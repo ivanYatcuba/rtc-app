@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed0b6eab-5d4c-4b25-b21d-b44dc38cfe4c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rtc-app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rtc-app.iml" afterPath="$PROJECT_DIR$/rtc-app.iml" />
     </list>
     <ignored path="rtc-app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -125,6 +125,16 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="rtc-app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rtc-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rtc-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -367,12 +377,12 @@
       <created>1392391425943</created>
       <updated>1392391425943</updated>
       <workItem from="1392391433357" duration="237000" />
-      <workItem from="1392391711045" duration="64000" />
+      <workItem from="1392391711045" duration="372000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="301000" />
+    <option name="totallyTimeSpent" value="609000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
