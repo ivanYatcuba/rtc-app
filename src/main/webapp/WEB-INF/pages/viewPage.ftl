@@ -46,7 +46,7 @@
 <h1>Register here</h1>
 
 <!--  The form that will be parsed by jQuery before submit  -->
-<form action="" method="post" id="view-form" novalidate="novalidate">
+<form action="" method="post" id="view-form" novalidate=" novalidate">
 
 
 </form>
