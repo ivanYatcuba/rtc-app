@@ -2,7 +2,7 @@
 
 <#--Macro to create custom input
 * inputLabel - just input label
-* inputType - type of selected input
+* type - type of selected input
 * class - input's class
 * id - input's id
 * name - input's name
@@ -10,25 +10,25 @@
 * value - input's value
 * textOnTheLeftSide - is true display input label at the left side
 * Example:  <@customInput inputLabel = ["Enter first name", "Enter last name"]
-*                         inputType = "text"
+*                         type = "text"
 *                         textOnTheLeftSide="true"/>
 -->
-<#macro customInput inputLabel = ""
-                    inputType = "text"
+<#macro customInput inputLabel = [""]
+                    type = "text"
                     textOnTheLeftSide = "true"
                     class = ""
                     id = ""
                     name = ""
                     style = ""
-                    values = "">
+                    value = "">
     <#list inputLabel as x >
         <p><#if textOnTheLeftSide == "true">${x}</#if>
-            <input  type = ${inputType}
+            <input  type = ${type}
                     class = ${class}
                     id = ${id}
                     name = ${name}
                     style = ${style}
-                    value = ${values[x_index]}>
+                    value = ${value}>
         <#if textOnTheLeftSide != "true">${x}</#if></p>
     </#list>
 </#macro>
@@ -40,7 +40,7 @@
 * id - select's id
 * name - select's name
 * style - select's style
-* Example:   <@customSelect options = ["winter", "spring", "summer", "autmn"]/>
+* Example:   <@customSelect options = ["winter", "asprint", "summer", "autmn"]/>
 -->
 <#macro customSelect options
                      class = ""
@@ -56,4 +56,18 @@
         <option value=${x}>${x}</option>
     </#list>
     </select></p>
+</#macro>
+
+
+<#macro validate
+            form = ""
+            JSON = "">
+$(function() {
+    $("${form}").validate({
+        ${JSON}
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+});
 </#macro>
