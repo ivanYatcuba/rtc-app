@@ -40,7 +40,7 @@
 * id - select's id
 * name - select's name
 * style - select's style
-* Example:   <@customSelect options = ["winter", "asprint", "summer", "autmn"]/>
+* Example:   <@customSelect options = ["winter", "spring", "summer", "autmn"]/>
 -->
 <#macro customSelect options
                      class = ""
