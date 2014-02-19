@@ -10,23 +10,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/")
+@RequestMapping("/")
 public class HelloController {
 
-    private static List<User> userList = new ArrayList<User>();
+//    private static List<User> userList = new ArrayList<User>();
+//
+//    static{
+//        userList.add(new User("Ivanov Ivan Ivanovych","42-43-44", "iv@i.ua", 1991) );
+//        userList.add(new User("Mykolov Mykola Mykolayovych","12-13-14", "my@i.ua", 1986) );
+//        userList.add(new User("Vasyliv Vasyl Vasylyovych","32-33-34", "vs@i.ua", 1994) );
+//        userList.add(new User("Petrenko Petro Petrovych","42-43-44", "iv@i.ua", 1991) );
+//    }
 
-    static{
-        userList.add(new User("Ivanov Ivan Ivanovych","42-43-44", "iv@i.ua", 1991) );
-        userList.add(new User("Mykolov Mykola Mykolayovych","12-13-14", "my@i.ua", 1986) );
-        userList.add(new User("Vasyliv Vasyl Vasylyovych","32-33-34", "vs@i.ua", 1994) );
-        userList.add(new User("Petrenko Petro Petrovych","42-43-44", "iv@i.ua", 1991) );
-    }
-
-	@RequestMapping(value="/registration",method = RequestMethod.GET)
-	public String register(@ModelAttribute("model") ModelMap model) {
-		model.addAttribute("userList", userList);
-		return "registration";
+	@RequestMapping(value="/",method = RequestMethod.GET)
+	public String register(ModelMap model) {
+		model.addAttribute("message", "Hello worl1234567890-d!");
+	 //System.out.println("gfhdgbdfg");
+		return "in";
 	}
+        
+        @RequestMapping(value="/registration",method=RequestMethod.POST)
+        public String registration(ModelMap model)
+        {
+         //   System.out.println("gfhdgbdfg");
+            return "registration";
+        }
 
 //    @RequestMapping(value = "/add", method = RequestMethod.POST)
 //    public String add(@ModelAttribute("user") User user) {
