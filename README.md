@@ -1,4 +1,4 @@
-[![Build Status](https://drone.io/github.com/es-pulse-dp-ua/exigen-pulse/status.png)](https://drone.io/github.com/es-pulse-dp-ua/exigen-pulse/latest)
+https://drone.io/hook?id=github.com/ReturnOnIntellingenceTraineeCommunity/rtc-app&token=A3okU0yryZvTSwECSITT
 =======
 
 RTC-app
