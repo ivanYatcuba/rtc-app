@@ -1,7 +1,9 @@
 
 
 <#--Macro to create custom input
-* inputLabel - just input label
+* lableText - text near input
+* lableClass - text of the lable near input
+* lableOnTheNewLine set the lable in above input
 * type - type of selected input
 * class - input's class
 * id - input's id
@@ -9,27 +11,36 @@
 * style - input's style
 * value - input's value
 * textOnTheLeftSide - is true display input label at the left side
-* Example:  <@customInput inputLabel = ["Enter first name", "Enter last name"]
+* Example:
+* <@input lableText = ["Enter first name", "Enter last name"]
 *                         type = "text"
-*                         textOnTheLeftSide="true"/>
+*                         textOnTheLeftSide="false"
+*                         lableOnTheNewLine="true"
+*                         id = ["1"]/>
 -->
-<#macro customInput inputLabel = [""]
-                    type = "text"
-                    textOnTheLeftSide = "true"
-                    class = ""
-                    id = ""
-                    name = ""
-                    style = ""
-                    value = "">
-    <#list inputLabel as x >
-        <p><#if textOnTheLeftSide == "true">${x}</#if>
-            <input  type = ${type}
-                    class = ${class}
-                    id = ${id}
-                    name = ${name}
-                    style = ${style}
-                    value = ${value}>
-        <#if textOnTheLeftSide != "true">${x}</#if></p>
+<#macro input
+        lableText = [""]
+        lableClass = ""
+        lableOnTheNewLine = "true"
+        type = "text"
+        textOnTheLeftSide = "true"
+        class = ""
+        id = [""]
+        name = [""]
+        style = ""
+        value = [""]>
+    <#list lableText as l_text >
+        <#if textOnTheLeftSide == "true" && lableOnTheNewLine != "true"><div>${l_text}</#if>
+        <#if textOnTheLeftSide == "true" && lableOnTheNewLine == "true"><div>${l_text}</div></#if>
+        <#if textOnTheLeftSide != "true" && lableOnTheNewLine == "true"><div>${l_text}</div></#if>
+        <#if textOnTheLeftSide != "true" && lableOnTheNewLine != "true"><div></#if>
+        <input  type = ${type}
+                    class = "${class}"
+                    <#if id[l_text_index]?exists>id = "${id[l_text_index]}"<#else>id = ""</#if>
+                    <#if name[l_text_index]?exists>name = "${name[l_text_index]}"<#else>name = ""</#if>
+                    <#if value[l_text_index]?exists>value = "${value[l_text_index]}"<#else>value= ""</#if>>
+        <#if textOnTheLeftSide != "true" && lableOnTheNewLine != "true">${l_text}</div></#if>
+        <#if textOnTheLeftSide == "true" && lableOnTheNewLine != "true"></div></#if>  <br />
     </#list>
 </#macro>
 
@@ -40,34 +51,64 @@
 * id - select's id
 * name - select's name
 * style - select's style
-* Example:   <@customSelect options = ["winter", "asprint", "summer", "autmn"]/>
+* value - values of options
+* Example:   <@customSelect options = ["winter", "spring", "summer", "autmn"]/>
 -->
 <#macro customSelect options
                      class = ""
                      id = ""
                      name = ""
-                     style = "">
+                     style = ""
+                     value = [""]>
     <p><select size="x_size"
-               class = ${class}
-               id = ${id}
-               name = ${name}
-               style = ${style}>
+               class = "${class}"
+               id = "${id}"
+               name = "${name}"
+               style = "${style}">
     <#list options as x>
-        <option value=${x}>${x}</option>
+        <option value=${x}  <#if value[x_index]?exists>value = "${value[x_index]}"<#else>value= ""</#if>>
+        ${x}
+        </option>
     </#list>
     </select></p>
 </#macro>
 
+<#--Macro to create text area
+* lableText - text of the lable near text area
+* lableClass - class of the lable near text area
+* class - class of text are
+* id - id of text area
+* name - name of text area
+* style - style of text area
+* rows - number of rows in text area
+* cols number of cols in text area
+-->
+<#macro textArea
+        lableText = ""
+        lableClass = "none"
+        class = ""
+        id = ""
+        name = ""
+        style = ""
+        rows = "10"
+        cols = "45">
+    <div class="${lableClass}">${lableText}</div><br />
+    <textarea class="${class}" id="${id}" name="${name}" style="${style}" rows="${rows}" cols="${cols}" ></textarea>
+</#macro>
 
+
+<#--Macro to validate form
+* form - name of the form that needs validation
+* class - json class
+-->
 <#macro validate
-            form = ""
-            JSON = "">
-$(function() {
-    $("${form}").validate({
-        ${JSON}
-        submitHandler: function(form) {
-            form.submit();
-        }
-    });
-});
+        form = ""
+        class = "">
+    $(function() {
+        $("${form}").validate({
+
+            submitHandler: function(form) {
+                form.submit();}
+        });
+    }
 </#macro>
