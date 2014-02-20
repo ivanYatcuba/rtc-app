@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<center>
+
 <h1>In</h1>
 <form action="" enctype="text/plain" method="post">
 Login: <br>
@@ -23,6 +23,6 @@ Password
    
     <input type="submit" value="Registratoin"/>
 </form>
-</center>
+
 </body>
 </html>
