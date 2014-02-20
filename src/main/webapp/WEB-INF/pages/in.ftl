@@ -3,10 +3,14 @@
 
 <head>
 <title>In</title>
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+    <link href="runnable.css" rel="stylesheet" />
 </head>
 <body>
 
-
+<center>
 <h1>In</h1>
 <form action="" enctype="text/plain" method="post">
 Login: <br>
@@ -21,6 +25,6 @@ Password
    
     <input type="submit" value="registration"/>
 </form>
-
+</center>
 </body>
 </html>
