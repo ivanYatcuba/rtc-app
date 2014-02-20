@@ -31,7 +31,7 @@ public class HelloController {
         @RequestMapping(value="/registration",method=RequestMethod.POST)
         public String registration(ModelMap model)
         {
-            return "registration";
+            return "registration.ftl";
         }
 
     @RequestMapping(value="/viewPage",method=RequestMethod.POST)
