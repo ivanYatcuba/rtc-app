@@ -25,37 +25,19 @@ public class HelloController {
 	@RequestMapping(value="/",method = RequestMethod.GET)
 	public String register(ModelMap model) {
 		model.addAttribute("message", "Hello worl1234567890-d!");
-	 //System.out.println("gfhdgbdfg");
 		return "in";
 	}
         
         @RequestMapping(value="/registration",method=RequestMethod.POST)
         public String registration(ModelMap model)
         {
-
             return "registration";
         }
 
     @RequestMapping(value="/viewPage",method=RequestMethod.POST)
     public String viewPage(ModelMap model)
     {
-
         return "viewPage";
     }
-//    @RequestMapping(value = "/add", method = RequestMethod.POST)
-//    public String add(@ModelAttribute("user") User user) {
-//
-//        if (null != user && null != user.getFio()
-//                 && !user.getFio().isEmpty()
-//                && null != user.getEmail()
-//                && !user.getEmail().isEmpty()
-//                && null != user.getPhone()
-//                && !user.getPhone().isEmpty()) {
-//
-//            synchronized (userList) {
-//                userList.add(user);
-//            }
-//        }
-//        return "redirect:registration.html";
-//    }
+
 }
