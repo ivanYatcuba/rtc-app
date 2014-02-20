@@ -32,10 +32,16 @@ public class HelloController {
         @RequestMapping(value="/registration",method=RequestMethod.POST)
         public String registration(ModelMap model)
         {
-         //   System.out.println("gfhdgbdfg");
+
             return "registration";
         }
 
+    @RequestMapping(value="/viewPage",method=RequestMethod.POST)
+    public String viewPage(ModelMap model)
+    {
+
+        return "viewPage";
+    }
 //    @RequestMapping(value = "/add", method = RequestMethod.POST)
 //    public String add(@ModelAttribute("user") User user) {
 //

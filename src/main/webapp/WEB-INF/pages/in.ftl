@@ -1,5 +1,6 @@
 <html>
 <#include "macro.ftl">
+
 <head>
 <title>In</title>
 </head>
@@ -21,7 +22,7 @@ Password
 </FORM>
 <form action="registration" enctype="text/plain" method="post" >
    
-    <input type="submit" value="Registratoin"/>
+    <input type="submit" value="registration"/>
 </form>
 
 </body>
