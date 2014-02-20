@@ -13,7 +13,7 @@
 
 
 </head>
-
+<title> Profile View </title>
 <body>
 
 <form action="" method="post" id="view-form" novalidate=" novalidate">
@@ -23,7 +23,7 @@
     <center><h1> Welcome to user profile view </h1> </center>
     <label> User name </label> <br>
     <label> Last name</label> <br>
-    <label> E-mail </label>     <br>
+    <label> E-mail </label> <br>
 
 </div>
 

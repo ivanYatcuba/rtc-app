@@ -14,10 +14,7 @@ Login: <br>
 Password
 <br>
 <INPUT type="PASSWORD" name="PASSWORD_BOX" maxlength="35" size="20"> <br>
-<INPUT type="submit" value="In"> 
-
-
-
+<INPUT type="submit" value="In">
 
 </FORM>
 <form action="registration" enctype="text/plain" method="post" >
