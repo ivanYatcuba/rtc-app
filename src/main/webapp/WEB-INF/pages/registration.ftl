@@ -46,7 +46,7 @@
 <h1>Register here</h1>
 
 <!--  The form that will be parsed by jQuery before submit  -->
-<form action="" method="post" id="register-form" novalidate="novalidate">
+<form action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
     <div class="label">First Name</div><input type="text" id="firstname" name="firstname" /><br />
     <div class="label">Last Name</div><input type="text" id="lastname" name="lastname" /><br />
