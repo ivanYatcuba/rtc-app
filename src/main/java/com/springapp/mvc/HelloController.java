@@ -39,5 +39,10 @@ public class HelloController {
     {
         return "viewPage";
     }
+    @RequestMapping(value="/edit",method=RequestMethod.POST)
+    public String editPage(ModelMap model)
+    {
+        return "edit";
+    }
 
 }
