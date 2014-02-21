@@ -1,4 +1,5 @@
 <html>
+
 <!--#include "macro.ftl"-->
 <head>
 
@@ -11,13 +12,13 @@
     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 
-
 </head>
 <title> Profile View </title>
-<body>
+<!--<body style= " background-image : url(back.jpeg)"  > -->
+
+<body style="background-image: url(back.jpeg) ">
 
 <form action="" method="post" id="view-form" novalidate=" novalidate">
-    
 <div class="Profile view">
 
     <center><h1> Welcome to user profile view </h1> </center>

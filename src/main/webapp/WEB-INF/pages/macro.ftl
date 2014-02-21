@@ -1,5 +1,3 @@
-
-
 <#--Macro to create custom input
 * lableText - text near input
 * lableClass - text of the lable near input
