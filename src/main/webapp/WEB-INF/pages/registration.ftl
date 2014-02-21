@@ -12,7 +12,7 @@
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 
     <!-- jQuery Form Validation code -->
-   <!-- <script>
+   <#-- <script>
         <@validate form = "#register-form"
                     JSON = " rules: {
             firstname: \"required\",
