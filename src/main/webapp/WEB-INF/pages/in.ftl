@@ -27,11 +27,6 @@ Password:
 
 </form>
 </center>
-<#if login??>
- You'r login is ${login} <br>
-</#if>
-<#if password??>
-You'r password id ${password}<br>
-</#if>
+
 </body>
 </html>
