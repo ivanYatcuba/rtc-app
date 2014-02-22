@@ -11,7 +11,11 @@
 <body>
 <center>
 <h1>In</h1>
+<<<<<<< HEAD
 <form name="Logins" action="input" method="post">
+=======
+<form name="Logins" action="input"  method="post">
+>>>>>>> a08669a00b5a587631410e2e40b51354ef730f07
  <div class="label">Login</div> <br>
 <INPUT type="text" name="login" maxlenght="35" SIZE="20" > <br>
  <div class="label">Password</div><br>
@@ -31,11 +35,17 @@
 <#if password??>
 You'r password id ${password}<br>
 </#if>
+<<<<<<< HEAD
 
 <#if message??>
 ${message}
 </#if>
 
 <#include "down.ftl">
+=======
+<#if message??>
+${message}
+</#if>
+>>>>>>> a08669a00b5a587631410e2e40b51354ef730f07
 </body>
 </html>
