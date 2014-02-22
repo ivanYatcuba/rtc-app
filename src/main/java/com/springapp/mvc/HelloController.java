@@ -14,11 +14,10 @@ import java.util.List;
 public class HelloController {
 private static List<Login> userLogin = new ArrayList<Login>();
 
-<<<<<<< HEAD
-=======
-private static List<Login> userLogin = new ArrayList<Login>();
 
->>>>>>> a08669a00b5a587631410e2e40b51354ef730f07
+
+
+
 static {userLogin.add(new Login("Lisitsa","1234"));
     userLogin.add(new Login("Bogdan","1234"));
     userLogin.add(new Login("Yarosav","1234"));
