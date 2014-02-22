@@ -16,6 +16,14 @@
 <title> Profile View </title>
 <!--<body style= " background-image : url(back.jpeg)"  > -->
 
+<style>
+html,body{
+    background-image: url(back.jpeg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+</style>
+
 <body>
 
 <form action="" method="post" id="view-form" novalidate=" novalidate">
