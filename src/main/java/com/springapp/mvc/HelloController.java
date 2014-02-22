@@ -56,10 +56,17 @@ static {userLogin.add(new Login("Lisitsa","1234"));
     {
         for(Login l: userLogin)
         {
-            if(login.getLogin().equals(l.getLogin())==true)
-                if(login.getPassword().equals(l.getPassword())==true)
+            if((login.getLogin().equals(l.getLogin())==true)&& (login.getPassword().equals(l.getPassword())==true)){
+                
                     model.addAttribute("message", "login and password is correct!");
-        }
+                    break;
+            }
+             else 
+        {
+                 model.addAttribute("message", "login and password invalid!");
+                }
+            }
+            
         model.addAttribute("login", login.getLogin());
         model.addAttribute("password",login.getPassword());
         return "in";
