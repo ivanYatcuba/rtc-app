@@ -1,5 +1,5 @@
 <html>
-<#include "macro.ftl">
+<#include "header.ftl">
 
 <head>
 <title>In</title>
@@ -9,14 +9,12 @@
     <link href="runnable.css" rel="stylesheet" />
 </head>
 <body>
-
 <center>
 <h1>In</h1>
 <form name="Logins" action="input" method="post">
-Login: <br>
+ <div class="label">Login</div> <br>
 <INPUT type="text" name="login" maxlenght="35" SIZE="20" > <br>
-Password:
-<br>
+ <div class="label">Password</div><br>
 <INPUT type="PASSWORD" name="password" maxlength="35" size="20"> <br>
 <INPUT type="submit" value=" In ">
 
@@ -33,5 +31,11 @@ Password:
 <#if password??>
 You'r password id ${password}<br>
 </#if>
+
+<#if message??>
+${message}
+</#if>
+
+<#include "down.ftl">
 </body>
 </html>
