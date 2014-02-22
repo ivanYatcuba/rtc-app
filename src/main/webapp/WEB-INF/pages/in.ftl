@@ -33,5 +33,8 @@ Password:
 <#if password??>
 You'r password id ${password}<br>
 </#if>
+<#if message??>
+${message}
+</#if>
 </body>
 </html>
