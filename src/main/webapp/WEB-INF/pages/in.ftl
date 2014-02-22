@@ -13,10 +13,9 @@
 <center>
 <h1>In</h1>
 <form name="Logins" action="input"  method="post">
-Login: <br>
+ <div class="label">Login</div> <br>
 <INPUT type="text" name="login" maxlenght="35" SIZE="20" > <br>
-Password:
-<br>
+ <div class="label">Password</div><br>
 <INPUT type="PASSWORD" name="password" maxlength="35" size="20"> <br>
 <INPUT type="submit" value=" In ">
 
