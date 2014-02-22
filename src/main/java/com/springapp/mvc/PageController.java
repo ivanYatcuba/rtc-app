@@ -18,7 +18,8 @@ private static List<Login> userLogin = new ArrayList<Login>();
 
 
 
-static {userLogin.add(new Login("Lisitsa","1234"));
+static {
+    userLogin.add(new Login("Lisitsa","1234"));
     userLogin.add(new Login("Bogdan","1234"));
     userLogin.add(new Login("Yarosav","1234"));
 }
