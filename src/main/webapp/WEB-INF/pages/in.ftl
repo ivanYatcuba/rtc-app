@@ -12,13 +12,13 @@
 
 <center>
 <h1>In</h1>
-<form action="" enctype="text/plain" method="post">
+<form name="Logins" action="input" method="post">
 Login: <br>
-<INPUT type="text" NAME="Name" maxlenght="35" SIZE="20" > <br>
+<INPUT type="text" name="login" maxlenght="35" SIZE="20" > <br>
 Password:
 <br>
-<INPUT type="PASSWORD" name="PASSWORD_BOX" maxlength="35" size="20"> <br>
-<INPUT type="submit" value="In">
+<INPUT type="PASSWORD" name="password" maxlength="35" size="20"> <br>
+<INPUT type="submit" value=" In ">
 
 </FORM>
 <form action="registration" enctype="text/plain" method="post" >
@@ -27,5 +27,11 @@ Password:
 
 </form>
 </center>
+<#if login??>
+ You'r login is ${login} <br>
+</#if>
+<#if password??>
+You'r password id ${password}<br>
+</#if>
 </body>
 </html>

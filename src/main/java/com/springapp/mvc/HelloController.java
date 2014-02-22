@@ -23,8 +23,8 @@ public class HelloController {
 //    }
 
 	@RequestMapping(value="/",method = RequestMethod.GET)
-	public String register(ModelMap model) {
-		model.addAttribute("message", "Hello worl1234567890-d!");
+	public String register( ModelMap model) {
+		
 		return "in";
 	}
         
@@ -45,4 +45,12 @@ public class HelloController {
         return "edit";
     }
 
+    @RequestMapping(value="/input",method=RequestMethod.POST)
+    public String input(@ModelAttribute("Logins") Login login, ModelMap model)
+    {
+        model.addAttribute("login", login.getLogin());
+        model.addAttribute("password",login.getPassword());
+        return "in";
+    }
+    
 }
