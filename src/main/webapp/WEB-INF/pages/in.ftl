@@ -12,7 +12,7 @@
 
 <center>
 <h1>In</h1>
-<form name="Logins" action="input" method="post">
+<form name="Logins" action="input" enctype="text/plain" method="post">
 Login: <br>
 <INPUT type="text" name="login" maxlenght="35" SIZE="20" > <br>
 Password:
