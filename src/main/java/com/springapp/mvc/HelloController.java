@@ -13,6 +13,12 @@ import java.util.List;
 @RequestMapping("/")
 public class HelloController {
 
+private static List<Login> userLogin = new ArrayList<Login>();
+
+static {userLogin.add(new Login("Lisitsa","1234"));
+    userLogin.add(new Login("Bogdan","1234"));
+    userLogin.add(new Login("Yarosav","1234"));
+}
 //    private static List<User> userList = new ArrayList<User>();
 //
 //    static{
@@ -48,6 +54,12 @@ public class HelloController {
     @RequestMapping(value="/input",method=RequestMethod.POST)
     public String input(@ModelAttribute("Logins") Login login, ModelMap model)
     {
+        for(Login l: userLogin)
+        {
+            if(login.getLogin().equals(l.getLogin())==true)
+                if(login.getPassword().equals(l.getPassword())==true)
+                    model.addAttribute("message", "login and password is correct!");
+        }
         model.addAttribute("login", login.getLogin());
         model.addAttribute("password",login.getPassword());
         return "in";
