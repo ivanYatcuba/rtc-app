@@ -45,12 +45,12 @@ public class HelloController {
         return "edit";
     }
 
-  /*  @RequestMapping(value="/input",method=RequestMethod.POST)
+    @RequestMapping(value="/input",method=RequestMethod.POST)
     public String input(@ModelAttribute("Logins") Login login, ModelMap model)
     {
         model.addAttribute("login", login.getLogin());
         model.addAttribute("password",login.getPassword());
         return "in";
-    }*/
+    }
     
 }
