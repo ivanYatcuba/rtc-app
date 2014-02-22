@@ -33,9 +33,9 @@
 </form>
 <form action="edit" method="post" id="view-form" >
 
-    <input class="btn" type="submit" value="edit"/>
+    <button class="btn btn-primary"> Edit Page </button>
 
 </form>
-<button class="btn btn-primary">test</button>
+
 </body>
 </html>
