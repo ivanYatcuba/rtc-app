@@ -18,6 +18,7 @@
 
 <style>
     html,body{
+        <img src="${pageContext.request.contextPath}/WEB-INF/resources/images/back.jpeg"/>
         background-image: url(back.jpeg);
         background-repeat: no-repeat;
         -o-background-size: 100%;
@@ -27,7 +28,7 @@
 </style>
 
 <body>
-<img src="${pageContext.request.contextPath}/WEB-INF/resources/images/back.jpeg"/>
+
 
 <form action="" method="post" id="view-form" novalidate=" novalidate">
 <div class="Profile view">
