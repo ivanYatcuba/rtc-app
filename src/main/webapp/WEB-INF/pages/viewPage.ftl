@@ -7,6 +7,7 @@
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="/META-INF/resources/images/back.jpeg" rel="stylesheet" type="text/css">
+    <img src="${pageContext.request.contextPath}/WEB-INF/resources/images/back.jpeg"/>
     <!-- Load jQuery and the validate plugin
     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script> -->
@@ -14,7 +15,6 @@
 
 </head>
 <title> Profile View </title>
-<!--<body style= " background-image : url(back.jpeg)"  > -->
 
 <style>
     html,body{
@@ -23,6 +23,7 @@
         -o-background-size: 100%;
         background-size: 100%;
     }
+
 </style>
 
 <body>

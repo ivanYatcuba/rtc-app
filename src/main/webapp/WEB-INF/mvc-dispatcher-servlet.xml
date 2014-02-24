@@ -32,6 +32,6 @@
         <property name="prefix" value=""/>
         <property name="suffix" value=".ftl"/>
     </bean>
-   
+
 
 </beans>
