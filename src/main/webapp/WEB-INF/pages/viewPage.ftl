@@ -18,7 +18,7 @@
 
 <style>
     html,body{
-        <img src="${pageContext.request.contextPath}/WEB-INF/resources/images/back.jpeg"/>
+   <!--<img src="${pageContext.request.contextPath}/WEB-INF/resources/images/back.jpeg"/>-->
         background-image: url(back.jpeg);
         background-repeat: no-repeat;
         -o-background-size: 100%;
