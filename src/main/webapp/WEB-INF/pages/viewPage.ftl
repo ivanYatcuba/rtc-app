@@ -1,6 +1,5 @@
 <html>
 
-<!--#include "macro.ftl"-->
 <head>
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
@@ -17,11 +16,12 @@
 <!--<body style= " background-image : url(back.jpeg)"  > -->
 
 <style>
-html,body{
-    background-image: url(back.jpeg);
-    background-repeat: no-repeat;
-    background-size: 100%;
-}
+    html,body{
+        background-image: url(back.jpeg);
+        background-repeat: no-repeat;
+        -o-background-size: 100%;
+        background-size: 100%;
+    }
 </style>
 
 <body>
@@ -41,7 +41,8 @@ html,body{
 </form>
 <form action="edit" method="post" id="view-form" >
 
-    <button class="btn btn-primary"> Edit Page </button>
+    <button class="btn btn-primary"> Edit Page </button><br>
+
 
 </form>
 

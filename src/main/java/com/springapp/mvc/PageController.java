@@ -15,7 +15,7 @@ public class PageController {
 private static List<Login> userLogin = new ArrayList<Login>();
 
 
-
+User fictUser = new User();
 
 
 static {
