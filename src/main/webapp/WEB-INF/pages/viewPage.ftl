@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -16,7 +17,8 @@
 <title> Profile View </title>
 
 <body>
-<link href="${pageContext.request.contextPath}/META-INF/resources/images/back.jpeg" rel="stylesheet">
+<!--
+<link href="${pageContext.request.contextPath}/META-INF/resources/images/back.jpeg" rel="stylesheet"> -->
 <div id="content">
 <style>
     body
