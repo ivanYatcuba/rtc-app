@@ -23,7 +23,7 @@ static {
     userLogin.add(new Login("Bogdan","1234"));
     userLogin.add(new Login("Yarosav","1234"));
 }
-    @RequestMapping(value="/start input",method = RequestMethod.POST)
+    @RequestMapping(value="/start input",method = RequestMethod.GET)
     public String Home( ModelMap model) {
 
         return "in";
@@ -72,5 +72,9 @@ static {
         model.addAttribute("password",login.getPassword());
         return "in";
     }
-    
+    @RequestMapping(value="/input",method=RequestMethod.GET)
+    public String inputlan(ModelMap model)
+    {
+        return "in";
+    }
 }
