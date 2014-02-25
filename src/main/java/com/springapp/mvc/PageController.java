@@ -40,7 +40,13 @@ static {
         {
             return "registration";
         }
-
+        
+	@RequestMapping(value="/registration",method=RequestMethod.GET)
+        public String registrationLang(ModelMap model)
+        {
+            return "registration";
+        }
+        
     @RequestMapping(value="/viewPage",method=RequestMethod.POST)
     public String viewPage(ModelMap model)
     {
