@@ -39,7 +39,10 @@
     <h2><label> Birth Year: </label> ${userForm.birthYear} <br></h2>
     <h2><label> E-mail: </label> ${userForm.email} <br></h2>
 
+</div>
 
+</form>
+<form action="edit" method="post" id="view-form" >
 
 </div>
 <form name="user" action="edit" method="post" id="view-form" novalidate=" novalidate">
