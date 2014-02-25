@@ -20,7 +20,7 @@
 
 <body>
 
-<form action="start input" method="post">
+<form action="start input" method="get">
 
   <center>  <button class="btn btn-primary"> Enter Page </button></center>
 
