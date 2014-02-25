@@ -1,6 +1,6 @@
 
 <html>
-
+<#import "/spring.ftl" as spring/>
 <head>
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
@@ -37,7 +37,7 @@
 <form action="" method="post" id="view-form" novalidate=" novalidate">
 <div class="Profile view">
 
-    <center><h1> Welcome to user profile view! </h1> </center>
+    <center><h1> Welcome to user profile view </h1> </center>
     <h2><label> User name: </label> <br></h2>
     <h2><label> Last name:</label> <br></h2>
     <h2><label> E-mail: </label> <br></h2>
@@ -52,5 +52,6 @@
 
 </form>
 </div>
+<#include "down.ftl">
 </body>
 </html>

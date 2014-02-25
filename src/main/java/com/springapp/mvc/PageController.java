@@ -32,11 +32,18 @@ static {
 //        userList.add(new User("Petrenko Petro Petrovych","42-43-44", "iv@i.ua", 1991) );
 //    }
 
+    @RequestMapping(value="/start input",method = RequestMethod.POST)
+    public String Home( ModelMap model) {
+
+        return "in";
+    }
+
 	@RequestMapping(value="/",method = RequestMethod.GET)
-	public String register( ModelMap model) {
-		
-		return "in";
-	}
+     public String register( ModelMap model) {
+
+        return "homepage";
+    }
+
         
         @RequestMapping(value="/registration",method=RequestMethod.POST)
         public String registration(ModelMap model)

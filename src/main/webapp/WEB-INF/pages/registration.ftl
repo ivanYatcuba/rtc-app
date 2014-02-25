@@ -1,5 +1,6 @@
 <html>
 <#include "macro.ftl">
+<#import "/spring.ftl" as spring/>
 <head>
 
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
@@ -58,6 +59,6 @@
 
     <div style="margin-left:140px;"><input type="submit" name="submit" value="Submit" /></div>
 </form>
-
+<#include "down.ftl">
 </body>
 </html>
