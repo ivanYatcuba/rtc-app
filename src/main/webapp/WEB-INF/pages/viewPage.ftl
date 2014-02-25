@@ -1,4 +1,3 @@
-
 <html>
 <#import "/spring.ftl" as spring/>
 <head>
@@ -37,7 +36,7 @@
 <form action="" method="post" id="view-form" novalidate=" novalidate">
 <div class="Profile view">
 
-    <center><h1> Welcome to user profile view </h1> </center>
+    <center><h1> <@spring.message "welcomeView"/> </h1> </center>
     <h2><label> User name: </label> <br></h2>
     <h2><label> Last name:</label> <br></h2>
     <h2><label> E-mail: </label> <br></h2>

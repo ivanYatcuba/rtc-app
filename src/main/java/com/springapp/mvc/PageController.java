@@ -23,15 +23,6 @@ static {
     userLogin.add(new Login("Bogdan","1234"));
     userLogin.add(new Login("Yarosav","1234"));
 }
-//    private static List<User> userList = new ArrayList<User>();
-//
-//    static{
-//        userList.add(new User("Ivanov Ivan Ivanovych","42-43-44", "iv@i.ua", 1991) );
-//        userList.add(new User("Mykolov Mykola Mykolayovych","12-13-14", "my@i.ua", 1986) );
-//        userList.add(new User("Vasyliv Vasyl Vasylyovych","32-33-34", "vs@i.ua", 1994) );
-//        userList.add(new User("Petrenko Petro Petrovych","42-43-44", "iv@i.ua", 1991) );
-//    }
-
     @RequestMapping(value="/start input",method = RequestMethod.POST)
     public String Home( ModelMap model) {
 
@@ -44,7 +35,6 @@ static {
         return "homepage";
     }
 
-        
         @RequestMapping(value="/registration",method=RequestMethod.POST)
         public String registration(ModelMap model)
         {
