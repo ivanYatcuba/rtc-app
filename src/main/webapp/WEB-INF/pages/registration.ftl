@@ -72,7 +72,7 @@
 
     <div class="label">Password</div><input type="password" id="password" name="password" /><br />
 
-    <div style="margin-left:140px;"><input class ="btn btn-warning" type="submit" name="submit" value="Submit" /></div>
+    <div style="margin-left:140px;"><input class ="btn btn-warning" type="submit" name="submit" value="Register" /></div>
 </form>
 <#include "down.ftl">
 </body>
