@@ -16,7 +16,21 @@
 <!--<body style= " background-image : url(back.jpeg)"  > -->
 
 <body>
-
+<div id="content">
+    <style>
+        body
+        {
+            background-image:url(" <@spring.url '/resources/images/back.jpeg'/> ");
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+            background-position:center;
+            background-size: cover;
+        }
+        #content
+        {
+            background-color: rgba(255,255,255,0.7);
+        }
+    </style>
 <form action="" method="post" id="edit-form" novalidate=" novalidate">
 
     <div class="Editing profile">

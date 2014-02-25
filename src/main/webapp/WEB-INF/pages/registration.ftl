@@ -44,6 +44,21 @@
 </head>
 
 <body>
+<div id="content">
+    <style>
+        body
+        {
+            background-image:url(" <@spring.url '/resources/images/back.jpeg'/> ");
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+            background-position:center;
+            background-size: cover;
+        }
+        #content
+        {
+            background-color: rgba(255,255,255,0.7);
+        }
+    </style>
 <h1><@spring.message "register"/></h1>
 
 <!--  The form that will be parsed by jQuery before submit  -->

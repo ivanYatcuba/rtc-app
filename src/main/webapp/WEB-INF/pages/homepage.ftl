@@ -35,7 +35,7 @@
             background-color: rgba(255,255,255,0.7);
         }
     </style>
-<#include "header.ftl">    
+<#include "header.ftl">
 <form action="start input" method="get">
 
   <center>  <button class="btn btn-primary"> Enter Page </button></center>
