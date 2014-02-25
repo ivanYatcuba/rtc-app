@@ -12,7 +12,7 @@
 <center>
 <h1><@spring.message "enter"/> </h1>
 
-<form name="Logins" action="input" method="post">
+
 
 <form name="Logins" action="input"  method="post">
 
@@ -20,12 +20,12 @@
 <INPUT type="text" name="login" maxlenght="35" SIZE="20" > <br>
  <div class="label">Password</div><br>
 <INPUT type="PASSWORD" name="password" maxlength="35" size="20"> <br>
-<INPUT type="submit" value=" In ">
+<INPUT class="btn btn-primary" type="submit" value=" In ">
 
 </FORM>
 <form action="registration" enctype="text/plain" method="post" >
    
-    <input type="submit" value="registration"/>
+    <input class="btn btn-primary" type="submit" value="registration"/>
 
 </form>
 </center>
