@@ -39,9 +39,7 @@
 
 </FORM>
 <form action="registration" enctype="text/plain" method="get" >
-   
-    <input class="btn btn-primary" type="submit" value="registration"/>
-
+ 
 </center>
 <#if login??>
  You'r login is ${login} <br>
