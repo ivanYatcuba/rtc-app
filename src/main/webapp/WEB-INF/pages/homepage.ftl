@@ -1,5 +1,5 @@
 <html>
-<#include "header.ftl">
+
 <head>
 
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
@@ -19,7 +19,23 @@
 <!--<body style= " background-image : url(back.jpeg)"  > -->
 
 <body>
-<img src="<@spring.url '/resources/images/back.jpeg'/>"/>
+
+<div id="content">
+    <style>
+        body
+        {
+            background-image:url(" <@spring.url '/resources/images/back.jpeg'/> ");
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+            background-position:center;
+            background-size: cover;
+        }
+        #content
+        {
+            background-color: rgba(255,255,255,0.7);
+        }
+    </style>
+<#include "header.ftl">    
 <form action="start input" method="get">
 
   <center>  <button class="btn btn-primary"> Enter Page </button></center>
