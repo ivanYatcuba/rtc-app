@@ -1,18 +1,28 @@
 package com.springapp.mvc;
 
 public class User {
-    private String fio;
+    private String lastname;
+    private String firstname;
     private String phone;
     private String email;
-    private int birthYear;
+    private String birthYear;
 
-    public String getFio() {
-        return fio;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setFio(String fio) {
-        this.fio = fio;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
 
     public String getPhone() {
         return phone;
@@ -30,11 +40,11 @@ public class User {
         this.email = email;
     }
 
-    public int getBirthYear() {
+    public String getBirthYear() {
         return birthYear;
     }
 
-    public void setBirthYear(int birthYear) {
+    public void setBirthYear(String birthYear) {
         this.birthYear = birthYear;
     }
 
@@ -44,8 +54,9 @@ public class User {
 
     }
 
-    public User(String fio, String phone, String email, int birthYear){
-        this.fio = fio;
+    public User(String firstname, String lastname, String phone, String email, String birthYear){
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.phone = phone;
         this.email = email;
         this.birthYear = birthYear;

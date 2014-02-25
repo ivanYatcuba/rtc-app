@@ -42,7 +42,7 @@
 
 </form>
 
-<form action="registration" method="post" >
+<form action="registration" method="get" >
 
   <center>  <button class="btn btn-primary"> Register Page </button></center>
 

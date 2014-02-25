@@ -38,7 +38,7 @@
 <INPUT class="btn btn-primary" type="submit" value=" In ">
 
 </FORM>
-<form action="registration" enctype="text/plain" method="post" >
+<form action="registration" enctype="text/plain" method="get" >
    
     <input class="btn btn-primary" type="submit" value="registration"/>
 

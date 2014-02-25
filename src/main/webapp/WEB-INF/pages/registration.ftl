@@ -62,17 +62,19 @@
 <h1><@spring.message "register"/></h1>
 
 <!--  The form that will be parsed by jQuery before submit  -->
-<form action="viewPage" method="post" id="register-form" novalidate="novalidate">
+<form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
     <div class="label">First Name</div><input type="text" id="firstname" name="firstname" /><br />
 
     <div class="label">Last Name</div><input type="text" id="lastname" name="lastname" /><br />
 
+    <div class="label">Birth Year</div><input type="text" id="birthYear" name="birthYear" /><br />
+
     <div class="label">Email</div><input type="text" id="email" name="email" /><br />
 
     <div class="label">Password</div><input type="password" id="password" name="password" /><br />
 
-    <div style="margin-left:140px;"><input type="submit" name="submit" value="Submit" /></div>
+    <div style="margin-left:140px;"><input type="submit" name="submit" value="Register" /></div>
 </form>
 <#include "down.ftl">
 </body>

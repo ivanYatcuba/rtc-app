@@ -15,7 +15,7 @@ public class PageController {
 private static List<Login> userLogin = new ArrayList<Login>();
 
 
-User fictUser = new User();
+private User fictUser = new User();
 
 
 static {
@@ -35,26 +35,32 @@ static {
         return "homepage";
     }
 
-        @RequestMapping(value="/registration",method=RequestMethod.POST)
-        public String registration(ModelMap model)
-        {
-            return "registration";
-        }
+//        @RequestMapping(value="/registration",method=RequestMethod.POST)
+//        public String registration(ModelMap model)
+//        {
+//            return "registration";
+//        }
         
 	@RequestMapping(value="/registration",method=RequestMethod.GET)
         public String registrationLang(ModelMap model)
         {
+            User user = new User();
+            model.addAttribute("userForm",user);
             return "registration";
         }
         
     @RequestMapping(value="/viewPage",method=RequestMethod.POST)
-    public String viewPage(ModelMap model)
+    public String viewPage(@ModelAttribute("userForm") User user, ModelMap model)
     {
+        fictUser = user;
+        System.out.println("fictUser.getFirstname()" + fictUser.getFirstname());
+        System.out.println("fictUser.getLastname()" + fictUser.getLastname());
         return "viewPage";
     }
     @RequestMapping(value="/edit",method=RequestMethod.POST)
     public String editPage(ModelMap model)
     {
+        model.addAttribute("user",fictUser);
         return "edit";
     }
 

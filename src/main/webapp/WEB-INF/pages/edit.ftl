@@ -31,15 +31,18 @@
             background-color: rgba(255,255,255,0.7);
         }
     </style>
-<form action="" method="post" id="edit-form" novalidate=" novalidate">
+    <form name="user" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
-    <div class="Editing profile">
+        <div class="label">First Name</div><input type="text" id="firstname" name="firstname" value="${user.firstname}"/><br />
 
-        Something to edit
+        <div class="label">Last Name</div><input type="text" id="lastname" name="lastname" value="${user.lastname}"/><br />
 
-    </div>
+        <div class="label">Birth Year</div><input type="text" id="birthYear" name="birthYear" value="${user.birthYear}" /><br />
 
-</form>
+        <div class="label">Email</div><input type="text" id="email" name="email" value="${user.email}"/><br />
+
+        <div style="margin-left:140px;"><input type="submit" name="submit" value="Save" /></div>
+    </form>
 <#include "down.ftl">
 </body>
 </html>
