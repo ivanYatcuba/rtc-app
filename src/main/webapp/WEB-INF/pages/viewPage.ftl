@@ -13,6 +13,7 @@
 <title> Profile View </title>
 
 <body>
+<img src="${pageContext.request.contextPath}/WEB-INF/resources/images/back.jpeg"/>
 
 <div id="content">
 <style>

@@ -19,7 +19,7 @@
 <!--<body style= " background-image : url(back.jpeg)"  > -->
 
 <body>
-
+<img src="<@spring.url '/resources/images/back.jpeg'/>"/>
 <form action="start input" method="get">
 
   <center>  <button class="btn btn-primary"> Enter Page </button></center>
