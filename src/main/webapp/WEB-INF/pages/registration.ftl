@@ -44,7 +44,7 @@
 </head>
 
 <body>
-<h1>Register here</h1>
+<h1><@spring.message "register"></h1>
 
 <!--  The form that will be parsed by jQuery before submit  -->
 <form action="viewPage" method="post" id="register-form" novalidate="novalidate">

@@ -9,7 +9,7 @@
 </head>
 <body>
 <center>
-<h1>Enter your profile </h1>
+<h1><@spring.message "enter"> </h1>
 
 <form name="Logins" action="input" method="post">
 
