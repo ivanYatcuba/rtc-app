@@ -35,14 +35,10 @@
 <INPUT type="text" name="login" maxlenght="35" SIZE="20" > <br>
  <div class="label">Password</div><br>
 <INPUT type="PASSWORD" name="password" maxlength="35" size="20"> <br>
-<INPUT class="btn btn-primary" type="submit" value=" In ">
+<INPUT class="btn btn-warning" type="submit" value=" In ">
 
 </FORM>
-<form action="registration" enctype="text/plain" method="post" >
-   
-    <input class="btn btn-primary" type="submit" value="registration"/>
 
-</form>
 </center>
 <#if login??>
  You'r login is ${login} <br>

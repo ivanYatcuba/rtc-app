@@ -38,13 +38,13 @@
 <#include "header.ftl">
 <form action="start input" method="get">
 
-  <center>  <button class="btn btn-primary"> Enter Page </button></center>
+  <center>  <button class="btn btn-warning"> Enter Page </button></center>
 
 </form>
 
 <form action="registration" method="post" >
 
-  <center>  <button class="btn btn-primary"> Register Page </button></center>
+  <center>  <button class="btn btn-warning"> Register Page </button></center>
 
 </form>
 <#include "down.ftl">
