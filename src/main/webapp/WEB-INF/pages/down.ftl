@@ -1,3 +1,4 @@
+<div class="navbar navbar-fixed-bottom">
 <center>
     <a href="?lang=en"><@spring.message "lang.en"/></a>&nbsp;
     <a href="?lang=ru"><@spring.message "lang.ru"/></a>&nbsp;
@@ -5,3 +6,4 @@
 <br><br>copyright bla bla bla<br>
 autor is bla bla bla <br>
 </center>
+</div>
