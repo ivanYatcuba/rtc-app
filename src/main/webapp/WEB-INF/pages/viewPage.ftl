@@ -18,7 +18,7 @@
 <style>
     body
     {
-        background-image:url(back.jpeg);
+        background-image:url(" <@spring.url '/resources/images/back.jpeg'/> ");
         background-repeat: no-repeat;
         background-attachment:fixed;
         background-position:center;
