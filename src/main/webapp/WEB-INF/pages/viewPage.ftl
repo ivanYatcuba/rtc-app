@@ -7,9 +7,6 @@
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
 
-    <!-- Load jQuery and the validate plugin
-    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script> -->
 
 
 </head>
