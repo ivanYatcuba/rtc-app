@@ -52,8 +52,19 @@ static {
     {
         return "viewPage";
     }
+    @RequestMapping(value="/viewPage",method=RequestMethod.GET)
+    public String viewPageLang(ModelMap model)
+    {
+        return "viewPage";
+    }
     @RequestMapping(value="/edit",method=RequestMethod.POST)
     public String editPage(ModelMap model)
+    {
+        return "edit";
+    }
+    
+    @RequestMapping(value="/edit",method=RequestMethod.GET)
+    public String editPageLang(ModelMap model)
     {
         return "edit";
     }
