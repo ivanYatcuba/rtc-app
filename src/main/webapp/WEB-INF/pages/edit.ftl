@@ -41,7 +41,7 @@
 
         <div class="label">Email</div><input type="text" id="email" name="email" value="${user.email}"/><br />
 
-        <div style="margin-left:140px;"><input class="btn btn-warning" name="submit" value="Save" /></div>
+        <div style="margin-left:140px;"><input class="btn btn-warning" type="submit" value="Save" /></div>
     </form>
 <#include "down.ftl">
 </body>
