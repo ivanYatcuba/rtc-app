@@ -34,10 +34,10 @@
 <div class="Profile view">
 
     <center><h1> <@spring.message "welcomeView"/> </h1> </center>
-    <h2><label> First name: </label>${userForm.firstname} <br></h2>
-    <h2><label> Last name:</label> ${userForm.lastname} <br></h2>
-    <h2><label> Birth Year: </label> ${userForm.birthYear} <br></h2>
-    <h2><label> E-mail: </label> ${userForm.email} <br></h2>
+    <h2><label> <@spring.message "reg.firstName"/>: </label>${userForm.firstname} <br></h2>
+    <h2><label> <@spring.message "reg.lastName"/>:</label> ${userForm.lastname} <br></h2>
+    <h2><label> <@spring.message "reg.birthDate"/>: </label> ${userForm.birthYear} <br></h2>
+    <h2><label> <@spring.message "reg.email"/>: </label> ${userForm.email} <br></h2>
 
 </div>
 
@@ -46,7 +46,7 @@
 
 </div>
 <form name="user" action="edit" method="post" id="view-form" novalidate=" novalidate">
-    <button class="btn btn-warning"> Edit Page </button><br>
+    <button class="btn btn-warning"> <@spring.message "page.edit"/> </button><br>
 </form>
 </div>
 <#include "down.ftl">

@@ -31,11 +31,11 @@
 
 <form name="Logins" action="input"  method="post">
 
- <div class="label">Login</div> <br>
+ <div class="label"><@spring.message "in.login"/></div> <br>
 <INPUT type="text" name="login" maxlenght="35" SIZE="20" > <br>
- <div class="label">Password</div><br>
+ <div class="label"><@spring.message "in.password"/></div><br>
 <INPUT type="PASSWORD" name="password" maxlength="35" size="20"> <br>
-<INPUT class="btn btn-warning" type="submit" value=" Enter ">
+<INPUT class="btn btn-warning" type="submit" value=" <@spring.message "btn.enter"/> ">
 
 </FORM>
 <form action="registration" enctype="text/plain" method="get" >

@@ -28,10 +28,10 @@
         style = ""
         value = [""]>
     <#list lableText as l_text >
-        <#if textOnTheLeftSide == "true" && lableOnTheNewLine != "true"><div>${l_text}</#if>
-        <#if textOnTheLeftSide == "true" && lableOnTheNewLine == "true"><div>${l_text}</div></#if>
-        <#if textOnTheLeftSide != "true" && lableOnTheNewLine == "true"><div>${l_text}</div></#if>
-        <#if textOnTheLeftSide != "true" && lableOnTheNewLine != "true"><div></#if>
+        <#if textOnTheLeftSide == "true" && lableOnTheNewLine != "true"><div class="${lableClass}">${l_text}</#if>
+        <#if textOnTheLeftSide == "true" && lableOnTheNewLine == "true"><div class="${lableClass}">${l_text}</div></#if>
+        <#if textOnTheLeftSide != "true" && lableOnTheNewLine == "true"><div class="${lableClass}">${l_text}</div></#if>
+        <#if textOnTheLeftSide != "true" && lableOnTheNewLine != "true"><div class="${lableClass}"></#if>
         <input  type = ${type}
                     class = "${class}"
                     <#if id[l_text_index]?exists>id = "${id[l_text_index]}"<#else>id = ""</#if>

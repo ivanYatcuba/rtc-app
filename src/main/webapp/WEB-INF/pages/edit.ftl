@@ -33,13 +33,13 @@
     </style>
     <form name="user" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
-        <div class="label">First Name</div><input type="text" id="firstname" name="firstname" value="${user.firstname}"/><br />
+        <div class="label"><@spring.message "reg.firstName"/></div><input type="text" id="firstname" name="firstname" value="${user.firstname}"/><br />
 
-        <div class="label">Last Name</div><input type="text" id="lastname" name="lastname" value="${user.lastname}"/><br />
+        <div class="label"><@spring.message "reg.lastName"/></div><input type="text" id="lastname" name="lastname" value="${user.lastname}"/><br />
 
-        <div class="label">Birth Year</div><input type="text" id="birthYear" name="birthYear" value="${user.birthYear}" /><br />
+        <div class="label"><@spring.message "reg.birthDate"/></div><input type="text" id="birthYear" name="birthYear" value="${user.birthYear}" /><br />
 
-        <div class="label">Email</div><input type="text" id="email" name="email" value="${user.email}"/><br />
+        <div class="label"><@spring.message "reg.email"/></div><input type="text" id="email" name="email" value="${user.email}"/><br />
 
         <div style="margin-left:140px;"><input class="btn btn-warning" type="submit" value="Save" /></div>
     </form>

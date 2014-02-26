@@ -38,13 +38,13 @@
 <#include "header.ftl">
 <form action="start input" method="get">
 
-  <center>  <button class="btn btn-warning"> Enter Page </button></center>
+  <center>  <button class="btn btn-warning"> <@spring.message "page.enter"/> </button></center>
 
 </form>
 
 <form action="registration" method="get" >
 
-  <center>  <button class="btn btn-warning"> Register Page </button></center>
+  <center>  <button class="btn btn-warning"> <@spring.message "page.register"/> </button></center>
 
 </form>
 <#include "down.ftl">
