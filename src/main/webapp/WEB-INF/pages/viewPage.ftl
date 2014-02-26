@@ -46,7 +46,7 @@
 
 </div>
 <form name="user" action="edit" method="post" id="view-form" novalidate=" novalidate">
-    <button class="btn btn-primary"> Edit Page </button><br>
+    <button class="btn btn-warning"> Edit Page </button><br>
 </form>
 </div>
 <#include "down.ftl">

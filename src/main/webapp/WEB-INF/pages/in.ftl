@@ -35,7 +35,7 @@
 <INPUT type="text" name="login" maxlenght="35" SIZE="20" > <br>
  <div class="label">Password</div><br>
 <INPUT type="PASSWORD" name="password" maxlength="35" size="20"> <br>
-<INPUT class="btn btn-warning" type="submit" value=" In ">
+<INPUT class="btn btn-warning" type="submit" value=" Enter ">
 
 </FORM>
 <form action="registration" enctype="text/plain" method="get" >
