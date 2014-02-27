@@ -26,9 +26,13 @@
     </style>
 <center>
 <h1><@spring.message "enter"/> </h1>
-
-
-
+</center>
+<form name="goHome" action="goHome" method="get" >
+<div style="margin-left:560px"> 
+    <button class="btn btn-primary" type="submit"><-</button>
+ </div>
+</form>
+<center>
 <form name="Logins" action="input"  method="post">
 
  <div class="label"><@spring.message "in.login"/></div> <br>
@@ -39,8 +43,16 @@
 
 </FORM>
 <form action="registration" enctype="text/plain" method="get" >
- 
+ </form>
+<form class="form-inline">
+<label class="checkbox">
+    <input type="checkbox">Запомнить меня</label>
+    <br>
+ <a href="#">Забыли пароль?</a>
+</form>
+
 </center>
+
 <#if login??>
  You'r login is ${login} <br>
 </#if>
