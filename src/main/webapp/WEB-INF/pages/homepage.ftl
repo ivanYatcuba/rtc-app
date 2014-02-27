@@ -35,7 +35,69 @@
             background-color: rgba(255,255,255,0.7);
         }
     </style>
+<style>
+   table {
+   
+   
+    width: 100%; /* Ширина таблицы */ 
+    border-spacing: 7px 11px; /* Расстояние между ячейками */ 
+   }
+   </style>
+ <style>
+   a.rollover {
+    background: url("<@spring.url '/resources/images/one.jpg'/>"); /* Путь к файлу с исходным рисунком  */
+    display: block; /*  Рисунок как блочный элемент */
+    width: 300px; /* Ширина рисунка */
+    height: 225px; /*  Высота рисунка */
+
+   }
+   a.rollover:hover {
+    background: url("<@spring.url '/resources/images/one2.jpg'/>"); /* Путь к файлу с заменяемым рисунком  */
+   }
+ 
+   a.rollover1 {
+    background: url("<@spring.url '/resources/images/two.jpg'/>"); /* Путь к файлу с исходным рисунком  */
+    display: block; /*  Рисунок как блочный элемент */
+    width: 300px; /* Ширина рисунка */
+    height: 225px; /*  Высота рисунка */
+   }
+   a.rollover1:hover {
+    background: url("<@spring.url '/resources/images/two2.jpg'/>"); /* Путь к файлу с заменяемым рисунком  */
+   }
+  
+   a.rollover2 {
+    background: url("<@spring.url '/resources/images/three.jpg'/>"); /* Путь к файлу с исходным рисунком  */
+    display: block; /*  Рисунок как блочный элемент */
+    width: 300px; /* Ширина рисунка */
+    height: 225px; /*  Высота рисунка */
+   }
+   a.rollover2:hover {
+    background: url("<@spring.url '/resources/images/three2.jpg'/>"); /* Путь к файлу с заменяемым рисунком  */
+   }
+  </style>
 <#include "header.ftl">
+<div>
+    <center>
+        <table>
+            <tr>
+                <td>
+                    <center>
+                        <a href="" class="rollover" > 
+                        </a>
+                    </center>
+                </td>
+                <td>
+                        <a href="" class="rollover1">
+                        </a>
+                </td>
+                <td>
+                        <a href="" class="rollover2">
+                        </a>
+                </td>
+           </tr>
+        </table>
+    </center>
+</div>
 <form action="start input" method="get">
 
   <center>  <button class="btn btn-warning"> <@spring.message "page.enter"/> </button></center>
