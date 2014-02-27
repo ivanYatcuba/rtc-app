@@ -39,40 +39,40 @@
    table {
    
    
-    width: 100%; /* Ширина таблицы */ 
-    border-spacing: 7px 11px; /* Расстояние между ячейками */ 
+    width: 100%; /* пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */ 
+    border-spacing: 7px 11px; /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */ 
    }
    </style>
  <style>
    a.rollover {
-    background: url("<@spring.url '/resources/images/one.jpg'/>"); /* Путь к файлу с исходным рисунком  */
-    display: block; /*  Рисунок как блочный элемент */
-    width: 300px; /* Ширина рисунка */
-    height: 225px; /*  Высота рисунка */
+    background: url("<@spring.url '/resources/images/one.jpg'/>"); /* пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  */
+    display: block; /*  пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    width: 300px; /* пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    height: 225px; /*  пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 
    }
    a.rollover:hover {
-    background: url("<@spring.url '/resources/images/one2.jpg'/>"); /* Путь к файлу с заменяемым рисунком  */
+    background: url("<@spring.url '/resources/images/one2.jpg'/>"); /* пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  */
    }
  
    a.rollover1 {
-    background: url("<@spring.url '/resources/images/two.jpg'/>"); /* Путь к файлу с исходным рисунком  */
-    display: block; /*  Рисунок как блочный элемент */
-    width: 300px; /* Ширина рисунка */
-    height: 225px; /*  Высота рисунка */
+    background: url("<@spring.url '/resources/images/two.jpg'/>"); /* пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  */
+    display: block; /*  пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    width: 300px; /* пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    height: 225px; /*  пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
    }
    a.rollover1:hover {
-    background: url("<@spring.url '/resources/images/two2.jpg'/>"); /* Путь к файлу с заменяемым рисунком  */
+    background: url("<@spring.url '/resources/images/two2.jpg'/>"); /* пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  */
    }
   
    a.rollover2 {
-    background: url("<@spring.url '/resources/images/three.jpg'/>"); /* Путь к файлу с исходным рисунком  */
-    display: block; /*  Рисунок как блочный элемент */
-    width: 300px; /* Ширина рисунка */
-    height: 225px; /*  Высота рисунка */
+    background: url("<@spring.url '/resources/images/three.jpg'/>"); /* пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  */
+    display: block; /*  пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    width: 300px; /* пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    height: 225px; /*  пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
    }
    a.rollover2:hover {
-    background: url("<@spring.url '/resources/images/three2.jpg'/>"); /* Путь к файлу с заменяемым рисунком  */
+    background: url("<@spring.url '/resources/images/three2.jpg'/>"); /* пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  */
    }
   </style>
 <#include "header.ftl">
@@ -105,9 +105,9 @@
 <form action="start input" method="get">
 <p align="right">
   <button class="btn btn-warning"> <@spring.message "page.enter"/> </button>
-
-</form>
 </p>
+</form>
+
 </td>
 <td>
 <form action="registration" method="get" >
