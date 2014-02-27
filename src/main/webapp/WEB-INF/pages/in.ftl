@@ -46,9 +46,9 @@
  </form>
 <form class="form-inline">
 <label class="checkbox">
-    <input type="checkbox">Запомнить меня</label>
+    <input type="checkbox">Р—Р°РїРѕРјРЅРёС‚СЊ РјРµРЅСЏ</label>
     <br>
- <a href="#">Забыли пароль?</a>
+ <a href="#">Р—Р°Р±С‹Р»Рё РїР°СЂРѕР»СЊ?</a>
 </form>
 
 </center>
