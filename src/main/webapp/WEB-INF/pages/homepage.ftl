@@ -103,10 +103,10 @@
        
 
 <form action="start input" method="get">
-<p align="right">
+
   <button class="btn btn-warning"> <@spring.message "page.enter"/> </button>
   <br>
-</p>
+
 </form>
 
 
