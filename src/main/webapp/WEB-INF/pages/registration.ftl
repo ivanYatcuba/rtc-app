@@ -22,14 +22,23 @@
         #content
         {
             background-color: rgba(255,255,255,0.7);
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-bottom: 5%;
+            margin-top: 5%;
+            height: 90%;
+            width: auto;
+        }
+        #reg{
+            text-align: center;
         }
     </style>
-<h1><@spring.message "register"/></h1>
+<h1 id="reg"><@spring.message "page.register"/></h1>
 
 <!--  The form that will be parsed by jQuery before submit  -->
 <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
-    <div class="label"><@spring.message "reg.firstName"/></div><input type="text" id="firstname" name="firstname" /><br />
+    <div class="label"><@spring.message "reg.firstName"/></div> <input type="text" id="firstname" name="firstname" /><br />
 
     <div class="label"><@spring.message "reg.lastName"/></div><input type="text" id="lastname" name="lastname" /><br />
 
