@@ -98,9 +98,9 @@
         </table>
     </center>
 </div>
-<table>
-    <tr><h1>
-        <td>
+<center>
+<h1>
+       
 
 <form action="start input" method="get">
 <p align="right">
@@ -109,16 +109,14 @@
 </p>
 </form>
 
-</td>
-<td>
+
 <form action="registration" method="get" >
 
    <button class="btn btn-warning"> <@spring.message "page.register"/> </button>
 
-</form>
-</td>
+
 </h1>
-</tr>
+</center>
 </table>
 <#include "down.ftl">
 </body>
