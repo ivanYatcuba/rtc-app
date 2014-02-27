@@ -98,17 +98,27 @@
         </table>
     </center>
 </div>
-<form action="start input" method="get">
+<table>
+    <tr><h1>
+        <td>
 
-  <center>  <button class="btn btn-warning"> <@spring.message "page.enter"/> </button></center>
+<form action="start input" method="get">
+<p align="right">
+  <button class="btn btn-warning"> <@spring.message "page.enter"/> </button>
 
 </form>
-
+</p>
+</td>
+<td>
 <form action="registration" method="get" >
 
-  <center>  <button class="btn btn-warning"> <@spring.message "page.register"/> </button></center>
+   <button class="btn btn-warning"> <@spring.message "page.register"/> </button>
 
 </form>
+</td>
+</h1>
+</tr>
+</table>
 <#include "down.ftl">
 </body>
 </html>
