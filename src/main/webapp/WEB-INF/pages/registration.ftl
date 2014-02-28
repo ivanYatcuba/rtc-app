@@ -24,8 +24,13 @@
             background-color: rgba(255,255,255,0.7);
         }
     </style>
-<h1><@spring.message "register"/></h1>
 
+<h1><@spring.message "register"/></h1>
+    <form name="goHome" action="goHome" method="get" >
+        <div style="margin-left:560px">
+            <button class="btn btn-warning" type="submit">Home page</button>
+        </div>
+        </form>
 <!--  The form that will be parsed by jQuery before submit  -->
 <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 

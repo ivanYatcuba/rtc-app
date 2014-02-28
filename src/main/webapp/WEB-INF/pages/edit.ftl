@@ -1,5 +1,6 @@
 <html>
 <#import "/spring.ftl" as spring/>
+<#include "macro.ftl" >
 <head>
 
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
@@ -16,6 +17,11 @@
 <!--<body style= " background-image : url(back.jpeg)"  > -->
 
 <body>
+<form name="goHome" action="goHome" method="get" >
+    <div style="margin-left:560px">
+        <button class="btn btn-warning" type="submit">Home page</button>
+    </div>
+    </form>
 <div id="content">
     <style>
         body
@@ -33,13 +39,13 @@
     </style>
     <form name="user" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
-        <div class="label"><@spring.message "reg.firstName"/></div><input type="text" id="firstname" name="firstname" value="${user.firstname}"/><br />
+        <div class="label"><@spring.message "reg.firstName"/></div><br><input type="text" id="firstname" name="firstname" value="${user.firstname}"/><br />
 
-        <div class="label"><@spring.message "reg.lastName"/></div><input type="text" id="lastname" name="lastname" value="${user.lastname}"/><br />
+        <div class="label"><@spring.message "reg.lastName"/></div><br><input type="text" id="lastname" name="lastname" value="${user.lastname}"/><br />
 
-        <div class="label"><@spring.message "reg.birthDate"/></div><input type="text" id="birthYear" name="birthYear" value="${user.birthYear}" /><br />
+        <div class="label"><@spring.message "reg.birthDate"/></div><br><input type="text" id="birthYear" name="birthYear" value="${user.birthYear}" /><br />
 
-        <div class="label"><@spring.message "reg.email"/></div><input type="text" id="email" name="email" value="${user.email}"/><br />
+        <div class="label"><@spring.message "reg.email"/></div><br><input type="text" id="email" name="email" value="${user.email}"/><br />
 
         <div style="margin-left:140px;"><input class="btn btn-warning" type="submit" value="Save" /></div>
     </form>

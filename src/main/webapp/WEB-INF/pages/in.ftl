@@ -29,7 +29,7 @@
 </center>
 <form name="goHome" action="goHome" method="get" >
 <div style="margin-left:560px"> 
-    <button class="btn btn-primary" type="submit"><-</button>
+    <button class="btn btn-warning" type="submit">Home page</button>
  </div>
 </form>
 <center>

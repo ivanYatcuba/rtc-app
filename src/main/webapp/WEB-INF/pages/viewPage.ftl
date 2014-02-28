@@ -13,7 +13,10 @@
 <title> Profile View </title>
 
 <body>
-
+<form name="goHome" action="goHome" method="get" >
+    <div style="margin-left:560px">
+        <button class="btn btn-warning" type="submit">Home page</button>
+    </div>
 <div id="content">
 <style>
     body
