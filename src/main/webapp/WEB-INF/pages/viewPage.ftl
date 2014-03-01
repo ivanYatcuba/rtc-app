@@ -36,7 +36,7 @@
 
 <div class="Profile view">
 
-    <center><h1> <@spring.message "welcomeView"/> </h1> </center>
+    <h1> <@spring.message "welcomeView"/> </h1>
     <h2><label> <@spring.message "reg.firstName"/>: </label>
 <#if (userForm.firstname)??>
 ${userForm.firstname} 
