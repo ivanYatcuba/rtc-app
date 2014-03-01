@@ -15,7 +15,7 @@
 <body>
 <form name="goHome" action="goHome" method="get" >
     <div style="margin-left:560px">
-        <button class="btn btn-warning pull-right" type="submit">Home page</button>
+        <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
     </div>
 <div id="content">
 <style>
@@ -40,14 +40,14 @@
     <h2><label> <@spring.message "reg.firstName"/>: </label>
 <#if (userForm.firstname)??>
 ${userForm.firstname} 
-<#else>Data not available
+<#else>
  <br>
 </#if>
 </h2>
     <h2><label> <@spring.message "reg.lastName"/>:</label> 
 <#if (userForm.lastname)??>
 ${userForm.lastname} 
-<#else>Data not available
+<#else>
 </#if>
 <br></h2>
 
@@ -55,13 +55,13 @@ ${userForm.lastname}
     <h2><label> <@spring.message "reg.birthDate"/>: </label>
 <#if (userForm.birthYear)??>
  ${userForm.birthYear}
-<#else>Data not available
+<#else>
 </#if>
  <br></h2>
     <h2><label> <@spring.message "reg.email"/>: </label> 
 <#if (userForm.email)??>
 ${userForm.email} 
-<#else>Data not available
+<#else>
 </#if>
 <br></h2>
 

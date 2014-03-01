@@ -122,7 +122,8 @@
 </h1>
 </center>
 
-</div>
+
 <#include "down.ftl">
+</div>
 </body>
 </html>

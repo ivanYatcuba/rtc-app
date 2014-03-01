@@ -19,7 +19,7 @@
 <body>
 <form name="goHome" action="goHome" method="get" >
     <div style="margin-left:560px">
-        <button class="btn btn-warning pull-right" type="submit">Home page</button>
+        <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
     </div>
     </form>
 <div id="content">
@@ -48,20 +48,20 @@
 </#if>
         <div class="label"><@spring.message "reg.lastName"/></div><br>
 <#if !(user.lastname)??>
-<input type="text" id="lastname" name="lastname" value="Data not avialable"/><br />
+<input type="text" id="lastname" name="lastname" value="Data not available"/><br />
 <#else>
 <input type="text" id="lastname" name="lastname" value="${user.lastname}"/><br />
 </#if>
         <div class="label"><@spring.message "reg.birthDate"/></div><br>
 <#if !(user.birthYear)??>
-<input type="text" id="birthYear" name="birthYear" value="Data not avialable" /><br />
+<input type="text" id="birthYear" name="birthYear" value="Data not available" /><br />
 <#else>
 <input type="text" id="birthYear" name="birthYear" value="${user.birthYear}" /><br />
 </#if>
 
         <div class="label"><@spring.message "reg.email"/></div><br>
 <#if !(user.email)??>
-<input type="text" id="email" name="email" value="Data not avialable"/><br />
+<input type="text" id="email" name="email" value="Data not available"/><br />
 <#else>
 <input type="text" id="email" name="email" value="${user.email}"/><br />
 </#if>
