@@ -40,14 +40,31 @@
 
     <form name="user" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
-        <div class="label"><@spring.message "reg.firstName"/></div><br><input type="text" id="firstname" name="firstname" value="${user.firstname}"/><br />
+        <div class="label"><@spring.message "reg.firstName"/></div><br>
+<#if !(userForm.firstname)??>
+<input type="text" id="firstname" name="firstname" value="Data not available"/><br />
+<#else>
+<input type="text" id="firstname" name="firstname" value="${user.firstname}"/><br />
+</#if>
+        <div class="label"><@spring.message "reg.lastName"/></div><br>
+<#if !(user.lastname)??>
+<input type="text" id="lastname" name="lastname" value="Data not avialable"/><br />
+<#else>
+<input type="text" id="lastname" name="lastname" value="${user.lastname}"/><br />
+</#if>
+        <div class="label"><@spring.message "reg.birthDate"/></div><br>
+<#if !(user.birthYear)??>
+<input type="text" id="birthYear" name="birthYear" value="Data not avialable" /><br />
+<#else>
+<input type="text" id="birthYear" name="birthYear" value="${user.birthYear}" /><br />
+</#if>
 
-        <div class="label"><@spring.message "reg.lastName"/></div><br><input type="text" id="lastname" name="lastname" value="${user.lastname}"/><br />
-
-        <div class="label"><@spring.message "reg.birthDate"/></div><br><input type="text" id="birthYear" name="birthYear" value="${user.birthYear}" /><br />
-
-        <div class="label"><@spring.message "reg.email"/></div><br><input type="text" id="email" name="email" value="${user.email}"/><br />
-
+        <div class="label"><@spring.message "reg.email"/></div><br>
+<#if !(user.email)??>
+<input type="text" id="email" name="email" value="Data not avialable"/><br />
+<#else>
+<input type="text" id="email" name="email" value="${user.email}"/><br />
+</#if>
         <div style="margin-left:140px;"><input class="btn btn-warning" type="submit" value="Save" /></div>
     </form>
 <#include "down.ftl">
