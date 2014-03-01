@@ -37,6 +37,7 @@
             background-color: rgba(255,255,255,0.7);
         }
     </style>
+    <h1> <@spring.message "editPage"/> </h1><br>
 
     <form name="user" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
