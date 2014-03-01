@@ -37,10 +37,33 @@
 <div class="Profile view">
 
     <center><h1> <@spring.message "welcomeView"/> </h1> </center>
-    <h2><label> <@spring.message "reg.firstName"/>: </label>${userForm.firstname} <br></h2>
-    <h2><label> <@spring.message "reg.lastName"/>:</label> ${userForm.lastname} <br></h2>
-    <h2><label> <@spring.message "reg.birthDate"/>: </label> ${userForm.birthYear} <br></h2>
-    <h2><label> <@spring.message "reg.email"/>: </label> ${userForm.email} <br></h2>
+    <h2><label> <@spring.message "reg.firstName"/>: </label>
+<#if (userForm.firstname)??>
+${userForm.firstname} 
+<#else>Data not available
+ <br>
+</#if>
+</h2>
+    <h2><label> <@spring.message "reg.lastName"/>:</label> 
+<#if (userForm.lastname)??>
+${userForm.lastname} 
+<#else>Data not available
+</#if>
+<br></h2>
+
+
+    <h2><label> <@spring.message "reg.birthDate"/>: </label>
+<#if (userForm.birthYear)??>
+ ${userForm.birthYear}
+<#else>Data not available
+</#if>
+ <br></h2>
+    <h2><label> <@spring.message "reg.email"/>: </label> 
+<#if (userForm.email)??>
+${userForm.email} 
+<#else>Data not available
+</#if>
+<br></h2>
 
 </div>
 
