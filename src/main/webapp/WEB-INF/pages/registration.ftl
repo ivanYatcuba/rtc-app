@@ -5,6 +5,9 @@
 
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <link href="runnable.css" rel="stylesheet" />
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
 </head>
 
@@ -28,22 +31,33 @@
 <h1><@spring.message "register"/></h1>
     <form name="goHome" action="goHome" method="get" >
         <div style="margin-left:560px">
-            <button class="btn btn-warning" type="submit">Home page</button>
+            <button class="btn btn-warning pull-right" type="submit">Home page</button>
         </div>
         </form>
 <!--  The form that will be parsed by jQuery before submit  -->
 <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
-    <div class="label"><@spring.message "reg.firstName"/></div><input type="text" id="firstname" name="firstname" /><br />
+    <div class="label"><@spring.message "reg.firstName"/></div><br><input type="text" id="firstname" name="firstname" /><br />
 
-    <div class="label"><@spring.message "reg.lastName"/></div><input type="text" id="lastname" name="lastname" /><br />
+    <div class="label"><@spring.message "reg.lastName"/></div><br><input type="text" id="lastname" name="lastname" /><br />
 
-    <div class="label"><@spring.message "reg.birthDate"/></div><input type="text" id="birthYear" name="birthYear" /><br />
+    <div class="label"><@spring.message "reg.birthDate"/></div><br><input type="text" id="birthYear" name="birthYear" /><br />
 
-    <div class="label"><@spring.message "reg.email"/></div><input type="text" id="email" name="email" /><br />
+    <div class="label"><@spring.message "reg.email"/></div><br><input type="text" id="email" name="email" /><br />
 
-    <div class="label"><@spring.message "reg.password"/></div><input type="password" id="password" name="password" /><br />
-  
+    <div class="label"><@spring.message "reg.password"/></div><br><input type="password" id="password" name="password" /><br />
+
+    <div class="dropdown">
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+
+        <li><a tabindex="-1" href="#"> java </li>
+        <li><a tabindex="-1" href="#"> C# </li>
+        <li> <a tabindex="-1" href="#"> Assembler oO</li>
+
+        </ul>
+
+<br>
+        </div>
     <div style="margin-left:140px;"><input class ="btn btn-warning" type="submit" name="submit" value=<@spring.message "reg.register"/> /></div>
 </form>
 <#include "down.ftl">

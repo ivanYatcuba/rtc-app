@@ -15,7 +15,7 @@
 <body>
 <form name="goHome" action="goHome" method="get" >
     <div style="margin-left:560px">
-        <button class="btn btn-warning" type="submit">Home page</button>
+        <button class="btn btn-warning pull-right" type="submit">Home page</button>
     </div>
 <div id="content">
 <style>
@@ -46,7 +46,7 @@
 
 </form>
 <form action="edit" method="post" id="view-form" >
-
+</form>
 </div>
 <form name="user" action="edit" method="post" id="view-form" novalidate=" novalidate">
     <button class="btn btn-warning"> <@spring.message "page.edit"/> </button><br>

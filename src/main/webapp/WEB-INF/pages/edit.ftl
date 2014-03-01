@@ -19,7 +19,7 @@
 <body>
 <form name="goHome" action="goHome" method="get" >
     <div style="margin-left:560px">
-        <button class="btn btn-warning" type="submit">Home page</button>
+        <button class="btn btn-warning pull-right" type="submit">Home page</button>
     </div>
     </form>
 <div id="content">
@@ -37,6 +37,7 @@
             background-color: rgba(255,255,255,0.7);
         }
     </style>
+
     <form name="user" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
         <div class="label"><@spring.message "reg.firstName"/></div><br><input type="text" id="firstname" name="firstname" value="${user.firstname}"/><br />

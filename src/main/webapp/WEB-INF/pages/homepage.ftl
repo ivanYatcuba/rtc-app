@@ -34,45 +34,47 @@
         {
             background-color: rgba(255,255,255,0.7);
         }
+
     </style>
+</div>
 <style>
    table {
    
    
-    width: 100%; /* ������ ������� */ 
-    border-spacing: 7px 11px; /* ���������� ����� �������� */ 
+    width: 100%;
+    border-spacing: 7px 11px;
    }
    </style>
  <style>
    a.rollover {
-    background: url("<@spring.url '/resources/images/one.jpg'/>"); /* ���� � ����� � �������� ��������  */
-    display: block; /*  ������� ��� ������� ������� */
-    width: 300px; /* ������ ������� */
-    height: 225px; /*  ������ ������� */
+    background: url("<@spring.url '/resources/images/one.jpg'/>");
+    display: block;
+    width: 300px;
+    height: 225px;
 
    }
    a.rollover:hover {
-    background: url("<@spring.url '/resources/images/one2.jpg'/>"); /* ���� � ����� � ���������� ��������  */
+    background: url("<@spring.url '/resources/images/one2.jpg'/>");
    }
  
    a.rollover1 {
-    background: url("<@spring.url '/resources/images/two.jpg'/>"); /* ���� � ����� � �������� ��������  */
-    display: block; /*  ������� ��� ������� ������� */
-    width: 300px; /* ������ ������� */
-    height: 225px; /*  ������ ������� */
+    background: url("<@spring.url '/resources/images/two.jpg'/>");
+    display: block;
+    width: 300px;
+    height: 225px;
    }
    a.rollover1:hover {
-    background: url("<@spring.url '/resources/images/two2.jpg'/>"); /* ���� � ����� � ���������� ��������  */
+    background: url("<@spring.url '/resources/images/two2.jpg'/>");
    }
   
    a.rollover2 {
-    background: url("<@spring.url '/resources/images/three.jpg'/>"); /* ���� � ����� � �������� ��������  */
+    background: url("<@spring.url '/resources/images/three.jpg'/>");
     display: block; /*  ������� ��� ������� ������� */
     width: 300px; /* ������ ������� */
     height: 225px; /*  ������ ������� */
    }
    a.rollover2:hover {
-    background: url("<@spring.url '/resources/images/three2.jpg'/>"); /* ���� � ����� � ���������� ��������  */
+    background: url("<@spring.url '/resources/images/three2.jpg'/>");
    }
   </style>
 <#include "header.ftl">
