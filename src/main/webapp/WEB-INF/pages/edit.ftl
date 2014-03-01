@@ -42,26 +42,26 @@
 
         <div class="label"><@spring.message "reg.firstName"/></div><br>
 <#if !(userForm.firstname)??>
-<input type="text" id="firstname" name="firstname" value="Data not available"/><br />
+<input type="text" id="firstname" name="firstname" value=""/><br />
 <#else>
 <input type="text" id="firstname" name="firstname" value="${user.firstname}"/><br />
 </#if>
         <div class="label"><@spring.message "reg.lastName"/></div><br>
 <#if !(user.lastname)??>
-<input type="text" id="lastname" name="lastname" value="Data not avialable"/><br />
+<input type="text" id="lastname" name="lastname" value=""/><br />
 <#else>
 <input type="text" id="lastname" name="lastname" value="${user.lastname}"/><br />
 </#if>
         <div class="label"><@spring.message "reg.birthDate"/></div><br>
 <#if !(user.birthYear)??>
-<input type="text" id="birthYear" name="birthYear" value="Data not avialable" /><br />
+<input type="text" id="birthYear" name="birthYear" value="" /><br />
 <#else>
 <input type="text" id="birthYear" name="birthYear" value="${user.birthYear}" /><br />
 </#if>
 
         <div class="label"><@spring.message "reg.email"/></div><br>
 <#if !(user.email)??>
-<input type="text" id="email" name="email" value="Data not avialable"/><br />
+<input type="text" id="email" name="email" value=""/><br />
 <#else>
 <input type="text" id="email" name="email" value="${user.email}"/><br />
 </#if>
