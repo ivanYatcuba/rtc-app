@@ -37,15 +37,20 @@
 <!--  The form that will be parsed by jQuery before submit  -->
 <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
-    <div class="label"><@spring.message "reg.firstName"/></div><br><input type="text" id="firstname" name="firstname" /><br />
+    <div class="label"><@spring.message "reg.firstName"/></div><br>
+<input type="text" id="firstname" name="firstname" /><br />
 
-    <div class="label"><@spring.message "reg.lastName"/></div><br><input type="text" id="lastname" name="lastname" /><br />
+    <div class="label"><@spring.message "reg.lastName"/></div><br>
+<input type="text" id="lastname" name="lastname" /><br />
 
-    <div class="label"><@spring.message "reg.birthDate"/></div><br><input type="text" id="birthYear" name="birthYear" /><br />
+    <div class="label"><@spring.message "reg.birthDate"/></div><br>
+<input type="text" id="birthYear" name="birthYear" /><br />
 
-    <div class="label"><@spring.message "reg.email"/></div><br><input type="text" id="email" name="email" /><br />
+    <div class="label"><@spring.message "reg.email"/></div><br>
+<input type="text" id="email" name="email" /><br />
 
-    <div class="label"><@spring.message "reg.password"/></div><br><input type="password" id="password" name="password" /><br />
+    <div class="label"><@spring.message "reg.password"/></div><br>
+<input type="password" id="password" name="password" /><br />
 
     <div class="dropdown">
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
