@@ -69,16 +69,16 @@
   
    a.rollover2 {
     background: url("<@spring.url '/resources/images/three.jpg'/>");
-    display: block; /*  ������� ��� ������� ������� */
-    width: 300px; /* ������ ������� */
-    height: 225px; /*  ������ ������� */
+    display: block;
+    width: 300px;
+    height: 225px;
    }
    a.rollover2:hover {
     background: url("<@spring.url '/resources/images/three2.jpg'/>");
    }
   </style>
 <#include "header.ftl">
-</div>
+
 <div>
     <center>
         <table>
@@ -121,6 +121,7 @@
 </h1>
 </center>
 </table>
+</div>
 <#include "down.ftl">
 </body>
 </html>
