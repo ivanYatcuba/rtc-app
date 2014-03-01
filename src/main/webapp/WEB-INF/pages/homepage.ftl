@@ -116,11 +116,12 @@
 <form action="registration" method="get" >
 
    <button class="btn btn-warning"> <@spring.message "page.register"/> </button>
+
 </form>
 
 </h1>
 </center>
-</table>
+
 </div>
 <#include "down.ftl">
 </body>
