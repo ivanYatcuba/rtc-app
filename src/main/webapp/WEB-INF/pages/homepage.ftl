@@ -36,7 +36,7 @@
         }
 
     </style>
-</div>
+
 <style>
    table {
    
@@ -78,6 +78,7 @@
    }
   </style>
 <#include "header.ftl">
+</div>
 <div>
     <center>
         <table>
