@@ -40,6 +40,8 @@
             <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
         </div>
 
+        <br>
+
     <h2><label> <@spring.message "reg.firstName"/>: </label>
 <#if (userForm.firstname)??>
 ${userForm.firstname} 
@@ -53,7 +55,6 @@ ${userForm.lastname}
 <#else>
 </#if>
 <br></h2>
-
 
     <h2><label> <@spring.message "reg.birthDate"/>: </label>
 <#if (userForm.birthYear)??>
