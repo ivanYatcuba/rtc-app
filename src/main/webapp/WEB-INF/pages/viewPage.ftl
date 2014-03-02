@@ -7,7 +7,7 @@
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
 
-
+<link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
 
 </head>
 <title> <@spring.message "title.view"/> </title>
@@ -15,23 +15,8 @@
 <body>
 
 <div id="content">
-<style>
-    body
-    {
-        background-image:url(" <@spring.url '/resources/images/back.jpeg'/> ");
-        background-repeat: no-repeat;
-        background-attachment:fixed;
-        background-position:center;
-        background-size: cover;
-    }
-    #content
-    {
-        background-color: rgba(255,255,255,0.7);
-    }
-</style>
 
-
-<div class="Profile view">
+ <div class="Profile view">
 
     <center><h1> <@spring.message "welcomeView"/> </h1> </center>
 
@@ -44,10 +29,11 @@
 
     <h2><label> <@spring.message "reg.firstName"/>: </label>
 <#if (userForm.firstname)??>
-${userForm.firstname} 
-<#else>
-</#if>
-<br></h2>
+   ${userForm.firstname} 
+    <#else>
+  </#if>
+ <br>
+ </h2>
 
     <h2><label> <@spring.message "reg.lastName"/>:</label> 
 <#if (userForm.lastname)??>
