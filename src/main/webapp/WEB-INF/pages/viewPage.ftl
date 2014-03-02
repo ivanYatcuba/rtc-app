@@ -13,10 +13,7 @@
 <title> Profile View </title>
 
 <body>
-<form name="goHome" action="goHome" method="get" >
-    <div style="margin-left:560px">
-        <button class="btn btn-warning pull-right" type="submit">Home page</button>
-    </div>
+
 <div id="content">
 <style>
     body
@@ -36,28 +33,39 @@
 
 <div class="Profile view">
 
-    <h1> <@spring.message "welcomeView"/> </h1>
+    <center><h1> <@spring.message "welcomeView"/> </h1> </center>
+
+    <form name="goHome" action="goHome" method="get" >
+        <div style="margin-left:560px">
+            <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
+        </div>
+
+        <br>
+
     <h2><label> <@spring.message "reg.firstName"/>: </label>
 <#if (userForm.firstname)??>
 ${userForm.firstname} 
- <br>
-</#if>
-</h2>
-    <h2><label> <@spring.message "reg.lastName"/>:</label> 
-<#if (userForm.lastname)??>
-${userForm.lastname} 
+<#else>
 </#if>
 <br></h2>
 
+    <h2><label> <@spring.message "reg.lastName"/>:</label> 
+<#if (userForm.lastname)??>
+${userForm.lastname} 
+<#else>
+</#if>
+<br></h2>
 
     <h2><label> <@spring.message "reg.birthDate"/>: </label>
 <#if (userForm.birthYear)??>
  ${userForm.birthYear}
+<#else>
 </#if>
  <br></h2>
     <h2><label> <@spring.message "reg.email"/>: </label> 
 <#if (userForm.email)??>
 ${userForm.email} 
+<#else>
 </#if>
 <br></h2>
 

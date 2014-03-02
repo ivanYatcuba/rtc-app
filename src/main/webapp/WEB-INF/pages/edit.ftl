@@ -17,11 +17,7 @@
 <!--<body style= " background-image : url(back.jpeg)"  > -->
 
 <body>
-<form name="goHome" action="goHome" method="get" >
-    <div style="margin-left:560px">
-        <button class="btn btn-warning pull-right" type="submit">Home page</button>
-    </div>
-    </form>
+
 <div id="content">
     <style>
         body
@@ -38,6 +34,12 @@
         }
     </style>
     <h1> <@spring.message "editPage"/> </h1><br>
+
+    <form name="goHome" action="goHome" method="get" >
+        <div style="margin-left:560px">
+            <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
+        </div>
+    </form>
 
     <form name="user" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
