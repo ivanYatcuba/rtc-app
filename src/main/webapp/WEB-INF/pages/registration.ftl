@@ -7,26 +7,14 @@
     <link href="runnable.css" rel="stylesheet" />
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
 </head>
 
 <title><@spring.message "register"/></title>
 
 <body>
 <div id="content">
-    <style>
-        body
-        {
-            background-image:url(" <@spring.url '/resources/images/back.jpeg'/> ");
-            background-repeat: no-repeat;
-            background-attachment:fixed;
-            background-position:center;
-            background-size: cover;
-        }
-        #content
-        {
-            background-color: rgba(255,255,255,0.7);
-        }
-    </style>
+ 
 
 <h1><@spring.message "register"/></h1><br>
 
@@ -64,7 +52,9 @@
 
 <br>
         </div>
-    <div style="margin-left:140px;"><input class ="btn btn-warning" type="submit" name="submit" value=<@spring.message "reg.register"/> /></div>
+    <div style="margin-left:140px;">
+    <input class ="btn btn-warning" type="submit" name="submit" value=<@spring.message "reg.register"/> />
+    </div>
 </form>
 <#include "down.ftl">
 </body>
