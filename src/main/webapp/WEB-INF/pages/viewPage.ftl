@@ -46,9 +46,9 @@
 <#if (userForm.firstname)??>
 ${userForm.firstname} 
 <#else>
- <br>
 </#if>
-</h2>
+<br></h2>
+
     <h2><label> <@spring.message "reg.lastName"/>:</label> 
 <#if (userForm.lastname)??>
 ${userForm.lastname} 
