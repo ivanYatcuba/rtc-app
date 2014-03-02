@@ -15,7 +15,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
   
 </head>
-<title> <@spring.message "title.home"/> </title>
+<title> Home Page </title>
 
 <body>
 <div id="content">
