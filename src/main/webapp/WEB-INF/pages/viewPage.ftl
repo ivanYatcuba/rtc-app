@@ -10,7 +10,7 @@
 
 
 </head>
-<title> Profile View </title>
+<title> <@spring.message "title.view"/> </title>
 
 <body>
 
