@@ -8,7 +8,7 @@
     <link href="runnable.css" rel="stylesheet" />
     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-
+<link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
 </head>
 <title> <@spring.message "editPage"/> </title>
 
@@ -16,20 +16,7 @@
 <body>
 
 <div id="content">
-    <style>
-        body
-        {
-            background-image:url(" <@spring.url '/resources/images/back.jpeg'/> ");
-            background-repeat: no-repeat;
-            background-attachment:fixed;
-            background-position:center;
-            background-size: cover;
-        }
-        #content
-        {
-            background-color: rgba(255,255,255,0.7);
-        }
-    </style>
+    
     <h1> <@spring.message "editPage"/> </h1><br>
 
     <form name="goHome" action="goHome" method="get" >
