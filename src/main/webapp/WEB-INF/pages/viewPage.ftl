@@ -13,10 +13,7 @@
 <title> Profile View </title>
 
 <body>
-<form name="goHome" action="goHome" method="get" >
-    <div style="margin-left:560px">
-        <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
-    </div>
+
 <div id="content">
 <style>
     body
@@ -37,6 +34,12 @@
 <div class="Profile view">
 
     <center><h1> <@spring.message "welcomeView"/> </h1> </center>
+
+    <form name="goHome" action="goHome" method="get" >
+        <div style="margin-left:560px">
+            <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
+        </div>
+
     <h2><label> <@spring.message "reg.firstName"/>: </label>
 <#if (userForm.firstname)??>
 ${userForm.firstname} 
