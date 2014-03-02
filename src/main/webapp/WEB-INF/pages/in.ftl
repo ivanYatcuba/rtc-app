@@ -6,24 +6,11 @@
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
   <link href="runnable.css" rel="stylesheet" />
-
+<link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="content">
-    <style>
-        body
-        {
-            background-image:url(" <@spring.url '/resources/images/back.jpeg'/> ");
-            background-repeat: no-repeat;
-            background-attachment:fixed;
-            background-position:center;
-            background-size: cover;
-        }
-        #content
-        {
-            background-color: rgba(255,255,255,0.7);
-        }
-    </style>
+    
 <center>
 <h1><@spring.message "enter"/> </h1>
 </center>
