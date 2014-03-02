@@ -13,7 +13,7 @@
 
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
-  
+  <link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
 </head>
 <title> Home Page </title>
 
