@@ -1,6 +1,6 @@
 body
         {
-            background-image:url("/resources/images/back.jpeg");
+            background-image:url(../images/back.jpeg);
             background-repeat: no-repeat;
             background-attachment:fixed;
             background-position:center;
@@ -17,33 +17,33 @@ table {
     border-spacing: 7px 11px;
    }
     a.rollover {
-    background: url("/resources/images/one.jpg");
+    background: url(../images/one.jpg);
     display: block;
     width: 300px;
     height: 225px;
 
    }
    a.rollover:hover {
-    background: url("/resources/images/one2.jpg");
+    background: url(../images/one2.jpg);
    }
  
    a.rollover1 {
-    background: url("/resources/images/two.jpg");
+    background: url(../images/two.jpg);
     display: block;
     width: 300px;
     height: 225px;
    }
    a.rollover1:hover {
-    background: url("/resources/images/two2.jpg");
+    background: url(../images/two2.jpg);
    }
   
    a.rollover2 {
-    background: url("/resources/images/three.jpg");
+    background: url(../images/three.jpg);
     display: block;
     width: 300px;
     height: 225px;
    }
    a.rollover2:hover {
-    background: url("/resources/images/three2.jpg");
+    background: url(../images/three2.jpg);
    }
    
