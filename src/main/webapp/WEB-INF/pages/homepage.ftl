@@ -46,7 +46,6 @@
 <center>
 <h1>
        
-
 <form action="start input" method="get">
 
   <button class="btn btn-warning"> <@spring.message "page.enter"/> </button>
