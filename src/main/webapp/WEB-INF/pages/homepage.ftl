@@ -13,70 +13,12 @@
 
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
-
+    <link href="<@spring.url'/resources/css/js/style.css'/>" rel="stylesheet"  type="text/css">
 </head>
 <title> Home page </title>
-<!--<body style= " background-image : url(back.jpeg)"  > -->
 
 <body>
-
 <div id="content">
-    <style>
-        body
-        {
-            background-image:url(" <@spring.url '/resources/images/back.jpeg'/> ");
-            background-repeat: no-repeat;
-            background-attachment:fixed;
-            background-position:center;
-            background-size: cover;
-        }
-        #content
-        {
-            background-color: rgba(255,255,255,0.7);
-        }
-
-    </style>
-
-<style>
-   table {
-   
-   
-    width: 100%;
-    border-spacing: 7px 11px;
-   }
-   </style>
- <style>
-   a.rollover {
-    background: url("<@spring.url '/resources/images/one.jpg'/>");
-    display: block;
-    width: 300px;
-    height: 225px;
-
-   }
-   a.rollover:hover {
-    background: url("<@spring.url '/resources/images/one2.jpg'/>");
-   }
- 
-   a.rollover1 {
-    background: url("<@spring.url '/resources/images/two.jpg'/>");
-    display: block;
-    width: 300px;
-    height: 225px;
-   }
-   a.rollover1:hover {
-    background: url("<@spring.url '/resources/images/two2.jpg'/>");
-   }
-  
-   a.rollover2 {
-    background: url("<@spring.url '/resources/images/three.jpg'/>");
-    display: block;
-    width: 300px;
-    height: 225px;
-   }
-   a.rollover2:hover {
-    background: url("<@spring.url '/resources/images/three2.jpg'/>");
-   }
-  </style>
 <#include "header.ftl">
 
 <div>
@@ -111,7 +53,6 @@
   <br>
 
 </form>
-
 
 <form action="registration" method="get" >
 
