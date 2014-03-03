@@ -1,0 +1,49 @@
+body
+        {
+            background-image:url(../images/back.jpeg);
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+            background-position:center;
+            background-size: cover;
+        }
+        #content
+        {
+            background-color: rgba(255,255,255,0.7);
+        }
+table {
+   
+   
+    width: 100%;
+    border-spacing: 7px 11px;
+   }
+    a.rollover {
+    background: url(../images/one.jpg);
+    display: block;
+    width: 300px;
+    height: 225px;
+
+   }
+   a.rollover:hover {
+    background: url(../images/one2.jpg);
+   }
+ 
+   a.rollover1 {
+    background: url(../images/two.jpg);
+    display: block;
+    width: 300px;
+    height: 225px;
+   }
+   a.rollover1:hover {
+    background: url(../images/two2.jpg);
+   }
+  
+   a.rollover2 {
+    background: url(../images/three.jpg);
+    display: block;
+    width: 300px;
+    height: 225px;
+   }
+   a.rollover2:hover {
+    background: url(../images/three2.jpg);
+   }
+   
