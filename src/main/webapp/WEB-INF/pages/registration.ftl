@@ -22,7 +22,6 @@
 
 <body>
 <div id="content">
- 
 
 <h1><@spring.message "register"/></h1><br>
 
@@ -37,13 +36,17 @@
     <div class="label"><@spring.message "reg.firstName"/></div><br>
 <input type="text" id="firstname" name="firstname" /><br />
 
-    <div class="label"><@spring.message "reg.lastName"/></div><input type="text" id="lastname" name="lastname" /><br />
+    <div class="label"><@spring.message "reg.lastName"/></div> <br>
+    <input type="text" id="lastname" name="lastname" /><br />
 
-    <div class="label"><@spring.message "reg.birthDate"/></div><input type="text" id="birthYear" name="birthYear" /><br />
+    <div class="label"><@spring.message "reg.birthDate"/></div><br>
+    <input type="text" id="birthYear" name="birthYear" /><br />
 
-    <div class="label"><@spring.message "reg.email"/></div><input type="text" id="email" name="email" /><br />
+    <div class="label"><@spring.message "reg.email"/></div><br>
+    <input type="text" id="email" name="email" /><br />
 
-    <div class="label"><@spring.message "reg.password"/></div><input type="password" id="password" name="password" /><br />
+    <div class="label"><@spring.message "reg.password"/></div><br>
+    <input type="password" id="password" name="password" /><br />
   
     <div style="margin-left:140px;"><input class ="btn btn-warning" type="submit" name="submit" value=<@spring.message "reg.register"/> /></div>
 </form>

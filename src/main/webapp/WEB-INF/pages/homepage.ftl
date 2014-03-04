@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <#import "/spring.ftl" as spring/>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -60,21 +60,15 @@
 <h1>
        
 <form action="start input" method="get">
-
   <button class="btn btn-warning"> <@spring.message "page.enter"/> </button>
-  <br>
-
 </form>
 
 <form action="registration" method="get" >
-
    <button class="btn btn-warning"> <@spring.message "page.register"/> </button>
-
 </form>
 
 </h1>
 </center>
-
 
 <#include "down.ftl">
 </div>
