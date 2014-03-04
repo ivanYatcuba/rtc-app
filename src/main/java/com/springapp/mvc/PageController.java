@@ -58,8 +58,8 @@ static {
     public String viewPage(@ModelAttribute("userForm") User user, ModelMap model)
     {
         fictUser = user;
-        System.out.println("fictUser.getFirstname()" + fictUser.getFirstname());
-        System.out.println("fictUser.getLastname()" + fictUser.getLastname());
+//        System.out.println("fictUser.getFirstname()" + fictUser.getFirstname());
+//        System.out.println("fictUser.getLastname()" + fictUser.getLastname());
         return "viewPage";
     }
     @RequestMapping(value="/viewPage",method=RequestMethod.GET)
