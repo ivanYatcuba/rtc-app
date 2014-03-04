@@ -147,6 +147,8 @@ public class User {
         this.oralEng = oralEng;
         this.note = note;
         this.password = password;
+
+        
     }
 
 }

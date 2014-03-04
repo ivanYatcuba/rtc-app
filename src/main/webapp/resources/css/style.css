@@ -46,4 +46,10 @@ table {
    a.rollover2:hover {
     background: url(../images/three2.jpg);
    }
+
+   textarea{
+
+       width: 100%;float: left;height: 50%;
+
+   }
    
