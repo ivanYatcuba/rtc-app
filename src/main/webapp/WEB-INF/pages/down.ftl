@@ -1,4 +1,4 @@
-<div class="navbar navbar-fixed-bottom">
+<div class="navbar">
    <center>
 
     <a href="?lang=en"><@spring.message "lang.en"/></a>&nbsp;
