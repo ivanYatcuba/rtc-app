@@ -50,4 +50,12 @@ table {
    textarea{
        width:60%;float:none;height:50%;
    }
+   #copyrights {
+
+
+       bottom: 1em;
+       right: 1em;
+       text-align: center;
+
+   }
    
