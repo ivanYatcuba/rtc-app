@@ -15,6 +15,7 @@
 
     <context:component-scan base-package="com.springapp.mvc"/>
 
+
     <!-- freemarker config -->
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/pages/"/>
@@ -62,5 +63,10 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
     <mvc:annotation-driven/>
+
+
+    <!--Import spring settings from util-->
+    <import resource="classpath:spring-config.xml"/>
+
 
 </beans>

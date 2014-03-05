@@ -1,9 +1,12 @@
 package com.springapp.mvc;
 
+import org.util.rtc.annotation.required;
+
 import java.util.Date;
 import java.util.List;
 
 public class User {
+    @required
     private String fio;
     private String phone;
     private String email;
