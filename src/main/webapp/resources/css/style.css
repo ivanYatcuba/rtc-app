@@ -52,7 +52,7 @@ table {
    }
    #copyrights {
 
-
+       position: relative;
        bottom: 1em;
        right: 1em;
        text-align: center;
