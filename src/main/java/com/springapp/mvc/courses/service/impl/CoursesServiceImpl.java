@@ -2,9 +2,12 @@ package com.springapp.mvc.courses.service.impl;
 
 import com.springapp.mvc.courses.dao.CoursesDao;
 import com.springapp.mvc.courses.dao.impl.CoursesDaoImpl;
+import com.springapp.mvc.courses.model.Courses;
 import com.springapp.mvc.courses.service.CoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 
 /**
  * This is service
@@ -21,4 +24,9 @@ public class CoursesServiceImpl implements CoursesService {
     }
 
     private CoursesDao dao;
+
+    @Override
+    public Collection<Courses> findAll() {
+        return dao.findAll();
+    }
 }
