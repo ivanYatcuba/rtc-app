@@ -6,7 +6,7 @@
     <a href="?lang=uk"><@spring.message "lang.uk"/></a>
 <br><br>
        <div id="copyrights">
-       Copyright 2014 Exigen Services, Ltd. Dсі права захищені.
+       Copyright 2014 Exigen Services, Ltd. Усі права захищені.
        E-mail: ukraine@exigenservices.com
 </center>
 </div>
