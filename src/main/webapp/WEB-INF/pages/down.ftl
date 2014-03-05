@@ -1,3 +1,5 @@
+<#import "/spring.ftl" as spring/>
+
 <div class="navbar">
    <center>
 
@@ -6,8 +8,11 @@
     <a href="?lang=uk"><@spring.message "lang.uk"/></a>
 <br><br>
        <div id="copyrights">
-       Copyright 2014 Exigen Services, Ltd. Усі права захищені.
+       Copyright 2014 Exigen Services, Ltd.
+       </div>
+    <@spring.message "copyright"/>
        E-mail: ukraine@exigenservices.com
 </center>
-</div>
+
+
 </div>
