@@ -16,9 +16,16 @@
     <link href="css/bootstrap.css" rel="stylesheet">
 <script type="text/javascript" src="<@spring.url'/resources/css/js/JavaScript.js'/>"> </script>
   <link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
-  
+
 <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet">
   <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap-responsive.css'/>" rel="stylesheet">
+
+  
+
+  <script src="<@spring.url'/resources/css/js/jquery.js'/>"></script>  
+ <script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap-transition.js'/>"></script>
+  <script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap-modal.js'/>"></script>
+
 </head>
 <title> Home Page </title>
 
