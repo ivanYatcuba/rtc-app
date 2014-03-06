@@ -1,26 +1,12 @@
-<html>
-<#import "/spring.ftl" as spring/>
-
-<head>
-<title><@spring.message "title.in"/></title>
-<link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap-combined.no-icons.min.css'/>" rel="stylesheet"/>
-    <script src="/<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
-
-  <link href="runnable.css" rel="stylesheet" />
-<link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
-</head>
-<body>
 <div id="content">
-    
-<center>
-<h1><@spring.message "enter"/> </h1>
-</center>
 <form name="goHome" action="goHome" method="get" >
-<div style="margin-left:560px"> 
+<div style="margin-left"> 
     <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
  </div>
 </form>
+
 <center>
+<br>
 <form name="Logins" action="input"  method="post">
 
  <div class="label"><@spring.message "in.login"/></div> <br>
@@ -30,29 +16,22 @@
 <INPUT class="btn btn-warning" type="submit" value=" <@spring.message "btn.enter"/> ">
 
 </FORM>
+
 <form action="registration" enctype="text/plain" method="get" >
  </form>
+
 <form class="form-inline">
+
 <label class="checkbox">
-    <input type="checkbox">Запомнить меня</label>
-    <br>
- <a href="#">Забыли пароль?</a>
+    <input type="checkbox">Запомнить меня<</label>
 </form>
+    
+ <a href="#">Забыли пароль??</a>
+
 
 </center>
+</div>
 
-<#if login??>
- You'r login is ${login} <br>
-</#if>
-<#if password??>
-You'r password id ${password}<br>
-</#if>
-<#if message??>
-${message}
-</#if>
-<#if message??>
-${message}
-</#if>
-<#include "down.ftl">
-</body>
-</html>
+
+
+
