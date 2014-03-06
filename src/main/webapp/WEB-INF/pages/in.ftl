@@ -13,7 +13,7 @@
 <div id="content">
     
 <center>
-<h1><@spring.message "enter"/> </h1>
+
 </center>
 <form name="goHome" action="goHome" method="get" >
 <div style="margin-left"> 
