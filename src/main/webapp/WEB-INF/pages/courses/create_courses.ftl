@@ -1,4 +1,4 @@
-<#include "header.ftl">
+<#include "../header.ftl">
 
 <table cellpadding = "0" cellspacing="0" border="1" width="70%">
     <tr>
@@ -18,4 +18,4 @@
     </tr>
 </table>
 /*  <button form=" "> */
-<#include "down.ftl">
+<#include "../down.ftl">
