@@ -1,4 +1,4 @@
-﻿<html>
+<html>
 <#import "/spring.ftl" as spring/>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -16,6 +16,9 @@
     <link href="css/bootstrap.css" rel="stylesheet">
 <script type="text/javascript" src="<@spring.url'/resources/css/js/JavaScript.js'/>"> </script>
   <link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
+  
+<link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet">
+  <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap-responsive.css'/>" rel="stylesheet">
 </head>
 <title> Home Page </title>
 
@@ -52,9 +55,8 @@
     <div>
         <table>
             <tr>
-<form action="start input" method="get">
-  <button class="btn btn-warning"> <@spring.message "page.enter"/> </button>
-</form>
+<a data-toggle="modal" data-target="#mayoOkno" class="btn btn-primary">Вход</a>
+<#include "modalWindow.ftl">
     |
 <form action="registration" method="get" >
    <button class="btn btn-warning"> <@spring.message "page.register"/> </button>
