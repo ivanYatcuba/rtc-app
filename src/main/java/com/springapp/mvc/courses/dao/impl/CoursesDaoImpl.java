@@ -9,8 +9,18 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
 
+import javax.ws.rs.HttpMethod;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -18,25 +28,21 @@ import java.util.Collection;
  *
  * @author Vladislav Pikus
  */
-//todo May be, need make as component
 @Repository("coursesDao")
 public class CoursesDaoImpl implements CoursesDao {
 
-    public CoursesDaoImpl() {
-        ClientConfig cfg = new DefaultClientConfig();
-        cfg.getClasses().add(JacksonJsonProvider.class);
-        service = Client.create(cfg).resource("http://146.185.176.193:8079/method/");
+    private RestTemplate restTemplate;
+
+    @Autowired
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
-    private WebResource service;
-
-    public void setService(WebResource service) {
-        this.service = service;
-    }
+    private static String URL  = "http://146.185.176.193:8079/method/";
 
     @Override
     public Courses findById(Integer id) {
-        return service.path(String.format("courses/%s", id)).get(Courses.class);
+        return restTemplate.getForObject(URL + "courses/{id}", Courses.class, id);
     }
 
     /**
@@ -46,8 +52,6 @@ public class CoursesDaoImpl implements CoursesDao {
      */
     @Override
     public Collection<Courses> findAll() {
-        GenericType<Collection<Courses>> type = new GenericType<Collection<Courses>>(){};
-        ClientResponse clientResponse = service.path("/courses").get(ClientResponse.class);
-        return clientResponse.getEntity(type);
+        return Arrays.asList(restTemplate.getForObject(URL + "courses", Courses[].class));
     }
 }
