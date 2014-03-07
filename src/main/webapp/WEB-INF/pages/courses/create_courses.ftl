@@ -40,5 +40,6 @@
     <input type="submit" value="Create" /><@spring.message "courses.or"/> <a href="#"><@spring.message "courses.cancel"/></a>
 </form>
 
+
 </body>
 </html>
