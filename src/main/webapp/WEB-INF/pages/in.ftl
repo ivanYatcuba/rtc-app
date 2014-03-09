@@ -54,6 +54,5 @@ ${message}
 <#if message??>
 ${message}
 </#if>
-<#include "down.ftl">
 </body>
 </html>
