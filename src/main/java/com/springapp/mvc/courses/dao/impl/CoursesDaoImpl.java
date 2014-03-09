@@ -2,29 +2,16 @@ package com.springapp.mvc.courses.dao.impl;
 
 import com.springapp.mvc.courses.dao.CoursesDao;
 import com.springapp.mvc.courses.model.Courses;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
-import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
-import javax.ws.rs.HttpMethod;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * This is DAO class
+ * Data Access Object Implementation
+ * All queries are built using {@link RestTemplate}
  *
  * @author Vladislav Pikus
  */
@@ -38,20 +25,34 @@ public class CoursesDaoImpl implements CoursesDao {
         this.restTemplate = restTemplate;
     }
 
-    private static String URL  = "http://146.185.176.193:8079/method/";
+    private String hostUrl;
 
-    @Override
-    public Courses findById(Integer id) {
-        return restTemplate.getForObject(URL + "courses/{id}", Courses.class, id);
+    public void setHostUrl(String hostUrl) {
+        this.hostUrl = hostUrl;
+    }
+
+    public String getHostUrl() {
+        return hostUrl;
     }
 
     /**
-     * Find all courses
+     * Find a course's object
      *
-     * @return
+     * @param id course ID
+     * @return null if not found or course's object if found
+     */
+    @Override
+    public Courses findById(Integer id) {
+        return restTemplate.getForObject(hostUrl + "courses/{id}", Courses.class, id);
+    }
+
+    /**
+     * Find collection of objects
+     *
+     * @return collection of objects
      */
     @Override
     public Collection<Courses> findAll() {
-        return Arrays.asList(restTemplate.getForObject(URL + "courses", Courses[].class));
+        return Arrays.asList(restTemplate.getForObject(hostUrl + "courses", Courses[].class));
     }
 }

@@ -1,30 +1,79 @@
 package com.springapp.mvc.courses.dao.impl;
 
-import com.springapp.mvc.courses.dao.CoursesDao;
-import com.springapp.mvc.courses.model.Author;
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
 import com.springapp.mvc.courses.model.Courses;
-import com.springapp.mvc.courses.model.Tags;
-import org.joda.time.DateTime;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
  * @author Vladislav Pikus
  */
-//todo Make with spring-test
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:mvc-test.xml" })
 public class CoursesDaoImplTest {
 
-    //todo Make autowired
-    private CoursesDao dao = new CoursesDaoImpl();
+    @Autowired
+    private CoursesDaoImpl dao;
 
-    //todo This is only example
+    @Autowired
+    private RestTemplate restTemplate;
+
+    private MockRestServiceServer mockServer;
+
+    @Before
+    public void setUp() throws Exception {
+        mockServer = MockRestServiceServer.createServer(restTemplate);
+        dao.setRestTemplate(restTemplate);
+
+    }
+
+    private String loadXmlFile(final String filename) throws IOException {
+        URL url = Resources.getResource(filename);
+        return Resources.toString(url, Charsets.UTF_8);
+    }
+
     @Test
     public void testFindById() throws Exception {
-       /// ((CoursesDaoImpl)dao).setRestTemplate(new RestTemplate()) ;
-        //Courses courses = ;
-       // System.out.print(dao.findAll().toString());
+        final String responseXml = loadXmlFile("course.json");
+        final Integer id = 5;
+        mockServer.expect(requestTo(dao.getHostUrl() + "courses/" + id))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess(responseXml, MediaType.APPLICATION_JSON));
+        final Courses courses = dao.findById(id);
+        mockServer.verify();
+        assertEquals(id, courses.getId());
+
+    }
+
+    @Test
+    public void testFindAll() throws Exception {
+        final String responseXml = loadXmlFile("courses.json");
+        mockServer.expect(requestTo(dao.getHostUrl() + "courses"))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess(responseXml, MediaType.APPLICATION_JSON));
+        Collection<Courses> courses = dao.findAll();
+        mockServer.verify();
+        assertNotNull(courses);
+        assertTrue(courses.size() == 2);
     }
 }

@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 /**
- * This is service
+ * Service Implementation
+ * This's a wrapper for {@link CoursesDao}
  *
  * @author Vladislav Pikus
  */
-//Todo May be, need make as component
 @Service("coursesService")
 public class CoursesServiceImpl implements CoursesService {
 
@@ -25,6 +25,11 @@ public class CoursesServiceImpl implements CoursesService {
 
     private CoursesDao dao;
 
+    /**
+     * Find collection of objects
+     *
+     * @return collection of objects
+     */
     @Override
     public Collection<Courses> findAll() {
         return dao.findAll();

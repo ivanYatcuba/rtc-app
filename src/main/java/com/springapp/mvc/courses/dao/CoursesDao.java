@@ -5,15 +5,18 @@ import com.springapp.mvc.courses.model.Courses;
 import java.util.Collection;
 
 /**
+ * Data Access Object Interface
+ * Provides CRUD operations with {@link Courses} objects
+ *
  * @author Vladislav Pikus
  */
 public interface CoursesDao {
     Courses findById(Integer id);
 
     /**
-     * Find all courses
+     * Find collection of objects
      *
-     * @return
+     * @return collection of objects
      */
     Collection<Courses> findAll();
 }

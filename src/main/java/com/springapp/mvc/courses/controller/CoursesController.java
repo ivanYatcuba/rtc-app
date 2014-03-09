@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Collection;
 
 /**
- * Courses controlle
+ * Controller for {@link Courses}
  *
  * @author Vladislav Pikus
  */
@@ -27,7 +27,7 @@ public class CoursesController {
     }
 
     /**
-     * Will be show a all courses page
+     * Will be show all courses page
      *
      * @return
      */
