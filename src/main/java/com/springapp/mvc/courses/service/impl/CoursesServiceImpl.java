@@ -34,4 +34,18 @@ public class CoursesServiceImpl implements CoursesService {
     public Collection<Courses> findAll() {
         return dao.findAll();
     }
+
+    /**
+     * Will be delete course object by ID
+     * If ID is null then will be throw {@link NullPointerException}
+     *
+     * @param id course ID
+     */
+    @Override
+    public void delete(Integer id) {
+        if (id == null) {
+            throw new NullPointerException("ID  NULL");
+        }
+        dao.delete(id);
+    }
 }

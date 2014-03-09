@@ -17,4 +17,11 @@ public interface CoursesService {
      * @return collection of objects
      */
     Collection<Courses> findAll();
+
+    /**
+     * Will be delete course object by ID
+     *
+     * @param id course ID
+     */
+    void delete(Integer id);
 }

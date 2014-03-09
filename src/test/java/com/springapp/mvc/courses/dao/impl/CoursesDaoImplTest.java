@@ -76,4 +76,14 @@ public class CoursesDaoImplTest {
         assertNotNull(courses);
         assertTrue(courses.size() == 2);
     }
+
+    @Test
+    public void testDelete() throws Exception {
+        final Integer id = 5;
+        mockServer.expect(requestTo(dao.getHostUrl() + "courses/" + id))
+                .andExpect(method(HttpMethod.DELETE))
+                .andRespond(withSuccess());
+        dao.delete(id);
+        mockServer.verify();
+    }
 }

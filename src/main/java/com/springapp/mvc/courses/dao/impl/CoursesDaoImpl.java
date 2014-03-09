@@ -55,4 +55,14 @@ public class CoursesDaoImpl implements CoursesDao {
     public Collection<Courses> findAll() {
         return Arrays.asList(restTemplate.getForObject(hostUrl + "courses", Courses[].class));
     }
+
+    /**
+     * Will be delete course object by ID
+     *
+     * @param id course ID
+     */
+    @Override
+    public void delete(Integer id) {
+        restTemplate.delete(hostUrl + "courses/{id}", id);
+    }
 }

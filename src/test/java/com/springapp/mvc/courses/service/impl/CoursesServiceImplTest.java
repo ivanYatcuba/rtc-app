@@ -53,4 +53,17 @@ public class CoursesServiceImplTest {
         assertEquals(courses, result);
         assertTrue(result.size() == 1);
     }
+
+    @Test
+    public void testDelete() throws Exception {
+        Integer id = 5;
+        service.delete(id);
+        verify(mockDao).delete(id);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testDeleteWithNullId() throws Exception {
+        Integer id = null;
+        service.delete(id);
+    }
 }

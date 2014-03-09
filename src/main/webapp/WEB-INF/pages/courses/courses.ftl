@@ -11,7 +11,7 @@
         </tr>
     <#list courses as course>
         <tr>
-            <td>${course.type}</td> <td>${course.name}</td> <td>${course.startDate?date}</td> <td>${course.author.firstName}&nbsp;${course.author.lastName}</td> <td><a href="<@spring.url "#" />"><@spring.message "coursesPage.action.delete"/></a> </td>
+            <td>${course.type}</td> <td>${course.name}</td> <td>${course.startDate?date}</td> <td>${course.author.firstName}&nbsp;${course.author.lastName}</td> <td><a href="<@spring.url "/courses/delete/${course.id}" />"><@spring.message "coursesPage.action.delete"/></a> </td>
         </tr>
     </#list>
     </table>
