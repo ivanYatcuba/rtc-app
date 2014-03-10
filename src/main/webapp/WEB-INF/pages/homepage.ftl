@@ -110,9 +110,6 @@
   <div class="modal-body">
 <center>
     <#include "registration.ftl">
-<p>
-<#include "down.ftl">
-</p>
 </center>
   </div>
   <div class="modal-footer">
