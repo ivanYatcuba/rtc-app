@@ -61,12 +61,12 @@
     <div>
         <table>
             <tr>
-<a data-toggle="modal" data-target="#mayoOkno" class="btn btn-primary">Вход</a>
-<#include "modalWindow.ftl">
+            <td>
+            <div align = "right">
+<a data-toggle="modal" data-target="#mayoOknoIn" class="btn btn-primary">Вход</a>
+</div>
     |
-<form action="registration" method="get" >
-   <button class="btn btn-warning"> <@spring.message "page.register"/> </button>
-</form>
+<a data-toggle="modal" data-target="#mayoOknoRegister" class="btn btn-primary"> <@spring.message "page.register"/></a>
             </tr>
         </table>
     </div>
@@ -75,5 +75,51 @@
 
 <#include "down.ftl">
 </div>
+
+<div class="container">
+
+
+<div id="mayoOknoIn" class="modal hide fade" tabindex="-1" role="dialog">
+  <div class="modal-header">
+
+    <button type="button" class="close" data-dismiss="modal">X</button>
+
+    <h1><@spring.message "enter"/> </h1>
+  </div>
+
+  <div class="modal-body">
+<center>
+    <#include "in.ftl">
+</center>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal">Закрыть</button>
+      </div>
+</div>
+
+
+<div class="container">
+
+<div id="mayoOknoRegister" class="modal hide fade" tabindex="-1" role="dialog">
+  <div class="modal-header">
+
+    <button type="button" class="close" data-dismiss="modal">X</button>
+
+    <h1><@spring.message "register"/></h1>
+  </div>
+
+  <div class="modal-body">
+<center>
+    <#include "registration.ftl">
+<p>
+<#include "down.ftl">
+</p>
+</center>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal">Закрыть</button>
+      </div>
+</div>
+
 </body>
 </html>
