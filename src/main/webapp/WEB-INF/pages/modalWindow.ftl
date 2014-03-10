@@ -7,7 +7,8 @@
 
 <!-- Содержимое модального окна: -->
 
-<div id="mayoOkno" class="modal hide fade" tabindex="-1" role="dialog">
+<div id="modalWindow" class="modal hide fade" tabindex="-1" role="dialog">
+
   <div class="modal-header">
 
     <button type="button" class="close" data-dismiss="modal">?</button>

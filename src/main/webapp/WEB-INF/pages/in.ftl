@@ -11,12 +11,7 @@
 </head>
 <body>
 <div id="content">
-<#--
-<form name="goHome" action="goHome" method="get" >
-<div style="margin-left"> 
-    <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
- </div>
-</form>-->
+
 <br>
 <center>
 <form name="Logins" action="input"  method="post">

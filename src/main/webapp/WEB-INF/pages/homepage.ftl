@@ -31,6 +31,7 @@
 
 <body>
 <div id="content">
+
  <#include "header.ftl">
 
   <center> <h2> <@spring.message "homepage.mid"/> </h2></center>
@@ -64,11 +65,11 @@
             <td>
             <div align = "right">
 
-<a data-toggle="modal" data-target="#mayoOknoIn" class="btn btn-warning"><@spring.message "btn.enter"></@></a>
+<a data-toggle="modal" data-target="#modalIn" class="btn btn-warning"><@spring.message "btn.enter"></@></a>
 </div>
 </td>
 <td>|
-<a data-toggle="modal" data-target="#mayoOknoRegister" class="btn btn-warning"> <@spring.message "page.register"/></a>
+<a data-toggle="modal" data-target="#modalReg" class="btn btn-warning"> <@spring.message "page.register"/></a>
         </td>
             </tr>
         </table>
@@ -82,7 +83,7 @@
 <div class="container">
 
 
-<div id="mayoOknoIn" class="modal hide fade" tabindex="-1" role="dialog">
+<div id="modalIn" class="modal hide fade" tabindex="-1" role="dialog">
   <div class="modal-header">
 
     <button type="button" class="close" data-dismiss="modal">X</button>
@@ -103,7 +104,7 @@
 
 <div class="container">
 
-<div id="mayoOknoRegister" class="modal hide fade" tabindex="-1" role="dialog">
+<div id="modalReg" class="modal hide fade" tabindex="-1" role="dialog">
   <div class="modal-header">
 
     <button type="button" class="close" data-dismiss="modal">X</button>

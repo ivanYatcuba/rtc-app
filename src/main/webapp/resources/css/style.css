@@ -57,4 +57,10 @@ table {
        text-align: center;
 
    }
+#modalWindow.modal-dialog
+{
+    width: 100% ;
+}
+
+
    
