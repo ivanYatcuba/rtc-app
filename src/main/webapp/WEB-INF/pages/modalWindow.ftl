@@ -23,7 +23,7 @@
 </center>
   </div>
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal">Закрыть</button>
+    <button class="btn" data-dismiss="modal"><@spring.message "btn.close"/></button>
       </div>
 </div>
 

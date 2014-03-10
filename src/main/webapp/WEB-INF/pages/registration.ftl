@@ -33,15 +33,16 @@
 <title><@spring.message "register"/></title>
 
 <body>
+<form name="goHome" action="goHome" method="get" >
+    <div style="margin-left:560px">
+        <button class="btn btn-warning pull-left" type="submit"><@spring.message "btn.home"/></button>
+    </div>
+</form>
 <div id="content">
 
 <h1><@spring.message "register"/></h1><br>
 
-    <form name="goHome" action="goHome" method="get" >
-        <div style="margin-left:560px">
-            <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
-        </div>
-        </form>
+
 <!--  The form that will be parsed by jQuery before submit  -->
 <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 

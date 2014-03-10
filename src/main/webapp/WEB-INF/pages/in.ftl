@@ -11,12 +11,12 @@
 </head>
 <body>
 <div id="content">
-    
+<#--
 <form name="goHome" action="goHome" method="get" >
 <div style="margin-left"> 
     <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
  </div>
-</form>
+</form>-->
 <br>
 <center>
 <form name="Logins" action="input"  method="post">
@@ -32,9 +32,9 @@
  </form>
 <form class="form-inline">
 <label class="checkbox">
-    <input type="checkbox">Запомнить меня</label>
+    <input type="checkbox"><@spring.message "password.save"/></label>
     <br>
- <a href="#">Забыли пароль?</a>
+ <a href="#"><@spring.message "password.forgot"/></a>
 </form>
 
 </center>

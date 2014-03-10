@@ -57,11 +57,14 @@
     </center>
 </div>
 <br>
+
     <div>
+
         <table>
             <tr>
             <td>
             <div align = "right">
+
 <a data-toggle="modal" data-target="#mayoOknoIn" class="btn btn-warning"><@spring.message "btn.enter"></@></a>
 </div>
 </td>
@@ -70,7 +73,9 @@
         </td>
             </tr>
         </table>
+
     </div>
+
 
 <#include "down.ftl">
 </div>
@@ -92,7 +97,7 @@
 </center>
   </div>
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal">Закрыть</button>
+    <button class="btn" data-dismiss="modal"><@spring.message "btn.close"/></button>
       </div>
 </div>
 
@@ -113,7 +118,7 @@
 </center>
   </div>
   <div class="modal-footer">
-    <button class="btn " data-dismiss="modal">Закрыть</button>
+    <button class="btn " data-dismiss="modal"><@spring.message "btn.close"/></button>
       </div>
 </div>
 
