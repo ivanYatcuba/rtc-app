@@ -56,7 +56,6 @@
         </table>
     </center>
 </div>
-<center>
 
     <div>
         <table>
@@ -72,8 +71,6 @@
             </tr>
         </table>
     </div>
-</h1>
-</center>
 
 <#include "down.ftl">
 </div>
