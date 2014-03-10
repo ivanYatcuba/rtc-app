@@ -62,6 +62,6 @@
   
     <div style="margin-left:140px;"><input class ="btn btn-warning" type="submit" name="submit" value=<@spring.message "reg.register"/> /></div>
 </form>
-<#include "down.ftl">
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <#import "/spring.ftl" as spring/>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -62,11 +62,11 @@
             <tr>
             <td>
             <div align = "right">
-<a data-toggle="modal" data-target="#mayoOknoIn" class="btn btn-primary">Вход</a>
+<a data-toggle="modal" data-target="#mayoOknoIn" class="btn btn-warning">Вход</a>
 </div>
 </td>
 <td>|
-<a data-toggle="modal" data-target="#mayoOknoRegister" class="btn btn-primary"> <@spring.message "page.register"/></a>
+<a data-toggle="modal" data-target="#mayoOknoRegister" class="btn btn-warning"> <@spring.message "page.register"/></a>
         </td>
             </tr>
         </table>
@@ -104,7 +104,7 @@
 
     <button type="button" class="close" data-dismiss="modal">X</button>
 
-    <h1><@spring.message "register"/></h1>
+    <#-- <h1><@spring.message "register"/></h1>-->
   </div>
 
   <div class="modal-body">
@@ -113,7 +113,7 @@
 </center>
   </div>
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal">Закрыть</button>
+    <button class="btn " data-dismiss="modal">Закрыть</button>
       </div>
 </div>
 

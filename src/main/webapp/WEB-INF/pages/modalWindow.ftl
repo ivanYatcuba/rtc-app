@@ -19,7 +19,6 @@
 <center>
     <#include "in.ftl">
 <p>
-<#include "down.ftl">
 </p>
 </center>
   </div>
