@@ -33,11 +33,7 @@
 <title><@spring.message "register"/></title>
 
 <body>
-<form name="goHome" action="goHome" method="get" >
-    <div style="margin-left:560px">
-        <button class="btn btn-warning pull-left" type="submit"><@spring.message "btn.home"/></button>
-    </div>
-</form>
+
 <div id="content">
 
 <h1><@spring.message "register"/></h1><br>
@@ -46,23 +42,58 @@
 <!--  The form that will be parsed by jQuery before submit  -->
 <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
-    <div class="label"><@spring.message "reg.firstName"/></div><br>
-<input type="text" id="firstname" name="firstname" /><br />
+    <div class="row-fluid">
+        <div class="span12">
 
-    <div class="label"><@spring.message "reg.lastName"/></div> <br>
-    <input type="text" id="lastname" name="lastname" /><br />
+        <!--name & birth row-->
+        <div class="row-fluid">
 
-    <div class="label"><@spring.message "reg.birthDate"/></div><br>
-    <input type="text" id="birthYear" name="birthYear" /><br />
+        <div class="span5">
 
-    <div class="label"><@spring.message "reg.email"/></div><br>
-    <input type="text" id="email" name="email" /><br />
+            <div class="label"> <@spring.message "reg.firstName"/></div><br>
 
-    <div class="label"><@spring.message "reg.password"/></div><br>
-    <input type="password" id="password" name="password" /><br />
-  
-    <div style="margin-left:140px;"><input class ="btn btn-warning" type="submit" name="submit" value=<@spring.message "reg.register"/> /></div>
+                  <input type="text" id="firstname" name="firstname" /> <br>
+
+            <div class="label"><@spring.message "reg.lastName"/></div>  <br>
+            <input type="text" id="lastname" name="lastname" />
+
+            <div class="label"><@spring.message "town"/> </div> <div class="label"><@spring.message "phone"/> <div class="label"><@spring.message "reg.email"/></div> </div>  <br>
+
+            <input type="text" id="town" name="town" />
+
+            <input type="text" id="phone" name="phone" />
+
+            <input type="text" id="email" name="email" />
+
+                                                                                     </div>
+            <div class="span5">
+        <div class="label"><@spring.message "reg.birthDate"/> </div>
+            <input type="text" id="birthYear" name="birthYear" />
+        </div>
+                                                                                 <br>
+
+
+    <br>
+    <br>
+
+                                                                            </div>
+    <!--end of name/lastname & birth block-->
+
+
+            <div class="label"><@spring.message "reg.password"/></div><br>
+            <input type="password" id="password" name="password" /><br />
+
+    <div style="margin-left:140px;"> <input class ="btn btn-warning" type="submit" name="submit" value=<@spring.message "reg.register"/> > </div>
+
+
+</div>
+
+        <!--Closing all hell-table -->
+        </div>
+
 </form>
+
+</div>
 
 </body>
 </html>
