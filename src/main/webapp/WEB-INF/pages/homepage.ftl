@@ -62,7 +62,7 @@
             <tr>
             <td>
             <div align = "right">
-<a data-toggle="modal" data-target="#mayoOknoIn" class="btn btn-warning">Вход</a>
+<a data-toggle="modal" data-target="#mayoOknoIn" class="btn btn-warning"><@spring.message "btn.enter"></@></a>
 </div>
 </td>
 <td>|
