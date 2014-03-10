@@ -12,9 +12,6 @@
 <body>
 <div id="content">
     
-<center>
-
-</center>
 <form name="goHome" action="goHome" method="get" >
 <div style="margin-left"> 
     <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
