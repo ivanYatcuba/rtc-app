@@ -66,7 +66,7 @@
 <a data-toggle="modal" data-target="#mayoOknoIn" class="btn btn-primary">Вход</a>
 </div>
 </td>
-<td><h1>|</h1>
+<td>|
 <a data-toggle="modal" data-target="#mayoOknoRegister" class="btn btn-primary"> <@spring.message "page.register"/></a>
         </td>
             </tr>
