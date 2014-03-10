@@ -4,18 +4,30 @@
 <head>
 
 
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<!-- add Bootstrap-->
-    <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap-combined.no-icons.min.css'/>" rel="stylesheet"/>
+     <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap-combined.no-icons.min.css'/>" rel="stylesheet"/>
     <script src="/<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
 
-
     <link href="runnable.css" rel="stylesheet" />
+
+    <!-- Load jQuery and the validate plugin -->
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<@spring.url'/resources/css/js/JavaScript.js'/>"> </script>
+  <link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
+
+<link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet">
+  <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap-responsive.css'/>" rel="stylesheet">
+
+  
+
+  <script src="<@spring.url'/resources/css/js/jquery.js'/>"></script>  
+ <script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap-transition.js'/>"></script>
+  <script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap-modal.js'/>"></script>
 </head>
 
 <title><@spring.message "register"/></title>
