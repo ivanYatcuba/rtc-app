@@ -1,8 +1,7 @@
 <html>
-<#import "/spring.ftl" as spring/>
+    <#import "/spring.ftl" as spring/>
 <head>
-<#include "link.ftl">
-
+        <#include "link.ftl">
 </head>
 <title> <@spring.message "title.view"/> </title>
 
