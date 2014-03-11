@@ -1,5 +1,6 @@
 package com.springapp.mvc.courses.service.impl;
 
+import com.springapp.mvc.courses.exception.NullIdException;
 import com.springapp.mvc.courses.resource.CoursesResource;
 import com.springapp.mvc.courses.resource.impl.CoursesResourceImpl;
 import com.springapp.mvc.courses.model.Author;
@@ -61,7 +62,7 @@ public class CoursesServiceImplTest {
         verify(mockResource).delete(id);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = NullIdException.class)
     public void testDeleteWithNullId() throws Exception {
         Integer id = null;
         service.delete(id);
