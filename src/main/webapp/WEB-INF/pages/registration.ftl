@@ -67,7 +67,7 @@
 
             <input type="text" id="town" name="town" />
              <input type="text" id="phone" name="phone" />
-               <input type="text" id="email" name="email" />
+                <input type="text" id="email" name="email" />
 
                                                                                      </div>
             <div class="span5">
