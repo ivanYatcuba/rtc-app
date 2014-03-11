@@ -1,16 +1,7 @@
 <html>
 <#import "/spring.ftl" as spring/>
 <head>
-
-<link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap-combined.no-icons.min.css'/>" rel="stylesheet"/>
-    <script src="/<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
-
-
-    <link href="runnable.css" rel="stylesheet" />
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-<link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
+<#include "link.ftl">
 
 </head>
 <title> <@spring.message "title.view"/> </title>

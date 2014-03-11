@@ -2,13 +2,7 @@
 <#import "/spring.ftl" as spring/>
 <#include "macro.ftl" >
 <head>
-
-    <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap-combined.no-icons.min.css'/>" rel="stylesheet"/>
-    <script src="/<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
-    <link href="runnable.css" rel="stylesheet" />
-    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-<link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
+<#include "link.ftl">
 </head>
 <title> <@spring.message "editPage"/> </title>
 

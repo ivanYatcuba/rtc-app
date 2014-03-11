@@ -2,12 +2,7 @@
 <#import "/spring.ftl" as spring/>
 
 <head>
-<title><@spring.message "title.in"/></title>
-<link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap-combined.no-icons.min.css'/>" rel="stylesheet"/>
-    <script src="/<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
-
-  <link href="runnable.css" rel="stylesheet" />
-<link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />
+<#include "link.ftl">
 </head>
 <body>
 <div id="content">
