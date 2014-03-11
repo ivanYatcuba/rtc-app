@@ -5,12 +5,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * @author Vladislav Pikus
  */
 @XmlRootElement
-public class Author {
+public class Author implements Serializable {
     private Integer id;
 
     @NotEmpty

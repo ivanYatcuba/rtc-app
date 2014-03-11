@@ -1,7 +1,7 @@
 package com.springapp.mvc.courses.service.impl;
 
-import com.springapp.mvc.courses.dao.CoursesDao;
-import com.springapp.mvc.courses.dao.impl.CoursesDaoImpl;
+import com.springapp.mvc.courses.resource.CoursesResource;
+import com.springapp.mvc.courses.resource.impl.CoursesResourceImpl;
 import com.springapp.mvc.courses.model.Author;
 import com.springapp.mvc.courses.model.Courses;
 import com.springapp.mvc.courses.service.CoursesService;
@@ -32,23 +32,23 @@ public class CoursesServiceImplTest {
 
     @Autowired
     private CoursesService service;
-    private CoursesDao mockDao;
+    private CoursesResource mockResource;
 
     private Courses course;
 
     @Before
     public void setUp() throws Exception {
-        mockDao = mock(CoursesDaoImpl.class);
-        ((CoursesServiceImpl)service).setDao(mockDao);
+        mockResource = mock(CoursesResourceImpl.class);
+        ((CoursesServiceImpl)service).setResource(mockResource);
         course = new Courses("codeTest", "nameTest", "DEV", new Author("Vasya", "Pupkin", "vasia@gmail.com"), DateTime.now().toDate(), DateTime.now().toDate());
     }
 
     @Test
     public void testFindAll() throws Exception {
         Collection<Courses> courses = Arrays.asList(course);
-        when(mockDao.findAll()).thenReturn(courses);
+        when(mockResource.findAll()).thenReturn(courses);
         Collection<Courses> result = service.findAll();
-        verify(mockDao).findAll();
+        verify(mockResource).findAll();
         assertNotNull(result);
         assertEquals(courses, result);
         assertTrue(result.size() == 1);
@@ -58,7 +58,7 @@ public class CoursesServiceImplTest {
     public void testDelete() throws Exception {
         Integer id = 5;
         service.delete(id);
-        verify(mockDao).delete(id);
+        verify(mockResource).delete(id);
     }
 
     @Test(expected = NullPointerException.class)

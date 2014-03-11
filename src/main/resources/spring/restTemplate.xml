@@ -8,8 +8,8 @@
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
 
-    <bean id="coursesDao" class="com.springapp.mvc.courses.dao.impl.CoursesDaoImpl">
-        <property name="hostUrl" value="http://localhost:8079/method/"/>
+    <bean id="coursesDao" class="com.springapp.mvc.courses.resource.impl.CoursesResourceImpl">
+        <property name="hostUrl" value="http://localhost:8079/api/"/>
     </bean>
 
 </beans>

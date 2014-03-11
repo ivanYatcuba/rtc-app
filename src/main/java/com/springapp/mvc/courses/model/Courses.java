@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @author Vladislav Pikus
  */
 @XmlRootElement
-public class Courses {
+public class Courses implements Serializable {
     private Integer id;
 
     @NotEmpty

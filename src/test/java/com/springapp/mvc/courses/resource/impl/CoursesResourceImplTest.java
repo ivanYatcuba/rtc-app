@@ -1,4 +1,4 @@
-package com.springapp.mvc.courses.dao.impl;
+package com.springapp.mvc.courses.resource.impl;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
@@ -30,10 +30,10 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:mvc-test.xml" })
-public class CoursesDaoImplTest {
+public class CoursesResourceImplTest {
 
     @Autowired
-    private CoursesDaoImpl dao;
+    private CoursesResourceImpl resource;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -43,7 +43,7 @@ public class CoursesDaoImplTest {
     @Before
     public void setUp() throws Exception {
         mockServer = MockRestServiceServer.createServer(restTemplate);
-        dao.setRestTemplate(restTemplate);
+        resource.setRestTemplate(restTemplate);
 
     }
 
@@ -56,10 +56,10 @@ public class CoursesDaoImplTest {
     public void testFindById() throws Exception {
         final String responseXml = loadXmlFile("course.json");
         final Integer id = 5;
-        mockServer.expect(requestTo(dao.getHostUrl() + "courses/" + id))
+        mockServer.expect(requestTo(resource.getHostUrl() + "courses/" + id))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(responseXml, MediaType.APPLICATION_JSON));
-        final Courses courses = dao.findById(id);
+        final Courses courses = resource.findById(id);
         mockServer.verify();
         assertEquals(id, courses.getId());
 
@@ -68,10 +68,10 @@ public class CoursesDaoImplTest {
     @Test
     public void testFindAll() throws Exception {
         final String responseXml = loadXmlFile("courses.json");
-        mockServer.expect(requestTo(dao.getHostUrl() + "courses"))
+        mockServer.expect(requestTo(resource.getHostUrl() + "courses"))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(responseXml, MediaType.APPLICATION_JSON));
-        Collection<Courses> courses = dao.findAll();
+        Collection<Courses> courses = resource.findAll();
         mockServer.verify();
         assertNotNull(courses);
         assertTrue(courses.size() == 2);
@@ -80,10 +80,10 @@ public class CoursesDaoImplTest {
     @Test
     public void testDelete() throws Exception {
         final Integer id = 5;
-        mockServer.expect(requestTo(dao.getHostUrl() + "courses/" + id))
+        mockServer.expect(requestTo(resource.getHostUrl() + "courses/" + id))
                 .andExpect(method(HttpMethod.DELETE))
                 .andRespond(withSuccess());
-        dao.delete(id);
+        resource.delete(id);
         mockServer.verify();
     }
 }

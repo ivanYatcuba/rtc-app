@@ -1,6 +1,6 @@
-package com.springapp.mvc.courses.dao.impl;
+package com.springapp.mvc.courses.resource.impl;
 
-import com.springapp.mvc.courses.dao.CoursesDao;
+import com.springapp.mvc.courses.resource.CoursesResource;
 import com.springapp.mvc.courses.model.Courses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +16,7 @@ import java.util.Collection;
  * @author Vladislav Pikus
  */
 @Repository("coursesDao")
-public class CoursesDaoImpl implements CoursesDao {
+public class CoursesResourceImpl implements CoursesResource {
 
     private RestTemplate restTemplate;
 
@@ -36,10 +36,9 @@ public class CoursesDaoImpl implements CoursesDao {
     }
 
     /**
-     * Find a course's object
-     *
      * @param id course ID
      * @return null if not found or course's object if found
+     * @see com.springapp.mvc.courses.resource.CoursesResource
      */
     @Override
     public Courses findById(Integer id) {
@@ -47,9 +46,8 @@ public class CoursesDaoImpl implements CoursesDao {
     }
 
     /**
-     * Find collection of objects
-     *
-     * @return collection of objects
+     * @return collection of courses
+     * @see com.springapp.mvc.courses.resource.CoursesResource
      */
     @Override
     public Collection<Courses> findAll() {
@@ -57,9 +55,8 @@ public class CoursesDaoImpl implements CoursesDao {
     }
 
     /**
-     * Will be delete course object by ID
-     *
      * @param id course ID
+     * @see com.springapp.mvc.courses.resource.CoursesResource
      */
     @Override
     public void delete(Integer id) {

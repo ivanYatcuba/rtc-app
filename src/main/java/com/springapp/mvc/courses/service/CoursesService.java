@@ -12,14 +12,15 @@ import java.util.Collection;
  */
 public interface CoursesService {
     /**
-     * Find collection of objects
+     * Find collection of courses
      *
-     * @return collection of objects
+     * @return collection of courses
      */
     Collection<Courses> findAll();
 
     /**
-     * Will be delete course object by ID
+     * Will be delete course by ID
+     * If ID is null then will be throw {@link com.springapp.mvc.courses.exception.NullIdException}
      *
      * @param id course ID
      */

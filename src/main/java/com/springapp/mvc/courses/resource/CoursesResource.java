@@ -1,4 +1,4 @@
-package com.springapp.mvc.courses.dao;
+package com.springapp.mvc.courses.resource;
 
 import com.springapp.mvc.courses.model.Courses;
 
@@ -10,18 +10,18 @@ import java.util.Collection;
  *
  * @author Vladislav Pikus
  */
-public interface CoursesDao {
+public interface CoursesResource {
     Courses findById(Integer id);
 
     /**
-     * Find collection of objects
+     * Find collection of courses
      *
-     * @return collection of objects
+     * @return collection of courses
      */
     Collection<Courses> findAll();
 
     /**
-     * Will be delete course object by ID
+     * Will be delete course by ID
      *
      * @param id course ID
      */

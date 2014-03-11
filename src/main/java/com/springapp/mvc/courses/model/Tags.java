@@ -4,12 +4,13 @@ package com.springapp.mvc.courses.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * @author Vladislav Pikus
  */
 @XmlRootElement
-public class Tags {
+public class Tags implements Serializable {
     private Integer id;
 
     @NotEmpty
