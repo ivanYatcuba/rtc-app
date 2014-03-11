@@ -25,12 +25,9 @@
 
         <div class="span5">
 
-            <div class="label"> <@spring.message "reg.firstName"/></div><br>
+            <div class="label"> <@spring.message "fio"/></div><br>
 
-                  <input type="text" id="firstname" name="firstname" /> <br>
-
-            <div class="label"><@spring.message "reg.lastName"/></div>  <br>
-            <input type="text" id="lastname" name="lastname" />
+                  <input type="text" id="fio" name="fio" /> <br>
 
             <div class="label"><@spring.message "town"/>
 
@@ -46,7 +43,7 @@
 
                                                                                      </div>
             <div class="span5">
-        <div class="label"><@spring.message "reg.birthDate"/> </div>
+        <div class="label"><@spring.message "reg.birthDate"/> </div> <br>
             <input type="text" id="birthYear" name="birthYear" />
         </div>
 
