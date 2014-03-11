@@ -45,8 +45,9 @@ public class CoursesServiceImpl implements CoursesService {
     @Override
     public void delete(Integer id) {
         if (id == null) {
-            LOG.log(Level.SEVERE, "Exception: ID can't be null");
-            throw new NullIdException("ID can't be null");
+            RuntimeException ex = new NullIdException("ID can't be null");
+            LOG.log(Level.SEVERE, "Exception: ", ex);
+            throw ex;
         }
         resource.delete(id);
     }
