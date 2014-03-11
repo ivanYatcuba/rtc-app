@@ -23,29 +23,19 @@
         <!--name & birth row-->
         <div class="row-fluid">
 
-        <div class="span6">
+            <div class="span12">
 
-            <div class="label"> <@spring.message "fio"/></div><br>
+                <div class="label"> <@spring.message "fio"/></div> <div class="label"><@spring.message "reg.birthDate"/> </div><br>
 
-                  <input type="text" id="fio" name="fio"/> <br>
+                  <input type="text" id="fio" name="fio"/> <input type="text" id="birthYear" name="birthYear" /> <br>
 
-            <div class="label"><@spring.message "town"/></div>  <div class="label"><@spring.message "reg.email"/></div> <br>
-                <input type="text" id="town" name="town" /> <input type="text" id="email" name="email" />
+                    <div class="label"><@spring.message "town"/></div>  <div class="label"><@spring.message "phone"/> </div> <div class="label"><@spring.message "reg.email"/></div> <br>
 
-                                 <br>
+                    <input type="text" id="town" name="town" /> <input type="text" id="phone" name="phone" /> <input type="text" id="email" name="email" />
 
-                                                                                     </div>
-            <div class="span6">
+         </div>
 
-                 <div class="label"><@spring.message "reg.birthDate"/> </div> <br>
-            <input type="text" id="birthYear" name="birthYear" />
-        </div>
-            <br>
-            <div class="label"><@spring.message "phone"/></div> <br>
-            <input type="text" id="phone" name="phone" />
-
-
-                                                                            </div>
+            </div>
     <!--end of name/lastname & birth block-->
 
        <hr/>
