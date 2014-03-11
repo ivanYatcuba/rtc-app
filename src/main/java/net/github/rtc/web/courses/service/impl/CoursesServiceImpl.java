@@ -1,15 +1,15 @@
-package com.springapp.mvc.courses.service.impl;
+package net.github.rtc.web.courses.service.impl;
 
-import com.springapp.mvc.courses.resource.CoursesResource;
-import com.springapp.mvc.courses.exception.NullIdException;
-import com.springapp.mvc.courses.model.Courses;
-import com.springapp.mvc.courses.service.CoursesService;
+import net.github.rtc.web.courses.exception.ServiceProcessingException;
+import net.github.rtc.web.courses.resource.CoursesResource;
+import net.github.rtc.web.courses.model.Courses;
+import net.github.rtc.web.courses.service.CoursesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Service Implementation
@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 @Service("coursesService")
 public class CoursesServiceImpl implements CoursesService {
 
-    private static Logger LOG = Logger.getLogger(CoursesServiceImpl.class.getName());
+    private static Logger LOG = LoggerFactory.getLogger(CoursesServiceImpl.class.getName());
 
     @Autowired
     public void setResource(CoursesResource resource) {
@@ -45,8 +45,8 @@ public class CoursesServiceImpl implements CoursesService {
     @Override
     public void delete(Integer id) {
         if (id == null) {
-            RuntimeException ex = new NullIdException("ID can't be null");
-            LOG.log(Level.SEVERE, "Exception: ", ex);
+            RuntimeException ex = new ServiceProcessingException("ID can't be null");
+            LOG.error("Exception: ", ex);
             throw ex;
         }
         resource.delete(id);

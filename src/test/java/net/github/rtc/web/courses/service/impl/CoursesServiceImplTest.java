@@ -1,11 +1,12 @@
-package com.springapp.mvc.courses.service.impl;
+package net.github.rtc.web.courses.service.impl;
 
-import com.springapp.mvc.courses.exception.NullIdException;
-import com.springapp.mvc.courses.resource.CoursesResource;
-import com.springapp.mvc.courses.resource.impl.CoursesResourceImpl;
-import com.springapp.mvc.courses.model.Author;
-import com.springapp.mvc.courses.model.Courses;
-import com.springapp.mvc.courses.service.CoursesService;
+import net.github.rtc.web.courses.exception.ServiceProcessingException;
+import net.github.rtc.web.courses.resource.CoursesResource;
+import net.github.rtc.web.courses.resource.impl.CoursesResourceImpl;
+import net.github.rtc.web.courses.model.Author;
+import net.github.rtc.web.courses.model.Courses;
+import net.github.rtc.web.courses.service.CoursesService;
+import net.github.rtc.web.courses.service.impl.CoursesServiceImpl;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,7 +63,7 @@ public class CoursesServiceImplTest {
         verify(mockResource).delete(id);
     }
 
-    @Test(expected = NullIdException.class)
+    @Test(expected = ServiceProcessingException.class)
     public void testDeleteWithNullId() throws Exception {
         Integer id = null;
         service.delete(id);

@@ -1,7 +1,7 @@
-package com.springapp.mvc.courses.controller;
+package net.github.rtc.web.courses.controller;
 
-import com.springapp.mvc.courses.model.Courses;
-import com.springapp.mvc.courses.service.CoursesService;
+import net.github.rtc.web.courses.model.Courses;
+import net.github.rtc.web.courses.service.CoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Collection;
 
 /**
- * Controller for {@link Courses}
+ * Controller for {@link net.github.rtc.web.courses.model.Courses}
  *
  * @author Vladislav Pikus
  */

@@ -12,7 +12,7 @@
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
 
     <context:property-placeholder location="classpath:/host.properties"/>
-    <bean id="coursesDao" class="com.springapp.mvc.courses.resource.impl.CoursesResourceImpl">
+    <bean id="coursesDao" class="net.github.rtc.web.courses.resource.impl.CoursesResourceImpl">
         <property name="hostUrl" value="${host.url}"/>
     </bean>
 

@@ -1,8 +1,8 @@
-package com.springapp.mvc.courses.resource.impl;
+package net.github.rtc.web.courses.resource.impl;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
-import com.springapp.mvc.courses.model.Courses;
+import net.github.rtc.web.courses.model.Courses;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

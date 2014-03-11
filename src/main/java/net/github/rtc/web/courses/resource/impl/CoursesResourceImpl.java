@@ -1,9 +1,9 @@
-package com.springapp.mvc.courses.resource.impl;
+package net.github.rtc.web.courses.resource.impl;
 
-import com.springapp.mvc.courses.resource.CoursesResource;
-import com.springapp.mvc.courses.model.Courses;
+import net.github.rtc.web.courses.resource.CoursesResource;
+import net.github.rtc.web.courses.model.Courses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import java.util.Collection;
  *
  * @author Vladislav Pikus
  */
-@Repository("coursesDao")
+@Component("coursesDao")
 public class CoursesResourceImpl implements CoursesResource {
 
     private RestTemplate restTemplate;
@@ -38,7 +38,7 @@ public class CoursesResourceImpl implements CoursesResource {
     /**
      * @param id course ID
      * @return null if not found or course's object if found
-     * @see com.springapp.mvc.courses.resource.CoursesResource
+     * @see net.github.rtc.web.courses.resource.CoursesResource
      */
     @Override
     public Courses findById(Integer id) {
@@ -47,7 +47,7 @@ public class CoursesResourceImpl implements CoursesResource {
 
     /**
      * @return collection of courses
-     * @see com.springapp.mvc.courses.resource.CoursesResource
+     * @see net.github.rtc.web.courses.resource.CoursesResource
      */
     @Override
     public Collection<Courses> findAll() {
@@ -56,7 +56,7 @@ public class CoursesResourceImpl implements CoursesResource {
 
     /**
      * @param id course ID
-     * @see com.springapp.mvc.courses.resource.CoursesResource
+     * @see net.github.rtc.web.courses.resource.CoursesResource
      */
     @Override
     public void delete(Integer id) {

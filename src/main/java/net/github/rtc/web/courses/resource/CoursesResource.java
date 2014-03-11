@@ -1,6 +1,6 @@
-package com.springapp.mvc.courses.resource;
+package net.github.rtc.web.courses.resource;
 
-import com.springapp.mvc.courses.model.Courses;
+import net.github.rtc.web.courses.model.Courses;
 
 import java.util.Collection;
 
