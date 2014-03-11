@@ -57,28 +57,29 @@
             <div class="label"><@spring.message "reg.lastName"/></div>  <br>
             <input type="text" id="lastname" name="lastname" />
 
-            <div class="label"><@spring.message "town"/> </div> <div class="label"><@spring.message "phone"/> <div class="label"><@spring.message "reg.email"/></div> </div>  <br>
+            <div class="label"><@spring.message "town"/>
+
+                <div class="label"><@spring.message "phone"/>
+
+                    <div class="label"><@spring.message "reg.email"/>
+
+                                </div></div></div> <br>
 
             <input type="text" id="town" name="town" />
-
-            <input type="text" id="phone" name="phone" />
-
-            <input type="text" id="email" name="email" />
+             <input type="text" id="phone" name="phone" />
+               <input type="text" id="email" name="email" />
 
                                                                                      </div>
             <div class="span5">
         <div class="label"><@spring.message "reg.birthDate"/> </div>
             <input type="text" id="birthYear" name="birthYear" />
         </div>
-                                                                                 <br>
 
-
-    <br>
-    <br>
 
                                                                             </div>
     <!--end of name/lastname & birth block-->
 
+       <hr/>
 
             <div class="label"><@spring.message "reg.password"/></div><br>
             <input type="password" id="password" name="password" /><br />
