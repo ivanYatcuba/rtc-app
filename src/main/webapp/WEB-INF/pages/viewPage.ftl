@@ -18,7 +18,7 @@
               <p class="muted"><@spring.message "viewPage.information"/></p>
            </h2>
         </center>
-         <div style="margin-left:15px;"> Иванов Иван </div>
+         <div style="margin-left:15px;">РРІР°РЅРѕРІ РРІР°РЅ</div>
             <div class="row-fluid">
              <div class="span2">
         <img src="<@spring.url'/resources/images/profile.jpg'/>" width="150" height="200">
@@ -29,7 +29,7 @@
                                  <p class="muted"> <@spring.message "viewPage.dateOfBirth"/></p>
                                    </div>
                                    <div class = "span8">
-                                    10 февраля 1990
+                                    10 Р¤РµРІСЂР°Р»СЏ 1990
                                    </div>
                         </div>
                         <div class="row-fluid">
@@ -37,7 +37,7 @@
                                  <p class="muted"> <@spring.message "viewPage.cityOfResidence"/></p>
                                    </div>
                                    <div class = "span8">
-                                    Днепропетровск
+                                    Р”РЅРµРїСЂРѕРїРµС‚СЂРѕРІСЃРє
                                    </div>
                         </div>
                         <div class="row-fluid">
@@ -45,7 +45,7 @@
                                  <p class="muted"> <@spring.message "viewPage.placeOfStudy"/></p>
                                    </div>
                                    <div class = "span8">
-                                    ДНУ им. О. Гончара
+                                    Р”РќРЈ РёРј. Рћ. Р“РѕРЅС‡Р°СЂР°
                                    </div>
                         </div>
                         <div class="row-fluid">
@@ -53,7 +53,7 @@
                                   <p class="muted"><@spring.message "viewPage.specialization"/></p>
                                    </div>
                                    <div class = "span8">
-                                    Какаято специализация
+                                    РљР°РєР°СЏС‚Рѕ СЃРїРµС†РёР°Р»РёР·Р°С†РёСЏ
                                    </div>
                         </div>                                 
                  </div>
