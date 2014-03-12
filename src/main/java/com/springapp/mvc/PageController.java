@@ -1,14 +1,12 @@
 package com.springapp.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.util.rtc.validation.ParseValidation;
+import org.util.rtc.validation.Validation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,7 @@ private static List<Project> project = new ArrayList<Project>();
 private User fictUser = new User();
 
     @Autowired
-    ParseValidation validation;
+    Validation validation;
 
 static {
     userLogin.add(new Login("Lisitsa","1234"));
@@ -45,7 +43,9 @@ static {
 
 	@RequestMapping(value="/",method = RequestMethod.GET)
      public String register( ModelMap model) {
-
+        validation.fromClassToJSON(User.class,new Locale("ukr"));
+        String rules = validation.getJSON(User.class);
+        model.addAttribute("validation", rules);
         return "homepage";
     }
 
@@ -64,10 +64,6 @@ static {
         public String registrationLang(ModelMap model)
         {
             User user = new User();
-
-           validation.fromClassToJSON(User.class,new Locale("ukr"));
-            System.out.print(validation.getJSON(User.class));
-            model.addAttribute("userForm",user);
             return "registration";
         }
         

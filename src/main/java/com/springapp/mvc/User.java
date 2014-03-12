@@ -1,23 +1,45 @@
 package com.springapp.mvc;
 
-import org.util.rtc.annotation.required;
+import org.util.rtc.annotation.*;
 
 import java.util.Date;
 import java.util.List;
 
 public class User {
     @required
+    @maxlength(30)
+    @minlength(5)
     private String fio;
+    @required
+    @number
     private String phone;
+    @email
     private String email;
+    @date
+    @required
     private Date birthDate;
 
+    @maxlength(30)
+    @minlength(5)
+    @required
     private String city;
+
+    @maxlength(30)
+    @minlength(5)
+    @required
     private String university;
+    @maxlength(30)
+    @minlength(5)
+    @required
     private String faculty;
+    @maxlength(30)
+    @minlength(5)
+    @required
     private String major;
     private List<String> technologies;
+    @number
     private Integer writtenEng;
+    @number
     private Integer oralEng;
     private String note;
     private String password;

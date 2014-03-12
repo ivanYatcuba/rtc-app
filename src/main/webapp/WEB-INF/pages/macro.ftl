@@ -103,13 +103,19 @@
 <#macro validate
         form = ""
         class = "">
-    $(function() {
-        $("${form}").validate({
+<script>
+$(function() {
+    $("#${form}").validate({
 
-            submitHandler: function(form) {
-                form.submit();}
-        });
-    }
+    ${class}
+
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+});
+</script>
 </#macro>
 
 
