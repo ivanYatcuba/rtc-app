@@ -5,6 +5,8 @@ body
             background-attachment:fixed;
             background-position:center;
             background-size: cover;
+    height: auto!important;
+    position: relative;
         }
         #content
         {
@@ -59,16 +61,7 @@ table {
 }
    #fio
    {
-
        width: 530px;
-
    }
-
-
-#modalWindow.modal-dialog
-{
-    width: 100% ;
-}
-
 
    
