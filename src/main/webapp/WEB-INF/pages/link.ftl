@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap-combined.no-icons.min.css'/>" rel="stylesheet"/>
-        <script src="/<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
+        <script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
             <link href="runnable.css" rel="stylesheet" />
                         <!-- Load jQuery and the validate plugin -->
              <script src="//code.jquery.com/jquery-1.9.1.js"></script>
