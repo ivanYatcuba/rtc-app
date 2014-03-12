@@ -35,7 +35,7 @@ public class User {
     @maxlength(30)
     @minlength(5)
     @required
-    private String major;
+    private String speciality;
     private List<String> technologies;
     @number
     private Integer writtenEng;
@@ -71,11 +71,11 @@ public class User {
     }
 
     public String getMajor() {
-        return major;
+        return speciality;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
+    public void setMajor(String speciality) {
+        this.speciality = speciality;
     }
 
     //maybe this getter maybe should be changed
@@ -166,7 +166,7 @@ public class User {
         this.city = city;
         this.university = university;
         this.faculty = faculty;
-        this.major = major;
+        this.speciality = major;
         this.technologies = technologies;
         this.writtenEng = writtenEng;
         this.oralEng = oralEng;
