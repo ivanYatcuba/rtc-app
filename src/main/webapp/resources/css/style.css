@@ -11,11 +11,11 @@ body
             background-color: rgba(255,255,255,0.7);
         }
 table {
-   
-   
+
     width: 100%;
     border-spacing: 7px 11px;
    }
+
     a.rollover {
     background: url(../images/one.jpg);
     display: block;
@@ -48,7 +48,7 @@ table {
    }
 
    textarea{
-       width:60%;float:none;height:50%;
+       width:90%;float:none;height:50%;
    }
    #copyrights {
 

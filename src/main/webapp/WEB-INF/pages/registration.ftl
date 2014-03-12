@@ -1,8 +1,10 @@
 <html>
+
 <#include "macro.ftl">
 <#import "/spring.ftl" as spring/>
 <head>
 <#include "link.ftl">
+
 </head>
 
 <title><@spring.message "register"/></title>
@@ -111,18 +113,16 @@
     <#--language dropdown-->
         <br>
 
-<div class="btn-group ">
+<div class="btn-group">
 
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 
-        <@spring.message "progLanguage"/>
+    <@spring.message "progLanguage"/>
 
-            <span class="caret"> </span>
+        <span class="caret"></span>
 
-        </button>
-
-    <ul class="dropdown-menu">
-
+    </a>
+        <ul class="dropdown-menu">
         <li>1</li>
         <li>2</li>
         <li>3</li>
@@ -133,15 +133,97 @@
         <li>8</li>
         <li>9</li>
         <li>10</li>
-
-    </ul>
+</ul>
 
 </div>
     <br>
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
-    <h4> <@spring.message "language"/> </h4>
+    <h4> <@spring.message "language"/> </h4> <br>
+    <h4> <@spring.message "language.mark"/> </h4><br>
 
 
+    <div class="row-fluid span12">
+
+        <div class="container">
+
+            <div class = "span6">
+
+                <div class="btn-group">
+
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+
+                    <@spring.message "language.write"/>
+
+                        <span class="caret"></span>
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+
+
+                </div>
+
+            </div>
+            <div class="span6">
+
+                <div class="btn-group">
+
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+
+                    <@spring.message "language.spoken"/>
+
+                        <span class="caret"></span>
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
+<br>
+    <h4> <@spring.message "language"/> </h4> <br>
+
+   <div id="content">
+    <textarea >
+
+
+    </textarea>
+
+   </div>
+
+
+
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
+<br>
 
 
                 <div class="label"><@spring.message "reg.password"/></div>
