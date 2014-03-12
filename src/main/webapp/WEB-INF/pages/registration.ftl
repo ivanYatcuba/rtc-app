@@ -11,64 +11,121 @@
 
 <div id="content">
 
-<h1><@spring.message "register"/></h1><br>
+    <h2><@spring.message "register"/></h2><br>
+
+       <h4> <@spring.message "fields.enter"/></h4>
+
+<hr/>
+                <h4><@spring.message "personalData"/></h4>
+
+    <!--  The form that will be parsed by jQuery before submit  -->
+    <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
+
+                <!--name & birth row-->
+                <div class="row-fluid span12">
+
+                    <div class="container">
+
+                        <div class = "span6">
+
+                            <label for="fio"><@spring.message "fio"/></label>
+                            <input type="text" id="fio" name="fio"/>
+
+                        </div>
+                       <div class="span6">
+
+                           <label for="birthYear"><@spring.message "reg.birthDate"/> </label>
+                           <input type="text" id="birthYear" name="birthYear"/>
+
+                       </div>
+                  </div>
+              </div>
+
+                      <!--town/phone/email row-->
+                <div class="row-fluid span12">
+
+                    <div class="container">
+
+                        <div class="span4">
+
+                            <label for="town"> <@spring.message "town"/> </label>
+                            <input type="text" id="town" name="town"/>
+
+                        </div>
+
+                        <div class="span4">
+
+                            <label for="phone"> <@spring.message "phone"/> </label>
+                            <input type="text" id="phone" name="phone"/>
+
+                        </div>
+
+                        <div class="span4">
+
+                            <label for="email"> <@spring.message "reg.email"/> </label>
+                            <input type="text" id="email" name="email"/>
+
+                        </div>
+
+                   </div>
+
+                 </div>
+
+            - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
+                                        <h4> <@spring.message "education"/> </h4>
+
+                <!-- university/Faculty/Speciality -->
 
 
-<!--  The form that will be parsed by jQuery before submit  -->
-<form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
+            <div class="row-fluid span12">
 
-    <div class="row-fluid">
-        <div class="span12">
+                <div class="container">
 
-        <!--name & birth row-->
-        <div class="row-fluid">
+                    <div class="span4">
 
-            <div class="span12">
+                        <label for="university"> <@spring.message "university"/> </label>
+                        <input type="text" id="university" name="university"/>
 
-                <div class="label"> <@spring.message "fio"/></div> <div class="label"><@spring.message "reg.birthDate"/> </div><br>
+                    </div>
 
-                  <input type="text" id="fio" name="fio"/> <input type="text" id="birthYear" name="birthYear" /> <br>
+                    <div class="span4">
 
-                    <div class="label"><@spring.message "town"/></div>  <div class="label"><@spring.message "phone"/> </div> <div class="label"><@spring.message "reg.email"/></div> <br>
+                        <label for="faculty"> <@spring.message "faculty"/> </label>
+                        <input type="text" id="faculty" name="faculty"/>
 
-                    <input type="text" id="town" name="town" /> <input type="text" id="phone" name="phone" /> <input type="text" id="email" name="email" />
+                    </div>
 
-         </div>
+                    <div class="span4">
 
-            </div>
+                        <label for="speciality"> <@spring.message "speciality"/> </label>
+                        <input type="text" id="speciality" name="speciality"/>
 
-    <!--end of fio & birth block-->
-
-       <hr/>
-
-            <!-- university/Faculty/Speciality -->
-
-
-            <div class = "row-fluid">
-
-                <div class="span12">
-
-                    <div class="label"> <@spring.message "university"/></div> <div class="label"><@spring.message "faculty"/> </div> <div class="label"><@spring.message "speciality"/> </div><br>
+                    </div>
 
                 </div>
 
             </div>
 
-
-            <div class="label"><@spring.message "reg.password"/></div><br>
-            <input type="password" id="password" name="password" /><br />
-
-    <div style="margin-left:140px;"> <input class ="btn btn-warning" type="submit" name="submit" value=<@spring.message "reg.register"/> > </div>
+            <hr/>
 
 
-</div>
 
-        <!--Closing all hell-table -->
-        </div>
+                <div class="label"><@spring.message "reg.password"/></div>
+                <br>
+                <input type="password" id="password" name="password"/><br/>
 
-</form>
+                <div style="margin-left:140px;"><input class="btn btn-warning" type="submit" name="submit"
+                                                       value=<@spring.message "reg.register"/>></div>
 
-</div>
+
+
+
+            <!--Closing all hell-table -->
+
+
+    </form>
+
+
 
 </body>
 </html>
