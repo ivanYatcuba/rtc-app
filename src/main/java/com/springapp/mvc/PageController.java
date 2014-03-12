@@ -1,6 +1,7 @@
 package com.springapp.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,7 +11,6 @@ import org.util.rtc.validation.Validation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 @RequestMapping("/")
@@ -43,7 +43,7 @@ static {
 
 	@RequestMapping(value="/",method = RequestMethod.GET)
      public String register( ModelMap model) {
-        validation.fromClassToJSON(User.class,new Locale("ukr"));
+        validation.fromClassToJSON(User.class, LocaleContextHolder.getLocale());
         String rules = validation.getJSON(User.class);
         model.addAttribute("validation", rules);
         return "homepage";
