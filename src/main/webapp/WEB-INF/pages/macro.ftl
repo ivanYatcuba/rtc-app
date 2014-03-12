@@ -124,27 +124,16 @@ $(function() {
 <#macro datepicker
 id ="datepicker"
 name="datepicker"
-value ="1.03.2015"
 >
 
-<input type="datetime" id="${id}" name="${name}" class="datepicker" value = "${value}"/>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.js">
-    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script type="text/javascript" src="include/jquery-1.2.6.min.js"></script>
-
-<!-- Подключаем jQuery UI (у нас там только datepicker) -->
-<script type="text/javascript" src="include/jquery-ui-personalized-1.5.3.packed.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<!-- Подключаем русификацию datepicker`a -->
-<script type="text/javascript" src="include/ui.datepicker-ru.js"></script>
+<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<input id="${id}" type="text">
 <script type="text/javascript">
     $(function() {
-        $( "#datepicker" ).datepicker();
+        $("#${id}").datepicker();
+        $("#${id}").datepicker("setDate", new Date);
     });
-</script>
 </script>
 
 </#macro>
