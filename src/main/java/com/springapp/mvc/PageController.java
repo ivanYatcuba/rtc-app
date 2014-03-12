@@ -115,4 +115,9 @@ static {
     {
         return "in";
     }
+    @RequestMapping(value="/input1",method=RequestMethod.GET)
+    public String inputlan12(ModelMap model)
+    {
+        return "viewPage";
+    }
 }

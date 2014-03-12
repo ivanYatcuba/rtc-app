@@ -1,4 +1,4 @@
-<#import "/spring.ftl" as spring/>
+﻿<#import "/spring.ftl" as spring/>
 <#include "macro.ftl">
 
  <@spring.message "welcome.text"/><br>
