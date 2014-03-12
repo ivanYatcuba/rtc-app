@@ -11,7 +11,7 @@
 
 <div id="content">
 
-    <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
+
     <h2><@spring.message "register"/></h2><br>
 
        <h4> <@spring.message "fields.enter"/></h4>
@@ -109,18 +109,35 @@
     <h4> <@spring.message "progLanguage"/> </h4>
 
     <#--language dropdown-->
+        <br>
 
-    <ul class="dropdown-menu" >
+<div class="btn-group ">
 
-        <li><a tabindex="-1" href="#">1</a></li>
-        <li><a tabindex="-1" href="#">2 /a></li>
-        <li><a tabindex="-1" href="#">3 /a></li>
-        <li class="divider"></li>
-        <li><a tabindex="-1" href="#">4</a></li>
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+
+        <@spring.message "progLanguage"/>
+
+            <span class="caret"> </span>
+
+        </button>
+
+    <ul class="dropdown-menu">
+
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
 
     </ul>
 
-
+</div>
+    <br>
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
     <h4> <@spring.message "language"/> </h4>
 
@@ -131,8 +148,10 @@
                 <br>
                 <input type="password" id="password" name="password"/><br/>
 
-                <div style="margin-left:140px;"><input class="btn btn-warning" type="submit" name="submit"
-                                                       value=<@spring.message "reg.register"/>></div>
+    <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
+
+                <div style="margin-left:140px;">
+                    <input class="btn btn-warning" type="submit" name="submit"value=<@spring.message "reg.register"/>></div>
 
     </form>
 
