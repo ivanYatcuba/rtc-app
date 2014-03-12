@@ -42,7 +42,7 @@
                        <div class="span6">
 
                            <label for="birthYear"><@spring.message "reg.birthDate"/> </label>
-                           <input type="text" id="birthDate" name="birthDate"/>
+                            <@datepicker "birthDate" "birthDate" />
 
                        </div>
                   </div>
