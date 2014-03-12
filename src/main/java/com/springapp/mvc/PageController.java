@@ -18,7 +18,7 @@ import java.util.Locale;
 @RequestMapping("/")
 public class PageController {
 private static List<Login> userLogin = new ArrayList<Login>();
-
+private static List<Project> project = new ArrayList<Project>();
 
 private User fictUser = new User();
 
@@ -29,6 +29,13 @@ static {
     userLogin.add(new Login("Lisitsa","1234"));
     userLogin.add(new Login("Bogdan","1234"));
     userLogin.add(new Login("Yarosav","1234"));
+}
+static {
+    project.add(new Project("Project 1"));
+    project.add(new Project("Project 2"));
+    project.add(new Project("Project 3"));
+    project.add(new Project("Project 4"));
+    project.add(new Project("Project 5"));
 }
     @RequestMapping(value="/start input",method = RequestMethod.GET)
     public String Home( ModelMap model) {
@@ -75,6 +82,8 @@ static {
     @RequestMapping(value="/viewPage",method=RequestMethod.GET)
     public String viewPageLang(ModelMap model)
     {
+        
+        
         return "viewPage";
     }
     @RequestMapping(value="/edit",method=RequestMethod.POST)
@@ -118,6 +127,7 @@ static {
     @RequestMapping(value="/input1",method=RequestMethod.GET)
     public String inputlan12(ModelMap model)
     {
+        model.addAttribute("user",userLogin);
         return "viewPage";
     }
 }

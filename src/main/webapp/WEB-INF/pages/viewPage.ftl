@@ -2,7 +2,7 @@
     <#import "/spring.ftl" as spring/>
 <head>
         <#include "link.ftl">
-
+ <script src="/templates/bimall/js/bootstrap-scrollspy.js"></script>
 </head>
 <title> 
     <@spring.message "title.view"/>
@@ -147,8 +147,21 @@
   </div>
 </div>
 
+<div data-spy="scroll" data-target="#navbar-example" data-offset="0" 
+   style="height:100px;overflow:auto; position: relative;">
+    <#list user as x>
+<img src="<@spring.url'/resources/images/project.jpg'/>" width="100" height="150">
+    Login: ${x.login}, password: ${x.password} <br>
+    </#list>
 </div>
 
+
+
+</div>
+<script type="text/javascript">
+$('body').scrollspy({ target: '.navbar-example' })
+
+</script>
 <#include "down.ftl">
 </body>
 </html>
