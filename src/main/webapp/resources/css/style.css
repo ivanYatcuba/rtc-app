@@ -57,6 +57,14 @@ table {
        text-align: center;
 
    }
+   #fio
+   {
+
+       width: 530px;
+
+   }
+
+
 #modalWindow.modal-dialog
 {
     width: 100% ;
