@@ -21,8 +21,12 @@
 <hr/>
                 <h4><@spring.message "personalData"/></h4>
 
+    <!-- Load jQuery and the validate plugin -->
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <!--  The form that will be parsed by jQuery before submit  -->
-
+    <@validate "register-form" "${validation}"/>
+    <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
                 <!--name & birth row-->
                 <div class="row-fluid span12">
@@ -38,7 +42,7 @@
                        <div class="span6">
 
                            <label for="birthYear"><@spring.message "reg.birthDate"/> </label>
-                           <input type="text" id="birthYear" name="birthYear"/>
+                           <input type="text" id="birthDate" name="birthDate"/>
 
                        </div>
                   </div>
@@ -52,7 +56,7 @@
                         <div class="span4">
 
                             <label for="town"> <@spring.message "town"/> </label>
-                            <input type="text" id="town" name="town"/>
+                            <input type="text" id="city" name="city"/>
 
                         </div>
 
@@ -230,7 +234,7 @@
                 <br>
                 <input type="password" id="password" name="password"/><br/>
 
-    <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
+
 
                 <div style="margin-left:140px;">
                     <input class="btn btn-warning" type="submit" name="submit"value=<@spring.message "reg.register"/>></div>
