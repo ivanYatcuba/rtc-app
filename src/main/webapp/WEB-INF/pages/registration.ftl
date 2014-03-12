@@ -36,9 +36,24 @@
          </div>
 
             </div>
-    <!--end of name/lastname & birth block-->
+
+    <!--end of fio & birth block-->
 
        <hr/>
+
+            <!-- university/Faculty/Speciality -->
+
+
+            <div class = "row-fluid">
+
+                <div class="span12">
+
+                    <div class="label"> <@spring.message "university"/></div> <div class="label"><@spring.message "faculty"/> </div> <div class="label"><@spring.message "speciality"/> </div><br>
+
+                </div>
+
+            </div>
+
 
             <div class="label"><@spring.message "reg.password"/></div><br>
             <input type="password" id="password" name="password" /><br />
