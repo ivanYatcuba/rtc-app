@@ -1,23 +1,45 @@
 package com.springapp.mvc;
 
-import org.util.rtc.annotation.required;
+import org.util.rtc.annotation.*;
 
 import java.util.Date;
 import java.util.List;
 
 public class User {
     @required
+    @maxlength(30)
+    @minlength(5)
     private String fio;
+    @required
+    @number
     private String phone;
+    @email
     private String email;
+    @date
+    @required
     private Date birthDate;
 
+    @maxlength(30)
+    @minlength(5)
+    @required
     private String city;
+
+    @maxlength(30)
+    @minlength(5)
+    @required
     private String university;
+    @maxlength(30)
+    @minlength(5)
+    @required
     private String faculty;
-    private String major;
+    @maxlength(30)
+    @minlength(5)
+    @required
+    private String speciality;
     private List<String> technologies;
+    @number
     private Integer writtenEng;
+    @number
     private Integer oralEng;
     private String note;
     private String password;
@@ -49,11 +71,11 @@ public class User {
     }
 
     public String getMajor() {
-        return major;
+        return speciality;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
+    public void setMajor(String speciality) {
+        this.speciality = speciality;
     }
 
     //maybe this getter maybe should be changed
@@ -144,7 +166,7 @@ public class User {
         this.city = city;
         this.university = university;
         this.faculty = faculty;
-        this.major = major;
+        this.speciality = major;
         this.technologies = technologies;
         this.writtenEng = writtenEng;
         this.oralEng = oralEng;

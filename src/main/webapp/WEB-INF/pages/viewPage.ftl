@@ -138,22 +138,35 @@
 </div>
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span2" >
-
+    <div class="span4" >
+        <center><h3><@spring.message "viewPage.projects"/></h3></center>
+        <div data-spy="scroll" data-target="#navbar-example" data-offset="0" 
+                style="height:200px;overflow:auto; position: relative;">
+                 <#list project as x>
+                    <hr>
+                    <img src="<@spring.url'/resources/images/project.jpg'/>" width="100" height="150">
+                      Project name: ${x.name} <br>                      
+                        </#list>
+        </div>
+<br>
+<hr>
+                <center><h3><@spring.message "viewPage.friends"/></h3></center>
+                   <div data-spy="scroll" data-target="#navbar-example" data-offset="0" 
+                    style="height:200px;overflow:auto; position: relative;">
+                     <#list user as x>
+                             <hr>
+                        <img src="<@spring.url'/resources/images/profile.jpg'/>" width="100" height="150">
+                         Login: ${x.login}, password: ${x.password} <br>                      
+                        </#list>
+             </div>
     </div>
-    <div class="span10">
+    <div class="span8">
       <!--Body content-->
+        
     </div>
   </div>
 </div>
 
-<div data-spy="scroll" data-target="#navbar-example" data-offset="0" 
-   style="height:100px;overflow:auto; position: relative;">
-    <#list user as x>
-<img src="<@spring.url'/resources/images/project.jpg'/>" width="100" height="150">
-    Login: ${x.login}, password: ${x.password} <br>
-    </#list>
-</div>
 
 
 
