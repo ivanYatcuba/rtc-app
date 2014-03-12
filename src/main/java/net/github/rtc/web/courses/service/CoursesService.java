@@ -9,6 +9,7 @@ import java.util.Collection;
  * Provides operations with {@link net.github.rtc.web.courses.model.Courses} objects
  *
  * @author Vladislav Pikus
+ * @author Dmitry Pritula
  */
 public interface CoursesService {
     /**
@@ -25,4 +26,6 @@ public interface CoursesService {
      * @param id course ID
      */
     void delete(Integer id);
+
+    Courses findById(Integer id);
 }

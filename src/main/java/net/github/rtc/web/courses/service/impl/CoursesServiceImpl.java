@@ -16,6 +16,7 @@ import java.util.Collection;
  * This's a wrapper for {@link CoursesService}
  *
  * @author Vladislav Pikus
+ * @author Dmitry Pritula
  */
 @Service("coursesService")
 public class CoursesServiceImpl implements CoursesService {
@@ -50,5 +51,14 @@ public class CoursesServiceImpl implements CoursesService {
             throw ex;
         }
         resource.delete(id);
+    }
+
+    /**
+     * @return link of courses
+     * @see CoursesService
+     */
+    @Override
+    public Courses findById(Integer id){
+        return resource.findById(id);
     }
 }
