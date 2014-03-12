@@ -11,6 +11,7 @@
 
 <div id="content">
 
+    <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
     <h2><@spring.message "register"/></h2><br>
 
        <h4> <@spring.message "fields.enter"/></h4>
@@ -19,7 +20,7 @@
                 <h4><@spring.message "personalData"/></h4>
 
     <!--  The form that will be parsed by jQuery before submit  -->
-    <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
+
 
                 <!--name & birth row-->
                 <div class="row-fluid span12">
@@ -70,8 +71,7 @@
                    </div>
 
                  </div>
-
-            - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
+   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
                                         <h4> <@spring.message "education"/> </h4>
 
                 <!-- university/Faculty/Speciality -->
@@ -105,8 +105,25 @@
                 </div>
 
             </div>
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
+    <h4> <@spring.message "progLanguage"/> </h4>
 
-            <hr/>
+    <#--language dropdown-->
+
+    <ul class="dropdown-menu" >
+
+        <li><a tabindex="-1" href="#">1</a></li>
+        <li><a tabindex="-1" href="#">2 /a></li>
+        <li><a tabindex="-1" href="#">3 /a></li>
+        <li class="divider"></li>
+        <li><a tabindex="-1" href="#">4</a></li>
+
+    </ul>
+
+
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
+    <h4> <@spring.message "language"/> </h4>
+
 
 
 
@@ -117,15 +134,7 @@
                 <div style="margin-left:140px;"><input class="btn btn-warning" type="submit" name="submit"
                                                        value=<@spring.message "reg.register"/>></div>
 
-
-
-
-            <!--Closing all hell-table -->
-
-
     </form>
-
-
 
 </body>
 </html>
