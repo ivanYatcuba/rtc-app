@@ -131,6 +131,7 @@ name="datepicker"
 <input id="${id}" type="text">
 <script type="text/javascript">
     $(function() {
+        $("#${id}").datepicker({changeYear:true});
         $("#${id}").datepicker();
         $("#${id}").datepicker("setDate", new Date);
     });
