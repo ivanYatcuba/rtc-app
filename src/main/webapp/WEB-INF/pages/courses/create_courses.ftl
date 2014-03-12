@@ -1,45 +1,65 @@
 <html>
-<#import "/spring.ftl" as spring/>
-<head>
-
-    </head>
+<title>Create Courses</title>
 <body>
-
-<form name="create" id = "create" action="${rc.getContextUrl('/course/create')}" method="post">
-    <h2>Create Course</h2>
-    <div>
-        <dl>
-            <dt><label for="name"><@spring.message "courses.name"/></label></dt>
-            <dd><@spring.formInput "course.name" />
-            <dd><@spring.showErrors "<br>" />
-            <dt><label for="type"><@spring.message "courses.category"/></label></dt>
-            <!--<dd><@spring.formMultiSelect "course.type" ""/>-->
-            <dt><label for="startDate"><@spring.message "courses.startDate"/></label></dt>
-            <dd><@spring.formInput "course.startDate" />
-            <dd><@spring.showErrors "<br>" />
-            <dt><label for="endDate"><@spring.message "courses.endDate"/></label></dt>
-            <dd><@spring.formInput "course.endDate" />
-            <dd><@spring.showErrors "<br>" />
-        </dl>
-    </div>
-    <div>
-        <dl>
-            <dt><label for="author.Name"><@spring.message "courses.author"/></label></dt>
-            <dd><@spring.formInput "course.author.lastName" />
-            <dd><@spring.showErrors "<br>" />
-            <dd><@spring.formInput "course.author.firsName" /><
-            <dd><@spring.showErrors "<br>" />
-            <dt><label for="author.Email"><@spring.message "courses.email"/></label></dt>
-            <dd><@spring.formInput "course.author.email" /><
-            <dd><@spring.showErrors "<br>" />
-            <dt><label for="endDate"><@spring.message "courses.tags"/></label></dt>
-            <dd><@spring.formInput "course.Tags" />
-            <dd><@spring.showErrors "<br>" />
-        </dl>
-    </div>
-    <input type="submit" value="Create" /><@spring.message "courses.or"/> <a href="#"><@spring.message "courses.cancel"/></a>
-</form>
-
-
+<link href="/stylesheets/create_courses.css" media="all" rel="stylesheet" type="text/css" />
 </body>
+<head>
+    <meta charset="cp1251" />
+
+    <center><h3>Create Courses</h3></center>
+
+    <hr width="70%" align="center">
+
+    <table border="0" align="center">
+        <tr>
+            <td width = "20%">Course Name:</td>
+            <td>
+                <input type="text">
+            </td>
+            <td width = "20%" align="right">Author:</td>
+            <td>
+                <input type="text"> &nbsp; <input type="text">
+            </td>
+        </tr>
+        </td>
+        <td>
+            <tr>
+                <td width = "20%">Category:</td>
+                <td>
+                    <select>
+                        <option>Development</option>
+                        <option>Test 1</option>
+                        <option>Test 2</option>
+                    </select>
+                </td>
+                <td width = "20%" align="right">Email:</td>
+                <td>
+                    <input type="text">
+                </td>
+            </tr>
+        </td>
+        <td>
+            <tr>
+                <td width = "20%">Start Date</td>
+                <td>
+                    <input type="text">
+                </td>
+                <td width = "20%" align="right">Tags:</td>
+                <td>
+                    <input type="text">
+                </td>
+            </tr>
+        </td>
+        <td>
+            <tr>
+                <td width = "20%">Finish Date</td> &nbsp;
+                <td>
+                    <input type="text">
+                </td>
+            </tr>
+        </td>
+        </tr>
+    </table>
+    <p align="center"><input type="button" value="Create"> or <a href="#">Cancel</a></p>
+</head>
 </html>
