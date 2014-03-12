@@ -128,6 +128,7 @@ static {
     public String inputlan12(ModelMap model)
     {
         model.addAttribute("user",userLogin);
+        model.addAttribute("project",project);
         return "viewPage";
     }
 }
