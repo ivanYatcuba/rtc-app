@@ -210,7 +210,7 @@
 
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
 <br>
-    <h4> <@spring.message "language"/> </h4> <br>
+    <h4> <@spring.message "reg.reason"/> </h4> <br>
 
    <div id="content">
     <textarea >
