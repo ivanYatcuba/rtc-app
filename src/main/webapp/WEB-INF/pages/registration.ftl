@@ -77,8 +77,9 @@
                    </div>
 
                  </div>
-   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
-                                        <h4> <@spring.message "education"/> </h4>
+                <hr>
+
+                                         <h4> <@spring.message "education"/> </h4>
 
                 <!-- university/Faculty/Speciality -->
 
@@ -111,38 +112,108 @@
                 </div>
 
             </div>
-    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
-    <h4> <@spring.message "progLanguage"/> </h4>
+                <hr>
+       <h4> <@spring.message "progLanguage"/> </h4>
 
     <#--language dropdown-->
         <br>
 
-<div class="btn-group">
+                <div class="row-fluid span12">
 
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <div class="container">
 
-    <@spring.message "progLanguage"/>
+                        <div class="span4">
 
-        <span class="caret"></span>
+                            <div class="btn-group">
 
-    </a>
-        <ul class="dropdown-menu">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>10</li>
-</ul>
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 
-</div>
+                                    Java
+
+                                    <span class="caret"></span>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li>10</li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span4">
+
+                            <div class="btn-group">
+
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+
+                                    C#
+
+                                    <span class="caret"></span>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li>10</li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span4">
+
+                            <div class="btn-group">
+
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+
+                                    PHP
+
+                                    <span class="caret"></span>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li>10</li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
     <br>
-    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
-    <h4> <@spring.message "language"/> </h4> <br>
+                <hr>
+
+        <h4> <@spring.message "language"/> </h4> <br>
     <h4> <@spring.message "language.mark"/> </h4><br>
 
 
@@ -209,11 +280,8 @@
         </div>
     </div>
 
-
-
-
-    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
-<br>
+                <hr>
+    <br>
     <h4> <@spring.message "reg.reason"/> </h4> <br>
 
    <div id="content">
@@ -225,9 +293,9 @@
    </div>
 
 
+    <hr>
 
-    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  <!--Sorryy for this :(-->
-<br>
+   <br>
 
 
                 <div class="label"><@spring.message "reg.password"/></div>

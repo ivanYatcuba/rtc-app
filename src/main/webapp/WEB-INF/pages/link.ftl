@@ -6,7 +6,7 @@
                         <!-- Load jQuery and the validate plugin -->
 
 
-            <link href="css/bootstrap-responsive.css" rel="stylesheet">
+            <#--<link href="css/bootstrap-responsive.css" rel="stylesheet">-->
        <link href="css/bootstrap.css" rel="stylesheet">
     <script type="text/javascript" src="<@spring.url'/resources/css/js/JavaScript.js'/>"> </script>
   <link href="<@spring.url'/resources/css/style.css'/>" rel="stylesheet" type="text/css" />

@@ -36,23 +36,27 @@
     </center>
 </div>
 <br>
-    <div>
 
-        <table>
-            <tr>
-            <td>
-            <div align = "right">
+<div>
 
-<a data-toggle="modal" data-target="#modalIn" class="btn btn-warning"><@spring.message "btn.enter"></@></a>
-</div>
+            <table>
+      <tr>
+                    <td>
 </td>
-<td>|
-<a data-toggle="modal" data-target="#modalReg" class="btn btn-warning"> <@spring.message "page.register"/></a>
+<td>
+    <center>
+    <a data-toggle="modal" data-target="#modalIn" class="btn btn-warning"><@spring.message "btn.enter"></@></a>
+    |
+    <a data-toggle="modal" data-target="#modalReg" class="btn btn-warning"> <@spring.message "page.register"/></a>
+    </center>
+</td>
+<td>
         </td>
             </tr>
-        </table>
+            </table>
 
-    </div>
+
+</div>
 
 
 <#include "down.ftl">
