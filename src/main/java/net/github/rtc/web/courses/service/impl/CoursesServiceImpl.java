@@ -61,4 +61,14 @@ public class CoursesServiceImpl implements CoursesService {
     public Courses findById(Integer id){
         return resource.findById(id);
     }
+
+    @Override
+    public Courses create(Courses course) {
+        return resource.create(course);
+    }
+
+    @Override
+    public void update(Courses course) {
+        resource.update(course);
+    }
 }

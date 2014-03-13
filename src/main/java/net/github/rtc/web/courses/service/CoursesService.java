@@ -28,4 +28,8 @@ public interface CoursesService {
     void delete(Integer id);
 
     Courses findById(Integer id);
+
+    Courses create(Courses course);
+
+    void update(Courses course);
 }

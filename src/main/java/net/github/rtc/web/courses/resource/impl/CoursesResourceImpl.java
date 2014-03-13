@@ -62,4 +62,14 @@ public class CoursesResourceImpl implements CoursesResource {
     public void delete(Integer id) {
         restTemplate.delete(hostUrl + "courses/{id}", id);
     }
+
+    @Override
+    public Courses create(Courses course) {
+        return restTemplate.postForObject(hostUrl + "courses", course, Courses.class);
+    }
+
+    @Override
+    public void update(Courses course) {
+        restTemplate.put(hostUrl + "courses/{id}", course, course.getId());
+    }
 }
