@@ -5,8 +5,10 @@
 </head>
 <body>
 
-<form name="course" id = "course" action="<@spring.url "/courses/save" />" method="post">
+<form name="course" id = "course" action="<@spring.url "/courses/update" />" method="post">
     <h2>Create course</h2>
+    <@spring.formHiddenInput "course.id" />
+    <@spring.formHiddenInput "course.code" />
     <div>
         <dl>
             <dt><label for="name">Course name:</label></dt>
@@ -14,7 +16,7 @@
             <dd><@spring.showErrors "<br>" /></dd>
             <dt><label for="type">Category:</label></dt>
             <dd>
-                <@spring.bind "categories" />
+            <@spring.bind "categories" />
                 <@spring.formSingleSelect "course.type", categories, " " />
             </dd>
             <dt><label for="startDate">Start Date:</label></dt>
@@ -40,7 +42,7 @@
             <dd><@spring.showErrors "<br>" /></dd>
         </dl>
     </div>
-    <input type="submit" value="Create" />
+    <input type="submit" value="Update" />
 </form>
 </body>
 </html>
