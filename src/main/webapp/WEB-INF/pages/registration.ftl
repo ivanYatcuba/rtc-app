@@ -36,7 +36,7 @@
 
                             <label for="fio"><@spring.message "fio"/></label>
                             <div id="fio">
-                            <input type="text"  id="fio" name="fio"/>
+                            <input type="text"  id="fio" name="fio" />
                             </div>
 
                         </div>
@@ -66,14 +66,14 @@
                         <div class="span4">
 
                             <label for="phone"> <@spring.message "phone"/> </label>
-                            <input type="text" id="phone" name="phone"/>
+                            <input type="text" id="phone" name="phone" />
 
                         </div>
 
                         <div class="span4">
 
                             <label for="email"> <@spring.message "reg.email"/> </label>
-                            <input type="text" id="email" name="email"/>
+                            <input type="text" id="email" name="email" />
 
                         </div>
 
@@ -95,21 +95,21 @@
                     <div class="span4">
 
                         <label for="university"> <@spring.message "university"/> </label>
-                        <input type="text" id="university" name="university"/>
+                        <input type="text" id="university" name="university" />
 
                     </div>
 
                     <div class="span4">
 
                         <label for="faculty"> <@spring.message "faculty"/> </label>
-                        <input type="text" id="faculty" name="faculty"/>
+                        <input type="text" id="faculty" name="faculty" />
 
                     </div>
 
                     <div class="span4">
 
                         <label for="speciality"> <@spring.message "speciality"/> </label>
-                        <input type="text" id="speciality" name="speciality"/>
+                        <input type="text" id="speciality" name="speciality" />
 
                     </div>
 

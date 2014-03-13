@@ -17,7 +17,7 @@ import java.util.List;
 public class PageController {
 private static List<Login> userLogin = new ArrayList<Login>();
 private static List<Project> project = new ArrayList<Project>();
-
+private List<User> users = new ArrayList<User>();
 private User fictUser = new User();
 
     @Autowired
@@ -61,18 +61,25 @@ static {
     }
         
 	@RequestMapping(value="/registration",method=RequestMethod.GET)
-        public String registrationLang(ModelMap model)
+        public String registrationLang(@ModelAttribute("userForm") User user1, ModelMap model)
         {
-            User user = new User();
+       
+          //this.users.add(user1);
+         
             return "registration";
         }
         
     @RequestMapping(value="/viewPage",method=RequestMethod.POST)
     public String viewPage(@ModelAttribute("userForm") User user, ModelMap model)
     {
-        fictUser = user;
+       
+     
 //        System.out.println("fictUser.getFirstname()" + fictUser.getFirstname());
 //        System.out.println("fictUser.getLastname()" + fictUser.getLastname());
+        this.users.add(user);
+        model.addAttribute("project",project);
+        model.addAttribute("user1",user);
+        model.addAttribute("user",userLogin);
         return "viewPage";
     }
     @RequestMapping(value="/viewPage",method=RequestMethod.GET)
@@ -125,6 +132,8 @@ static {
     {
         model.addAttribute("user",userLogin);
         model.addAttribute("project",project);
-        return "viewPage";
+        User user1 = new User("lisitsa", "0967309619", "scorpter@mail.ru", "Dnepropetrovsk", "DNUZT", "Teh kibern", "1234");
+        model.addAttribute("user1",fictUser);
+        return "registration";
     }
 }
