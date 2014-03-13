@@ -56,7 +56,9 @@ static {
 //        }
      @RequestMapping(value="/goHome",method = RequestMethod.GET)
      public String goHome( ModelMap model) {
-
+validation.fromClassToJSON(User.class, LocaleContextHolder.getLocale());
+        String rules = validation.getJSON(User.class);
+        model.addAttribute("validation", rules);
         return "homepage";
     }
         
