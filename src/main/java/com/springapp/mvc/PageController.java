@@ -107,7 +107,7 @@ static {
     {
         for(User l: users)
         {
-            if((login.getLogin().equals(l.getFio())==true)&& (login.getPassword().equals(l.getPassword())==true)){
+            if((login.getLogin().equals(l.getEmail())==true)&& (login.getPassword().equals(l.getPassword())==true)){
                 
                    model.addAttribute("project",project);
         model.addAttribute("user1",l);
