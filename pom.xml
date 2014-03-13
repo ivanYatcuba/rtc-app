@@ -9,7 +9,16 @@
 
     <properties>
         <spring.version>3.2.0.RELEASE</spring.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>bintray</id>
+            <url>http://dl.bintray.com/rtcommunity/maven</url>
+        </repository>
+    </repositories>
+
 
     <dependencies>
         <dependency>
@@ -128,7 +137,12 @@
             <version>0.9.28</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>rtc-util</groupId>
+            <artifactId>rtc-util</artifactId>
+            <version>1.2.0-RELEASE</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>
@@ -139,6 +153,7 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -149,6 +164,14 @@
                     <url>http://localhost:8080/manager/text</url>
                     <server>PulseTomcatServer</server>
                     <path>/rtc-app</path>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
         </plugins>

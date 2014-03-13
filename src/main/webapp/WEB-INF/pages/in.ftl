@@ -2,36 +2,12 @@
 <#import "/spring.ftl" as spring/>
 
 <head>
-<title>Login page</title>
-<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
- <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-  <link href="runnable.css" rel="stylesheet" />
-
+<#include "link.ftl">
 </head>
 <body>
 <div id="content">
-    <style>
-        body
-        {
-            background-image:url(" <@spring.url '/resources/images/back.jpeg'/> ");
-            background-repeat: no-repeat;
-            background-attachment:fixed;
-            background-position:center;
-            background-size: cover;
-        }
-        #content
-        {
-            background-color: rgba(255,255,255,0.7);
-        }
-    </style>
-<center>
-<h1><@spring.message "enter"/> </h1>
-</center>
-<form name="goHome" action="goHome" method="get" >
-<div style="margin-left:560px"> 
-    <button class="btn btn-primary" type="submit"><-</button>
- </div>
-</form>
+
+<br>
 <center>
 <form name="Logins" action="input"  method="post">
 
@@ -46,9 +22,9 @@
  </form>
 <form class="form-inline">
 <label class="checkbox">
-    <input type="checkbox">Запомнить меня</label>
+    <input type="checkbox"><@spring.message "password.save"/></label>
     <br>
- <a href="#">Забыли пароль?</a>
+ <a href="#"><@spring.message "password.forgot"/></a>
 </form>
 
 </center>
@@ -65,6 +41,5 @@ ${message}
 <#if message??>
 ${message}
 </#if>
-<#include "down.ftl">
 </body>
 </html>

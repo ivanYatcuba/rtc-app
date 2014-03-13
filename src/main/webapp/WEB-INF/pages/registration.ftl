@@ -2,45 +2,306 @@
 <#include "macro.ftl">
 <#import "/spring.ftl" as spring/>
 <head>
-
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<#include "link.ftl">
 
 </head>
 
+<title><@spring.message "register"/></title>
+
 <body>
+
 <div id="content">
-    <style>
-        body
-        {
-            background-image:url(" <@spring.url '/resources/images/back.jpeg'/> ");
-            background-repeat: no-repeat;
-            background-attachment:fixed;
-            background-position:center;
-            background-size: cover;
-        }
-        #content
-        {
-            background-color: rgba(255,255,255,0.7);
-        }
-    </style>
-<h1><@spring.message "register"/></h1>
 
-<!--  The form that will be parsed by jQuery before submit  -->
-<form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
-    <div class="label"><@spring.message "reg.firstName"/></div><input type="text" id="firstname" name="firstname" /><br />
+    <h2><@spring.message "register"/></h2><br>
 
-    <div class="label"><@spring.message "reg.lastName"/></div><input type="text" id="lastname" name="lastname" /><br />
+       <h4> <@spring.message "fields.enter"/></h4>
 
-    <div class="label"><@spring.message "reg.birthDate"/></div><input type="text" id="birthYear" name="birthYear" /><br />
+<hr>
+                <h4><@spring.message "personalData"/></h4>
 
-    <div class="label"><@spring.message "reg.email"/></div><input type="text" id="email" name="email" /><br />
+    <!-- Load jQuery and the validate plugin -->
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <!--  The form that will be parsed by jQuery before submit  -->
+    <@validate "register-form" "${validation}"/>
+    <form name="userForm" action="viewPage" method="post" id="register-form" novalidate="novalidate">
 
-    <div class="label"><@spring.message "reg.password"/></div><input type="password" id="password" name="password" /><br />
-  
-    <div style="margin-left:140px;"><input class ="btn btn-warning" type="submit" name="submit" value=<@spring.message "reg.register"/> /></div>
-</form>
-<#include "down.ftl">
+                <!--name & birth row-->
+                <div class="row-fluid span12">
+
+                    <div class="container">
+
+                        <div class = "span8">
+
+                            <label for="fio"><@spring.message "fio"/></label>
+                            <div id="fio">
+                            <input type="text"  id="fio" name="fio"/>
+                            </div>
+
+                        </div>
+
+                       <div class="span4">
+
+                           <label for="birthYear"><@spring.message "reg.birthDate"/> </label>
+
+                       <@datepicker "birthDate" "birthDate" />
+
+                       </div>
+                  </div>
+              </div>
+
+                      <!--town/phone/email row-->
+                <div class="row-fluid span12">
+
+                    <div class="container">
+
+                        <div class="span4">
+
+                            <label for="town"> <@spring.message "town"/> </label>
+                            <input type="text" id="city" name="city"/>
+
+                        </div>
+
+                        <div class="span4">
+
+                            <label for="phone"> <@spring.message "phone"/> </label>
+                            <input type="text" id="phone" name="phone"/>
+
+                        </div>
+
+                        <div class="span4">
+
+                            <label for="email"> <@spring.message "reg.email"/> </label>
+                            <input type="text" id="email" name="email"/>
+
+                        </div>
+
+                   </div>
+
+                 </div>
+
+                <hr style="width: 1027px">
+
+                                         <h4> <@spring.message "education"/> </h4>
+
+                <!-- university/Faculty/Speciality -->
+
+
+            <div class="row-fluid span12">
+
+                <div class="container">
+
+                    <div class="span4">
+
+                        <label for="university"> <@spring.message "university"/> </label>
+                        <input type="text" id="university" name="university"/>
+
+                    </div>
+
+                    <div class="span4">
+
+                        <label for="faculty"> <@spring.message "faculty"/> </label>
+                        <input type="text" id="faculty" name="faculty"/>
+
+                    </div>
+
+                    <div class="span4">
+
+                        <label for="speciality"> <@spring.message "speciality"/> </label>
+                        <input type="text" id="speciality" name="speciality"/>
+
+                    </div>
+
+                </div>
+
+            </div>
+                <hr style="width: 1027px">
+                <br>
+       <h4> <@spring.message "progLanguage"/> </h4>
+
+    <#--language dropdown-->
+        <br>
+
+                <div class="row-fluid span12">
+
+                    <div class="container">
+
+                        <div class="span4">
+
+                            <div class="btn-group">
+
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+
+                                    Java
+
+                                    <span class="caret"></span>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li>10</li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span4">
+
+                            <div class="btn-group">
+
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+
+                                    C#
+
+                                    <span class="caret"></span>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li>10</li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span4">
+
+                            <div class="btn-group">
+
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+
+                                    PHP
+
+                                    <span class="caret"></span>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li>10</li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+    <br>
+                <hr>
+
+        <h4> <@spring.message "language"/> </h4> <br>
+    <h4> <@spring.message "language.mark"/> </h4><br>
+
+
+    <div class="row-fluid span12">
+
+        <div class="container">
+
+            <div class = "span6">
+
+                <div class="btn-group">
+
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+
+                    <@spring.message "language.write"/>
+
+                        <span class="caret"></span>
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+
+                </div>
+
+            </div>
+            <div class="span6">
+
+                <div class="btn-group">
+
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+
+                    <@spring.message "language.spoken"/>
+
+                        <span class="caret"></span>
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+<br>
+    <hr style="width: 1027px">
+
+    <h4> <@spring.message "reg.reason"/> </h4> <br>
+
+
+    <textarea style="height:150px;width:700;resize: none">
+    </textarea>
+
+    <hr>
+                <div class="label"><@spring.message "reg.password"/></div>
+                <br>
+                <input type="password" id="password" name="password"/><br/>
+
+    <hr>
+
+
+                <center>    <input class="btn btn-warning" type="submit" name="submit"value=<@spring.message "reg.register"/>> </center>
+
+    </form>
+
 </body>
 </html>

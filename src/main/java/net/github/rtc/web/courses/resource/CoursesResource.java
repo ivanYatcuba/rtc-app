@@ -26,4 +26,8 @@ public interface CoursesResource {
      * @param id course ID
      */
     void delete(Integer id);
+
+    Courses create(Courses course);
+
+    void update(Courses course);
 }

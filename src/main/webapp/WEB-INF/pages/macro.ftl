@@ -16,6 +16,7 @@
 *                         lableOnTheNewLine="true"
 *                         id = ["1"]/>
 -->
+
 <#macro input
         lableText = [""]
         lableClass = ""
@@ -102,11 +103,38 @@
 <#macro validate
         form = ""
         class = "">
-    $(function() {
-        $("${form}").validate({
+<script>
+$(function() {
+    $("#${form}").validate({
 
-            submitHandler: function(form) {
-                form.submit();}
-        });
-    }
+    ${class}
+
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+});
+</script>
+</#macro>
+
+
+
+
+<#macro datepicker
+id ="datepicker"
+name="datepicker"
+>
+
+<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<input id="${id}" type="text">
+<script type="text/javascript">
+    $(function() {
+  
+        $("#${id}").datepicker();
+        $("#${id}").datepicker("setDate", new Date);
+    });
+</script>
+
 </#macro>
