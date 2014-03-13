@@ -1,5 +1,4 @@
 <html>
-
 <#include "macro.ftl">
 <#import "/spring.ftl" as spring/>
 <head>
@@ -18,7 +17,7 @@
 
        <h4> <@spring.message "fields.enter"/></h4>
 
-<hr/>
+<hr>
                 <h4><@spring.message "personalData"/></h4>
 
     <!-- Load jQuery and the validate plugin -->
@@ -33,13 +32,16 @@
 
                     <div class="container">
 
-                        <div class = "span6">
+                        <div class = "span8">
 
                             <label for="fio"><@spring.message "fio"/></label>
-                            <input type="text" id="fio" name="fio"/>
+                            <div id="fio">
+                            <input type="text"  id="fio" name="fio"/>
+                            </div>
 
                         </div>
-                       <div class="span6">
+
+                       <div class="span4">
 
                            <label for="birthYear"><@spring.message "reg.birthDate"/> </label>
 
@@ -78,7 +80,8 @@
                    </div>
 
                  </div>
-                <hr>
+
+                <hr style="width: 1027px">
 
                                          <h4> <@spring.message "education"/> </h4>
 
@@ -113,7 +116,8 @@
                 </div>
 
             </div>
-                <hr>
+                <hr style="width: 1027px">
+                <br>
        <h4> <@spring.message "progLanguage"/> </h4>
 
     <#--language dropdown-->
@@ -246,7 +250,6 @@
                         <li>10</li>
                     </ul>
 
-
                 </div>
 
             </div>
@@ -274,39 +277,29 @@
                         <li>10</li>
                     </ul>
 
-
                 </div>
 
             </div>
         </div>
     </div>
+<br>
+    <hr style="width: 1027px">
 
-                <hr>
-    <br>
     <h4> <@spring.message "reg.reason"/> </h4> <br>
 
-   <div id="content">
-    <textarea >
 
-
+    <textarea style="height:150px;width:700;resize: none">
     </textarea>
 
-   </div>
-
-
     <hr>
-
-   <br>
-
-
                 <div class="label"><@spring.message "reg.password"/></div>
                 <br>
                 <input type="password" id="password" name="password"/><br/>
 
+    <hr>
 
 
-                <div style="margin-left:140px;">
-                    <input class="btn btn-warning" type="submit" name="submit"value=<@spring.message "reg.register"/>></div>
+                <center>    <input class="btn btn-warning" type="submit" name="submit"value=<@spring.message "reg.register"/>> </center>
 
     </form>
 

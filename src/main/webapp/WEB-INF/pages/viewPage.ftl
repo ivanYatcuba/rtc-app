@@ -148,8 +148,7 @@
                       Project name: ${x.name} <br>                      
                         </#list>
         </div>
-<br>
-<hr>
+                <br><hr>
                 <center><h3><@spring.message "viewPage.friends"/></h3></center>
                    <div data-spy="scroll" data-target="#navbar-example" data-offset="0" 
                     style="height:200px;overflow:auto; position: relative;">
@@ -159,6 +158,7 @@
                          Login: ${x.login}, password: ${x.password} <br>                      
                         </#list>
              </div>
+        <br><br><br><br>
     </div>
     <div class="span8">
       <!--Body content-->

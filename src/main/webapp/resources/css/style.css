@@ -5,6 +5,8 @@ body
             background-attachment:fixed;
             background-position:center;
             background-size: cover;
+    height: auto!important;
+    position: relative;
         }
         #content
         {
@@ -50,17 +52,16 @@ table {
    textarea{
        width:90%;float:none;height:50%;
    }
-   #copyrights {
-
-       position: relative;
-       bottom: 1px;
-       text-align: center;
-
-   }
-#modalWindow.modal-dialog
-{
-    width: 100% ;
+#footer {
+    background-color: rgba(255,255,255,0.7);
+    height: 2.5em;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
-
+   #fio
+   {
+       width: 530px;
+   }
 
    
