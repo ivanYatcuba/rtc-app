@@ -192,7 +192,11 @@ On November 13, 2006, Sun released much of Java as free and open source software
 Sun's vice-president Rich Green said that Sun's ideal role with regards to Java was as an "evangelist."[19] Following Oracle Corporation's acquisition of Sun Microsystems in 2009–2010, Oracle has described itself as the "steward of Java technology with a relentless commitment to fostering a community of participation and transparency".[20] This did not hold Oracle, however, from filing a lawsuit against Google shortly after that for using Java inside the Android SDK (see Google section below). Java software runs on everything from laptops to data centers, game consoles to scientific supercomputers. There are 930 million Java Runtime Environment downloads each year and 3 billion mobile phones run Java.[21] On April 2, 2010, James Gosling resigned from Oracle.[22]
                     
       </div>
-
+<form name="goHome" action="goHome" method="get" >
+        <div style="margin-left:560px">
+            <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
+        </div>
+    </form>
 
     </div>
   </div>
