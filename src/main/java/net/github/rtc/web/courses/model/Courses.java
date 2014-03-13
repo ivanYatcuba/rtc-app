@@ -16,14 +16,13 @@ import java.util.List;
 public class Courses implements Serializable {
     private Integer id;
 
-    @NotEmpty
     private String code;
 
     @NotEmpty
     @Size(min = 2, max = 30)
     private String name;
 
-    @NotNull
+    @NotEmpty
     private String type;
 
     @NotNull

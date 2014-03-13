@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
@@ -79,14 +80,18 @@ public class CoursesController {
     }
 
     @RequestMapping(value="/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute Courses course,
+    public ModelAndView save(@ModelAttribute("course") @Valid Courses course,
                        BindingResult bindingResult,
                        SessionStatus session) {
-        course.setStartDate(DateTime.now().toDate());
-        course.setEndDate(DateTime.now().toDate());
+        if (bindingResult.hasErrors()) {
+            ModelAndView mav = new ModelAndView("courses/create_courses");
+            Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
+            mav.addObject("categories", categories);
+            return mav;
+        }
         course = service.create(course);
         session.setComplete();
-        return "redirect:/courses/" + course.getId();
+        return new ModelAndView("redirect:/courses/" + course.getId());
     }
 
     @RequestMapping(value="/{courseId}/update", method = RequestMethod.GET)
@@ -99,11 +104,9 @@ public class CoursesController {
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute Courses course,
+    public String update(@ModelAttribute("course") Courses course,
                        BindingResult bindingResult,
                        SessionStatus session) {
-        course.setStartDate(DateTime.now().toDate());
-        course.setEndDate(DateTime.now().toDate());
         service.update(course);
         session.setComplete();
         return "redirect:/courses/" + course.getId();
@@ -112,7 +115,6 @@ public class CoursesController {
     @InitBinder("course")
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        dateFormat.setLenient(true);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
     }
