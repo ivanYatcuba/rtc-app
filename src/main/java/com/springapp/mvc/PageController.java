@@ -105,12 +105,16 @@ static {
     @RequestMapping(value="/input",method=RequestMethod.POST)
     public String input(@ModelAttribute("Logins") Login login, ModelMap model)
     {
-        for(Login l: userLogin)
+        for(User l: users)
         {
-            if((login.getLogin().equals(l.getLogin())==true)&& (login.getPassword().equals(l.getPassword())==true)){
+            if((login.getLogin().equals(l.getFio())==true)&& (login.getPassword().equals(l.getPassword())==true)){
                 
-                    model.addAttribute("message", "login and password is correct!");
-                    break;
+                   model.addAttribute("project",project);
+        model.addAttribute("user1",l);
+        model.addAttribute("user",userLogin);
+        return "viewPage";
+                    
+                    
             }
              else 
         {
