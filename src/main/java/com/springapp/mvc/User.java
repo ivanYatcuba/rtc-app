@@ -175,5 +175,21 @@ public class User {
 
         
     }
+    public User (String fio, String phone, String email, String city, String university, String faculty, String password)
+    {
+         this.fio = fio;
+        this.phone = phone;
+        this.email = email;
+        this.birthDate = new Date();
+        this.city = city;
+        this.university = university;
+        this.faculty = faculty;
+        this.speciality = "bb";
+        this.technologies = null;
+        this.writtenEng = 1;
+        this.oralEng = 2;
+        this.note = "df";
+        this.password = password;
+    }
 
 }

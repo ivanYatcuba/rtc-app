@@ -105,9 +105,6 @@
 </div>
 
 
-<form name="Logins" action="input1"  method="get">
-<INPUT class="btn btn-warning" type="submit" value="viewProfile">
-
 </body>
 
 </html>
