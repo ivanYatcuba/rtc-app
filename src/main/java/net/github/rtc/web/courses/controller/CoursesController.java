@@ -1,10 +1,8 @@
 package net.github.rtc.web.courses.controller;
 
 import net.github.rtc.web.courses.model.Courses;
-import net.github.rtc.web.courses.model.Tags;
 import net.github.rtc.web.courses.propertyeditors.CustomTagsEditor;
 import net.github.rtc.web.courses.service.CoursesService;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -57,13 +55,13 @@ public class CoursesController {
      * @param courseId course ID
      * @return redirect to "/course"
      */
-    @RequestMapping(value="/delete/{courseId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{courseId}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer courseId) {
         service.delete(courseId);
         return "redirect:/courses";
     }
 
-    @RequestMapping(value="/{courseId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{courseId}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable Integer courseId) {
         ModelAndView mav = new ModelAndView("courses/course");
         Courses course = service.findById(courseId);
@@ -71,7 +69,7 @@ public class CoursesController {
         return mav;
     }
 
-    @RequestMapping(value="/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         ModelAndView mav = new ModelAndView("courses/create_courses");
         Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
@@ -79,10 +77,10 @@ public class CoursesController {
         return mav;
     }
 
-    @RequestMapping(value="/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute("course") @Valid Courses course,
-                       BindingResult bindingResult,
-                       SessionStatus session) {
+                             BindingResult bindingResult,
+                             SessionStatus session) {
         if (bindingResult.hasErrors()) {
             ModelAndView mav = new ModelAndView("courses/create_courses");
             Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
@@ -94,7 +92,7 @@ public class CoursesController {
         return new ModelAndView("redirect:/courses/" + course.getId());
     }
 
-    @RequestMapping(value="/{courseId}/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/{courseId}/update", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable Integer courseId) {
         ModelAndView mav = new ModelAndView("courses/update");
         mav.getModelMap().addAttribute("course", service.findById(courseId));
@@ -103,10 +101,10 @@ public class CoursesController {
         return mav;
     }
 
-    @RequestMapping(value="/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@ModelAttribute("course") Courses course,
-                       BindingResult bindingResult,
-                       SessionStatus session) {
+                         BindingResult bindingResult,
+                         SessionStatus session) {
         service.update(course);
         session.setComplete();
         return "redirect:/courses/" + course.getId();

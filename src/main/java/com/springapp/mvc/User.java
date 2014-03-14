@@ -4,8 +4,12 @@ import org.util.rtc.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class User {
+    
+    Integer id;
     @required
     @maxlength(30)
     @minlength(5)
@@ -48,7 +52,15 @@ public class User {
         return city;
     }
 
+    public void  setId(Integer id)
+    {
+        this.id=id;
+    }
 
+    public Integer getId()
+    {
+        return this.id;
+    }
 
     public void setCity(String city) {
         this.city = city;
@@ -175,8 +187,9 @@ public class User {
 
         
     }
-    public User (String fio, String phone, String email, String city, String university, String faculty, String password)
+    public User (Integer id, String fio, String phone, String email, String city, String university, String faculty, String password)
     {
+        this.id=id;
          this.fio = fio;
         this.phone = phone;
         this.email = email;
