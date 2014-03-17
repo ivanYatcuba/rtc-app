@@ -41,7 +41,7 @@ public class CoursesController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("courses/courses");
+        ModelAndView mav = new ModelAndView("admin/courses/courses");
         Collection<Courses> courses = service.findAll();
         mav.addObject("courses", courses);
         return mav;
@@ -63,7 +63,7 @@ public class CoursesController {
 
     @RequestMapping(value = "/{courseId}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable Integer courseId) {
-        ModelAndView mav = new ModelAndView("courses/course");
+        ModelAndView mav = new ModelAndView("admin/courses/course");
         Courses course = service.findById(courseId);
         mav.addObject("course", course);
         return mav;
@@ -71,7 +71,7 @@ public class CoursesController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
-        ModelAndView mav = new ModelAndView("courses/create_courses");
+        ModelAndView mav = new ModelAndView("admin/courses/create_courses");
         Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
         mav.addObject("categories", categories);
         return mav;
@@ -82,7 +82,7 @@ public class CoursesController {
                              BindingResult bindingResult,
                              SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            ModelAndView mav = new ModelAndView("courses/create_courses");
+            ModelAndView mav = new ModelAndView("admin/courses/create_courses");
             Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
             mav.addObject("categories", categories);
             return mav;
@@ -94,7 +94,7 @@ public class CoursesController {
 
     @RequestMapping(value = "/{courseId}/update", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable Integer courseId) {
-        ModelAndView mav = new ModelAndView("courses/update");
+        ModelAndView mav = new ModelAndView("admin/courses/update");
         mav.getModelMap().addAttribute("course", service.findById(courseId));
         Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
         mav.addObject("categories", categories);
