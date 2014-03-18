@@ -24,7 +24,7 @@ import java.util.Date;
  * @author Vladislav Pikus
  */
 @Controller("coursesController")
-@RequestMapping("/courses")
+@RequestMapping("admin/courses")
 public class CoursesController {
 
     private CoursesService service;
@@ -58,7 +58,7 @@ public class CoursesController {
     @RequestMapping(value = "/delete/{courseId}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer courseId) {
         service.delete(courseId);
-        return "redirect:/courses";
+        return "redirect:/admin/courses";
     }
 
     @RequestMapping(value = "/{courseId}", method = RequestMethod.GET)
@@ -89,7 +89,7 @@ public class CoursesController {
         }
         course = service.create(course);
         session.setComplete();
-        return new ModelAndView("redirect:/courses/" + course.getId());
+        return new ModelAndView("redirect:/admin/courses/" + course.getId());
     }
 
     @RequestMapping(value = "/{courseId}/update", method = RequestMethod.GET)

@@ -11,10 +11,10 @@
         </tr>
     <#list courses as course>
         <tr>
-            <td>${course.type}</td> <td><a href="<@spring.url "/courses/${course.id}" />">${course.name}</a></td> <td>${course.startDate?date}</td> <td>${course.author.firstName}&nbsp;${course.author.lastName}</td> <td><a href="<@spring.url "/courses/delete/${course.id}" />"><@spring.message "coursesPage.action.delete"/></a> </td>
+            <td>${course.type}</td> <td><a href="<@spring.url "/admin/courses/${course.id}" />">${course.name}</a></td> <td>${course.startDate?date}</td> <td>${course.author.firstName}&nbsp;${course.author.lastName}</td> <td><a href="<@spring.url "/admin/courses/delete/${course.id}" />"><@spring.message "coursesPage.action.delete"/></a> </td>
         </tr>
     </#list>
     </table>
-    <a href="<@spring.url "/courses/create" />"><@spring.message "coursesPage.action.create"/></a>
+    <a href="<@spring.url "/admin/courses/create" />"><@spring.message "coursesPage.action.create"/></a>
 </body>
 </html>

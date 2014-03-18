@@ -31,8 +31,8 @@
     </div>
 </div>
 <div style="clear:both; margin-top: 180px; margin-left: 50%">
-    <a href="<@spring.url "/courses/${course.id}/update" />"><button><@spring.message "coursesPage.action.edit"/></button></a> or
-    <a href="<@spring.url "/courses/" />"><@spring.message "coursesPage.action.cancel"/></a>
+    <a href="<@spring.url "/admin/courses/${course.id}/update" />"><button><@spring.message "coursesPage.action.edit"/></button></a> or
+    <a href="<@spring.url "/admin/courses" />"><@spring.message "coursesPage.action.cancel"/></a>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form name="course" id = "course" action="<@spring.url "/courses/save" />" method="post">
+<form name="course" id = "course" action="<@spring.url "/admin/courses/save" />" method="post">
     <h2>Create course</h2>
     <div>
         <dl>

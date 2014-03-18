@@ -10,6 +10,6 @@ public class AdminController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String Home() {
-        return "redirect:courses";
+        return "redirect:/admin/courses";
     }
 }
