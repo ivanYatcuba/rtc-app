@@ -5,42 +5,94 @@
 </head>
 <body>
 
-<form name="course" id = "course" action="<@spring.url "/admin/courses/save" />" method="post">
-    <h2>Create course</h2>
-    <div>
-        <dl>
-            <dt><label for="name">Course name:</label></dt>
-            <dd><@spring.formInput "course.name" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-            <dt><label for="type">Category:</label></dt>
-            <dd>
-                <@spring.bind "categories" />
-                <@spring.formSingleSelect "course.type", categories, " " />
-            </dd>
-            <dt><label for="startDate">Start Date:</label></dt>
-            <dd><@spring.formInput "course.startDate" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-            <dt><label for="endDate">Finish Date:</label></dt>
-            <dd><@spring.formInput "course.endDate" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-        </dl>
+<form name="course" id = "course" action="<@spring.url "/courses/create" />" method="post">
+    <h2><@spring.message "create.message"/></h2><br>
+    <hr>
+
+    <!--Course name & Author-->
+    <div class="row-fluid span12">
+
+        <div class="container">
+
+            <div class = "span6">
+                <label for="name"><@spring.message "courses.name"/></label>
+                <div id="name">
+                    <input type="text"  id="name" name="course.name" />
+                </div>
+            </div>
+
+            <div class="span3">
+                <label for="course.author.firstName"><@spring.message "courses.author"/> </label>
+                <input type="text"  id="course.author.firstName" name="course.author.firstName" />
+            </div>
+
+            <div class="span3">
+                <input type="text"  id="course.author.lastName" name="course.author.lastName" />
+            </div>
+
+        </div>
+
     </div>
-    <div>
-        <dl>
-            <dt><label for="author.firstName">Author:</label></dt>
-            <dd><@spring.formInput "course.author.firstName" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-            <dd><@spring.formInput "course.author.lastName" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-            <dt><label for="author.firstName">Email:</label></dt>
-            <dd><@spring.formInput "course.author.email" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-            <dt><label for="author.tags">Tags:</label></dt>
-            <dd><@spring.formInput "course.tags" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-        </dl>
+
+    <!--Category & Email-->
+
+    <div class="row-fluid span12">
+
+        <div class="container">
+
+            <div class="span6">
+
+                <label for="type"> <@spring.message "courses.category"/> </label>
+            <@spring.bind "categories" />
+            <@spring.formSingleSelect "course.type", "categories", " " />
+            </div>
+
+            <div class="span6">
+
+                <label for="course.author.email"> <@spring.message "courses.email"/> </label>
+                <input type="text" id="course.author.email" name="course.author.email" />
+
+            </div>
+
+        </div>
     </div>
-    <input type="submit" value="Create" />
+
+    <!--startDate & Tags-->
+    <div class="row-fluid span12">
+        <div class="container">
+
+            <div class="span6">
+
+                <label for="startDate"><@spring.message "courses.startDate"/> </label>
+            <@datepicker "startDate" "startDate" />
+
+            </div>
+
+            <div class="span6">
+
+                <label for="course.tags"> <@spring.message "courses.tags"/> </label>
+                <input type="text" id="course.tags" name="course.tags" />
+
+            </div>
+        </div>
+    </div>
+
+    <!--endDate-->
+    <div class="row-fluid span12">
+
+        <div class="container">
+
+            <div class="span6">
+
+                <label for="endDate"><@spring.message "courses.endDate"/> </label>
+            <@datepicker "endDate" "endDate" />
+
+            </div>
+
+        </div>
+
+    </div>
+    <input type="submit" value="Create" /> or <label for="cancel"></label> <input type="cancel" value="Cancel" />
 </form>
 </body>
 </html>
