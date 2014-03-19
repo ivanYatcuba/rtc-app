@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/admin")
 public class AdminController {
 
+    /**
+     * Redirect to admin page and view all courses list
+     *
+     * @return redirect to "/admin/courses"
+     */
     @RequestMapping(method = RequestMethod.GET)
-    public String Home() {
+    public String adminMain() {
         return "redirect:/admin/courses";
     }
 }

@@ -37,7 +37,7 @@ public class CoursesController {
     /**
      * Processes the request to view all courses page
      *
-     * @return modelAndView("courses/courses")
+     * @return modelAndView("admin/courses/courses")
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
@@ -53,7 +53,7 @@ public class CoursesController {
      * If all is well, we get redirected to "course"
      *
      * @param courseId course ID
-     * @return redirect to "/course"
+     * @return redirect to "/admin/courses"
      */
     @RequestMapping(value = "/delete/{courseId}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer courseId) {
