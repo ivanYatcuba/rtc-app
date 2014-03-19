@@ -1,20 +1,29 @@
 <html>
 <#import "/spring.ftl" as spring/>
 <head>
-
+    <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.css'/>" rel="stylesheet"/>
+    <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet"/>
+    <link href="<@spring.url'/resources/css/grid.css'/>" rel="stylesheet"/>
 </head>
 <body>
+<div class="container">
+    <h3>Courses List</h3>
+    <hr width="100%" >
 
-    <table class="datatable">
-        <tr>
-            <th><@spring.message "courses.category"/></th>  <th><@spring.message "courses.name"/></th>  <th><@spring.message "courses.startDate"/></th>  <th><@spring.message "courses.author"/></th>  <th><@spring.message "coursesPage.action"/></th>
-        </tr>
-    <#list courses as course>
-        <tr>
-            <td>${course.type}</td> <td><a href="<@spring.url "/admin/courses/${course.id}" />">${course.name}</a></td> <td>${course.startDate?date}</td> <td>${course.author.firstName}&nbsp;${course.author.lastName}</td> <td><a href="<@spring.url "/admin/courses/delete/${course.id}" />"><@spring.message "coursesPage.action.delete"/></a> </td>
-        </tr>
-    </#list>
-    </table>
-    <a href="<@spring.url "/admin/courses/create" />"><@spring.message "coursesPage.action.create"/></a>
+    <div class="head-2"><strong>Category</strong></div>
+    <div class="head-3"><strong>Name</strong></div>
+    <div class="head-3"><strong>Date</strong></div>
+    <div class="head-2"><strong>Author</strong></div>
+    <div class="head-2"><strong>Action</strong></div>
+<#list courses as course>
+    <div class="col-md-2">${course.type}</div>
+    <div class="col-md-3"><a href="<@spring.url "/admin/courses" />">${course.name}</a></div>
+    <div class="col-md-3">${course.startDate?date}&nbsp;-&nbsp;${course.endDate?date}</div>
+    <div class="col-md-2">${course.author.firstName}&nbsp;${course.author.lastName}</div>
+    <div class="col-md-2"><a href="<@spring.url "/admin/courses" />">delete</a></div>
+</#list>
+
+    <a style="float: right" href="<@spring.url "/admin/courses/create" />"><button class="btn">Create New</button></a>
+</div>
 </body>
 </html>
