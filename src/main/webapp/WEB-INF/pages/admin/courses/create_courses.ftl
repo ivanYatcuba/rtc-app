@@ -8,7 +8,7 @@
 
 <body>
 
-<form name="course" id = "course" action="<@spring.url "/admin/courses/create" />" method="post">
+<form name="course" id = "course" action="<@spring.url "/admin/courses/save" />" method="post">
 
 <div class="container">
     <h3><@spring.message "create.message"/></h3>

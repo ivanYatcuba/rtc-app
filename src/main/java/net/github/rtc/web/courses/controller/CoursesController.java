@@ -62,7 +62,7 @@ public class CoursesController {
     }
 
     /**
-     * Process the request to get deteail about course by selected code
+     * Process the request to get details about course by selected code
      * URL example: "/1". Parse by pattern: "/{code}"
      * if success go to view "admin/courses/course")
      *
@@ -115,7 +115,7 @@ public class CoursesController {
                          SessionStatus session) {
         service.update(course);
         session.setComplete();
-        return "redirect:/courses/" + course.getCode();
+        return "redirect:/admin/courses/" + course.getCode();
     }
 
     @InitBinder("course")
