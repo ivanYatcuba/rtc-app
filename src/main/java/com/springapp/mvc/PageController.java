@@ -43,6 +43,7 @@ public class PageController {
         project.add(new Project("Project 5"));
     }
 
+
     private UserService service;
 
     @Autowired
@@ -71,7 +72,7 @@ public class PageController {
          return mav;
     }
     
-    
+
     @RequestMapping(value = "/start input", method = RequestMethod.GET)
     public String Home(ModelMap model) {
 
@@ -86,7 +87,12 @@ public class PageController {
         return "homepage";
     }
 
-      
+    //        @RequestMapping(value="/registration",method=RequestMethod.POST)
+//        public String registration(ModelMap model)
+//        {
+//            return "registration";
+//        }
+
     @RequestMapping(value = "/goHome", method = RequestMethod.GET)
     public String goHome(ModelMap model) {
         validation.fromClassToJSON(User.class, LocaleContextHolder.getLocale());
