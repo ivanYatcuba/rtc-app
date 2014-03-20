@@ -17,10 +17,10 @@
     <div class="head-2"><strong>Action</strong></div>
 <#list courses as course>
     <div class="col-md-2">${course.type}</div>
-    <div class="col-md-3"><a href="<@spring.url "/admin/courses" />">${course.name}</a></div>
+    <div class="col-md-3"><a href="<@spring.url "/admin/courses/${course.getCode()}" />">${course.name}</a></div>
     <div class="col-md-3">${course.startDate?date}&nbsp;-&nbsp;${course.endDate?date}</div>
     <div class="col-md-2">${course.author.firstName}&nbsp;${course.author.lastName}</div>
-    <div class="col-md-2"><a href="<@spring.url "/admin/courses" />">delete</a></div>
+    <div class="col-md-2"><a href="<@spring.url "/admin/courses/delete/${course.getCode()}" />">delete</a></div>
 </#list>
 
     <a style="float: right" href="<@spring.url "/admin/courses/create" />"><button class="btn">Create New</button></a>

@@ -45,6 +45,11 @@ public class CoursesResourceImpl implements CoursesResource {
         return restTemplate.getForObject(hostUrl + "courses/{id}", Courses.class, id);
     }
 
+    @Override
+    public Courses findByCode(String code) {
+        return restTemplate.getForObject(hostUrl + "courses/{code}", Courses.class, code);
+    }
+
     /**
      * @return collection of courses
      * @see net.github.rtc.web.courses.resource.CoursesResource
@@ -64,12 +69,17 @@ public class CoursesResourceImpl implements CoursesResource {
     }
 
     @Override
+    public void delete(String code) {
+        restTemplate.delete(hostUrl + "courses/{code}", code);
+    }
+
+    @Override
     public Courses create(Courses course) {
         return restTemplate.postForObject(hostUrl + "courses", course, Courses.class);
     }
 
     @Override
     public void update(Courses course) {
-        restTemplate.put(hostUrl + "courses/{id}", course, course.getId());
+        restTemplate.put(hostUrl + "courses/{code}", course, course.getCode());
     }
 }

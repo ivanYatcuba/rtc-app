@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<form name="course" id = "course" action="<@spring.url "/admin/courses/create" />" method="post">
+<form name="course" id = "course" action="<@spring.url "/admin/courses/save" />" method="post">
     <h2><@spring.message "create.message"/></h2><br>
     <hr>
 

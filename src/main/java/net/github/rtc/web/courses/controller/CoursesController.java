@@ -52,19 +52,27 @@ public class CoursesController {
      * Url example: "/delete/1". Parse by pattern: "/delete/{courseId}"
      * If all is well, we get redirected to "course"
      *
-     * @param courseId course ID
+     * @param courseCode course ID
      * @return redirect to "/admin/courses"
      */
-    @RequestMapping(value = "/delete/{courseId}", method = RequestMethod.GET)
-    public String delete(@PathVariable Integer courseId) {
-        service.delete(courseId);
+    @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
+    public String delete(@PathVariable String courseCode) {
+        service.delete(courseCode);
         return "redirect:/admin/courses";
     }
 
-    @RequestMapping(value = "/{courseId}", method = RequestMethod.GET)
-    public ModelAndView single(@PathVariable Integer courseId) {
+    /**
+     * Process the request to get deteail about course by selected code
+     * URL example: "/1". Parse by pattern: "/{code}"
+     * if success go to view "admin/courses/course")
+     *
+     * @param courseCode course code
+     * @return modelAndView("admin/courses/course")
+     */
+    @RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
+    public ModelAndView single(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView("admin/courses/course");
-        Courses course = service.findById(courseId);
+        Courses course = service.findByCode(courseCode);
         mav.addObject("course", course);
         return mav;
     }
@@ -89,13 +97,13 @@ public class CoursesController {
         }
         course = service.create(course);
         session.setComplete();
-        return new ModelAndView("redirect:/admin/courses/" + course.getId());
+        return new ModelAndView("redirect:/admin/courses/" + course.getCode());
     }
 
-    @RequestMapping(value = "/{courseId}/update", method = RequestMethod.GET)
-    public ModelAndView update(@PathVariable Integer courseId) {
+    @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
+    public ModelAndView update(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView("admin/courses/update");
-        mav.getModelMap().addAttribute("course", service.findById(courseId));
+        mav.getModelMap().addAttribute("course", service.findByCode(courseCode));
         Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
         mav.addObject("categories", categories);
         return mav;
@@ -107,7 +115,7 @@ public class CoursesController {
                          SessionStatus session) {
         service.update(course);
         session.setComplete();
-        return "redirect:/courses/" + course.getId();
+        return "redirect:/courses/" + course.getCode();
     }
 
     @InitBinder("course")

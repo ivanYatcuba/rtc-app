@@ -53,6 +53,17 @@ public class CoursesServiceImpl implements CoursesService {
         resource.delete(id);
     }
 
+    @Override
+    public void delete(String code) {
+        if (code == null) {
+            RuntimeException ex = new ServiceProcessingException("Code can't be null");
+            LOG.error("Exception: ", ex);
+            throw ex;
+        }
+        resource.delete(code);
+
+    }
+
     /**
      * @return link of courses
      * @see CoursesService
@@ -60,6 +71,11 @@ public class CoursesServiceImpl implements CoursesService {
     @Override
     public Courses findById(Integer id){
         return resource.findById(id);
+    }
+
+    @Override
+    public Courses findByCode(String code) {
+        return resource.findByCode(code);
     }
 
     @Override

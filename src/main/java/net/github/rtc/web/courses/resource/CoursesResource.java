@@ -13,6 +13,8 @@ import java.util.Collection;
 public interface CoursesResource {
     Courses findById(Integer id);
 
+    Courses findByCode(String code);
+
     /**
      * Find collection of courses
      *
@@ -26,6 +28,8 @@ public interface CoursesResource {
      * @param id course ID
      */
     void delete(Integer id);
+
+    void delete(String code);
 
     Courses create(Courses course);
 

@@ -27,7 +27,11 @@ public interface CoursesService {
      */
     void delete(Integer id);
 
+    void delete(String code);
+
     Courses findById(Integer id);
+
+    Courses findByCode(String code);
 
     Courses create(Courses course);
 
