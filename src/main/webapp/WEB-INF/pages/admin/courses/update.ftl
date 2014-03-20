@@ -1,48 +1,129 @@
 <html>
 <#import "/spring.ftl" as spring/>
-<head>
 
+<head>
+    <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.css'/>" rel="stylesheet"/>
+    <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet"/>
 </head>
+
 <body>
 
 <form name="course" id = "course" action="<@spring.url "/admin/courses/update" />" method="post">
-    <h2>Create course</h2>
+
+    <div class="container">
     <@spring.formHiddenInput "course.id" />
     <@spring.formHiddenInput "course.code" />
-    <div>
-        <dl>
-            <dt><label for="name">Course name:</label></dt>
-            <dd><@spring.formInput "course.name" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-            <dt><label for="type">Category:</label></dt>
-            <dd>
-            <@spring.bind "categories" />
-                <@spring.formSingleSelect "course.type", categories, " " />
-            </dd>
-            <dt><label for="startDate">Start Date:</label></dt>
-            <dd><@spring.formInput "course.startDate" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-            <dt><label for="endDate">Finish Date:</label></dt>
-            <dd><@spring.formInput "course.endDate" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-        </dl>
+        <h3><@spring.message "update.message"/></h3>
+        <hr width="100%">
+        <!--Course name & Author-->
+        <div class="row-fluid span12">
+            <div class="container">
+                <div class = "span5">
+
+                    <label for="name" style="text-align: right">
+                    <@spring.message "courses.name"/>&nbsp;
+                    <@spring.formInput "course.name" />
+                    <@spring.showErrors "<br>" />
+                    </label>
+
+                </div>
+
+                <div class="span7">
+
+                    <label for="course.author.firstName" >
+                    <@spring.message "courses.author"/>
+                    <@spring.formInput "course.author.firstName" />
+                    <@spring.formInput "course.author.lastName" />
+                    <@spring.showErrors "<br>" />
+                    </label>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Category & Email-->
+
+        <div class="row-fluid span12">
+            <div class="container">
+                <div class="span5">
+
+                    <label for="type" style="text-align: right">
+                    <@spring.message "courses.category"/>
+                    <@spring.bind "categories" />
+                    <@spring.formSingleSelect "course.type", categories, " " />
+                    </label>
+
+                </div>
+
+                <div class="span7">
+
+                    <label for="course.author.email">
+                    <@spring.message "courses.email"/>&nbsp;
+                    <@spring.formInput "course.author.email"/>
+                    <@spring.showErrors "<br>" />
+                    </label>
+
+                </div>
+            </div>
+        </div>
+
+        <!--startDate & Tags-->
+        <div class="row-fluid span12">
+            <div class="container">
+                <div class="span5">
+
+                    <label for="startDate" style="text-align: right">
+                    <@spring.message "courses.startDate" />
+                    <@spring.formInput "course.startDate" />
+                    <@spring.showErrors "<br>" />
+                    </label>
+
+                </div>
+
+                <div class="span7">
+
+                    <label for="course.tags">
+                    <@spring.message "courses.tags"/> &nbsp;
+                    <@spring.formInput "course.tags" />
+                    <@spring.showErrors "<br>" />
+                    </label>
+
+                </div>
+            </div>
+        </div>
+
+        <!--endDate-->
+        <div class="row-fluid span12">
+            <div class="container">
+                <div class="span5">
+
+                    <label for="endDate" style="text-align: right">
+                    <@spring.message "courses.endDate"/>
+                    <@spring.formInput "course.endDate" />
+                    <@spring.showErrors "<br>" />
+                    </label>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Create & Cancel-->
+        <div class="row-fluid span12">
+            <div class="container">
+                <div class="span5">
+                </div>
+
+                <div class="span6"  style="text-align: right">
+
+                    <input type="submit" value="Update" /> or <a href="<@spring.url "/admin/courses" />">Cancel</a>
+
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div>
-        <dl>
-            <dt><label for="author.firstName">Author:</label></dt>
-            <dd><@spring.formInput "course.author.firstName" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-            <dd><@spring.formInput "course.author.lastName" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-            <dt><label for="author.firstName">Email:</label></dt>
-            <dd><@spring.formInput "course.author.email" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-            <dt><label for="author.tags">Tags:</label></dt>
-            <dd><@spring.formInput "course.tags" /></dd>
-            <dd><@spring.showErrors "<br>" /></dd>
-        </dl>
-    </div>
-    <input type="submit" value="Update" />
 </form>
 </body>
 </html>
+
+
