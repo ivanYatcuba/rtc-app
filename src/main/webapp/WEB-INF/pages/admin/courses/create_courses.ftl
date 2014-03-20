@@ -1,46 +1,42 @@
 <html>
 <#import "/spring.ftl" as spring/>
-<script src="<@spring.url'/resources/css/js/jquery.js'/>"></script>
-<link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap-combined.no-icons.min.css'/>" rel="stylesheet"/>
-<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
-<link href="runnable.css" rel="stylesheet" />
-
-<link href="css/bootstrap.css" rel="stylesheet">
-<script type="text/javascript" src="<@spring.url'/resources/css/js/JavaScript.js'/>"> </script>
-<link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet">
-
-<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap-modal.js'/>"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
 
 <head>
-
+    <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.css'/>" rel="stylesheet"/>
+    <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet"/>
 </head>
+
 <body>
 
-<form name="course" id = "course" action="<@spring.url "/admin/courses/save" />" method="post">
-    <h2><@spring.message "create.message"/></h2><br>
-    <hr>
+<form name="course" id = "course" action="<@spring.url "/admin/courses/create" />" method="post">
 
+<div class="container">
+    <h3><@spring.message "create.message"/></h3>
+    <hr width="100%">
     <!--Course name & Author-->
     <div class="row-fluid span12">
         <div class="container">
             <div class = "span5">
-                <label for="name">
+
+                <label for="name" style="text-align: right">
                     <@spring.message "courses.name"/>&nbsp;
                     <@spring.formInput "course.name" />
                     <@spring.showErrors "<br>" />
                 </label>
+
             </div>
 
             <div class="span7">
-                <label for="course.author.firstName">
-                    <@spring.message "courses.author"/>&nbsp;
-                    <@spring.formInput "course.author.firstName" /> <@spring.formInput "course.author.lastName" />
-                </label>
+
+                 <label for="course.author.firstName" >
+                    <@spring.message "courses.author"/>
+                    <@spring.formInput "course.author.firstName" />
+                    <@spring.formInput "course.author.lastName" />
+                    <@spring.showErrors "<br>" />
+                 </label>
+
             </div>
-
         </div>
-
     </div>
 
     <!--Category & Email-->
@@ -49,17 +45,19 @@
         <div class="container">
             <div class="span5">
 
-                <label for="type"> <@spring.message "courses.category"/>
-                <@spring.bind "categories" />
-                <@spring.formSingleSelect "course.type", categories, " " />
+                <label for="type" style="text-align: right">
+                    <@spring.message "courses.category"/>
+                    <@spring.bind "categories" />
+                    <@spring.formSingleSelect "course.type", categories, " " />
                 </label>
+
             </div>
 
             <div class="span7">
 
                 <label for="course.author.email">
                     <@spring.message "courses.email"/>&nbsp;
-                    <@spring.formInput "course.author.email" />
+                    <@spring.formInput "course.author.email"/>
                     <@spring.showErrors "<br>" />
                 </label>
 
@@ -72,10 +70,12 @@
         <div class="container">
             <div class="span5">
 
-                <label for="startDate"><@spring.message "courses.startDate"/>
-                <@spring.formInput "course.startDate" />
-                <@spring.showErrors "<br>" />
+                <label for="startDate" style="text-align: right">
+                    <@spring.message "courses.startDate" />
+                    <@spring.formInput "course.startDate" />
+                    <@spring.showErrors "<br>" />
                 </label>
+
             </div>
 
             <div class="span7">
@@ -92,12 +92,11 @@
 
     <!--endDate-->
     <div class="row-fluid span12">
-
         <div class="container">
-
             <div class="span5">
 
-                <label for="endDate"><@spring.message "courses.endDate"/>
+                <label for="endDate" style="text-align: right">
+                    <@spring.message "courses.endDate"/>
                     <@spring.formInput "course.endDate" />
                     <@spring.showErrors "<br>" />
                 </label>
@@ -106,16 +105,21 @@
         </div>
     </div>
 
-        <div class="row-fluid span12">
-            <div class="container">
+    <!--Create & Cancel-->
+    <div class="row-fluid span12">
+        <div class="container">
                 <div class="span5">
                 </div>
 
-                <div class="span7">
-                    <input type="submit" value="Create" /> or <a name="">Cancel</a>
+                <div class="span6"  style="text-align: right">
+
+                    <input type="submit" value="Create" /> or <a href="<@spring.url "/admin/courses" />">Cancel</a>
+
                 </div>
-            </div>
         </div>
+    </div>
+
+</div>
 </form>
 </body>
 </html>
