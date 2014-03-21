@@ -1,8 +1,7 @@
 package net.github.rtc.web.courses.resource.impl;
 
-import net.github.rtc.web.courses.resource.CoursesResource;
 import net.github.rtc.web.courses.model.Courses;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.github.rtc.web.courses.resource.CoursesResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,33 +15,11 @@ import java.util.Collection;
  * @author Vladislav Pikus
  */
 @Component("coursesDao")
-public class CoursesResourceImpl implements CoursesResource {
+public class CoursesResourceImpl extends AbstractResource implements CoursesResource {
 
-    private RestTemplate restTemplate;
-
-    @Autowired
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
-    private String hostUrl;
-
-    public void setHostUrl(String hostUrl) {
-        this.hostUrl = hostUrl;
-    }
-
-    public String getHostUrl() {
-        return hostUrl;
-    }
-
-    /**
-     * @param id course ID
-     * @return null if not found or course's object if found
-     * @see net.github.rtc.web.courses.resource.CoursesResource
-     */
     @Override
-    public Courses findById(Integer id) {
-        return restTemplate.getForObject(hostUrl + "courses/{id}", Courses.class, id);
+    public Courses findByCode(String code) {
+        return restTemplate.getForObject(hostUrl + "courses/{code}", Courses.class, code);
     }
 
     /**
@@ -54,13 +31,9 @@ public class CoursesResourceImpl implements CoursesResource {
         return Arrays.asList(restTemplate.getForObject(hostUrl + "courses", Courses[].class));
     }
 
-    /**
-     * @param id course ID
-     * @see net.github.rtc.web.courses.resource.CoursesResource
-     */
     @Override
-    public void delete(Integer id) {
-        restTemplate.delete(hostUrl + "courses/{id}", id);
+    public void delete(String code) {
+        restTemplate.delete(hostUrl + "courses/{code}", code);
     }
 
     @Override
@@ -70,6 +43,6 @@ public class CoursesResourceImpl implements CoursesResource {
 
     @Override
     public void update(Courses course) {
-        restTemplate.put(hostUrl + "courses/{id}", course, course.getId());
+        restTemplate.put(hostUrl + "courses/{code}", course, course.getCode());
     }
 }

@@ -15,5 +15,8 @@
     <bean id="coursesDao" class="net.github.rtc.web.courses.resource.impl.CoursesResourceImpl">
         <property name="hostUrl" value="${host.url}"/>
     </bean>
+    <bean id="categoryResource" class="net.github.rtc.web.courses.resource.impl.CategoryResourceImpl">
+        <property name="hostUrl" value="${host.url}"/>
+    </bean>
 
 </beans>
