@@ -35,16 +35,6 @@ public class CoursesResourceImpl implements CoursesResource {
         return hostUrl;
     }
 
-    /**
-     * @param id course ID
-     * @return null if not found or course's object if found
-     * @see net.github.rtc.web.courses.resource.CoursesResource
-     */
-    @Override
-    public Courses findById(Integer id) {
-        return restTemplate.getForObject(hostUrl + "courses/{id}", Courses.class, id);
-    }
-
     @Override
     public Courses findByCode(String code) {
         return restTemplate.getForObject(hostUrl + "courses/{code}", Courses.class, code);
@@ -57,15 +47,6 @@ public class CoursesResourceImpl implements CoursesResource {
     @Override
     public Collection<Courses> findAll() {
         return Arrays.asList(restTemplate.getForObject(hostUrl + "courses", Courses[].class));
-    }
-
-    /**
-     * @param id course ID
-     * @see net.github.rtc.web.courses.resource.CoursesResource
-     */
-    @Override
-    public void delete(Integer id) {
-        restTemplate.delete(hostUrl + "courses/{id}", id);
     }
 
     @Override

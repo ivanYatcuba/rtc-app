@@ -39,20 +39,6 @@ public class CoursesServiceImpl implements CoursesService {
         return resource.findAll();
     }
 
-    /**
-     * @param id course ID
-     * @see CoursesService
-     */
-    @Override
-    public void delete(Integer id) {
-        if (id == null) {
-            RuntimeException ex = new ServiceProcessingException("ID can't be null");
-            LOG.error("Exception: ", ex);
-            throw ex;
-        }
-        resource.delete(id);
-    }
-
     @Override
     public void delete(String code) {
         if (code == null) {
@@ -62,15 +48,6 @@ public class CoursesServiceImpl implements CoursesService {
         }
         resource.delete(code);
 
-    }
-
-    /**
-     * @return link of courses
-     * @see CoursesService
-     */
-    @Override
-    public Courses findById(Integer id){
-        return resource.findById(id);
     }
 
     @Override

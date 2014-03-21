@@ -11,7 +11,6 @@ import java.util.Collection;
  * @author Vladislav Pikus
  */
 public interface CoursesResource {
-    Courses findById(Integer id);
 
     Courses findByCode(String code);
 
@@ -21,13 +20,6 @@ public interface CoursesResource {
      * @return collection of courses
      */
     Collection<Courses> findAll();
-
-    /**
-     * Will be delete course by ID
-     *
-     * @param id course ID
-     */
-    void delete(Integer id);
 
     void delete(String code);
 

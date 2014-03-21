@@ -59,7 +59,7 @@ public class CoursesControllerTest {
         verifyNoMoreInteractions(mockService);
     }
 
-    @Test
+    /*@Test
     public void testDelete() throws Exception {
         Integer id = 5;
         mockMvc.perform(get("/admin/courses/delete/{id}", id))
@@ -81,5 +81,5 @@ public class CoursesControllerTest {
                 andExpect(view().name("admin/courses/course"));
         verify(mockService, times(1)).findById(id);
         verifyNoMoreInteractions(mockService);
-    }
+    } */
 }

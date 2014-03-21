@@ -19,17 +19,7 @@ public interface CoursesService {
      */
     Collection<Courses> findAll();
 
-    /**
-     * Will be delete course by ID
-     * If ID is null then will be throw {@link net.github.rtc.web.courses.exception.ServiceProcessingException}
-     *
-     * @param id course ID
-     */
-    void delete(Integer id);
-
     void delete(String code);
-
-    Courses findById(Integer id);
 
     Courses findByCode(String code);
 

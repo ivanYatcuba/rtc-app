@@ -27,6 +27,9 @@ import java.util.Date;
 @RequestMapping("admin/courses")
 public class CoursesController {
 
+    private static final String ROOT = "admin/courses";
+    private static final String ROOT_MODEL = "course";
+
     private CoursesService service;
 
     @Autowired
@@ -41,7 +44,7 @@ public class CoursesController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("admin/courses/courses");
+        ModelAndView mav = new ModelAndView(ROOT + "/courses");
         Collection<Courses> courses = service.findAll();
         mav.addObject("courses", courses);
         return mav;
@@ -58,7 +61,7 @@ public class CoursesController {
     @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
     public String delete(@PathVariable String courseCode) {
         service.delete(courseCode);
-        return "redirect:/admin/courses";
+        return "redirect:/" + ROOT;
     }
 
     /**
@@ -71,7 +74,7 @@ public class CoursesController {
      */
     @RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable String courseCode) {
-        ModelAndView mav = new ModelAndView("admin/courses/course");
+        ModelAndView mav = new ModelAndView(ROOT + "/course");
         Courses course = service.findByCode(courseCode);
         mav.addObject("course", course);
         return mav;
@@ -79,30 +82,30 @@ public class CoursesController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
-        ModelAndView mav = new ModelAndView("admin/courses/create_courses");
+        ModelAndView mav = new ModelAndView(ROOT + "/create_courses");
         Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
         mav.addObject("categories", categories);
         return mav;
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute("course") @Valid Courses course,
+    public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid Courses course,
                              BindingResult bindingResult,
                              SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            ModelAndView mav = new ModelAndView("admin/courses/create_courses");
+            ModelAndView mav = new ModelAndView(ROOT + "/create_courses");
             Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
             mav.addObject("categories", categories);
             return mav;
         }
         course = service.create(course);
         session.setComplete();
-        return new ModelAndView("redirect:/admin/courses/" + course.getCode());
+        return new ModelAndView("redirect:/" + ROOT + course.getCode());
     }
 
     @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable String courseCode) {
-        ModelAndView mav = new ModelAndView("admin/courses/update");
+        ModelAndView mav = new ModelAndView(ROOT + "/update");
         mav.getModelMap().addAttribute("course", service.findByCode(courseCode));
         Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
         mav.addObject("categories", categories);
@@ -110,22 +113,22 @@ public class CoursesController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute("course") Courses course,
+    public String update(@ModelAttribute(ROOT_MODEL) Courses course,
                          BindingResult bindingResult,
                          SessionStatus session) {
         service.update(course);
         session.setComplete();
-        return "redirect:/admin/courses/" + course.getCode();
+        return "redirect:/" + ROOT + course.getCode();
     }
 
-    @InitBinder("course")
+    @InitBinder(ROOT_MODEL)
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
     }
 
-    @ModelAttribute(value = "course")
+    @ModelAttribute(value = ROOT_MODEL)
     public Courses getCommandObject() {
         return new Courses();
     }
