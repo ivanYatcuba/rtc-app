@@ -7,7 +7,40 @@
 </head>
 
 <body>
+<style type="text/css">
+    html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    .container-fluid {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+    }
+    .container {
+        padding-bottom: 100px;
+    }
+    .footer {
+        height: 100px;
+        margin-top: -100px;
+        text-align: center;
+        background: #999;
+    }
+</style>
 
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+
+            <div class="jumbotron">
+                <h1>
+                    there was a menu
+                </h1>
+            </div>
+        </div>
+        <p>
 <form name="course" id = "course" action="<@spring.url "/admin/courses/save" />" method="post">
 
 <div class="container">
@@ -121,5 +154,12 @@
 
 </div>
 </form>
+       </p>
+    </div>
+</div>
+
+<div class="footer">
+    Copyright 2014 Exigen Services, Ltd. All rights reserved E-mail: ukraine@exigenservices.com
+</div>
 </body>
 </html>
