@@ -2,6 +2,7 @@ package net.github.rtc.web.courses.controller;
 
 import net.github.rtc.web.courses.model.Author;
 import net.github.rtc.web.courses.model.Courses;
+import net.github.rtc.web.courses.service.CategoryService;
 import net.github.rtc.web.courses.service.CoursesService;
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -33,6 +34,9 @@ public class CoursesControllerTest {
 
     @Mock
     private CoursesService mockService;
+
+    @Mock
+    private CategoryService mockCategoryService;
 
     @InjectMocks
     private CoursesController controller;
