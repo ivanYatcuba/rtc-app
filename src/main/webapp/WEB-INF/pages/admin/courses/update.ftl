@@ -77,7 +77,6 @@
                     <@spring.formInput "course.author.lastName" />
                     <@spring.showErrors "<br>" />
 
-
                         </div>
                     </div>
                 </div>
