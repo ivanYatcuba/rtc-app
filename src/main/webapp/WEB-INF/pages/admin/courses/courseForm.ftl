@@ -26,7 +26,7 @@
         <div class="container">
             <div class="span5">
 
-                <label for="type" style="text-align: right">
+                <label for="type" ">
                 <@spring.message "courses.category"/>   </label>
             <@spring.bind "categories" />
             <@spring.formSingleSelect "course.type", categories, " " />
@@ -47,7 +47,7 @@
             <@spring.formItem "course.startDate" "datepiker"/>
             </div>
 
-            <div class="span7">
+            <div class="span6">
             <@spring.formItem "course.tags" "tags"/>
             </div>
         </div>

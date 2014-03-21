@@ -6,48 +6,10 @@
     <link href="<@spring.url'/resources/css/grid.css'/>" rel="stylesheet"/>
 </head>
 <body>
-<style type="text/css">
-    html, body {
-        height: 100%;
-        width: 100%;
-        margin: 0px;
-        padding: 0px;
-    }
 
-    .container-fluid {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-    }
-
-    .container {
-        padding-bottom: 100px;
-    }
-
-    .footer {
-        height: 100px;
-        margin-top: -100px;
-        text-align: center;
-        background: #999;
-    }
-    .header {
-        height: 40px;
-        text-align: center;
-        background: #999;
-    }
-</style>
+<#include "style.ftl">
 <#include "header.ftl">
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span2">
-
-            <div class="jumbotron">
-                <h1>
-                       <#include "menu.ftl">
-                </h1>
-            </div>
-        </div>
-        <p>
+<#include "menu.ftl">
 
         <div class="container">
             <h3>Courses List</h3>
@@ -70,9 +32,6 @@
                 <button class="btn">Create New</button>
             </a>
         </div>
-        </p>
-    </div>
-</div>
 
 <#include "footer.ftl">
 </body>
