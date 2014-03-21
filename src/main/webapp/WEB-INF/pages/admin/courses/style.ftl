@@ -1,10 +1,11 @@
+<#import "/spring.ftl" as spring/>
 <style type="text/css">
     html, body {
         height: 100%;
         width: 100%;
         margin: 0px;
         padding: 0px;
-        background-image: url("<@spring.url " ../../../resources/images/admin_bg.jpg"/>")
+        background-image: url("<@spring.url ' ../../../resources/images/admin_bg.jpg'/>")
     }
     .container-fluid {
         min-height: 100%;
@@ -21,7 +22,7 @@
         background: #999;
     }
     .header {
-        background-image: url("<@spring.url " ../../../resources/images/header.jpg"/>");
+        background-image: url("<@spring.url '../../../resources/images/header.jpg'/>");
         height: 10%;
         margin-bottom: 10px;
         text-align: center;
