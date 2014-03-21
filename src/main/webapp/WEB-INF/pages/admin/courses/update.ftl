@@ -32,15 +32,20 @@
         text-align: center;
         background: #999;
     }
+    .header {
+        -        height: 40px;
+        -        text-align: center;
+        -        background: #999;
+    -    }
 </style>
-
+<#include "header.ftl">
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span2">
 
             <div class="jumbotron">
                 <h1>
-                    there was a menu
+                <#include "menu.ftl">
                 </h1>
             </div>
         </div>
@@ -75,9 +80,7 @@
     </div>
 </div>
 
-<div class="footer">
-    Copyright 2014 Exigen Services, Ltd. All rights reserved E-mail: ukraine@exigenservices.com
-</div>
+<#include "footer.ftl">
 </body>
 </html>
 

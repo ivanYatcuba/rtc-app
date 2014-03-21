@@ -118,6 +118,9 @@ public class CoursesController {
     public String update(@ModelAttribute(ROOT_MODEL) Courses course,
                          BindingResult bindingResult,
                          SessionStatus session) {
+        if (bindingResult.hasErrors()) {
+            return ROOT + "/update";
+        }
         coursesService.update(course);
         session.setComplete();
         return "redirect:/" + ROOT + course.getCode();
