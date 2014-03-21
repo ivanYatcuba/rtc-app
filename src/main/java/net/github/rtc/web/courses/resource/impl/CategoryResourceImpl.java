@@ -1,6 +1,5 @@
 package net.github.rtc.web.courses.resource.impl;
 
-import net.github.rtc.web.courses.model.Courses;
 import net.github.rtc.web.courses.resource.CategoryResource;
 import org.springframework.stereotype.Component;
 
