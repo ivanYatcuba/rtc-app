@@ -1,8 +1,7 @@
 package net.github.rtc.web.courses.resource.impl;
 
-import net.github.rtc.web.courses.resource.CoursesResource;
 import net.github.rtc.web.courses.model.Courses;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.github.rtc.web.courses.resource.CoursesResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
