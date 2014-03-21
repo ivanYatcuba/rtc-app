@@ -67,7 +67,7 @@
 
                         <div class="span6" style="text-align: right">
 
-                            <input type="submit" value="Update"/> or <a
+                            <input type="submit" class="btn" value="Update"/> or <a
                                 href="<@spring.url "/admin/courses/"${course.code} />">Cancel</a>
 
                         </div>

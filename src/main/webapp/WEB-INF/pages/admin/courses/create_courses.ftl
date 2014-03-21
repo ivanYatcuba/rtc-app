@@ -67,7 +67,7 @@
 
                         <div class="span6" style="text-align: right">
 
-                            <input type="submit" value="Create"/> or <a
+                            <input type="submit" class="btn" value="Create"/> or <a
                                 href="<@spring.url "/admin/courses" />">Cancel</a>
 
                         </div>

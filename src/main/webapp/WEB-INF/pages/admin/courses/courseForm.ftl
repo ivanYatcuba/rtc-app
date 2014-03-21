@@ -1,6 +1,8 @@
 
     <!--Course name & Author-->
-    <div class="row-fluid span12">
+    <form class="form-horizontal">
+
+    <div class="row-fluid span12" >
         <div class="container">
             <div class="span5">
             <@spring.formItem "course.name" />
@@ -59,3 +61,4 @@
             </div>
         </div>
     </div>
+        </form>
