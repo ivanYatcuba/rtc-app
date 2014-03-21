@@ -4,11 +4,12 @@
 <head>
     <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.css'/>" rel="stylesheet"/>
     <link href="<@spring.url'/resources/css/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css"
+          href="<@spring.url '/resources/css/admin.css'/>"/>
 <@spring.includeHeader />
 </head>
 
 <body>
-<#include "style.ftl">
 <#include "header.ftl">
 <#include "menu.ftl">
 
