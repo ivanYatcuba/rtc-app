@@ -16,24 +16,7 @@ import java.util.Collection;
  * @author Vladislav Pikus
  */
 @Component("coursesDao")
-public class CoursesResourceImpl implements CoursesResource {
-
-    private RestTemplate restTemplate;
-
-    @Autowired
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
-    private String hostUrl;
-
-    public void setHostUrl(String hostUrl) {
-        this.hostUrl = hostUrl;
-    }
-
-    public String getHostUrl() {
-        return hostUrl;
-    }
+public class CoursesResourceImpl extends AbstractResource implements CoursesResource {
 
     @Override
     public Courses findByCode(String code) {

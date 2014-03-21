@@ -2,10 +2,12 @@ package net.github.rtc.web.courses.controller;
 
 import net.github.rtc.web.courses.model.Courses;
 import net.github.rtc.web.courses.propertyeditors.CustomTagsEditor;
+import net.github.rtc.web.courses.service.CategoryService;
 import net.github.rtc.web.courses.service.CoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +32,18 @@ public class CoursesController {
     private static final String ROOT = "admin/courses";
     private static final String ROOT_MODEL = "course";
 
-    private CoursesService service;
+    private CoursesService coursesService;
 
     @Autowired
-    public void setService(CoursesService service) {
-        this.service = service;
+    public void setCoursesService(CoursesService coursesService) {
+        this.coursesService = coursesService;
+    }
+
+    private CategoryService categoryService;
+
+    @Autowired
+    public void setCategoryService(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     /**
@@ -45,7 +54,7 @@ public class CoursesController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView(ROOT + "/courses");
-        Collection<Courses> courses = service.findAll();
+        Collection<Courses> courses = coursesService.findAll();
         mav.addObject("courses", courses);
         return mav;
     }
@@ -60,7 +69,7 @@ public class CoursesController {
      */
     @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
     public String delete(@PathVariable String courseCode) {
-        service.delete(courseCode);
+        coursesService.delete(courseCode);
         return "redirect:/" + ROOT;
     }
 
@@ -75,7 +84,7 @@ public class CoursesController {
     @RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView(ROOT + "/course");
-        Courses course = service.findByCode(courseCode);
+        Courses course = coursesService.findByCode(courseCode);
         mav.addObject("course", course);
         return mav;
     }
@@ -83,32 +92,25 @@ public class CoursesController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         ModelAndView mav = new ModelAndView(ROOT + "/create_courses");
-        Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
-        mav.addObject("categories", categories);
         return mav;
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid Courses course,
+    public String save(@ModelAttribute(ROOT_MODEL) @Valid Courses course,
                              BindingResult bindingResult,
                              SessionStatus session) {
-        if (bindingResult.hasErrors()) {
-            ModelAndView mav = new ModelAndView(ROOT + "/create_courses");
-            Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
-            mav.addObject("categories", categories);
-            return mav;
+       if (bindingResult.hasErrors()) {
+            return ROOT + "/create_courses";
         }
-        course = service.create(course);
+        course = coursesService.create(course);
         session.setComplete();
-        return new ModelAndView("redirect:/" + ROOT + course.getCode());
+        return "redirect:/" + ROOT + "/" + course.getCode();
     }
 
     @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView(ROOT + "/update");
-        mav.getModelMap().addAttribute("course", service.findByCode(courseCode));
-        Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
-        mav.addObject("categories", categories);
+        mav.getModelMap().addAttribute("course", coursesService.findByCode(courseCode));
         return mav;
     }
 
@@ -116,7 +118,7 @@ public class CoursesController {
     public String update(@ModelAttribute(ROOT_MODEL) Courses course,
                          BindingResult bindingResult,
                          SessionStatus session) {
-        service.update(course);
+        coursesService.update(course);
         session.setComplete();
         return "redirect:/" + ROOT + course.getCode();
     }
@@ -127,6 +129,12 @@ public class CoursesController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
     }
+
+    @ModelAttribute("categories")
+    public Collection<String> getCategories() {
+        return categoryService.findAll();
+    }
+
 
     @ModelAttribute(value = ROOT_MODEL)
     public Courses getCommandObject() {

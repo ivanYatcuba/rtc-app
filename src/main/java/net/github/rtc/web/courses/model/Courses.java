@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
@@ -24,13 +25,13 @@ public class Courses implements Serializable {
     @NotBlank
     private String type;
 
-    @NotEmpty
+    @NotNull
     private Author author;
 
-    @NotEmpty
+    @NotNull
     private Date startDate;
 
-    @NotEmpty
+    @NotNull
     private Date endDate;
 
     @NotEmpty
