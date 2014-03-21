@@ -31,7 +31,13 @@
         text-align: center;
         background: #999;
     }
+    .header {
+        height: 40px;
+        text-align: center;
+        background: #999;
+    }
 </style>
+<#include "header.ftl">
 
 <div class="container-fluid">
     <div class="row-fluid">
