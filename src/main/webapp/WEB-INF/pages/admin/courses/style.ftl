@@ -4,7 +4,7 @@
         width: 100%;
         margin: 0px;
         padding: 0px;
-        background-image: url("<@spring.url " ../../../resources/images/admin_bg.jpg"/>")
+
     }
     .container-fluid {
         min-height: 100%;
