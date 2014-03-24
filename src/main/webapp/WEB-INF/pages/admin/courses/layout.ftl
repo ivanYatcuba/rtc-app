@@ -14,7 +14,7 @@
                 <#include "layout/menu.ftl">
             </div>
             <div class="span10">
-                <#include "${content}">
+                <#include "content/${content}.ftl">
             </div>
         </div>
     </div>
