@@ -1,5 +1,8 @@
-package com.springapp.mvc;
+package rtc.app.controllers;
 
+import com.springapp.mvc.Login;
+import com.springapp.mvc.Project;
+import com.springapp.mvc.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;

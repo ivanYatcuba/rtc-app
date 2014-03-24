@@ -14,8 +14,10 @@
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
+        <url-pattern>/admin</url-pattern>
 	</servlet-mapping>
-        
+
+
         <servlet-mapping>
     <servlet-name>mvc-dispatcher</servlet-name>
     <url-pattern>*.css</url-pattern>

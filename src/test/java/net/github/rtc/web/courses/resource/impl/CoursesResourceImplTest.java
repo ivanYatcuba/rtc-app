@@ -52,7 +52,7 @@ public class CoursesResourceImplTest {
         return Resources.toString(url, Charsets.UTF_8);
     }
 
-    @Test
+   /* @Test
     public void testFindById() throws Exception {
         final String responseXml = loadXmlFile("course.json");
         final Integer id = 5;
@@ -63,7 +63,7 @@ public class CoursesResourceImplTest {
         mockServer.verify();
         assertEquals(id, courses.getId());
 
-    }
+    } */
 
     @Test
     public void testFindAll() throws Exception {
@@ -77,7 +77,7 @@ public class CoursesResourceImplTest {
         assertTrue(courses.size() == 2);
     }
 
-    @Test
+   /* @Test
     public void testDelete() throws Exception {
         final Integer id = 5;
         mockServer.expect(requestTo(resource.getHostUrl() + "courses/" + id))
@@ -85,5 +85,5 @@ public class CoursesResourceImplTest {
                 .andRespond(withSuccess());
         resource.delete(id);
         mockServer.verify();
-    }
+    }*/
 }
