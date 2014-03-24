@@ -51,9 +51,10 @@ public class CoursesController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView(ROOT + "/courses");
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
         Collection<Courses> courses = coursesService.findAll();
         mav.addObject("courses", courses);
+        mav.addObject("content", "content/listContent.ftl");
         return mav;
     }
 

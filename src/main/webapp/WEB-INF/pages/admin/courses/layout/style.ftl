@@ -21,7 +21,6 @@
         background: #999;
     }
     .header {
-        background-image: url("<@spring.url " ../../../resources/images/header.jpg"/>");
         height: 10%;
         margin-bottom: 10px;
         text-align: center;
