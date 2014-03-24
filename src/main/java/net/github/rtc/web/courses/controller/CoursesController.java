@@ -90,7 +90,8 @@ public class CoursesController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
-        ModelAndView mav = new ModelAndView(ROOT + "/create_courses");
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", "content/createContent.ftl");
         return mav;
     }
 

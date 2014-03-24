@@ -1,4 +1,3 @@
-
     <!--Course name & Author-->
     <div class="row-fluid span12" >
         <div class="container" style="padding-bottom: 10px;">
