@@ -106,15 +106,17 @@ public class CoursesController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute(ROOT_MODEL) @Valid Courses course,
+    public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid Courses course,
                              BindingResult bindingResult,
                              SessionStatus session) {
        if (bindingResult.hasErrors()) {
-            return ROOT + "/create_courses";
+           ModelAndView mav = new ModelAndView(ROOT + "/layout");
+           mav.addObject("content", "createContent");
+           return mav;
         }
         course = coursesService.create(course);
         session.setComplete();
-        return "redirect:/" + ROOT + "/" + course.getCode();
+        return new ModelAndView("redirect:/" + ROOT + "/" + course.getCode());
     }
 
     @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
@@ -126,15 +128,17 @@ public class CoursesController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute(ROOT_MODEL) Courses course,
+    public ModelAndView update(@ModelAttribute(ROOT_MODEL) Courses course,
                          BindingResult bindingResult,
                          SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return ROOT + "/update";
+            ModelAndView mav = new ModelAndView(ROOT + "/layout");
+            mav.addObject("content", "updateContent");
+            return mav;
         }
         coursesService.update(course);
         session.setComplete();
-        return "redirect:/" + ROOT + "/" + course.getCode();
+        return new ModelAndView("redirect:/" + ROOT + "/" + course.getCode());
     }
 
     @InitBinder(ROOT_MODEL)
