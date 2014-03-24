@@ -4,7 +4,7 @@ import net.github.rtc.web.courses.model.Courses;
 import net.github.rtc.web.courses.resource.CoursesResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import com.springapp.mvc.User;
+//import com.springapp.mvc.User;
 
 import java.util.Arrays;
 import java.util.Collection;
