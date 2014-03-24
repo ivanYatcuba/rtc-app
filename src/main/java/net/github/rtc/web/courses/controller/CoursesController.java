@@ -1,6 +1,7 @@
 package net.github.rtc.web.courses.controller;
 
 import net.github.rtc.web.courses.model.Courses;
+import net.github.rtc.web.courses.model.SearchFilter;
 import net.github.rtc.web.courses.propertyeditors.CustomTagsEditor;
 import net.github.rtc.web.courses.service.CategoryService;
 import net.github.rtc.web.courses.service.CoursesService;
@@ -89,6 +90,14 @@ public class CoursesController {
         return mav;
     }
 
+    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    public ModelAndView filter(@ModelAttribute("searchFilter") SearchFilter searchFilter) {
+        ModelAndView mav = new ModelAndView(ROOT + "/courses");
+        Collection<Courses> courses = coursesService.findByFilter(searchFilter.getMap());
+        mav.addObject("courses", courses);
+        return mav;
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
@@ -138,6 +147,11 @@ public class CoursesController {
     @ModelAttribute("categories")
     public Collection<String> getCategories() {
         return categoryService.findAll();
+    }
+
+    @ModelAttribute("searchFilter")
+    public SearchFilter getFilter() {
+        return new SearchFilter();
     }
 
 

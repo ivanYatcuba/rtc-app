@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * Service Implementation
@@ -63,5 +64,10 @@ public class CoursesServiceImpl implements CoursesService {
     @Override
     public void update(Courses course) {
         resource.update(course);
+    }
+
+    @Override
+    public Collection<Courses> findByFilter(Map<String, String> filter) {
+        return resource.findByFilter(filter);
     }
 }
