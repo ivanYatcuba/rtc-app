@@ -5,6 +5,7 @@ import net.github.rtc.web.courses.model.Courses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import com.springapp.mvc.User;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -67,6 +68,7 @@ public class CoursesResourceImpl implements CoursesResource {
     public Courses create(Courses course) {
         return restTemplate.postForObject(hostUrl + "courses", course, Courses.class);
     }
+
 
     @Override
     public void update(Courses course) {
