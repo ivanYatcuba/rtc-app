@@ -1,61 +1,26 @@
     <!--Course name & Author-->
     <div class="row-fluid span12" >
-        <div class="container" style="padding-bottom: 10px;">
 
-            <div class="offset1"></div>
-            <div class="span5" style="float: left">
-            <@spring.formItem "course.name"/>
-            </div>
-
-            <div class="span6">
-                <label for="course.author.firstName">
-                <@spring.message "courses.author"/> </label>
-            <@spring.formInput "course.author.firstName" 'class="input-medium"'/>
-            <@spring.formInput "course.author.lastName" 'class="input-medium"'/>
-            <@spring.showErrors "<br>" />
-
-            </div>
-        </div>
-    </div>
-
-    <!--Category & Email-->
-
-    <div class="row-fluid span12">
-        <div class="container" style="padding-bottom: 10px;">
-            <div class="span5">
-
-                <label for="type" style="control-label">
+            <div class="span6" >
+                <@spring.formItem "course.name"/>
+                <p><label for="type">
                 <@spring.message "courses.category"/>   </label>
-            <@spring.bind "categories" />
-            <@spring.formSingleSelect "course.type", categories, " "/>
-
+                <@spring.bind "categories" />
+                <@spring.formSingleSelect "course.type", categories, " "/></p>
+                <p><@spring.formItem "course.startDate" "datepiker" 'class="input-medium"'/></p>
+                <p><@spring.formItem "course.endDate" "datepiker" 'class="input-medium"'/></p>
             </div>
 
             <div class="span6">
-            <@spring.formItem "course.author.email"/>
+                <p><label for="course.author.firstName">
+                <@spring.message "courses.author"/> </label>
+                <@spring.formInput "course.author.firstName" 'class="input-medium"'/>
+                <@spring.formInput "course.author.lastName" 'class="input-medium"'/>
+                <@spring.showErrors "<br>" /></p>
+                <p><@spring.formItem "course.author.email"/></p>
+                <p> <@spring.formItem "course.tags" "tags" 'class="input-medium"'/></p>
             </div>
 
-        </div>
     </div>
 
-    <!--startDate & Tags-->
-    <div class="row-fluid span12">
-        <div class="container" style="padding-bottom: 5px;">
-            <div class="span5">
-            <@spring.formItem "course.startDate" "datepiker" 'class="input-medium"'/>
-            </div>
 
-            <div class="span6">
-            <@spring.formItem "course.tags" "tags"/>
-            </div>
-        </div>
-    </div>
-
-    <!--endDate-->
-    <div class="row-fluid span12">
-        <div class="container" style="padding-bottom: 10px;">
-            <div class="span5">
-            <@spring.formItem "course.endDate" "datepiker" 'class="input-medium"'/>
-            </div>
-        </div>
-    </div>

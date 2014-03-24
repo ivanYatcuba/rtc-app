@@ -44,7 +44,6 @@
         <label for="${status.expression?replace('[','')?replace(']','')}">
             <@message path/>
         </label>
-        <p>
             <#if type == "text">
                 <@formInput path attributes/>
             <#else>
@@ -57,6 +56,6 @@
                 </#if>
             </#if>
             <@showErrors "<br/>"/>
-        </p>
     </div>
+
 </#macro>
