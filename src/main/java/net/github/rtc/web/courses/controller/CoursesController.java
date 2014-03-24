@@ -82,9 +82,10 @@ public class CoursesController {
      */
     @RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable String courseCode) {
-        ModelAndView mav = new ModelAndView(ROOT + "/course");
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
         Courses course = coursesService.findByCode(courseCode);
         mav.addObject("course", course);
+        mav.addObject("content", "content/courseContent.ftl");
         return mav;
     }
 
@@ -109,8 +110,9 @@ public class CoursesController {
 
     @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable String courseCode) {
-        ModelAndView mav = new ModelAndView(ROOT + "/update");
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.getModelMap().addAttribute("course", coursesService.findByCode(courseCode));
+        mav.addObject("content", "content/updateContent.ftl");
         return mav;
     }
 
@@ -123,7 +125,7 @@ public class CoursesController {
         }
         coursesService.update(course);
         session.setComplete();
-        return "redirect:/" + ROOT + course.getCode();
+        return "redirect:/" + ROOT + "/" + course.getCode();
     }
 
     @InitBinder(ROOT_MODEL)

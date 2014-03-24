@@ -15,13 +15,13 @@
         padding-bottom: 100px;
     }
     .footer {
-        height: 20%;
+        height: 10%;
         margin-top: -100px;
         text-align: center;
         background: #999;
     }
     .header {
-        height: 10%;
+        height: 20%;
         margin-bottom: 10px;
         text-align: center;
 
