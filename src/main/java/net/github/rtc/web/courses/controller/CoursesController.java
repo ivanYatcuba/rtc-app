@@ -90,6 +90,12 @@ public class CoursesController {
         return mav;
     }
 
+    /**
+     * Process the request to get view about course by custom filter
+     *
+     * @param searchFilter searchFilter model
+     * @return modelAndView("admin/courses/courses")
+     */
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     public ModelAndView filter(@ModelAttribute("searchFilter") SearchFilter searchFilter) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
@@ -99,6 +105,11 @@ public class CoursesController {
         return mav;
     }
 
+    /**
+     * Process the request to get create course form
+     *
+     * @return modelAndView("admin/courses/layout")
+     */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
@@ -106,18 +117,31 @@ public class CoursesController {
         return mav;
     }
 
+    /**
+     * Process the request to post entered course in the form
+     *
+     * @param course        course object
+     * @param bindingResult binding course result
+     * @param session       current session
+     * @return if all is OK the redirect to view new course or return to edit course
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid Courses course,
                              BindingResult bindingResult,
                              SessionStatus session) {
-       if (bindingResult.hasErrors()) {
-           return modelAndViewContentBuilder("createContent");
+        if (bindingResult.hasErrors()) {
+            return modelAndViewContentBuilder("createContent");
         }
         course = coursesService.create(course);
         session.setComplete();
         return new ModelAndView("redirect:/" + ROOT + "/" + course.getCode());
     }
 
+    /**
+     * Process the request to get edit course form
+     *
+     * @return modelAndView("admin/courses/layout")
+     */
     @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
@@ -126,10 +150,18 @@ public class CoursesController {
         return mav;
     }
 
+    /**
+     * Process the request to post entered course in the form
+     *
+     * @param course        course object
+     * @param bindingResult binding course result
+     * @param session       current session
+     * @return if all is OK the redirect to view course or return to edit course
+     */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView update(@ModelAttribute(ROOT_MODEL) Courses course,
-                         BindingResult bindingResult,
-                         SessionStatus session) {
+                               BindingResult bindingResult,
+                               SessionStatus session) {
         if (bindingResult.hasErrors()) {
             return modelAndViewContentBuilder("updateContent");
         }
@@ -138,6 +170,11 @@ public class CoursesController {
         return new ModelAndView("redirect:/" + ROOT + "/" + course.getCode());
     }
 
+    /**
+     * Binding course conditions for entry into the form conclusions
+     *
+     * @param binder
+     */
     @InitBinder(ROOT_MODEL)
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -145,23 +182,43 @@ public class CoursesController {
         binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
     }
 
+    /**
+     * Prepare collection categories as model attribute
+     *
+     * @return collection categories
+     */
     @ModelAttribute("categories")
     public Collection<String> getCategories() {
         return categoryService.findAll();
     }
 
+    /**
+     * Prepare searchFilter as model attribute
+     *
+     * @return searchFilter object
+     */
     @ModelAttribute("searchFilter")
     public SearchFilter getFilter() {
         return new SearchFilter();
     }
 
-
+    /**
+     * Prepare course as model attribute
+     *
+     * @return course object
+     */
     @ModelAttribute(value = ROOT_MODEL)
     public Courses getCommandObject() {
         return new Courses();
     }
 
-    private ModelAndView modelAndViewContentBuilder(String content){
+    /**
+     * build MAV
+     *
+     * @param content content name
+     * @return configurated mav
+     */
+    private ModelAndView modelAndViewContentBuilder(String content) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", content);
         return mav;

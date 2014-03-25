@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
 /**
+ * Abstract Data Access Object class
+ * This is parent class to custom DAO
+ *
  * @author Vladislav Pikus
  */
 public abstract class AbstractResource {
