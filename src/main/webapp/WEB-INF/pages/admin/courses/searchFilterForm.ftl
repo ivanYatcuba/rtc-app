@@ -17,5 +17,5 @@
         <input type="checkbox" value="${cat}" name="categories" <#if isSelected> checked="checked"</#if>/>${cat}<br>
     </#list>
     <@spring.formItem "searchFilter.tags" "tags" />
-    <button type="submit">Search</button>
+    <button type="submit" class="btn">Search</button>
 </form>

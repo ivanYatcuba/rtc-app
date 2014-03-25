@@ -8,6 +8,7 @@
 
 <body>
     <#include "layout/header.ftl">
+
     <div class="container-fluid">
         <div class="row">
             <div class="span2">

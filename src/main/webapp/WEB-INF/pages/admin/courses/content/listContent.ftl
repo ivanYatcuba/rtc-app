@@ -1,7 +1,9 @@
+
+
 <div class="container">
     <h3>Courses List</h3>
     <hr width="100%">
-
+<#include "../layout/searchPanel.ftl">
     <div class="head-2"><strong>Category</strong></div>
     <div class="head-3"><strong>Name</strong></div>
     <div class="head-3"><strong>Date</strong></div>
