@@ -21,35 +21,49 @@ import java.util.Map;
 @Component("coursesDao")
 public class CoursesResourceImpl extends AbstractResource implements CoursesResource {
 
+    /**
+     * @see CoursesResource#findByCode(String)
+     */
     @Override
     public Courses findByCode(String code) {
         return restTemplate.getForObject(hostUrl + "courses/{code}", Courses.class, code);
     }
 
     /**
-     * @return collection of courses
-     * @see net.github.rtc.web.courses.resource.CoursesResource
+     * @see CoursesResource#findAll()
      */
     @Override
     public Collection<Courses> findAll() {
         return Arrays.asList(restTemplate.getForObject(hostUrl + "courses", Courses[].class));
     }
 
+    /**
+     * @see CoursesResource#delete(String)
+     */
     @Override
     public void delete(String code) {
         restTemplate.delete(hostUrl + "courses/{code}", code);
     }
 
+    /**
+     * @see CoursesResource#create(Courses)
+     */
     @Override
     public Courses create(Courses course) {
         return restTemplate.postForObject(hostUrl + "courses", course, Courses.class);
     }
 
+    /**
+     * @see CoursesResource#update(Courses)
+     */
     @Override
     public void update(Courses course) {
         restTemplate.put(hostUrl + "courses/{code}", course, course.getCode());
     }
 
+    /**
+     * @see CoursesResource#findByFilter(Map)
+     */
     @Override
     public Collection<Courses> findByFilter(Map<String, String> filter) {
         URI targetUrl = UriComponentsBuilder.fromUriString(hostUrl)
