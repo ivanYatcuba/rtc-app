@@ -9,7 +9,7 @@
 <body>
     <#include "layout/header.ftl">
     <div class="container-fluid">
-        <div class="row-fluid">
+        <div class="row">
             <div class="span2">
                 <#include "layout/menu.ftl">
             </div>

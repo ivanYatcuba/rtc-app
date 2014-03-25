@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <div  class="container">
     <h3>${course.name} Details:</h3>
     <hr width="100%" >

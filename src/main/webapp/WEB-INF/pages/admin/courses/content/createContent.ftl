@@ -9,10 +9,10 @@
 
                 <!--Create & Cancel-->
                 <div class="row-fluid span12">
-                        <div class="span5">
+                        <div class="span6">
                         </div>
 
-                        <div class="span6" style="text-align: right">
+                        <div class="span5" style="text-align: right">
 
                             <input type="submit" class="btn" value="Create"/> or <a
                                 href="<@spring.url "/admin/courses" />">Cancel</a>
