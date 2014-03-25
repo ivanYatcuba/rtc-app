@@ -3,7 +3,7 @@ package net.github.rtc.web.user.model;
 import org.util.rtc.annotation.*;
 
 import java.util.Date;
-import java.util.List;
+//import java.util.List;
 //import javax.xml.bind.annotation.XmlRootElement;
 
 //@XmlRootElement
