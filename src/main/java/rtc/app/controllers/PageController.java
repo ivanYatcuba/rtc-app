@@ -120,6 +120,7 @@ public class PageController {
 //        System.out.println("fictUser.getFirstname()" + fictUser.getFirstname());
 //        System.out.println("fictUser.getLastname()" + fictUser.getLastname());
         this.users.add(user);
+
         service.create(user);
         session.setComplete();
         model.addAttribute("project", project);
