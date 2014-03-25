@@ -40,7 +40,8 @@ public class User {
     @minlength(5)
     @required
     private String speciality;
-    private List<String> technologies;
+
+    private String technologies;
     @number
     private Integer writtenEng;
     @number
@@ -92,11 +93,11 @@ public class User {
 
     //maybe this getter maybe should be changed
     //I have no idea how to pass several technologies from a reg.form to a controller and user
-    public List<String> getTechnologies() {
+    public String getTechnologies() {
         return technologies;
     }
 
-    public void setTechnologies(List<String> technologies) {
+    public void setTechnologies(String technologies) {
         this.technologies = technologies;
     }
 
@@ -171,7 +172,7 @@ public class User {
 
     }
 
-    public User(String fio, String phone, String email, Date birthDate, String city, String university, String faculty, String major, List<String> technologies, Integer writtenEng, Integer oralEng, String note, String password) {
+    public User(String fio, String phone, String email, Date birthDate, String city, String university, String faculty, String major, String technologies, Integer writtenEng, Integer oralEng, String note, String password) {
         this.fio = fio;
         this.phone = phone;
         this.email = email;

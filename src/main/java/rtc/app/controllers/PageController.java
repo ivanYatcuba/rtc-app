@@ -15,7 +15,7 @@ import org.util.rtc.validation.Validation;
 import java.util.ArrayList;
 
 import java.util.List;
-import net.github.web.user.service.UserService;
+import net.github.rtc.web.user.service.UserService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.support.SessionStatus;
