@@ -58,7 +58,7 @@ public class CoursesControllerTest {
         when(mockService.findAll()).thenReturn(courses);
         mockMvc.perform(get("/admin/courses")).andExpect(status().isOk())
                 .andExpect(model().attribute("courses", courses))
-                .andExpect(view().name("admin/courses/courses"));
+                .andExpect(view().name("admin/courses/layout"));
         verify(mockService, times(1)).findAll();
         verifyNoMoreInteractions(mockService);
     }

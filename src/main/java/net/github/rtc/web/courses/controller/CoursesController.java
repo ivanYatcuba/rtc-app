@@ -92,7 +92,8 @@ public class CoursesController {
 
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     public ModelAndView filter(@ModelAttribute("searchFilter") SearchFilter searchFilter) {
-        ModelAndView mav = new ModelAndView(ROOT + "/courses");
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", "listContent");
         Collection<Courses> courses = coursesService.findByFilter(searchFilter.getMap());
         mav.addObject("courses", courses);
         return mav;
@@ -110,9 +111,7 @@ public class CoursesController {
                              BindingResult bindingResult,
                              SessionStatus session) {
        if (bindingResult.hasErrors()) {
-           ModelAndView mav = new ModelAndView(ROOT + "/layout");
-           mav.addObject("content", "createContent");
-           return mav;
+           return modelAndViewContentBuilder("createContent");
         }
         course = coursesService.create(course);
         session.setComplete();
@@ -132,9 +131,7 @@ public class CoursesController {
                          BindingResult bindingResult,
                          SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            ModelAndView mav = new ModelAndView(ROOT + "/layout");
-            mav.addObject("content", "updateContent");
-            return mav;
+            return modelAndViewContentBuilder("updateContent");
         }
         coursesService.update(course);
         session.setComplete();
@@ -162,5 +159,11 @@ public class CoursesController {
     @ModelAttribute(value = ROOT_MODEL)
     public Courses getCommandObject() {
         return new Courses();
+    }
+
+    private ModelAndView modelAndViewContentBuilder(String content){
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", content);
+        return mav;
     }
 }
