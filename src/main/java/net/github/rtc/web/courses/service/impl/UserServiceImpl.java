@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public class UserServiceImpl implements UserService{
 
-  private static Logger LOG = LoggerFactory.getLogger(CoursesServiceImpl.class.getName());
+  private static Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class.getName());
 
     @Autowired
     public void setResource(UserResource resource) {
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService{
 
     /**
      * @return collection of courses
-     * @see CoursesService
+     * @see UserService
      */
     @Override
     public Collection<User> findAll() {
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService{
 
     /**
      * @param id course ID
-     * @see CoursesService
+     * @see UserService
      */
     @Override
     public void delete(Integer id) {
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService{
 
     /**
      * @return link of courses
-     * @see CoursesService
+     * @see UserService
      */
     @Override
     public User findById(Integer id){

@@ -104,11 +104,11 @@
       </div>
 </div>
 
-<form name="w" action="w" method="post" >
+<#--<form name="w" action="w" method="post" >
         <div style="margin-left:560px">
             <button class="btn btn-warning pull-right" type="submit"><@spring.message "btn.home"/></button>
         </div>
-    </form>
+    </form>-->
 </body>
 
 </html>
