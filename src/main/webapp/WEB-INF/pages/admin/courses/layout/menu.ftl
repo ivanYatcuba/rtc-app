@@ -1,7 +1,8 @@
 <div class="jumbotron">
-    <h1>
-        there was a menu
-    </h1>
+    <h4>
+        Groups:
+    </h4>
+    <a href="<@spring.url "/admin/courses/" />">courses</a>
 </div>
 
 

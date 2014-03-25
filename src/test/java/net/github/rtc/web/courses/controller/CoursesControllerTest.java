@@ -63,27 +63,27 @@ public class CoursesControllerTest {
         verifyNoMoreInteractions(mockService);
     }
 
-    /*@Test
+    @Test
     public void testDelete() throws Exception {
-        Integer id = 5;
-        mockMvc.perform(get("/admin/courses/delete/{id}", id))
+        String code = "fd29a957-01e0-4219-bbba-36188aa949fa";
+        mockMvc.perform(get("/admin/courses/delete/{code}", code))
                 .andExpect(status().isMovedTemporarily())
                 .andExpect(view().name("redirect:/admin/courses"));
-        verify(mockService, times(1)).delete(id);
+        verify(mockService, times(1)).delete(code);
         verifyNoMoreInteractions(mockService);
     }
 
     @Test
     public void testSingle() throws Exception {
         Courses testCourse = course;
-        testCourse.setId(5);
-        Integer id = testCourse.getId();
-        when(mockService.findById(id)).thenReturn(testCourse);
-        mockMvc.perform(get("/admin/courses/{id}", id)).
+        testCourse.setCode("fd29a957-01e0-4219-bbba-36188aa949fa");
+        String code = testCourse.getCode();
+        when(mockService.findByCode(code)).thenReturn(testCourse);
+        mockMvc.perform(get("/admin/courses/{code}", code)).
                 andExpect(status().isOk()).
                 andExpect(model().attribute("course", testCourse)).
                 andExpect(view().name("admin/courses/course"));
-        verify(mockService, times(1)).findById(id);
+        verify(mockService, times(1)).findByCode(code);
         verifyNoMoreInteractions(mockService);
-    } */
+    }
 }
