@@ -5,11 +5,7 @@ import net.github.rtc.web.courses.resource.CoursesResource;
 import net.github.rtc.web.courses.utils.QueryParametersBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-<<<<<<< HEAD
-//import com.springapp.mvc.User;
-=======
 import org.springframework.web.util.UriComponentsBuilder;
->>>>>>> refs/remotes/origin/admin
 
 import java.net.URI;
 import java.util.Arrays;
@@ -57,13 +53,9 @@ public class CoursesResourceImpl extends AbstractResource implements CoursesReso
         return restTemplate.postForObject(hostUrl + "courses", course, Courses.class);
     }
 
-<<<<<<< HEAD
-
-=======
     /**
      * @see CoursesResource#update(Courses)
      */
->>>>>>> refs/remotes/origin/admin
     @Override
     public void update(Courses course) {
         restTemplate.put(hostUrl + "courses/{code}", course, course.getCode());
