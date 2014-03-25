@@ -4,9 +4,9 @@ import org.util.rtc.annotation.*;
 
 import java.util.Date;
 import java.util.List;
-import javax.xml.bind.annotation.XmlRootElement;
+//import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+//@XmlRootElement
 public class User {
     
     Integer id;
