@@ -1,5 +1,4 @@
 
-
 <form name="searchFilter" id="searchFilter" action="<@spring.url "/admin/courses/filter"/>" method="gets">
     <@spring.formItem "searchFilter.title"/>
     <@spring.formItem "searchFilter.startDate" "datepiker" />

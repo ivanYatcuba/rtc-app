@@ -3,12 +3,12 @@
 
 <script>
     $(function() {
-        $("#accordion").accordion({ header: "h3", collapsible: true, active: false });
+        $("#searcher").accordion({ header: "h3", collapsible: true, active: false });
     });
 </script>
 
 
-<div id="accordion" height = "100%">
+<div id="searcher" height = "100%">
     <h3>Search</h3>
     <div class="panel panel-default">
         <div class="panel-body">
