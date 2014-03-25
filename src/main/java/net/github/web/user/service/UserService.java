@@ -4,31 +4,28 @@
  * and open the template in the editor.
  */
 
-package net.github.rtc.web.courses.resource;
+package net.github.web.user.service;
 
-import com.springapp.mvc.User;
+import net.github.rtc.web.user.model.User;
 import java.util.Collection;
 
 /**
  *
  * @author Саша
  */
-public interface UserResource {
-    User findById(Integer id);
-
-    /**
-     * Find collection of courses
-     *
-     * @return collection of courses
-     */
+public interface UserService {
+    
     Collection<User> findAll();
 
     /**
      * Will be delete course by ID
+     * If ID is null then will be throw {@link net.github.rtc.web.courses.exception.ServiceProcessingException}
      *
      * @param id course ID
      */
     void delete(Integer id);
+
+    User findById(Integer id);
 
     User create(User user);
 

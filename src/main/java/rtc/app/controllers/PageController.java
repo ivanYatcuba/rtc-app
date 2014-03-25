@@ -2,7 +2,7 @@ package rtc.app.controllers;
 
 import com.springapp.mvc.Login;
 import com.springapp.mvc.Project;
-import com.springapp.mvc.User;
+import net.github.rtc.web.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import org.util.rtc.validation.Validation;
 import java.util.ArrayList;
 
 import java.util.List;
-import net.github.rtc.web.courses.service.UserService;
+import net.github.web.user.service.UserService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.support.SessionStatus;
@@ -56,7 +56,7 @@ public class PageController {
     
     
     
-    @RequestMapping(value = "/w/{Id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/get_user/{Id}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable Integer Id) {
         ModelAndView mav = new ModelAndView("user/user");
        // service.create(new User(2, "Alex", "phone", "scorp", "dnepr", "uni", "fac", "1234"));
@@ -64,16 +64,16 @@ public class PageController {
         mav.addObject("user", user);
         return mav;
     }
-    @RequestMapping(value = "/w", method = RequestMethod.POST)
-    public ModelAndView create(BindingResult bindingResult,
-                         SessionStatus session) {
-      ModelAndView mav = new ModelAndView("user/user");
-      User u;
-       u = service.create(new User(2, "Alex", "phone", "scorp", "dnepr", "uni", "fac", "1234"));
-        session.setComplete();
-        mav.addObject("user", u);
-         return mav;
-    }
+//    @RequestMapping(value = "/w", method = RequestMethod.POST)
+//    public ModelAndView create(BindingResult bindingResult,
+//                         SessionStatus session) {
+//      ModelAndView mav = new ModelAndView("user/user");
+//      User u;
+//       u = service.create(new User(2, "Alex", "phone", "scorp", "dnepr", "uni", "fac", "1234"));
+//        session.setComplete();
+//        mav.addObject("user", u);
+//         return mav;
+//    }
     
 
     @RequestMapping(value = "/start input", method = RequestMethod.GET)

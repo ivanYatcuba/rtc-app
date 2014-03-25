@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 
-package net.github.rtc.web.courses.resource.impl;
+package net.github.rtc.web.user.resource.impl;
 
-import com.springapp.mvc.User;
+import net.github.rtc.web.courses.resource.impl.*;
+import net.github.rtc.web.user.model.User;
 import java.util.Arrays;
 import java.util.Collection;
-import net.github.rtc.web.courses.resource.UserResource;
+import net.github.rtc.web.user.resource.UserResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

@@ -1,4 +1,4 @@
-package com.springapp.mvc;
+package net.github.rtc.web.user.model;
 
 import org.util.rtc.annotation.*;
 
