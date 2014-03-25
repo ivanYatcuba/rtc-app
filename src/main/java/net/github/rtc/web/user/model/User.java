@@ -11,7 +11,7 @@ public class User {
     
     Integer id;
     @required
-    @maxlength(30)
+    @maxlength(50)
     @minlength(5)
     private String fio;
     @required
@@ -164,6 +164,7 @@ public class User {
         this.birthDate = birthDate;
     }
 
+    
 
 
     public User(){
@@ -184,8 +185,6 @@ public class User {
         this.oralEng = oralEng;
         this.note = note;
         this.password = password;
-
-        
     }
     public User (Integer id, String fio, String phone, String email, String city, String university, String faculty, String password)
     {
@@ -204,5 +203,7 @@ public class User {
         this.note = "df";
         this.password = password;
     }
+
+
 
 }

@@ -11,7 +11,7 @@ import net.github.rtc.web.user.model.User;
 import java.util.Collection;
 import net.github.rtc.web.courses.exception.ServiceProcessingException;
 import net.github.rtc.web.user.resource.UserResource;
-import net.github.web.user.service.UserService;
+import net.github.rtc.web.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
