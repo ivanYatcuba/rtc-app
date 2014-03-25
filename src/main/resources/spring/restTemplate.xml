@@ -17,7 +17,7 @@
     </bean>
     
     
-    <bean id="userDao" class="net.github.rtc.web.courses.resource.impl.UserResourseImpl">
+    <bean id="userDao" class="net.github.rtc.web.user.resource.impl.UserResourseImpl">
         <property name="hostUserUrl" value="${host.userURL}"/>
     </bean>
 

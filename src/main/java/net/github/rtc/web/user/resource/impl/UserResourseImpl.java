@@ -6,7 +6,7 @@
 
 package net.github.rtc.web.user.resource.impl;
 
-import net.github.rtc.web.courses.resource.impl.*;
+//import net.github.rtc.web.courses.resource.impl.*;
 import net.github.rtc.web.user.model.User;
 import java.util.Arrays;
 import java.util.Collection;
