@@ -1,6 +1,6 @@
     <h3 class="page-header">${course.name} Details:</h3>
 
-            <div class="row-fluid">
+            <div class="row-fluid" style="margin-left: 1px">
                 <div class="span2"  align="right">
                     <p>Course name: </p>
                     <p>Category: </p>
