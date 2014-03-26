@@ -1,7 +1,6 @@
 package net.github.rtc.web.courses.service;
 
 import net.github.rtc.web.courses.model.Courses;
-//import com.springapp.mvc.User;
 
 import java.util.Collection;
 import java.util.Map;

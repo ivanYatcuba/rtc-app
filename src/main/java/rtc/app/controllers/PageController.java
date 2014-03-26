@@ -2,7 +2,7 @@ package rtc.app.controllers;
 
 import com.springapp.mvc.Login;
 import com.springapp.mvc.Project;
-import net.github.rtc.web.user.model.User;
+import com.springapp.mvc.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,13 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.util.rtc.validation.Validation;
 
 import java.util.ArrayList;
-
 import java.util.List;
-import net.github.rtc.web.user.service.UserService;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
@@ -46,36 +40,6 @@ public class PageController {
         project.add(new Project("Project 5"));
     }
 
-
-    private UserService service;
-
-    @Autowired
-    public void setService(UserService service) {
-        this.service = service;
-    }
-    
-    
-    
-    @RequestMapping(value = "/get_user/{Id}", method = RequestMethod.GET)
-    public ModelAndView single(@PathVariable Integer Id) {
-        ModelAndView mav = new ModelAndView("user/user");
-       // service.create(new User(2, "Alex", "phone", "scorp", "dnepr", "uni", "fac", "1234"));
-        User user = service.findById(Id);
-        mav.addObject("user", user);
-        return mav;
-    }
-//    @RequestMapping(value = "/w", method = RequestMethod.POST)
-//    public ModelAndView create(BindingResult bindingResult,
-//                         SessionStatus session) {
-//      ModelAndView mav = new ModelAndView("user/user");
-//      User u;
-//       u = service.create(new User(2, "Alex", "phone", "scorp", "dnepr", "uni", "fac", "1234"));
-//        session.setComplete();
-//        mav.addObject("user", u);
-//         return mav;
-//    }
-    
-
     @RequestMapping(value = "/start input", method = RequestMethod.GET)
     public String Home(ModelMap model) {
 
@@ -95,7 +59,6 @@ public class PageController {
 //        {
 //            return "registration";
 //        }
-
     @RequestMapping(value = "/goHome", method = RequestMethod.GET)
     public String goHome(ModelMap model) {
         validation.fromClassToJSON(User.class, LocaleContextHolder.getLocale());
@@ -113,16 +76,12 @@ public class PageController {
     }
 
     @RequestMapping(value = "/viewPage", method = RequestMethod.POST)
-    public String viewPage(@ModelAttribute("userForm") User user, ModelMap model,BindingResult bindingResult,
-                         SessionStatus session) {
+    public String viewPage(@ModelAttribute("userForm") User user, ModelMap model) {
 
 
 //        System.out.println("fictUser.getFirstname()" + fictUser.getFirstname());
 //        System.out.println("fictUser.getLastname()" + fictUser.getLastname());
         this.users.add(user);
-
-        service.create(user);
-        session.setComplete();
         model.addAttribute("project", project);
         model.addAttribute("user1", user);
         model.addAttribute("user", userLogin);
