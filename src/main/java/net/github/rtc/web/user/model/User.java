@@ -172,7 +172,7 @@ public class User {
 
     }
 
-    public User(String fio, String phone, String email, Date birthDate, String city, String university, String faculty, String major, String technologies, Integer writtenEng, Integer oralEng, String note, String password) {
+    public User(String fio, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
         this.fio = fio;
         this.phone = phone;
         this.email = email;
@@ -180,8 +180,7 @@ public class User {
         this.city = city;
         this.university = university;
         this.faculty = faculty;
-        this.speciality = major;
-        this.technologies = technologies;
+        this.speciality = speciality;
         this.writtenEng = writtenEng;
         this.oralEng = oralEng;
         this.note = note;
