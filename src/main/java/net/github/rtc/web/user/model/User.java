@@ -83,11 +83,11 @@ public class User {
         this.faculty = faculty;
     }
 
-    public String getMajor() {
+    public String getSpeciality() {
         return speciality;
     }
 
-    public void setMajor(String speciality) {
+    public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
 
@@ -172,9 +172,9 @@ public class User {
 
     }
 
-    public User(Integer id, String fio, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
+    public User(String fio, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
        
-        this.id=id;
+       
         this.fio = fio;
         this.phone = phone;
         this.email = email;
@@ -188,7 +188,7 @@ public class User {
         this.note = note;
         this.password = password;
     }
-   /* public User (Integer id, String fio, String phone, String email, String city, String university, String faculty, String password)
+    public User (Integer id, String fio, String phone, String email, String city, String university, String faculty, String password)
     {
         this.id=id;
          this.fio = fio;
@@ -206,6 +206,6 @@ public class User {
         this.password = password;
     }
 
-*/
+
 
 }
