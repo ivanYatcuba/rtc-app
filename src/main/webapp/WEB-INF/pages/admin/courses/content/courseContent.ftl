@@ -1,6 +1,11 @@
-    <h3 class="page-header">${course.name} Details:</h3>
+<!DOCTYPE HTML>
+<div  class="container">
+    <h3>${course.name} Details:</h3>
+    <hr width="100%" >
 
-            <div class="row-fluid" style="margin-left: 1px">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row-fluid">
                 <div class="span2"  align="right">
                     <p>Course name: </p>
                     <p>Category: </p>
@@ -34,3 +39,8 @@
                     <a href="<@spring.url "/admin/courses" />"><@spring.message "coursesPage.action.cancel"/></a>
                 </div>
             </div>
+        </div>
+
+    </div>
+
+</div>
