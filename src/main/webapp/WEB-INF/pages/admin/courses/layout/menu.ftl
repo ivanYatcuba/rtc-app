@@ -1,27 +1,10 @@
-<div class="menu">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-
-    <script>
-        $(function() {
-            $("#menuIteams").accordion();
-        });
-    </script>
-
-    <div id="menuIteams" height = "100%">
-        <h3>Iteam 1</h3>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <p>Something interesting</p>
-            </div>
-        </div>
-        <h3>Iteam 2</h3>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <p>More interesting</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
+        <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Item 1</a></li>
+            <li><a href="#">Item 2</a></li>
+            <li><a href="#">Item 3</a></li>
+            <li><a href="#">Item 4</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+            <li><a href="">Item 5</a></li>
+            <li><a href="">Item 6</a></li>
+        </ul>
