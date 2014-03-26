@@ -73,4 +73,9 @@ public class CoursesResourceImpl extends AbstractResource implements CoursesReso
                 .toUri();
         return Arrays.asList(restTemplate.getForObject(targetUrl, Courses[].class));
     }
+
+    @Override
+    public int getCount() {
+        return restTemplate.getForObject(hostUrl + "courses/count", Integer.class);
+    }
 }
