@@ -199,7 +199,7 @@ public class User {
         this.university = university;
         this.faculty = faculty;
         this.speciality = "bb";
-        this.technologies = null;
+       
         this.writtenEng = 1;
         this.oralEng = 2;
         this.note = "df";
