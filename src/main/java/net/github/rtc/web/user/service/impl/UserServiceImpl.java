@@ -9,7 +9,7 @@ package net.github.rtc.web.user.service.impl;
 //import net.github.rtc.web.courses.service.impl.*;
 import net.github.rtc.web.user.model.User;
 import java.util.Collection;
-import net.github.rtc.web.courses.exception.ServiceProcessingException;
+import net.github.rtc.web.exception.ServiceProcessingException;
 import net.github.rtc.web.user.resource.UserResource;
 import net.github.rtc.web.user.service.UserService;
 import org.slf4j.Logger;

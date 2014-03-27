@@ -237,36 +237,18 @@
 
             <properties>
                 <host.baseUrl>http://localhost:8079/api/</host.baseUrl>
-            </properties>
-        </profile>
-               <!-- My URL Lisitsa-->
-        <profile>
-                <id>dev1</id>
-                <activation>
-                    <activeByDefault>true</activeByDefault>
-                </activation>
-          
-            <properties> 
                 <host.userURL>http://localhost:8078/api/users-web-service/</host.userURL>
             </properties>
-            </profile>
-        
+        </profile>
         
         
         <profile>
             <id>prod</id>
             <properties>
                 <host.baseUrl>http://146.185.176.193:8079/api/</host.baseUrl>
-            </properties>
-                    
-        </profile>
-        
-        <profile>
-            <id>prod1</id>
-            <properties>
-                 <!-- My URL Lisitsa-->
                 <host.userURL>http://146.185.176.193:8078/api/users-web-service/</host.userURL>
             </properties>
+                    
         </profile>
         
         

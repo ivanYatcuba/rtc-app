@@ -1,4 +1,4 @@
-package net.github.rtc.web.courses.resource.impl;
+package net.github.rtc.web.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;

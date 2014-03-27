@@ -1,6 +1,7 @@
 package net.github.rtc.web.courses.resource.impl;
 
 import net.github.rtc.web.courses.resource.CategoryResource;
+import net.github.rtc.web.resource.AbstractResource;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;

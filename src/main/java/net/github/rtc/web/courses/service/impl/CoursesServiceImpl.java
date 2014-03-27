@@ -1,6 +1,6 @@
 package net.github.rtc.web.courses.service.impl;
 
-import net.github.rtc.web.courses.exception.ServiceProcessingException;
+import net.github.rtc.web.exception.ServiceProcessingException;
 import net.github.rtc.web.courses.model.Courses;
 import net.github.rtc.web.courses.resource.CoursesResource;
 import net.github.rtc.web.courses.service.CoursesService;

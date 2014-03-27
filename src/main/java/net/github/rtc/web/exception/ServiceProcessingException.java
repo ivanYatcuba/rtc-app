@@ -1,4 +1,4 @@
-package net.github.rtc.web.courses.exception;
+package net.github.rtc.web.exception;
 
 /**
  * Service processing exception

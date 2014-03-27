@@ -61,7 +61,7 @@ public class SearchFilter {
             map.put("name", title);
         }
         if (!startDate.equals(""))  {
-            map.put("date", startDate);
+            map.put("date", startDate.replace('.', '-'));
         }
         StringBuffer sb = new StringBuffer();
         String prefix = "";

@@ -3,6 +3,7 @@ package net.github.rtc.web.courses.resource.impl;
 import net.github.rtc.web.courses.model.Courses;
 import net.github.rtc.web.courses.resource.CoursesResource;
 import net.github.rtc.web.courses.utils.QueryParametersBuilder;
+import net.github.rtc.web.resource.AbstractResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;

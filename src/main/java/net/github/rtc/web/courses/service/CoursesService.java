@@ -25,7 +25,7 @@ public interface CoursesService {
      * Delete a course by code
      *
      * @param code course code
-     * @throws net.github.rtc.web.courses.exception.ServiceProcessingException
+     * @throws net.github.rtc.web.exception.ServiceProcessingException
      *          if code is null
      */
     void delete(String code);
@@ -35,7 +35,7 @@ public interface CoursesService {
      *
      * @param code course code
      * @return course object
-     * @throws net.github.rtc.web.courses.exception.ServiceProcessingException
+     * @throws net.github.rtc.web.exception.ServiceProcessingException
      *          if code is null
      */
     Courses findByCode(String code);
