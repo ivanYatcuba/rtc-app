@@ -6,6 +6,7 @@ import net.github.rtc.web.courses.service.CategoryService;
 import net.github.rtc.web.courses.service.CoursesService;
 import org.joda.time.DateTime;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,6 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * @author Vladislav Pikus
@@ -44,23 +49,23 @@ public class CoursesControllerTest {
         course = new Courses("codeTest", "nameTest", "DEV", new Author("Vasya", "Pupkin", "vasia@gmail.com"), DateTime.now().toDate(), DateTime.now().toDate());
     }
 
-    /*@Test
-    public void testIndex() throws Exception {
-        Collection<Courses> courses = Arrays.asList(course);
-        when(mockService.findAll()).thenReturn(courses);
-        mockMvc.perform(get("/admin/courses")).andExpect(status().isOk())
-                .andExpect(model().attribute("courses", courses))
-                .andExpect(view().name("admin/courses/layout"));
-        verify(mockService, times(1)).findAll();
-        verifyNoMoreInteractions(mockService);
-    }*/
+   /* @Test
+public void testIndex() throws Exception {
+Collection<Courses> courses = Arrays.asList(course);
+when(mockService.findAll()).thenReturn(courses);
+mockMvc.perform(get("/admin/courses")).andExpect(status().isOk())
+.andExpect(model().attribute("courses", courses))
+.andExpect(view().name("admin/courses/layout"));
+verify(mockService, times(1)).findAll();
+verifyNoMoreInteractions(mockService);
+} */
 
-    /*@Test
+    @Test
     public void testDelete() throws Exception {
         String code = "fd29a957-01e0-4219-bbba-36188aa949fa";
         mockMvc.perform(get("/admin/courses/delete/{code}", code))
                 .andExpect(status().isMovedTemporarily())
-                .andExpect(view().name("redirect:/admin/layout"));
+                .andExpect(view().name("redirect:/admin/courses"));
         verify(mockService, times(1)).delete(code);
         verifyNoMoreInteractions(mockService);
     }
@@ -74,8 +79,9 @@ public class CoursesControllerTest {
         mockMvc.perform(get("/admin/courses/{code}", code)).
                 andExpect(status().isOk()).
                 andExpect(model().attribute("course", testCourse)).
-                andExpect(view().name("admin/courses/course"));
+                andExpect(view().name("admin/courses/layout"));
         verify(mockService, times(1)).findByCode(code);
         verifyNoMoreInteractions(mockService);
-    } */
+    }
 }
+
