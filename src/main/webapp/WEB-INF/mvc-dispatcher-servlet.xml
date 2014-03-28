@@ -13,7 +13,7 @@
 
         >
 
-    <context:component-scan base-package="rtc.app.controllers, net.github.rtc.web, org.util.rtc"/>
+    <context:component-scan base-package="rtc.app.controllers, rtc.app.controllers.admin, net.github.rtc.web, org.util.rtc"/>
 
     <import resource="classpath:/spring/restTemplate.xml"/>
 
