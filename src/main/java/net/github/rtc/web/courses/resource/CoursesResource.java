@@ -57,4 +57,6 @@ public interface CoursesResource {
      * @return course collection
      */
     Collection<Courses> findByFilter(Map<String, String> filter);
+
+    int getCount();
 }

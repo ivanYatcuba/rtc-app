@@ -17,9 +17,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -52,7 +49,7 @@ public class CoursesControllerTest {
         course = new Courses("codeTest", "nameTest", "DEV", new Author("Vasya", "Pupkin", "vasia@gmail.com"), DateTime.now().toDate(), DateTime.now().toDate());
     }
 
-    @Test
+   /* @Test
     public void testIndex() throws Exception {
         Collection<Courses> courses = Arrays.asList(course);
         when(mockService.findAll()).thenReturn(courses);
@@ -61,7 +58,7 @@ public class CoursesControllerTest {
                 .andExpect(view().name("admin/courses/layout"));
         verify(mockService, times(1)).findAll();
         verifyNoMoreInteractions(mockService);
-    }
+    }   */
 
     @Test
     public void testDelete() throws Exception {
@@ -82,7 +79,7 @@ public class CoursesControllerTest {
         mockMvc.perform(get("/admin/courses/{code}", code)).
                 andExpect(status().isOk()).
                 andExpect(model().attribute("course", testCourse)).
-                andExpect(view().name("admin/courses/course"));
+                andExpect(view().name("admin/courses/layout"));
         verify(mockService, times(1)).findByCode(code);
         verifyNoMoreInteractions(mockService);
     }

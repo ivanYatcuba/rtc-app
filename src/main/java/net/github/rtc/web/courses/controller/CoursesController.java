@@ -1,10 +1,12 @@
 package net.github.rtc.web.courses.controller;
 
 import net.github.rtc.web.courses.model.Courses;
+import net.github.rtc.web.courses.model.Page;
 import net.github.rtc.web.courses.model.SearchFilter;
 import net.github.rtc.web.courses.propertyeditors.CustomTagsEditor;
 import net.github.rtc.web.courses.service.CategoryService;
 import net.github.rtc.web.courses.service.CoursesService;
+import net.github.rtc.web.courses.utils.Paginator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Controller for {@link net.github.rtc.web.courses.model.Courses}
@@ -45,17 +49,36 @@ public class CoursesController {
         this.categoryService = categoryService;
     }
 
+    private Paginator paginator;
+
+    @Autowired
+    public void setPaginator(Paginator paginator) {
+        this.paginator = paginator;
+    }
+
     /**
      * Processes the request to view all courses page
      *
      * @return modelAndView("admin/courses/courses")
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView index() {
+    public ModelAndView index(@RequestParam(required = true, defaultValue = "1") int page) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        Collection<Courses> courses = coursesService.findAll();
+
+        Page pageModel = paginator.getPage(page, coursesService.getCount());
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("pageNumber" , String.valueOf(pageModel.getCurrent() - 1));
+        map.put("maxResult" , String.valueOf(paginator.getMaxPerPage()));
+        mav.addObject("currentPage", pageModel.getCurrent());
+        mav.addObject("lastPage", pageModel.getLast());
+        mav.addObject("nextPage", pageModel.getNext());
+        mav.addObject("prevPage", pageModel.getPrev());
+        mav.addObject("startPage", pageModel.getStart());
+
+        Collection<Courses> courses = coursesService.findByFilter(map);
         mav.addObject("courses", courses);
         mav.addObject("content", "listContent");
+        mav.addObject("isFiltered", false);
         return mav;
     }
 
@@ -97,11 +120,24 @@ public class CoursesController {
      * @return modelAndView("admin/courses/courses")
      */
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public ModelAndView filter(@ModelAttribute("searchFilter") SearchFilter searchFilter) {
+    public ModelAndView filter(@ModelAttribute("searchFilter") SearchFilter searchFilter,
+                               @RequestParam(required = true, defaultValue = "1") int page) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "listContent");
-        Collection<Courses> courses = coursesService.findByFilter(searchFilter.getMap());
+
+        Page pageModel = paginator.getPage(page, coursesService.getCount());
+        Map<String, String> map = searchFilter.getMap();
+        map.put("pageNumber" , String.valueOf(pageModel.getCurrent() - 1));
+        map.put("maxResult" , String.valueOf(paginator.getMaxPerPage()));
+        mav.addObject("currentPage", pageModel.getCurrent());
+        mav.addObject("lastPage", pageModel.getLast());
+        mav.addObject("nextPage", pageModel.getNext());
+        mav.addObject("prevPage", pageModel.getPrev());
+        mav.addObject("startPage", pageModel.getStart());
+
+        Collection<Courses> courses = coursesService.findByFilter(map);
         mav.addObject("courses", courses);
+        mav.addObject("isFiltered", false);
         return mav;
     }
 

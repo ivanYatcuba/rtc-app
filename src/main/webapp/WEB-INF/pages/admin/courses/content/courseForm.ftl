@@ -1,4 +1,4 @@
-    <div class="row-fluid span12" >
+    <div class="row-fluid span12" style="margin-left: 1px">
 
             <div class="span6" >
                 <@spring.formItem "course.name"/>

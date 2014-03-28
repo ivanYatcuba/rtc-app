@@ -95,4 +95,9 @@ public class CoursesServiceImpl implements CoursesService {
     public Collection<Courses> findByFilter(Map<String, String> filter) {
         return resource.findByFilter(filter);
     }
+
+    @Override
+    public int getCount() {
+        return resource.getCount();
+    }
 }
