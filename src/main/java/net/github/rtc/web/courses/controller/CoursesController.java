@@ -1,8 +1,12 @@
 package net.github.rtc.web.courses.controller;
 
 import net.github.rtc.web.courses.model.Courses;
+import net.github.rtc.web.courses.model.Page;
+import net.github.rtc.web.courses.model.SearchFilter;
 import net.github.rtc.web.courses.propertyeditors.CustomTagsEditor;
+import net.github.rtc.web.courses.service.CategoryService;
 import net.github.rtc.web.courses.service.CoursesService;
+import net.github.rtc.web.courses.utils.Paginator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -14,9 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Controller for {@link net.github.rtc.web.courses.model.Courses}
@@ -24,26 +29,56 @@ import java.util.Date;
  * @author Vladislav Pikus
  */
 @Controller("coursesController")
-@RequestMapping("/courses")
+@RequestMapping("admin/courses")
 public class CoursesController {
 
-    private CoursesService service;
+    private static final String ROOT = "admin/courses";
+    private static final String ROOT_MODEL = "course";
+
+    private CoursesService coursesService;
 
     @Autowired
-    public void setService(CoursesService service) {
-        this.service = service;
+    public void setCoursesService(CoursesService coursesService) {
+        this.coursesService = coursesService;
+    }
+
+    private CategoryService categoryService;
+
+    @Autowired
+    public void setCategoryService(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    private Paginator paginator;
+
+    @Autowired
+    public void setPaginator(Paginator paginator) {
+        this.paginator = paginator;
     }
 
     /**
      * Processes the request to view all courses page
      *
-     * @return modelAndView("courses/courses")
+     * @return modelAndView("admin/courses/courses")
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("courses/courses");
-        Collection<Courses> courses = service.findAll();
+    public ModelAndView index(@RequestParam(required = true, defaultValue = "1") int page) {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+
+        Page pageModel = paginator.getPage(page, coursesService.getCount());
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("pageNumber" , String.valueOf(pageModel.getCurrent() - 1));
+        map.put("maxResult" , String.valueOf(paginator.getMaxPerPage()));
+        mav.addObject("currentPage", pageModel.getCurrent());
+        mav.addObject("lastPage", pageModel.getLast());
+        mav.addObject("nextPage", pageModel.getNext());
+        mav.addObject("prevPage", pageModel.getPrev());
+        mav.addObject("startPage", pageModel.getStart());
+
+        Collection<Courses> courses = coursesService.findByFilter(map);
         mav.addObject("courses", courses);
+        mav.addObject("content", "listContent");
+        mav.addObject("isFiltered", false);
         return mav;
     }
 
@@ -52,73 +87,176 @@ public class CoursesController {
      * Url example: "/delete/1". Parse by pattern: "/delete/{courseId}"
      * If all is well, we get redirected to "course"
      *
-     * @param courseId course ID
-     * @return redirect to "/course"
+     * @param courseCode course ID
+     * @return redirect to "/admin/courses"
      */
-    @RequestMapping(value = "/delete/{courseId}", method = RequestMethod.GET)
-    public String delete(@PathVariable Integer courseId) {
-        service.delete(courseId);
-        return "redirect:/courses";
+    @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
+    public String delete(@PathVariable String courseCode) {
+        coursesService.delete(courseCode);
+        return "redirect:/" + ROOT;
     }
 
-    @RequestMapping(value = "/{courseId}", method = RequestMethod.GET)
-    public ModelAndView single(@PathVariable Integer courseId) {
-        ModelAndView mav = new ModelAndView("courses/course");
-        Courses course = service.findById(courseId);
+    /**
+     * Process the request to get details about course by selected code
+     * URL example: "/1". Parse by pattern: "/{code}"
+     * if success go to view "admin/courses/course")
+     *
+     * @param courseCode course code
+     * @return modelAndView("admin/courses/course")
+     */
+    @RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
+    public ModelAndView single(@PathVariable String courseCode) {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        Courses course = coursesService.findByCode(courseCode);
         mav.addObject("course", course);
+        mav.addObject("content", "courseContent");
         return mav;
     }
 
+    /**
+     * Process the request to get view about course by custom filter
+     *
+     * @param searchFilter searchFilter model
+     * @return modelAndView("admin/courses/courses")
+     */
+    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    public ModelAndView filter(@ModelAttribute("searchFilter") SearchFilter searchFilter,
+                               @RequestParam(required = true, defaultValue = "1") int page) {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", "listContent");
+
+        Page pageModel = paginator.getPage(page, coursesService.getCount());
+        Map<String, String> map = searchFilter.getMap();
+        map.put("pageNumber" , String.valueOf(pageModel.getCurrent() - 1));
+        map.put("maxResult" , String.valueOf(paginator.getMaxPerPage()));
+        mav.addObject("currentPage", pageModel.getCurrent());
+        mav.addObject("lastPage", pageModel.getLast());
+        mav.addObject("nextPage", pageModel.getNext());
+        mav.addObject("prevPage", pageModel.getPrev());
+        mav.addObject("startPage", pageModel.getStart());
+
+        Collection<Courses> courses = coursesService.findByFilter(map);
+        mav.addObject("courses", courses);
+        mav.addObject("isFiltered", false);
+        return mav;
+    }
+
+    /**
+     * Process the request to get create course form
+     *
+     * @return modelAndView("admin/courses/layout")
+     */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
-        ModelAndView mav = new ModelAndView("courses/create_courses");
-        Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
-        mav.addObject("categories", categories);
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", "createContent");
         return mav;
     }
 
+    /**
+     * Process the request to post entered course in the form
+     *
+     * @param course        course object
+     * @param bindingResult binding course result
+     * @param session       current session
+     * @return if all is OK the redirect to view new course or return to edit course
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute("course") @Valid Courses course,
+    public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid Courses course,
                              BindingResult bindingResult,
                              SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            ModelAndView mav = new ModelAndView("courses/create_courses");
-            Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
-            mav.addObject("categories", categories);
-            return mav;
+            return modelAndViewContentBuilder("createContent");
         }
-        course = service.create(course);
+        course = coursesService.create(course);
         session.setComplete();
-        return new ModelAndView("redirect:/courses/" + course.getId());
+        return new ModelAndView("redirect:/" + ROOT + "/" + course.getCode());
     }
 
-    @RequestMapping(value = "/{courseId}/update", method = RequestMethod.GET)
-    public ModelAndView update(@PathVariable Integer courseId) {
-        ModelAndView mav = new ModelAndView("courses/update");
-        mav.getModelMap().addAttribute("course", service.findById(courseId));
-        Collection<String> categories = Arrays.asList("DEV", "BA", "QA");
-        mav.addObject("categories", categories);
+    /**
+     * Process the request to get edit course form
+     *
+     * @return modelAndView("admin/courses/layout")
+     */
+    @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
+    public ModelAndView update(@PathVariable String courseCode) {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.getModelMap().addAttribute("course", coursesService.findByCode(courseCode));
+        mav.addObject("content", "updateContent");
         return mav;
     }
 
+    /**
+     * Process the request to post entered course in the form
+     *
+     * @param course        course object
+     * @param bindingResult binding course result
+     * @param session       current session
+     * @return if all is OK the redirect to view course or return to edit course
+     */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute("course") Courses course,
-                         BindingResult bindingResult,
-                         SessionStatus session) {
-        service.update(course);
+    public ModelAndView update(@ModelAttribute(ROOT_MODEL) Courses course,
+                               BindingResult bindingResult,
+                               SessionStatus session) {
+        if (bindingResult.hasErrors()) {
+            return modelAndViewContentBuilder("updateContent");
+        }
+        coursesService.update(course);
         session.setComplete();
-        return "redirect:/courses/" + course.getId();
+        return new ModelAndView("redirect:/" + ROOT + "/" + course.getCode());
     }
 
-    @InitBinder("course")
+    /**
+     * Binding course conditions for entry into the form conclusions
+     *
+     * @param binder
+     */
+    @InitBinder(ROOT_MODEL)
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
     }
 
-    @ModelAttribute(value = "course")
+    /**
+     * Prepare collection categories as model attribute
+     *
+     * @return collection categories
+     */
+    @ModelAttribute("categories")
+    public Collection<String> getCategories() {
+        return categoryService.findAll();
+    }
+
+    /**
+     * Prepare searchFilter as model attribute
+     *
+     * @return searchFilter object
+     */
+    @ModelAttribute("searchFilter")
+    public SearchFilter getFilter() {
+        return new SearchFilter();
+    }
+
+    /**
+     * Prepare course as model attribute
+     *
+     * @return course object
+     */
+    @ModelAttribute(value = ROOT_MODEL)
     public Courses getCommandObject() {
         return new Courses();
+    }
+
+    /**
+     * build MAV
+     *
+     * @param content content name
+     * @return configurated mav
+     */
+    private ModelAndView modelAndViewContentBuilder(String content) {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", content);
+        return mav;
     }
 }

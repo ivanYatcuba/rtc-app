@@ -1,6 +1,8 @@
-package net.github.rtc.web.courses.exception;
+package net.github.rtc.web.exception;
 
 /**
+ * Service processing exception
+ *
  * @author Vladislav Pikus
  */
 public class ServiceProcessingException extends RuntimeException {

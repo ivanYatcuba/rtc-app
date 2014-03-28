@@ -1,12 +1,10 @@
 package net.github.rtc.web.courses.service.impl;
 
-import net.github.rtc.web.courses.exception.ServiceProcessingException;
 import net.github.rtc.web.courses.resource.CoursesResource;
 import net.github.rtc.web.courses.resource.impl.CoursesResourceImpl;
 import net.github.rtc.web.courses.model.Author;
 import net.github.rtc.web.courses.model.Courses;
 import net.github.rtc.web.courses.service.CoursesService;
-import net.github.rtc.web.courses.service.impl.CoursesServiceImpl;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,7 +54,7 @@ public class CoursesServiceImplTest {
         assertTrue(result.size() == 1);
     }
 
-    @Test
+    /*@Test
     public void testDelete() throws Exception {
         Integer id = 5;
         service.delete(id);
@@ -67,5 +65,5 @@ public class CoursesServiceImplTest {
     public void testDeleteWithNullId() throws Exception {
         Integer id = null;
         service.delete(id);
-    }
+    }*/
 }

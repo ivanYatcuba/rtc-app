@@ -1,9 +1,9 @@
 package net.github.rtc.web.courses.model;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
@@ -12,17 +12,16 @@ import java.io.Serializable;
  */
 @XmlRootElement
 public class Author implements Serializable {
-    private Integer id;
 
-    @NotEmpty
-    @Size(min = 2, max = 30)
+    @NotBlank
+    @Length(min = 2, max = 30)
     private String firstName;
 
-    @NotEmpty
-    @Size(min = 2, max = 30)
+    @NotBlank
+    @Length(min = 2, max = 30)
     private String lastName;
 
-    @NotEmpty
+    @NotBlank
     @Email
     private String email;
 
@@ -50,14 +49,6 @@ public class Author implements Serializable {
         this.email = email;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Author() {
 
     }
@@ -77,7 +68,6 @@ public class Author implements Serializable {
 
         if (email != null ? !email.equals(author.email) : author.email != null) return false;
         if (firstName != null ? !firstName.equals(author.firstName) : author.firstName != null) return false;
-        if (id != null ? !id.equals(author.id) : author.id != null) return false;
         if (lastName != null ? !lastName.equals(author.lastName) : author.lastName != null) return false;
 
         return true;
@@ -85,8 +75,7 @@ public class Author implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        int result = firstName != null ? firstName.hashCode() : 0;
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
@@ -95,8 +84,7 @@ public class Author implements Serializable {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Author{");
-        sb.append("id=").append(id);
-        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append("firstName='").append(firstName).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append('}');

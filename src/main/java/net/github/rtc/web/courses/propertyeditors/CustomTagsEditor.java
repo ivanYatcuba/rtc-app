@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * Custom tags editor for tag collection
+ *
  * @author Vladislav Pikus
  */
 public class CustomTagsEditor extends PropertyEditorSupport {
@@ -23,7 +25,7 @@ public class CustomTagsEditor extends PropertyEditorSupport {
             Collection<Tags> tags = ((Collection<Tags>)obj);
             StringBuffer sb = new StringBuffer();
             for(Tags tag : tags) {
-                sb.append(tag.getValue()).append(", ");
+                sb.append(tag.getValue()).append(",");
             }
             return sb.toString();
        // } else {
@@ -33,7 +35,7 @@ public class CustomTagsEditor extends PropertyEditorSupport {
 
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
-        List<String> tagsSplit = Arrays.asList(text.split(", "));
+        List<String> tagsSplit = Arrays.asList(text.split(","));
         Collection<Tags> tags = new ArrayList<Tags>();
         for(String tagName : tagsSplit) {
             tags.add(new Tags(tagName));

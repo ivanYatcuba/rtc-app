@@ -1,0 +1,36 @@
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+[class*="head-"] {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #bebebe;
+    border: 1px solid #000000;
+}
+
+.head-2{
+     position: relative;
+     min-height: 1px;
+     padding-right: 15px;
+     padding-left: 15px;
+     width: 16.666667%;
+     float: left;
+ }
+
+.head-3{
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 25%;
+    float: left;
+}
+
+[class*="col-"] {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #ffffff;
+    border: 0px solid #000000;
+}

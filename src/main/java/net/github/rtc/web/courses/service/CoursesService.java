@@ -1,12 +1,14 @@
 package net.github.rtc.web.courses.service;
 
 import net.github.rtc.web.courses.model.Courses;
+//import com.springapp.mvc.User;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * Service Interface
- * Provides operations with {@link net.github.rtc.web.courses.model.Courses} objects
+ * Provides operations with {@link Courses} objects
  *
  * @author Vladislav Pikus
  * @author Dmitry Pritula
@@ -20,16 +22,46 @@ public interface CoursesService {
     Collection<Courses> findAll();
 
     /**
-     * Will be delete course by ID
-     * If ID is null then will be throw {@link net.github.rtc.web.courses.exception.ServiceProcessingException}
+     * Delete a course by code
      *
-     * @param id course ID
+     * @param code course code
+     * @throws net.github.rtc.web.exception.ServiceProcessingException
+     *          if code is null
      */
-    void delete(Integer id);
+    void delete(String code);
 
-    Courses findById(Integer id);
+    /**
+     * Find a course object by code
+     *
+     * @param code course code
+     * @return course object
+     * @throws net.github.rtc.web.exception.ServiceProcessingException
+     *          if code is null
+     */
+    Courses findByCode(String code);
 
+    /**
+     * Create a new course object
+     *
+     * @param course new course object
+     * @return course with updated fields
+     */
     Courses create(Courses course);
 
+    /**
+     * Update a course object
+     *
+     * @param course course object for update
+     */
     void update(Courses course);
+
+    /**
+     * Find course collection by filtering param
+     *
+     * @param filter filter map
+     * @return course collection
+     */
+    Collection<Courses> findByFilter(Map<String, String> filter);
+
+    int getCount();
 }

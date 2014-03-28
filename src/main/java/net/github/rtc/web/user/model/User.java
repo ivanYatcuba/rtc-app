@@ -1,13 +1,17 @@
-package com.springapp.mvc;
+package net.github.rtc.web.user.model;
 
 import org.util.rtc.annotation.*;
 
 import java.util.Date;
-import java.util.List;
+//import java.util.List;
+//import javax.xml.bind.annotation.XmlRootElement;
 
+//@XmlRootElement
 public class User {
+    
+    Integer id;
     @required
-    @maxlength(30)
+    @maxlength(50)
     @minlength(5)
     private String fio;
     @required
@@ -36,7 +40,8 @@ public class User {
     @minlength(5)
     @required
     private String speciality;
-    private List<String> technologies;
+
+   // private String technologies;
     @number
     private Integer writtenEng;
     @number
@@ -48,7 +53,15 @@ public class User {
         return city;
     }
 
+    public void  setId(Integer id)
+    {
+        this.id=id;
+    }
 
+    public Integer getId()
+    {
+        return this.id;
+    }
 
     public void setCity(String city) {
         this.city = city;
@@ -70,24 +83,24 @@ public class User {
         this.faculty = faculty;
     }
 
-    public String getMajor() {
+    public String getSpeciality() {
         return speciality;
     }
 
-    public void setMajor(String speciality) {
+    public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
 
     //maybe this getter maybe should be changed
     //I have no idea how to pass several technologies from a reg.form to a controller and user
-    public List<String> getTechnologies() {
+   /* public String getTechnologies() {
         return technologies;
     }
 
-    public void setTechnologies(List<String> technologies) {
+    public void setTechnologies(String technologies) {
         this.technologies = technologies;
     }
-
+*/
     public Integer getWrittenEng() {
         return writtenEng;
     }
@@ -152,13 +165,16 @@ public class User {
         this.birthDate = birthDate;
     }
 
+    
 
 
     public User(){
 
     }
 
-    public User(String fio, String phone, String email, Date birthDate, String city, String university, String faculty, String major, List<String> technologies, Integer writtenEng, Integer oralEng, String note, String password) {
+    public User(String fio, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
+       
+       
         this.fio = fio;
         this.phone = phone;
         this.email = email;
@@ -166,17 +182,15 @@ public class User {
         this.city = city;
         this.university = university;
         this.faculty = faculty;
-        this.speciality = major;
-        this.technologies = technologies;
+        this.speciality = speciality;
         this.writtenEng = writtenEng;
         this.oralEng = oralEng;
         this.note = note;
         this.password = password;
-
-        
     }
-    public User (String fio, String phone, String email, String city, String university, String faculty, String password)
+    public User (Integer id, String fio, String phone, String email, String city, String university, String faculty, String password)
     {
+        this.id=id;
          this.fio = fio;
         this.phone = phone;
         this.email = email;
@@ -185,11 +199,13 @@ public class User {
         this.university = university;
         this.faculty = faculty;
         this.speciality = "bb";
-        this.technologies = null;
+       
         this.writtenEng = 1;
         this.oralEng = 2;
         this.note = "df";
         this.password = password;
     }
+
+
 
 }
