@@ -3,33 +3,31 @@ package rtc.app.controllers;
 import com.springapp.mvc.Login;
 import com.springapp.mvc.Project;
 import net.github.rtc.web.user.model.User;
+import net.github.rtc.web.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 import org.util.rtc.validation.Validation;
 
 import java.util.ArrayList;
-
 import java.util.List;
-import net.github.rtc.web.user.service.UserService;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 
-@Controller
-@RequestMapping("/")
+//@Controller
+//@RequestMapping("/")
 public class PageController {
     private static List<Login> userLogin = new ArrayList<Login>();
     private static List<Project> project = new ArrayList<Project>();
     private List<User> users = new ArrayList<User>();
     private User fictUser = new User();
 
-    @Autowired
+  //  @Autowired
     Validation validation;
 
     static {
@@ -49,7 +47,7 @@ public class PageController {
 
     private UserService service;
 
-    @Autowired
+   // @Autowired
     public void setService(UserService service) {
         this.service = service;
     }
