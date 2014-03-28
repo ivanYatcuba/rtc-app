@@ -11,11 +11,7 @@
     <#include "layout/header.ftl">
 
     <div class="container-fluid" style="margin-bottom: 60px">
-        <div class="row" style="width: 940; height: 330;" >
-            <div  class="col-lg-6 col-lg-offset-2">
-                <#include "content/welcomeContent.ftl">
-            </div>
-        </div>
+            <#include "content/welcomeContent.ftl">
     </div>
 
     <#include "layout/footer.ftl">
