@@ -72,11 +72,8 @@ public class CoursesController {
         CoursesDTO dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
 
         Page pageModel = paginator.getPage(page, dto.getTotalCount());
-        mav.addObject("currentPage", pageModel.getCurrent());
-        mav.addObject("lastPage", pageModel.getLast());
-        mav.addObject("nextPage", pageModel.getNext());
-        mav.addObject("prevPage", pageModel.getPrev());
-        mav.addObject("startPage", pageModel.getStart());
+        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
+                .byNextPage().byPrevPage().byStartPage().toMap());
 
         mav.addObject("courses", dto.getCourses());
         mav.addObject("content", "listContent");
@@ -134,11 +131,8 @@ public class CoursesController {
                 .byTitle().byDate().byCategories().byTags().toString());
 
         Page pageModel = paginator.getPage(page, dto.getTotalCount());
-        mav.addObject("currentPage", pageModel.getCurrent());
-        mav.addObject("lastPage", pageModel.getLast());
-        mav.addObject("nextPage", pageModel.getNext());
-        mav.addObject("prevPage", pageModel.getPrev());
-        mav.addObject("startPage", pageModel.getStart());
+        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
+                .byNextPage().byPrevPage().byStartPage().toMap());
 
         mav.addObject("courses", dto.getCourses());
         mav.addObject("isFiltered", false);
