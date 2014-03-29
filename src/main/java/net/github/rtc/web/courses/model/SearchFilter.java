@@ -2,6 +2,7 @@ package net.github.rtc.web.courses.model;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -14,13 +15,6 @@ public class SearchFilter {
     private Collection<String> tags;
 
     public SearchFilter() {
-    }
-
-    public SearchFilter(int categoriesSize) {
-        int idx;
-        for (idx = 0; idx < categoriesSize; idx++) {
-            //categories.add(new Boolean(false));
-        }
     }
 
     public String getTitle() {
@@ -55,35 +49,82 @@ public class SearchFilter {
         this.tags = tags;
     }
 
-    public Map<String, String> getMap() {
-        Map<String, String> map = new HashMap<String, String>();
-        if (!title.equals("")) {
-            map.put("name", title);
-        }
-        if (!startDate.equals(""))  {
-            map.put("date", startDate.replace('.', '-'));
-        }
-        StringBuffer sb = new StringBuffer();
-        String prefix = "";
-        if (categories != null && categories.size() > 0) {
-            for (String cat : categories) {
-                sb.append(prefix);
-                prefix = ";";
-                sb.append(cat);
-            }
-            map.put("categories", sb.toString());
-        }
-        sb = new StringBuffer();
-        prefix = "";
-        if (tags != null && tags.size() > 0) {
-            for (String tag : tags) {
-                sb.append(prefix);
-                prefix = ";";
-                sb.append(tag);
-            }
-            map.put("tags", sb.toString());
+    public class QueryBuilder {
+        private Map<String, String> map;
+
+        public QueryBuilder() {
+            map = new HashMap<String, String>();
         }
 
-        return map;
+        public QueryBuilder(Map<String, String> map) {
+            this.map = map;
+        }
+
+        public QueryBuilder byTitle() {
+            if (!title.equals("")) {
+                map.put("name", title);
+            }
+            return this;
+        }
+
+        public QueryBuilder byDate() {
+            if (!startDate.equals(""))  {
+                map.put("date", startDate.replace('.', '-'));
+            }
+            return this;
+        }
+
+        public QueryBuilder byCategories() {
+            StringBuffer sb = new StringBuffer();
+            String prefix = "";
+            if (categories != null && categories.size() > 0) {
+                for (String cat : categories) {
+                    sb.append(prefix);
+                    prefix = ";";
+                    sb.append(cat);
+                }
+                map.put("categories", sb.toString());
+            }
+            return this;
+        }
+
+        public QueryBuilder byTags() {
+            StringBuffer sb = new StringBuffer();
+            String prefix = "";
+            if (tags != null && tags.size() > 0) {
+                for (String tag : tags) {
+                    sb.append(prefix);
+                    prefix = ";";
+                    sb.append(tag);
+                }
+                map.put("tags", sb.toString());
+            }
+            return this;
+        }
+
+        public Map<String, String> toMap() {
+            return map;
+        }
+
+        public String toString() {
+            StringBuffer query = new StringBuffer();
+            Iterator iterator = map.entrySet().iterator();
+            String prefix = (query.length() > 0) ? "&" : "";
+            while (iterator.hasNext()) {
+                Map.Entry mapEntry = (Map.Entry) iterator.next();
+                query.append(prefix).append(mapEntry.getKey()).append("=").append(mapEntry.getValue());
+                prefix = "&";
+            }
+
+            return query.toString();
+        }
+    }
+
+    public QueryBuilder createQuery(Map<String, String> map) {
+        return new QueryBuilder(map);
+    }
+
+    public QueryBuilder createQuery() {
+        return new QueryBuilder();
     }
 }

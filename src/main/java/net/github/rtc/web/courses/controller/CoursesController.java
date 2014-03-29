@@ -1,6 +1,7 @@
 package net.github.rtc.web.courses.controller;
 
 import net.github.rtc.web.courses.model.Courses;
+import net.github.rtc.web.courses.model.CoursesDTO;
 import net.github.rtc.web.courses.model.Page;
 import net.github.rtc.web.courses.model.SearchFilter;
 import net.github.rtc.web.courses.propertyeditors.CustomTagsEditor;
@@ -65,18 +66,19 @@ public class CoursesController {
     public ModelAndView index(@RequestParam(required = true, defaultValue = "1") int page) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
 
-        Page pageModel = paginator.getPage(page, coursesService.getCount());
         Map<String, String> map = new HashMap<String, String>();
-        map.put("pageNumber" , String.valueOf(pageModel.getCurrent() - 1));
-        map.put("maxResult" , String.valueOf(paginator.getMaxPerPage()));
+        map.put("pageNumber", String.valueOf(page - 1));
+        map.put("maxResult", String.valueOf(paginator.getMaxPerPage()));
+        CoursesDTO dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
+
+        Page pageModel = paginator.getPage(page, dto.getTotalCount());
         mav.addObject("currentPage", pageModel.getCurrent());
         mav.addObject("lastPage", pageModel.getLast());
         mav.addObject("nextPage", pageModel.getNext());
         mav.addObject("prevPage", pageModel.getPrev());
         mav.addObject("startPage", pageModel.getStart());
 
-        Collection<Courses> courses = coursesService.findByFilter(map);
-        mav.addObject("courses", courses);
+        mav.addObject("courses", dto.getCourses());
         mav.addObject("content", "listContent");
         mav.addObject("isFiltered", false);
         return mav;
@@ -125,18 +127,20 @@ public class CoursesController {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "listContent");
 
-        Page pageModel = paginator.getPage(page, coursesService.getCount());
-        Map<String, String> map = searchFilter.getMap();
-        map.put("pageNumber" , String.valueOf(pageModel.getCurrent() - 1));
-        map.put("maxResult" , String.valueOf(paginator.getMaxPerPage()));
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("pageNumber", String.valueOf(page - 1));
+        map.put("maxResult", String.valueOf(paginator.getMaxPerPage()));
+        CoursesDTO dto = coursesService.findByFilter(searchFilter.createQuery(map)
+                .byTitle().byDate().byCategories().byTags().toString());
+
+        Page pageModel = paginator.getPage(page, dto.getTotalCount());
         mav.addObject("currentPage", pageModel.getCurrent());
         mav.addObject("lastPage", pageModel.getLast());
         mav.addObject("nextPage", pageModel.getNext());
         mav.addObject("prevPage", pageModel.getPrev());
         mav.addObject("startPage", pageModel.getStart());
 
-        Collection<Courses> courses = coursesService.findByFilter(map);
-        mav.addObject("courses", courses);
+        mav.addObject("courses", dto.getCourses());
         mav.addObject("isFiltered", false);
         return mav;
     }

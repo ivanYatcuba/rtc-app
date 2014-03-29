@@ -4,7 +4,6 @@ import com.springapp.mvc.Login;
 import com.springapp.mvc.Project;
 import net.github.rtc.web.user.model.User;
 import net.github.rtc.web.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;

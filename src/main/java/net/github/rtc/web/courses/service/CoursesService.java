@@ -1,10 +1,9 @@
 package net.github.rtc.web.courses.service;
 
 import net.github.rtc.web.courses.model.Courses;
-//import com.springapp.mvc.User;
+import net.github.rtc.web.courses.model.CoursesDTO;
 
-import java.util.Collection;
-import java.util.Map;
+//import com.springapp.mvc.User;
 
 /**
  * Service Interface
@@ -14,12 +13,6 @@ import java.util.Map;
  * @author Dmitry Pritula
  */
 public interface CoursesService {
-    /**
-     * Find collection of courses
-     *
-     * @return collection of courses
-     */
-    Collection<Courses> findAll();
 
     /**
      * Delete a course by code
@@ -58,10 +51,8 @@ public interface CoursesService {
     /**
      * Find course collection by filtering param
      *
-     * @param filter filter map
-     * @return course collection
+     * @param query filter query
+     * @return courseDTO
      */
-    Collection<Courses> findByFilter(Map<String, String> filter);
-
-    int getCount();
+    CoursesDTO findByFilter(String query);
 }
