@@ -22,16 +22,21 @@ public class UserController {
     private UserService userService;
 
 
-    @RequestMapping (value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping (value = "/qwe", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         User user = userService.findById(id);
-        mav.addObject("user", user);
+        //mav.addObject("user", user);
         mav.addObject("content", "ViewAll");
         return mav;
        // return "ViewAll";
     }
 
-
+    @RequestMapping(value = "/ViewAll", method = RequestMethod.GET)
+    public ModelAndView View() {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", "ViewAll");
+        return mav;
+    }
 
 }
