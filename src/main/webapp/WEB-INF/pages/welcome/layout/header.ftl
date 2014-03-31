@@ -10,7 +10,7 @@
                 <li><a href="#contact">Register</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../navbar/">Sing in</a></li>
+                <li><a href="../navbar/">Sign in</a></li>
             </ul>
         </div>
     </div>
