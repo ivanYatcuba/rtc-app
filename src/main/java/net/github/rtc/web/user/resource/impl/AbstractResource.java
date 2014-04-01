@@ -18,12 +18,11 @@ public abstract class AbstractResource {
     }
 
     protected String hostUrl;
+    
 
     public void setHostUrl(String hostUrl) {
         this.hostUrl = hostUrl;
     }
 
-    public String getHostUrl() {
-        return hostUrl;
-    }
+   
 }

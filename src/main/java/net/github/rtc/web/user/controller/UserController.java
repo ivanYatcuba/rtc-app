@@ -3,6 +3,12 @@ package net.github.rtc.web.user.controller;
 
 
 
+
+import java.util.Collection;
+import net.github.rtc.web.user.model.User;
+import net.github.rtc.web.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +26,12 @@ public class UserController {
 
     private static final String ROOT = "admin";
   //  private static final String ROOT2 = "admin/user";
-  //  private UserService userService;
-
+   private UserService userService;
+     @Autowired
+    public void setService(UserService service) {
+        this.userService = service;
+    }
+Collection <User> listUser;
 
   /*  @RequestMapping (value = "/qwe", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable Integer id) {
@@ -37,6 +47,8 @@ public class UserController {
     public ModelAndView View() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content1", "ViewAll");
+        listUser=userService.findAll();
+        mav.addObject("users", listUser);
         return mav;
     }
 

@@ -10,16 +10,29 @@ import java.util.Collection;
 
 @Component("UserDao")
 public class UserResourceImpl extends AbstractResource implements UserResource {
-
+ protected String userUrl;
+    public String getHostUrl() {
+        return hostUrl;
+    }
+    public String getUserUrl()
+    {
+        return this.userUrl;
+    }
+    public void setUserUrl(String userUrl)
+    {
+        this.userUrl=userUrl;
+    }
 
     @Override
     public User findById(Integer id) {
-        return restTemplate.getForObject(hostUrl + "user/{id}", User.class, id);
+        return restTemplate.getForObject(userUrl + "user/{id}", User.class, id);
     }
 
     @Override
     public Collection<User> findAll() {
-        return Arrays.asList(restTemplate.getForObject(hostUrl + "users", User[].class));
+       // return Arrays.asList(restTemplate.getForObject(userUrl + "users", User[].class));
+        String request = userUrl+"viewAll";
+        return Arrays.asList(restTemplate.getForObject(request, User[].class));
     }
 
 }

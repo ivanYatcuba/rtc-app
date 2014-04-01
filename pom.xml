@@ -220,12 +220,14 @@
 
             <properties>
                 <host.baseUrl>http://localhost:8079/api/</host.baseUrl>
+                <host.userUrl>http://localhost:8078/api/users-web-service/</host.userUrl>
             </properties>
         </profile>
         <profile>
             <id>prod</id>
             <properties>
                 <host.baseUrl>http://146.185.176.193:8079/api/</host.baseUrl>
+                 <host.userUrl>http://146.185.176.193:8078/api/users-web-service/</host.userUrl>
             </properties>
         </profile>
     </profiles>
