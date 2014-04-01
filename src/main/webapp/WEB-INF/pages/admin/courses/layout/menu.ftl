@@ -1,6 +1,6 @@
 <div class="col-sm-3 col-md-2 sidebar" >
     <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Courses</a></li>
-            <li class="active"><a href="#">Users</a></li>
+            <li class="active"><a href="http://localhost:8080/admin/courses/listContent">Courses</a></li>
+            <li class="active"><a href="http://localhost:8080/admin/user/ViewAll">Users</a></li>
     </ul>
 </div>
