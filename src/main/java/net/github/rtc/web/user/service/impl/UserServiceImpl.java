@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 /**
  * Service Implementation
  * This's a wrapper for {@link net.github.rtc.web.courses.service.CoursesService}
@@ -36,6 +38,9 @@ public class UserServiceImpl implements UserService {
 
     }
 
-
+    @Override
+    public Collection<User> findAll() {
+        return resource.findAll();
+    }
 
 }

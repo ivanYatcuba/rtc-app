@@ -2,6 +2,7 @@ package net.github.rtc.web.user.service;
 
 import net.github.rtc.web.user.model.User;
 
+import java.util.Collection;
 
 
 /**
@@ -15,5 +16,5 @@ public interface UserService {
 
     User findById(Integer id);
 
-
+    Collection<User> findAll();
 }
