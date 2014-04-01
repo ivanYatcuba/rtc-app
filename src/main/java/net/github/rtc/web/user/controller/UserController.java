@@ -1,10 +1,10 @@
 package net.github.rtc.web.user.controller;
 
 
-import net.github.rtc.web.user.model.User;
-import net.github.rtc.web.user.service.UserService;
+
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,8 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     private static final String ROOT = "admin";
-    private static final String ROOT2 = "admin/user";
-    private UserService userService;
+  //  private static final String ROOT2 = "admin/user";
+  //  private UserService userService;
 
 
   /*  @RequestMapping (value = "/qwe", method = RequestMethod.GET)
