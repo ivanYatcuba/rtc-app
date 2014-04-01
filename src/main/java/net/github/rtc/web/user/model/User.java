@@ -1,14 +1,18 @@
 package net.github.rtc.web.user.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.util.rtc.annotation.*;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Collection;
 import java.util.Date;
 //import java.util.List;
 //import javax.xml.bind.annotation.XmlRootElement;
 
-//@XmlRootElement
-public class User {
-    
+@XmlRootElement
+public class User implements UserDetails {
+
     Integer id;
     @required
     @maxlength(50)
@@ -41,7 +45,7 @@ public class User {
     @required
     private String speciality;
 
-   // private String technologies;
+    // private String technologies;
     @number
     private Integer writtenEng;
     @number
@@ -49,17 +53,71 @@ public class User {
     private String note;
     private String password;
 
+    /* Spring Security fields*/
+    private Collection<Role> authorities;
+    private boolean accountNonExpired = true;
+    private boolean accountNonLocked = true;
+    private boolean credentialsNonExpired = true;
+    private boolean enabled = true;
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Collection<Role> authorities) {
+        this.authorities = authorities;
+    }
+
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    /**
+     * *********************************
+     */
+
     public String getCity() {
         return city;
     }
 
-    public void  setId(Integer id)
-    {
-        this.id=id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return this.id;
     }
 
@@ -165,16 +223,14 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    
 
-
-    public User(){
+    public User() {
 
     }
 
     public User(String fio, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
-       
-       
+
+
         this.fio = fio;
         this.phone = phone;
         this.email = email;
@@ -188,10 +244,10 @@ public class User {
         this.note = note;
         this.password = password;
     }
-    public User (Integer id, String fio, String phone, String email, String city, String university, String faculty, String password)
-    {
-        this.id=id;
-         this.fio = fio;
+
+    public User(Integer id, String fio, String phone, String email, String city, String university, String faculty, String password) {
+        this.id = id;
+        this.fio = fio;
         this.phone = phone;
         this.email = email;
         this.birthDate = new Date();
@@ -199,13 +255,12 @@ public class User {
         this.university = university;
         this.faculty = faculty;
         this.speciality = "bb";
-       
+
         this.writtenEng = 1;
         this.oralEng = 2;
         this.note = "df";
         this.password = password;
     }
-
 
 
 }
