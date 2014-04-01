@@ -11,7 +11,7 @@
     <#include "layout/header.ftl">
 
     <div class="container-fluid" style="margin-bottom: 60px">
-            <#include "content/welcomeContent.ftl">
+        <#include "${content}.ftl">
     </div>
 
     <#include "layout/footer.ftl">
@@ -20,7 +20,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="../../../resources/css/Bootstrap/js/bootstrap.min.js"></script>
-<script src="../../../resources/css/Bootstrap/js/bootstrap.js"
+<script src="../../../resources/css/Bootstrap/js/bootstrap.js"></script>
 </html>
 
 

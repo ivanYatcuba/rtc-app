@@ -24,6 +24,10 @@ public class WelcomeController {
     @Autowired
     private CoursesService coursesService;
 
+    /**
+     * Request to main page, get three coming soon courses
+     * @return ModelAndView("welcome/welcomeLayout")
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView welcome() {
         ModelAndView mav = new ModelAndView("welcome/welcomeLayout");
@@ -38,6 +42,7 @@ public class WelcomeController {
 
         CoursesDTO coursesDTO = coursesService.findByFilter(searchFilter.createQuery(map).byDate().toString());
         mav.addObject("soonCourses", coursesDTO.getCourses());
+        mav.addObject("content","content/welcomeContent");
         return mav;
     }
 }
