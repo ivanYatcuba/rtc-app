@@ -77,7 +77,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:spring-config.xml
+            /WEB-INF/mvc-dispatcher-servlet.xml
         </param-value>
     </context-param>
 
