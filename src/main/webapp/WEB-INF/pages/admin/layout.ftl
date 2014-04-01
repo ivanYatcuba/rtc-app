@@ -14,8 +14,13 @@
         <div class="row">
             <#include "courses/layout/menu.ftl">
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <#include "user/content/${content}.ftl">
-                <!--<#include "courses/content/${content}.ftl">-->
+                   <#if content ??>
+
+                <#include "courses/content/${content}.ftl">
+                </#if>
+                <#if content1 ??>
+                <#include "user/content/${content1}.ftl">
+                </#if>
             </div>
         </div>
     </div>

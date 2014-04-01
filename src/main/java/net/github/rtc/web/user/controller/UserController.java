@@ -36,20 +36,20 @@ public class UserController {
     @RequestMapping(value = "/ViewAll", method = RequestMethod.GET)
     public ModelAndView View() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "ViewAll");
+        mav.addObject("content1", "ViewAll");
         return mav;
     }
 
     @RequestMapping(value = "/EditPage", method = RequestMethod.GET)
     public ModelAndView EditPage() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "EditPage");
+        mav.addObject("content1", "EditPage");
         return mav;
     }
     @RequestMapping(value = "/UserPage", method = RequestMethod.GET)
     public ModelAndView UserPage() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "UserPage");
+        mav.addObject("content1", "UserPage");
         return mav;
     }
 
