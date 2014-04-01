@@ -45,6 +45,7 @@ public class PageController {
 
         return "in";
     }
+    //
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String register(ModelMap model) {
