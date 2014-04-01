@@ -1,10 +1,10 @@
 package net.github.rtc.web.user.controller;
 
 
-import net.github.rtc.web.user.model.User;
-import net.github.rtc.web.user.service.UserService;
+
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,8 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     private static final String ROOT = "admin";
-    private static final String ROOT2 = "admin/user";
-    private UserService userService;
+  //  private static final String ROOT2 = "admin/user";
+  //  private UserService userService;
 
 
   /*  @RequestMapping (value = "/qwe", method = RequestMethod.GET)
@@ -36,20 +36,20 @@ public class UserController {
     @RequestMapping(value = "/ViewAll", method = RequestMethod.GET)
     public ModelAndView View() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "ViewAll");
+        mav.addObject("content1", "ViewAll");
         return mav;
     }
 
     @RequestMapping(value = "/EditPage", method = RequestMethod.GET)
     public ModelAndView EditPage() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "EditPage");
+        mav.addObject("content1", "EditPage");
         return mav;
     }
     @RequestMapping(value = "/UserPage", method = RequestMethod.GET)
     public ModelAndView UserPage() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "UserPage");
+        mav.addObject("content1", "UserPage");
         return mav;
     }
 
