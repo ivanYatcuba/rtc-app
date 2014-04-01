@@ -1,4 +1,4 @@
-<form name="f" action= @spring.url "j_spring_security_check" method='POST'>
+<form name="f" action= <@spring.url "j_spring_security_check"/> method='POST'>
  
   <table>
   <tr>
@@ -18,6 +18,18 @@
     <td colspan="2"><input style="width:250px;height:35px" name="reset" type="reset" />
     </td>
    </tr>
+   <tr>
+   <p class="remember"> <input type="checkbox">show password? 
+   <input type="checkbox">remember me
+   </p>
+  </tr>
   </table>
+  
+ <#if test="${not empty error}">
+  <div class="errorblock">
+   Your login attempt was not successful, try again.<br /> Caused :
+   ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+  </div>
+ </#if>
  
  </form>
