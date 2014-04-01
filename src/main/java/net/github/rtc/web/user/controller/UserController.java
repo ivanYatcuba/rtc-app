@@ -18,11 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping ("admin/user")
 public class UserController {
 
-    private static final String ROOT = "admin/user";
+    private static final String ROOT = "admin";
+    private static final String ROOT2 = "admin/user";
     private UserService userService;
 
 
-    @RequestMapping (value = "/qwe", method = RequestMethod.GET)
+  /*  @RequestMapping (value = "/qwe", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         User user = userService.findById(id);
@@ -31,11 +32,24 @@ public class UserController {
         return mav;
        // return "ViewAll";
     }
-
+*/
     @RequestMapping(value = "/ViewAll", method = RequestMethod.GET)
     public ModelAndView View() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "ViewAll");
+        return mav;
+    }
+
+    @RequestMapping(value = "/EditPage", method = RequestMethod.GET)
+    public ModelAndView EditPage() {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", "EditPage");
+        return mav;
+    }
+    @RequestMapping(value = "/UserPage", method = RequestMethod.GET)
+    public ModelAndView UserPage() {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", "UserPage");
         return mav;
     }
 
