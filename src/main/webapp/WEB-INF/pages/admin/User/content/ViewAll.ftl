@@ -5,10 +5,13 @@
 <body>
   <table id="example">
     <thead>
-      <tr><th>FIO</th>
+  <tr><th>FIO</th>
  <th>Phone</th>
  <th>Email</th>
- <th>City</th></tr>
+ <th>City</th>
+ <th>University</th>
+ <th>Faculty</th>
+      </tr>
     </thead>
     <tbody>
       <#list users as x>
@@ -33,6 +36,16 @@
     <#else>
         <td>None</td>
      </#if>
+      <#if (x.university)??>
+          <td>${x.university}</td>
+      <#else>
+          <td>None</td>
+      </#if>
+    <#if (x.faculty)??>
+        <td>${x.faculty}</td>
+    <#else>
+        <td>None</td>
+    </#if>
 </tr>
     </#list>
     </tbody>
