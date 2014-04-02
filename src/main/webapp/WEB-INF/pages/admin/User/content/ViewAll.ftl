@@ -5,13 +5,13 @@
 <body>
   <table id="example">
     <thead>
-  <tr><th>FIO</th>
-      <th>Email</th>
- <th>Phone</th>
-      <th>Register Date</th>
-      <th>Role</th>
-      <th>Action</th>
-
+  <tr>
+      <th>FIO</th>
+       <th>Email</th>
+        <th>Phone</th>
+         <th>Register Date</th>
+          <th>Role</th>
+           <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -45,8 +45,10 @@
         <td>${x.role}</td>
     <#else>
         <td>None</td>
-
     </#if>
+    <td><a href="<@spring.url "/admin/user/delete/${x.id}" />">delete</a></td>
+
+
 
 
 </tr>
