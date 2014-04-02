@@ -12,7 +12,6 @@
       <th>Role</th>
       <th>Action</th>
 
-
       </tr>
     </thead>
     <tbody>
@@ -34,13 +33,12 @@
         <td>${x.phone}</td>
     <#else>
         <td>None</td>
-
     </#if>
+
     <#if (x.regDate)??>
         <td>${x.regDate}</td>
     <#else>
         <td>None</td>
-
     </#if>
 
     <#if (x.role)??>
@@ -54,7 +52,7 @@
 </tr>
     </#list>
     </tbody>
-    </tbody>
+
   </table>
   <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
   <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
