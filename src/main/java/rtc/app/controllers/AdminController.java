@@ -13,8 +13,8 @@ public class AdminController {
      *
      * @return redirect to "/admin/courses"
      */
-    @RequestMapping(method = RequestMethod.GET)
+  /*  @RequestMapping(method = RequestMethod.GET)
     public String adminMain() {
         return "redirect:/admin/courses";
-    }
+    }*/
 }
