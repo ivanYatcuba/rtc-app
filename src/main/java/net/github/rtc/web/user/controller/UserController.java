@@ -1,9 +1,5 @@
 package net.github.rtc.web.user.controller;
 
-
-
-
-
 import java.util.Collection;
 import net.github.rtc.web.user.model.User;
 import net.github.rtc.web.user.service.UserService;
