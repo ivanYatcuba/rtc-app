@@ -47,7 +47,7 @@
         <td>None</td>
     </#if>
 
-    <td><a href="<@spring.url "/api/users-web-service/${x.id}" />">delete</a></td>
+    <td><a href="<@spring.url "/admin/User/delete/${x.id}" />">Remove</a></td>
 
 
 
