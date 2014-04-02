@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller ("adminNavigationController")
-@RequestMapping ("admin/user1")
+@RequestMapping ("admin/user")
 public class UserController {
 
     private static final String ROOT = "admin";
