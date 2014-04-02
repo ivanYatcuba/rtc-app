@@ -44,8 +44,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(User user) {
+     public User create(User user) {
         return resource.create(user);
     }
 
+    @Override
+    public void delete(Integer id) {
+         resource.delete(id);
+    }
 }

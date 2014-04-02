@@ -60,7 +60,6 @@ public class CoursesServiceImpl implements CoursesService {
     public void delete(String code) {
         checkCode(code);
         resource.delete(code);
-
     }
 
     /**

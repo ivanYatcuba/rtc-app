@@ -61,10 +61,11 @@ Collection <User> listUser;
         mav.addObject("content", "User/content/UserPage");
         return mav;
     }
-    /*@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable String courseCode) {
-        UserService.delete(id);
-        return "redirect:/" + ROOT;
-    }*/
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable Integer id) {
+        userService.delete(id);
+        return  ROOT +"/User/ViewAll";
+    }
 
 }

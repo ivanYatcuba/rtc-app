@@ -19,4 +19,6 @@ public interface UserService {
     Collection<User> findAll();
     
     User create(User user);
+
+    void delete(Integer id);
 }

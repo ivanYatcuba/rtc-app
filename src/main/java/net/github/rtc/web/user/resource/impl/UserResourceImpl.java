@@ -42,7 +42,12 @@ public class UserResourceImpl  implements UserResource {
     }
 
  @Override
-    public User create(User user) {
+     public User create(User user) {
         return restTemplate.postForObject(userUrl, user, User.class);
+    }
+
+    @Override
+    public void delete(Integer id) {
+         restTemplate.delete(userUrl + "user/{id}", id);
     }
 }
