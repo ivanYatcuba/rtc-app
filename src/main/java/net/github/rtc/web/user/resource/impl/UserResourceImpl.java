@@ -6,14 +6,20 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.Collection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
 
 @Component("UserDao")
-public class UserResourceImpl extends AbstractResource implements UserResource {
+public class UserResourceImpl  implements UserResource {
  protected String userUrl;
-    public String getHostUrl() {
-        return hostUrl;
+ protected RestTemplate restTemplate;
+
+    @Autowired
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
+    
     public String getUserUrl()
     {
         return this.userUrl;
@@ -35,4 +41,8 @@ public class UserResourceImpl extends AbstractResource implements UserResource {
         return Arrays.asList(restTemplate.getForObject(request, User[].class));
     }
 
+ @Override
+    public User create(User user) {
+        return restTemplate.postForObject(userUrl, user, User.class);
+    }
 }

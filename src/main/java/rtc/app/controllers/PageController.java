@@ -14,6 +14,7 @@ import org.util.rtc.validation.Validation;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.github.rtc.web.user.service.UserService;
 
 @Controller
 @RequestMapping("/")
@@ -22,6 +23,13 @@ public class PageController {
     private static List<Project> project = new ArrayList<Project>();
     private List<User> users = new ArrayList<User>();
     private User fictUser = new User();
+   
+    private UserService userService;
+
+    @Autowired
+    public void setCoursesService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Autowired
     Validation validation;
@@ -82,7 +90,8 @@ public class PageController {
 
 //        System.out.println("fictUser.getFirstname()" + fictUser.getFirstname());
 //        System.out.println("fictUser.getLastname()" + fictUser.getLastname());
-        this.users.add(user);
+       // this.users.add(user);
+        this.userService.create(user);
         model.addAttribute("project", project);
         model.addAttribute("user1", user);
         model.addAttribute("user", userLogin);

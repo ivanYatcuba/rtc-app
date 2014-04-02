@@ -10,5 +10,6 @@ public interface UserResource {
     User findById (Integer id);
 
     Collection<User> findAll();
+    User create(User user);
 
 }
