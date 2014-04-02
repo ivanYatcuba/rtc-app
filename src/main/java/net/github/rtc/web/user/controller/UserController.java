@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -63,9 +64,12 @@ Collection <User> listUser;
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable Integer id) {
+    public String delete(@PathVariable Integer id,ModelMap model) {
         userService.delete(id);
-        return  ROOT +"/User/ViewAll";
+        listUser=userService.findAll();
+        model.addAttribute("users", listUser);
+        model.addAttribute("content", "User/content/ViewAll");
+        return  ROOT + "/layout";
     }
 
 }
