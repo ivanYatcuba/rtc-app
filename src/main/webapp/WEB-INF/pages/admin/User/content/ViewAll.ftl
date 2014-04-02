@@ -6,11 +6,13 @@
   <table id="example">
     <thead>
   <tr><th>FIO</th>
+      <th>Email</th>
  <th>Phone</th>
- <th>Email</th>
- <th>City</th>
- <th>University</th>
- <th>Faculty</th>
+      <th>Register Date</th>
+      <th>Role</th>
+      <th>Action</th>
+
+
       </tr>
     </thead>
     <tbody>
@@ -21,31 +23,34 @@
      <#else>
         <td>None</td>
     </#if>
+
+    <#if (x.email)??>
+        <td>${x.email}</td>
+    <#else>
+        <td>None</td>
+    </#if>
+
     <#if (x.phone)??>
         <td>${x.phone}</td>
     <#else>
         <td>None</td>
+
     </#if>
-     <#if (x.email)??>
-        <td>${x.email}</td>
-    <#else>
-         <td>None</td>
-    </#if>
-    <#if (x.city)??>
-        <td>${x.city}</td>
+    <#if (x.regDate)??>
+        <td>${x.regDate}</td>
     <#else>
         <td>None</td>
-     </#if>
-      <#if (x.university)??>
-          <td>${x.university}</td>
-      <#else>
-          <td>None</td>
-      </#if>
-    <#if (x.faculty)??>
-        <td>${x.faculty}</td>
+
+    </#if>
+
+    <#if (x.role)??>
+        <td>${x.role}</td>
     <#else>
         <td>None</td>
+
     </#if>
+
+
 </tr>
     </#list>
     </tbody>
