@@ -42,7 +42,7 @@ Collection <User> listUser;
     @RequestMapping(value = "/ViewAll", method = RequestMethod.GET)
     public ModelAndView View() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content1", "ViewAll");
+        mav.addObject("content", "User/content/ViewAll");
         listUser=userService.findAll();
         mav.addObject("users", listUser);
         return mav;
@@ -51,13 +51,13 @@ Collection <User> listUser;
     @RequestMapping(value = "/EditPage", method = RequestMethod.GET)
     public ModelAndView EditPage() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content1", "EditPage");
+        mav.addObject("content", "User/content/EditPage");
         return mav;
     }
     @RequestMapping(value = "/UserPage", method = RequestMethod.GET)
     public ModelAndView UserPage() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content1", "UserPage");
+        mav.addObject("content", "User/content/UserPage");
         return mav;
     }
 

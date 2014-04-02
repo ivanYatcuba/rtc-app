@@ -77,7 +77,7 @@ public class CoursesController {
 
         Collection<Courses> courses = coursesService.findByFilter(map);
         mav.addObject("courses", courses);
-        mav.addObject("content", "listContent");
+        mav.addObject("content", "courses/content/listContent");
         mav.addObject("isFiltered", false);
         return mav;
     }
@@ -109,7 +109,7 @@ public class CoursesController {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         Courses course = coursesService.findByCode(courseCode);
         mav.addObject("course", course);
-        mav.addObject("content", "courseContent");
+        mav.addObject("content", "courses/content/courseContent");
         return mav;
     }
 
@@ -149,7 +149,7 @@ public class CoursesController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "createContent");
+        mav.addObject("content", "courses/content/createContent");
         return mav;
     }
 
@@ -182,7 +182,7 @@ public class CoursesController {
     public ModelAndView update(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.getModelMap().addAttribute("course", coursesService.findByCode(courseCode));
-        mav.addObject("content", "updateContent");
+        mav.addObject("content", "courses/content/updateContent");
         return mav;
     }
 
