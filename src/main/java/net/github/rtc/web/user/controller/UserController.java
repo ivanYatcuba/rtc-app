@@ -62,7 +62,7 @@ Collection <User> listUser;
         return mav;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer id) {
         userService.delete(id);
         return  ROOT +"/User/ViewAll";
