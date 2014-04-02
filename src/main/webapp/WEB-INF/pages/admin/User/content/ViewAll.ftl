@@ -5,11 +5,35 @@
 <body>
   <table id="example">
     <thead>
-      <tr><th>Sites</th></tr>
+      <tr><th>FIO</th>
+ <th>Phone</th>
+ <th>Email</th>
+ <th>City</th></tr>
     </thead>
     <tbody>
       <#list users as x>
-    <tr><td>${x.fio}</td></tr>
+<tr>
+      <#if (x.fio)??>
+        <td>${x.fio}</td>
+     <#else>
+        <td>None</td>
+    </#if>
+    <#if (x.phone)??>
+        <td>${x.phone}</td>
+    <#else>
+        <td>None</td>
+    </#if>
+     <#if (x.email)??>
+        <td>${x.email}</td>
+    <#else>
+         <td>None</td>
+    </#if>
+    <#if (x.city)??>
+        <td>${x.city}</td>
+    <#else>
+        <td>None</td>
+     </#if>
+</tr>
     </#list>
     </tbody>
     </tbody>
