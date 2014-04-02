@@ -19,7 +19,7 @@
                 <#include "courses/content/${content}.ftl">
                 </#if>
                 <#if content1 ??>
-                <#include "user1/content/${content1}.ftl">
+                <#include "User/content/${content1}.ftl">
                 </#if>
             </div>
         </div>
