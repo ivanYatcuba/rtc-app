@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService {
         return resource.findAll();
     }
 
+    @Override
+    public User create(User user) {
+        return resource.create(user);
+    }
+
 }
