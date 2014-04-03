@@ -83,10 +83,160 @@
             Female
         </label>
     </div>
-
 </div>
 
+<!--*Last Name & *First Name:-->
+<div class="row-fluid span12">
 
+    <div class="container">
+
+        <div class = "span4">
+
+            *Last Name:
+            <input type="text" id="inputEmail" placeholder="Ivanov" style="margin-top: 5px;">
+
+        </div>
+
+        <div class="span4">
+
+            *First Name:
+            <input type="password" id="inputPassword" placeholder="Ivan" style="margin-top: 5px;">
+
+        </div>
+    </div>
+</div>
+
+<!--Middle Name: & *Birthdate:-->
+<div class="row-fluid span12">
+
+    <div class="container">
+
+        <div class = "span5">
+
+            Middle Name:
+            <input type="text" id="inputEmail" placeholder="" style="margin-top: 5px;">
+
+        </div>
+
+        <div class = "span4">
+
+            *Birthdate:
+            <input type="text" id="inputEmail" placeholder="10-10-1990" style="margin-top: 5px;">
+
+        </div>
+    </div>
+</div>
+
+<hr align="center" width="800" size="1" />
+
+<!--City: & *Phone:-->
+<div class="row-fluid span12">
+
+    <div class="container">
+
+        <div class = "span5">
+
+            City:
+            <input type="text" id="inputEmail" placeholder="" style="margin-top: 5px;">
+
+        </div>
+
+        <div class = "span4">
+
+            *Phone:
+            <input type="text" id="inputEmail" placeholder="063768787878" style="margin-top: 5px;">
+
+        </div>
+    </div>
+</div>
+
+<hr align="center" width="800" size="1" />
+
+<!--University: & Speciality:-->
+<div class="row-fluid span12">
+
+    <div class="container">
+
+        <div class = "span4">
+
+            University:
+            <input type="text" id="inputEmail" placeholder="" style="margin-top: 5px;">
+
+        </div>
+
+        <div class = "span4">
+
+            Speciality:
+            <input type="text" id="inputEmail" placeholder="" style="margin-top: 5px;">
+
+        </div>
+    </div>
+</div>
+
+<!--Faculty:-->
+<div class="row-fluid span12">
+
+    <div class="container">
+
+        <div class = "span4">
+
+            Faculty:
+            <input type="text" id="inputEmail" placeholder="" style="margin-top: 5px;">
+
+        </div>
+    </div>
+</div>
+
+<hr align="center" width="800" size="1" />
+
+<!--Programming languages: &  *English: -->
+<div class="row-fluid span12">
+
+    <div class="container">
+
+        <div class="span7">
+
+            Programming languages:
+            <input type="text" id="inputEmail" placeholder="" style="margin-top: 5px;">
+
+        </div>
+
+        <div class="span4">
+
+            *English:
+            <select style="margin-top: 5px;">
+                <option>Basic</option>
+                <option>Basic 1</option>
+                <option>Basic 2</option>
+            </select>
+
+        </div>
+    </div>
+</div>
+
+<hr align="center" width="800" size="1" />
+
+<!--*Why do you want to join us:-->
+<div class="row-fluid span12">
+
+    <div class="container">
+
+Why do you want to join us:
+<textarea rows="3" style="width: 800px;" placeholder="Bla-Bla-Bla"></textarea>
+
+    </div>
+</div>
+
+<hr align="center" width="800" size="1" />
+
+<!--Save & Cancel-->
+
+<p>
+    <button class="btn btn-info" type="button">Save</button>
+    or
+    <a href="">Cancel</a>
+
+</p>
 
 </body>
 
