@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller ("adminNavigationController")
-@RequestMapping ("admin/User")
+@RequestMapping ("admin/user")
 public class UserController {
 
     private static final String ROOT = "admin";
@@ -29,7 +29,7 @@ public class UserController {
     public void setService(UserService service) {
         this.userService = service;
     }
-Collection <User> listUser;
+
 
   /*  @RequestMapping (value = "/qwe", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable Integer id) {
@@ -41,8 +41,9 @@ Collection <User> listUser;
        // return "ViewAll";
     }
 */
-    @RequestMapping(value = "/ViewAll", method = RequestMethod.GET)
-    public ModelAndView View() {
+    @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
+    public ModelAndView viewAll() {
+        Collection<User> listUser;
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "User/content/ViewAll");
         listUser=userService.findAll();
@@ -50,26 +51,24 @@ Collection <User> listUser;
         return mav;
     }
 
-    @RequestMapping(value = "/EditPage", method = RequestMethod.GET)
-    public ModelAndView EditPage() {
+    @RequestMapping(value = "/editPage", method = RequestMethod.GET)
+    public ModelAndView editPage() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "User/content/EditPage");
         return mav;
     }
-    @RequestMapping(value = "/UserPage", method = RequestMethod.GET)
-    public ModelAndView UserPage() {
+    @RequestMapping(value = "/userPage", method = RequestMethod.GET)
+    public ModelAndView userPage() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "User/content/UserPage");
         return mav;
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable Integer id,ModelMap model) {
+    public String delete(@PathVariable Integer id) {
         userService.delete(id);
-        listUser=userService.findAll();
-        model.addAttribute("users", listUser);
-        model.addAttribute("content", "User/content/ViewAll");
-        return  ROOT + "/layout";
+
+        return  "redirect:/"+ROOT+"/user/viewAll";
     }
 
 }

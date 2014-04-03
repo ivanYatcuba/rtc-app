@@ -17,4 +17,6 @@ public class AdminController {
     public String adminMain() {
         return "redirect:/admin/courses";
     }
+
+
 }
