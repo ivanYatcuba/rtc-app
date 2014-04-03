@@ -1,14 +1,14 @@
 <div class="row-fluid span12" style="margin-left: 1px">
 
     <div class="span6" >
-        <@spring.formItem "reg.email"/>
+        <@spring.formItem "user.email" 'style="background-color: #FFFACD"'/>
 
             <hr width="100%">
         <div><label for="user.gender">
         <@spring.message "user.gender"/> </label>
         <@spring.formRadioButtons "user.gender" /></div>
-        <@spring.formItem "reg.lastName"/>
-        <@spring.formItem "middleName"/>
+        <@spring.formItem "reg.lastName" 'style="background-color: #FFFACD"' />
+        <@spring.formItem "user.middleName"/>
 
             <hr width="100%">
         <@spring.formItem "user.city"/>
@@ -24,24 +24,24 @@
 
     <div class="span5">
 
-        <@spring.formItem "reg.password"/>
+        <@spring.formItem "reg.password" 'style="background-color: #FFFACD"' />
         <!-- Show password -->
         <div><label for="user.showPassword">
         <@spring.message "user.showPassword"/> </label>
         <@spring.formCheckboxes "user.showPassword" /></div>
 
             <hr width="100%">
-        <@spring.formItem "reg.firstName"/>
-        <@spring.formItem "user.birthdate" "datepiker" 'class="input-medium"'/>
+        <@spring.formItem "reg.firstName" 'style="background-color: #FFFACD"'/>
+        <@spring.formItem "user.birthdate" "datepiker" 'class="input-medium"' 'style="background-color: #FFFACD"'/>
 
             <hr width="100%">
-        <@spring.formItem "user.phone"/>
+        <@spring.formItem "user.phone" 'style="background-color: #FFFACD"' />
 
             <hr width="100%">
         <@spring.formItem "user.speciality"/>
 
             <hr width="100%">
-        <@spring.formItem "user.english"/>
+        <@spring.formItem "user.english" 'style="background-color: #FFFACD"' />
 
     </div>
 
@@ -53,7 +53,7 @@
         <div>
             <label for="reg.reason">
             <@spring.message "reg.reason"/> </label>
-            <@spring.formInput "reg.reason" />
+            <@spring.formInput "reg.reason" 'style="background-color: #FFFACD"' />
         </div>
 
     </div>
