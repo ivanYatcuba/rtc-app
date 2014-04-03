@@ -8,7 +8,11 @@
 
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/admin*/*" access="hasRole('ROLE_ADMIN')" />
-        <logout logout-url="/logout" />
+        <form-login login-page="/login" default-target-url="/admin"
+                    authentication-failure-url="/loginfailed" />
+        <logout logout-success-url="/logout" />
+        <logout delete-cookies="JSESSIONID" />
+        <remember-me key="uniqueAndSecret" token-validity-seconds="86400"/>
     </http>
 
     <authentication-manager alias="authenticationManager">

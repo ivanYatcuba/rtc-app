@@ -84,7 +84,7 @@ public class UserResourseImpl implements UserResource{
 
     @Override
     public void update(User user) {
-        restTemplate.put(hostUserUrl + "user/{fio}", user, user.getFio());
+        //restTemplate.put(hostUserUrl + "user/{fio}", user, user.getFio());
     }
 
     @Override

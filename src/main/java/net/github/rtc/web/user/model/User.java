@@ -17,7 +17,17 @@ public class User implements UserDetails {
     @required
     @maxlength(50)
     @minlength(5)
-    private String fio;
+    private String surname;
+
+    @required
+    @maxlength(50)
+    @minlength(5)
+    private String name;
+
+    @required
+    @maxlength(50)
+    @minlength(5)
+    private String middleName;
     @required
     @number
     private String phone;
@@ -191,12 +201,28 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getFio() {
-        return fio;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setFio(String fio) {
-        this.fio = fio;
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public String getPhone() {
@@ -228,10 +254,11 @@ public class User implements UserDetails {
 
     }
 
-    public User(String fio, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
-
-
-        this.fio = fio;
+    public User(Integer id, String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
+        this.id = id;
+        this.surname = surname;
+        this.name = name;
+        this.middleName = middleName;
         this.phone = phone;
         this.email = email;
         this.birthDate = birthDate;
@@ -245,22 +272,20 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public User(Integer id, String fio, String phone, String email, String city, String university, String faculty, String password) {
-        this.id = id;
-        this.fio = fio;
+    public User(String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
+        this.surname = surname;
+        this.name = name;
+        this.middleName = middleName;
         this.phone = phone;
         this.email = email;
-        this.birthDate = new Date();
+        this.birthDate = birthDate;
         this.city = city;
         this.university = university;
         this.faculty = faculty;
-        this.speciality = "bb";
-
-        this.writtenEng = 1;
-        this.oralEng = 2;
-        this.note = "df";
+        this.speciality = speciality;
+        this.writtenEng = writtenEng;
+        this.oralEng = oralEng;
+        this.note = note;
         this.password = password;
     }
-
-
 }

@@ -1,3 +1,4 @@
+<#import "/spring.ftl" as spring/>
 <form name="f" action= <@spring.url "j_spring_security_check"/> method="POST">
  
   <table>
@@ -20,12 +21,12 @@
    </tr>
    <tr>
    <p class="remember"> <input type="checkbox">show password? 
-   <input type="checkbox">remember me
+   <input type="checkbox" name="_spring_security_remember_me">remember me
    </p>
   </tr>
   </table>
   
- <#if test="${not empty error}">
+ <#if error??>
   <div class="errorblock">
    Your login attempt was not successful, try again.<br /> Caused :
    ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
