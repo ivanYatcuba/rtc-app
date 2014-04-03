@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -13,7 +14,7 @@
 
         >
 
-    <context:component-scan base-package="rtc.app.controllers, net.github.rtc.web, org.util.rtc"/>
+    <context:component-scan base-package="rtc.app, net.github.rtc.web, org.util.rtc"/>
 
     <import resource="classpath:/spring/restTemplate.xml"/>
 
@@ -68,6 +69,7 @@
 
     <!--Import spring settings from util-->
     <import resource="classpath:spring-config.xml"/>
-
+    <!-- Import spring security configurations -->
+    <import resource="classpath:/spring/spring-security.xml" />
 
 </beans>

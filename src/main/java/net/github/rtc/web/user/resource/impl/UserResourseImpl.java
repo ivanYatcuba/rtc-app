@@ -84,6 +84,11 @@ public class UserResourseImpl implements UserResource{
 
     @Override
     public void update(User user) {
-        restTemplate.put(hostUserUrl + "user/{fio}", user, user.getFio());
+        //restTemplate.put(hostUserUrl + "user/{fio}", user, user.getFio());
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return restTemplate.getForObject(hostUserUrl + "login/{email}", User.class, email);
     }
 }

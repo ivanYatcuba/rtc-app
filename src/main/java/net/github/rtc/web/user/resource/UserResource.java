@@ -33,4 +33,6 @@ public interface UserResource {
     User create(User user);
 
     void update(User user);
+
+    User findByEmail(String email);
 }
