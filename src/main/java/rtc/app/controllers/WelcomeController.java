@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,9 +36,10 @@ public class WelcomeController {
         map.put("maxResult", "3");
 
         SearchFilter searchFilter = new SearchFilter();
-        Date date = new Date();
-        String formattedDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
-        searchFilter.setStartDate(formattedDate);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        Calendar rightNow = Calendar.getInstance();
+
+        searchFilter.setStartDate(sdf.format(rightNow.getTime()));
 
         CoursesDTO coursesDTO = coursesService.findByFilter(searchFilter.createQuery(map).byDate().toString());
         mav.addObject("soonCourses", coursesDTO.getCourses());
