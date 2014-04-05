@@ -11,13 +11,13 @@
 
         <div class="carousel-inner">
             <div class="item active">
-                <img src="../../../../resources/images/carousel/cat1.jpg" alt="First slide">
+                <img src="<@spring.url'/resources/images/carousel/cat1.jpg'/>" alt="First slide">
             </div>
             <div class="item">
-                <img src="../../../../resources/images/carousel/cat2.jpg" alt="Second slide">
+                <img src="<@spring.url'/resources/images/carousel/cat2.jpg'/>" alt="Second slide">
             </div>
             <div class="item">
-                <img src="../../../../resources/images/carousel/cat3.jpg" alt="Third slide">
+                <img src="<@spring.url'/resources/images/carousel/cat3.jpg'/>" alt="Third slide">
             </div>
         </div>
 
