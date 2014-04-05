@@ -59,6 +59,12 @@
                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Famale</label>
                            </div>
                  </div>
+            </form>
+       <div>
+</div>
+<div class="row-fluid">
+      <div class="span6">
+            <form class="form-horizontal">
                  <div class="control-group">
                           <label class="control-label">*Last name:</label> 
                           <div class="controls">
@@ -72,11 +78,29 @@
                           <input type="text" id="inputMidleName" placeholder="Middle name" required>
                          </div>
                  </div>
+                 </form>
                 </div>
-             </form>
              
-      </div>
+             
       <div class="span6">
+             <form class="form-horizontal">
+               
+                 
+               
+                <div class="control-group">
+                         <label class="control-label">*First name:</label> 
+                          <div class="controls">
+                          <input type="text" id="inputFirstName" placeholder="First name:" required>
+                         </div>
+                 </div>
+                 <div class="control-group">
+                         <label class="control-label">*Birth date:</label> 
+                          <div class="controls">
+                          <input type="text" id="inputBirth date" placeholder="Birth date:" required>
+                         </div>
+                 </div>
+             </form>
+
       </div>
 
 </div>

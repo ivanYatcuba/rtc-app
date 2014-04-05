@@ -56,9 +56,9 @@
   </table>
 <br><br>
 <div align = "right">
- <form name="creayeUser" action="createUser" method="get">
-
- <input type="submit" name="submit"value="Create">
+    <form name="createUser" action="createUser" method="get">
+    <button type="submit">Create</button>
+</form>
 </div>
   <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
   <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
