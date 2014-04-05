@@ -1,7 +1,5 @@
 package rtc.app.controllers;
 
-import net.github.rtc.web.courses.service.CoursesService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class WelcomeController {
 
-    @Autowired
-    private CoursesService coursesService;
+   // @Autowired
+    //private CoursesService coursesService;
 
     /**
      * Request to main page, get three coming soon courses
