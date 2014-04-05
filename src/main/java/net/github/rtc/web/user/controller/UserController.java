@@ -70,5 +70,14 @@ public class UserController {
 
         return  "redirect:/"+ROOT+"/user/viewAll";
     }
+    
+    @RequestMapping(value = "/createUser", method = RequestMethod.GET)
+    public ModelAndView creayeUser() {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", "User/content/CreateUser");
+        return mav;
+    }
+    
+    
 
 }
