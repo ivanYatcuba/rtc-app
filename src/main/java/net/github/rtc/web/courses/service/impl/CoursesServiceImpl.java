@@ -1,16 +1,14 @@
 package net.github.rtc.web.courses.service.impl;
 
-import net.github.rtc.web.courses.exception.ServiceProcessingException;
 import net.github.rtc.web.courses.model.Courses;
+import net.github.rtc.web.courses.model.CoursesDTO;
 import net.github.rtc.web.courses.resource.CoursesResource;
 import net.github.rtc.web.courses.service.CoursesService;
+import net.github.rtc.web.exception.ServiceProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * Service Implementation
@@ -30,14 +28,6 @@ public class CoursesServiceImpl implements CoursesService {
     }
 
     private CoursesResource resource;
-
-    /**
-     * @see CoursesService#findAll()
-     */
-    @Override
-    public Collection<Courses> findAll() {
-        return resource.findAll();
-    }
 
     /**
      * Check course code for null
@@ -88,15 +78,10 @@ public class CoursesServiceImpl implements CoursesService {
     }
 
     /**
-     * @see CoursesService#findByFilter(Map)
+     * @see CoursesService#findByFilter(String)
      */
     @Override
-    public Collection<Courses> findByFilter(Map<String, String> filter) {
-        return resource.findByFilter(filter);
-    }
-
-    @Override
-    public int getCount() {
-        return resource.getCount();
+    public CoursesDTO findByFilter(String query) {
+        return resource.findByFilter(query);
     }
 }

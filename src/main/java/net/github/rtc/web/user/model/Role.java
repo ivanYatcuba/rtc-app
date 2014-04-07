@@ -1,20 +1,14 @@
 package net.github.rtc.web.user.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 
 /**
  * @author Vladislav Pikus
  */
-@Entity
-@Table(name = "user_roles", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 @XmlRootElement
-public class Role implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class Role implements GrantedAuthority {
     private Integer id;
 
     public Integer getId() {
@@ -25,31 +19,18 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-    @NotNull
-    private Roles name;
+    private String name;
 
-    @Column
-    @Enumerated(EnumType.ORDINAL)
-    public Roles getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Roles name) {
+    public void setName(String name) {
         this.name = name;
     }
 
     @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Role{");
-        sb.append("name='").append(name);
-        sb.append('}');
-        return sb.toString();
-    }
-
-    public Role() {
-    }
-
-    public Role(Roles name) {
-        this.name = name;
+    public String getAuthority() {
+        return name;
     }
 }

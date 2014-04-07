@@ -1,20 +1,33 @@
 package net.github.rtc.web.user.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.util.rtc.annotation.*;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 //import java.util.List;
 //import javax.xml.bind.annotation.XmlRootElement;
 
-//@XmlRootElement
-public class User {
-    
+@XmlRootElement
+public class User implements UserDetails {
+
     Integer id;
     @required
     @maxlength(50)
     @minlength(5)
-    private String fio;
+    private String surname;
+
+    @required
+    @maxlength(50)
+    @minlength(5)
+    private String name;
+
+    @required
+    @maxlength(50)
+    @minlength(5)
+    private String middleName;
     @required
     @number
     private String phone;
@@ -42,7 +55,7 @@ public class User {
     @required
     private String speciality;
 
-   // private String technologies;
+    // private String technologies;
     @number
     private Integer writtenEng;
     @number
@@ -50,21 +63,27 @@ public class User {
     private String note;
     private String password;
 
-    
-     private List<Role> authorities;
+    /* Spring Security fields*/
+    private Collection<Role> authorities;
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
-    
-     public List<Role> getAuthorities() {
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(List<Role> authorities) {
+    public void setAuthorities(Collection<Role> authorities) {
         this.authorities = authorities;
     }
-     public boolean isAccountNonExpired() {
+
+    public boolean isAccountNonExpired() {
         return accountNonExpired;
     }
 
@@ -95,19 +114,20 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-    
-    
+
+    /**
+     * *********************************
+     */
+
     public String getCity() {
         return city;
     }
 
-    public void  setId(Integer id)
-    {
-        this.id=id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return this.id;
     }
 
@@ -181,12 +201,28 @@ public class User {
         this.password = password;
     }
 
-    public String getFio() {
-        return fio;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setFio(String fio) {
-        this.fio = fio;
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public String getPhone() {
@@ -213,17 +249,16 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    
 
-
-    public User(){
+    public User() {
 
     }
 
-    public User(String fio, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
-       
-       
-        this.fio = fio;
+    public User(Integer id, String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
+        this.id = id;
+        this.surname = surname;
+        this.name = name;
+        this.middleName = middleName;
         this.phone = phone;
         this.email = email;
         this.birthDate = birthDate;
@@ -236,26 +271,21 @@ public class User {
         this.note = note;
         this.password = password;
     }
-    public User (Integer id, String fio, String phone, 
-            String email, String city, String university, 
-            String faculty, String password)
-    {
-        this.id=id;
-         this.fio = fio;
+
+    public User(String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
+        this.surname = surname;
+        this.name = name;
+        this.middleName = middleName;
         this.phone = phone;
         this.email = email;
-        this.birthDate = new Date();
+        this.birthDate = birthDate;
         this.city = city;
         this.university = university;
         this.faculty = faculty;
-        this.speciality = "bb";
-       
-        this.writtenEng = 1;
-        this.oralEng = 2;
-        this.note = "df";
+        this.speciality = speciality;
+        this.writtenEng = writtenEng;
+        this.oralEng = oralEng;
+        this.note = note;
         this.password = password;
     }
-
-
-
 }

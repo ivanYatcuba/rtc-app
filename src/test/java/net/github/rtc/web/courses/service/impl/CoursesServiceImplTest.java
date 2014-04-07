@@ -1,12 +1,11 @@
 package net.github.rtc.web.courses.service.impl;
 
-import net.github.rtc.web.courses.exception.ServiceProcessingException;
 import net.github.rtc.web.courses.resource.CoursesResource;
 import net.github.rtc.web.courses.resource.impl.CoursesResourceImpl;
 import net.github.rtc.web.courses.model.Author;
 import net.github.rtc.web.courses.model.Courses;
 import net.github.rtc.web.courses.service.CoursesService;
-import net.github.rtc.web.courses.service.impl.CoursesServiceImpl;
+import net.github.rtc.web.exception.ServiceProcessingException;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +35,8 @@ public class CoursesServiceImplTest {
     private CoursesService service;
     private CoursesResource mockResource;
 
+    private final String code = "fcb56955-5344-41e4-897b-d69387e5fa55";
+
     private Courses course;
 
     @Before
@@ -46,26 +47,13 @@ public class CoursesServiceImplTest {
     }
 
     @Test
-    public void testFindAll() throws Exception {
-        Collection<Courses> courses = Arrays.asList(course);
-        when(mockResource.findAll()).thenReturn(courses);
-        Collection<Courses> result = service.findAll();
-        verify(mockResource).findAll();
-        assertNotNull(result);
-        assertEquals(courses, result);
-        assertTrue(result.size() == 1);
-    }
-
-    /*@Test
     public void testDelete() throws Exception {
-        Integer id = 5;
-        service.delete(id);
-        verify(mockResource).delete(id);
+        service.delete(code);
+        verify(mockResource).delete(code);
     }
 
     @Test(expected = ServiceProcessingException.class)
     public void testDeleteWithNullId() throws Exception {
-        Integer id = null;
-        service.delete(id);
-    }*/
+        service.delete(null);
+    }
 }

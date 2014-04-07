@@ -1,16 +1,14 @@
 package net.github.rtc.web.courses.resource.impl;
 
 import net.github.rtc.web.courses.model.Courses;
+import net.github.rtc.web.courses.model.CoursesDTO;
 import net.github.rtc.web.courses.resource.CoursesResource;
-import net.github.rtc.web.courses.utils.QueryParametersBuilder;
+import net.github.rtc.web.resource.AbstractResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * Data Access Object Implementation
@@ -27,14 +25,6 @@ public class CoursesResourceImpl extends AbstractResource implements CoursesReso
     @Override
     public Courses findByCode(String code) {
         return restTemplate.getForObject(hostUrl + "courses/{code}", Courses.class, code);
-    }
-
-    /**
-     * @see CoursesResource#findAll()
-     */
-    @Override
-    public Collection<Courses> findAll() {
-        return Arrays.asList(restTemplate.getForObject(hostUrl + "courses", Courses[].class));
     }
 
     /**
@@ -62,20 +52,15 @@ public class CoursesResourceImpl extends AbstractResource implements CoursesReso
     }
 
     /**
-     * @see CoursesResource#findByFilter(Map)
+     * @see CoursesResource#findByFilter(String)
      */
     @Override
-    public Collection<Courses> findByFilter(Map<String, String> filter) {
+    public CoursesDTO findByFilter(String query) {
         URI targetUrl = UriComponentsBuilder.fromUriString(hostUrl)
-                .path("courses/filter")
-                .query(QueryParametersBuilder.fromMap(filter).build())
+                .path("courses")
+                .query(query)
                 .build()
                 .toUri();
-        return Arrays.asList(restTemplate.getForObject(targetUrl, Courses[].class));
-    }
-
-    @Override
-    public int getCount() {
-        return restTemplate.getForObject(hostUrl + "courses/count", Integer.class);
+        return restTemplate.getForObject(targetUrl, CoursesDTO.class);
     }
 }

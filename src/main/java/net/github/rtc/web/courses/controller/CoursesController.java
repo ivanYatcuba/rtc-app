@@ -1,6 +1,7 @@
 package net.github.rtc.web.courses.controller;
 
 import net.github.rtc.web.courses.model.Courses;
+import net.github.rtc.web.courses.model.CoursesDTO;
 import net.github.rtc.web.courses.model.Page;
 import net.github.rtc.web.courses.model.SearchFilter;
 import net.github.rtc.web.courses.propertyeditors.CustomTagsEditor;
@@ -65,18 +66,16 @@ public class CoursesController {
     public ModelAndView index(@RequestParam(required = true, defaultValue = "1") int page) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
 
-        Page pageModel = paginator.getPage(page, coursesService.getCount());
         Map<String, String> map = new HashMap<String, String>();
-        map.put("pageNumber" , String.valueOf(pageModel.getCurrent() - 1));
-        map.put("maxResult" , String.valueOf(paginator.getMaxPerPage()));
-        mav.addObject("currentPage", pageModel.getCurrent());
-        mav.addObject("lastPage", pageModel.getLast());
-        mav.addObject("nextPage", pageModel.getNext());
-        mav.addObject("prevPage", pageModel.getPrev());
-        mav.addObject("startPage", pageModel.getStart());
+        map.put("pageNumber", String.valueOf(page - 1));
+        map.put("maxResult", String.valueOf(paginator.getMaxPerPage()));
+        CoursesDTO dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
 
-        Collection<Courses> courses = coursesService.findByFilter(map);
-        mav.addObject("courses", courses);
+        Page pageModel = paginator.getPage(page, dto.getTotalCount());
+        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
+                .byNextPage().byPrevPage().byStartPage().toMap());
+
+        mav.addObject("courses", dto.getCourses());
         mav.addObject("content", "courses/content/listContent");
         mav.addObject("isFiltered", false);
         return mav;
@@ -123,20 +122,19 @@ public class CoursesController {
     public ModelAndView filter(@ModelAttribute("searchFilter") SearchFilter searchFilter,
                                @RequestParam(required = true, defaultValue = "1") int page) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "listContent");
+        mav.addObject("content", "courses/content/listContent");
 
-        Page pageModel = paginator.getPage(page, coursesService.getCount());
-        Map<String, String> map = searchFilter.getMap();
-        map.put("pageNumber" , String.valueOf(pageModel.getCurrent() - 1));
-        map.put("maxResult" , String.valueOf(paginator.getMaxPerPage()));
-        mav.addObject("currentPage", pageModel.getCurrent());
-        mav.addObject("lastPage", pageModel.getLast());
-        mav.addObject("nextPage", pageModel.getNext());
-        mav.addObject("prevPage", pageModel.getPrev());
-        mav.addObject("startPage", pageModel.getStart());
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("pageNumber", String.valueOf(page - 1));
+        map.put("maxResult", String.valueOf(paginator.getMaxPerPage()));
+        CoursesDTO dto = coursesService.findByFilter(searchFilter.createQuery(map)
+                .byTitle().byDate().byCategories().byTags().toString());
 
-        Collection<Courses> courses = coursesService.findByFilter(map);
-        mav.addObject("courses", courses);
+        Page pageModel = paginator.getPage(page, dto.getTotalCount());
+        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
+                .byNextPage().byPrevPage().byStartPage().toMap());
+
+        mav.addObject("courses", dto.getCourses());
         mav.addObject("isFiltered", false);
         return mav;
     }
@@ -166,7 +164,7 @@ public class CoursesController {
                              BindingResult bindingResult,
                              SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return modelAndViewContentBuilder("createContent");
+            return modelAndViewContentBuilder("courses/content/createContent");
         }
         course = coursesService.create(course);
         session.setComplete();
@@ -199,7 +197,7 @@ public class CoursesController {
                                BindingResult bindingResult,
                                SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return modelAndViewContentBuilder("updateContent");
+            return modelAndViewContentBuilder("courses/content/updateContent");
         }
         coursesService.update(course);
         session.setComplete();

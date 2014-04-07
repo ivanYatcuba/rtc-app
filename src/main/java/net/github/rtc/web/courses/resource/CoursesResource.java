@@ -1,9 +1,7 @@
 package net.github.rtc.web.courses.resource;
 
 import net.github.rtc.web.courses.model.Courses;
-
-import java.util.Collection;
-import java.util.Map;
+import net.github.rtc.web.courses.model.CoursesDTO;
 
 /**
  * Data Access Object Interface
@@ -20,13 +18,6 @@ public interface CoursesResource {
      * @return course object or null
      */
     Courses findByCode(String code);
-
-    /**
-     * Find collection of courses
-     *
-     * @return collection of courses
-     */
-    Collection<Courses> findAll();
 
     /**
      * Delete existing course by code
@@ -53,10 +44,8 @@ public interface CoursesResource {
     /**
      * Find course collection by filtering param
      *
-     * @param filter filter map
-     * @return course collection
+     * @param query filter query
+     * @return courseDto
      */
-    Collection<Courses> findByFilter(Map<String, String> filter);
-
-    int getCount();
+    CoursesDTO findByFilter(String query);
 }

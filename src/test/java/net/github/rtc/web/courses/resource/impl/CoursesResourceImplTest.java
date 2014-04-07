@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 
+//import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -34,6 +35,8 @@ public class CoursesResourceImplTest {
 
     @Autowired
     private CoursesResourceImpl resource;
+
+    private final String code = "fcb56955-5344-41e4-897b-d69387e5fa55";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -52,38 +55,24 @@ public class CoursesResourceImplTest {
         return Resources.toString(url, Charsets.UTF_8);
     }
 
-   /* @Test
+   @Test
     public void testFindById() throws Exception {
         final String responseXml = loadXmlFile("course.json");
-        final Integer id = 5;
-        mockServer.expect(requestTo(resource.getHostUrl() + "courses/" + id))
+        mockServer.expect(requestTo(resource.getHostUrl() + "courses/" + code))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(responseXml, MediaType.APPLICATION_JSON));
-        final Courses courses = resource.findById(id);
+        final Courses courses = resource.findByCode(code);
         mockServer.verify();
-        assertEquals(id, courses.getId());
+        assertEquals(code, courses.getCode());
 
-    } */
-
-    @Test
-    public void testFindAll() throws Exception {
-        final String responseXml = loadXmlFile("courses.json");
-        mockServer.expect(requestTo(resource.getHostUrl() + "courses"))
-                .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(responseXml, MediaType.APPLICATION_JSON));
-        Collection<Courses> courses = resource.findAll();
-        mockServer.verify();
-        assertNotNull(courses);
-        assertTrue(courses.size() == 2);
     }
 
-   /* @Test
+   @Test
     public void testDelete() throws Exception {
-        final Integer id = 5;
-        mockServer.expect(requestTo(resource.getHostUrl() + "courses/" + id))
+        mockServer.expect(requestTo(resource.getHostUrl() + "courses/" + code))
                 .andExpect(method(HttpMethod.DELETE))
                 .andRespond(withSuccess());
-        resource.delete(id);
+        resource.delete(code);
         mockServer.verify();
-    }*/
+    }
 }

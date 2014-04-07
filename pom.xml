@@ -9,6 +9,7 @@
 
     <properties>
         <spring.version>3.2.0.RELEASE</spring.version>
+        <spring.security.version>3.2.0.RELEASE</spring.security.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -56,6 +57,24 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
         </dependency>
 
         <dependency>
@@ -144,6 +163,23 @@
             <type>jar</type>
         </dependency>
 
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.2.2</version>
+            </dependency>
+
+
     </dependencies>
 
     <build>
@@ -220,15 +256,20 @@
 
             <properties>
                 <host.baseUrl>http://localhost:8079/api/</host.baseUrl>
-                <host.userUrl>http://localhost:8078/api/users-web-service/</host.userUrl>
+                <host.userURL>http://localhost:8078/api/users-web-service/</host.userURL>
             </properties>
         </profile>
+        
+        
         <profile>
             <id>prod</id>
             <properties>
                 <host.baseUrl>http://146.185.176.193:8079/api/</host.baseUrl>
-                 <host.userUrl>http://146.185.176.193:8078/api/users-web-service/</host.userUrl>
+                <host.userURL>http://146.185.176.193:8078/api/users-web-service/</host.userURL>
             </properties>
+                    
         </profile>
+        
+        
     </profiles>
 </project>

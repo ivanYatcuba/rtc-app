@@ -1,24 +1,33 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package net.github.rtc.web.user.service;
 
 import net.github.rtc.web.user.model.User;
-
 import java.util.Collection;
 
-
 /**
- * Data Access Object Interface
- * Provides CRUD operations with {@link net.github.rtc.web.courses.model.Courses} objects
  *
- * @author Vladislav Pikus
+ * @author Саша
  */
 public interface UserService {
 
+    Collection<User> findAll();
+
+    /**
+     * Will be delete course by ID
+     * If ID is null then will be throw {@link net.github.rtc.web.exception.ServiceProcessingException}
+     *
+     * @param id course ID
+     */
+    void delete(Integer id);
 
     User findById(Integer id);
 
-    Collection<User> findAll();
-    
     User create(User user);
 
-    void delete(Integer id);
+    void update(User user);
 }
