@@ -23,24 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     private static final String ROOT = "admin";
-  //  private static final String ROOT2 = "admin/user";
-   private UserService userService;
+    private UserService userService;
      @Autowired
     public void setService(UserService service) {
         this.userService = service;
     }
 
-
-  /*  @RequestMapping (value = "/qwe", method = RequestMethod.GET)
-    public ModelAndView single(@PathVariable Integer id) {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        User user = userService.findById(id);
-        //mav.addObject("user", user);
-        mav.addObject("content", "ViewAll");
-        return mav;
-       // return "ViewAll";
-    }
-*/
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView viewAll() {
         Collection<User> listUser;
@@ -48,6 +36,14 @@ public class UserController {
         mav.addObject("content", "User/content/ViewAll");
         listUser=userService.findAll();
         mav.addObject("users", listUser);
+        return mav;
+    }
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public ModelAndView user(@PathVariable Integer id) {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+ //       User user = userService.findById(id);
+       // mav.addObject("user", user);
+        mav.addObject("content", "User/content/UserPage");
         return mav;
     }
 
@@ -72,7 +68,7 @@ public class UserController {
     }
     
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
-    public ModelAndView creayeUser() {
+    public ModelAndView createUser() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "User/content/CreateUser");
         return mav;
