@@ -10,8 +10,8 @@
 
                         <div class="span5" style="text-align: right">
 
-                            <input type="submit" class="btn" value="Create"/> or <a
-                                href="<@spring.url "/admin/courses" />">Cancel</a>
+                            <input type="submit" class="btn" value="Create"/> or
+                            <a href="<@spring.url "/admin/courses" />">Cancel</a>
 
                         </div>
                 </div>

@@ -65,7 +65,7 @@ public class UserResourseImpl implements UserResource{
      */
     @Override
     public Collection<User> findAll() {
-        return Arrays.asList(restTemplate.getForObject(hostUserUrl, User[].class));
+        return Arrays.asList(restTemplate.getForObject(hostUserUrl + "viewAll", User[].class));
     }
     
     /**

@@ -11,7 +11,7 @@
     <div class="col-xs-3"><a href="<@spring.url "/admin/courses/${course.code}" />">${course.name}</a></div>
     <div class="col-xs-3">${course.startDate?date}&nbsp;-&nbsp;${course.endDate?date}</div>
     <div class="col-xs-2">${course.author.firstName}&nbsp;${course.author.lastName}</div>
-    <div class="col-xs-2"><a href="<@spring.url "/admin/courses/delete/${course.code}" />">delete</a></div>
+    <div class="col-xs-2"><a href="<@spring.url "/admin/courses/delete/${course.code}"/>">delete</a></div>
 </#list>
 
 <table style="width: 100%;">

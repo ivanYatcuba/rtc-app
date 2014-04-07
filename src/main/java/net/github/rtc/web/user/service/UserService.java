@@ -14,7 +14,7 @@ import java.util.Collection;
  * @author Саша
  */
 public interface UserService {
-    
+
     Collection<User> findAll();
 
     /**
