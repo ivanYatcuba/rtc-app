@@ -1,5 +1,5 @@
 <#import "/spring.ftl" as spring/>
-<form name="f" action= <@spring.url "j_spring_security_check"/> method="POST">
+<form name="f" action= <@spring.url "/j_spring_security_check"/> method="POST">
  
   <table>
   <tr>
