@@ -11,6 +11,7 @@
 
         <div class="carousel-inner">
             <div class="item active">
+
                 <img src="<@spring.url'/resources/images/carousel/cat1.jpg'/>" alt="First slide">
             </div>
             <div class="item">

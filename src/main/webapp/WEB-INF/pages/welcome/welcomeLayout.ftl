@@ -19,8 +19,8 @@
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js"'/>"></script>
-<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.js"'/>"></script>
+<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
+<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.js'/>"></script>
 </html>
 
 
