@@ -40,12 +40,20 @@ public class UserNavController {
      *
      * @return modelAndView("user/layout")
      */
-    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable Integer id) {
+        User u =  new User("a1ddasd", "a2dasd", "asdsd3", "223322", "ololo@mail.ol", new Date(),
+                "DNk", "DNU", "FPM", "PZ", 6, 6, "bla-bla", "password");
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.getModelMap().addAttribute("user", userService.findById(id));
+        mav.getModelMap().addAttribute("user", u);
         mav.addObject("content", "content/editUser");
         return mav;
+        /*
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+
+        mav.getModelMap().addAttribute("user", userService.findById(id));
+        mav.addObject("content", "content/editUser");
+        return mav;*/
     }
 
     /**
