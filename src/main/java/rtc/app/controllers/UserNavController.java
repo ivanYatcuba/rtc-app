@@ -22,7 +22,7 @@ import java.util.Date;
  */
 
 @Controller("userNavigationController")
-@RequestMapping("/user")
+@RequestMapping("user")
 public class UserNavController {
 
     private static final String ROOT = "user";
@@ -40,14 +40,20 @@ public class UserNavController {
      *
      * @return modelAndView("user/layout")
      */
-    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable Integer id) {
-        User u =  new User("a1ddasd", "assdasd", "asssdsd3", "123123", "ololo@mail.ol", new Date(),
-                "DNk", "DNU", "FPM", "PZ", 6, 6, "bla-bla", "123123");
+        User u =  new User("a1ddasd", "a2dasd", "asdsd3", "223322", "ololo@mail.ol", new Date(),
+                "DNk", "DNU", "FPM", "PZ", 6, 6, "bla-bla", "password");
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.getModelMap().addAttribute("user", u);
         mav.addObject("content", "content/editUser");
         return mav;
+        /*
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+
+        mav.getModelMap().addAttribute("user", userService.findById(id));
+        mav.addObject("content", "content/editUser");
+        return mav;*/
     }
 
     /**
@@ -89,8 +95,7 @@ public class UserNavController {
      */
     @ModelAttribute(value = ROOT_MODEL)
     public User getCommandObject() {
-        return new User("a1ddasd", "a2dasd", "asdsd3", "123123", "ololo@mail.ol", new Date(),
-                "DNk", "DNU", "FPM", "PZ", 6, 6, "bla-bla", "123123");
+        return new User();
     }
 
     /**
