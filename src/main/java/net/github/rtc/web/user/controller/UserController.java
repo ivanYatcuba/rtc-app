@@ -81,7 +81,7 @@ public class UserController {
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "User/content/CreateUser");
+        mav.addObject("content", "User/content/createContent");
         return mav;
     }
     
