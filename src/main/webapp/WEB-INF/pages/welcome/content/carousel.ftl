@@ -23,11 +23,8 @@
         </div>
 
         <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-generic" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-generic" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
+        <a class="left carousel-control" href="#carousel-generic" data-slide="prev">&lsaquo;</a>
+        <a class="right carousel-control" href="#carousel-generic" data-slide="next">&rsaquo;</a>
     </div>
 </div>
+

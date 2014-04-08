@@ -22,7 +22,7 @@ import java.util.Date;
  */
 
 @Controller("userNavigationController")
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserNavController {
 
     private static final String ROOT = "user";
@@ -42,8 +42,10 @@ public class UserNavController {
      */
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable Integer id) {
+        User u =  new User("a1ddasd", "assdasd", "asssdsd3", "123123", "ololo@mail.ol", new Date(),
+                "DNk", "DNU", "FPM", "PZ", 6, 6, "bla-bla", "123123");
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.getModelMap().addAttribute("user", userService.findById(id));
+        mav.getModelMap().addAttribute("user", u);
         mav.addObject("content", "content/editUser");
         return mav;
     }
@@ -87,7 +89,8 @@ public class UserNavController {
      */
     @ModelAttribute(value = ROOT_MODEL)
     public User getCommandObject() {
-        return new User();
+        return new User("a1ddasd", "a2dasd", "asdsd3", "123123", "ololo@mail.ol", new Date(),
+                "DNk", "DNU", "FPM", "PZ", 6, 6, "bla-bla", "123123");
     }
 
     /**
