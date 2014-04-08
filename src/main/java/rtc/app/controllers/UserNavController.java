@@ -43,7 +43,7 @@ public class UserNavController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable Integer id) {
         User u =  new User("a1ddasd", "a2dasd", "asdsd3", "223322", "ololo@mail.ol", new Date(),
-                "DNk", "DNU", "FPM", "PZ", 6, 6, "bla-bla", "password");
+                "DNk", "DNU", "FPM", "PZ", 6, 6, "bla-bla", "password", "male");
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.getModelMap().addAttribute("user", u);
         mav.addObject("content", "content/editUser");
