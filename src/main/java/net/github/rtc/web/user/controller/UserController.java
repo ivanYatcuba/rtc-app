@@ -1,11 +1,20 @@
 package net.github.rtc.web.user.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import net.github.rtc.web.courses.model.SearchFilter;
+import net.github.rtc.web.courses.propertyeditors.CustomTagsEditor;
 import net.github.rtc.web.user.model.User;
 import net.github.rtc.web.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 //import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     private static final String ROOT = "admin";
+    private static final String ROOT_MODEL = "user";
     private UserService userService;
      @Autowired
     public void setService(UserService service) {
@@ -73,6 +83,31 @@ public class UserController {
         return mav;
     }
     
+      
+    @ModelAttribute(value = ROOT_MODEL)
+    public User getCommandObject() {
+        return new User();
+    }
+     @InitBinder(ROOT_MODEL)
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
+    }
+    
+     @ModelAttribute("searchFilter")
+    public SearchFilter getFilter() {
+        return new SearchFilter();
+    }
+    
+     @ModelAttribute("roles")
+    public Collection<String> getCategories() {
+        
+        Collection<String> s = new ArrayList<String>();
+        s.add("User");
+        s.add("Admin");
+        return s;
+    }
     
 
 }
