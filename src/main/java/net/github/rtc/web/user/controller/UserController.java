@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import javax.validation.Valid;
 import net.github.rtc.web.courses.model.SearchFilter;
 import net.github.rtc.web.courses.propertyeditors.CustomTagsEditor;
 import net.github.rtc.web.user.model.User;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -84,7 +87,16 @@ public class UserController {
         mav.addObject("content", "User/content/createContent");
         return mav;
     }
-    
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid User user,
+                             BindingResult bindingResult,
+                             SessionStatus session) {
+        
+        System.out.println("it's test");
+       // course = coursesService.create(course);
+       // session.setComplete();
+        return new ModelAndView("redirect:/" + ROOT + "/" + user.getId());
+    }
       
     @ModelAttribute(value = ROOT_MODEL)
     public User getCommandObject() {
@@ -110,6 +122,8 @@ public class UserController {
         s.add("Admin");
         return s;
     }
+
+    
     
 
 }
