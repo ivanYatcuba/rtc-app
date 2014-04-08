@@ -27,6 +27,11 @@ public class User implements UserDetails {
     @required
     @maxlength(50)
     @minlength(5)
+    private String lastName;
+    
+    @required
+    @maxlength(50)
+    @minlength(5)
     private String middleName;
     @required
     @number
@@ -54,6 +59,8 @@ public class User implements UserDetails {
     @minlength(5)
     @required
     private String speciality;
+    
+    private String progLanguages;
 
     // private String technologies;
     @number
@@ -75,6 +82,28 @@ public class User implements UserDetails {
         return email;
     }
 
+    public void setLastName(String lastName)
+    {
+        this.lastName=lastName;
+        
+    }
+    
+    public void setProgLanguages(String progrLanguage)
+    {
+        this.progLanguages=progrLanguage;
+    }
+    
+    public String getProgLanguages()
+    {
+       return this.progLanguages=progLanguages;
+    }
+    
+    public String getLastName()
+    {
+        return this.lastName;
+    }
+    
+    
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }

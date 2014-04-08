@@ -1,10 +1,10 @@
 
 <h2>Create User</h2>
 
- <div class="row-fluid span12" style="margin-left: 1px">
+ <div class="row-fluid">
 
             <div class="span6" >
-    <form class="form-horizontal">
+             <form class="form-horizontal">
                 <@spring.formItem "user.email"/>
                 </form>
                 <form class="form-horizontal">
@@ -12,11 +12,10 @@
                 <@spring.bind "roles" />
                 <div class="controls">
                 <@spring.formSingleSelect "user.authorities", roles, " "/></div></div></form>
-                <@spring.formItem "user.birthDate" "datepiker" 'class="input-medium"'/>
-               <hr align="center" width="800" size="1" />
+                
             </div>
 
-            <div class="span5">
+            <div class="span6">
 
                 <form class="form-horizontal">
                      <div class="control-group">
@@ -27,19 +26,105 @@
                          </div>
                      </div>
                 </form>
-             <!--<div><label for="course.author.firstName">
-                <@spring.message "courses.author"/> </label>
-                <@spring.formInput "course.author.firstName" 'class="input-medium"'/>
-                <@spring.formInput "course.author.lastName" 'class="input-medium"'/>
-                <@spring.showErrors "<br>" /></div>
-                <@spring.formItem "course.author.email"/>
-                <@spring.formItem "course.tags" "tags"/>-->
+           
             </div>
 
     </div>
 
+<hr/>
+<div class="row-fluid">
 
+            <div class="span6" >
+             <form class="form-horizontal">
+                <div class="control-group">
+                         <label class="control-label">*Gender:</label>
+                         <div class="controls">
+                            <label class="radio inline">
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Male</label>
+                            <label class="radio inline">
+                           <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Famale</label>
+                           </div>
+                 </div>
+            </form>
+             </div>
+              <div class="span6">
+              </div>
 
-</body>
+</div>
 
-</html>
+<div class="row-fluid">
+
+            <div class="span6" >
+             <form class="form-horizontal">
+                 <@spring.formItem "user.lastName"/>
+                 <br>
+               <@spring.formItem "user.middleName"/>
+                </form>
+               
+                
+            </div>
+
+            <div class="span6">
+
+                <form class="form-horizontal">
+                 <@spring.formItem "user.surname"/>
+                 <br>
+               <@spring.formItem "user.birthDate" "datepiker" 'class="input-medium"'/>
+                </form>
+           
+            </div>
+
+    </div>
+<hr/>
+
+<div class="row-fluid">
+
+            <div class="span6" >
+             <form class="form-horizontal">
+                 <@spring.formItem "user.university"/>
+                 <br>
+               <@spring.formItem "user.faculty"/>
+                </form>
+               
+                
+            </div>
+
+            <div class="span6">
+
+                <form class="form-horizontal">
+                 <@spring.formItem "user.speciality"/>
+    
+             
+                </form>
+           
+            </div>
+
+    </div>
+<hr/>
+<div class="row-fluid">
+
+            <div class="span6" >
+             <form class="form-horizontal">
+                 <@spring.formItem "user.progLanguages"/>
+               </form>
+               
+                
+            </div>
+
+            <div class="span6">
+                <form class="form-horizontal">
+                <div><label  class="control-label" for="type"><@spring.message "user.role"/></label>
+                <@spring.bind "roles" />
+                <div class="controls">
+                <@spring.formSingleSelect "user.authorities", roles, " "/></div></div>
+    
+             
+                </form>
+           
+            </div>
+
+    </div>
+<hr/>
+ <form class="form-horizontal">
+<div><label  class="control-label" for="type"><@spring.message "user.note"/></label>
+ <@spring.formTagsInput "user.note"/></form>
