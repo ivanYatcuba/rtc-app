@@ -23,3 +23,7 @@
     height: 330px;
     width: 940px;
 }
+
+.carousel-control {
+    margin-top: 10px;
+}
