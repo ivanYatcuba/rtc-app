@@ -60,6 +60,8 @@ public class UserController {
     public ModelAndView editPage() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "User/content/EditPage");
+        User us=new User("serName","Name","midleName","Pfone","Email",new Date(),"Sity","University","Faculty","Speciality",1,1,"note","Password");
+        mav.addObject("user", us);
         return mav;
     }
     @RequestMapping(value = "/userPage", method = RequestMethod.GET)
