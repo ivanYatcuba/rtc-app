@@ -31,10 +31,9 @@ public class UserController {
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView viewAll() {
-        Collection<User> listUser;
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "User/content/ViewAll");
-        listUser=userService.findAll();
+        Collection<User> listUser=userService.findAll();
         mav.addObject("users", listUser);
         return mav;
     }
