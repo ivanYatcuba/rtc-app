@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Service Implementation
  * This's a wrapper for {@link CoursesService}
@@ -83,5 +85,12 @@ public class CoursesServiceImpl implements CoursesService {
     @Override
     public CoursesDTO findByFilter(String query) {
         return resource.findByFilter(query);
+    }
+
+    @Override
+    public void publish(Courses course) {
+        course.setStatus("PUBLISHED");
+        course.setPublishDate(new Date());
+        resource.update(course);
     }
 }

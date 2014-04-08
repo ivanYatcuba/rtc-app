@@ -1,36 +1,59 @@
-    <h3 class="page-header">${course.name} Details:</h3>
+<div class="row-fluid span12" style="margin-left: 1px">
+    <div class="span6" >
+        <p><@spring.message "course.name"/>&nbsp${course.name}</p>
+        <p><@spring.message "courses.category"/>&nbsp${course.type}</p>
+        <p><@spring.message "course.capacity"/>&nbsp${course.capacity}</p>
+    </div>
 
-            <div class="row-fluid" style="margin-left: 1px">
-                <div class="span2"  align="right">
-                    <p>Course name: </p>
-                    <p>Category: </p>
-                    <p>Start Date: </p>
-                    <p>Finish Date: </p>
-                </div>
+    <div class="span5">
 
-                <div class="span2" style="margin-right: 0px">
-                    <p>${course.name}</p>
-                    <p>${course.type}</p>
-                    <p>${course.startDate?date}</p>
-                    <p>${course.endDate?date}</p>
-                </div>
+        <p><@spring.message "course.startDate"/>${course.startDate?date}</p>
+        <p><@spring.message "course.endDate"/>&nbsp${course.endDate?date}</p>
+        <p><@spring.message "course.tags"/>
+        <#list course.tags as tag>${tag.value}<#if tag_has_next>,</#if> </#list></p>
 
-                <div class="span2" align="right">
-                    <p>Author: </p>
-                    <p>Email: </p>
-                    <p>Tags: </p>
-                </div>
+    </div>
 
-                <div class="span2" >
-                    <p>${course.author.firstName} &nbsp; ${course.author.lastName}</p>
-                    <p>${course.author.email}</p>
-                    <p><#list course.tags as tag>${tag.value}<#if tag_has_next>,</#if> </#list></p>
-                </div>
-            </div>
+</div>
 
-            <div class = "row">
-                <div class="span8" align="right">
-                    <a href="<@spring.url "/admin/courses/${course.getCode()}/update" />"><button class="btn"><@spring.message "coursesPage.action.edit"/></button></a> or
-                    <a href="<@spring.url "/admin/courses" />"><@spring.message "coursesPage.action.cancel"/></a>
-                </div>
-            </div>
+&NonBreakingSpace;
+<hr>
+<div class="row-fluid span12" style="margin-left: 1px; ">
+    <div class="span6" >
+        <p><@spring.message "course.author.lastName"/>&nbsp${course.author.lastName}</p>
+        <p><@spring.message  "course.author.firstName"/>&nbsp${course.author.firstName}</p>
+    </div>
+
+    <div class="span5">
+        <p><@spring.message  "course.author.email"/>&nbsp${course.author.email}</p>
+    </div>
+</div>
+
+&NonBreakingSpace;
+<hr>
+<div class="row-fluid span12" style="margin-left: 1px">
+    <@spring.message  "course.description"/>&nbsp${course.description}
+</div>
+
+&NonBreakingSpace;
+<hr>
+<div class="row-fluid span12" style="margin-left: 1px">
+    <div class="span6" >
+        <@spring.message  "course.status"/>&nbsp${course.status}
+    </div>
+
+    <div class="span5">
+        <@spring.message "course.pudlishDate"/>&nbsp
+        <#if course.publishDate??>${course.publishDate?date}</#if>
+    </div>
+</div>
+
+&NonBreakingSpace;
+<hr>
+<div class = "row">
+    <div class="span12" align="right">
+        <a href="<@spring.url "/admin/courses/${course.getCode()}/update" />"><button class="btn"><@spring.message "coursesPage.action.edit"/></button></a> or
+        <a href="<@spring.url "/admin/courses" />"><@spring.message "coursesPage.action.cancel"/></a>
+    </div>
+</div>
+
