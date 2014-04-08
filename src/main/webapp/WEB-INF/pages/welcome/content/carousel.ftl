@@ -11,6 +11,7 @@
 
         <div class="carousel-inner">
             <div class="item active">
+
                 <img src="<@spring.url'/resources/images/carousel/cat1.jpg'/>" alt="First slide">
             </div>
             <div class="item">
@@ -22,11 +23,8 @@
         </div>
 
         <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-generic" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-generic" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
+        <a class="left carousel-control" href="#carousel-generic" data-slide="prev">&lsaquo;</a>
+        <a class="right carousel-control" href="#carousel-generic" data-slide="next">&rsaquo;</a>
     </div>
 </div>
+

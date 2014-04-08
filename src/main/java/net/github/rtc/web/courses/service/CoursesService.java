@@ -55,4 +55,10 @@ public interface CoursesService {
      * @return courseDTO
      */
     CoursesDTO findByFilter(String query);
+
+    /**
+     * Set course status as published
+     * @param course  what course?
+     */
+    void publish(Courses course);
 }
