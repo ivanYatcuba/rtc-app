@@ -123,9 +123,12 @@
 
         <hr>
 <div class="span12" style="text-align: right">
-    <button class="btn btn-info"  type="button">Edit</button>
+    <form name ="editPage" action="editPage/${user.id}" method="get">
+    <button class="btn btn-info" type="submit">Edit</button>
+    </form>
     or
     <a href="">Cancel</a>
+
 </div>
 
 </body>

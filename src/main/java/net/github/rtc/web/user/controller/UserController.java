@@ -61,7 +61,7 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/editPage/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "userPage/editPage/{id}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "User/content/EditPage");
@@ -82,6 +82,7 @@ public class UserController {
         userService.delete(id);
         return  "redirect:/"+ROOT+"/user/viewAll";
     }
+
     
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
