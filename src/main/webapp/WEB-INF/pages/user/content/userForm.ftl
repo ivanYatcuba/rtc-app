@@ -23,8 +23,8 @@
     <div class="span6">
         <div style="margin-bottom: 10px;"><label for="user.gender">
         <@spring.message "user.gender"/>:
-            <input type="radio" path="user.gender" name="user.gender" value="male" style="margin: -3px 0px 0px;"> <@spring.message "user.genderM"/>
-            <input type="radio" path="user.gender" name="user.gender" value="female" style="margin: -3px 0px 0px;"> <@spring.message "user.genderF"/>
+            <input type="radio" name="gender" id="optionsRadios1" value="Male" checked style="margin: -3px 0px 0px;"> <@spring.message "user.genderM"/>
+            <input type="radio" name="gender" id="optionsRadios2" value="Female" style="margin: -3px 0px 0px;"> <@spring.message "user.genderF"/>
         </label>
         </div>
     </div>
@@ -98,16 +98,12 @@
 
     <div class="span6">
         <div><label for="user.english">
+        <@spring.bind "english" />
             * <@spring.message "user.english"/>: </label>
-            <div class="controls">
-                <select style="background-color: #FFFACD;">
-                    <option>Basic</option>
-                    <option>Pre-Intermediate</option>
-                    <option>Intermediate</option>
-                    <option>Upper Intermediate</option>
-                    <option>Advanced</option>
-                </select>
-            </div>
+            <div>
+            <@spring.bind "english" />
+                <div class="controls">
+                <@spring.formSingleSelect "user.english", english, " "/></div></div>
         </div>
     </div>
 </div>
