@@ -44,7 +44,7 @@
     <@bind path/>
     <div>
         <label for="${status.expression?replace('[','')?replace(']','')}">
-            <@message path/>
+            <@message path/>:
         </label>
             <#if type == "text">
                 <@formInput path attributes/>

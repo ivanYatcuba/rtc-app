@@ -40,6 +40,7 @@ public class Courses implements Serializable {
     @NotEmpty
     private List<Tags> tags;
 
+    @NotNull
     private Integer capacity;
 
     @Size(max = 255)
