@@ -99,7 +99,6 @@ public class UserController {
          Collection <Role> rol = new ArrayList<Role>();
          rol.add(new Role());
          user.setAuthorities(rol);
-        
       user=this.userService.create(user);   
          session.setComplete();
  Collection<User> listUser=userService.findAll();
