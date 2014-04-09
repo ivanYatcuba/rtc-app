@@ -1,5 +1,6 @@
 <h3 class="page-header">Courses List</h3>
 
+<script src="/resources/css/Bootstrap/js/bootstrap-dropdown.js"></script>
 
 <#include "../layout/searchPanel.ftl">
     <div class="head-2"><strong>Category</strong></div>
@@ -14,11 +15,19 @@
     <div class="col-xs-2">${course.startDate?date}&nbsp;-&nbsp;${course.endDate?date}</div>
     <div class="col-xs-2">${course.author.firstName}&nbsp;${course.author.lastName}</div>
     <div class="col-xs-2">${course.status}</div>
-    <div class="col-xs-2 dropdown">
-        <p><#if "${course.status}" == "DRAFT">
-            <a href="<@spring.url "/admin/courses/publish/${course.code}"/>">Publish!</a>
-        </#if></p>
-        <p><a href="<@spring.url "/admin/courses/delete/${course.code}"/>">Delete</a></p>
+    <div class="col-xs-2">
+
+        <ul class="nav" role="navigation">
+        <li class="dropdown">
+            <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                <#if "${course.status}" == "DRAFT">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/courses/publish/${course.code}"/>">Publish!</a></li>
+                </#if>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/courses/delete/${course.code}"/>">Delete</a></li>
+            </ul>
+        </li>
+        </ul>
     </div>
 </#list>
 
