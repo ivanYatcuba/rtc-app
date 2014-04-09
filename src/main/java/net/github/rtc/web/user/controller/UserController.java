@@ -52,9 +52,10 @@ public class UserController {
         mav.addObject("content", "User/content/EditPage");
         return mav;
     }
-    @RequestMapping(value = "/userPage", method = RequestMethod.GET)
-    public ModelAndView userPage() {
+    @RequestMapping(value = "/userPage/{id}", method = RequestMethod.GET)
+    public ModelAndView userPage(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("user",userService.findById(id));
         mav.addObject("content", "User/content/UserPage");
         return mav;
     }
@@ -62,7 +63,6 @@ public class UserController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer id) {
         userService.delete(id);
-
         return  "redirect:/"+ROOT+"/user/viewAll";
     }
     
