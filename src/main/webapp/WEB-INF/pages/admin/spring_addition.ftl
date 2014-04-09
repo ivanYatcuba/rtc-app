@@ -43,8 +43,13 @@
 <#macro formItem path type="text" attributes="" >
     <@bind path/>
     <div>
+<<<<<<< HEAD
         <label class="control-label" for="${status.expression?replace('[','')?replace(']','')}">
             <@message path/>
+=======
+        <label for="${status.expression?replace('[','')?replace(']','')}">
+            <@message path/>:
+>>>>>>> refs/remotes/origin/Develop
         </label>
          <div class="controls">
             <#if type == "text">

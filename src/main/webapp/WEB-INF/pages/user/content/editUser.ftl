@@ -6,7 +6,7 @@
         <div class="span6">
         </div>
 
-        <div class="span5" style="text-align: right">
+        <div class="span2" style="text-align: right">
 
             <input type="submit" class="btn" value="Save"/> or <a
                 href="<@spring.url "/user/details" />">Cancel</a>
