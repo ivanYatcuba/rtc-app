@@ -22,8 +22,8 @@ public class User implements UserDetails {
     @required
     @maxlength(50)
     @minlength(5)
-    private String name;
-
+    private String name;  
+    
     @required
     @maxlength(50)
     @minlength(5)
@@ -54,7 +54,13 @@ public class User implements UserDetails {
     @minlength(5)
     @required
     private String speciality;
+    
+    private String gender;
+    
+    private String progLanguages;
+    private String english;
 
+    
     // private String technologies;
     @number
     private Integer writtenEng;
@@ -70,11 +76,51 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
 
+  
+    
+    public void setEnglish(String english)
+    {
+        this.english=english;
+    }
+    public String getEnglish()
+    {
+        return this.english;
+    }
+    
+    public void setGender(String gender)
+    {
+        this.gender=gender;
+    }
+    
+    public String getGender()
+    {
+        return this.gender;
+    }
+    
     @Override
     public String getUsername() {
         return email;
     }
 
+     
+    public void setProgLanguages(String progrLanguage)
+    {
+        this.progLanguages=progrLanguage;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public String getProgLanguages()
+    {
+       return this.progLanguages;
+    }
+    
+    
+    
+    
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
@@ -83,6 +129,7 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 
+    @Override
     public boolean isAccountNonExpired() {
         return accountNonExpired;
     }
@@ -91,6 +138,7 @@ public class User implements UserDetails {
         this.accountNonExpired = accountNonExpired;
     }
 
+    @Override
     public boolean isAccountNonLocked() {
         return accountNonLocked;
     }
@@ -99,6 +147,7 @@ public class User implements UserDetails {
         this.accountNonLocked = accountNonLocked;
     }
 
+    @Override
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
@@ -107,6 +156,7 @@ public class User implements UserDetails {
         this.credentialsNonExpired = credentialsNonExpired;
     }
 
+    @Override
     public boolean isEnabled() {
         return enabled;
     }
@@ -117,6 +167,7 @@ public class User implements UserDetails {
 
     /**
      * *********************************
+     * @return 
      */
 
     public String getCity() {
@@ -193,6 +244,7 @@ public class User implements UserDetails {
         this.note = note;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
