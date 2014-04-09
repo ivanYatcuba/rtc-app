@@ -18,7 +18,8 @@
       <#list users as x>
 <tr>
       <#if (x.name) ?? && (x.surname) ?? >
-        <td>${x.name + " " + x.surname}</td>
+        <td>
+            <a href="<@spring.url"/admin/user/userPage/${x.id}"/>">  ${x.name + " " + x.surname} </a></td>
      <#else>
         <td>None</td>
     </#if>
@@ -47,7 +48,7 @@
         <td>None</td>
     </#if>
 
-    <td><a href="<@spring.url "/admin/User/delete/${x.id}" />">Remove</a></td>
+    <td><a href="<@spring.url "/admin/user/delete/${x.id}" />">Remove</a></td>
 
 </tr>
     </#list>
