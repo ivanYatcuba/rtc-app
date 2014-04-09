@@ -127,7 +127,7 @@
     <button class="btn btn-inverse" type="submit">Edit</button>
     </form>
     or
-    <form name ="editPage" action="rtc-app/admin/user/viewAll" method="get">
+    <form name ="editPage" action="/admin/user/viewAll" method="get">
     <button class="btn btn-link">Cancel</button>
     </form>
 </div>
