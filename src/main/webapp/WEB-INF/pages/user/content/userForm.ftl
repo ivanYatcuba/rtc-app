@@ -66,7 +66,7 @@
     <div class="span6">
         <div><label for="user.phone">
         * <@spring.message "user.phone"/>: </label>
-        <@spring.formDatepicker "user.phone" 'style="background-color: #FFFACD;"'/>
+        <@spring.formInput "user.phone" 'style="background-color: #FFFACD;"'/>
         <@spring.showErrors "<br>"/>
         </div>
     </div>
