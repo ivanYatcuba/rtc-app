@@ -40,7 +40,7 @@
     </script>
 </#macro>
 
-<#macro formItem path type="text" attributes="">
+<#macro formItem path type="text" attributes="" >
     <@bind path/>
     <div>
         <label class="control-label" for="${status.expression?replace('[','')?replace(']','')}">

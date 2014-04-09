@@ -55,8 +55,12 @@ public class User implements UserDetails {
     @required
     private String speciality;
     
+    private String gender;
+    
     private String progLanguages;
+    private String english;
 
+    
     // private String technologies;
     @number
     private Integer writtenEng;
@@ -72,6 +76,27 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
 
+  
+    
+    public void setEnglish(String english)
+    {
+        this.english=english;
+    }
+    public String getEnglish()
+    {
+        return this.english;
+    }
+    
+    public void setGender(String gender)
+    {
+        this.gender=gender;
+    }
+    
+    public String getGender()
+    {
+        return this.gender;
+    }
+    
     @Override
     public String getUsername() {
         return email;

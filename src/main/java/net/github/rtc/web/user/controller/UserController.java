@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import javax.validation.Valid;
-import net.github.rtc.web.courses.model.SearchFilter;
+//import net.github.rtc.web.courses.model.SearchFilter;
 import net.github.rtc.web.courses.propertyeditors.CustomTagsEditor;
+import net.github.rtc.web.user.model.Role;
+import net.github.rtc.web.user.model.Roles;
 import net.github.rtc.web.user.model.User;
 import net.github.rtc.web.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,11 +93,18 @@ public class UserController {
     public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid User user,
                              BindingResult bindingResult,
                              SessionStatus session) {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+         mav.addObject("content", "User/content/ViewAll");
         
+         Collection <Role> rol = new ArrayList<Role>();
+         rol.add(new Role());
+         user.setAuthorities(rol);
+        mav.addObject("user",user);
+      user=this.userService.create(user);   
+         session.setComplete();
         System.out.println("it's test");
-       // course = coursesService.create(course);
-       // session.setComplete();
-        return new ModelAndView("redirect:/" + ROOT + "/" + user.getId());
+    
+        return mav;
     }
       
     @ModelAttribute(value = ROOT_MODEL)
@@ -109,21 +118,29 @@ public class UserController {
         binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
     }
     
-     @ModelAttribute("searchFilter")
-    public SearchFilter getFilter() {
-        return new SearchFilter();
-    }
-    
+//     @ModelAttribute("searchFilter")
+//    public SearchFilter getFilter() {
+//        return new SearchFilter();
+//    }
+//    
      @ModelAttribute("roles")
     public Collection<String> getCategories() {
         
         Collection<String> s = new ArrayList<String>();
-        s.add("User");
-        s.add("Admin");
+        s.add(Roles.ROLE_ADMIN.name());
+        s.add(Roles.ROLE_USER.name());
         return s;
     }
 
-    
+      @ModelAttribute("english")
+    public Collection<String> getEnglish() {
+        
+        Collection<String> s = new ArrayList<String>();
+        s.add("Basic");
+        s.add("Intermidiate");
+        s.add("Advanced");
+        return s;
+    }
     
 
 }
