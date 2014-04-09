@@ -30,7 +30,7 @@
                             <label class="radio inline">
                             <input type="radio" name="gender" id="optionsRadios1" value="Male" checked>Male</label>
                             <label class="radio inline">
-                           <input type="radio" name="gender" id="optionsRadios2" value="Famale">Famale</label>
+                           <input type="radio" name="gender" id="optionsRadios2" value="Female">Famale</label>
                            </div>
                  </div>
              </div>

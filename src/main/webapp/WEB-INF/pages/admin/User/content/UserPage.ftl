@@ -1,6 +1,7 @@
 <html>
 
 <head>
+<#--<#assign security=JspTaglibs["http://www.springframework.org/security/tags"]/>-->
   <title>User Page</title>
  </head>
 
@@ -19,27 +20,27 @@
          <br>
           <br>
        <div class="span3" style="margin-left: 100px">
-          <label>Role:User</label>
+
+          <label>Role:ROLE MF</label>
+
        </div>
 
    </div>
 
         <hr>
 
-
-
    <div class="row-fluid 12">
 
         <div class="span12" style="margin-left: 80px">
-            <label>Gender:Female</label>
+            <label>Gender:GENDER MF</label>
 
             <br>
 
             <div class="span3" style="margin-left: -15px">
-            <label>Last Name:Ivanov</label>
+            <label>Last Name:${user.surname}</label>
             </div>
             <div class="span7" style="margin-left: 180px">
-            <label>First Name:Ivan</label>
+            <label>First Name:${user.name}</label>
             </div>
 
         </div>
@@ -48,10 +49,10 @@
        <div class="span12" style="margin-left: 80px">
     <br>
            <div class="span3" style="margin-left: -28px">
-               <label>Middle Name:Ivanovich</label>
+               <label>Middle Name:${user.middleName}</label>
            </div>
            <div class="span7" style="margin-left: 180px">
-               <label>Birthdate:10-10-10</label>
+               <label>BirthDate:${user.birthDate ? datetime ? string("yyyy-MM-dd")}</label>
            </div>
 
        </div>
@@ -64,10 +65,10 @@
 
                 <div class="span12" style="margin-left: 80px">
                 <div class="span3" style="margin-left: 5px">
-                    <label>City:Dnepr</label>
+                    <label>City:${user.city}</label>
                 </div>
                 <div class="span7" style="margin-left: 180px">
-                    <label>Phone:0950952020</label>
+                    <label>Phone:${user.phone}</label>
                 </div>
         </div>
             </div>
@@ -78,15 +79,15 @@
 
         <div class="span12" style="margin-left: 80px">
             <div class="span3" style="margin-left: 5px">
-                <label>Univercity:DNU</label>
+                <label>Univercity:${user.university}</label>
             </div>
             <div class="span7" style="margin-left: 180px">
-                <label>Speciality:Biologist</label>
+                <label>Speciality:${user.speciality}</label>
             </div>
 
             <div class="span3" style="margin-left: 0px">
                 <br>
-                <label>Faculty:Some faculty</label>
+                <label>Faculty:${user.faculty}</label>
             </div>
         </div>
 
@@ -99,10 +100,10 @@
 
         <div class="span12" style="margin-left: 80px">
             <div class="span3" style="margin-left: -70px">
-                <label>Programming languages:Java,PHP</label>
+                <label>Programming languages:${user.progLanguages}</label>
             </div>
             <div class="span7" style="margin-left: 180px">
-                <label>English:Basic</label>
+                <label>English:${user.english}</label>
             </div>
         </div>
     </div>
@@ -113,7 +114,7 @@
 
             <div class="span12" style="margin-left: 0px">
 
-                <label>Why do you want to join us:</label>
+                <label>Why do you want to join us:${user.note}</label>
 
             </div>
 
