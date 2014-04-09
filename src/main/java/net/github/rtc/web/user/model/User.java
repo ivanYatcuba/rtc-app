@@ -54,11 +54,6 @@ public class User implements UserDetails {
     @minlength(5)
     @required
     private String speciality;
-    
-    private String gender;
-    
-    private String progLanguages;
-    private String english;
 
     
     // private String technologies;
@@ -304,33 +299,7 @@ public class User implements UserDetails {
         this.birthDate = birthDate;
     }
 
-    public String getGender() {
-        return gender;
-    }
 
-    public void setGender(String gender){
-        this.gender = gender;
-    }
-
-    public void setProgLanguages(String progLanguages)
-    {
-        this.progLanguages=progLanguages;
-    }
-
-    public String getProgLanguages()
-    {
-        return this.progLanguages;
-    }
-
-    public void setEnglish(String english)
-    {
-        this.english=english;
-    }
-
-    public String getEnglish()
-    {
-        return this.english;
-    }
 
 
     public User() {
