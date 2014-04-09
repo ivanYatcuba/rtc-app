@@ -124,11 +124,12 @@
         <hr>
 <div class="span12" style="text-align: right">
     <form name ="editPage" action="editPage/${user.id}" method="get">
-    <button class="btn btn-info" type="submit">Edit</button>
+    <button class="btn btn-inverse" type="submit">Edit</button>
     </form>
     or
-    <a href="">Cancel</a>
-
+    <form name ="editPage" action="/admin/user/viewAll" method="get">
+    <button class="btn btn-link">Cancel</button>
+    </form>
 </div>
 
 </body>

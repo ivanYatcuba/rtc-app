@@ -6,7 +6,7 @@
   <table id="example">
     <thead>
   <tr>
-      <th>FIO</th>
+      <th>Name</th>
        <th>Email</th>
         <th>Phone</th>
          <th>Register Date</th>
@@ -17,8 +17,8 @@
     <tbody>
       <#list users as x>
 <tr>
-      <#if (x.name)??>
-        <td>${x.name}</td>
+      <#if (x.name) ?? && (x.surname) ?? >
+        <td>${x.name + " " + x.surname}</td>
      <#else>
         <td>None</td>
     </#if>
