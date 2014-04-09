@@ -79,7 +79,7 @@ public class UserResourseImpl implements UserResource{
 
     @Override
     public User create(User user) {
-        
+        System.out.println("it's test");
         return restTemplate.postForObject(hostUserUrl, user, User.class);
     }
 

@@ -17,8 +17,8 @@
     <tbody>
       <#list users as x>
 <tr>
-      <#if (x.fio)??>
-        <td>${x.fio}</td>
+      <#if (x.name)??>
+        <td>${x.name}</td>
      <#else>
         <td>None</td>
     </#if>
