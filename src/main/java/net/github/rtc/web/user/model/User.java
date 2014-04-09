@@ -62,6 +62,9 @@ public class User implements UserDetails {
     private Integer oralEng;
     private String note;
     private String password;
+    private String gender;
+    private String progLanguages;
+    private String english;
 
     /* Spring Security fields*/
     private Collection<Role> authorities;
@@ -249,12 +252,40 @@ public class User implements UserDetails {
         this.birthDate = birthDate;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender){
+        this.gender = gender;
+    }
+
+    public void setProgLanguages(String progLanguages)
+    {
+        this.progLanguages=progLanguages;
+    }
+
+    public String getProgLanguages()
+    {
+        return this.progLanguages;
+    }
+
+    public void setEnglish(String english)
+    {
+        this.english=english;
+    }
+
+    public String getEnglish()
+    {
+        return this.english;
+    }
+
 
     public User() {
 
     }
 
-    public User(Integer id, String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
+    public User(Integer id, String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password, String gender, String progLanguages, String english) {
         this.id = id;
         this.surname = surname;
         this.name = name;
@@ -270,9 +301,12 @@ public class User implements UserDetails {
         this.oralEng = oralEng;
         this.note = note;
         this.password = password;
+        this.gender = gender;
+        this.progLanguages = progLanguages;
+        this.english = english;
     }
 
-    public User(String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
+    public User(String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password, String gender, String progLanguages, String english) {
         this.surname = surname;
         this.name = name;
         this.middleName = middleName;
@@ -287,5 +321,8 @@ public class User implements UserDetails {
         this.oralEng = oralEng;
         this.note = note;
         this.password = password;
+        this.gender = gender;
+        this.progLanguages = progLanguages;
+        this.english = english;
     }
 }
