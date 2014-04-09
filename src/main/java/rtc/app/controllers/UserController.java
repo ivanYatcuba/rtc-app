@@ -26,7 +26,7 @@ public class UserController {
     private static final String ROOT = "user";
     private static final String ROOT_MODEL = "user" ;
 
-   @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public ModelAndView user(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         User user = userService.findById(id);
@@ -42,27 +42,21 @@ public class UserController {
      */
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable Integer id) {
-//        User u =  new User("a1ddasd", "a2dasd", "asdsd3", "223322", "ololo@mail.ol", new Date(),
-//                "DNk", "DNU", "FPM", "PZ", 6, 6, "bla-bla", "password");
+       /* User u = new User("a1ddasd", "a2dasd", "asdsd3", "223322", "ololo@mail.ol", new Date(),
+     "DNk", "DNU", "FPM", "PZ", 6, 6, "bla-bla", "password", "male", "bad", "good");*/
         User u = userService.findById(id);
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.getModelMap().addAttribute("user", u);
         mav.addObject("content", "editUser");
         return mav;
-        /*
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
-
-        mav.getModelMap().addAttribute("user", userService.findById(id));
-        mav.addObject("content", "content/editUser");
-        return mav;*/
     }
 
     /**
      * Process the request to post entered user in the form
      *
-     * @param user        course object
+     * @param user course object
      * @param bindingResult binding user result
-     * @param session       current session
+     * @param session current session
      * @return if all is OK the redirect to view user details
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -70,7 +64,7 @@ public class UserController {
                                BindingResult bindingResult,
                                SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return modelAndViewContentBuilder("content/editUser");
+            return modelAndViewContentBuilder("editUser");
         }
         userService.update(user);
         session.setComplete();

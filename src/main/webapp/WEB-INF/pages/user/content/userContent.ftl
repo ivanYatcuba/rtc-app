@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div align="right"><@spring.message "user.gender"/>:</div>
-                <div align="right"><@spring.message "user.lastName"/>:</div>
+                <div align="right"><@spring.message "user.surname"/>:</div>
                 <div align="right"><@spring.message "user.middleName"/>:</div>
             </div>
             <div class="col-md-3">
@@ -23,8 +23,8 @@
             </div>
             <div class="col-md-3">
                 <br>
-                <div align="right"><@spring.message "user.firstName"/>:</div>
-                <div align="right"><@spring.message "user.birthdate"/>:</div>
+                <div align="right"><@spring.message "user.name"/>:</div>
+                <div align="right"><@spring.message "user.birthDate"/>:</div>
             </div>
             <div class="col-md-3">
                 <br>
@@ -67,7 +67,7 @@
         <hr width="100%">
         <div class="row">
             <div class="col-md-3">
-                <div align="right"><@spring.message "user.progLanguage"/>:</div>
+                <div align="right"><@spring.message "user.progLanguages"/>:</div>
             </div>
             <div class="col-md-3">
                 <div align="left">Programming languages</div>

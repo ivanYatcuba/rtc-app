@@ -5,10 +5,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" style="color: #ffffff;">Help</a></li>
+                <li><a href="#" style="color: #ffffff; line-height: 25px;">Help</a></li>
             </ul>
             <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
+                <input type="text" class="form-control" placeholder="Search..." style="border: #333;">
             </form>
         </div>
     </div>
