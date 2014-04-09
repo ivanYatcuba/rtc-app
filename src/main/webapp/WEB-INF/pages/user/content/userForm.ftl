@@ -1,3 +1,4 @@
+<@spring.formHiddenInput "user.id" />
 <div class="row-fluid span12" style="margin-left: 1px">
     <div class="span6" >
             <div><label for="user.email">

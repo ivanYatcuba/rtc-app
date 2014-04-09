@@ -59,7 +59,7 @@ public class UserController {
      * @param session current session
      * @return if all is OK the redirect to view user details
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView update(@ModelAttribute(ROOT_MODEL) User user,
                                BindingResult bindingResult,
                                SessionStatus session) {
@@ -68,7 +68,7 @@ public class UserController {
         }
         userService.update(user);
         session.setComplete();
-        return new ModelAndView("redirect:/" + ROOT + "/" + user.getId());
+        return new ModelAndView("redirect:/" + ROOT + "/" +"view/"+ user.getId());
     }
 
     /**
