@@ -61,11 +61,11 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/editPage", method = RequestMethod.GET)
-    public ModelAndView editPage() {
+    @RequestMapping(value = "/editPage/{id}", method = RequestMethod.GET)
+    public ModelAndView editPage(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "User/content/EditPage");
-        User us=new User("serName","Name","midleName","Pfone","Email",new Date(),"Sity","University","Faculty","Speciality",1,1,"note","Password");
+        User us=userService.findById(id);
         mav.addObject("user", us);
         return mav;
     }
@@ -105,6 +105,26 @@ public class UserController {
  Collection<User> listUser=userService.findAll();
         mav.addObject("users", listUser);
     
+        return mav;
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public ModelAndView update(@PathVariable Integer id, @ModelAttribute(ROOT_MODEL) @Valid User user,
+                             BindingResult bindingResult,
+                             SessionStatus session) {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", "User/content/ViewAll");
+
+        Collection <Role> rol = new ArrayList<Role>();
+        rol.add(new Role());
+        user.setAuthorities(rol);
+        user.setId(id);
+
+        this.userService.update(user);
+        session.setComplete();
+        Collection<User> listUser=userService.findAll();
+        mav.addObject("users", listUser);
+
         return mav;
     }
       
