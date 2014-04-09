@@ -1,6 +1,5 @@
 <h3 class="page-header">Courses List</h3>
-
-<script src="/resources/css/Bootstrap/js/bootstrap-dropdown.js"></script>
+<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
 
 <#include "../layout/searchPanel.ftl">
     <div class="head-2"><strong>Category</strong></div>
