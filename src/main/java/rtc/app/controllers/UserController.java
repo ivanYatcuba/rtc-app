@@ -13,6 +13,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -103,5 +104,15 @@ public class UserController {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", content);
         return mav;
+    }
+
+    @ModelAttribute("english")
+    public Collection<String> getEnglish() {
+
+        Collection<String> s = new ArrayList<String>();
+        s.add("Basic");
+        s.add("Intermidiate");
+        s.add("Advanced");
+        return s;
     }
 }
