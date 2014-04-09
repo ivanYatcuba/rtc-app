@@ -122,16 +122,23 @@
         </div>
 
         <hr>
-<div class="span12" style="text-align: right">
-    <form name ="editPage" action="editPage/${user.id}" method="get">
-    <button class="btn btn-inverse" type="submit">Edit</button>
-    </form>
-    or
-    <form name ="editPage" action="/admin/user/viewAll" method="get">
-    <button class="btn btn-link">Cancel</button>
-    </form>
-</div>
+    <div class="row-fluid">
+        <div class="span10"></div>
+<div class="span1" style="text-align: right">
 
+
+    <form name ="editPage" action="editPage/${user.id}" method="get">
+    <button class="btn btn-inverse" type="submit"   >Edit</button>
+    </form>
+
+    </div>
+        <div class="span1" style="margin-left: -2px;text-align: right">
+             or
+    <a href="<@spring.url "/admin/user/viewAll" />">Cancel</a>
+
+    </div>
+</div>
+    </div>
 </body>
 
 </html>
