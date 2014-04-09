@@ -11,25 +11,31 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class LoginController {
-    @RequestMapping(value="/login", method = RequestMethod.GET)
-    public ModelAndView login(ModelMap model) {
-        ModelAndView mav = new ModelAndView("welcome/welcomeLayout");
+
+    private ModelAndView buildLoginMav(ModelMap model) {
+        ModelAndView mav = new ModelAndView("welcome/welcomeLayout", model);
         mav.addObject("content","/user/login");
         return mav;
     }
 
+    @RequestMapping(value="/login", method = RequestMethod.GET)
+    public ModelAndView login(ModelMap model) {
+
+        return buildLoginMav(model);
+    }
+
     @RequestMapping(value="/loginfailed", method = RequestMethod.GET)
-    public String loginerror(ModelMap model) {
+    public ModelAndView loginerror(ModelMap model) {
+        ModelAndView mav = buildLoginMav(model);
+        mav.addObject("error", "true");
 
-        model.addAttribute("error", "true");
-        return "/user/login";
-
+        return mav;
     }
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logout(ModelMap model) {
+    public ModelAndView logout(ModelMap model) {
 
-        return "/user/login";
+        return buildLoginMav(model);
 
     }
 }
