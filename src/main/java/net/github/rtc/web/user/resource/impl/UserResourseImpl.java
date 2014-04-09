@@ -74,7 +74,7 @@ public class UserResourseImpl implements UserResource{
      */
     @Override
     public void delete(Integer id) {
-        restTemplate.delete(hostUserUrl + "user/{fio}", id);
+        restTemplate.delete(hostUserUrl + "{id}", id);
     }
 
     @Override
