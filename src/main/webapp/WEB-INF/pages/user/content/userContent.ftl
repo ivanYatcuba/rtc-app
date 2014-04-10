@@ -17,7 +17,7 @@
                 <div align="right"><@spring.message "user.middleName"/>:</div>
             </div>
             <div class="col-md-3">
-                <div align="left">Male</div>
+                <div align="left">${user.gender}</div>
                 <div align="left">${user.surname}</div>
                 <div align="left">${user.middleName}</div>
             </div>
@@ -70,13 +70,13 @@
                 <div align="right"><@spring.message "user.progLanguages"/>:</div>
             </div>
             <div class="col-md-3">
-                <div align="left">Programming languages</div>
+                <div align="left">${user.progLanguages}</div>
             </div>
             <div class="col-md-3">
                 <div align="right"><@spring.message "user.english"/>:</div>
             </div>
             <div class="col-md-3">
-                <div align="left">Basic</div>
+                <div align="left">${user.english}</div>
             </div>
         </div>
         <hr width="100%">
