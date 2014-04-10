@@ -31,9 +31,9 @@
                    <p class="remember"><input type="checkbox" id="chbxce">show password?
             <script language="JavaScript" type="text/javascript">
                 $("#chbxce").change(function () {
-                    if ($(this).attr("checked")) {
+                    if (!$(this).attr("checked")) {
 
-
+                       
                         password.type = "text"
                     } else {
                         password.type = "password"
