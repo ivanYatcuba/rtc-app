@@ -8,9 +8,8 @@
 </#if>
     <form name="f" action= <@spring.url "/j_spring_security_check"/> method=
     "POST">
-    <script type="text/javascript" src="/resources/css/js/jquery.js"></script>
-    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-
+    <scripttype="text/javascript" src="/resources/css/js/jquery.js"></script>
+      <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 
     <div>
         <span class="message"><b>Please sign in</b></span>
@@ -28,15 +27,18 @@
         <p>
         <td colspan="2"><input style="width:250px;height:35px" name="reset" type="reset"/>
         </p>
-           
-                   <p class="remember"><input type="checkbox" id="chbxce">show password?
+
+                   <p class="remember"><input type="checkbox" id="ch">show password?
                        <script language="JavaScript" type="text/javascript">
-                          $("#chbxce").change(function(){
-                               if (chbxce.checked) {
+                           $("#ch").change(function(){
+                           
+                               if (ch.checked) {
                                   password.type = "text"
                                } else {
                                    password.type = "password"
-                      </script>
+
+                               }});
+                       </script>
             <input type="checkbox" name="_spring_security_remember_me">remember me
         </p>
     </div>
