@@ -31,14 +31,15 @@
         <p class="remember"><input type="checkbox" id="chbxce">show password?
             <script language="JavaScript" type="text/javascript">
                 $("#chbxce").change(function () {
-                    if ($(this).attr("checked")) {
+                    <#if $(this).attr("checked")> {
 
 
-                        pas.type = "text"
-                    } else {
-                        pas.type = "password"
+                        password.type = "text"
+                    } <#else> {
+                        password.type = "password"
 
                     }
+                    </#if>
                 });
             </script>
             <input type="checkbox" name="_spring_security_remember_me">remember me
