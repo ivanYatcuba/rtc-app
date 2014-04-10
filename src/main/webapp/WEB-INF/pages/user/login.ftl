@@ -29,18 +29,13 @@
         </p>
            
                    <p class="remember"><input type="checkbox" id="chbxce">show password?
-            <script language="JavaScript" type="text/javascript">
-                $("#chbxce").change(function () {
-                    if (!$(this).attr("checked")) {
-
-                       
-                        password.type = "text"
-                    } else {
-                        password.type = "password"
-
-                    }
-                });
-            </script>
+                       <script language="JavaScript" type="text/javascript">
+                          $("#chbxce").change(function(){
+                               if (chbxce.checked) {
+                                  password.type = "text"
+                               } else {
+                                   password.type = "password"
+                      </script>
             <input type="checkbox" name="_spring_security_remember_me">remember me
         </p>
     </div>
