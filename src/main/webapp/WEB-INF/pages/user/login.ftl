@@ -9,6 +9,7 @@
     <form name="f" action= <@spring.url "/j_spring_security_check"/> method=
     "POST">
     <script type="text/javascript" src="/resources/css/js/jquery.js"></script>
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 
 
     <div>
