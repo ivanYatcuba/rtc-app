@@ -99,10 +99,10 @@
     <div class="row-fluid 12">
 
         <div class="span12" style="margin-left: 80px">
-            <div class="span3" style="margin-left: -105px">
+            <div class="span7" style="margin-left: -105px">
                 <label>Programming languages:${user.progLanguages}</label>
             </div>
-            <div class="span7" style="margin-left: 282px">
+            <div class="span3" style="margin-left: -70px">
                 <label>English:${user.english}</label>
             </div>
         </div>
