@@ -1,7 +1,7 @@
-package rtc.app.service;
+package net.github.rtc.app.service;
 
-import net.github.rtc.web.user.model.User;
-import net.github.rtc.web.user.resource.UserResource;
+import net.github.rtc.app.model.User;
+import net.github.rtc.app.resource.UserResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @author Vladislav Pikus
  */
 @Service("userDetailsService")
-public class UserService implements UserDetailsService {
+public class UserServiceLogin implements UserDetailsService {
 
     private UserResource userResource;
 

@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<#--<#assign security=JspTaglibs["http://www.springframework.org/security/tags"]/>-->
+<#--<#assign security=JspTaglibs["http://www.springframework.org/security/tag"]/>-->
   <title>User Page</title>
  </head>
 
