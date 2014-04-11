@@ -1,6 +1,5 @@
 <h3 class="page-header">Courses List</h3>
-
-<script src="/resources/css/Bootstrap/js/bootstrap-dropdown.js"></script>
+<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
 
 <#include "../layout/searchPanel.ftl">
     <div class="head-2"><strong>Category</strong></div>
@@ -9,9 +8,9 @@
     <div class="head-2"><strong>Author</strong></div>
     <div class="head-2"><strong>Status</strong></div>
     <div class="head-2">&nbsp;</div>
-<#list courses as course>
+<#list course as course>
     <div class="col-xs-2">${course.type}</div>
-    <div class="col-xs-2"><a href="<@spring.url "/admin/courses/${course.code}" />">${course.name}</a></div>
+    <div class="col-xs-2"><a href="<@spring.url "/admin/course/${course.code}" />">${course.name}</a></div>
     <div class="col-xs-2">${course.startDate?date}&nbsp;-&nbsp;${course.endDate?date}</div>
     <div class="col-xs-2">${course.author.firstName}&nbsp;${course.author.lastName}</div>
     <div class="col-xs-2">${course.status}</div>
@@ -22,9 +21,9 @@
             <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                 <#if "${course.status}" == "DRAFT">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/courses/publish/${course.code}"/>">Publish!</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/publish/${course.code}"/>">Publish!</a></li>
                 </#if>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/courses/delete/${course.code}"/>">Delete</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/delete/${course.code}"/>">Delete</a></li>
             </ul>
         </li>
         </ul>
@@ -35,23 +34,23 @@
     <tr>
         <td>Pages: </td>
         <#if startPage != currentPage>
-            <td><a href="<@spring.url "/admin/courses?page=${startPage}" />" />First</a></td>
+            <td><a href="<@spring.url "/admin/course?page=${startPage}" />" />First</a></td>
         </#if>
         <#if prevPage??>
-            <td><a href="<@spring.url "/admin/courses?page=${prevPage}" />" />${prevPage}</a></td>
+            <td><a href="<@spring.url "/admin/course?page=${prevPage}" />" />${prevPage}</a></td>
         </#if>
         <td>${currentPage}</td>
         <#if nextPage??>
-            <td><a href="<@spring.url "/admin/courses?page=${nextPage}" />" />${nextPage}</a></td>
+            <td><a href="<@spring.url "/admin/course?page=${nextPage}" />" />${nextPage}</a></td>
         </#if>
         <#if lastPage != currentPage>
-            <td><a href="<@spring.url "/admin/courses?page=${lastPage}" />" />Last</a></td>
+            <td><a href="<@spring.url "/admin/course?page=${lastPage}" />" />Last</a></td>
         </#if>
     </tr>
 </table>
 
 
-<a style="float: right" href="<@spring.url "/admin/courses/create" />">
+<a style="float: right" href="<@spring.url "/admin/course/create" />">
     <button class="btn">Create New</button>
 </a>
 

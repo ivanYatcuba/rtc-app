@@ -1,7 +1,7 @@
 <div class="row-fluid span12" style="margin-left: 1px">
     <div class="span6" >
         <p><@spring.message "course.name"/>&nbsp${course.name}</p>
-        <p><@spring.message "courses.category"/>&nbsp${course.type}</p>
+        <p><@spring.message "course.category"/>&nbsp${course.type}</p>
         <p><@spring.message "course.capacity"/>&nbsp${course.capacity}</p>
     </div>
 
@@ -9,8 +9,8 @@
 
         <p><@spring.message "course.startDate"/>${course.startDate?date}</p>
         <p><@spring.message "course.endDate"/>&nbsp${course.endDate?date}</p>
-        <p><@spring.message "course.tags"/>
-        <#list course.tags as tag>${tag.value}<#if tag_has_next>,</#if> </#list></p>
+        <p><@spring.message "course.tag"/>
+        <#list course.tag as tag>${tag.value}<#if tag_has_next>,</#if> </#list></p>
 
     </div>
 
@@ -52,8 +52,8 @@
 <hr>
 <div class = "row">
     <div class="span12" align="right">
-        <a href="<@spring.url "/admin/courses/${course.getCode()}/update" />"><button class="btn"><@spring.message "coursesPage.action.edit"/></button></a> or
-        <a href="<@spring.url "/admin/courses" />"><@spring.message "coursesPage.action.cancel"/></a>
+        <a href="<@spring.url "/admin/course/${course.getCode()}/update" />"><button class="btn"><@spring.message "coursesPage.action.edit"/></button></a> or
+        <a href="<@spring.url "/admin/course" />"><@spring.message "coursesPage.action.cancel"/></a>
     </div>
 </div>
 

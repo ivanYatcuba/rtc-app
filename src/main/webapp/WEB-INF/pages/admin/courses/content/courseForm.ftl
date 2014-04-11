@@ -2,7 +2,7 @@
         <div class="span6" >
             <@spring.formItem "course.name"/>
             <div><label for="type">
-            <@spring.message "courses.category"/>   </label>
+            <@spring.message "course.category"/>   </label>
             <@spring.bind "categories" />
             <@spring.formSingleSelect "course.type", categories, " "/></div>
             <label><@spring.message "course.capacity"/> </label>
@@ -12,7 +12,7 @@
         <div class="span5">
             <@spring.formItem "course.startDate" "datepiker" 'class="input-medium"'/>
             <@spring.formItem "course.endDate" "datepiker" 'class="input-medium"'/>
-            <@spring.formItem "course.tags" "tags"/>
+            <@spring.formItem "course.tag" "tag"/>
         </div>
 
 </div>

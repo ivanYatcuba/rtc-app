@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
         >
 
-    <context:component-scan base-package="com.springapp.mvc, net.github.rtc.web, org.util.rtc"/>
+    <context:component-scan base-package="com.springapp.mvc, net.github.rtc.app, org.util.rtc"/>
 
     <import resource="classpath:/spring/restTemplate.xml"/>
 </beans>

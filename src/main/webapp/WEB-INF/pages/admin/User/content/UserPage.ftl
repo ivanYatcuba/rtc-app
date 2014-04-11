@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<#--<#assign security=JspTaglibs["http://www.springframework.org/security/tags"]/>-->
+<#--<#assign security=JspTaglibs["http://www.springframework.org/security/tag"]/>-->
   <title>User Page</title>
  </head>
 
@@ -12,7 +12,7 @@
         <br>
 
    <div class="row-fluid 12">
-        <div class="span3" style="margin-left: 97px">
+        <div class="span3" style="margin-left: 95px">
 
             <label>Email:${user.email}</label>
 
@@ -48,10 +48,10 @@
 
        <div class="span12" style="margin-left: 80px">
     <br>
-           <div class="span3" style="margin-left: -28px">
+           <div class="span3" style="margin-left: -30px">
                <label>Middle Name:${user.middleName}</label>
            </div>
-           <div class="span7" style="margin-left: 180px">
+           <div class="span7" style="margin-left: 200px">
                <label>BirthDate:${user.birthDate ? datetime ? string("yyyy-MM-dd")}</label>
            </div>
 
@@ -64,10 +64,10 @@
             <div class="row-fluid 12">
 
                 <div class="span12" style="margin-left: 80px">
-                <div class="span3" style="margin-left: 5px">
+                <div class="span3" style="margin-left: 25px">
                     <label>City:${user.city}</label>
                 </div>
-                <div class="span7" style="margin-left: 180px">
+                <div class="span7" style="margin-left: 165px">
                     <label>Phone:${user.phone}</label>
                 </div>
         </div>
@@ -78,7 +78,7 @@
     <div class="row-fluid 12">
 
         <div class="span12" style="margin-left: 80px">
-            <div class="span3" style="margin-left: 5px">
+            <div class="span3" style="margin-left: -15px">
                 <label>Univercity:${user.university}</label>
             </div>
             <div class="span7" style="margin-left: 180px">
@@ -99,10 +99,10 @@
     <div class="row-fluid 12">
 
         <div class="span12" style="margin-left: 80px">
-            <div class="span3" style="margin-left: -70px">
+            <div class="span7" style="margin-left: -105px">
                 <label>Programming languages:${user.progLanguages}</label>
             </div>
-            <div class="span7" style="margin-left: 180px">
+            <div class="span3" style="margin-left: -70px">
                 <label>English:${user.english}</label>
             </div>
         </div>
@@ -112,7 +112,7 @@
 
         <div class="row-fluid 12">
 
-            <div class="span12" style="margin-left: 0px">
+            <div class="span12" style="margin-left: -35px">
 
                 <label>Why do you want to join us:${user.note}</label>
 
@@ -128,7 +128,7 @@
 
 
     <form name ="editPage" action="editPage/${user.id}" method="get">
-    <button class="btn btn-inverse" type="submit"   >Edit</button>
+    <button class="btn" type="submit"   >Edit</button>
     </form>
 
     </div>

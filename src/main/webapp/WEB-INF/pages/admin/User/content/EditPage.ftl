@@ -1,6 +1,6 @@
 <h2><@spring.message "user.title"/></h2>
 <form class="form-horizontal" name="user" id="user" action="<@spring.url '/admin/user/update/${user.id}'/>" method="post">
-<#include "CreateUser.ftl"/>
+<#include "createUser.ftl"/>
     <div class="row-fluid">
         <div class="span6">
         </div>
