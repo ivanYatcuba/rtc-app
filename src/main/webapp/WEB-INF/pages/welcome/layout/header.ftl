@@ -9,9 +9,11 @@
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#contact">Register</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="../navbar/">Sign in</a></li>
-            </ul>
+            <#if "${content}" != "/user/login">
+                <ul class="nav navbar-nav navbar-right"">
+                    <li><a href="<@spring.url'/login'/>">Sign In</a></li>
+                </ul>
+            </#if>
         </div>
     </div>
 </div>

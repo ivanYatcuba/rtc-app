@@ -1,153 +1,144 @@
 <html>
 
 <head>
-
-    <meta charset="utf-8">
+<#--<#assign security=JspTaglibs["http://www.springframework.org/security/tags"]/>-->
   <title>User Page</title>
-  <style>
-    .block1 {
-    width: 940px;
-    background: #fff;
-    padding: 20px;
-    padding-right: 0px;
-    border: solid 1px black;
-    float: top;
-   }
+ </head>
 
-   </style>
-
-</head>
-
-<!------------>
 <body>
-    <div class="block1">
 
-        <b><p1>User Details</p1>
+    <p1>User Details</p1>
         <br>
         <br>
-        <br>
-        <label>Email: </label><label>ivanov@xyz.net</label>
-        <br>
-        <label>Role: </label><label>User</label>
+
+   <div class="row-fluid 12">
+        <div class="span3" style="margin-left: 95px">
+
+            <label>Email:${user.email}</label>
+
+        </div>
+         <br>
+          <br>
+       <div class="span3" style="margin-left: 100px">
+
+          <label>Role:ROLE MF</label>
+
+       </div>
+
+   </div>
 
         <hr>
-        </b>
-        <table width="940">
-            <tr>
-                <th><label>Gender: </label><label>Male</label></th>
-                <th></th>
-            </tr>
+
+   <div class="row-fluid 12">
+
+        <div class="span12" style="margin-left: 80px">
+            <label>Gender:GENDER MF</label>
+
             <br>
-            <tr></tr>
 
-            <tr>
-                <th>
-                    <label>Last name: </label><label>Ivanov</label>
-                </th>
-                <th>
-                    <label>First name: </label><label>Ivan</label>
-                </th>
-            </tr>
+            <div class="span3" style="margin-left: -15px">
+            <label>Last Name:${user.surname}</label>
+            </div>
+            <div class="span7" style="margin-left: 180px">
+            <label>First Name:${user.name}</label>
+            </div>
 
-            <tr></tr>
+        </div>
 
-            <tr>
-                 <th>
-                    <label>Middle name: </label><label>Ivanovich</label>
-                 </th>
-                 <th>
-                    <label>Birthday: </label><label>10-10-1990</label>
-                 </th>
-            </tr>
-        </table>
 
-        <hr>
+       <div class="span12" style="margin-left: 80px">
+    <br>
+           <div class="span3" style="margin-left: -30px">
+               <label>Middle Name:${user.middleName}</label>
+           </div>
+           <div class="span7" style="margin-left: 200px">
+               <label>BirthDate:${user.birthDate ? datetime ? string("yyyy-MM-dd")}</label>
+           </div>
 
-        <table width="940">
-            <tr>
-                <th>
-                    <label>City: </label><label>Dnipropetrovsk</label>
-                </th>
-                <th>
-                    <label>Phone: </label><label>06354747474747</label>
-                </th>
-            </tr>
-        </table>
+       </div>
+
+   </div>
 
         <hr>
 
-        <table width="940">
-              <tr>
-                 <th>
-                     <label>University: </label><label>DNU</label>
-                 </th>
-                 <th>
-                    <label>Spesiality: </label><label>Biologist</label>
-                 </th>
-              </tr>
-              <tr>
-                 <th>
-                     <label>Faculty: </label><label></label>
-                 </th>
-                 <th>
+            <div class="row-fluid 12">
 
-                 </th>
-              </tr>
-        </table>
+                <div class="span12" style="margin-left: 80px">
+                <div class="span3" style="margin-left: 25px">
+                    <label>City:${user.city}</label>
+                </div>
+                <div class="span7" style="margin-left: 165px">
+                    <label>Phone:${user.phone}</label>
+                </div>
+        </div>
+            </div>
+
         <hr>
-        <table width="940">
-              <tr>
-                  <th>
-                       <label>Programming language: </label><label>Java, PHP</label>
-                  </th>
-                  <th>
-                       <label>English: </label><label>Basic</label>
-                  </th>
-              </tr>
 
-        </table>
-        <hr>
-        <table width="940">
-              <tr>
-                  <th>
-                       <label>Why do you want to join us?: </label><label>Bla-bla</label>
-                  </th>
+    <div class="row-fluid 12">
 
-                  <th>
+        <div class="span12" style="margin-left: 80px">
+            <div class="span3" style="margin-left: -15px">
+                <label>Univercity:${user.university}</label>
+            </div>
+            <div class="span7" style="margin-left: 180px">
+                <label>Speciality:${user.speciality}</label>
+            </div>
 
-                  </th>
-              </tr>
-              <tr>
+            <div class="span3" style="margin-left: 0px">
+                <br>
+                <label>Faculty:${user.faculty}</label>
+            </div>
+        </div>
 
-              </tr>
-        </table>
-        <hr>
-        <table width="940">
-              <th width="900">
-              </th>
-              <tr>
-                  <th width="900">
-                  </th>
-                  <th>
-                       <button>Edit</button>
-                  </th>
-                  <th>
-                       or
-                  </th>
-                  <th>
-                       <link>Cancel</link>
-                  </th>
-              </tr>
-
-        </table>
     </div>
 
+        <hr>
 
-    <script>
-        $(function(){
-            $("#example").dataTable();
-        })
-    </script>
+
+    <div class="row-fluid 12">
+
+        <div class="span12" style="margin-left: 80px">
+            <div class="span7" style="margin-left: -105px">
+                <label>Programming languages:${user.progLanguages}</label>
+            </div>
+            <div class="span3" style="margin-left: -70px">
+                <label>English:${user.english}</label>
+            </div>
+        </div>
+    </div>
+
+        <hr>
+
+        <div class="row-fluid 12">
+
+            <div class="span12" style="margin-left: -35px">
+
+                <label>Why do you want to join us:${user.note}</label>
+
+            </div>
+
+
+        </div>
+
+        <hr>
+    <div class="row-fluid">
+        <div class="span10"></div>
+<div class="span1" style="text-align: right">
+
+
+    <form name ="editPage" action="editPage/${user.id}" method="get">
+    <button class="btn" type="submit"   >Edit</button>
+    </form>
+
+    </div>
+        <div class="span1" style="margin-left: -2px;text-align: right">
+             or
+    <a href="<@spring.url "/admin/user/viewAll" />">Cancel</a>
+
+    </div>
+</div>
+    </div>
 </body>
 
 </html>

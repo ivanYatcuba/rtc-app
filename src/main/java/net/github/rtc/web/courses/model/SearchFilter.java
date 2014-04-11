@@ -13,6 +13,7 @@ public class SearchFilter {
     private String startDate;
     private Collection<String> categories;
     private Collection<String> tags;
+    private String status;
 
     public SearchFilter() {
     }
@@ -48,6 +49,10 @@ public class SearchFilter {
     public void setTags(Collection<String> tags) {
         this.tags = tags;
     }
+
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
 
     public class QueryBuilder {
         private Map<String, String> map;
@@ -98,6 +103,13 @@ public class SearchFilter {
                     sb.append(tag);
                 }
                 map.put("tags", sb.toString());
+            }
+            return this;
+        }
+
+        public QueryBuilder byStatus() {
+            if (!status.equals("")) {
+                map.put("status", status);
             }
             return this;
         }

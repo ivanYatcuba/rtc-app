@@ -6,7 +6,7 @@
   <table id="example">
     <thead>
   <tr>
-      <th>FIO</th>
+      <th>Name</th>
        <th>Email</th>
         <th>Phone</th>
          <th>Register Date</th>
@@ -17,8 +17,9 @@
     <tbody>
       <#list users as x>
 <tr>
-      <#if (x.fio)??>
-        <td>${x.fio}</td>
+      <#if (x.name) ?? && (x.surname) ?? >
+        <td>
+            <a href="<@spring.url"/admin/user/userPage/${x.id}"/>">  ${x.name + " " + x.surname} </a></td>
      <#else>
         <td>None</td>
     </#if>
@@ -47,7 +48,7 @@
         <td>None</td>
     </#if>
 
-    <td><a href="<@spring.url "/admin/User/delete/${x.id}" />">Remove</a></td>
+    <td><a href="<@spring.url "/admin/user/delete/${x.id}" />">Remove</a></td>
 
 </tr>
     </#list>

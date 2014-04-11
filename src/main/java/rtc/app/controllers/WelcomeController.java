@@ -39,8 +39,9 @@ public class WelcomeController {
         Calendar rightNow = Calendar.getInstance();
 
         searchFilter.setStartDate(sdf.format(rightNow.getTime()));
+        searchFilter.setStatus("PUBLISHED");
 
-        CoursesDTO coursesDTO = coursesService.findByFilter(searchFilter.createQuery(map).byDate().toString());
+        CoursesDTO coursesDTO = coursesService.findByFilter(searchFilter.createQuery(map).byDate().byStatus().toString());
         mav.addObject("soonCourses", coursesDTO.getCourses());
         mav.addObject("content","content/welcomeContent");
         return mav;

@@ -95,6 +95,12 @@ public class CoursesController {
         return "redirect:/" + ROOT;
     }
 
+    @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
+    public String publish(@PathVariable String courseCode) {
+        coursesService.publish(coursesService.findByCode(courseCode));
+        return "redirect:/" + ROOT;
+    }
+
     /**
      * Process the request to get details about course by selected code
      * URL example: "/1". Parse by pattern: "/{code}"
@@ -168,7 +174,7 @@ public class CoursesController {
         }
         course = coursesService.create(course);
         session.setComplete();
-        return new ModelAndView("redirect:/" + ROOT + "/" + course.getCode());
+        return new ModelAndView("redirect:/"  + ROOT + "/" +"courses" + "/" + course.getCode());
     }
 
     /**
@@ -201,7 +207,7 @@ public class CoursesController {
         }
         coursesService.update(course);
         session.setComplete();
-        return new ModelAndView("redirect:/" + ROOT + "/" + course.getCode());
+        return new ModelAndView("redirect:/"  + ROOT + "/" +"courses" + "/" + course.getCode());
     }
 
     /**

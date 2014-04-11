@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
@@ -34,8 +35,19 @@ public class Courses implements Serializable {
     @NotNull
     private Date endDate;
 
+    private Date publishDate;
+
     @NotEmpty
     private List<Tags> tags;
+
+    @NotNull
+    private Integer capacity;
+
+    @Size(max = 255)
+    private String description;
+
+    @NotNull
+    private String status = "DRAFT";
 
     public List<Tags> getTags() {
         return tags;
@@ -93,29 +105,54 @@ public class Courses implements Serializable {
         this.name = name;
     }
 
+    public Integer getCapacity() { return capacity;}
+
+    public void setCapacity(Integer capacity) { this.capacity = capacity; }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
+
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
+
+    public Date getPublishDate() { return publishDate; }
+
+    public void setPublishDate(Date publishDate) { this.publishDate = publishDate; }
+
     public Courses() {
 
     }
 
-    public Courses(String code, String name, String type, Author author, Date startDate, Date endDate) {
+    public Courses(String code, String name, String type, Author author, Date startDate, Date endDate,
+                   Date publishDate, Integer capacity, String description, String status) {
         this.code = code;
         this.name = name;
         this.type = type;
         this.author = author;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.publishDate = publishDate;
+        this.capacity = capacity;
+        this.description = description;
+        this.status = status;
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Courses{");
-        sb.append("code='").append(code).append('\'');
+        sb.append(", code='").append(code).append('\'');
         sb.append(", name='").append(name).append('\'');
-        sb.append(", type='").append(type).append('\'');
+        sb.append(", type=").append(type);
         sb.append(", author=").append(author);
+        sb.append(", capacity=").append(capacity);
         sb.append(", startDate=").append(startDate);
         sb.append(", endDate=").append(endDate);
+        sb.append(", publishDate=").append(publishDate);
         sb.append(", tags=").append(tags);
+        sb.append(", description=").append(description);
+        sb.append(", status=").append(status);
         sb.append('}');
         return sb.toString();
     }
@@ -147,6 +184,10 @@ public class Courses implements Serializable {
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + (tags != null ? tags.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (publishDate != null ? publishDate.hashCode() : 0);
+        result = 31 * result + (capacity != null ? capacity.hashCode() : 0);
         return result;
     }
 }

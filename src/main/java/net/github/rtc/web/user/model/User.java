@@ -22,8 +22,8 @@ public class User implements UserDetails {
     @required
     @maxlength(50)
     @minlength(5)
-    private String name;
-
+    private String name;  
+    
     @required
     @maxlength(50)
     @minlength(5)
@@ -55,6 +55,7 @@ public class User implements UserDetails {
     @required
     private String speciality;
 
+    
     // private String technologies;
     @number
     private Integer writtenEng;
@@ -62,6 +63,9 @@ public class User implements UserDetails {
     private Integer oralEng;
     private String note;
     private String password;
+    private String gender;
+    private String progLanguages;
+    private String english;
 
     /* Spring Security fields*/
     private Collection<Role> authorities;
@@ -70,11 +74,51 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
 
+  
+    
+    public void setEnglish(String english)
+    {
+        this.english=english;
+    }
+    public String getEnglish()
+    {
+        return this.english;
+    }
+    
+    public void setGender(String gender)
+    {
+        this.gender=gender;
+    }
+    
+    public String getGender()
+    {
+        return this.gender;
+    }
+    
     @Override
     public String getUsername() {
         return email;
     }
 
+     
+    public void setProgLanguages(String progrLanguage)
+    {
+        this.progLanguages=progrLanguage;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public String getProgLanguages()
+    {
+       return this.progLanguages;
+    }
+    
+    
+    
+    
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
@@ -83,6 +127,7 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 
+    @Override
     public boolean isAccountNonExpired() {
         return accountNonExpired;
     }
@@ -91,6 +136,7 @@ public class User implements UserDetails {
         this.accountNonExpired = accountNonExpired;
     }
 
+    @Override
     public boolean isAccountNonLocked() {
         return accountNonLocked;
     }
@@ -99,6 +145,7 @@ public class User implements UserDetails {
         this.accountNonLocked = accountNonLocked;
     }
 
+    @Override
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
@@ -107,6 +154,7 @@ public class User implements UserDetails {
         this.credentialsNonExpired = credentialsNonExpired;
     }
 
+    @Override
     public boolean isEnabled() {
         return enabled;
     }
@@ -117,6 +165,7 @@ public class User implements UserDetails {
 
     /**
      * *********************************
+     * @return 
      */
 
     public String getCity() {
@@ -193,6 +242,7 @@ public class User implements UserDetails {
         this.note = note;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -250,11 +300,13 @@ public class User implements UserDetails {
     }
 
 
+
+
     public User() {
 
     }
 
-    public User(Integer id, String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
+    public User(Integer id, String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password, String gender, String progLanguages, String english) {
         this.id = id;
         this.surname = surname;
         this.name = name;
@@ -270,9 +322,12 @@ public class User implements UserDetails {
         this.oralEng = oralEng;
         this.note = note;
         this.password = password;
+        this.gender = gender;
+        this.progLanguages = progLanguages;
+        this.english = english;
     }
 
-    public User(String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password) {
+    public User(String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password, String gender, String progLanguages, String english) {
         this.surname = surname;
         this.name = name;
         this.middleName = middleName;
@@ -287,5 +342,8 @@ public class User implements UserDetails {
         this.oralEng = oralEng;
         this.note = note;
         this.password = password;
+        this.gender = gender;
+        this.progLanguages = progLanguages;
+        this.english = english;
     }
 }
