@@ -53,7 +53,7 @@
                 <#if type == "datepiker">
                     <@formDatepicker path attributes/>
                 <#else>
-                    <#if type == "tags">
+                    <#if type == "tag">
                         <@formTagsInput path attributes/>
                     </#if>
                 </#if>
