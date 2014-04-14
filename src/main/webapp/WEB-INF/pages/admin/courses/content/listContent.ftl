@@ -8,7 +8,7 @@
     <div class="head-2"><strong>Author</strong></div>
     <div class="head-2"><strong>Status</strong></div>
     <div class="head-2">&nbsp;</div>
-<#list course as course>
+<#list courses as course>
     <div class="col-xs-2">${course.type}</div>
     <div class="col-xs-2"><a href="<@spring.url "/admin/course/${course.code}" />">${course.name}</a></div>
     <div class="col-xs-2">${course.startDate?date}&nbsp;-&nbsp;${course.endDate?date}</div>

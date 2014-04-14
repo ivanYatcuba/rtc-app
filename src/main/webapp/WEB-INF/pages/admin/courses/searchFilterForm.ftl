@@ -20,7 +20,7 @@
 
         <div class="span5">
             <@spring.formItem "searchFilter.startDate" "datepiker" />
-            <@spring.formItem "searchFilter.tag" "tag" />
+            <@spring.formItem "searchFilter.tags" "tag" />
         </div>
     </div>
 
