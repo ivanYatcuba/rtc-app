@@ -28,7 +28,7 @@
         <td colspan="2"><input style="width:250px;height:35px" name="reset" type="reset"/>
         </p>
 
-                   <p class="remember"><input type="checkbox" id="ch">show password?
+                   <p class="remember"><input type="checkbox" id="ch">Show password
                        <script language="JavaScript" type="text/javascript">
                            $("#ch").change(function(){
                            
@@ -39,7 +39,7 @@
 
                                }});
                        </script>
-            <input type="checkbox" name="_spring_security_remember_me">remember me
+            <input type="checkbox" name="_spring_security_remember_me">Remember me
         </p>
     </div>
 </div>
