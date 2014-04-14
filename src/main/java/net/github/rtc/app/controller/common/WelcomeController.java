@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.common;
 
+import net.github.rtc.app.model.Course;
 import net.github.rtc.app.model.CourseDto;
 import net.github.rtc.app.model.SearchFilter;
 import net.github.rtc.app.service.CoursesService;
@@ -10,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
 /**
  * Created by ivan on 28.03.14.
  */
@@ -42,6 +42,13 @@ public class WelcomeController {
         searchFilter.setStatus("PUBLISHED");
 
         CourseDto courseDto = coursesService.findByFilter(searchFilter.createQuery(map).byDate().byStatus().toString());
+        Collections.sort((List<Course>)courseDto.getCourses(), new Comparator<Course>() {
+            public int compare(Course course1, Course course2) {
+                if (course1.getStartDate() == null || course2.getStartDate() == null)
+                    return 0;
+                return course1.getStartDate().compareTo(course2.getStartDate());
+            }
+        });
         mav.addObject("soonCourses", courseDto.getCourses());
         mav.addObject("content","content/welcomeContent");
         return mav;
