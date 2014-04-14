@@ -72,6 +72,12 @@ public class UserController {
         return new ModelAndView("redirect:/" + ROOT + "/" +"view/"+ user.getId());
     }
 
+    @RequestMapping(value = "/userCourses", method = RequestMethod.GET)
+    public ModelAndView userCourses() {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", "userCourses");
+        return mav;
+    }
     /**
      * Binding user conditions for entry into the form conclusions
      *

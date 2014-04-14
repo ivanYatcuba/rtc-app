@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <#include "../admin/course/layout/footer.ftl">
+    <#include "../admin/courses/layout/footer.ftl">
 
 </body>
 
