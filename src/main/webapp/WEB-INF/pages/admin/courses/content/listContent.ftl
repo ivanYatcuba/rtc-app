@@ -2,15 +2,15 @@
 <script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
 
 <#include "../layout/searchPanel.ftl">
-    <div class="head-2"><strong>Category</strong></div>
     <div class="head-2"><strong>Name</strong></div>
-    <div class="head-2"><strong>Date</strong></div>
+    <div class="head-2"><strong>Category</strong></div>
+    <div class="head-2"><strong>Dates</strong></div>
     <div class="head-2"><strong>Author</strong></div>
     <div class="head-2"><strong>Status</strong></div>
     <div class="head-2">&nbsp;</div>
 <#list courses as course>
-    <div class="col-xs-2">${course.type}</div>
     <div class="col-xs-2"><a href="<@spring.url "/admin/course/${course.code}" />">${course.name}</a></div>
+    <div class="col-xs-2">${course.type}</div>
     <div class="col-xs-2">${course.startDate?date}&nbsp;-&nbsp;${course.endDate?date}</div>
     <div class="col-xs-2">${course.author.firstName}&nbsp;${course.author.lastName}</div>
     <div class="col-xs-2">${course.status}</div>

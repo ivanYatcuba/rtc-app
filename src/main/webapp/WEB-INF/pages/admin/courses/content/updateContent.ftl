@@ -1,6 +1,8 @@
 <form name="course" id="course" action="<@spring.url "/admin/course/update" />" method="post">
 
     <@spring.formHiddenInput "course.code" />
+    <@spring.formHiddenInput "course.status" />
+    <@spring.formHiddenInput "course.publishDate" />
     <h3 class="page-header"><@spring.message "update.message"/></h3>
 
             <#include "courseForm.ftl" />
