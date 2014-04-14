@@ -265,7 +265,7 @@
             </activation>
 
             <properties>
-                <host.baseUrl>http://localhost:8079/api/</host.baseUrl>
+                <host.baseUrl>http://localhost:8079/rtc-course-microservice/api/</host.baseUrl>
                 <host.userURL>http://localhost:8078/api/users-web-service/</host.userURL>
             </properties>
         </profile>
