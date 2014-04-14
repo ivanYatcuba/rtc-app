@@ -12,7 +12,7 @@
         <div class="span5">
             <@spring.formItem "course.startDate" "datepiker" 'class="input-medium"'/>
             <@spring.formItem "course.endDate" "datepiker" 'class="input-medium"'/>
-            <@spring.formItem "course.tag" "tag"/>
+            <@spring.formItem "course.tags" "tag"/>
         </div>
 
 </div>

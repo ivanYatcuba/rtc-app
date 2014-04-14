@@ -15,7 +15,7 @@ public class AdminController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String adminMain() {
-        return "redirect:/admin/courses";
+        return "redirect:/admin/course";
     }
 
 

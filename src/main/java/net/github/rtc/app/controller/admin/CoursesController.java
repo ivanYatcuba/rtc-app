@@ -30,7 +30,7 @@ import java.util.Map;
  * @author Vladislav Pikus
  */
 @Controller("coursesController")
-@RequestMapping("admin/courses")
+@RequestMapping("admin/course")
 public class CoursesController {
 
     private static final String ROOT = "admin";
@@ -174,7 +174,7 @@ public class CoursesController {
         }
         course = coursesService.create(course);
         session.setComplete();
-        return new ModelAndView("redirect:/"  + ROOT + "/" +"courses" + "/" + course.getCode());
+        return new ModelAndView("redirect:/"  + ROOT + "/" +"course" + "/" + course.getCode());
     }
 
     /**
@@ -207,7 +207,7 @@ public class CoursesController {
         }
         coursesService.update(course);
         session.setComplete();
-        return new ModelAndView("redirect:/"  + ROOT + "/" +"courses" + "/" + course.getCode());
+        return new ModelAndView("redirect:/"  + ROOT + "/" +"course" + "/" + course.getCode());
     }
 
     /**

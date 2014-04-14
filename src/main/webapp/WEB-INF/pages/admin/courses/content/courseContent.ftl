@@ -9,8 +9,8 @@
 
         <p><@spring.message "course.startDate"/>${course.startDate?date}</p>
         <p><@spring.message "course.endDate"/>&nbsp${course.endDate?date}</p>
-        <p><@spring.message "course.tag"/>
-        <#list course.tag as tag>${tag.value}<#if tag_has_next>,</#if> </#list></p>
+        <p><@spring.message "course.tags"/>
+        <#list course.tags as tag>${tag.value}<#if tag_has_next>,</#if> </#list></p>
 
     </div>
 
