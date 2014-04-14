@@ -2,17 +2,17 @@
 <#import "/spring.ftl" as spring/>
 
 <head>
-    <#include "course/layout/link.ftl">
+    <#include "courses/layout/link.ftl">
 
 </head>
 
 <body>
 
-    <#include "course/layout/header.ftl">
+    <#include "courses/layout/header.ftl">
 
     <div class="container-fluid" style="margin-bottom: 60px">
         <div class="row">
-            <#include "course/layout/menu.ftl">
+            <#include "courses/layout/menu.ftl">
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                    
 
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <#include "course/layout/footer.ftl">
+    <#include "courses/layout/footer.ftl">
 
 </body>
 
