@@ -41,7 +41,7 @@ public class UserResourseImpl implements UserResource{
     /**
      * @param id course ID
      * @return null if not found or course's object if found
-     * @see net.github.rtc.app.courses.resource.CoursesResource
+     * @see net.github.rtc.app.resource.CoursesResource
      */
     @Override
     public User findById(Integer id) {
@@ -61,7 +61,7 @@ public class UserResourseImpl implements UserResource{
 
     /**
      * @return collection of courses
-     * @see net.github.rtc.app.courses.resource.CoursesResource
+     * @see net.github.rtc.app.resource.CoursesResource
      */
     @Override
     public Collection<User> findAll() {
@@ -70,7 +70,7 @@ public class UserResourseImpl implements UserResource{
     
     /**
      * @param id course ID
-     * @see net.github.rtc.app.courses.resource.CoursesResource
+     * @see net.github.rtc.app.resource.CoursesResource
      */
     @Override
     public void delete(Integer id) {
