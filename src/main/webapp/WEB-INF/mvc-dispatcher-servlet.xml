@@ -14,7 +14,7 @@
         >
 
     <context:component-scan base-package=" net.github.rtc.app, org.util.rtc"/>
-
+    <context:property-placeholder location="classpath:/host.properties, classpath:/hibernate.properties"/>
     <import resource="classpath:/spring/restTemplate.xml"/>
 
     <!-- freemarker config -->
@@ -65,10 +65,11 @@
     <mvc:resources mapping="/resources/**" location="/resources/" />
     <mvc:annotation-driven/>
 
-
     <!--Import spring settings from util-->
     <import resource="classpath:spring-config.xml"/>
     <!-- Import spring security configurations -->
     <import resource="classpath:/spring/spring-security.xml" />
+    <!-- Import data source security configurations -->
+    <import resource="classpath:/spring/dataSource.xml" />
 
 </beans>
