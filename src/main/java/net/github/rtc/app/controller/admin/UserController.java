@@ -48,7 +48,7 @@ public class UserController {
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView viewAll() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "User/content/ViewAll");
+        mav.addObject("content", "user/content/viewAll");
         Collection<User> listUser=userService.findAll();
         mav.addObject("users", listUser);
         return mav;
@@ -58,14 +58,14 @@ public class UserController {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
  //       User user = userService.findById(id);
        // mav.addObject("user", user);
-        mav.addObject("content", "User/content/UserPage");
+        mav.addObject("content", "user/content/userPage");
         return mav;
     }
 
     @RequestMapping(value = "userPage/editPage/{id}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "User/content/EditPage");
+        mav.addObject("content", "user/content/editPage");
         User us=userService.findById(id);
         mav.addObject("user", us);
         return mav;
@@ -74,7 +74,7 @@ public class UserController {
     public ModelAndView userPage(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("user",userService.findById(id));
-        mav.addObject("content", "User/content/UserPage");
+        mav.addObject("content", "user/content/userPage");
         return mav;
     }
 
@@ -88,7 +88,7 @@ public class UserController {
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "User/content/createContent");
+        mav.addObject("content", "user/content/createContent");
         return mav;
     }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -96,7 +96,7 @@ public class UserController {
                              BindingResult bindingResult,
                              SessionStatus session) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-         mav.addObject("content", "User/content/ViewAll");
+         mav.addObject("content", "user/content/viewAll");
         
          Collection <Role> rol = new ArrayList<Role>();
          rol.add(new Role());
@@ -114,7 +114,7 @@ public class UserController {
                              BindingResult bindingResult,
                              SessionStatus session) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "User/content/ViewAll");
+        mav.addObject("content", "user/content/viewAll");
 
         Collection <Role> rol = new ArrayList<Role>();
         rol.add(new Role());

@@ -36,6 +36,6 @@ public class AdminControllerTest {
     @Test
     public void testAdminMain() throws Exception {
         mockMvc.perform(get("/admin")).andExpect(status().isMovedTemporarily())
-                .andExpect(view().name("redirect:/admin/courses"));
+                .andExpect(view().name("redirect:/admin/course"));
     }
 }
