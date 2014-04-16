@@ -10,8 +10,8 @@
 </div>
 <div class="row">
     <div class="span12">
-            SampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletext
-            SampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletext
-            SampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletext
+        SampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletext
+        SampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletext
+        SampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletextSampletext
     </div>
 </div>
