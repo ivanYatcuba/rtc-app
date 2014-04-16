@@ -1,8 +1,11 @@
 package net.github.rtc.app.controller.user;
 
+import net.github.rtc.app.model.CourseDto;
+import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.model.User;
 import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.model.SearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -13,9 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 @Controller("userController")
 @RequestMapping("/user")
@@ -24,8 +25,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    private CoursesService coursesService;
+
     private static final String ROOT = "user";
     private static final String ROOT_MODEL = "user" ;
+
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public ModelAndView user(@PathVariable Integer id) {
@@ -75,9 +80,18 @@ public class UserController {
     @RequestMapping(value = "/userCourses", method = RequestMethod.GET)
     public ModelAndView userCourses() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        Map<String, String> map = new HashMap<String, String>();
+        CourseDto dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
+        mav.addObject("courses", dto.getCourses());
         mav.addObject("content", "userCourses");
         return mav;
     }
+
+    @ModelAttribute("searchFilter")
+    public SearchFilter getFilter() {
+        return new SearchFilter();
+    }
+
     /**
      * Binding user conditions for entry into the form conclusions
      *
