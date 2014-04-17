@@ -22,8 +22,7 @@
                   type="password"></p>
     </div>
     <div>
-        <p><input style="width:250px;height:35px" id="signin_submit" value="Sign in" type="submit" name="submit"></p>
-
+        
         <p>
         <td colspan="2">
         </p>
@@ -41,6 +40,8 @@
                        </script>
             <input type="checkbox" name="_spring_security_remember_me">Remember me
         </p>
+        <p><input style="width:250px;height:35px" id="signin_submit" value="Sign in" type="submit" name="submit"></p>
+
     </div>
 </div>
 
