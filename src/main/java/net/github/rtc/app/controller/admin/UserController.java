@@ -147,7 +147,7 @@ public class UserController {
 //    
      @ModelAttribute("roles")
     public Collection<String> getCategories() {
-        
+
         Collection<String> s = new ArrayList<String>();
         s.add(Roles.ROLE_ADMIN.name());
         s.add(Roles.ROLE_USER.name());

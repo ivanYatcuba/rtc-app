@@ -17,15 +17,21 @@
 
     </div>
 
-        <div class="span3">
+        <div class="span12">
 
             <#list courses as course>
-            <a href="#">${course.name} </a>
-            <br>
-            <label>${course.description}</label>
+                <div class="span4">
+                <a href="#">${course.name} </a>
+                <br>
+                <div style="width:250px; height:200px; word-wrap: break-word ">${course.description}
+                <br>
+                    <div class="btn btn-info"> Apply </div>
+                </div>
+                </div>
+            </#list>
 
         </div>
 
-        </#list>
+
 
 </div>
