@@ -20,15 +20,20 @@
         <div class="span12">
 
             <#list courses as course>
-                <div class="span4">
-                <a href="#">${course.name} </a>
+
+                <div class="span4" style="word-wrap: break-word; border: solid 1px #008000;text-align: center">
+
+                     <a href="#">${course.name} </a>
                 <br>
-                <div style="width:250px; height:200px; word-wrap: break-word ">${course.description}
-                <br>
-                    <div class="btn btn-info"> Apply </div>
+
+                        <div style="width:300px; height:200px; word-wrap: break-word "> ${course.description}</div>
+
+                    <div class="btn btn-success"> Apply </div>
+
                 </div>
-                </div>
+
             </#list>
+
 
         </div>
 
