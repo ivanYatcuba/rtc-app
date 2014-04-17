@@ -27,7 +27,7 @@
         <td colspan="2">
         </p>
 
-                   <p class="remember"><input type="checkbox" id="ch"> Show password
+                   <p class="remember" float:left ><input type="checkbox" id="ch"> Show password
                        <script language="JavaScript" type="text/javascript">
                            $("#ch").change(function(){
                            
