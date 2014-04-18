@@ -7,7 +7,7 @@
                 <li><a href="#about">Courses</a></li>
                 <li><a href="#contact">About</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="#contact">Register</a></li>
+                <li><a href="<@spring.url "/user/register" />">Register</a></li>
             </ul>
             <#if "${content}" != "/user/login">
                 <ul class="nav navbar-nav navbar-right"">

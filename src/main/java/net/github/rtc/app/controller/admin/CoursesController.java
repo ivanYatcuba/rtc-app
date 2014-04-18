@@ -67,8 +67,8 @@ public class CoursesController {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
 
         Map<String, String> map = new HashMap<String, String>();
-        //map.put("pageNumber", String.valueOf(page - 1));
-        //map.put("maxResult", String.valueOf(paginator.getMaxPerPage()));
+        map.put("pageNumber", String.valueOf(page - 1));
+        map.put("maxResult", String.valueOf(paginator.getMaxPerPage()));
         CourseDto dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
 
         Page pageModel = paginator.getPage(page, dto.getTotalCount());

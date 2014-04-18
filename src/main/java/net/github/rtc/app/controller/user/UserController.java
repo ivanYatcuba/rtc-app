@@ -2,6 +2,7 @@ package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.model.CourseDto;
 import net.github.rtc.app.service.CoursesService;
+import net.github.rtc.app.service.UserServiceLogin;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.model.User;
 import net.github.rtc.app.service.UserService;
@@ -24,6 +25,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserServiceLogin userServiceLogin;
 
     @Autowired
     private CoursesService coursesService;
@@ -73,6 +77,20 @@ public class UserController {
             return modelAndViewContentBuilder("editUser");
         }
         userService.update(user);
+        session.setComplete();
+        return new ModelAndView("redirect:/" + ROOT + "/" +"view/"+ user.getId());
+    }
+
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public ModelAndView save(@ModelAttribute(ROOT_MODEL) User user,
+                               BindingResult bindingResult,
+                               SessionStatus session) {
+        if (bindingResult.hasErrors()) {
+            return modelAndViewContentBuilder("register");
+        }
+        userService.create(user);
+        user = userServiceLogin.loadUserByUsername(user.getEmail());
         session.setComplete();
         return new ModelAndView("redirect:/" + ROOT + "/" +"view/"+ user.getId());
     }
