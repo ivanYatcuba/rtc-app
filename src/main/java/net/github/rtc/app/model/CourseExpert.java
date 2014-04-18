@@ -9,19 +9,15 @@ public class CourseExpert {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column
-    private Course course;
-
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="user_id")
-    private List<User> user;
+    private long id_course;
+    private List<Long> id_user;
 
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
 
-    public Course getCourse() { return course; }
-    public void setCourse(Course course) { this.course = course; }
+    public long getCourse() { return id_course; }
+    public void setCourse(long id_course) { this.id_course = id_course; }
 
-    public List<User> getUser() { return user; }
-    public void setUser(List<User> user) { this.user = user;}
+    public List<Long> getUser() { return id_user; }
+    public void setUser(List<Long> id_user) { this.id_user = id_user;}
 }

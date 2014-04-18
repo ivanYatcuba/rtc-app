@@ -11,18 +11,15 @@ public class UserRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column
-    private User user;
-
-    @Column
-    private Course course;
+    private long id_user;
+    private long id_course;
 
     public long getId() { return id; }
     public void setId(long id) { this.id = id;}
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user;}
+    public long getUser() { return id_user; }
+    public void setUser(long id) { this.id_user = id_user;}
 
-    public Course getCourse() { return course; }
-    public void setCourse(Course course) { this.course = course; }
+    public long getCourse() { return id_course; }
+    public void setCourse(long id_course) { this.id_course = id_course; }
 }
