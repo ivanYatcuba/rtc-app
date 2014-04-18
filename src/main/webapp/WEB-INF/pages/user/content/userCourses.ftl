@@ -9,7 +9,7 @@
 </div>
 
 <hr>
-<div class="row-fluid 12">
+<div class="">
 
     <div class="span12">
 
@@ -17,26 +17,24 @@
 
     </div>
 
-        <div class="span12">
+        <div class="container">
 
             <#list courses as course>
 
-                <div class="span4" style="word-wrap: break-word; border: solid 1px #008000;text-align: center">
+                <div class="span3" style="word-wrap: break-word; border: solid 1px #008000;text-align: center;margin-top:10px; margin-left: 5px">
 
                      <a href="#">${course.name} </a>
                 <br>
 
-                        <div style="width:300px; height:200px; word-wrap: break-word "> ${course.description}</div>
+                        <div class="userCourses"> ${course.description}</div>
 
-                    <div class="btn btn-success"> Apply </div>
+
+                    <div class="btn btn-success" style="margin-bottom: 5px"> Apply </div>
 
                 </div>
 
             </#list>
 
-
         </div>
-
-
 
 </div>
