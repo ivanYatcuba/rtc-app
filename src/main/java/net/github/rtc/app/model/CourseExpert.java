@@ -3,13 +3,17 @@ package net.github.rtc.app.model;
 import javax.persistence.*;
 import java.util.List;
 
-//@Entity
+@Entity
 public class CourseExpert {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column
     private long id_course;
+
+    @Column
+    @ElementCollection
     private List<Long> id_user;
 
     public long getId() { return id; }
