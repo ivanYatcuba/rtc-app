@@ -21,8 +21,23 @@
             $("#${status.expression?replace('[','')?replace(']','')}").datepicker(
                     {
                         dateFormat: "dd.mm.yy"
+
+                        <#if "${status.expression?replace('[','')?replace(']','')}"=="startDate">
+                            ,minDate:  0,
+                            onSelect: function(date){
+                                var date1 = $('#startDate').datepicker('getDate');
+                                var date = new Date( Date.parse( date1 ) );
+                                date.setDate( date.getDate() + 1 );
+                                var newDate = date.toDateString();
+                                newDate = new Date( Date.parse( newDate ) );
+                                $('#endDate').datepicker("option","minDate",newDate);
+                            }
+
+
+                        </#if>
                     }
             );
+
         });
     </script>
 </#macro>
