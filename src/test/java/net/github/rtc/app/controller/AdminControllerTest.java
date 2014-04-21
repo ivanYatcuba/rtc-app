@@ -3,6 +3,7 @@ package net.github.rtc.app.controller;
 
 import net.github.rtc.app.controller.admin.AdminController;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = { "classpath:mvc-test.xml" })
+@Ignore
 public class AdminControllerTest {
 
     @InjectMocks
