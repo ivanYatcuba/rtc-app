@@ -31,7 +31,7 @@
                                 var newDate = date.toDateString();
                                 newDate = new Date( Date.parse( newDate ) );
                                 $('#endDate').datepicker("option","minDate",newDate);
-                            }                    `
+                            }
 
 
                         </#if>
