@@ -18,22 +18,27 @@ public class UserRequestResourceImpl implements UserRequestResource {
     SessionFactory sessionFactory;
 
     @Override
+    public void insert(UserRequest request) {
+        sessionFactory.getCurrentSession().save(request);
+    }
+
+    @Override
     public UserRequest findByID(long id) {
-        return null;
+        return (UserRequest)sessionFactory.getCurrentSession().get(UserRequest.class, (long) id);
     }
 
     @Override
     public List<UserRequest> getAll() {
-        return null;
+        return sessionFactory.getCurrentSession().createCriteria(UserRequest.class).list();
     }
 
     @Override
     public void delete(UserRequest request) {
-
+        sessionFactory.getCurrentSession().delete(request);
     }
 
     @Override
     public void update(UserRequest request) {
-
+        sessionFactory.getCurrentSession().update(request);
     }
 }

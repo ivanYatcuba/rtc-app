@@ -5,6 +5,7 @@ import net.github.rtc.app.resource.UserRequestResource;
 import net.github.rtc.app.service.UserRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,23 +17,34 @@ public class UserRequestServiceImpl implements UserRequestService {
     @Autowired
     UserRequestResource resource;
 
+
     @Override
+    @Transactional
+    public void insert(UserRequest request) {
+        resource.insert(request);
+    }
+
+    @Override
+    @Transactional
     public UserRequest getUserRequest(long id) {
-        return null;
+        return resource.findByID(id);
     }
 
     @Override
+    @Transactional
     public List<UserRequest> getAll() {
-        return null;
+        return resource.getAll();
     }
 
     @Override
+    @Transactional
     public void update(UserRequest request) {
-
+        resource.update(request);
     }
 
     @Override
+    @Transactional
     public void delete(UserRequest request) {
-
+        resource.delete(request);
     }
 }

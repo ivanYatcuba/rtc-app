@@ -8,6 +8,7 @@ import java.util.List;
  * Created by ivan on 18.04.14.
  */
 public interface UserRequestService {
+    void insert(UserRequest request);
     UserRequest getUserRequest(long id);
     List<UserRequest> getAll();
     void update(UserRequest request);

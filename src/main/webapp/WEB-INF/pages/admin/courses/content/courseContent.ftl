@@ -1,3 +1,4 @@
+<h3 class="page-header"><@spring.message "course.details"/></h3>
 <div class="row-fluid span12" style="margin-left: 1px">
     <div class="span6" >
         <p><@spring.message "course.name"/>&nbsp${course.name}</p>
