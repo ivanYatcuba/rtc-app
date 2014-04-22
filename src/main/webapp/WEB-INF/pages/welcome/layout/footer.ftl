@@ -1,11 +1,11 @@
 <div id="footer" class="container">
     <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="row" style="width: 940px;">
-            <div class="col-lg-12 col-md-offset-2">
-                <div class="col-md-7">
+        <div class="row" style="width: 1250px;">
+            <div class="col-lg-12 col-md-offset-1">
+                <div class="col-md-8">
                     <p class="text-muted credit">Copyright 2014 Exigen Services</p>
                 </div>
-                <div class="col-md-5" >
+                <div class="col-md-4" >
                     <p class="text-muted credit text-right"><a>How it works</a> |
                                                  <a>Courses</a> |
                                                  <a>About</a> |
