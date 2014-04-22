@@ -31,7 +31,7 @@ public class RegisterController {
 
         Collection<String> s = new ArrayList<String>();
         s.add("Basic");
-        s.add("Intermidiate");
+        s.add("Intermediate");
         s.add("Advanced");
         return s;
     }

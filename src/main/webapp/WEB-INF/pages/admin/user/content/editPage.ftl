@@ -1,4 +1,4 @@
-<h2><@spring.message "user.title"/></h2>
+<h2><@spring.message "user.editTitle"/></h2>
 <form class="form-horizontal" name="user" id="user" action="<@spring.url '/admin/user/update/${user.id}'/>" method="post">
 <#include "createUser.ftl"/>
     <div class="row-fluid">
