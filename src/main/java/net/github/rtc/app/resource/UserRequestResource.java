@@ -8,6 +8,7 @@ import java.util.List;
  * Created by ivan on 18.04.14.
  */
 public interface UserRequestResource {
+    void insert(UserRequest request);
     UserRequest findByID(long id);
     List<UserRequest> getAll();
     void delete(UserRequest request);
