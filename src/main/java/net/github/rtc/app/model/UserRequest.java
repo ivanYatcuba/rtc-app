@@ -30,16 +30,21 @@ public class UserRequest {
 
     @Column
     @Enumerated(EnumType.STRING)
+    private TraineePosition position;
+
+    @Column
+    @Enumerated(EnumType.STRING)
     private UserRequestStatus status;
 
     public UserRequest(long id_user, String course_code, Date requestDate, Date responseDate,
-                       Speciality speciality, UserRequestStatus status) {
+                       Speciality speciality, UserRequestStatus status, TraineePosition position) {
         this.id_user = id_user;
         this.course_code = course_code;
         this.requestDate = requestDate;
         this.responseDate = responseDate;
         this.speciality = speciality;
         this.status = status;
+        this.position = position;
     }
 
     public UserRequest() {}
@@ -65,4 +70,7 @@ public class UserRequest {
 
     public UserRequestStatus getStatus() { return status; }
     public void setStatus(UserRequestStatus status) { this.status = status; }
+
+    public TraineePosition getPosition() { return position; }
+    public void setPosition(TraineePosition position) { this.position = position; }
 }
