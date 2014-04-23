@@ -299,7 +299,18 @@ public class User implements UserDetails {
         this.birthDate = birthDate;
     }
 
-
+    
+    // for authentification
+    public boolean hasRole(String role) {
+        boolean hasRole = false;
+        for(GrantedAuthority authority: this.getAuthorities()) {
+            if (authority.getAuthority().equals(role)) {
+                hasRole = true;
+                break;
+            }
+        }
+        return hasRole;
+    }
 
 
     public User() {
