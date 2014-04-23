@@ -47,3 +47,55 @@
         </div>
 
 </div>
+
+<a href="javascript:PopUpShow()">Показать попап</a>
+
+<div class="popup" id="window-popup">
+ <div class="popup-content">
+<center>
+<h2><@spring.message "userCourses"/>
+</h2></center>
+<strong>
+<@spring.message "userCourses.IHave"/>
+</strong>
+ <form name="modal" action="modal" method="post">
+<label class="radio inline">
+<input type="radio" name="userCourses" id="optionsRadios1" value="<@spring.message "userCourses.developer"/>" checked><@spring.message "userCourses.developer"/></label>
+<br>
+<label class="radio inline">
+<input type="radio" name="userCourses" id="optionsRadios2" value="<@spring.message "userCourses.tester"/>"><@spring.message "userCourses.tester"/></label>
+<br>
+<label class="radio inline">
+<input type="radio" name="userCourses" id="optionsRadios2" value="<@spring.message "userCourses.Business_Analyst"/>"><@spring.message "userCourses.Business_Analyst"/></label>
+<br>
+<strong>
+<@spring.message "userCourses.because"/>
+</strong>
+<br>
+    <textarea class="input-block-level" name="userTextArea" id="redex" rows="10"></textarea>
+    <style type="text/css">
+#redex { resize: none; }
+</style>
+<br>
+<!--<a href="javascript:PopUpHide()">Скрыть попап</a>-->
+<center>
+
+ <input type="submit" class="btn btn-primary" value="Ok"/>
+<button class="btn" type="button" onClick="javascript:PopUpHide()">Cencel</button>
+</center>
+</form>
+
+</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+PopUpHide();
+});
+function PopUpShow(){
+$("#window-popup").show();
+}
+function PopUpHide(){
+$("#window-popup").hide();
+}
+</script>
