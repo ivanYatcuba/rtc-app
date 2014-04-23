@@ -47,7 +47,6 @@
 
 </div>
 
-<a href="javascript:PopUpShow()">Показать попап</a>
 
 <div class="popup" id="window-popup">
  <div class="popup-content">
