@@ -304,7 +304,7 @@
         <profile>
             <id>prod</id>
             <properties>
-                <host.baseUrl>http://146.185.176.193:8079/api/</host.baseUrl>
+                <host.baseUrl>http://146.185.176.193:8079/rtc-course-microservice/api/</host.baseUrl>
                 <host.userURL>http://146.185.176.193:8078/api/users-web-service/</host.userURL>
             </properties>
                     
