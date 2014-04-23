@@ -64,6 +64,7 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
     <mvc:annotation-driven/>
+    <mvc:default-servlet-handler />
 
     <!--Import spring settings from util-->
     <import resource="classpath:spring-config.xml"/>

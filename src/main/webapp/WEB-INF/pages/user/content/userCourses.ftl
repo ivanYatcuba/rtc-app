@@ -29,7 +29,7 @@
                         <#--<div class="span3">-->
                             <div class="thumbnail">
 
-                                <img data-src="<profile.jpg>" alt="...">
+                                <img src="<@spring.url'/resources/images/profile.jpg'/>" alt="..." style="width: 200px;height: 120px">
 
                             </div>
                         <#--</div>-->
