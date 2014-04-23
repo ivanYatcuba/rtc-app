@@ -52,8 +52,6 @@ public class UserController {
      */
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable Integer id) {
-       /* User u = new User("a1ddasd", "a2dasd", "asdsd3", "223322", "ololo@mail.ol", new Date(),
-     "DNk", "DNU", "FPM", "PZ", 6, 6, "bla-bla", "password", "male", "bad", "good");*/
         User u = userService.findById(id);
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.getModelMap().addAttribute("user", u);
@@ -149,7 +147,7 @@ public class UserController {
 
         Collection<String> s = new ArrayList<String>();
         s.add("Basic");
-        s.add("Intermidiate");
+        s.add("Intermediate");
         s.add("Advanced");
         return s;
     }

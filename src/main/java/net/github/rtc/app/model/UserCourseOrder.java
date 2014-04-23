@@ -7,16 +7,16 @@ import java.util.Date;
  * Created by ivan on 15.04.14.
  */
 @Entity
-public class UserRequest {
+public class UserCourseOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column
-    private long id_user;
+    private long userId;
 
     @Column
-    private String course_code;
+    private String courseCode;
 
     @Column
     private Date requestDate;
@@ -36,10 +36,10 @@ public class UserRequest {
     @Enumerated(EnumType.STRING)
     private UserRequestStatus status;
 
-    public UserRequest(long id_user, String course_code, Date requestDate, Date responseDate,
-                       Speciality speciality, UserRequestStatus status, TraineePosition position) {
-        this.id_user = id_user;
-        this.course_code = course_code;
+    public UserCourseOrder(long userId, String courseCode, Date requestDate, Date responseDate,
+                           Speciality speciality, UserRequestStatus status, TraineePosition position) {
+        this.userId = userId;
+        this.courseCode = courseCode;
         this.requestDate = requestDate;
         this.responseDate = responseDate;
         this.speciality = speciality;
@@ -47,17 +47,17 @@ public class UserRequest {
         this.position = position;
     }
 
-    public UserRequest() {}
+    public UserCourseOrder() {}
 
 
     public long getId() { return id; }
     public void setId(long id) { this.id = id;}
 
-    public long getUser() { return id_user; }
-    public void setUser(long id) { this.id_user = id_user;}
+    public long getUser() { return userId; }
+    public void setUser(long id) { this.userId = userId;}
 
-    public String getCourse() { return course_code; }
-    public void setCourse(String course_code) { this.course_code = course_code; }
+    public String getCourse() { return courseCode; }
+    public void setCourse(String course_code) { this.courseCode = course_code; }
 
     public Speciality getSpeciality() { return speciality; }
     public void setSpeciality(Speciality speciality) { this.speciality = speciality; }

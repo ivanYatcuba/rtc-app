@@ -1,8 +1,8 @@
 package net.github.rtc.app.service.impl;
 
-import net.github.rtc.app.model.UserRequest;
-import net.github.rtc.app.resource.UserRequestResource;
-import net.github.rtc.app.service.UserRequestService;
+import net.github.rtc.app.model.UserCourseOrder;
+import net.github.rtc.app.resource.UserCourseOrderResource;
+import net.github.rtc.app.service.UserCourseOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,38 +13,38 @@ import java.util.List;
  * Created by ivan on 18.04.14.
  */
 @Service
-public class UserRequestServiceImpl implements UserRequestService {
+public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Autowired
-    UserRequestResource resource;
+    UserCourseOrderResource resource;
 
 
     @Override
     @Transactional
-    public void insert(UserRequest request) {
+    public void insert(UserCourseOrder request) {
         resource.insert(request);
     }
 
     @Override
     @Transactional
-    public UserRequest getUserRequest(long id) {
+    public UserCourseOrder getUserRequest(long id) {
         return resource.findByID(id);
     }
 
     @Override
     @Transactional
-    public List<UserRequest> getAll() {
+    public List<UserCourseOrder> getAll() {
         return resource.getAll();
     }
 
     @Override
     @Transactional
-    public void update(UserRequest request) {
+    public void update(UserCourseOrder request) {
         resource.update(request);
     }
 
     @Override
     @Transactional
-    public void delete(UserRequest request) {
+    public void delete(UserCourseOrder request) {
         resource.delete(request);
     }
 }
