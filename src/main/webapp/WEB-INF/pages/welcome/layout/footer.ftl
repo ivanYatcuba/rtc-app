@@ -10,7 +10,7 @@
                                                  <a>Courses</a> |
                                                  <a>About</a> |
                                                  <a>Contact</a> |
-                                                 <a>Register</a> </p>
+                                                 <a href="<@spring.url "/user/register"/>" > Register</a> </p>
                 </div>
             </div>
         </div>
