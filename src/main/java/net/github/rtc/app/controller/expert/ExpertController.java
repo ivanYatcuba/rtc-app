@@ -1,4 +1,4 @@
-package net.github.rtc.app.controller.user;
+package net.github.rtc.app.controller.expert;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
