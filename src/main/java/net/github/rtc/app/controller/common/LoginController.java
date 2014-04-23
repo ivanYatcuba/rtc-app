@@ -40,14 +40,5 @@ public class LoginController {
     }
 
 
-@RequestMapping(value = "/login_attempt", method = RequestMethod.GET)
-    public void loginAttempt() {
-        User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (currentUser.hasRole(Roles.ROLE_ADMIN.name())) {
-         
-        } else {
-       
-        }
-    }
     
 }
