@@ -26,19 +26,18 @@
                      <a href="#">${course.name} </a>
                 <br>
 
-                        <#--<div class="span3">-->
                             <div class="thumbnail">
 
                                 <img src="<@spring.url'/resources/images/profile.jpg'/>" alt="..." style="width: 200px;height: 120px">
 
                             </div>
-                        <#--</div>-->
 
-                    <br>
+
+                <br>
 
                         <div class="userCourses"> ${course.description}</div>
                     <br>
-                    <div class="btn btn-success" style="margin-bottom: 5px"> Apply </div>
+                    <div class="btn btn-success" style="margin-bottom: 5px " onClick="javascript:PopUpShow()" > Apply </div>
 
                 </div>
 
@@ -47,7 +46,7 @@
         </div>
 
 </div>
-<!--Lisitsa-->
+
 <a href="javascript:PopUpShow()">Показать попап</a>
 
 <div class="popup" id="window-popup">
@@ -56,7 +55,9 @@
 <h2><@spring.message "userCourses"/>
 </h2></center>
 <strong>
-<@spring.message "userCourses.IHave"/>
+
+<@spring.message "userCourses.IHave"/>  <@spring.message "userCourses.IHave2"/>
+
 </strong>
  <form name="modal" action="modal" method="post">
 <label class="radio inline">
@@ -81,9 +82,9 @@
 <center>
 
  <input type="submit" class="btn btn-primary" value="Ok"/>
-<button class="btn" type="button" onClick="javascript:PopUpHide()">Cencel</button>
-</center>
-</form>
+<button class="btn" type="button" onClick="javascript:PopUpHide()">Cancel</button>
+    </center>
+    </form>
 
 </div>
 </div>
@@ -92,8 +93,11 @@
 $(document).ready(function(){
 PopUpHide();
 });
+
 function PopUpShow(){
+
 $("#window-popup").show();
+
 }
 function PopUpHide(){
 $("#window-popup").hide();

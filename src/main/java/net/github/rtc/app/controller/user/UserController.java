@@ -151,4 +151,14 @@ public class UserController {
         s.add("Advanced");
         return s;
     }
+
+    @RequestMapping(value = "/modal", method = RequestMethod.POST)
+    public ModelAndView modal(@PathVariable String userCourses,@PathVariable String userTextArea) {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        Map<String, String> map = new HashMap<String, String>();
+        CourseDto dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
+        mav.addObject("courses", dto.getCourses());
+        mav.addObject("content", "userCourses");
+        return mav;
+    }
 }

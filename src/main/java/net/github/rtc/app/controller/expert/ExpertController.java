@@ -1,4 +1,4 @@
-package net.github.rtc.app.controller.user;
+package net.github.rtc.app.controller.expert;
 
 import net.github.rtc.app.model.CourseDto;
 import net.github.rtc.app.model.SearchFilter;
