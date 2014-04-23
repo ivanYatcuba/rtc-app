@@ -51,20 +51,15 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
 
     /** Builds the target URL according to the logic defined in the main class Javadoc. */
     protected String determineTargetUrl(Authentication authentication) {
-        boolean isUser = false;
+       // boolean isUser = false;
         boolean isAdmin = false;
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-                isUser = true;
-                break;
-            } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+             if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 isAdmin = true;
                 break;
             }
         }
-
-
         if (isAdmin) {
             return "/admin";
         } else {
