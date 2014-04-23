@@ -44,9 +44,9 @@ public class LoginController {
     public void loginAttempt() {
         User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (currentUser.hasRole(Roles.ROLE_ADMIN.name())) {
-         RedirectToRoute("/admin");
+         
         } else {
-          RedirectToRoute("/");
+       
         }
     }
     
