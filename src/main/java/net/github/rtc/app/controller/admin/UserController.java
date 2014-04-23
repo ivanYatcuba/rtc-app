@@ -1,32 +1,28 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.model.Role;
+import net.github.rtc.app.model.Roles;
+import net.github.rtc.app.model.User;
+import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import javax.validation.Valid;
+
 //import net.github.rtc.app.courses.model.SearchFilter;
 //import net.github.rtc.app.service.UserServiceLogin;
-import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
-import net.github.rtc.app.model.Role;
-import net.github.rtc.app.model.Roles;
-import net.github.rtc.app.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
 //import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author  Lapshin Ugene
@@ -101,7 +97,7 @@ public class UserController {
          Collection <Role> rol = new ArrayList<Role>();
          rol.add(new Role());
          user.setAuthorities(rol);
-      user=this.userService.create(user);   
+         user=this.userService.create(user);
          session.setComplete();
  Collection<User> listUser=userService.findAll();
         mav.addObject("users", listUser);
@@ -151,6 +147,7 @@ public class UserController {
         Collection<String> s = new ArrayList<String>();
         s.add(Roles.ROLE_ADMIN.name());
         s.add(Roles.ROLE_USER.name());
+        s.add(Roles.ROLE_EXPERT.name());
         return s;
     }
 

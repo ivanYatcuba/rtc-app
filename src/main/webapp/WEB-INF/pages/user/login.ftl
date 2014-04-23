@@ -16,13 +16,14 @@
     </div>
 
     <div>
-        <p><input id="username" name="j_username" style="width:250px;height:35px" value="Email" type="text"></p>
+        <p><input id="username" name="j_username" style="width:250px;height:35px" placeholder="E-mail" type="text"></p>
 
-        <p><input id="password" name="j_password" style="width:250px;height:35px" value="Password" title="password"
+        <p><input id="password" name="j_password" style="width:250px;height:35px" placeholder="Password" title="password"
                   type="password"></p>
     </div>
     <div>
-        
+        <p><input style="width:250px;height:35px" id="signin_submit" value="Sign in" type="submit" name="submit"></p>
+ 
         <p>
         <td colspan="2">
         </p>
@@ -38,10 +39,8 @@
 
                                }});
                        </script>
-            <input type="checkbox" name="_spring_security_remember_me" float:left> Remember me
+            <input type="checkbox" name="_spring_security_remember_me">Remember me
         </p>
-        <p><input style="width:250px;height:35px" id="signin_submit" value="Sign in" type="submit" name="submit"></p>
-
     </div>
 </div>
 
