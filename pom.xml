@@ -300,7 +300,7 @@
 
             <properties>
                 <host.baseUrl>http://localhost:8079/rtc-course-microservice/api/</host.baseUrl>
-                <host.userURL>http://localhost:8078/rtc-user-microservice/api/</host.userURL>
+                <host.userURL>http://localhost:8078/api/users-web-service/</host.userURL>
             </properties>
         </profile>
 
@@ -309,7 +309,7 @@
             <id>prod</id>
             <properties>
                 <host.baseUrl>http://146.185.176.193:8079/rtc-course-microservice/api/</host.baseUrl>
-                <host.userURL>http://146.185.176.193:8078/rtc-user-microservice/api/</host.userURL>
+                <host.userURL>http://146.185.176.193:8078/api/users-web-service/</host.userURL>
             </properties>
 
         </profile>
