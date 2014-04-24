@@ -101,7 +101,7 @@ public class UserController {
         if(currentUserCourseOrder == null){
             ModelAndView mav = new ModelAndView(ROOT + "/layout");
             Map<String, String> map = new HashMap<String, String>();
-            CourseDto dto = coursesService.findByFilter(getFilter().createQuery(map).byStatus().toString());
+            CourseDto dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
             User currentUser = userService.findById(id);
             mav.addObject("user", currentUser);
             mav.addObject("courses", dto.getCourses());
