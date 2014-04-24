@@ -26,7 +26,7 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
 
     @Override
     @Transactional
-    public UserCourseOrder getUserRequest(long id) {
+    public UserCourseOrder getUserOrder(long id) {
         return resource.findByID(id);
     }
 
@@ -46,5 +46,11 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Transactional
     public void delete(UserCourseOrder request) {
         resource.delete(request);
+    }
+
+    @Override
+    @Transactional
+    public UserCourseOrder getUserOrderByUserId(long userId) {
+        return resource.getUserOrder(userId);
     }
 }

@@ -41,4 +41,12 @@ public class UserCourseOrderResourceImpl implements UserCourseOrderResource {
     public void update(UserCourseOrder request) {
         sessionFactory.getCurrentSession().update(request);
     }
+
+    @Override
+    public UserCourseOrder getUserOrder(long userId) {
+        String query = "select e from UserCourseOrder e where e.userId = :userId";
+        return (UserCourseOrder)sessionFactory.getCurrentSession().
+                createQuery(query).setString("userId", String.valueOf(userId)).
+                uniqueResult();
+    }
 }

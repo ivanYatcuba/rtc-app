@@ -1,12 +1,11 @@
 package net.github.rtc.app.controller.user;
 
-import net.github.rtc.app.model.CourseDto;
+import net.github.rtc.app.model.*;
 import net.github.rtc.app.service.CoursesService;
+import net.github.rtc.app.service.UserCourseOrderService;
+import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.service.UserServiceLogin;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
-import net.github.rtc.app.model.User;
-import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.model.SearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -31,6 +30,9 @@ public class UserController {
 
     @Autowired
     private CoursesService coursesService;
+
+    @Autowired
+    private UserCourseOrderService userCourseOrderService;
 
     private static final String ROOT = "user";
     private static final String ROOT_MODEL = "user" ;
@@ -93,20 +95,81 @@ public class UserController {
         return new ModelAndView("redirect:/" + ROOT + "/" +"view/"+ user.getId());
     }
 
-    @RequestMapping(value = "/userCourses", method = RequestMethod.GET)
-    public ModelAndView userCourses() {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+    @RequestMapping(value = "{id}/userCourses", method = RequestMethod.GET)
+    public ModelAndView userCourses(@PathVariable Integer id) {
+        UserCourseOrder currentUserCourseOrder = userCourseOrderService.getUserOrderByUserId(id);
+        if(currentUserCourseOrder == null){
+            ModelAndView mav = new ModelAndView(ROOT + "/layout");
+            Map<String, String> map = new HashMap<String, String>();
+            CourseDto dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
+            User currentUser = userService.findById(id);
+            mav.addObject("user", currentUser);
+            mav.addObject("courses", dto.getCourses());
+            mav.addObject("content", "userCourses");
+            return mav;
+        }
+        else{
+            ModelAndView mav = new ModelAndView(ROOT + "/layout");
+            Map<String, String> map = new HashMap<String, String>();
+            User currentUser = userService.findById(id);
+            Course orderedCourse = coursesService.findByCode(currentUserCourseOrder.getCourseCode());
+            mav.addObject("user", currentUser);
+            mav.addObject("orderStatus", currentUserCourseOrder.getStatus());
+            mav.addObject("courseName", orderedCourse.getName());
+            mav.addObject("courseDescription", orderedCourse.getDescription());
+            mav.addObject("content", "userCourseOrder");
+            return mav;
+        }
+    }
+
+
+    @RequestMapping(value = "{id}/sendOrder", method = RequestMethod.POST)
+    public ModelAndView sendCourseOrder(@RequestBody String orderData, @PathVariable Integer id) {
+        ModelAndView mav = new ModelAndView("redirect:/user/"+id+"/userCourses");
         Map<String, String> map = new HashMap<String, String>();
-        CourseDto dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
-        mav.addObject("courses", dto.getCourses());
-        mav.addObject("content", "userCourses");
+        //I'm sorry for this...
+        Map<String, String> orderParamsMap = getUserCourseOrderParams(orderData);
+        UserCourseOrder userCourseOrder = buildUserCourseOrder(orderParamsMap, id);
+        userCourseOrderService.insert(userCourseOrder);
         return mav;
+    }
+
+
+    private UserCourseOrder buildUserCourseOrder(Map<String, String> orderParamsMap, Integer userId){
+        UserCourseOrder userCourseOrder = new UserCourseOrder();
+        userCourseOrder.setUserId(userId.longValue());
+        userCourseOrder.setCourseCode(orderParamsMap.get("selectedCode"));
+
+        if(orderParamsMap.get("userCourses").equals("Developer")){
+            userCourseOrder.setPosition(TraineePosition.DEVELOPER);
+        }
+        else if(orderParamsMap.get("userCourses").equals("Tester")){
+            userCourseOrder.setPosition(TraineePosition.TESTER);
+        }
+        else if(orderParamsMap.get("userCourses").equals("Business Analyst ")){
+            userCourseOrder.setPosition(TraineePosition.BUSINESS_ANALIST);
+        }
+        userCourseOrder.setReason(orderParamsMap.get("userTextArea"));
+        userCourseOrder.setStatus(UserRequestStatus.PENDING);
+        userCourseOrder.setRequestDate(new Date());
+        return userCourseOrder;
+    }
+
+    private Map<String, String> getUserCourseOrderParams(String orderData){
+        Map<String, String> orderParamsMap = new HashMap<String, String>();
+        String[] orderParams = orderData.split("&");
+        for(String param: orderParams){
+            String[] value = param.split("=");
+            orderParamsMap.put(value[0], value[1]);
+        }
+        return orderParamsMap;
     }
 
     @ModelAttribute("searchFilter")
     public SearchFilter getFilter() {
         return new SearchFilter();
     }
+
 
     /**
      * Binding user conditions for entry into the form conclusions
@@ -150,15 +213,5 @@ public class UserController {
         s.add("Intermediate");
         s.add("Advanced");
         return s;
-    }
-
-    @RequestMapping(value = "/modal", method = RequestMethod.POST)
-    public ModelAndView modal(@PathVariable String userCourses,@PathVariable String userTextArea) {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        Map<String, String> map = new HashMap<String, String>();
-        CourseDto dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
-        mav.addObject("courses", dto.getCourses());
-        mav.addObject("content", "userCourses");
-        return mav;
     }
 }
