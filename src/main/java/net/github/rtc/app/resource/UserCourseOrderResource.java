@@ -13,4 +13,5 @@ public interface UserCourseOrderResource {
     List<UserCourseOrder> getAll();
     void delete(UserCourseOrder request);
     void update(UserCourseOrder request);
+    UserCourseOrder getUserOrder(long userId);
 }

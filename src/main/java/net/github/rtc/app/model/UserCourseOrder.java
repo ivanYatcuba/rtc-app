@@ -26,41 +26,35 @@ public class UserCourseOrder {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private Speciality speciality;
-
-    @Column
-    @Enumerated(EnumType.STRING)
     private TraineePosition position;
 
     @Column
     @Enumerated(EnumType.STRING)
     private UserRequestStatus status;
 
+    @Column
+    private String reason;
+
     public UserCourseOrder(long userId, String courseCode, Date requestDate, Date responseDate,
-                           Speciality speciality, UserRequestStatus status, TraineePosition position) {
+                           UserRequestStatus status, TraineePosition position) {
         this.userId = userId;
         this.courseCode = courseCode;
         this.requestDate = requestDate;
         this.responseDate = responseDate;
-        this.speciality = speciality;
         this.status = status;
         this.position = position;
     }
 
     public UserCourseOrder() {}
 
-
     public long getId() { return id; }
     public void setId(long id) { this.id = id;}
 
-    public long getUser() { return userId; }
-    public void setUser(long id) { this.userId = userId;}
+    public long getUserId() { return userId; }
+    public void setUserId(long userId) { this.userId = userId; }
 
-    public String getCourse() { return courseCode; }
-    public void setCourse(String course_code) { this.courseCode = course_code; }
-
-    public Speciality getSpeciality() { return speciality; }
-    public void setSpeciality(Speciality speciality) { this.speciality = speciality; }
+    public String getCourseCode() { return courseCode; }
+    public void setCourseCode(String courseCode) { this.courseCode = courseCode; }
 
     public Date getResponseDate() { return responseDate; }
     public void setResponseDate(Date responseDate) { this.responseDate = responseDate; }
@@ -73,4 +67,7 @@ public class UserCourseOrder {
 
     public TraineePosition getPosition() { return position; }
     public void setPosition(TraineePosition position) { this.position = position; }
+
+    public String getReason() { return reason; }
+    public void setReason(String reason) { this.reason = reason; }
 }
