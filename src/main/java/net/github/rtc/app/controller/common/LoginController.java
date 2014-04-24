@@ -5,7 +5,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import net.github.rtc.app.model.User;
+import net.github.rtc.app.model.Roles;
+import org.springframework.security.core.context.SecurityContextHolder;
 /**
  * @author Vladislav Pikus
  */
@@ -39,6 +41,15 @@ public class LoginController {
 
     }
 
-
+@RequestMapping(value = "/login_attempt", method = RequestMethod.GET)
+    public String loginAttempt() {
+        User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (currentUser.hasRole(Roles.ROLE_ADMIN.name())) {
+         return "redirect:/admin";
+        } else {
+        return "redirect:/";
+        }
+    }
+    
     
 }
