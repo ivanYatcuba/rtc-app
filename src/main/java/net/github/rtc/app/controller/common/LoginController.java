@@ -47,7 +47,7 @@ public class LoginController {
         if (currentUser.hasRole(Roles.ROLE_ADMIN.name())) {
          return "redirect:/admin";
         } else {
-        return "redirect:/";
+         return "redirect:/user/view/{id}";
         }
     }
     
