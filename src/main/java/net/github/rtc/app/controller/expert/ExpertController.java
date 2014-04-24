@@ -45,7 +45,7 @@ public class ExpertController {
                             order.getPosition().toString());
                     requestsList.add(request);
                 }
-                }catch (Throwable t){}
+                }catch (Throwable t){System.out.print("error");}
             }
         }
         mav.addObject("requests", requestsList);
