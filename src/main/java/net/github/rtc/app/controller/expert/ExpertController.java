@@ -36,6 +36,7 @@ public class ExpertController {
         List<Request> requestsList = new ArrayList<Request>();
         if(!orderList.isEmpty()){
             for(UserCourseOrder order : orderList){
+                try{
                 if(order.getStatus()== UserRequestStatus.PENDING){
                     Request request = new Request((int)order.getId(),
                             (userService.findById((int)order.getId())).getName(),
@@ -44,6 +45,7 @@ public class ExpertController {
                             order.getPosition().toString());
                     requestsList.add(request);
                 }
+                }catch (Throwable t){}
             }
         }
         mav.addObject("requests", requestsList);
