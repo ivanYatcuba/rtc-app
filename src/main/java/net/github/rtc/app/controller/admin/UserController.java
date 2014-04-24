@@ -52,8 +52,6 @@ public class UserController {
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public ModelAndView user(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
- //       User user = userService.findById(id);
-       // mav.addObject("user", user);
         mav.addObject("content", "user/content/userPage");
         return mav;
     }

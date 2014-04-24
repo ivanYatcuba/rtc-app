@@ -110,7 +110,6 @@ public class UserController {
         }
         else{
             ModelAndView mav = new ModelAndView(ROOT + "/layout");
-            Map<String, String> map = new HashMap<String, String>();
             User currentUser = userService.findById(id);
             Course orderedCourse = coursesService.findByCode(currentUserCourseOrder.getCourseCode());
             mav.addObject("user", currentUser);
@@ -126,7 +125,6 @@ public class UserController {
     @RequestMapping(value = "{id}/sendOrder", method = RequestMethod.POST)
     public ModelAndView sendCourseOrder(@RequestBody String orderData, @PathVariable Integer id) {
         ModelAndView mav = new ModelAndView("redirect:/user/"+id+"/userCourses");
-        Map<String, String> map = new HashMap<String, String>();
         //I'm sorry for this...
         Map<String, String> orderParamsMap = getUserCourseOrderParams(orderData);
         UserCourseOrder userCourseOrder = buildUserCourseOrder(orderParamsMap, id);
