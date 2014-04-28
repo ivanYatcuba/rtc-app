@@ -1,6 +1,7 @@
 package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.model.UserCourseOrder;
+import net.github.rtc.app.model.UserRequestStatus;
 import net.github.rtc.app.resource.UserCourseOrderResource;
 import net.github.rtc.app.service.UserCourseOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
 
     @Override
     @Transactional
-    public void insert(UserCourseOrder request) {
-        resource.insert(request);
+    public void insert(UserCourseOrder order) {
+        resource.insert(order);
     }
 
     @Override
@@ -38,8 +39,8 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
 
     @Override
     @Transactional
-    public void update(UserCourseOrder request) {
-        resource.update(request);
+    public void update(UserCourseOrder order) {
+        resource.update(order);
     }
 
     @Override
@@ -53,4 +54,11 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     public UserCourseOrder getUserOrderByUserId(long userId) {
         return resource.getUserOrder(userId);
     }
+
+    @Override
+    @Transactional
+    public List<UserCourseOrder> getOrderByStatus(UserRequestStatus status) {
+        return resource.getOrderByStatus(status);
+    }
+
 }

@@ -1,6 +1,7 @@
 package net.github.rtc.app.resource.impl;
 
 import net.github.rtc.app.model.UserCourseOrder;
+import net.github.rtc.app.model.UserRequestStatus;
 import net.github.rtc.app.resource.UserCourseOrderResource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class UserCourseOrderResourceImpl implements UserCourseOrderResource {
     SessionFactory sessionFactory;
 
     @Override
-    public void insert(UserCourseOrder request) {
-        sessionFactory.getCurrentSession().save(request);
+    public void insert(UserCourseOrder order) {
+        sessionFactory.getCurrentSession().save(order);
     }
 
     @Override
@@ -48,5 +49,12 @@ public class UserCourseOrderResourceImpl implements UserCourseOrderResource {
         return (UserCourseOrder)sessionFactory.getCurrentSession().
                 createQuery(query).setString("userId", String.valueOf(userId)).
                 uniqueResult();
+    }
+
+    @Override
+    public List<UserCourseOrder> getOrderByStatus(UserRequestStatus status) {
+        String query = "select e from UserCourseOrder e where e.status = :status";
+        return sessionFactory.getCurrentSession().
+                createQuery(query).setString("status", String.valueOf(status.toString())).list();
     }
 }

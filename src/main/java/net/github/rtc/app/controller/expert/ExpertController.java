@@ -32,22 +32,18 @@ public class ExpertController {
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public ModelAndView expertCourses() {
         ModelAndView mav = new ModelAndView("user" + "/layout");
-        List<UserCourseOrder> orderList = userCourseOrderService.getAll();
+        List<UserCourseOrder> orderList = userCourseOrderService.getOrderByStatus(UserRequestStatus.PENDING);
         List<Request> requestsList = new ArrayList<Request>();
         if(!orderList.isEmpty()){
             for(UserCourseOrder order : orderList){
-
-                if(order.getStatus()== UserRequestStatus.PENDING){
-                    try{
-                    Request request = new Request((int)order.getId(),
-                            (userService.findById((int)order.getId())).getName(),
-                            order.getReason(),
-                            coursesService.findByCode(order.getCourseCode()).getName(),
-                            order.getPosition().toString());
-                    requestsList.add(request);
-                    }catch (Throwable t){System.out.print("error");}
-                }
-
+                try{
+                        Request request = new Request((int)order.getId(),
+                        (userService.findById((int)order.getId())).getName(),
+                        order.getReason(),
+                        coursesService.findByCode(order.getCourseCode()).getName(),
+                        order.getPosition().toString());
+                requestsList.add(request);
+                }catch (Throwable t){System.out.print("error");}
             }
         }
         mav.addObject("requests", requestsList);
@@ -72,7 +68,7 @@ public class ExpertController {
     }
 
     @RequestMapping(value = "/decline/{orderId}", method = RequestMethod.GET)
-    public String declineRequest( @PathVariable Integer orderId){
+    public String declineRequest(@PathVariable Integer orderId){
         changeOrderStatus(UserRequestStatus.REJECTED, orderId);
         return "redirect:/expert/requests";
     }

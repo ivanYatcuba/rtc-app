@@ -1,6 +1,7 @@
 package net.github.rtc.app.resource;
 
 import net.github.rtc.app.model.UserCourseOrder;
+import net.github.rtc.app.model.UserRequestStatus;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface UserCourseOrderResource {
     void delete(UserCourseOrder request);
     void update(UserCourseOrder request);
     UserCourseOrder getUserOrder(long userId);
+    List<UserCourseOrder> getOrderByStatus(UserRequestStatus status);
 }
