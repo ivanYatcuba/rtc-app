@@ -77,3 +77,22 @@
     </div>
 </div>
 </#macro>
+
+<#macro formValidation formName jsonRules>
+<script src="<@spring.url'/resources/css/js/jquery.validate.min.js'/>"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#${formName}").validate({
+            ${jsonRules}
+
+            errorClass: "alert alert-danger",
+            wrapper: "div",  // a wrapper around the error message
+            submitHandler: function(form) {
+                form.submit();
+            }
+
+        });
+    });
+</script>
+</#macro>

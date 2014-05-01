@@ -1,11 +1,7 @@
 package net.github.rtc.app.model;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
+import net.github.rtc.util.annotation.*;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
@@ -15,38 +11,41 @@ import java.util.List;
  * @author Vladislav Pikus
  */
 @XmlRootElement
+@Validatable
 public class Course implements Serializable {
 
     private String code;
 
-    @NotBlank
-    @Length(min = 2, max = 30)
+    @Required
+    @Minlength(2)
+    @Maxlength(30)
     private String name;
 
-    @NotBlank
+    @Required
     private String type;
 
-    @NotNull
+    @Required
     private Author author;
 
-    @NotNull
+    @Required
     private Date startDate;
 
-    @NotNull
+    @Required
     private Date endDate;
 
     private Date publishDate;
 
-    @NotEmpty
+
     private List<Tag> tags;
 
-    @NotNull
+    @Required
+    @net.github.rtc.util.annotation.Number
+    @Min(1)
     private Integer capacity;
 
-    @Size(max = 255)
+    @Maxlength(255)
     private String description;
 
-    @NotNull
     private String status = "DRAFT";
 
     public List<Tag> getTags() {

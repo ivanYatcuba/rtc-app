@@ -5,6 +5,7 @@ import net.github.rtc.app.model.Roles;
 import net.github.rtc.app.model.User;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
+import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,8 @@ import java.util.Date;
 @Controller ("adminNavigationController")
 @RequestMapping ("admin/user")
 public class UserController {
+    @Autowired
+    private ValidationContext validationContext;
 
     private static final String ROOT = "admin";
     private static final String ROOT_MODEL = "user";
@@ -59,6 +62,7 @@ public class UserController {
     @RequestMapping(value = "userPage/editPage/{id}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("validationRules", validationContext.get(User.class));
         mav.addObject("content", "user/content/editPage");
         User us=userService.findById(id);
         mav.addObject("user", us);
@@ -82,6 +86,8 @@ public class UserController {
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        validationContext.add(User.class);
+        mav.addObject("validationRules", validationContext.get(User.class));
         mav.addObject("content", "user/content/createContent");
         return mav;
     }

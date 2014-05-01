@@ -1,65 +1,63 @@
 package net.github.rtc.app.model;
 
+import net.github.rtc.util.annotation.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.util.rtc.annotation.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Date;
-//import java.util.List;
-//import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Validatable
 public class User implements UserDetails {
 
     Integer id;
-    @required
-    @maxlength(50)
-    @minlength(5)
+    @Required
+    @Maxlength(50)
+    @Minlength(5)
     private String surname;
 
-    @required
-    @maxlength(50)
-    @minlength(5)
+    @Required
+    @Maxlength(50)
+    @Minlength(5)
     private String name;  
     
-    @required
-    @maxlength(50)
-    @minlength(5)
+    @Required
+    @Maxlength(50)
+    @Minlength(5)
     private String middleName;
-    @required
-    @number
+    @Required
+    @net.github.rtc.util.annotation.Number
     private String phone;
-    @email
+    @Email
     private String email;
-    @date
-    @required
+    @Required
     private Date birthDate;
 
-    @maxlength(30)
-    @minlength(5)
-    @required
+    @Maxlength(30)
+    @Minlength(5)
+    @Required
     private String city;
 
-    @maxlength(30)
-    @minlength(5)
-    @required
+    @Maxlength(30)
+    @Minlength(5)
+    @Required
     private String university;
-    @maxlength(30)
-    @minlength(5)
-    @required
+    @Maxlength(30)
+    @Minlength(5)
+    @Required
     private String faculty;
-    @maxlength(30)
-    @minlength(5)
-    @required
+    @Maxlength(30)
+    @Minlength(5)
+    @Required
     private String speciality;
 
-    
+
     // private String technologies;
-    @number
+    @net.github.rtc.util.annotation.Number
     private Integer writtenEng;
-    @number
+    @net.github.rtc.util.annotation.Number
     private Integer oralEng;
     private String note;
     private String password;
@@ -74,8 +72,8 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
 
-  
-    
+
+
     public void setEnglish(String english)
     {
         this.english=english;
@@ -84,28 +82,28 @@ public class User implements UserDetails {
     {
         return this.english;
     }
-    
+
     public void setGender(String gender)
     {
         this.gender=gender;
     }
-    
+
     public String getGender()
     {
         return this.gender;
     }
-    
+
     @Override
     public String getUsername() {
         return email;
     }
 
-     
+
     public void setProgLanguages(String progrLanguage)
     {
         this.progLanguages=progrLanguage;
     }
-    
+
     /**
      *
      * @return
@@ -114,10 +112,10 @@ public class User implements UserDetails {
     {
        return this.progLanguages;
     }
-    
-    
-    
-    
+
+
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -165,7 +163,7 @@ public class User implements UserDetails {
 
     /**
      * *********************************
-     * @return 
+     * @return
      */
 
     public String getCity() {
@@ -299,7 +297,7 @@ public class User implements UserDetails {
         this.birthDate = birthDate;
     }
 
-    
+
     // for authentification
     public boolean hasRole(String role) {
         boolean hasRole = false;

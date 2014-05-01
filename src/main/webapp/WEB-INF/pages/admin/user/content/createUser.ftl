@@ -87,3 +87,5 @@
 <div>
 <label  class="control-label" for="type"><@spring.message "user.note"/></label>
  <@spring.formTagsInput "user.note"/>
+
+ <@spring.formValidation formName="user" jsonRules="${validationRules}"/>

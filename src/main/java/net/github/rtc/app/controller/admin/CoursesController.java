@@ -8,6 +8,7 @@ import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.service.CategoryService;
 import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.utils.Paginator;
+import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,9 @@ public class CoursesController {
     private static final String ROOT_MODEL = "course";
 
     private CoursesService coursesService;
+
+    @Autowired
+    private ValidationContext validationContext;
 
     @Autowired
     public void setCoursesService(CoursesService coursesService) {
@@ -153,6 +157,8 @@ public class CoursesController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        validationContext.add(Course.class);
+        mav.addObject("validationRules", validationContext.get(Course.class));
         mav.addObject("content", "courses/content/createContent");
         return mav;
     }
@@ -186,6 +192,7 @@ public class CoursesController {
     public ModelAndView update(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.getModelMap().addAttribute("course", coursesService.findByCode(courseCode));
+        mav.addObject("validationRules", validationContext.get(Course.class));
         mav.addObject("content", "courses/content/updateContent");
         return mav;
     }

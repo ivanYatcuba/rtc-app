@@ -1,7 +1,8 @@
 package net.github.rtc.app.model;
 
 
-import org.hibernate.validator.constraints.NotBlank;
+import net.github.rtc.util.annotation.Required;
+import net.github.rtc.util.annotation.Validatable;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -10,9 +11,10 @@ import java.io.Serializable;
  * @author Vladislav Pikus
  */
 @XmlRootElement
+@Validatable
 public class Tag implements Serializable {
 
-    @NotBlank
+    @Required
     private String value;
 
     public String getValue() {

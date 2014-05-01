@@ -13,7 +13,7 @@
 
         >
 
-    <context:component-scan base-package=" net.github.rtc.app, org.util.rtc"/>
+    <context:component-scan base-package=" net.github.rtc.app, net.github.rtc.util"/>
     <context:property-placeholder location="classpath:/host.properties, classpath:/hibernate.properties"/>
     <import resource="classpath:/spring/restTemplate.xml"/>
 
@@ -72,5 +72,9 @@
     <import resource="classpath:/spring/spring-security.xml" />
     <!-- Import data source security configurations -->
     <import resource="classpath:/spring/dataSource.xml" />
+
+    <bean id="validationContext" class="net.github.rtc.util.converter.ValidationContext" >
+
+    </bean>
 
 </beans>

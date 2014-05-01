@@ -1,8 +1,6 @@
 package net.github.rtc.app.model;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
+import net.github.rtc.util.annotation.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -11,17 +9,20 @@ import java.io.Serializable;
  * @author Vladislav Pikus
  */
 @XmlRootElement
+@Validatable
 public class Author implements Serializable {
 
-    @NotBlank
-    @Length(min = 2, max = 30)
+    @Required
+    @Minlength(2)
+    @Maxlength(30)
     private String firstName;
 
-    @NotBlank
-    @Length(min = 2, max = 30)
+    @Required
+    @Minlength(2)
+    @Maxlength(30)
     private String lastName;
 
-    @NotBlank
+    @Required
     @Email
     private String email;
 

@@ -55,5 +55,6 @@
         return true;
     }
 </script>
+<@spring.formValidation formName="course" jsonRules="${validationRules}"/>
 
 
