@@ -16,7 +16,7 @@
 
     <repositories>
         <repository>
-            <id>rtc-util-releases</id>
+            <id>rtc-util.releases</id>
             <url>https://raw.github.com/ReturnOnIntellingenceTraineeCommunity/rtc-util/releases/</url>
             <snapshots>
                 <enabled>true</enabled>
@@ -133,12 +133,6 @@
             <version>2.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>r05</version>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
