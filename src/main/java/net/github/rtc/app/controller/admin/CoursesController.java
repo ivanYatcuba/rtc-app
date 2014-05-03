@@ -157,7 +157,6 @@ public class CoursesController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        validationContext.add(Course.class);
         mav.addObject("validationRules", validationContext.get(Course.class));
         mav.addObject("content", "courses/content/createContent");
         return mav;

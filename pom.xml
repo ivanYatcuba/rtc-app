@@ -16,12 +16,8 @@
 
     <repositories>
         <repository>
-            <id>rtc-util.releases</id>
-            <url>https://raw.github.com/ReturnOnIntellingenceTraineeCommunity/rtc-util/releases/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
+            <id>bintray</id>
+            <url>http://dl.bintray.com/rtcommunity/maven</url>
         </repository>
     </repositories>
 
@@ -201,6 +197,7 @@
             <groupId>rtcCommunity</groupId>
             <artifactId>rtc-util</artifactId>
             <version>1.0-RELEASE</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.reflections</groupId>

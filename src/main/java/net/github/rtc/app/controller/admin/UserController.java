@@ -86,7 +86,6 @@ public class UserController {
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        validationContext.add(User.class);
         mav.addObject("validationRules", validationContext.get(User.class));
         mav.addObject("content", "user/content/createContent");
         return mav;

@@ -73,8 +73,10 @@
     <!-- Import data source security configurations -->
     <import resource="classpath:/spring/dataSource.xml" />
 
+    <bean id="validationConverter" class="net.github.rtc.util.converter.Converter" />
     <bean id="validationContext" class="net.github.rtc.util.converter.ValidationContext" >
-
+        <constructor-arg index="0" name="converter" ref="validationConverter"/>
+        <constructor-arg index="1" name="packagePath" value="net.github.rtc.app.model"/>
     </bean>
 
 </beans>
