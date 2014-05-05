@@ -10,17 +10,24 @@
         <intercept-url pattern="/admin*/*" access="hasRole('ROLE_ADMIN')" />
         <form-login login-page="/login" default-target-url="/login_attempt"
                     authentication-failure-url="/loginfailed"
-        authentication-success-handler-ref="SimpleAuthenticationSuccessHandler"/>
+        authentication-success-handler-ref="simpleAuthenticationSuccessHandler"/>
         <logout logout-success-url="/logout" />
         <logout delete-cookies="JSESSIONID" />
         <remember-me key="uniqueAndSecret" token-validity-seconds="86400"/>
     </http>
 
+
+    <beans:bean id="passwordEncoder"
+                class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
+
     <authentication-manager alias="authenticationManager">
-        <authentication-provider ref="userAuthenticationProvider" />
+        <authentication-provider ref="userAuthenticationProvider"/>
     </authentication-manager>
 
-    <beans:bean id="SimpleAuthenticationSuccessHandler"
+
+    <beans:bean id="userAuthenticationProvider"
+                class="net.github.rtc.app.security.UserAuthenticationProvider" />
+    <beans:bean id="simpleAuthenticationSuccessHandler"
                 class="net.github.rtc.app.security.SimpleAuthenticationSuccessHandler" />
 
 </beans:beans>
