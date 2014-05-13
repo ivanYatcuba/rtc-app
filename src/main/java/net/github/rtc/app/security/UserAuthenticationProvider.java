@@ -41,7 +41,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Username not found.");
         }
 
-        if (!passwordEncoder.matches(password,user.getPassword())) {
+        if (!password.equals(user.getPassword())) {
             throw new BadCredentialsException("Wrong password.");
         }
 
