@@ -1,8 +1,6 @@
 package net.github.rtc.app.security;
 
 
-import net.github.rtc.app.service.UserServiceLogin;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -21,13 +19,6 @@ import java.util.Collection;
 public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
-    private UserServiceLogin userService;
-
-    @Autowired
-    public void setUserService(UserServiceLogin userService) {
-        this.userService = userService;
-    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
