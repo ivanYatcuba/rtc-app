@@ -22,13 +22,13 @@ import java.util.Collection;
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
     private UserServiceLogin userService;
-    private PasswordEncoder passwordEncoder;
+   // private PasswordEncoder passwordEncoder;
     @Autowired
     public void setUserService(UserServiceLogin userService) {
         this.userService = userService;
     }
-    @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {this.passwordEncoder = passwordEncoder;}
+    /*@Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {this.passwordEncoder = passwordEncoder;}*/
 
 
     @Override
