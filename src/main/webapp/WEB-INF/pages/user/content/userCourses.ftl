@@ -31,17 +31,13 @@
 
 
 <div class="popup" id="window-popup">
- <div class="popup-content">
-<center>
-<h2><@spring.message "userCourses"/>
-</h2></center>
-<strong>
-
-<@spring.message "userCourses.IHave"/>  <@spring.message "userCourses.IHave2"/>
-
-</strong>
-
-
+    <div class="popup-content">
+    <center>
+    <h2><@spring.message "userCourses"/>
+    </h2></center>
+    <strong>
+    <@spring.message "userCourses.IHave"/>  <@spring.message "userCourses.IHave2"/>
+    </strong>
 
 
  <form name="modal" action="sendOrder" method="post">
@@ -50,32 +46,25 @@
     <label class="radio inline">
     <input type="radio"  name="userCourses" id="optionsRadios1"
            value="<@spring.message "userCourses.developer"/>" checked>
-    <@spring.message "userCourses.developer"/></label>
+    <@spring.message "userCourses.developer"/></label><br/>
 
-    <br>
     <label class="radio inline">
     <input type="radio" name="userCourses" id="optionsRadios2"
            value="<@spring.message "userCourses.tester"/>">
-    <@spring.message "userCourses.tester"/></label>
-    <br>
+    <@spring.message "userCourses.tester"/></label><br/>
+
     <label class="radio inline">
     <input type="radio"  name="userCourses" id="optionsRadios2"
            value="<@spring.message "userCourses.Business_Analyst"/>">
-    <@spring.message "userCourses.Business_Analyst"/></label>
-    <br>
-    <strong>
-    <@spring.message "userCourses.because"/>
-    </strong>
-    <br>
-     <textarea class="input-block-level" name="userTextArea" id="redex" rows="10"></textarea>
-     <style type="text/css">
-    #redex { resize: none; }
-    </style>
-    <br>
-    <!--<a href="javascript:PopUpHide()">Скрыть попап</a>-->
+    <@spring.message "userCourses.Business_Analyst"/></label><br/>
+
+    <strong><@spring.message "userCourses.because"/></strong><br/>
+
+    <textarea class="input-block-level" name="userTextArea" id="redex" rows="10"></textarea>
+    <style type="text/css">#redex { resize: none; }</style><br/>
     <center>
-    <button class="btn" onclick="pushData()">Ok</button>
-    <button class="btn" type="button" onClick="javascript:PopUpHide()">Cancel</button>
+        <button class="btn" onclick="pushData()">Ok</button>
+        <button class="btn" type="button" onClick="javascript:PopUpHide()">Cancel</button>
     </center>
 </form>
 
@@ -83,18 +72,9 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-PopUpHide();
-});
-
-function PopUpShow(){
-
-$("#window-popup").show();
-
-}
-function PopUpHide(){
-$("#window-popup").hide();
-}
+    $(document).ready(function(){PopUpHide();});
+    function PopUpShow(){$("#window-popup").show();}
+    function PopUpHide(){$("#window-popup").hide();}
 </script>
 
 
@@ -109,6 +89,4 @@ $("#window-popup").hide();
             data : selectedCourseCode
         });
     }
-
-
 </script>

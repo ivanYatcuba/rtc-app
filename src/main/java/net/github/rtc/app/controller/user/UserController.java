@@ -8,6 +8,7 @@ import net.github.rtc.app.service.UserServiceLogin;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -35,13 +36,13 @@ public class UserController {
     private UserCourseOrderService userCourseOrderService;
 
     private static final String ROOT = "user";
-    private static final String ROOT_MODEL = "user" ;
+    private static final String ROOT_MODEL = "user";
 
 
-    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public ModelAndView user(@PathVariable Integer id) {
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public ModelAndView user() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        User user = userService.findById(id);
+        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         mav.addObject("user", user);
         mav.addObject("content", "userContent");
         return mav;
@@ -50,13 +51,13 @@ public class UserController {
     /**
      * Process the request to get edit user form
      *
-     * @return modelAndView("user/layout")
+     * @return modelAndView(user/layout)
      */
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView edit(@PathVariable Integer id) {
-        User u = userService.findById(id);
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public ModelAndView edit() {
+        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.getModelMap().addAttribute("user", u);
+        mav.getModelMap().addAttribute("user", user);
         mav.addObject("content", "editUser");
         return mav;
     }
@@ -64,12 +65,12 @@ public class UserController {
     /**
      * Process the request to post entered user in the form
      *
-     * @param user course object
+     * @param user          course object
      * @param bindingResult binding user result
-     * @param session current session
+     * @param session       current session
      * @return if all is OK the redirect to view user details
      */
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView update(@ModelAttribute(ROOT_MODEL) User user,
                                BindingResult bindingResult,
                                SessionStatus session) {
@@ -78,41 +79,51 @@ public class UserController {
         }
         userService.update(user);
         session.setComplete();
-        return new ModelAndView("redirect:/" + ROOT + "/" +"view/"+ user.getId());
+        return new ModelAndView("redirect:/" + ROOT + "/view/");
     }
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute(ROOT_MODEL) User user,
-                               BindingResult bindingResult,
-                               SessionStatus session) {
+                             BindingResult bindingResult,
+                             SessionStatus session) {
         if (bindingResult.hasErrors()) {
             return modelAndViewContentBuilder("register");
         }
+
+        user.setAuthorities(getUserRole());
         userService.create(user);
-        user = userServiceLogin.loadUserByUsername(user.getEmail());
         session.setComplete();
-        return new ModelAndView("redirect:/" + ROOT + "/" +"view/"+ user.getId());
+        return new ModelAndView("redirect:/login/");
     }
 
-    @RequestMapping(value = "{id}/userCourses", method = RequestMethod.GET)
-    public ModelAndView userCourses(@PathVariable Integer id) {
-        UserCourseOrder currentUserCourseOrder = userCourseOrderService.getUserOrderByUserId(id);
-        if(currentUserCourseOrder == null){
+    @RequestMapping(value = "/userCourses", method = RequestMethod.GET)
+    public ModelAndView userCourses() {
+        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        UserCourseOrder currentUserCourseOrder = userCourseOrderService.getUserOrderByUserCode(user.getCode());
+        if (currentUserCourseOrder == null) {
             ModelAndView mav = new ModelAndView(ROOT + "/layout");
+
+            SearchFilter searchFilter = new SearchFilter();
+            searchFilter.setStatus("PUBLISHED");
             Map<String, String> map = new HashMap<String, String>();
-            CourseDto dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
-            User currentUser = userService.findById(id);
-            mav.addObject("user", currentUser);
-            mav.addObject("courses", dto.getCourses());
+            CourseDto courseDto = coursesService.findByFilter(searchFilter.createQuery(map).byStatus().toString());
+            Collections.sort((List<Course>)courseDto.getCourses(), new Comparator<Course>() {
+                public int compare(Course course1, Course course2) {
+                    if (course1.getStartDate() == null || course2.getStartDate() == null)
+                        return 0;
+                    return course1.getStartDate().compareTo(course2.getStartDate());
+                }
+            });
+
+            mav.addObject("user", user);
+            mav.addObject("courses", courseDto.getCourses());
             mav.addObject("content", "userCourses");
             return mav;
-        }
-        else{
+        } else {
             ModelAndView mav = new ModelAndView(ROOT + "/layout");
-            User currentUser = userService.findById(id);
             Course orderedCourse = coursesService.findByCode(currentUserCourseOrder.getCourseCode());
-            mav.addObject("user", currentUser);
+            mav.addObject("user", user);
             mav.addObject("orderStatus", currentUserCourseOrder.getStatus());
             mav.addObject("courseName", orderedCourse.getName());
             mav.addObject("courseDescription", orderedCourse.getDescription());
@@ -122,29 +133,28 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "{id}/sendOrder", method = RequestMethod.POST)
-    public ModelAndView sendCourseOrder(@RequestBody String orderData, @PathVariable Integer id) {
-        ModelAndView mav = new ModelAndView("redirect:/user/"+id+"/userCourses");
+    @RequestMapping(value = "/sendOrder", method = RequestMethod.POST)
+    public ModelAndView sendCourseOrder(@RequestBody String orderData) {
+        ModelAndView mav = new ModelAndView("redirect:/user/userCourses");
         //I'm sorry for this...
         Map<String, String> orderParamsMap = getUserCourseOrderParams(orderData);
-        UserCourseOrder userCourseOrder = buildUserCourseOrder(orderParamsMap, id);
+        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        UserCourseOrder userCourseOrder = buildUserCourseOrder(orderParamsMap, user.getCode());
         userCourseOrderService.insert(userCourseOrder);
         return mav;
     }
 
 
-    private UserCourseOrder buildUserCourseOrder(Map<String, String> orderParamsMap, Integer userId){
+    private UserCourseOrder buildUserCourseOrder(Map<String, String> orderParamsMap, String userCode) {
         UserCourseOrder userCourseOrder = new UserCourseOrder();
-        userCourseOrder.setUserId(userId.longValue());
+        userCourseOrder.setUserCode(userCode);
         userCourseOrder.setCourseCode(orderParamsMap.get("selectedCode"));
 
-        if(orderParamsMap.get("userCourses").equals("Developer")){
+        if (orderParamsMap.get("userCourses").equals("Developer")) {
             userCourseOrder.setPosition(TraineePosition.DEVELOPER);
-        }
-        else if(orderParamsMap.get("userCourses").equals("Tester")){
+        } else if (orderParamsMap.get("userCourses").equals("Tester")) {
             userCourseOrder.setPosition(TraineePosition.TESTER);
-        }
-        else if(orderParamsMap.get("userCourses").equals("Business Analyst ")){
+        } else if (orderParamsMap.get("userCourses").equals("Business Analyst ")) {
             userCourseOrder.setPosition(TraineePosition.BUSINESS_ANALIST);
         }
         userCourseOrder.setReason(orderParamsMap.get("userTextArea"));
@@ -153,10 +163,10 @@ public class UserController {
         return userCourseOrder;
     }
 
-    private Map<String, String> getUserCourseOrderParams(String orderData){
+    private Map<String, String> getUserCourseOrderParams(String orderData) {
         Map<String, String> orderParamsMap = new HashMap<String, String>();
         String[] orderParams = orderData.split("&");
-        for(String param: orderParams){
+        for (String param : orderParams) {
             String[] value = param.split("=");
             orderParamsMap.put(value[0], value[1]);
         }
@@ -203,13 +213,11 @@ public class UserController {
         return mav;
     }
 
-    @ModelAttribute("english")
-    public Collection<String> getEnglish() {
-
-        Collection<String> s = new ArrayList<String>();
-        s.add("Basic");
-        s.add("Intermediate");
-        s.add("Advanced");
-        return s;
+    private List<Role> getUserRole(){
+        List<Role> roles = new ArrayList<Role>();
+        Role userRole = new Role();
+        userRole.setName("ROLE_USER");
+        roles.add(userRole);
+        return roles;
     }
 }

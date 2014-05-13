@@ -51,8 +51,8 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
 
     @Override
     @Transactional
-    public UserCourseOrder getUserOrderByUserId(long userId) {
-        return resource.getUserOrder(userId);
+    public UserCourseOrder getUserOrderByUserCode(String code) {
+        return resource.getUserOrder(code);
     }
 
     @Override

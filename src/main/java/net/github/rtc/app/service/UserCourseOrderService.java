@@ -14,7 +14,7 @@ public interface UserCourseOrderService {
     List<UserCourseOrder> getAll();
     void update(UserCourseOrder request);
     void delete(UserCourseOrder request);
-    UserCourseOrder getUserOrderByUserId(long userId);
+    UserCourseOrder getUserOrderByUserCode(String code);
     List<UserCourseOrder> getOrderByStatus(UserRequestStatus status);
 
 }

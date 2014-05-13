@@ -8,7 +8,7 @@ import java.util.Collection;
  * @author Саша
  */
 public interface UserResource {
-    User findById(Integer id);
+    User findById(String code);
 
     /**
      * Find collection of courses
@@ -20,9 +20,9 @@ public interface UserResource {
     /**
      * Will be delete course by ID
      *
-     * @param id course ID
+     * @param code course ID
      */
-    void delete(Integer id);
+    void delete(String code);
 
     User create(User user);
 

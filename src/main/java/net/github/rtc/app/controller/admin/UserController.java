@@ -1,7 +1,7 @@
 package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.Role;
-import net.github.rtc.app.model.Roles;
+import net.github.rtc.app.model.RoleTypes;
 import net.github.rtc.app.model.User;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
@@ -20,10 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-
-//import net.github.rtc.app.courses.model.SearchFilter;
-//import net.github.rtc.app.service.UserServiceLogin;
-//import org.springframework.ui.ModelMap;
 
 /**
  * @author  Lapshin Ugene
@@ -59,26 +55,26 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "userPage/editPage/{id}", method = RequestMethod.GET)
-    public ModelAndView editPage(@PathVariable Integer id) {
+    @RequestMapping(value = "userPage/editPage/{code}", method = RequestMethod.GET)
+    public ModelAndView editPage(@PathVariable String code) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("validationRules", validationContext.get(User.class));
         mav.addObject("content", "user/content/editPage");
-        User us=userService.findById(id);
+        User us=userService.findByCode(code);
         mav.addObject("user", us);
         return mav;
     }
-    @RequestMapping(value = "/userPage/{id}", method = RequestMethod.GET)
-    public ModelAndView userPage(@PathVariable Integer id) {
+    @RequestMapping(value = "/userPage/{code}", method = RequestMethod.GET)
+    public ModelAndView userPage(@PathVariable String code) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("user",userService.findById(id));
+        mav.addObject("user",userService.findByCode(code));
         mav.addObject("content", "user/content/userPage");
         return mav;
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable Integer id) {
-        userService.delete(id);
+    @RequestMapping(value = "/delete/{code}", method = RequestMethod.GET)
+    public String delete(@PathVariable String code) {
+        userService.delete(code);
         return  "redirect:/"+ROOT+"/user/viewAll";
     }
 
@@ -102,14 +98,14 @@ public class UserController {
          user.setAuthorities(rol);
          user=this.userService.create(user);
          session.setComplete();
- Collection<User> listUser=userService.findAll();
+        Collection<User> listUser=userService.findAll();
         mav.addObject("users", listUser);
     
         return mav;
     }
 
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public ModelAndView update(@PathVariable Integer id, @ModelAttribute(ROOT_MODEL) @Valid User user,
+    @RequestMapping(value = "/update/{code}", method = RequestMethod.POST)
+    public ModelAndView update(@PathVariable String code, @ModelAttribute(ROOT_MODEL) @Valid User user,
                              BindingResult bindingResult,
                              SessionStatus session) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
@@ -118,7 +114,7 @@ public class UserController {
         Collection <Role> rol = new ArrayList<Role>();
         rol.add(new Role());
         user.setAuthorities(rol);
-        user.setId(id);
+        user.setCode(code);
 
         this.userService.update(user);
         session.setComplete();
@@ -138,19 +134,14 @@ public class UserController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
     }
-    
-//     @ModelAttribute("searchFilter")
-//    public SearchFilter getFilter() {
-//        return new SearchFilter();
-//    }
-//    
-     @ModelAttribute("roles")
+
+    @ModelAttribute("roles")
     public Collection<String> getCategories() {
 
         Collection<String> s = new ArrayList<String>();
-        s.add(Roles.ROLE_ADMIN.name());
-        s.add(Roles.ROLE_USER.name());
-        s.add(Roles.ROLE_EXPERT.name());
+        s.add(RoleTypes.ROLE_ADMIN.name());
+        s.add(RoleTypes.ROLE_USER.name());
+        s.add(RoleTypes.ROLE_EXPERT.name());
         return s;
     }
 

@@ -19,7 +19,6 @@ import java.util.*;
 public class ExpertController {
 
     private static final String ROOT = "user";
-    //private static final String ROOT_MODEL = "user" ;
 
     @Autowired
     private CoursesService coursesService;
@@ -37,12 +36,12 @@ public class ExpertController {
         if(!orderList.isEmpty()){
             for(UserCourseOrder order : orderList){
                 try{
-                        Request request = new Request((int)order.getId(),
-                        (userService.findById((int)order.getId())).getName(),
-                        order.getReason(),
-                        coursesService.findByCode(order.getCourseCode()).getName(),
-                        order.getPosition().toString());
-                requestsList.add(request);
+                    Request request = new Request((int)order.getId(),
+                    userService.findByCode(order.getUserCode()).getName(),
+                    order.getReason(),
+                    coursesService.findByCode(order.getCourseCode()).getName(),
+                    order.getPosition().toString());
+                    requestsList.add(request);
                 }catch (Throwable t){System.out.print("error");}
             }
         }

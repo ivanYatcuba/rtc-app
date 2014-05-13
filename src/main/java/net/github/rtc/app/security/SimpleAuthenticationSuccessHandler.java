@@ -1,7 +1,6 @@
 package net.github.rtc.app.security;
 
 
-import net.github.rtc.app.model.User;
 import net.github.rtc.app.service.UserServiceLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -40,18 +39,12 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
     protected void handle(HttpServletRequest request,
                           HttpServletResponse response, Authentication authentication) throws IOException {
         String targetUrl = determineTargetUrl(authentication);
-
-        if (response.isCommitted()) {
-
-            return;
-        }
-
+        if (response.isCommitted()) {return;        }
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
     /** Builds the target URL according to the logic defined in the main class Javadoc. */
     protected String determineTargetUrl(Authentication authentication) {
-       // boolean isUser = false;
         boolean isAdmin = false;
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
@@ -63,8 +56,7 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
         if (isAdmin) {
             return "/admin";
         } else {
-            User authenticatedUser = userService.loadUserByUsername(authentication.getName());
-            return "/user/view/"+authenticatedUser.getId();
+            return "/user/view/";
         }
     }
 

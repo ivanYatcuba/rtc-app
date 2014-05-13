@@ -13,7 +13,7 @@ public class UserCourseOrder {
     private long id;
 
     @Column
-    private long userId;
+    private String userCode;
 
     @Column
     private String courseCode;
@@ -35,9 +35,9 @@ public class UserCourseOrder {
     @Column
     private String reason;
 
-    public UserCourseOrder(long userId, String courseCode, Date requestDate, Date responseDate,
+    public UserCourseOrder(String userCode, String courseCode, Date requestDate, Date responseDate,
                            UserRequestStatus status, TraineePosition position) {
-        this.userId = userId;
+        this.userCode = userCode;
         this.courseCode = courseCode;
         this.requestDate = requestDate;
         this.responseDate = responseDate;
@@ -50,8 +50,8 @@ public class UserCourseOrder {
     public long getId() { return id; }
     public void setId(long id) { this.id = id;}
 
-    public long getUserId() { return userId; }
-    public void setUserId(long userId) { this.userId = userId; }
+    public String getUserCode() { return userCode; }
+    public void setUserCode(String userCode) { this.userCode = userCode; }
 
     public String getCourseCode() { return courseCode; }
     public void setCourseCode(String courseCode) { this.courseCode = courseCode; }

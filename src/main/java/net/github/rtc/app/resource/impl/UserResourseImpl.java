@@ -8,12 +8,15 @@ package net.github.rtc.app.resource.impl;
 
 //import net.github.rtc.app.impl.*;
 import net.github.rtc.app.model.User;
-import java.util.Arrays;
-import java.util.Collection;
 import net.github.rtc.app.resource.UserResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 /**
  *
@@ -39,17 +42,15 @@ public class UserResourseImpl implements UserResource{
     }
 
     /**
-     * @param id course ID
+     * @param code course ID
      * @return null if not found or course's object if found
      * @see net.github.rtc.app.resource.CoursesResource
      */
     @Override
-    public User findById(Integer id) {
-        System.out.println();
-        System.out.println("bgfbgf  " +hostUserUrl);
+    public User findById(String code) {
         User user = null;
         try{
-            user = restTemplate.getForObject(hostUserUrl + "{id}", User.class, id);
+            user = restTemplate.getForObject(hostUserUrl + "{code}", User.class, code);
         }
         catch(Exception e)
         {
@@ -69,17 +70,18 @@ public class UserResourseImpl implements UserResource{
     }
     
     /**
-     * @param id course ID
+     * @param code user code
      * @see net.github.rtc.app.resource.CoursesResource
      */
     @Override
-    public void delete(Integer id) {
-        restTemplate.delete(hostUserUrl + "{id}", id);
+    public void delete(String code) {
+        restTemplate.delete(hostUserUrl + "{code}", code);
     }
 
     @Override
     public User create(User user) {
-        System.out.println("it's test");
+        PasswordEncoder encoder = new StandardPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         return restTemplate.postForObject(hostUserUrl, user, User.class);
     }
 

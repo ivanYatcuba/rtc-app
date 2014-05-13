@@ -1,14 +1,12 @@
 package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.model.User;
+import net.github.rtc.util.converter.ValidationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by ivan on 18.04.14.
@@ -16,23 +14,16 @@ import java.util.Collection;
 @Controller("registerController")
 @RequestMapping("user/register")
 public class RegisterController {
+    @Autowired
+    ValidationContext validationContext;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView openRegisterPage() {
         ModelAndView mav = new ModelAndView("user/layout");
         User u = new User();
         mav.getModelMap().addAttribute("user", u);
+        mav.addObject("validationRules", validationContext.get(User.class));
         mav.addObject("content", "register");
         return mav;
-    }
-
-    @ModelAttribute("english")
-    public Collection<String> getEnglish() {
-
-        Collection<String> s = new ArrayList<String>();
-        s.add("Basic");
-        s.add("Intermediate");
-        s.add("Advanced");
-        return s;
     }
 }

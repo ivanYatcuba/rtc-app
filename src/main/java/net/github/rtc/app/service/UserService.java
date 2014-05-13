@@ -21,11 +21,11 @@ public interface UserService {
      * Will be delete course by ID
      * If ID is null then will be throw {@link net.github.rtc.app.exception.ServiceProcessingException}
      *
-     * @param id course ID
+     * @param code course ID
      */
-    void delete(Integer id);
+    void delete(String code);
 
-    User findById(Integer id);
+    User findByCode(String code);
 
     User create(User user);
 

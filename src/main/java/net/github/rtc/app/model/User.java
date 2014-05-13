@@ -11,8 +11,8 @@ import java.util.Date;
 @XmlRootElement
 @Validatable
 public class User implements UserDetails {
+    private String code;
 
-    Integer id;
     @Required
     @Maxlength(50)
     @Minlength(5)
@@ -21,17 +21,23 @@ public class User implements UserDetails {
     @Required
     @Maxlength(50)
     @Minlength(5)
-    private String name;  
-    
+    private String name;
+
     @Required
     @Maxlength(50)
     @Minlength(5)
     private String middleName;
+
+    @Required
+    @Email
+    private String email;
+
+
     @Required
     @net.github.rtc.util.annotation.Number
     private String phone;
-    @Email
-    private String email;
+
+
     @Required
     private Date birthDate;
 
@@ -44,25 +50,28 @@ public class User implements UserDetails {
     @Minlength(5)
     @Required
     private String university;
+
     @Maxlength(30)
     @Minlength(5)
     @Required
     private String faculty;
+
     @Maxlength(30)
     @Minlength(5)
     @Required
     private String speciality;
 
-
-    // private String technologies;
-    @net.github.rtc.util.annotation.Number
-    private Integer writtenEng;
-    @net.github.rtc.util.annotation.Number
-    private Integer oralEng;
+    @Required
     private String note;
+
+    @Required
     private String password;
+
     private String gender;
+
     private String progLanguages;
+
+    @Required
     private String english;
 
     /* Spring Security fields*/
@@ -73,23 +82,19 @@ public class User implements UserDetails {
     private boolean enabled = true;
 
 
-
-    public void setEnglish(String english)
-    {
-        this.english=english;
+    public void setEnglish(String english) {
+        this.english = english;
     }
-    public String getEnglish()
-    {
+
+    public String getEnglish() {
         return this.english;
     }
 
-    public void setGender(String gender)
-    {
-        this.gender=gender;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getGender()
-    {
+    public String getGender() {
         return this.gender;
     }
 
@@ -98,23 +103,13 @@ public class User implements UserDetails {
         return email;
     }
 
-
-    public void setProgLanguages(String progrLanguage)
-    {
-        this.progLanguages=progrLanguage;
+    public void setProgLanguages(String progrLanguage) {
+        this.progLanguages = progrLanguage;
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getProgLanguages()
-    {
-       return this.progLanguages;
+    public String getProgLanguages() {
+        return this.progLanguages;
     }
-
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -161,21 +156,8 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    /**
-     * *********************************
-     * @return
-     */
-
     public String getCity() {
         return city;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return this.id;
     }
 
     public void setCity(String city) {
@@ -206,32 +188,6 @@ public class User implements UserDetails {
         this.speciality = speciality;
     }
 
-    //maybe this getter maybe should be changed
-    //I have no idea how to pass several technologies from a reg.form to a controller and user
-   /* public String getTechnologies() {
-        return technologies;
-    }
-
-    public void setTechnologies(String technologies) {
-        this.technologies = technologies;
-    }
-*/
-    public Integer getWrittenEng() {
-        return writtenEng;
-    }
-
-    public void setWrittenEng(Integer writtenEng) {
-        this.writtenEng = writtenEng;
-    }
-
-    public Integer getOralEng() {
-        return oralEng;
-    }
-
-    public void setOralEng(Integer oralEng) {
-        this.oralEng = oralEng;
-    }
-
     public String getNote() {
         return note;
     }
@@ -245,9 +201,7 @@ public class User implements UserDetails {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password) { this.password = password; }
 
     public String getSurname() {
         return surname;
@@ -297,11 +251,18 @@ public class User implements UserDetails {
         this.birthDate = birthDate;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     // for authentification
     public boolean hasRole(String role) {
         boolean hasRole = false;
-        for(GrantedAuthority authority: this.getAuthorities()) {
+        for (GrantedAuthority authority : this.getAuthorities()) {
             if (authority.getAuthority().equals(role)) {
                 hasRole = true;
                 break;
@@ -312,11 +273,15 @@ public class User implements UserDetails {
 
 
     public User() {
-
     }
 
-    public User(Integer id, String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password, String gender, String progLanguages, String english) {
-        this.id = id;
+    public User(String code, String surname, String name, String middleName,
+                String phone, String email, Date birthDate, String city,
+                String university, String faculty, String speciality,
+                String note, String password, String gender,
+                String progLanguages, String english) {
+
+        this.code = code;
         this.surname = surname;
         this.name = name;
         this.middleName = middleName;
@@ -327,8 +292,7 @@ public class User implements UserDetails {
         this.university = university;
         this.faculty = faculty;
         this.speciality = speciality;
-        this.writtenEng = writtenEng;
-        this.oralEng = oralEng;
+
         this.note = note;
         this.password = password;
         this.gender = gender;
@@ -336,7 +300,10 @@ public class User implements UserDetails {
         this.english = english;
     }
 
-    public User(String surname, String name, String middleName, String phone, String email, Date birthDate, String city, String university, String faculty, String speciality, Integer writtenEng, Integer oralEng, String note, String password, String gender, String progLanguages, String english) {
+    public User(String surname, String name, String middleName, String phone,
+                String email, Date birthDate, String city, String university,
+                String faculty, String speciality, String note, String password,
+                String gender, String progLanguages, String english) {
         this.surname = surname;
         this.name = name;
         this.middleName = middleName;
@@ -347,8 +314,6 @@ public class User implements UserDetails {
         this.university = university;
         this.faculty = faculty;
         this.speciality = speciality;
-        this.writtenEng = writtenEng;
-        this.oralEng = oralEng;
         this.note = note;
         this.password = password;
         this.gender = gender;

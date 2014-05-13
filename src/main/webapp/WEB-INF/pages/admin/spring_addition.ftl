@@ -96,3 +96,35 @@
     });
 </script>
 </#macro>
+
+<#--
+* radioButtons
+*
+* @param path the name of the field to bind to
+* @param options a map (value=label) of all the available options
+* @param classes any additional classes for the surrounding label element (such as 'inline')
+* @param messageKey key to lookup in resource bundle, defaults to path
+-->
+<#macro radioButtons path options classes="" checkId=false messageKey=path>
+    <@spring.bind path/>
+    <#assign error><#if spring.status.errorMessages?has_content>error</#if></#assign>
+<div class="control-group ${error}">
+<#-- use id for selected check if property is an entity -->
+    <#if checkId && spring.status.value??><#assign stringStatusValue=spring.status.value.id?string in spring></#if>
+    <label class="control-label">
+        <@spring.message messageKey/>
+        <#if error?has_content><span class="help-block">${spring.status.errorMessages?first}</span></#if>
+    </label>
+    <div class="controls">
+        <#list options?keys as value>
+            <#assign id="${spring.status.expression?replace('[','')?replace(']','')}${value_index}">
+            <label class="radio ${classes}">
+                <input type="radio" id="${id}" name="${spring.status.expression}" value="${value?html}"<#if spring.stringStatusValue == value?string> checked</#if> >
+            ${options[value]?html}
+            </label>
+        </#list>
+    </div>
+</div>
+</#macro>
+
+
