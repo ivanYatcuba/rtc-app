@@ -29,7 +29,7 @@ public class ExportController {
     @RequestMapping(value = "/exportUsers", method = RequestMethod.GET)
     public ModelAndView exportUser() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "courses/content/exportUser");
+        mav.addObject("content", "users/content/exportUser");
         return mav;
     }
 
