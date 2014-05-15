@@ -26,10 +26,11 @@ public class ExportController {
         return mav;
     }
 
-    @RequestMapping(value = "/exportUsers", method = RequestMethod.GET)
-    public ModelAndView exportUsers() {
+    @RequestMapping(value = "/exportUser", method = RequestMethod.GET)
+    public ModelAndView exportUser() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "user/content/exportUsers");
+        mav.addObject("content", "courses/content/exportUser");
         return mav;
     }
+
 }
