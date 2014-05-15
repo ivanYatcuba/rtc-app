@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ExportController {
 
     private static final String ROOT = "admin";
-    private static final String ROOT_MODEL = "export";
+    //private static final String ROOT_MODEL = "export";
 
 
     @RequestMapping(value = "/exportCourses", method = RequestMethod.GET)
