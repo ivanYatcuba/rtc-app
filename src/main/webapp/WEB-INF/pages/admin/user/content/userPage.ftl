@@ -127,7 +127,7 @@
 <div class="span1" style="text-align: right">
 
 
-    <form name ="editPage" action="editPage/${user.id}" method="get">
+    <form name ="editPage" action="editPage/${user.code}" method="get">
     <button class="btn" type="submit"   >Edit</button>
     </form>
 

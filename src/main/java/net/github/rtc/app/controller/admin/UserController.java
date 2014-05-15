@@ -48,8 +48,8 @@ public class UserController {
         mav.addObject("users", listUser);
         return mav;
     }
-    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public ModelAndView user(@PathVariable Integer id) {
+    @RequestMapping(value = "/view/{code}", method = RequestMethod.GET)
+    public ModelAndView user(@PathVariable Integer code) {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "user/content/userPage");
         return mav;
