@@ -20,9 +20,17 @@ public class ExportController {
 
 
     @RequestMapping(value = "/exportCourses", method = RequestMethod.GET)
-    public ModelAndView export() {
+    public ModelAndView exportCourses() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "courses/content/exportCourses");
         return mav;
     }
+
+    @RequestMapping(value = "/exportUser", method = RequestMethod.GET)
+    public ModelAndView exportUser() {
+        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        mav.addObject("content", "courses/content/exportUser");
+        return mav;
+    }
+
 }
