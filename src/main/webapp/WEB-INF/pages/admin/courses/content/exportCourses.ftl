@@ -1,5 +1,4 @@
 <form name="export" id="export" action="<@spring.url "/admin/export/courses" />" method="post">
-
     <h3><@spring.message "export.courses"/></h3>
 
     <div class="row-fluid span12" style="margin-left: 1px">

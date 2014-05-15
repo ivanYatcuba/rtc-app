@@ -26,7 +26,7 @@ public class ExportController {
         return mav;
     }
 
-    @RequestMapping(value = "/exportUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/exportUsers", method = RequestMethod.GET)
     public ModelAndView exportUser() {
         ModelAndView mav = new ModelAndView(ROOT + "/layout");
         mav.addObject("content", "courses/content/exportUser");
