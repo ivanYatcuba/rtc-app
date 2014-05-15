@@ -23,6 +23,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     private UserServiceLogin userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     public void setUserService(UserServiceLogin userService) {
         this.userService = userService;
@@ -33,6 +34,11 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
+
+        if (username == null || username.trim().isEmpty()) {
+            throw new BadCredentialsException("Email cannot be empty");
+        }
+
         User user = userService.loadUserByUsername(username);
 
         if (user == null) {
