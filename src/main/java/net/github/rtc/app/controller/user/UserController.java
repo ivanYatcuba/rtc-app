@@ -73,7 +73,7 @@ public class UserController {
                                BindingResult bindingResult,
                                SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return modelAndViewContentBuilder("editUser");
+            return new ModelAndView("redirect:/" + ROOT + "/edit/");
         }
         userService.update(user);
         session.setComplete();
@@ -86,7 +86,7 @@ public class UserController {
                              BindingResult bindingResult,
                              SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return modelAndViewContentBuilder("register");
+            return new ModelAndView("redirect:/" + ROOT + "/register/");
         }
 
         user.setAuthorities(getUserRole());
@@ -197,17 +197,7 @@ public class UserController {
         return new User();
     }
 
-    /**
-     * build MAV
-     *
-     * @param content content name
-     * @return configurated mav
-     */
-    private ModelAndView modelAndViewContentBuilder(String content) {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", content);
-        return mav;
-    }
+
 
     private List<Role> getUserRole(){
         List<Role> roles = new ArrayList<Role>();
