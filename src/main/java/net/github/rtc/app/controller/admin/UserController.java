@@ -42,33 +42,29 @@ public class UserController {
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView viewAll() {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "user/content/viewAll");
+        ModelAndView mav = new ModelAndView(ROOT + "page/viewAllusers");
         Collection<User> listUser=userService.findAll();
         mav.addObject("users", listUser);
         return mav;
     }
     @RequestMapping(value = "/view/{code}", method = RequestMethod.GET)
     public ModelAndView user(@PathVariable Integer code) {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "user/content/userPage");
+        ModelAndView mav = new ModelAndView(ROOT + "page/userPagea");
         return mav;
     }
 
     @RequestMapping(value = "userPage/editPage/{code}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable String code) {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        ModelAndView mav = new ModelAndView(ROOT + "page/editPages");
         mav.addObject("validationRules", validationContext.get(User.class));
-        mav.addObject("content", "user/content/editPage");
         User us=userService.findByCode(code);
         mav.addObject("user", us);
         return mav;
     }
     @RequestMapping(value = "/userPage/{code}", method = RequestMethod.GET)
     public ModelAndView userPage(@PathVariable String code) {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        ModelAndView mav = new ModelAndView(ROOT + "page/userPagea");
         mav.addObject("user",userService.findByCode(code));
-        mav.addObject("content", "user/content/userPage");
         return mav;
     }
 
@@ -81,17 +77,15 @@ public class UserController {
     
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        ModelAndView mav = new ModelAndView(ROOT + "page/createuser");
         mav.addObject("validationRules", validationContext.get(User.class));
-        mav.addObject("content", "user/content/createContent");
         return mav;
     }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid User user,
                              BindingResult bindingResult,
                              SessionStatus session) {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
-         mav.addObject("content", "user/content/viewAll");
+        ModelAndView mav = new ModelAndView(ROOT + "page/viewAllusers");
         
          Collection <Role> rol = new ArrayList<Role>();
          rol.add(new Role());
@@ -108,9 +102,7 @@ public class UserController {
     public ModelAndView update(@PathVariable String code, @ModelAttribute(ROOT_MODEL) @Valid User user,
                              BindingResult bindingResult,
                              SessionStatus session) {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "user/content/viewAll");
-
+        ModelAndView mav = new ModelAndView(ROOT + "page/viewAllusers");
         Collection <Role> rol = new ArrayList<Role>();
         rol.add(new Role());
         user.setAuthorities(rol);

@@ -21,15 +21,13 @@ public class ExportController {
 
     @RequestMapping(value = "/exportCourses", method = RequestMethod.GET)
     public ModelAndView exportCourses() {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "courses/content/exportCourses");
+        ModelAndView mav = new ModelAndView(ROOT + "page/exportCourses");
         return mav;
     }
 
     @RequestMapping(value = "/exportUsers", method = RequestMethod.GET)
     public ModelAndView exportUser() {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
-        mav.addObject("content", "user/content/exportUsers");
+        ModelAndView mav = new ModelAndView(ROOT + "page/exportUsers");
         return mav;
     }
 
