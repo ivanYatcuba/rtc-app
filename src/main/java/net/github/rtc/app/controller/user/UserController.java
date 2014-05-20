@@ -41,10 +41,9 @@ public class UserController {
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView user() {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        ModelAndView mav = new ModelAndView(ROOT + "/page/userdataview");
         User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         mav.addObject("user", user);
-        mav.addObject("content", "userContent");
         return mav;
     }
 
@@ -56,9 +55,8 @@ public class UserController {
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView edit() {
         User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        ModelAndView mav = new ModelAndView(ROOT + "/page/edituser");
         mav.getModelMap().addAttribute("user", user);
-        mav.addObject("content", "editUser");
         return mav;
     }
 
@@ -102,7 +100,7 @@ public class UserController {
         User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         UserCourseOrder currentUserCourseOrder = userCourseOrderService.getUserOrderByUserCode(user.getCode());
         if (currentUserCourseOrder == null) {
-            ModelAndView mav = new ModelAndView(ROOT + "/layout");
+            ModelAndView mav = new ModelAndView(ROOT + "/page/usercours");
 
             SearchFilter searchFilter = new SearchFilter();
             searchFilter.setStatus("PUBLISHED");
@@ -118,16 +116,14 @@ public class UserController {
 
             mav.addObject("user", user);
             mav.addObject("courses", courseDto.getCourses());
-            mav.addObject("content", "userCourses");
             return mav;
         } else {
-            ModelAndView mav = new ModelAndView(ROOT + "/layout");
+            ModelAndView mav = new ModelAndView(ROOT + "/page/courseorder");
             Course orderedCourse = coursesService.findByCode(currentUserCourseOrder.getCourseCode());
             mav.addObject("user", user);
             mav.addObject("orderStatus", currentUserCourseOrder.getStatus());
             mav.addObject("courseName", orderedCourse.getName());
             mav.addObject("courseDescription", orderedCourse.getDescription());
-            mav.addObject("content", "userCourseOrder");
             return mav;
         }
     }

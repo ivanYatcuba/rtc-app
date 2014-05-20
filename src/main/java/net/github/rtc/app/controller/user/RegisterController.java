@@ -19,11 +19,10 @@ public class RegisterController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView openRegisterPage() {
-        ModelAndView mav = new ModelAndView("user/layout");
+        ModelAndView mav = new ModelAndView("user/page/registration");
         User u = new User();
         mav.getModelMap().addAttribute("user", u);
         mav.addObject("validationRules", validationContext.get(User.class));
-        mav.addObject("content", "register");
         return mav;
     }
 }

@@ -30,7 +30,7 @@ public class ExpertController {
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public ModelAndView expertCourses() {
-        ModelAndView mav = new ModelAndView("user" + "/layout");
+        ModelAndView mav = new ModelAndView("user" + "/page/Coursesexpert");
         List<UserCourseOrder> orderList = userCourseOrderService.getOrderByStatus(UserRequestStatus.PENDING);
         List<Request> requestsList = new ArrayList<Request>();
         if(!orderList.isEmpty()){
@@ -46,17 +46,15 @@ public class ExpertController {
             }
         }
         mav.addObject("requests", requestsList);
-        mav.addObject("content", "expertCourses");
         return mav;
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ModelAndView userCourses() {
-        ModelAndView mav = new ModelAndView(ROOT + "/layout");
+        ModelAndView mav = new ModelAndView(ROOT + "/page/expertAllcourse");
         Map<String, String> map = new HashMap<String, String>();
         CourseDto dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
         mav.addObject("courses", dto.getCourses());
-        mav.addObject("content", "expertAll");
         return mav;
     }
 

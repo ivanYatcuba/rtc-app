@@ -93,9 +93,9 @@
     <div class="row-fluid span12" style="margin-left: 1px">
         <div class="span5" style="text-align: right">
 
-            <a href="<@spring.url "/user/edit/${user.code}"/>">
+            <a href="<@spring.url "/user/edit"/>">
                 <button class="btn">Edit</button>
-            </a> or <a href="/user/view/${user.code}">Cancel</a>
+            </a> or <a href="/user/view/">Cancel</a>
 
         </div>
     </div>
