@@ -8,13 +8,18 @@
 
 <body>
 
-    <#include "layout/header.ftl">
+<div id="header" class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
+<#include "layout/header.ftl" />
+</div>
 
     <div class="container-fluid" style="margin-bottom: 60px">
         <#include "${content}.ftl">
     </div>
 
-    <#include "layout/footer.ftl">
+<div id="footer" class="container">
+<#include "layout/footer.ftl" />
+</div>
+
 
 </body>
 

@@ -16,7 +16,7 @@ public class LoginController {
 
     private ModelAndView buildLoginMav(ModelMap model) {
         ModelAndView mav = new ModelAndView("welcome/welcomeLayout", model);
-        mav.addObject("content","/user/login");
+        mav.addObject("content","../portal/user/login");
         return mav;
     }
 

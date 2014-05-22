@@ -18,7 +18,7 @@ import java.util.*;
 @RequestMapping("/expert")
 public class ExpertController {
 
-    private static final String ROOT = "user";
+    private static final String ROOT = "expert";
 
     @Autowired
     private CoursesService coursesService;
@@ -30,7 +30,7 @@ public class ExpertController {
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public ModelAndView expertCourses() {
-        ModelAndView mav = new ModelAndView("user" + "/page/Coursesexpert");
+        ModelAndView mav = new ModelAndView("expert" + "/page/Coursesexpert");
         List<UserCourseOrder> orderList = userCourseOrderService.getOrderByStatus(UserRequestStatus.PENDING);
         List<Request> requestsList = new ArrayList<Request>();
         if(!orderList.isEmpty()){

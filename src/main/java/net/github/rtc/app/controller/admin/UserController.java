@@ -32,7 +32,7 @@ public class UserController {
     @Autowired
     private ValidationContext validationContext;
 
-    private static final String ROOT = "admin";
+    private static final String ROOT = "portla/admin";
     private static final String ROOT_MODEL = "user";
     private UserService userService;
      @Autowired

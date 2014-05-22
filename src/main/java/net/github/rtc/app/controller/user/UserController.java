@@ -35,7 +35,7 @@ public class UserController {
     @Autowired
     private UserCourseOrderService userCourseOrderService;
 
-    private static final String ROOT = "user";
+    private static final String ROOT = "portal/user";
     private static final String ROOT_MODEL = "user";
 
 

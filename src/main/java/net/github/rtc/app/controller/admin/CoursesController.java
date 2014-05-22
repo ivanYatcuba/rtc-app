@@ -34,7 +34,7 @@ import java.util.Map;
 @RequestMapping("admin/course")
 public class CoursesController {
 
-    private static final String ROOT = "admin";
+    private static final String ROOT = "portal/admin";
     private static final String ROOT_MODEL = "course";
 
     private CoursesService coursesService;
