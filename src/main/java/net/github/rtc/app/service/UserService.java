@@ -17,13 +17,9 @@ public interface UserService {
 
     Collection<User> findAll();
 
-    /**
-     * Will be delete course by ID
-     * If ID is null then will be throw {@link net.github.rtc.app.exception.ServiceProcessingException}
-     *
-     * @param code course ID
-     */
-    void delete(String code);
+    void delete(User user);
+
+    void deleteByCode(String code);
 
     User findByCode(String code);
 

@@ -4,18 +4,24 @@ package net.github.rtc.app.model;
 import net.github.rtc.util.annotation.Required;
 import net.github.rtc.util.annotation.Validatable;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  * @author Vladislav Pikus
  */
-@XmlRootElement
+@Entity
 @Validatable
 public class Tag implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     @Required
+    @Column
     private String value;
+
 
     public String getValue() {
         return value;

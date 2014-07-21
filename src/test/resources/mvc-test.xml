@@ -11,5 +11,4 @@
 
     <context:component-scan base-package="com.springapp.mvc, net.github.rtc.app, org.util.rtc"/>
 
-    <import resource="classpath:/spring/restTemplate.xml"/>
 </beans>

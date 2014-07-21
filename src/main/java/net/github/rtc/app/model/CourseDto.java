@@ -1,12 +1,12 @@
 package net.github.rtc.app.model;
 
+import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 
 /**
  * @author Vladislav Pikus
  */
-@XmlRootElement
 public class CourseDto {
     private Collection<Course> courses;
     private int totalCount;

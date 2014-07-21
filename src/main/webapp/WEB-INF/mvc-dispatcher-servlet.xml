@@ -14,8 +14,7 @@
         >
 
     <context:component-scan base-package=" net.github.rtc.app, net.github.rtc.util"/>
-    <context:property-placeholder location="classpath:/host.properties, classpath:/hibernate.properties"/>
-    <import resource="classpath:/spring/restTemplate.xml"/>
+    <context:property-placeholder location="classpath:/hibernate.properties"/>
 
     <!-- freemarker config -->
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">

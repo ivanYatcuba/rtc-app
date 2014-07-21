@@ -2,28 +2,37 @@ package net.github.rtc.app.model;
 
 import net.github.rtc.util.annotation.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  * @author Vladislav Pikus
  */
-@XmlRootElement
+@Entity
 @Validatable
 public class Author implements Serializable {
+
+    @Id
+    private long id;
 
     @Required
     @Minlength(2)
     @Maxlength(30)
+    @Column
     private String firstName;
 
     @Required
     @Minlength(2)
     @Maxlength(30)
+    @Column
     private String lastName;
 
     @Required
     @Email
+    @Column
     private String email;
 
     public String getFirstName() {

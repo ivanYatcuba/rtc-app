@@ -6,13 +6,15 @@
 
 package net.github.rtc.app.resource.impl;
 
-//import net.github.rtc.app.impl.*;
 import net.github.rtc.app.model.User;
+import net.github.rtc.app.model.UserCourseOrder;
 import net.github.rtc.app.resource.UserResource;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -22,76 +24,62 @@ import java.util.Collection;
  *
  * @author Саша
  */
-@Component("userDao")
+@Repository
 public class UserResourseImpl implements UserResource{
-    private RestTemplate restTemplate;
-
     @Autowired
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
+    SessionFactory sessionFactory;
 
-    private String hostUserUrl;
-
-    public void setHostUserUrl(String hostUserUrl) {
-        this.hostUserUrl = hostUserUrl;
-    }
-
-    public String getHostUserUrl() {
-        return hostUserUrl;
-    }
-
-    /**
-     * @param code course ID
-     * @return null if not found or course's object if found
-     * @see net.github.rtc.app.resource.CoursesResource
-     */
     @Override
-    public User findById(String code) {
+    public User findByCode(String code) {
         User user = null;
         try{
-            user = restTemplate.getForObject(hostUserUrl + "{code}", User.class, code);
+            String query = "select user from User user where user.code = :code";
+            return (User)sessionFactory.getCurrentSession().
+                    createQuery(query).setString("code", code).uniqueResult();
+
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println(e.getMessage());
         }
         return user;
        
     }
 
-    /**
-     * @return collection of courses
-     * @see net.github.rtc.app.resource.CoursesResource
-     */
     @Override
     public Collection<User> findAll() {
-        return Arrays.asList(restTemplate.getForObject(hostUserUrl + "viewAll", User[].class));
+        return  sessionFactory.getCurrentSession().createCriteria(User.class).list();
     }
-    
-    /**
-     * @param code user code
-     * @see net.github.rtc.app.resource.CoursesResource
-     */
+
+
     @Override
-    public void delete(String code) {
-        restTemplate.delete(hostUserUrl + "{code}", code);
+    public void delete(User user) {
+        sessionFactory.getCurrentSession().delete(user);
     }
 
     @Override
     public User create(User user) {
         PasswordEncoder encoder = new StandardPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        return restTemplate.postForObject(hostUserUrl, user, User.class);
+        sessionFactory.getCurrentSession().save(user);
+        return user;
     }
 
     @Override
     public void update(User user) {
-        restTemplate.postForObject(hostUserUrl + "update", user,User.class);
+        sessionFactory.getCurrentSession().update(user);
     }
 
     @Override
     public User findByEmail(String email) {
-        return restTemplate.getForObject(hostUserUrl + "login/{email}", User.class, email);
+        String query = "select user from User user where user.email = :email";
+        return (User)sessionFactory.getCurrentSession().
+                createQuery(query).setString("email", email).uniqueResult();
+    }
+
+    @Override
+    public void deleteByСode(String code) {
+        String query = "select user from User user where user.code = :code";
+        sessionFactory.getCurrentSession().delete(sessionFactory.getCurrentSession().
+                createQuery(query).setString("code", code).uniqueResult());
     }
 }

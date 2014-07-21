@@ -25,15 +25,13 @@ public class CourseResourceImplTest {
 
     private final String code = "fcb56955-5344-41e4-897b-d69387e5fa55";
 
-    @Autowired
-    private RestTemplate restTemplate;
+
 
     private MockRestServiceServer mockServer;
 
     @Before
     public void setUp() throws Exception {
-        mockServer = MockRestServiceServer.createServer(restTemplate);
-        resource.setRestTemplate(restTemplate);
+
 
     }
 

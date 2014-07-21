@@ -2,14 +2,20 @@ package net.github.rtc.app.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Vladislav Pikus
  */
-@XmlRootElement
+@Entity
 public class Role implements GrantedAuthority {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @Column
+    private String name;
 
     public Integer getId() {
         return id;
@@ -18,8 +24,6 @@ public class Role implements GrantedAuthority {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    private String name;
 
     public String getName() {
         return name;

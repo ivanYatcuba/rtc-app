@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
@@ -28,50 +29,41 @@ public class UserServiceImpl implements UserService{
     private static Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class.getName());
 
     @Autowired
-    public void setResource(UserResource resource) {
-        this.resource = resource;
-    }
-
     private UserResource resource;
 
-    /**
-     * @return collection of courses
-     * @see UserService
-     */
     @Override
+    @Transactional
     public Collection<User> findAll() {
         return resource.findAll();
     }
 
-    /**
-     * @param code course ID
-     * @see UserService
-     */
+
     @Override
-    public void delete(String code) {
-        if (code == null) {
-            RuntimeException ex = new ServiceProcessingException("ID can't be null");
-            LOG.error("Exception: ", ex);
-            throw ex;
-        }
-        resource.delete(code);
+    @Transactional
+    public void delete(User user) {
+        resource.delete(user);
     }
 
-    /**
-     * @return link of courses
-     * @see UserService
-     */
     @Override
+    @Transactional
+    public void deleteByCode(String code) {
+        resource.deleteByСode(code);
+    }
+
+    @Override
+    @Transactional
     public User findByCode(String code){
-        return resource.findById(code);
+        return resource.findByCode(code);
     }
 
     @Override
+    @Transactional
     public User create(User user) {
         return resource.create(user);
     }
 
     @Override
+    @Transactional
     public void update(User user) {
         resource.update(user);
     }

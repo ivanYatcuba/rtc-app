@@ -4,81 +4,110 @@ import net.github.rtc.util.annotation.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
-@XmlRootElement
+@Entity
 @Validatable
 public class User implements UserDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    @Column
     private String code;
 
     @Required
     @Maxlength(50)
     @Minlength(5)
+    @Column
     private String surname;
 
     @Required
     @Maxlength(50)
     @Minlength(5)
+    @Column
     private String name;
 
     @Required
     @Maxlength(50)
     @Minlength(5)
+    @Column
     private String middleName;
 
     @Required
     @Email
+    @Column
     private String email;
 
 
     @Required
     @net.github.rtc.util.annotation.Number
+    @Column
     private String phone;
 
 
     @Required
+    @Column
     private Date birthDate;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
+    @Column
     private String city;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
+    @Column
     private String university;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
+    @Column
     private String faculty;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
+    @Column
     private String speciality;
 
     @Required
+    @Column
     private String note;
 
     @Required
+    @Column
     private String password;
 
+    @Column
     private String gender;
 
+    @Column
     private String progLanguages;
 
     @Required
+    @Column
     private String english;
 
     /* Spring Security fields*/
-    private Collection<Role> authorities;
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name="users_roles_refs",
+            joinColumns={@JoinColumn(name="ROLE_ID")},
+            inverseJoinColumns={@JoinColumn(name="id")})
+    private List<Role> authorities;
+    @Column
     private boolean accountNonExpired = true;
+    @Column
     private boolean accountNonLocked = true;
+    @Column
     private boolean credentialsNonExpired = true;
+    @Column
     private boolean enabled = true;
 
 
@@ -116,7 +145,7 @@ public class User implements UserDetails {
         return authorities;
     }
 
-    public void setAuthorities(Collection<Role> authorities) {
+    public void setAuthorities(List<Role> authorities) {
         this.authorities = authorities;
     }
 

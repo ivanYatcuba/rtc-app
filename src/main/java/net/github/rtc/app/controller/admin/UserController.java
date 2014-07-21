@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author  Lapshin Ugene
@@ -70,7 +71,7 @@ public class UserController {
 
     @RequestMapping(value = "/delete/{code}", method = RequestMethod.GET)
     public String delete(@PathVariable String code) {
-        userService.delete(code);
+        userService.deleteByCode(code);
         return  "redirect:/"+ROOT+"/user/viewAll";
     }
 
@@ -87,7 +88,7 @@ public class UserController {
                              SessionStatus session) {
         ModelAndView mav = new ModelAndView(ROOT + "page/viewAllusers");
         
-         Collection <Role> rol = new ArrayList<Role>();
+         List<Role> rol = new ArrayList<Role>();
          rol.add(new Role());
          user.setAuthorities(rol);
          user=this.userService.create(user);
@@ -103,7 +104,7 @@ public class UserController {
                              BindingResult bindingResult,
                              SessionStatus session) {
         ModelAndView mav = new ModelAndView(ROOT + "page/viewAllusers");
-        Collection <Role> rol = new ArrayList<Role>();
+        List<Role> rol = new ArrayList<Role>();
         rol.add(new Role());
         user.setAuthorities(rol);
         user.setCode(code);

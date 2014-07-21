@@ -2,6 +2,7 @@ package net.github.rtc.app.model;
 
 import net.github.rtc.util.annotation.*;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,42 +11,60 @@ import java.util.List;
 /**
  * @author Vladislav Pikus
  */
-@XmlRootElement
+@Entity
 @Validatable
 public class Course implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @Column
     private String code;
 
     @Required
     @Minlength(2)
     @Maxlength(30)
+    @Column
     private String name;
 
     @Required
+    @Column
     private String type;
 
     @Required
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "AUTHOR_ID")
     private Author author;
 
     @Required
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
 
     @Required
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
+    @Column
     private Date publishDate;
 
-
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name="courses_tags",
+            joinColumns={@JoinColumn(name="tagId")},
+            inverseJoinColumns={@JoinColumn(name="id")})
     private List<Tag> tags;
 
     @Required
     @net.github.rtc.util.annotation.Number
     @Min(1)
+    @Column
     private Integer capacity;
 
     @Maxlength(255)
+    @Column
     private String description;
 
+    @Column
     private String status = "DRAFT";
 
     public List<Tag> getTags() {
@@ -119,6 +138,10 @@ public class Course implements Serializable {
     public Date getPublishDate() { return publishDate; }
 
     public void setPublishDate(Date publishDate) { this.publishDate = publishDate; }
+
+    public long getId() {return id; }
+
+    public void setId(long id) { this.id = id; }
 
     public Course() {
 
