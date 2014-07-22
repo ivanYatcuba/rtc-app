@@ -3,6 +3,8 @@ package net.github.rtc.app.resource.impl;
 import net.github.rtc.app.model.Course;
 import net.github.rtc.app.model.CourseDto;
 import net.github.rtc.app.resource.CoursesResource;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
@@ -16,12 +18,23 @@ import org.springframework.web.client.RestTemplate;
 @Repository
 public class CoursesResourceImpl implements CoursesResource {
 
-    /**
-     * @see CoursesResource#findByCode(String)
-     */
+    @Autowired
+    SessionFactory sessionFactory;
+
     @Override
     public Course findByCode(String code) {
-        return null;
+
+        Course course = null;
+        try{
+            String query = "select course from Course course where course.code = :code";
+            course = (Course)sessionFactory.getCurrentSession().
+                    createQuery(query).setString("code", code).uniqueResult();
+
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return course;
     }
 
     /**
@@ -29,7 +42,9 @@ public class CoursesResourceImpl implements CoursesResource {
      */
     @Override
     public void delete(String code) {
-
+        String query = "select course from Course course where course.code = :code";
+        sessionFactory.getCurrentSession().delete(sessionFactory.getCurrentSession().
+                createQuery(query).setString("code", code).uniqueResult());
     }
 
     /**
@@ -37,7 +52,9 @@ public class CoursesResourceImpl implements CoursesResource {
      */
     @Override
     public Course create(Course course) {
-        return null;
+
+        sessionFactory.getCurrentSession().save(course);
+        return course;
     }
 
     /**
@@ -45,6 +62,7 @@ public class CoursesResourceImpl implements CoursesResource {
      */
     @Override
     public void update(Course course) {
+        sessionFactory.getCurrentSession().update(course);
        }
 
     /**
