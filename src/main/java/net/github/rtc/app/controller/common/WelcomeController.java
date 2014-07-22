@@ -31,8 +31,6 @@ public class WelcomeController {
     public ModelAndView welcome() {
         ModelAndView mav = new ModelAndView("welcome/welcomeLayout");
 
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("maxResult", "3");
 
         SearchFilter searchFilter = new SearchFilter();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -40,8 +38,9 @@ public class WelcomeController {
 
         searchFilter.setStartDate(sdf.format(rightNow.getTime()));
         searchFilter.setStatus("PUBLISHED");
+        searchFilter.setMaxResult(3);
 
-        CourseDto courseDto = coursesService.findByFilter(searchFilter.createQuery(map).byDate().byStatus().toString());
+        CourseDto courseDto = coursesService.findByFilter(searchFilter);
         Collections.sort((List<Course>)courseDto.getCourses(), new Comparator<Course>() {
             public int compare(Course course1, Course course2) {
                 if (course1.getStartDate() == null || course2.getStartDate() == null)

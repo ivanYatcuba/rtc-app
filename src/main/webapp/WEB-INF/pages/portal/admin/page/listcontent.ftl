@@ -1,2 +1,2 @@
 <#import "../../layout/layout.ftl" as m/>
-<@m.layout  "admin/couses/content/menu.ftl" "admin/courses/content/listContent.ftl"/>
+<@m.layout  "../admin/courses/content/menu.ftl" "../admin/courses/content/listContent.ftl"/>

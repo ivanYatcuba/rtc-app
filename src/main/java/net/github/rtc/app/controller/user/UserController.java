@@ -5,7 +5,9 @@ import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.service.UserServiceLogin;
+import net.github.rtc.app.service.impl.UserServiceLoginImpl;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
+import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,15 +27,14 @@ public class UserController {
 
     @Autowired
     UserService userService;
-
     @Autowired
     UserServiceLogin userServiceLogin;
-
     @Autowired
     private CoursesService coursesService;
-
     @Autowired
     private UserCourseOrderService userCourseOrderService;
+    @Autowired
+    ValidationContext validationContext;
 
     private static final String ROOT = "portal/user";
     private static final String ROOT_MODEL = "user";
@@ -57,6 +58,7 @@ public class UserController {
         User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         ModelAndView mav = new ModelAndView(ROOT + "/page/edituser");
         mav.getModelMap().addAttribute("user", user);
+        mav.addObject("validationRules", validationContext.get(User.class));
         return mav;
     }
 
@@ -77,7 +79,7 @@ public class UserController {
         }
         userService.update(user);
         session.setComplete();
-        return new ModelAndView("redirect:/" + ROOT + "/view/");
+        return new ModelAndView("redirect:/" + ROOT + "/view");
     }
 
 
@@ -104,8 +106,7 @@ public class UserController {
 
             SearchFilter searchFilter = new SearchFilter();
             searchFilter.setStatus("PUBLISHED");
-            Map<String, String> map = new HashMap<String, String>();
-            CourseDto courseDto = coursesService.findByFilter(searchFilter.createQuery(map).byStatus().toString());
+            CourseDto courseDto = coursesService.findByFilter(searchFilter);
             Collections.sort((List<Course>)courseDto.getCourses(), new Comparator<Course>() {
                 public int compare(Course course1, Course course2) {
                     if (course1.getStartDate() == null || course2.getStartDate() == null)

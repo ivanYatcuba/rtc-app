@@ -1,7 +1,10 @@
 package net.github.rtc.app.resource;
 
-import net.github.rtc.app.model.CourseDto;
 import net.github.rtc.app.model.Course;
+import net.github.rtc.app.model.PageDto;
+import net.github.rtc.app.model.SearchFilter;
+
+import java.util.Collection;
 
 /**
  * Data Access Object Interface
@@ -44,8 +47,24 @@ public interface CoursesResource {
     /**
      * Find course collection by filtering param
      *
-     * @param query filter query
+     * @param filter filter query
      * @return courseDto
      */
-    CourseDto findByFilter(String query);
+    public Collection<Course> findByCriteria(SearchFilter filter, PageDto pageDto);
+
+    /**
+     * Get courses count
+     *
+     * @return courses count
+     */
+    Integer getCount();
+
+    /**
+     * Find total course count by filter parameters. Such as (title, category, tags, startDate)
+     * And find with pagination criteria
+     *
+     * @param filter filter object
+     * @return total course count
+     */
+    Integer getCount(SearchFilter  filter);
 }

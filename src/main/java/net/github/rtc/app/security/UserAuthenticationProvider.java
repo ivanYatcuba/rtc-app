@@ -2,6 +2,7 @@ package net.github.rtc.app.security;
 
 import net.github.rtc.app.model.User;
 import net.github.rtc.app.service.UserServiceLogin;
+import net.github.rtc.app.service.impl.UserServiceLoginImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,14 +21,10 @@ import java.util.Collection;
 @Component
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
+    @Autowired
     private UserServiceLogin userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public void setUserService(UserServiceLogin userService) {
-        this.userService = userService;
-    }
 
 
     @Override

@@ -1,7 +1,6 @@
 package net.github.rtc.app.service.impl;
 
-import net.github.rtc.app.model.Course;
-import net.github.rtc.app.model.CourseDto;
+import net.github.rtc.app.model.*;
 import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.exception.ServiceProcessingException;
@@ -9,8 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Service Implementation
@@ -25,10 +27,6 @@ public class CoursesServiceImpl implements CoursesService {
     private static Logger LOG = LoggerFactory.getLogger(CoursesServiceImpl.class.getName());
 
     @Autowired
-    public void setResource(CoursesResource resource) {
-        this.resource = resource;
-    }
-
     private CoursesResource resource;
 
     /**
@@ -49,6 +47,7 @@ public class CoursesServiceImpl implements CoursesService {
      * @see CoursesService#delete(String)
      */
     @Override
+    @Transactional
     public void delete(String code) {
         checkCode(code);
         resource.delete(code);
@@ -58,6 +57,7 @@ public class CoursesServiceImpl implements CoursesService {
      * @see CoursesService#findByCode(String)
      */
     @Override
+    @Transactional
     public Course findByCode(String code) {
         checkCode(code);
         return resource.findByCode(code);
@@ -67,6 +67,7 @@ public class CoursesServiceImpl implements CoursesService {
      * @see CoursesService#create(net.github.rtc.app.model.Course)
      */
     @Override
+    @Transactional
     public Course create(Course course) {
         return resource.create(course);
     }
@@ -75,16 +76,25 @@ public class CoursesServiceImpl implements CoursesService {
      * @see CoursesService#update(net.github.rtc.app.model.Course)
      */
     @Override
+    @Transactional
     public void update(Course course) {
         resource.update(course);
     }
 
     /**
-     * @see CoursesService#findByFilter(String)
+     * @see CoursesService#(SearchFilter)
      */
     @Override
-    public CourseDto findByFilter(String query) {
-        return resource.findByFilter(query);
+    @Transactional
+    public CourseDto findByFilter(SearchFilter filter) {
+        Integer total = resource.getCount(filter);
+        PageDto pageDto = new PageDto.Builder(total).page(filter.getPageNumber()).maxResult(filter.getMaxResult())
+                .build();
+        CourseDto dto = new CourseDto.Builder().courses(resource.findByCriteria(filter, pageDto))
+                .totalCount(total)
+                .limit(pageDto.getMaxResult())
+                .offset(pageDto.getFirstResult()).build();
+        return dto;
     }
 
     @Override

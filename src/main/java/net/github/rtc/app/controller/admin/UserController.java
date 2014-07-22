@@ -30,16 +30,15 @@ import java.util.List;
 @Controller ("adminNavigationController")
 @RequestMapping ("admin/user")
 public class UserController {
+
     @Autowired
     private ValidationContext validationContext;
+    @Autowired
+    private UserService userService;
 
     private static final String ROOT = "portla/admin";
     private static final String ROOT_MODEL = "user";
-    private UserService userService;
-     @Autowired
-    public void setService(UserService service) {
-        this.userService = service;
-    }
+
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView viewAll() {

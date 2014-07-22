@@ -2,6 +2,7 @@ package net.github.rtc.app.service;
 
 import net.github.rtc.app.model.Course;
 import net.github.rtc.app.model.CourseDto;
+import net.github.rtc.app.model.SearchFilter;
 
 //import com.springapp.mvc.User;
 
@@ -51,10 +52,10 @@ public interface CoursesService {
     /**
      * Find course collection by filtering param
      *
-     * @param query filter query
+     * @param filter filter query
      * @return courseDTO
      */
-    CourseDto findByFilter(String query);
+    CourseDto findByFilter(SearchFilter filter);
 
     /**
      * Set course status as published

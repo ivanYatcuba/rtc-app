@@ -1,4 +1,4 @@
-<form name="user" id="user" action="<@spring.url "/user/edit" />" method="post">
+<form name="user" id="user" action="<@spring.url "/user/update" />" method="post">
     <h3 class="page-header"><@spring.message "user.editTitle"/></h3>
     <#include "userForm.ftl" />
 

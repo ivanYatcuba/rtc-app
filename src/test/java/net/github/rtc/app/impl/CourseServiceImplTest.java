@@ -38,7 +38,7 @@ public class CourseServiceImplTest {
     @Before
     public void setUp() throws Exception {
         mockResource = mock(CoursesResourceImpl.class);
-        ((CoursesServiceImpl)service).setResource(mockResource);
+       // ((CoursesServiceImpl)service).setResource(mockResource);
         course = new Course("codeTest", "nameTest", "DEV", new Author("Vasya", "Pupkin", "vasia@gmail.com"),
                 DateTime.now().toDate(), DateTime.now().toDate(), DateTime.now().toDate(), 10, "super description", "DRAFT");
     }

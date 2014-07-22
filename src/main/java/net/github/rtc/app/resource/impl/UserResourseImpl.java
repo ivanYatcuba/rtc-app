@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  *
@@ -59,6 +60,7 @@ public class UserResourseImpl implements UserResource{
     @Override
     public User create(User user) {
         PasswordEncoder encoder = new StandardPasswordEncoder();
+        user.setCode(UUID.randomUUID().toString());
         user.setPassword(encoder.encode(user.getPassword()));
         sessionFactory.getCurrentSession().save(user);
         return user;
@@ -66,7 +68,7 @@ public class UserResourseImpl implements UserResource{
 
     @Override
     public void update(User user) {
-        sessionFactory.getCurrentSession().update(user);
+        sessionFactory.getCurrentSession().merge(user);
     }
 
     @Override

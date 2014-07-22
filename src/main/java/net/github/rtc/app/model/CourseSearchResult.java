@@ -2,7 +2,6 @@ package net.github.rtc.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
-import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,13 +9,13 @@ import java.util.Collection;
 /**
  * @author Vladislav Pikus
  */
-public class CourseDto {
-    private Collection<Course> courses;
-    private int totalCount;
-    private int offset;
-    private int limit;
+public class CourseSearchResult {
+    private final Collection<Course> courses;
+    private final int totalCount;
+    private final int offset;
+    private final int limit;
 
-    public CourseDto(Builder builder) {
+    public CourseSearchResult(Builder builder) {
         this.courses = builder.courses;
         this.totalCount = builder.totalCount;
         this.offset = builder.offset;
@@ -27,39 +26,22 @@ public class CourseDto {
         return courses;
     }
 
-    public void setCourses(Collection<Course> courses) {
-        this.courses = courses;
-    }
-
     public int getTotalCount() {
         return totalCount;
-    }
-
-    public void setTotalCount(int totalCount) {
-        this.totalCount = totalCount;
     }
 
     public int getOffset() {
         return offset;
     }
 
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
     public int getLimit() {
         return limit;
     }
 
-    public void setLimit(int limit) {
-        this.limit = limit;
-    }
-
     /**
-     * Builder for {@link CourseDto}. The builder simplifies the creation of objects
+     * Builder for {@link CourseSearchResult}. The builder simplifies the creation of objects
      * and makes the code more understandable
      */
-    @JsonIgnoreType
     public static class Builder {
         private Collection<Course> courses = new ArrayList<Course>();
         private int totalCount;
@@ -86,8 +68,8 @@ public class CourseDto {
             return this;
         }
 
-        public CourseDto build() {
-            return new CourseDto(this);
+        public CourseSearchResult build() {
+            return new CourseSearchResult(this);
         }
     }
 }

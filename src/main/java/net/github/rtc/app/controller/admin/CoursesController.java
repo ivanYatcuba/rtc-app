@@ -68,12 +68,11 @@ public class CoursesController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index(@RequestParam(required = true, defaultValue = "1") int page) {
-        ModelAndView mav = new ModelAndView(ROOT + "page/listContent");
+        ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
 
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("pageNumber", String.valueOf(page - 1));
-        map.put("maxResult", String.valueOf(paginator.getMaxPerPage()));
-        CourseDto dto = coursesService.findByFilter(getFilter().createQuery(map).toString());
+        getFilter().setPageNumber(page - 1);
+        getFilter().setMaxResult(paginator.getMaxPerPage());
+        CourseDto dto = coursesService.findByFilter(getFilter());
 
         Page pageModel = paginator.getPage(page, dto.getTotalCount());
         mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
@@ -114,7 +113,7 @@ public class CoursesController {
      */
     @RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable String courseCode) {
-        ModelAndView mav = new ModelAndView(ROOT + "page/courseContent");
+        ModelAndView mav = new ModelAndView(ROOT + "/page/courseContent");
         Course course = coursesService.findByCode(courseCode);
         mav.addObject("course", course);
         return mav;
@@ -129,13 +128,11 @@ public class CoursesController {
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     public ModelAndView filter(@ModelAttribute("searchFilter") SearchFilter searchFilter,
                                @RequestParam(required = true, defaultValue = "1") int page) {
-        ModelAndView mav = new ModelAndView(ROOT + "page/listContent");
+        ModelAndView mav = new ModelAndView(ROOT + "/page/listContent");
 
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("pageNumber", String.valueOf(page - 1));
-        map.put("maxResult", String.valueOf(paginator.getMaxPerPage()));
-        CourseDto dto = coursesService.findByFilter(searchFilter.createQuery(map)
-                .byTitle().byDate().byCategories().byTags().toString());
+        searchFilter.setPageNumber(page - 1);
+        searchFilter.setMaxResult(paginator.getMaxPerPage());
+        CourseDto dto = coursesService.findByFilter(searchFilter);
 
         Page pageModel = paginator.getPage(page, dto.getTotalCount());
         mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
@@ -153,7 +150,7 @@ public class CoursesController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
-        ModelAndView mav = new ModelAndView(ROOT + "page/createContent");
+        ModelAndView mav = new ModelAndView(ROOT + "/page/createContent");
         mav.addObject("validationRules", validationContext.get(Course.class));
         return mav;
     }
@@ -171,11 +168,11 @@ public class CoursesController {
                              BindingResult bindingResult,
                              SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return  new ModelAndView(ROOT + "page/createContent");
+            return  new ModelAndView(ROOT + "/page/createContent");
         }
         course = coursesService.create(course);
         session.setComplete();
-        return new ModelAndView("redirect:/"  + ROOT + "/" +"course" + "/" + course.getCode());
+        return new ModelAndView("redirect:/"  + course.getCode());
     }
 
     /**
@@ -185,7 +182,7 @@ public class CoursesController {
      */
     @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable String courseCode) {
-        ModelAndView mav = new ModelAndView(ROOT + "page/updateContent");
+        ModelAndView mav = new ModelAndView(ROOT + "/page/updateContent");
         mav.getModelMap().addAttribute("course", coursesService.findByCode(courseCode));
         mav.addObject("validationRules", validationContext.get(Course.class));
         return mav;
@@ -204,7 +201,7 @@ public class CoursesController {
                                BindingResult bindingResult,
                                SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView(ROOT + "page/updateContent");
+            return new ModelAndView(ROOT + "/page/updateContent");
         }
         coursesService.update(course);
         session.setComplete();

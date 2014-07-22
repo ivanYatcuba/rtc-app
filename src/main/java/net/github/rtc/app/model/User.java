@@ -288,6 +288,10 @@ public class User implements UserDetails {
         this.code = code;
     }
 
+    public long getId() { return id;}
+
+    public void setId(long id) { this.id = id; }
+
     // for authentification
     public boolean hasRole(String role) {
         boolean hasRole = false;
@@ -348,5 +352,13 @@ public class User implements UserDetails {
         this.gender = gender;
         this.progLanguages = progLanguages;
         this.english = english;
+    }
+
+    public User(String name,String surname,String middleName, String email, String password) {
+        this.name = name;
+        this.surname=surname;
+        this.middleName=middleName;
+        this.email = email;
+        this.password = password;
     }
 }

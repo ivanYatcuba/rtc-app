@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -24,9 +25,9 @@ public class CategoryResourceImpl implements CategoryResource {
     @Override
     public Collection<String> findAll() {
         String types = Arrays.toString(CourseType.values());
-        String[] types_str = types.substring(1, types.length()-1).split(", ");
-        Collection<String> res = null;
-        for(String str : types_str){
+        String[] typesStr = types.substring(1, types.length()-1).split(", ");
+        Collection<String> res = new ArrayList<>();
+        for(String str : typesStr){
             res.add(str);
         }
         return res;

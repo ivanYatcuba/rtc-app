@@ -14,6 +14,8 @@ public class SearchFilter {
     private Collection<String> categories;
     private Collection<String> tags;
     private String status;
+    private Integer pageNumber = 0;
+    private Integer maxResult = 0;
 
     public SearchFilter() {
     }
@@ -34,9 +36,7 @@ public class SearchFilter {
         this.startDate = startDate;
     }
 
-    public Collection<String> getCategories() {
-        return categories;
-    }
+    public Collection<String> getCategories() {return categories;}
 
     public void setCategories(Collection<String> categories) {
         this.categories = categories;
@@ -53,6 +53,14 @@ public class SearchFilter {
     public String getStatus() { return status; }
 
     public void setStatus(String status) { this.status = status; }
+
+    public Integer getPageNumber() {return pageNumber;}
+
+    public void setPageNumber(Integer pageNumber) {this.pageNumber = pageNumber;}
+
+    public Integer getMaxResult() {return maxResult;}
+
+    public void setMaxResult(Integer maxResult) {this.maxResult = maxResult;}
 
     public class QueryBuilder {
         private Map<String, String> map;
