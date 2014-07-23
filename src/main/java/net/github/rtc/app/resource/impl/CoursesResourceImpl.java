@@ -73,7 +73,7 @@ public class CoursesResourceImpl implements CoursesResource {
      */
     @Override
     public void update(Course course) {
-        sessionFactory.getCurrentSession().update(course);
+        sessionFactory.getCurrentSession().merge(course);
        }
 
 

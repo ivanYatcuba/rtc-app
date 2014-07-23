@@ -1,5 +1,6 @@
 package net.github.rtc.app.resource.impl;
 
+import net.github.rtc.app.model.Course;
 import net.github.rtc.app.resource.CategoryResource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Data Access Object Implementation
@@ -24,11 +26,10 @@ public class CategoryResourceImpl implements CategoryResource {
      */
     @Override
     public Collection<String> findAll() {
-        String types = Arrays.toString(CourseType.values());
-        String[] typesStr = types.substring(1, types.length()-1).split(", ");
+        List<CourseType> types = Arrays.asList(CourseType.values());
         Collection<String> res = new ArrayList<>();
-        for(String str : typesStr){
-            res.add(str);
+        for(CourseType type : types){
+            res.add(type.name());
         }
         return res;
     }

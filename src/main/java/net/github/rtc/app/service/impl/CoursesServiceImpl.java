@@ -78,6 +78,8 @@ public class CoursesServiceImpl implements CoursesService {
     @Override
     @Transactional
     public void update(Course course) {
+        Course courseToUpdate = resource.findByCode(course.getCode());
+        course.setId(courseToUpdate.getId());
         resource.update(course);
     }
 
@@ -98,6 +100,7 @@ public class CoursesServiceImpl implements CoursesService {
     }
 
     @Override
+    @Transactional
     public void publish(Course course) {
         course.setStatus("PUBLISHED");
         course.setPublishDate(new Date());

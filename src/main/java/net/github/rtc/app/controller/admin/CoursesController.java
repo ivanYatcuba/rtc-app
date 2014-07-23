@@ -22,8 +22,6 @@ import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Controller for {@link net.github.rtc.app.model.Course}
@@ -94,13 +92,13 @@ public class CoursesController {
     @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
     public String delete(@PathVariable String courseCode) {
         coursesService.delete(courseCode);
-        return "redirect:/" + ROOT;
+        return "redirect:/" + "admin";
     }
 
     @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
     public String publish(@PathVariable String courseCode) {
         coursesService.publish(coursesService.findByCode(courseCode));
-        return "redirect:/" + ROOT;
+        return "redirect:/" + "admin";
     }
 
     /**
@@ -128,7 +126,7 @@ public class CoursesController {
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     public ModelAndView filter(@ModelAttribute("searchFilter") SearchFilter searchFilter,
                                @RequestParam(required = true, defaultValue = "1") int page) {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/listContent");
+        ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
 
         searchFilter.setPageNumber(page - 1);
         searchFilter.setMaxResult(paginator.getMaxPerPage());
@@ -172,7 +170,7 @@ public class CoursesController {
         }
         course = coursesService.create(course);
         session.setComplete();
-        return new ModelAndView("redirect:/"  + course.getCode());
+        return new ModelAndView("redirect:"  + course.getCode());
     }
 
     /**
@@ -205,7 +203,7 @@ public class CoursesController {
         }
         coursesService.update(course);
         session.setComplete();
-        return new ModelAndView("redirect:/"  + ROOT + "/" +"course" + "/" + course.getCode());
+        return new ModelAndView("redirect:" + course.getCode());
     }
 
     /**
