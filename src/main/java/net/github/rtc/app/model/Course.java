@@ -3,7 +3,6 @@ package net.github.rtc.app.model;
 import net.github.rtc.util.annotation.*;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

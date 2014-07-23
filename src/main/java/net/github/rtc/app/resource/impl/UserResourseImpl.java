@@ -7,17 +7,13 @@
 package net.github.rtc.app.resource.impl;
 
 import net.github.rtc.app.model.User;
-import net.github.rtc.app.model.UserCourseOrder;
 import net.github.rtc.app.resource.UserResource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
 

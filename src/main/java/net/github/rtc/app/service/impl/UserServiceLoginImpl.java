@@ -2,7 +2,6 @@ package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.model.User;
 import net.github.rtc.app.resource.UserResource;
-import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.service.UserServiceLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

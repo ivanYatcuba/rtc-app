@@ -5,7 +5,6 @@ import net.github.rtc.util.annotation.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
@@ -58,6 +57,10 @@ public class Author implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public long getId() {return id;}
+
+    public void setId(long id) {this.id = id;}
 
     public Author() {
 

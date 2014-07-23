@@ -5,7 +5,6 @@ import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.service.UserServiceLogin;
-import net.github.rtc.app.service.impl.UserServiceLoginImpl;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;

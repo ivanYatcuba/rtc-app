@@ -2,8 +2,6 @@ package net.github.rtc.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
-import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collection;
 

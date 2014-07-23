@@ -52,7 +52,6 @@ public class ExpertController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ModelAndView userCourses() {
         ModelAndView mav = new ModelAndView(ROOT + "/page/expertAllcourse");
-        Map<String, String> map = new HashMap<String, String>();
         CourseDto dto = coursesService.findByFilter(getFilter());
         mav.addObject("courses", dto.getCourses());
         return mav;

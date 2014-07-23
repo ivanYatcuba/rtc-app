@@ -5,7 +5,6 @@ import net.github.rtc.util.annotation.Required;
 import net.github.rtc.util.annotation.Validatable;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
@@ -30,6 +29,10 @@ public class Tag implements Serializable {
     public void setValue(String value) {
         this.value = value;
     }
+
+    public long getId() {return id;}
+
+    public void setId(long id) {this.id = id;}
 
     public Tag(String value) {
         this.value = value;

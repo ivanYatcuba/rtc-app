@@ -1,7 +1,5 @@
 package net.github.rtc.app.model;
 
-import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Vladislav Pikus

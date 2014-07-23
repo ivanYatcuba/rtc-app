@@ -6,11 +6,9 @@ import net.github.rtc.app.model.User;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.service.UserServiceLogin;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.ConfigurableWebApplicationContext;
 
 import java.util.Arrays;
 
