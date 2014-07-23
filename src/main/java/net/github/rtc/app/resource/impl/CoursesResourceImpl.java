@@ -119,7 +119,9 @@ public class CoursesResourceImpl implements CoursesResource {
         Date startDate = null;
         try {
             startDate = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(filter.getStartDate());
-        } catch (ParseException | NullPointerException e) {
+        } catch (ParseException e ) {
+            e.printStackTrace();
+        }catch (NullPointerException e){
             e.printStackTrace();
         }
         if (startDate != null) {
