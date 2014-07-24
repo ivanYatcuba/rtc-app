@@ -1,6 +1,9 @@
 package net.github.rtc.app.service.impl;
 
-import net.github.rtc.app.model.*;
+import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseSearchResult;
+import net.github.rtc.app.model.course.PageDto;
+import net.github.rtc.app.model.course.SearchFilter;
 import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.exception.ServiceProcessingException;
@@ -62,7 +65,7 @@ public class CoursesServiceImpl implements CoursesService {
     }
 
     /**
-     * @see CoursesService#create(net.github.rtc.app.model.Course)
+     * @see CoursesService#create(net.github.rtc.app.model.course.Course)
      */
     @Override
     @Transactional
@@ -71,7 +74,7 @@ public class CoursesServiceImpl implements CoursesService {
     }
 
     /**
-     * @see CoursesService#update(net.github.rtc.app.model.Course)
+     * @see CoursesService#update(net.github.rtc.app.model.course.Course)
      */
     @Override
     @Transactional
@@ -82,19 +85,19 @@ public class CoursesServiceImpl implements CoursesService {
     }
 
     /**
-     * @see CoursesService#(SearchFilter)
+     * @see CoursesService#( net.github.rtc.app.model.course.SearchFilter )
      */
     @Override
     @Transactional
-    public CourseDto findByFilter(SearchFilter filter) {
+    public CourseSearchResult findByFilter(SearchFilter filter) {
         Integer total = resource.getCount(filter);
         PageDto pageDto = new PageDto.Builder(total).page(filter.getPageNumber()).maxResult(filter.getMaxResult())
                 .build();
-        CourseDto dto = new CourseDto.Builder().courses(resource.findByCriteria(filter, pageDto))
+        CourseSearchResult result = new CourseSearchResult.Builder().courses(resource.findByCriteria(filter, pageDto))
                 .totalCount(total)
                 .limit(pageDto.getMaxResult())
                 .offset(pageDto.getFirstResult()).build();
-        return dto;
+        return result;
     }
 
     @Override

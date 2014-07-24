@@ -1,4 +1,4 @@
-package net.github.rtc.app.model;
+package net.github.rtc.app.model.user;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -20,8 +20,8 @@ public class Role implements GrantedAuthority {
     public Role() {
     }
 
-    public Role(RoleTypes name) {
-        this.name = name.toString();
+    public Role(RoleType name) {
+        this.name = name.name();
     }
 
     public long getId() {
@@ -45,9 +45,6 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Role{");
-        sb.append("name='").append(name);
-        sb.append('}');
-        return sb.toString();
+        return name;
     }
 }

@@ -1,4 +1,4 @@
-package net.github.rtc.app.model;
+package net.github.rtc.app.model.course;
 
 /**
  * @author Vladislav Pikus

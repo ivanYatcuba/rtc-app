@@ -1,4 +1,4 @@
-package net.github.rtc.app.model;
+package net.github.rtc.app.model.course;
 
 /**
  * Created by Ivan Yatcuba on 7/22/14.

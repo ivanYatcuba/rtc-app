@@ -1,10 +1,8 @@
-package net.github.rtc.app.model;
+package net.github.rtc.app.model.course;
 
 import net.github.rtc.util.annotation.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -15,6 +13,7 @@ import java.io.Serializable;
 public class Author implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Required

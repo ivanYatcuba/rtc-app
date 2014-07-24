@@ -1,12 +1,12 @@
 package net.github.rtc.app.controller.common;
 
-import net.github.rtc.app.model.RoleTypes;
+import net.github.rtc.app.model.user.RoleType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import net.github.rtc.app.model.User;
+import net.github.rtc.app.model.user.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 /**
  * @author Vladislav Pikus
@@ -44,7 +44,7 @@ public class LoginController {
 @RequestMapping(value = "/login_attempt", method = RequestMethod.GET)
     public String loginAttempt() {
         User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (currentUser.hasRole(RoleTypes.ROLE_ADMIN.name())) {
+        if (currentUser.hasRole(RoleType.ROLE_ADMIN.name())) {
          return "redirect:/admin";
         } else {
          return "redirect:/user/view/";

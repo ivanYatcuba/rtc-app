@@ -1,4 +1,4 @@
-package net.github.rtc.app.model;
+package net.github.rtc.app.model.course;
 
 import java.util.HashMap;
 import java.util.Map;

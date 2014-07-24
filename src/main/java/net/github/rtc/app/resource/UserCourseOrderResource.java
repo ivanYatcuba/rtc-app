@@ -1,7 +1,7 @@
 package net.github.rtc.app.resource;
 
-import net.github.rtc.app.model.UserCourseOrder;
-import net.github.rtc.app.model.UserRequestStatus;
+import net.github.rtc.app.model.user.UserCourseOrder;
+import net.github.rtc.app.model.user.UserRequestStatus;
 
 import java.util.List;
 

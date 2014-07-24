@@ -1,8 +1,9 @@
 package net.github.rtc.app.controller.admin;
 
-import net.github.rtc.app.model.Role;
-import net.github.rtc.app.model.RoleTypes;
-import net.github.rtc.app.model.User;
+import net.github.rtc.app.model.user.Role;
+import net.github.rtc.app.model.user.RoleType;
+import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.service.RoleService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
@@ -17,16 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author  Lapshin Ugene
  */
-
-
 @Controller ("adminNavigationController")
 @RequestMapping ("admin/user")
 public class UserController {
@@ -35,6 +31,8 @@ public class UserController {
     private ValidationContext validationContext;
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     private static final String ROOT = "portal/admin";
     private static final String ROOT_MODEL = "user";
@@ -81,20 +79,18 @@ public class UserController {
         mav.addObject("validationRules", validationContext.get(User.class));
         return mav;
     }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid User user,
-                             BindingResult bindingResult,
-                             SessionStatus session) {
+                             SessionStatus session, @RequestParam RoleType selectedRole) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/viewAllusers");
-        
-         List<Role> rol = new ArrayList<Role>();
-         rol.add(new Role());
-         user.setAuthorities(rol);
-         user=this.userService.create(user);
-         session.setComplete();
+        List<Role> useRoles = new ArrayList<>();
+        useRoles.add(roleService.getRoleByType(selectedRole));
+        user.setAuthorities(useRoles);
+        userService.create(user);
+        session.setComplete();
         Collection<User> listUser=userService.findAll();
         mav.addObject("users", listUser);
-    
         return mav;
     }
 
@@ -120,24 +116,27 @@ public class UserController {
     public User getCommandObject() {
         return new User();
     }
-     @InitBinder(ROOT_MODEL)
+
+    @InitBinder(ROOT_MODEL)
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
     }
 
-    @ModelAttribute("roles")
-    public Collection<String> getCategories() {
 
-        Collection<String> s = new ArrayList<String>();
-        s.add(RoleTypes.ROLE_ADMIN.name());
-        s.add(RoleTypes.ROLE_USER.name());
-        s.add(RoleTypes.ROLE_EXPERT.name());
-        return s;
+    @ModelAttribute("roles")
+    public List<RoleType> getCategories() {
+
+        List<RoleType> roles = new ArrayList<>();
+        roles.add(RoleType.ROLE_USER);
+        roles.add(RoleType.ROLE_ADMIN);
+        roles.add(RoleType.ROLE_EXPERT);
+
+        return roles;
     }
 
-      @ModelAttribute("english")
+    @ModelAttribute("english")
     public Collection<String> getEnglish() {
         
         Collection<String> s = new ArrayList<String>();

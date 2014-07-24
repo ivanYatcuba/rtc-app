@@ -1,14 +1,14 @@
 package net.github.rtc.app.resource;
 
-import net.github.rtc.app.model.Course;
-import net.github.rtc.app.model.PageDto;
-import net.github.rtc.app.model.SearchFilter;
+import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.PageDto;
+import net.github.rtc.app.model.course.SearchFilter;
 
 import java.util.Collection;
 
 /**
  * Data Access Object Interface
- * Provides CRUD operations with {@link net.github.rtc.app.model.Course} objects
+ * Provides CRUD operations with {@link net.github.rtc.app.model.course.Course} objects
  *
  * @author Vladislav Pikus
  */

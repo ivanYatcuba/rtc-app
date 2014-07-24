@@ -1,7 +1,7 @@
 package net.github.rtc.app.resource.impl;
 
-import net.github.rtc.app.model.UserCourseOrder;
-import net.github.rtc.app.model.UserRequestStatus;
+import net.github.rtc.app.model.user.UserCourseOrder;
+import net.github.rtc.app.model.user.UserRequestStatus;
 import net.github.rtc.app.resource.UserCourseOrderResource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

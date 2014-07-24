@@ -1,8 +1,8 @@
 package net.github.rtc.app.controller.common;
 
-import net.github.rtc.app.model.Course;
-import net.github.rtc.app.model.CourseDto;
-import net.github.rtc.app.model.SearchFilter;
+import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseSearchResult;
+import net.github.rtc.app.model.course.SearchFilter;
 import net.github.rtc.app.service.CoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,15 +40,15 @@ public class WelcomeController {
         searchFilter.setStatus("PUBLISHED");
         searchFilter.setMaxResult(3);
 
-        CourseDto courseDto = coursesService.findByFilter(searchFilter);
-        Collections.sort((List<Course>)courseDto.getCourses(), new Comparator<Course>() {
+        CourseSearchResult result = coursesService.findByFilter(searchFilter);
+        Collections.sort((List<Course>)result.getCourses(), new Comparator<Course>() {
             public int compare(Course course1, Course course2) {
                 if (course1.getStartDate() == null || course2.getStartDate() == null)
                     return 0;
                 return course1.getStartDate().compareTo(course2.getStartDate());
             }
         });
-        mav.addObject("soonCourses", courseDto.getCourses());
+        mav.addObject("soonCourses", result.getCourses());
         mav.addObject("content","content/welcomeContent");
         return mav;
     }

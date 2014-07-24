@@ -1,6 +1,6 @@
 package net.github.rtc.app.controller.user;
 
-import net.github.rtc.app.model.User;
+import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,8 +1,7 @@
 package net.github.rtc.app.controller;
 
 import net.github.rtc.app.controller.common.WelcomeController;
-import net.github.rtc.app.model.CourseDto;
-import net.github.rtc.app.model.SearchFilter;
+import net.github.rtc.app.model.course.CourseSearchResult;
 import net.github.rtc.app.service.CoursesService;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -16,15 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Created by ivan on 01.04.14.
@@ -41,7 +31,7 @@ public class WelcomeControllerTest {
     @Mock
     private CoursesService coursesService;
     @Mock
-    private CourseDto courseDto;
+    private CourseSearchResult result;
 
     private MockMvc mockMvc;
 
@@ -61,7 +51,7 @@ public class WelcomeControllerTest {
         Date date = new Date();
         String formattedDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
         searchFilter.setStartDate(formattedDate);
-        when(coursesService.findByFilter(searchFilter.createQuery(map).byDate().toString())).thenReturn(new CourseDto());
+        when(coursesService.findByFilter(searchFilter.createQuery(map).byDate().toString())).thenReturn(new CourseSearchResult());
         mockMvc.perform(get("/")).andExpect(status().isOk())
                 .andExpect(model().attribute("content", "content/welcomeContent"))
                 .andExpect(view().name("welcome/welcomeLayout"));*/

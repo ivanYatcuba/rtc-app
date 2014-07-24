@@ -1,10 +1,10 @@
 package net.github.rtc.app.controller.user;
 
-import net.github.rtc.app.model.*;
-import net.github.rtc.app.service.CoursesService;
-import net.github.rtc.app.service.UserCourseOrderService;
-import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.service.UserServiceLogin;
+import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseSearchResult;
+import net.github.rtc.app.model.course.SearchFilter;
+import net.github.rtc.app.model.user.*;
+import net.github.rtc.app.service.*;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.UserRoleAuthorizationInterceptor;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -25,15 +26,17 @@ import java.util.*;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    UserServiceLogin userServiceLogin;
+    private UserServiceLogin userServiceLogin;
     @Autowired
     private CoursesService coursesService;
     @Autowired
     private UserCourseOrderService userCourseOrderService;
     @Autowired
-    ValidationContext validationContext;
+    private ValidationContext validationContext;
+    @Autowired
+    private RoleService roleService;
 
     private static final String ROOT = "portal/user";
     private static final String ROOT_MODEL = "user";
@@ -90,7 +93,9 @@ public class UserController {
             return new ModelAndView("redirect:/" + ROOT + "/register/");
         }
 
-        user.setAuthorities(getUserRole());
+        List<Role> userRoles = new ArrayList<>();
+        userRoles.add(roleService.getRoleByType(RoleType.ROLE_USER));
+        user.setAuthorities(userRoles);
         userService.create(user);
         session.setComplete();
         return new ModelAndView("redirect:/login/");
@@ -105,8 +110,8 @@ public class UserController {
 
             SearchFilter searchFilter = new SearchFilter();
             searchFilter.setStatus("PUBLISHED");
-            CourseDto courseDto = coursesService.findByFilter(searchFilter);
-            Collections.sort((List<Course>)courseDto.getCourses(), new Comparator<Course>() {
+            CourseSearchResult result = coursesService.findByFilter(searchFilter);
+            Collections.sort((List<Course>)result.getCourses(), new Comparator<Course>() {
                 public int compare(Course course1, Course course2) {
                     if (course1.getStartDate() == null || course2.getStartDate() == null)
                         return 0;
@@ -115,7 +120,7 @@ public class UserController {
             });
 
             mav.addObject("user", user);
-            mav.addObject("courses", courseDto.getCourses());
+            mav.addObject("courses", result.getCourses());
             return mav;
         } else {
             ModelAndView mav = new ModelAndView(ROOT + "/page/courseorder");
@@ -197,13 +202,4 @@ public class UserController {
         return new User();
     }
 
-
-
-    private List<Role> getUserRole(){
-        List<Role> roles = new ArrayList<Role>();
-        Role userRole = new Role();
-        userRole.setName("ROLE_USER");
-        roles.add(userRole);
-        return roles;
-    }
 }

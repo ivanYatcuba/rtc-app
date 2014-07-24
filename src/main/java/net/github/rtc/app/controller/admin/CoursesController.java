@@ -1,9 +1,9 @@
 package net.github.rtc.app.controller.admin;
 
-import net.github.rtc.app.model.Course;
-import net.github.rtc.app.model.CourseDto;
-import net.github.rtc.app.model.Page;
-import net.github.rtc.app.model.SearchFilter;
+import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseSearchResult;
+import net.github.rtc.app.model.course.Page;
+import net.github.rtc.app.model.course.SearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.service.CategoryService;
 import net.github.rtc.app.service.CoursesService;
@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * Controller for {@link net.github.rtc.app.model.Course}
+ * Controller for {@link net.github.rtc.app.model.course.Course}
  *
  * @author Vladislav Pikus
  */
@@ -70,13 +70,13 @@ public class CoursesController {
 
         getFilter().setPageNumber(page - 1);
         getFilter().setMaxResult(paginator.getMaxPerPage());
-        CourseDto dto = coursesService.findByFilter(getFilter());
+        CourseSearchResult result = coursesService.findByFilter(getFilter());
 
-        Page pageModel = paginator.getPage(page, dto.getTotalCount());
+        Page pageModel = paginator.getPage(page, result.getTotalCount());
         mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
                 .byNextPage().byPrevPage().byStartPage().toMap());
 
-        mav.addObject("courses", dto.getCourses());
+        mav.addObject("courses", result.getCourses());
         mav.addObject("isFiltered", false);
         return mav;
     }
@@ -130,13 +130,13 @@ public class CoursesController {
 
         searchFilter.setPageNumber(page - 1);
         searchFilter.setMaxResult(paginator.getMaxPerPage());
-        CourseDto dto = coursesService.findByFilter(searchFilter);
+        CourseSearchResult result = coursesService.findByFilter(searchFilter);
 
-        Page pageModel = paginator.getPage(page, dto.getTotalCount());
+        Page pageModel = paginator.getPage(page, result.getTotalCount());
         mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
                 .byNextPage().byPrevPage().byStartPage().toMap());
 
-        mav.addObject("courses", dto.getCourses());
+        mav.addObject("courses", result.getCourses());
         mav.addObject("isFiltered", false);
         return mav;
     }

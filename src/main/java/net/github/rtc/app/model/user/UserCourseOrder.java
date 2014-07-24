@@ -1,4 +1,4 @@
-package net.github.rtc.app.model;
+package net.github.rtc.app.model.user;
 
 import javax.persistence.*;
 import java.util.Date;

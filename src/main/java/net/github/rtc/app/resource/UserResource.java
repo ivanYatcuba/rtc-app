@@ -1,6 +1,6 @@
 package net.github.rtc.app.resource;
 
-import net.github.rtc.app.model.User;
+import net.github.rtc.app.model.user.User;
 import java.util.Collection;
 
 /**

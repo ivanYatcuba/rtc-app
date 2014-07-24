@@ -1,6 +1,9 @@
 package net.github.rtc.app.resource.impl;
 
-import net.github.rtc.app.model.*;
+import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseType;
+import net.github.rtc.app.model.course.PageDto;
+import net.github.rtc.app.model.course.SearchFilter;
 import net.github.rtc.app.resource.CoursesResource;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -59,7 +62,7 @@ public class CoursesResourceImpl implements CoursesResource {
     }
 
     /**
-     * @see CoursesResource#create(net.github.rtc.app.model.Course)
+     * @see CoursesResource#create(net.github.rtc.app.model.course.Course)
      */
     @Override
     public Course create(Course course) {
@@ -69,7 +72,7 @@ public class CoursesResourceImpl implements CoursesResource {
     }
 
     /**
-     * @see CoursesResource#update(net.github.rtc.app.model.Course)
+     * @see CoursesResource#update(net.github.rtc.app.model.course.Course)
      */
     @Override
     public void update(Course course) {

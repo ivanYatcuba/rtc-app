@@ -6,7 +6,7 @@
 
 package net.github.rtc.app.service;
 
-import net.github.rtc.app.model.User;
+import net.github.rtc.app.model.user.User;
 import java.util.Collection;
 
 /**

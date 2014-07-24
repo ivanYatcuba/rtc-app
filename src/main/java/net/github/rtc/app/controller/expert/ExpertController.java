@@ -1,6 +1,10 @@
 package net.github.rtc.app.controller.expert;
 
-import net.github.rtc.app.model.*;
+import net.github.rtc.app.model.course.CourseSearchResult;
+import net.github.rtc.app.model.course.SearchFilter;
+import net.github.rtc.app.model.user.Request;
+import net.github.rtc.app.model.user.UserCourseOrder;
+import net.github.rtc.app.model.user.UserRequestStatus;
 import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
@@ -52,8 +56,8 @@ public class ExpertController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ModelAndView userCourses() {
         ModelAndView mav = new ModelAndView(ROOT + "/page/expertAllcourse");
-        CourseDto dto = coursesService.findByFilter(getFilter());
-        mav.addObject("courses", dto.getCourses());
+        CourseSearchResult result = coursesService.findByFilter(getFilter());
+        mav.addObject("courses", result.getCourses());
         return mav;
     }
 

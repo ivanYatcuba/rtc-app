@@ -7,8 +7,14 @@
         </div>
         <!--Authorities-->
         <div><label  class="control-label" for="type"><@spring.message "user.role"/></label>
-            <@spring.bind "roles" />
-            <div class="controls"><@spring.formSingleSelect "user.authorities", roles, " "/></div>
+            <div class="controls">
+                <select id="selectedRole" name="selectedRole">
+                    <#list roles as role>
+                        <option value="${role}">${role}</option>
+                    </#list>
+                </select>
+            </div>
+
         </div>
     </div>
 

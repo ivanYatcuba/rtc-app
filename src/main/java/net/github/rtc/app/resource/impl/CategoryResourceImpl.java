@@ -1,10 +1,7 @@
 package net.github.rtc.app.resource.impl;
 
-import net.github.rtc.app.model.Course;
+import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.resource.CategoryResource;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

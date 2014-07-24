@@ -6,7 +6,7 @@
 
 package net.github.rtc.app.service.impl;
 
-import net.github.rtc.app.model.User;
+import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.resource.UserResource;
 import net.github.rtc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

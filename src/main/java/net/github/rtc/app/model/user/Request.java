@@ -1,4 +1,4 @@
-package net.github.rtc.app.model;
+package net.github.rtc.app.model.user;
 
 /**
  * Created by ivan on 24.04.14.

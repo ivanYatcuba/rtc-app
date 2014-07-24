@@ -1,6 +1,6 @@
 package net.github.rtc.app.security;
 
-import net.github.rtc.app.model.User;
+import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserServiceLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
