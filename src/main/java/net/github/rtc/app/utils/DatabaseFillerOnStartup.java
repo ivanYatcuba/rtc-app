@@ -1,6 +1,5 @@
 package net.github.rtc.app.utils;
 
-import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.RoleService;
