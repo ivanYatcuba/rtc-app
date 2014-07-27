@@ -19,7 +19,7 @@ public class Course implements Serializable {
     private long id;
 
     @Column
-    private String code;
+    private String code;  //todo: do we really need this field?
 
     @Required
     @Minlength(2)
@@ -29,7 +29,7 @@ public class Course implements Serializable {
 
     @Required
     @Column
-    private String type;
+    private String type; //todo: change field type to CourseType
 
     @Required
     @ManyToOne(cascade = {CascadeType.ALL})
@@ -64,7 +64,7 @@ public class Course implements Serializable {
     private String description;
 
     @Column
-    private String status = "DRAFT";
+    private String status = "DRAFT";  //todo: change field type to CourseStatus
 
     public List<Tag> getTags() {
         return tags;

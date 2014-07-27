@@ -3,6 +3,7 @@ package net.github.rtc.app.model.course;
 /**
  * @author Vladislav Pikus
  */
+//todo: move class to net.github.rtc.app.util.datatable package
 public final class PageDto {
     private int firstResult;
     private int maxResult;

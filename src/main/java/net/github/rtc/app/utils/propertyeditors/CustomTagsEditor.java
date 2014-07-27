@@ -21,6 +21,7 @@ public class CustomTagsEditor extends PropertyEditorSupport {
         if (obj == null) {
             return "";
         }
+        //todo: remove commented code
         //if (obj instanceof Collection<Tag>) {
             Collection<Tag> tags = ((Collection<Tag>)obj);
             StringBuffer sb = new StringBuffer();

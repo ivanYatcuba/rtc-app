@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Created by Ivan Yatcuba on 7/24/14.
  */
+//todo: move all methods to UserReourceImpl
 @Repository
 public class RoleResourceImpl implements RoleResource {
 
@@ -18,6 +19,7 @@ public class RoleResourceImpl implements RoleResource {
 
     @Override
     public Role getRoleByType(RoleType type) {
+        //todo: remove useless variable
         String query = "select role from Role role where role.name = :name";
         return (Role)sessionFactory.getCurrentSession().createQuery(query).setString("name", type.name()).uniqueResult();
     }

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.java2d.pipe.ValidatePipe;
 
 import java.util.Date;
 
@@ -80,7 +81,7 @@ public class CoursesServiceImpl implements CoursesService {
     @Transactional
     public void update(Course course) {
         Course courseToUpdate = resource.findByCode(course.getCode());
-        course.setId(courseToUpdate.getId());
+        course.setId(courseToUpdate.getId());  //todo: course already must have id at this point
         resource.update(course);
     }
 

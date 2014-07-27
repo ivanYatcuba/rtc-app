@@ -15,6 +15,10 @@ import java.util.Arrays;
 /**
  * Created by Ivan Yatcuba on 7/22/14.
  */
+//todo: rename class to Bootstrap.java
+//todo: add InitializingBean interface instead of ApplicationListener
+//todo: rename onApplicationEvent method to loadTestUsers
+//todo: implement afterPropertiesSet method and call loadTestUsers
 @Component
 public class DatabaseFillerOnStartup implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired

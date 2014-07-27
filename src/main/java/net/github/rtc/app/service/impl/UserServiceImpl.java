@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService{
     public void update(User user) {
         PasswordEncoder encoder = new StandardPasswordEncoder();
         User userToUpdate = resource.findByCode(user.getCode());
-        user.setId(userToUpdate.getId());
+        user.setId(userToUpdate.getId());     //todo: user already must have id
         if(user.getPassword() != userToUpdate.getPassword()){
             user.setPassword(encoder.encode(user.getPassword()));
         }

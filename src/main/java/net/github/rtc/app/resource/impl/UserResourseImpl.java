@@ -28,8 +28,10 @@ public class UserResourseImpl implements UserResource{
 
     @Override
     public User findByCode(String code) {
+        //todo: remove try-catch
         User user = null;
         try{
+            //todo: useless variable
             String query = "select user from User user where user.code = :code";
             return (User)sessionFactory.getCurrentSession().
                     createQuery(query).setString("code", code).uniqueResult();
@@ -69,6 +71,7 @@ public class UserResourseImpl implements UserResource{
 
     @Override
     public User findByEmail(String email) {
+        //todo: useless variable
         String query = "select user from User user where user.email = :email";
         return (User)sessionFactory.getCurrentSession().
                 createQuery(query).setString("email", email).uniqueResult();
@@ -76,6 +79,7 @@ public class UserResourseImpl implements UserResource{
 
     @Override
     public void deleteByСode(String code) {
+        //todo: useless variable
         String query = "select user from User user where user.code = :code";
         sessionFactory.getCurrentSession().delete(sessionFactory.getCurrentSession().
                 createQuery(query).setString("code", code).uniqueResult());

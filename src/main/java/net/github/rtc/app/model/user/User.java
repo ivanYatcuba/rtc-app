@@ -88,7 +88,7 @@ public class User implements UserDetails {
     private String gender;
 
     @Column
-    private String progLanguages;
+    private String progLanguages;     //todo: change field name to programming languages and use list of strings instead of string
 
     @Required
     @Column

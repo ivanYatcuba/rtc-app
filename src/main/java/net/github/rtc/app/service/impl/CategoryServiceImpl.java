@@ -25,6 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
     /**
      * @see CategoryService#findAll()
      */
+    //todo: see todos in CategoryResource
     @Override
     public Collection<String> findAll() {
         return resource.findAll();

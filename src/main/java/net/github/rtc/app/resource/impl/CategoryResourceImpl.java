@@ -23,6 +23,8 @@ public class CategoryResourceImpl implements CategoryResource {
      */
     @Override
     public Collection<String> findAll() {
+        //todo: move this method to CourseType class and make it static
+        //todo: also use only one for loop
         List<CourseType> types = Arrays.asList(CourseType.values());
         Collection<String> res = new ArrayList<>();
         for(CourseType type : types){

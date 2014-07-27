@@ -37,9 +37,10 @@ public class CoursesResourceImpl implements CoursesResource {
 
     @Override
     public Course findByCode(String code) {
-
+        //todo: remove try-catch
         Course course = null;
         try{
+            //todo: remove useless variable query
             String query = "select course from Course course where course.code = :code";
             course = (Course)sessionFactory.getCurrentSession().
                     createQuery(query).setString("code", code).uniqueResult();
@@ -56,6 +57,7 @@ public class CoursesResourceImpl implements CoursesResource {
      */
     @Override
     public void delete(String code) {
+        //todo: remove useless variable query
         String query = "select course from Course course where course.code = :code";
         sessionFactory.getCurrentSession().delete(sessionFactory.getCurrentSession().
                 createQuery(query).setString("code", code).uniqueResult());

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by Ivan Yatcuba on 7/24/14.
  */
+//todo: move to UserServiceImpl
 @Service
 public class RoleServiceImpl implements RoleService {
 

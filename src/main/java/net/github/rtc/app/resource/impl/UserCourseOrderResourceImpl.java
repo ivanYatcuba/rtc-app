@@ -45,6 +45,7 @@ public class UserCourseOrderResourceImpl implements UserCourseOrderResource {
 
     @Override
     public UserCourseOrder getUserOrder(String code) {
+        //todo: useless variable
         String query = "select e from UserCourseOrder e where e.userCode = :code";
         return (UserCourseOrder)sessionFactory.getCurrentSession().
                 createQuery(query).setString("code", code).uniqueResult();
@@ -52,6 +53,7 @@ public class UserCourseOrderResourceImpl implements UserCourseOrderResource {
 
     @Override
     public List<UserCourseOrder> getOrderByStatus(UserRequestStatus status) {
+        //todo: useless variable
         String query = "select e from UserCourseOrder e where e.status = :status";
         return sessionFactory.getCurrentSession().
                 createQuery(query).setString("status", String.valueOf(status.toString())).list();
