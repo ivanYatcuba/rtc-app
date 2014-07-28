@@ -14,26 +14,27 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ErrorController {
 
+    @RequestMapping("error404")
+    public ModelAndView redirectToErrorPage() {
+        return new ModelAndView("error/error404");
+    }
+
     @RequestMapping("error")
     public ModelAndView customError(HttpServletRequest request) {
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
-        if(statusCode == 404){
-            return new ModelAndView("error/error404");
-        }else {
-            Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
-            String exceptionMessage = getExceptionMessage(throwable, statusCode);
+        Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
+        String exceptionMessage = getExceptionMessage(throwable, statusCode);
 
 
-            String requestUri = (String) request.getAttribute("javax.servlet.error.request_uri");
-            if (requestUri == null) {
-                requestUri = "Unknown";
-            }
-
-            String message = formatErrorMessage(statusCode, requestUri, exceptionMessage);
-            ModelAndView mnv = new ModelAndView("error/error");
-            mnv.addObject("errorMessage", message);
-            return mnv;
+        String requestUri = (String) request.getAttribute("javax.servlet.error.request_uri");
+        if (requestUri == null) {
+            requestUri = "Unknown";
         }
+
+        String message = formatErrorMessage(statusCode, requestUri, exceptionMessage);
+        ModelAndView mnv = new ModelAndView("error/error");
+        mnv.addObject("errorMessage", message);
+        return mnv;
     }
 
     private String getExceptionMessage(Throwable throwable, Integer statusCode) {
