@@ -44,8 +44,7 @@
 
 
     <error-page>
-        <error-code>404</error-code>
-        <location>/error404</location>
+        <location>/error</location>
     </error-page>
 
     <filter>

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ErrorController {
 
-    @RequestMapping("error404")
+    @RequestMapping("error")
     public ModelAndView redirectToErrorPage() {
         return new ModelAndView("error/error");
     }
