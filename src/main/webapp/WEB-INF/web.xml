@@ -42,12 +42,6 @@
     <url-pattern>*.png</url-pattern>
 </servlet-mapping>
 
-
-    <error-page>
-         <error-code>404</error-code>
-         <location>/error404</location>
-    </error-page>
-
     <error-page>
         <location>/error</location>
     </error-page>
