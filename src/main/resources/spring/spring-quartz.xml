@@ -5,27 +5,41 @@
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
+    <!--Jobs-->
     <bean id="userExportJob"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="userExportTask" />
         <property name="targetMethod" value="exportData" />
     </bean>
 
+
+    <bean id="courseExportJob"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="courseExportTask" />
+        <property name="targetMethod" value="exportData" />
+    </bean>
+
+    <!--Triggers-->
     <bean id="userExportTrigger"
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="userExportJob" />
-        <property name="cronExpression" value="0/10 * * * * ?" />
+        <property name="cronExpression" value="0 0/30 * * * ?" />
     </bean>
 
-    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="jobDetails">
-            <list>
-                <ref bean="userExportJob" />
-            </list>
-        </property>
+    <bean id="courseExportTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="courseExportJob" />
+        <property name="cronExpression" value="0 0/30 * * * ?" />
+    </bean>
+
+
+
+    <!--Scheduler-->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <list>
                 <ref bean="userExportTrigger" />
+                <ref bean="courseExportTrigger" />
             </list>
         </property>
     </bean>

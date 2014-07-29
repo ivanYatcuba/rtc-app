@@ -1,13 +1,19 @@
-<form name="export" id="export" action="<@spring.url "/admin/export/users" />" method="post">
+<form name="export" id="export" action="<@spring.url "/admin/export/downloadUserExport" />" method="post">
+    <script src="<@spring.url'/resources/css/js/jquery.fileDownload.js'/>"></script>
     <h3><@spring.message "export.users"/></h3>
 
     <div class="row-fluid span12" style="margin-left: 1px">
         <div class="span5">
             <label for="export.status"><@spring.message "export.role"/>: </label>
-            <@spring.formSingleSelect "user.role", ["All", "Admin", "Expert", "User"] />
+            <select id="selectedRole" name="selectedRole">
+                <#list roles as role>
+                    <option value="${role}">${role}</option>
+                </#list>
+            </select>
         </div>
     </div>
-
+    <br/>
+    <br/>
     <hr>
 
     <div class="row-fluid span12" style="margin-left: 1px">
@@ -15,8 +21,18 @@
         </div>
 
         <div class="span2" style="text-align: right">
-            <input type="submit" class="btn" value="Export"/> or <a
+            <a  class="btn fileDownloadSimpleRichExperience"  href="<@spring.url "/admin/export/downloadUserExport" />">Export</a> or <a
                 href="<@spring.url "/" />">Cancel</a>
         </div>
     </div>
 </form>
+
+<script>
+    $(document).on("click", "a.fileDownloadSimpleRichExperience", function () {
+        $.fileDownload($(this).prop('href'), {
+            preparingMessageHtml: "We are preparing your report, please wait...",
+            failMessageHtml: "There was a problem generating your report, please try again."
+        });
+        return false;
+    });
+</script>

@@ -95,11 +95,8 @@ public class Author implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Author{");
-        sb.append("firstName='").append(firstName).append('\'');
-        sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append('}');
+        final StringBuffer sb = new StringBuffer();
+        sb.append(firstName).append(" ").append(lastName);
         return sb.toString();
     }
 }

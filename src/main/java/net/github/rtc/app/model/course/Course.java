@@ -1,5 +1,6 @@
 package net.github.rtc.app.model.course;
 
+import net.github.rtc.app.annotation.ForExport;
 import net.github.rtc.util.annotation.*;
 
 import javax.persistence.*;
@@ -16,55 +17,75 @@ public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @ForExport("Id")
     private long id;
 
     @Column
+    @ForExport("Code")
     private String code;  //todo: do we really need this field?
 
     @Required
     @Minlength(2)
     @Maxlength(30)
     @Column
+    @ForExport("Name")
     private String name;
 
     @Required
     @Column
+    @ForExport("Type")
     private String type; //todo: change field type to CourseType
 
     @Required
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "AUTHOR_ID")
-    private Author author;
-
-    @Required
     @Temporal(TemporalType.TIMESTAMP)
+    @ForExport("Start date")
     private Date startDate;
 
     @Required
     @Temporal(TemporalType.TIMESTAMP)
+    @ForExport("End date")
     private Date endDate;
 
     @Column
+    @ForExport("Status")
+    private String status = "DRAFT";  //todo: change field type to CourseStatus
+
+    @Column
+    @ForExport("Publish date")
     private Date publishDate;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinTable(name="courses_tags",
-            joinColumns={@JoinColumn(name="tagId")},
-            inverseJoinColumns={@JoinColumn(name="id")})
-    private List<Tag> tags;
+    @Maxlength(255)
+    @Column
+    @ForExport("Description")
+    private String description;
 
     @Required
     @net.github.rtc.util.annotation.Number
     @Min(1)
     @Column
+    @ForExport("Capacity")
     private Integer capacity;
 
-    @Maxlength(255)
-    @Column
-    private String description;
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name="courses_tags",
+            joinColumns={@JoinColumn(name="tagId")},
+            inverseJoinColumns={@JoinColumn(name="id")})
+    @ForExport("Tags")
+    private List<Tag> tags;
 
-    @Column
-    private String status = "DRAFT";  //todo: change field type to CourseStatus
+    @Required
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "AUTHOR_ID")
+    @ForExport("Author")
+    private Author author;
+
+
+
+
+
+
+
+
 
     public List<Tag> getTags() {
         return tags;

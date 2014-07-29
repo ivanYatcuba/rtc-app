@@ -5,6 +5,7 @@ import net.github.rtc.app.model.course.PageDto;
 import net.github.rtc.app.model.course.SearchFilter;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Data Access Object Interface
@@ -67,4 +68,6 @@ public interface CoursesResource {
      * @return total course count
      */
     Integer getCount(SearchFilter  filter);
+
+    List<Course> findAll();
 }

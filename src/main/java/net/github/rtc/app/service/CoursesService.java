@@ -4,6 +4,8 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseSearchResult;
 import net.github.rtc.app.model.course.SearchFilter;
 
+import java.util.List;
+
 //import com.springapp.mvc.User;
 
 /**
@@ -58,8 +60,17 @@ public interface CoursesService {
     CourseSearchResult findByFilter(SearchFilter filter);
 
     /**
+     * Find all courses
+     *
+     * @return list of all courses
+     */
+    List<Course> findAll();
+
+    /**
      * Set course status as published
      * @param course  what course?
      */
     void publish(Course course);
+
+
 }

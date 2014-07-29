@@ -61,9 +61,6 @@ public class Tag implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Tag{");
-        sb.append("value='").append(value).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return value;
     }
 }

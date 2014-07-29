@@ -15,84 +15,87 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @ForExport
+    @ForExport("Id")
     private long id;
 
     @Column
-    @ForExport
+    @ForExport("Code")
     private String code;
 
     @Required
     @Maxlength(50)
     @Minlength(5)
     @Column
-    @ForExport
+    @ForExport("Surname")
     private String surname;
 
     @Required
     @Maxlength(50)
     @Minlength(5)
     @Column
-    @ForExport
+    @ForExport("Name")
     private String name;
 
     @Required
     @Maxlength(50)
     @Minlength(5)
     @Column
-    @ForExport
+    @ForExport("Midle name")
     private String middleName;
 
     @Required
-    @Email
     @Column
-    @ForExport
-    private String email;
-
+    @ForExport("Birthday")
+    private Date birthDate;
 
     @Required
     @net.github.rtc.util.annotation.Number
     @Column
-    @ForExport
+    @ForExport("Phone")
     private String phone;
 
-
     @Required
+    @Email
     @Column
-    @ForExport
-    private Date birthDate;
+    @ForExport("Email")
+    private String email;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
     @Column
-    @ForExport
+    @ForExport("City")
     private String city;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
     @Column
-    @ForExport
+    @ForExport("University")
     private String university;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
     @Column
-    @ForExport
+    @ForExport("Faculty")
     private String faculty;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
     @Column
-    @ForExport
+    @ForExport("Speciality")
     private String speciality;
 
     @Required
     @Column
-    @ForExport
+    @ForExport("English")
+    private String english;
+
+    @Required
+    @Column
+    @ForExport("Note")
     private String note;
 
     @Required
@@ -105,10 +108,7 @@ public class User implements UserDetails {
     @Column
     private String progLanguages;     //todo: change field name to programming languages and use list of strings instead of string
 
-    @Required
-    @Column
-    @ForExport
-    private String english;
+
 
     /* Spring Security fields*/
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)

@@ -18,10 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Locale;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Data Access Object Implementation
@@ -100,6 +97,11 @@ public class CoursesResourceImpl implements CoursesResource {
     @Override
     public Integer getCount(SearchFilter filter) {
         return ((Long)buildCriteria(filter).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+    }
+
+    @Override
+    public List<Course> findAll() {
+        return sessionFactory.getCurrentSession().createCriteria(Course.class).list();
     }
 
     /**

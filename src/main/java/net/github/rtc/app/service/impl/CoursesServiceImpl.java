@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Service Implementation
@@ -98,6 +99,12 @@ public class CoursesServiceImpl implements CoursesService {
                 .limit(pageDto.getMaxResult())
                 .offset(pageDto.getFirstResult()).build();
         return result;
+    }
+
+    @Override
+    @Transactional
+    public List<Course> findAll() {
+        return resource.findAll();
     }
 
     @Override
