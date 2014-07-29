@@ -42,6 +42,11 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -180,7 +185,6 @@
             <version>5.1.30</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -208,6 +212,28 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>r05</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.10-FINAL</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.10-FINAL</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>3.10-FINAL</version>
         </dependency>
 
 
@@ -278,26 +304,4 @@
             </resource>
         </resources>
     </build>
-
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-
-            <properties>
-                <host.baseUrl>http://localhost:8079/rtc-course-microservice/api/</host.baseUrl>
-                <host.userURL>http://localhost:8078/rtc-user-microservice/api/</host.userURL>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>prod</id>
-            <properties>
-                <host.baseUrl>http://146.185.176.193:8079/rtc-course-microservice/api/</host.baseUrl>
-                <host.userURL>http://146.185.176.193:8078/rtc-user-microservice/api/</host.userURL>
-            </properties>
-        </profile>
-    </profiles>
 </project>

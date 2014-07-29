@@ -1,5 +1,6 @@
 package net.github.rtc.app.model.user;
 
+import net.github.rtc.app.annotation.ForExport;
 import net.github.rtc.util.annotation.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,70 +15,84 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @ForExport
     private long id;
+
     @Column
+    @ForExport
     private String code;
 
     @Required
     @Maxlength(50)
     @Minlength(5)
     @Column
+    @ForExport
     private String surname;
 
     @Required
     @Maxlength(50)
     @Minlength(5)
     @Column
+    @ForExport
     private String name;
 
     @Required
     @Maxlength(50)
     @Minlength(5)
     @Column
+    @ForExport
     private String middleName;
 
     @Required
     @Email
     @Column
+    @ForExport
     private String email;
 
 
     @Required
     @net.github.rtc.util.annotation.Number
     @Column
+    @ForExport
     private String phone;
 
 
     @Required
     @Column
+    @ForExport
     private Date birthDate;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
     @Column
+    @ForExport
     private String city;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
     @Column
+    @ForExport
     private String university;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
     @Column
+    @ForExport
     private String faculty;
 
     @Maxlength(30)
     @Minlength(5)
     @Required
     @Column
+    @ForExport
     private String speciality;
 
     @Required
     @Column
+    @ForExport
     private String note;
 
     @Required
@@ -92,6 +107,7 @@ public class User implements UserDetails {
 
     @Required
     @Column
+    @ForExport
     private String english;
 
     /* Spring Security fields*/

@@ -71,6 +71,8 @@
     <import resource="classpath:/spring/spring-security.xml" />
     <!-- Import data source security configurations -->
     <import resource="classpath:/spring/dataSource.xml" />
+    <!-- Import quartz configurations -->
+    <import resource="classpath:/spring/spring-quartz.xml" />
 
     <bean id="validationConverter" class="net.github.rtc.util.converter.Converter" />
     <bean id="validationContext" class="net.github.rtc.util.converter.ValidationContext" >

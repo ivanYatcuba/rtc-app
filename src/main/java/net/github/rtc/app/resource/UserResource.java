@@ -1,7 +1,7 @@
 package net.github.rtc.app.resource;
 
 import net.github.rtc.app.model.user.User;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -15,7 +15,7 @@ public interface UserResource {
      *
      * @return collection of users
      */
-    Collection<User> findAll();
+    List<User> findAll();
 
     /**
      * Will be delete user by code

@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public Collection<User> findAll() {
+    public List<User> findAll() {
         return resource.findAll();
     }
 

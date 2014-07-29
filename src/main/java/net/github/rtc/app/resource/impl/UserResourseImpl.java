@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -45,7 +45,7 @@ public class UserResourseImpl implements UserResource{
     }
 
     @Override
-    public Collection<User> findAll() {
+    public List<User> findAll() {
         return  sessionFactory.getCurrentSession().createCriteria(User.class).list();
     }
 

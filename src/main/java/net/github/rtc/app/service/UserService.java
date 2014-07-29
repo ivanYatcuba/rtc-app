@@ -7,7 +7,7 @@
 package net.github.rtc.app.service;
 
 import net.github.rtc.app.model.user.User;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -15,7 +15,7 @@ import java.util.Collection;
  */
 public interface UserService {
 
-    Collection<User> findAll();
+    List<User> findAll();
 
     void delete(User user);
 
