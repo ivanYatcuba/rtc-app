@@ -8,6 +8,7 @@ package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.resource.UserResource;
+import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +23,7 @@ import java.util.List;
  * @author Саша
  */
 @Service("userService")
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements ModelService<User>, UserService{
 
     //private static Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class.getName());
 

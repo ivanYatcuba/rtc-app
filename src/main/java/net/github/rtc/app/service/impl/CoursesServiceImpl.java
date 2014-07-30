@@ -7,6 +7,7 @@ import net.github.rtc.app.model.course.SearchFilter;
 import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.exception.ServiceProcessingException;
+import net.github.rtc.app.service.ModelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import java.util.List;
  * @author Dmitry Pritula
  */
 @Service("coursesService")
-public class CoursesServiceImpl implements CoursesService {
+public class CoursesServiceImpl implements ModelService<Course>, CoursesService {
 
     private static Logger LOG = LoggerFactory.getLogger(CoursesServiceImpl.class.getName());
 
