@@ -36,7 +36,6 @@ public class User implements UserDetails {
     @ForExport("Name")
     private String name;
 
-    @Required
     @Maxlength(50)
     @Minlength(5)
     @Column
@@ -62,28 +61,24 @@ public class User implements UserDetails {
 
     @Maxlength(30)
     @Minlength(5)
-    @Required
     @Column
     @ForExport("City")
     private String city;
 
     @Maxlength(30)
     @Minlength(5)
-    @Required
     @Column
     @ForExport("University")
     private String university;
 
     @Maxlength(30)
     @Minlength(5)
-    @Required
     @Column
     @ForExport("Faculty")
     private String faculty;
 
     @Maxlength(30)
     @Minlength(5)
-    @Required
     @Column
     @ForExport("Speciality")
     private String speciality;
