@@ -37,13 +37,13 @@
     <bean id="courseExportTrigger"
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="courseExportJobDetails" />
-        <property name="cronExpression" value="0 0/1 * 1/1 * ? *" />
+        <property name="cronExpression" value="0 0/30 * 1/1 * ? *" />
     </bean>
 
     <bean id="userExportTrigger"
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="userExportJobDetails" />
-        <property name="cronExpression" value="0 0/1 * 1/1 * ? *" />
+        <property name="cronExpression" value="0 0/30 * 1/1 * ? *" />
     </bean>
 
     <!--Scheduler-->
