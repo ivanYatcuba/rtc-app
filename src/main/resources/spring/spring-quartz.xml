@@ -6,29 +6,49 @@
         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
     <!--Jobs-->
-    <bean id="userExportJob"
+    <bean id="userExportJob" class="net.github.rtc.app.export.ExportTask"/>
+    <bean id="courseExportJob" class="net.github.rtc.app.export.ExportTask"/>
+
+    <!--Job Details-->
+    <bean id="userExportJobDetails"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="userExportTask" />
+        <property name="targetObject" ref="userExportJob" />
         <property name="targetMethod" value="exportData" />
+        <property name="arguments">
+            <list>
+                <value type="java.lang.Class">net.github.rtc.app.model.user.User</value>
+                <value type="java.util.List">#{userService.findAll()}</value>
+                <value type="java.lang.String">"users"</value>
+                <value type="java.lang.String">${user.export.path}</value>
+            </list>
+        </property>
     </bean>
 
 
-    <bean id="courseExportJob"
+    <bean id="courseExportJobDetails"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="courseExportTask" />
+        <property name="targetObject" ref="courseExportJob" />
         <property name="targetMethod" value="exportData" />
+        <property name="arguments">
+            <list>
+                <value type="java.lang.Class">net.github.rtc.app.model.course.Course</value>
+                <value type="java.util.List">#{coursesService.findAll()}</value>
+                <value type="java.lang.String">"courses"</value>
+                <value type="java.lang.String">${course.export.path}</value>
+            </list>
+        </property>
     </bean>
 
     <!--Triggers-->
     <bean id="userExportTrigger"
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="userExportJob" />
+        <property name="jobDetail" ref="userExportJobDetails" />
         <property name="cronExpression" value="0 0/30 * 1/1 * ? *" />
     </bean>
 
     <bean id="courseExportTrigger"
           class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="courseExportJob" />
+        <property name="jobDetail" ref="courseExportJobDetails" />
         <property name="cronExpression" value="0 0/30 * 1/1 * ? *" />
     </bean>
 

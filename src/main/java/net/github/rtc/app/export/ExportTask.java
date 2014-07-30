@@ -6,19 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by Ivan Yatcuba on 7/29/14.
  */
+public class ExportTask {
 
-@Component
-public class UserExportTask {
-    @Autowired
-    private UserService userService;
-    @Value("${user.export.path}")
-    private String filePath;
-
-    public void exportData() {
+    public <T> void exportData(Class<T> aClass, List<T> list, String reportName, String reportPath) {
         XLSXReportBuilder reportBuilder = new XLSXReportBuilder();
-        reportBuilder.build(User.class, userService.findAll(), "users", filePath);
+        reportBuilder.build(aClass, list, reportName, reportPath);
     }
 }
