@@ -2,33 +2,38 @@
 <script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
 
 <#include "searchPanel.ftl">
-    <div class="head-2"><strong>Name</strong></div>
-    <div class="head-2"><strong>Category</strong></div>
-    <div class="head-2"><strong>Dates</strong></div>
-    <div class="head-2"><strong>Author</strong></div>
-    <div class="head-2"><strong>Status</strong></div>
-    <div class="head-2">&nbsp;</div>
-<#list courses as course>
-    <div class="col-xs-2"><a href="<@spring.url "/admin/course/${course.code}" />">${course.name}</a></div>
-    <div class="col-xs-2">${course.type}</div>
-    <div class="col-xs-2">${course.startDate?date}&nbsp;-&nbsp;${course.endDate?date}</div>
-    <div class="col-xs-2">${course.author.firstName}&nbsp;${course.author.lastName}</div>
-    <div class="col-xs-2">${course.status}</div>
-    <div class="col-xs-2">
 
-        <ul class="nav" role="navigation">
-        <li class="dropdown">
-            <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                <#if "${course.status}" == "DRAFT">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/publish/${course.code}"/>">Publish!</a></li>
-                </#if>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/delete/${course.code}"/>">Delete</a></li>
-            </ul>
-        </li>
+<table width="100%" border="1px">
+    <tr bgcolor="#d3d3d3" style="font-weight:bold">
+        <td>Name</td>
+        <td>Category</td>
+        <td>Dates</td>
+        <td>Author</td>
+        <td>Status</td>
+        <td>&nbsp;</td>
+    </tr>
+<#list courses as course>
+    <tr>
+        <td><a href="<@spring.url "/admin/course/${course.code}" />">${course.name}</a></td>
+        <td>${course.type}</td>
+        <td>${course.startDate?date}&nbsp;-&nbsp;${course.endDate?date}</td>
+        <td>${course.author.firstName}&nbsp;${course.author.lastName}</td>
+        <td>${course.status}</td>
+        <td><ul class="nav" role="navigation">
+            <li class="dropdown">
+                <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                    <#if "${course.status}" == "DRAFT">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/publish/${course.code}"/>">Publish!</a></li>
+                    </#if>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/delete/${course.code}"/>">Delete</a></li>
+                </ul>
+            </li>
         </ul>
-    </div>
+        </td>
+    </tr>
 </#list>
+</table>
 
 <table style="width: 100%;">
     <tr>
