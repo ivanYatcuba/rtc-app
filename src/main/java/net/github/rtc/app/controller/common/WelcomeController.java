@@ -41,13 +41,8 @@ public class WelcomeController {
         searchFilter.setMaxResult(3);
 
         CourseSearchResult result = coursesService.findByFilter(searchFilter);
-        Collections.sort((List<Course>)result.getCourses(), new Comparator<Course>() {
-            public int compare(Course course1, Course course2) {
-                if (course1.getStartDate() == null || course2.getStartDate() == null)
-                    return 0;
-                return course1.getStartDate().compareTo(course2.getStartDate());
-            }
-        });
+        Collections.sort((List<Course>)result.getCourses(), (course1, course2) ->
+                course1.getStartDate().compareTo(course2.getStartDate()));
         mav.addObject("soonCourses", result.getCourses());
         mav.addObject("content","content/welcomeContent");
         return mav;
