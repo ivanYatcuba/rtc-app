@@ -1,11 +1,12 @@
 package net.github.rtc.app.impl;
 
+import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.course.Author;
 import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.resource.impl.CoursesResourceImpl;
 import net.github.rtc.app.service.CoursesService;
-import net.github.rtc.app.exception.ServiceProcessingException;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -38,7 +39,7 @@ public class CourseServiceImplTest {
     public void setUp() throws Exception {
         mockResource = mock(CoursesResourceImpl.class);
        // ((CoursesServiceImpl)service).setResource(mockResource);
-        course = new Course("codeTest", "nameTest", "DEV", new Author("Vasya", "Pupkin", "vasia@gmail.com"),
+        course = new Course("codeTest", "nameTest", CourseType.DEV, new Author("Vasya", "Pupkin", "vasia@gmail.com"),
                 DateTime.now().toDate(), DateTime.now().toDate(), DateTime.now().toDate(), 10, "super description", "DRAFT");
     }
 

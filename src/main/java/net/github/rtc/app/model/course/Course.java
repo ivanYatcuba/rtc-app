@@ -34,7 +34,7 @@ public class Course implements Serializable {
     @Required
     @Column
     @ForExport("Type")
-    private String type; //todo: change field type to CourseType
+    private CourseType type; //todo: change field type to CourseType +
 
     @Required
     @Temporal(TemporalType.TIMESTAMP)
@@ -95,11 +95,11 @@ public class Course implements Serializable {
         this.tags = tags;
     }
 
-    public String getType() {
+    public CourseType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(CourseType type) {
         this.type = type;
     }
 
@@ -167,7 +167,7 @@ public class Course implements Serializable {
 
     }
 
-    public Course(String code, String name, String type, Author author, Date startDate, Date endDate,
+    public Course(String code, String name, CourseType type, Author author, Date startDate, Date endDate,
                   Date publishDate, Integer capacity, String description, String status) {
         this.code = code;
         this.name = name;

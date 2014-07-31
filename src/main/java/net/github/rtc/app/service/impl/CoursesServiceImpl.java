@@ -1,9 +1,6 @@
 package net.github.rtc.app.service.impl;
 
-import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseSearchResult;
-import net.github.rtc.app.model.course.PageDto;
-import net.github.rtc.app.model.course.SearchFilter;
+import net.github.rtc.app.model.course.*;
 import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.exception.ServiceProcessingException;
