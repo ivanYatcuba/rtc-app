@@ -36,8 +36,7 @@ public class DatabaseFillerOnStartup implements ApplicationListener<ContextRefre
             roleService.createRole(RoleType.ROLE_USER);
             roleService.createRole(RoleType.ROLE_EXPERT);
             User admin = new User("TestName","TestMiddlename","TestSurname", "admin", "admin");
-            admin.setAuthorities(new HashSet<>(Arrays.asList(roleService.getRoleByType(RoleType.ROLE_ADMIN),
-                    roleService.getRoleByType(RoleType.ROLE_USER))));
+            admin.setAuthorities(new HashSet<>(Arrays.asList(roleService.getRoleByType(RoleType.ROLE_ADMIN))));
             userService.create(admin);
         }
     }
