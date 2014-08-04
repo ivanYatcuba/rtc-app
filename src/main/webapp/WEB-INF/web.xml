@@ -28,7 +28,7 @@
 
     <!--Error Handle-->
     <error-page>
-        <exception-type>java.lang.Exception</exception-type>
+        <error-code>500</error-code>
         <location>/error</location>
     </error-page>
 
