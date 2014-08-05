@@ -1,11 +1,12 @@
 package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseSearchResult;
-import net.github.rtc.app.model.course.SearchFilter;
+import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.*;
 import net.github.rtc.app.service.*;
-import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
+import net.github.rtc.app.utils.datatable.CourseSearchResult;
+import net.github.rtc.app.utils.datatable.SearchFilter;
+import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.UserRoleAuthorizationInterceptor;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -79,12 +79,9 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("redirect:/" + ROOT + "/edit/");
         }
-        Set<Role> userRoles = new HashSet<>();
-        userRoles.add(roleService.getRoleByType(RoleType.ROLE_USER));
-        user.setAuthorities(userRoles);
         userService.update(user);
         session.setComplete();
-        return new ModelAndView("redirect:/" + ROOT_MODEL + "/view");
+        return new ModelAndView("redirect:/" + ROOT + "/view");
     }
 
 
@@ -96,7 +93,7 @@ public class UserController {
             return new ModelAndView("redirect:/" + ROOT + "/register/");
         }
 
-        Set<Role> userRoles = new HashSet<>();
+        List<Role> userRoles = new ArrayList<>();
         userRoles.add(roleService.getRoleByType(RoleType.ROLE_USER));
         user.setAuthorities(userRoles);
         userService.create(user);
@@ -112,7 +109,7 @@ public class UserController {
             ModelAndView mav = new ModelAndView(ROOT + "/page/usercours");
 
             SearchFilter searchFilter = new SearchFilter();
-            searchFilter.setStatus("PUBLISHED");
+            searchFilter.setStatus(CourseStatus.PUBLISHED);
             CourseSearchResult result = coursesService.findByFilter(searchFilter);
             Collections.sort((List<Course>)result.getCourses(), new Comparator<Course>() {
                 public int compare(Course course1, Course course2) {
@@ -159,7 +156,7 @@ public class UserController {
         } else if (orderParamsMap.get("userCourses").equals("Tester")) {
             userCourseOrder.setPosition(TraineePosition.TESTER);
         } else if (orderParamsMap.get("userCourses").equals("Business Analyst ")) {
-            userCourseOrder.setPosition(TraineePosition.BUSINESS_ANALIST);
+            userCourseOrder.setPosition(TraineePosition.BUSINESS_ANALYST);
         }
         userCourseOrder.setReason(orderParamsMap.get("userTextArea"));
         userCourseOrder.setStatus(UserRequestStatus.PENDING);
@@ -192,7 +189,7 @@ public class UserController {
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-        binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
+        binder.registerCustomEditor(Collection.class, new CustomStringEditor());
     }
 
     /**
@@ -204,5 +201,10 @@ public class UserController {
     public User getCommandObject() {
         return new User();
     }
+
+    private List<String> parseProgrammingLaguages(String languages){
+        return Arrays.asList(languages.split(","));
+    }
+
 
 }

@@ -1,7 +1,7 @@
 package net.github.rtc.app.controller;
 
 import net.github.rtc.app.controller.common.WelcomeController;
-import net.github.rtc.app.model.course.CourseSearchResult;
+import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.service.CoursesService;
 import org.junit.Before;
 import org.junit.Ignore;

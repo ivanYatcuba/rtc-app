@@ -11,7 +11,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.HashSet;
 
 /**
  * Created by Ivan Yatcuba on 7/22/14.
@@ -36,7 +35,8 @@ public class DatabaseFillerOnStartup implements ApplicationListener<ContextRefre
             roleService.createRole(RoleType.ROLE_USER);
             roleService.createRole(RoleType.ROLE_EXPERT);
             User admin = new User("TestName","TestMiddlename","TestSurname", "admin", "admin");
-            admin.setAuthorities(new HashSet<>(Arrays.asList(roleService.getRoleByType(RoleType.ROLE_ADMIN))));
+            admin.setAuthorities(Arrays.asList(roleService.getRoleByType(RoleType.ROLE_ADMIN),
+                    roleService.getRoleByType(RoleType.ROLE_USER)));
             userService.create(admin);
         }
     }

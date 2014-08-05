@@ -1,9 +1,10 @@
 package net.github.rtc.app.resource.impl;
 
 import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
-import net.github.rtc.app.model.course.PageDto;
-import net.github.rtc.app.model.course.SearchFilter;
+import net.github.rtc.app.utils.datatable.PageDto;
+import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.resource.CoursesResource;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -117,7 +118,7 @@ public class CoursesResourceImpl implements CoursesResource {
         if (title != null && !title.equals("")) {
             criteria.add(Restrictions.like("name", "%" + title + "%"));
         }
-        final String status = filter.getStatus();
+        final CourseStatus status = filter.getStatus();
         if (status != null && !status.equals("")) {
             final Disjunction stat = Restrictions.disjunction();
             stat.add(Restrictions.eq("status", status));

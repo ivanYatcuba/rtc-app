@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -101,16 +102,18 @@ public class User implements UserDetails {
     private String gender;
 
     @Column
-    private String progLanguages;     //todo: change field name to programming languages and use list of strings instead of string
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "UserProgLanguages", joinColumns =@JoinColumn(name = "user_id"))
+    private Set<String> programmingLanguages;     //todo: change field name to programming languages and use list of strings instead of string +
 
 
 
     /* Spring Security fields*/
-    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER )
-    @JoinTable(name="USER_ROLES",
-            joinColumns={@JoinColumn(name="USER_ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
-    private Set<Role> authorities;
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name="users_roles_refs",
+            joinColumns={@JoinColumn(name="ROLE_ID")},
+            inverseJoinColumns={@JoinColumn(name="id")})
+    private List<Role> authorities;
     @Column
     private boolean accountNonExpired = true;
     @Column
@@ -142,12 +145,12 @@ public class User implements UserDetails {
         return email;
     }
 
-    public void setProgLanguages(String progrLanguage) {
-        this.progLanguages = progrLanguage;
+    public void setProgrammingLanguages(Set<String> progrLanguage) {
+        this.programmingLanguages = progrLanguage;
     }
 
-    public String getProgLanguages() {
-        return this.progLanguages;
+    public Set<String> getProgrammingLanguages() {
+        return this.programmingLanguages;
     }
 
     @Override
@@ -155,7 +158,7 @@ public class User implements UserDetails {
         return authorities;
     }
 
-    public void setAuthorities(Set<Role> authorities) {
+    public void setAuthorities(List<Role> authorities) {
         this.authorities = authorities;
     }
 
@@ -322,7 +325,7 @@ public class User implements UserDetails {
                 String phone, String email, Date birthDate, String city,
                 String university, String faculty, String speciality,
                 String note, String password, String gender,
-                String progLanguages, String english) {
+                Set<String> programmingLanguages, String english) {
 
         this.code = code;
         this.surname = surname;
@@ -339,14 +342,14 @@ public class User implements UserDetails {
         this.note = note;
         this.password = password;
         this.gender = gender;
-        this.progLanguages = progLanguages;
+        this.programmingLanguages = programmingLanguages;
         this.english = english;
     }
 
     public User(String surname, String name, String middleName, String phone,
                 String email, Date birthDate, String city, String university,
                 String faculty, String speciality, String note, String password,
-                String gender, String progLanguages, String english) {
+                String gender, Set<String> programmingLanguages, String english) {
         this.surname = surname;
         this.name = name;
         this.middleName = middleName;
@@ -360,7 +363,7 @@ public class User implements UserDetails {
         this.note = note;
         this.password = password;
         this.gender = gender;
-        this.progLanguages = progLanguages;
+        this.programmingLanguages = programmingLanguages;
         this.english = english;
     }
 

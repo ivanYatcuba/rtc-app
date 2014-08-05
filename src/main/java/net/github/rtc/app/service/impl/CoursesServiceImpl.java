@@ -5,6 +5,9 @@ import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.service.ModelService;
+import net.github.rtc.app.utils.datatable.CourseSearchResult;
+import net.github.rtc.app.utils.datatable.PageDto;
+import net.github.rtc.app.utils.datatable.SearchFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +87,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     }
 
     /**
-     * @see CoursesService#( net.github.rtc.app.model.course.SearchFilter )
+     * @see CoursesService#( net.github.rtc.app.utils.datatable.SearchFilter )
      */
     @Override
     @Transactional
@@ -108,7 +111,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     @Override
     @Transactional
     public void publish(Course course) {
-        course.setStatus("PUBLISHED");
+        course.setStatus(CourseStatus.PUBLISHED);
         course.setPublishDate(new Date());
         resource.update(course);
     }

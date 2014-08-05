@@ -3,6 +3,7 @@ package net.github.rtc.app.impl;
 import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.course.Author;
 import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.resource.impl.CoursesResourceImpl;
@@ -40,7 +41,7 @@ public class CourseServiceImplTest {
         mockResource = mock(CoursesResourceImpl.class);
        // ((CoursesServiceImpl)service).setResource(mockResource);
         course = new Course("codeTest", "nameTest", CourseType.DEV, new Author("Vasya", "Pupkin", "vasia@gmail.com"),
-                DateTime.now().toDate(), DateTime.now().toDate(), DateTime.now().toDate(), 10, "super description", "DRAFT");
+                DateTime.now().toDate(), DateTime.now().toDate(), DateTime.now().toDate(), 10, "super description", CourseStatus.DRAFT);
     }
 
     @Test

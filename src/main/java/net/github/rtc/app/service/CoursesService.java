@@ -1,8 +1,8 @@
 package net.github.rtc.app.service;
 
 import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseSearchResult;
-import net.github.rtc.app.model.course.SearchFilter;
+import net.github.rtc.app.utils.datatable.CourseSearchResult;
+import net.github.rtc.app.utils.datatable.SearchFilter;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseSearchResult;
-import net.github.rtc.app.model.course.Page;
-import net.github.rtc.app.model.course.SearchFilter;
+import net.github.rtc.app.utils.datatable.CourseSearchResult;
+import net.github.rtc.app.utils.datatable.Page;
+import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.service.CategoryService;
 import net.github.rtc.app.service.CoursesService;

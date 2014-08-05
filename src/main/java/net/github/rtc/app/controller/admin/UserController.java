@@ -5,7 +5,7 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.RoleService;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
+import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -18,7 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author  Lapshin Ugene
@@ -45,7 +48,6 @@ public class UserController {
         mav.addObject("users", listUser);
         return mav;
     }
-
     @RequestMapping(value = "/view/{code}", method = RequestMethod.GET)
     public ModelAndView user(@PathVariable Integer code) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/userPagea");
@@ -70,7 +72,7 @@ public class UserController {
     @RequestMapping(value = "/delete/{code}", method = RequestMethod.GET)
     public String delete(@PathVariable String code) {
         userService.deleteByCode(code);
-        return  "redirect:/admin/" + ROOT_MODEL + "/viewAll";
+        return  "redirect:/"+ROOT+"/user/viewAll";
     }
 
     
@@ -82,29 +84,28 @@ public class UserController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid User user,
+    public String save(@ModelAttribute(ROOT_MODEL) @Valid User user,
                              SessionStatus session, @RequestParam RoleType selectedRole) {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/viewAllusers");
-        Set<Role> useRoles = new HashSet<>();
+        List<Role> useRoles = new ArrayList<>();
         useRoles.add(roleService.getRoleByType(selectedRole));
         user.setAuthorities(useRoles);
         userService.create(user);
         session.setComplete();
-        Collection<User> listUser=userService.findAll();
-        mav.addObject("users", listUser);
-        return mav;
+        return "redirect:viewAll";
     }
 
     @RequestMapping(value = "/update/{code}", method = RequestMethod.POST)
     public ModelAndView update(@PathVariable String code, @ModelAttribute(ROOT_MODEL) @Valid User user,
-                             SessionStatus session, @RequestParam RoleType selectedRole) {
+                             BindingResult bindingResult,
+                             SessionStatus session) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/viewAllusers");
-        Set<Role> useRoles = new HashSet<>();
-        useRoles.add(roleService.getRoleByType(selectedRole));
-        user.setAuthorities(useRoles);
-        userService.update(user);
-        session.setComplete();
+        List<Role> rol = new ArrayList<Role>();
+        rol.add(new Role());
+        user.setAuthorities(rol);
+        user.setCode(code);
 
+        this.userService.update(user);
+        session.setComplete();
         Collection<User> listUser=userService.findAll();
         mav.addObject("users", listUser);
 
@@ -120,7 +121,7 @@ public class UserController {
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-        binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
+        binder.registerCustomEditor(Collection.class, new CustomStringEditor());
     }
 
 

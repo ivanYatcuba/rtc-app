@@ -1,4 +1,6 @@
-package net.github.rtc.app.model.course;
+package net.github.rtc.app.utils.datatable;
+
+import net.github.rtc.app.model.course.CourseStatus;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,7 +16,7 @@ public class SearchFilter {
     private String startDate;
     private Collection<String> categories;
     private Collection<String> tags;
-    private String status;
+    private CourseStatus status;
     private Integer pageNumber = 0;
     private Integer maxResult = 0;
 
@@ -51,9 +53,9 @@ public class SearchFilter {
         this.tags = tags;
     }
 
-    public String getStatus() { return status; }
+    public CourseStatus getStatus() { return status; }
 
-    public void setStatus(String status) { this.status = status; }
+    public void setStatus(CourseStatus status) { this.status = status; }
 
     public Integer getPageNumber() {return pageNumber;}
 
@@ -118,7 +120,7 @@ public class SearchFilter {
 
         public QueryBuilder byStatus() {
             if (!status.equals("")) {
-                map.put("status", status);
+                map.put("status", status.name());
             }
             return this;
         }

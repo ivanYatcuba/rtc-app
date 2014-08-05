@@ -1,7 +1,7 @@
 package net.github.rtc.app.controller.expert;
 
-import net.github.rtc.app.model.course.CourseSearchResult;
-import net.github.rtc.app.model.course.SearchFilter;
+import net.github.rtc.app.utils.datatable.CourseSearchResult;
+import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.model.user.Request;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.model.user.UserRequestStatus;

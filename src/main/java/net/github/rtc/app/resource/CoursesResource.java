@@ -1,8 +1,8 @@
 package net.github.rtc.app.resource;
 
 import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.PageDto;
-import net.github.rtc.app.model.course.SearchFilter;
+import net.github.rtc.app.utils.datatable.PageDto;
+import net.github.rtc.app.utils.datatable.SearchFilter;
 
 import java.util.Collection;
 import java.util.List;

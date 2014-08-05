@@ -1,5 +1,7 @@
-package net.github.rtc.app.model.course;
+package net.github.rtc.app.utils.datatable;
 
+
+import net.github.rtc.app.model.course.Course;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,7 +9,7 @@ import java.util.Collection;
 /**
  * @author Vladislav Pikus
  */
-//todo: move class to net.github.rtc.app.util.datatable package
+//todo: move class to net.github.rtc.app.util.datatable package +
 public class CourseSearchResult {
     private final Collection<Course> courses;
     private final int totalCount;

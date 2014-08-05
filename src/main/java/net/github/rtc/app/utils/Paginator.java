@@ -1,6 +1,6 @@
 package net.github.rtc.app.utils;
 
-import net.github.rtc.app.model.course.Page;
+import net.github.rtc.app.utils.datatable.Page;
 import org.springframework.stereotype.Component;
 
 /**

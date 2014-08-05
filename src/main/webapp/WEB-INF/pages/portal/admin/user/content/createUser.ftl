@@ -93,7 +93,7 @@
 
 <div class="row-fluid span12" style="margin-left: 1px">
     <!--Languages-->
-    <div class="span6"><@spring.formItem "user.progLanguages"/></div>
+    <div class="span6"><@spring.formItem "user.programmingLanguages"/></div>
 
     <!--English-->
     <div class="span6">

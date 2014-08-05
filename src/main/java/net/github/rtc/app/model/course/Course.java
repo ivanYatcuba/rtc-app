@@ -34,6 +34,7 @@ public class Course implements Serializable {
     @Required
     @Column
     @ForExport("Type")
+    @Enumerated(EnumType.STRING)
     private CourseType type; //todo: change field type to CourseType +
 
     @Required
@@ -48,7 +49,8 @@ public class Course implements Serializable {
 
     @Column
     @ForExport("Status")
-    private String status = "DRAFT";  //todo: change field type to CourseStatus
+    @Enumerated(EnumType.STRING)
+    private CourseStatus status = CourseStatus.DRAFT;  //todo: change field type to CourseStatus
 
     @Column
     @ForExport("Publish date")
@@ -151,9 +153,9 @@ public class Course implements Serializable {
 
     public void setDescription(String description) { this.description = description; }
 
-    public String getStatus() { return status; }
+    public CourseStatus getStatus() { return status; }
 
-    public void setStatus(String status) { this.status = status; }
+    public void setStatus(CourseStatus status) { this.status = status; }
 
     public Date getPublishDate() { return publishDate; }
 
@@ -168,7 +170,7 @@ public class Course implements Serializable {
     }
 
     public Course(String code, String name, CourseType type, Author author, Date startDate, Date endDate,
-                  Date publishDate, Integer capacity, String description, String status) {
+                  Date publishDate, Integer capacity, String description, CourseStatus status) {
         this.code = code;
         this.name = name;
         this.type = type;

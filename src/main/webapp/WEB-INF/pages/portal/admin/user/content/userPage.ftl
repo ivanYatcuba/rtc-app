@@ -100,7 +100,7 @@
 
         <div class="span12" style="margin-left: 80px">
             <div class="span7" style="margin-left: -105px">
-                <label>Programming languages:${user.progLanguages}</label>
+                <label>Programming languages:${user.programmingLanguages}</label>
             </div>
             <div class="span3" style="margin-left: -70px">
                 <label>English:${user.english}</label>

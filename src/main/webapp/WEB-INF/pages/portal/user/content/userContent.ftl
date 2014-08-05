@@ -67,10 +67,10 @@
         <hr width="100%">
         <div class="row">
             <div class="col-md-3">
-                <div align="right"><@spring.message "user.progLanguages"/>:</div>
+                <div align="right"><@spring.message "user.programmingLanguages"/>:</div>
             </div>
             <div class="col-md-3">
-                <div align="left">${user.progLanguages}</div>
+                <div align="left">${user.programmingLanguages}</div>
             </div>
             <div class="col-md-3">
                 <div align="right"><@spring.message "user.english"/>:</div>

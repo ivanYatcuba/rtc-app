@@ -1,4 +1,4 @@
-package net.github.rtc.app.model.course;
+package net.github.rtc.app.utils.datatable;
 
 /**
  * @author Vladislav Pikus

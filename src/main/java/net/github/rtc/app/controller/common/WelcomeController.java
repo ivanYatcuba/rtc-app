@@ -1,8 +1,9 @@
 package net.github.rtc.app.controller.common;
 
 import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseSearchResult;
-import net.github.rtc.app.model.course.SearchFilter;
+import net.github.rtc.app.model.course.CourseStatus;
+import net.github.rtc.app.utils.datatable.CourseSearchResult;
+import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.service.CoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,8 +38,8 @@ public class WelcomeController {
         Calendar rightNow = Calendar.getInstance();
 
         searchFilter.setStartDate(sdf.format(rightNow.getTime()));
-        searchFilter.setStatus("PUBLISHED");
-        searchFilter.setMaxResult(3);
+        searchFilter.setStatus(CourseStatus.PUBLISHED);
+                searchFilter.setMaxResult(3);
 
         CourseSearchResult result = coursesService.findByFilter(searchFilter);
         Collections.sort((List<Course>)result.getCourses(), new Comparator<Course>() {
