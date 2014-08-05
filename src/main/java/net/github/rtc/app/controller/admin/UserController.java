@@ -91,7 +91,7 @@ public class UserController {
         user.setAuthorities(useRoles);
         userService.create(user);
         session.setComplete();
-        return "redirect:viewAll";
+        return "redirect:/admin/user/viewAll";
     }
 
     @RequestMapping(value = "/update/{code}", method = RequestMethod.POST)
