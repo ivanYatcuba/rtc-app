@@ -3,6 +3,7 @@ package net.github.rtc.app.model.user;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * @author Vladislav Pikus
@@ -16,6 +17,9 @@ public class Role implements GrantedAuthority {
 
     @Column
     private String name;
+
+    @ManyToMany(mappedBy="authorities")
+    private Set<User> users;
 
     public Role() {
     }
@@ -37,6 +41,9 @@ public class Role implements GrantedAuthority {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Set<User> getUsers() {return users;}
+    public void setUsers(Set<User> users) {this.users = users;}
 
     @Override
     public String getAuthority() {

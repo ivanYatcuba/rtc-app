@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Validatable
@@ -106,11 +106,11 @@ public class User implements UserDetails {
 
 
     /* Spring Security fields*/
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinTable(name="users_roles_refs",
-            joinColumns={@JoinColumn(name="ROLE_ID")},
-            inverseJoinColumns={@JoinColumn(name="id")})
-    private List<Role> authorities;
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER )
+    @JoinTable(name="USER_ROLES",
+            joinColumns={@JoinColumn(name="USER_ID")},
+            inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
+    private Set<Role> authorities;
     @Column
     private boolean accountNonExpired = true;
     @Column
@@ -155,7 +155,7 @@ public class User implements UserDetails {
         return authorities;
     }
 
-    public void setAuthorities(List<Role> authorities) {
+    public void setAuthorities(Set<Role> authorities) {
         this.authorities = authorities;
     }
 

@@ -45,6 +45,7 @@ public class UserController {
         mav.addObject("users", listUser);
         return mav;
     }
+
     @RequestMapping(value = "/view/{code}", method = RequestMethod.GET)
     public ModelAndView user(@PathVariable Integer code) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/userPagea");
@@ -69,7 +70,7 @@ public class UserController {
     @RequestMapping(value = "/delete/{code}", method = RequestMethod.GET)
     public String delete(@PathVariable String code) {
         userService.deleteByCode(code);
-        return  "redirect:/"+ROOT+"/user/viewAll";
+        return  "redirect:/admin/" + ROOT_MODEL + "/viewAll";
     }
 
     
@@ -84,7 +85,7 @@ public class UserController {
     public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid User user,
                              SessionStatus session, @RequestParam RoleType selectedRole) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/viewAllusers");
-        List<Role> useRoles = new ArrayList<>();
+        Set<Role> useRoles = new HashSet<>();
         useRoles.add(roleService.getRoleByType(selectedRole));
         user.setAuthorities(useRoles);
         userService.create(user);
@@ -96,16 +97,14 @@ public class UserController {
 
     @RequestMapping(value = "/update/{code}", method = RequestMethod.POST)
     public ModelAndView update(@PathVariable String code, @ModelAttribute(ROOT_MODEL) @Valid User user,
-                             BindingResult bindingResult,
-                             SessionStatus session) {
+                             SessionStatus session, @RequestParam RoleType selectedRole) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/viewAllusers");
-        List<Role> rol = new ArrayList<Role>();
-        rol.add(new Role());
-        user.setAuthorities(rol);
-        user.setCode(code);
-
-        this.userService.update(user);
+        Set<Role> useRoles = new HashSet<>();
+        useRoles.add(roleService.getRoleByType(selectedRole));
+        user.setAuthorities(useRoles);
+        userService.update(user);
         session.setComplete();
+
         Collection<User> listUser=userService.findAll();
         mav.addObject("users", listUser);
 

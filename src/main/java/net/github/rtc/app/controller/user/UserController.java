@@ -79,9 +79,12 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("redirect:/" + ROOT + "/edit/");
         }
+        Set<Role> userRoles = new HashSet<>();
+        userRoles.add(roleService.getRoleByType(RoleType.ROLE_USER));
+        user.setAuthorities(userRoles);
         userService.update(user);
         session.setComplete();
-        return new ModelAndView("redirect:/" + ROOT + "/view");
+        return new ModelAndView("redirect:/" + ROOT_MODEL + "/view");
     }
 
 
@@ -93,7 +96,7 @@ public class UserController {
             return new ModelAndView("redirect:/" + ROOT + "/register/");
         }
 
-        List<Role> userRoles = new ArrayList<>();
+        Set<Role> userRoles = new HashSet<>();
         userRoles.add(roleService.getRoleByType(RoleType.ROLE_USER));
         user.setAuthorities(userRoles);
         userService.create(user);
