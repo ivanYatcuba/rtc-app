@@ -2,7 +2,10 @@ package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.RoleType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.quartz.JobDetailFactoryBean;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +27,10 @@ import java.util.List;
 
 @Controller("exportController")
 @RequestMapping("admin/export")
-
 public class ExportController {
+
+    //@Autowired
+    //private SchedulerFactoryBean scheduler;
 
     private static final int BUFFER_SIZE = 4096;
     private static final String ROOT = "portal/admin";
@@ -34,6 +39,7 @@ public class ExportController {
     private String usersExportFile;
     @Value("${course.export.path}")
     private String coursesExportFile;
+
 
     @RequestMapping(value = "/exportCourses", method = RequestMethod.GET)
     public ModelAndView exportCourses() {

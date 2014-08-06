@@ -7,10 +7,11 @@
              http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/admin*/*" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
+        <!--<intercept-url pattern="/user/*" access="hasRole('ROLE_USER')" />-->
         <form-login login-page="/login" default-target-url="/login_attempt"
                     authentication-failure-url="/loginfailed"
-        authentication-success-handler-ref="simpleAuthenticationSuccessHandler"/>
+                    authentication-success-handler-ref="simpleAuthenticationSuccessHandler"/>
         <logout logout-success-url="/logout" />
         <logout delete-cookies="JSESSIONID" />
         <remember-me key="uniqueAndSecret" token-validity-seconds="86400"/>
@@ -23,7 +24,6 @@
     <authentication-manager alias="authenticationManager">
         <authentication-provider ref="userAuthenticationProvider"/>
     </authentication-manager>
-
 
     <beans:bean id="userAuthenticationProvider"
                 class="net.github.rtc.app.security.UserAuthenticationProvider" />

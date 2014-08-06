@@ -21,13 +21,13 @@ public class XLSXReportBuilder {
     /**
      * Create xlsx report file
      *
-     * @param classType report about this model class,
+     * @param reportFields report about this model class,
      *                  which fields that needs to be in report are annotated by @ForExport.
      * @param objectsList list of object that will be stored in report table.
      * @param sheetName name of sheet in xlsx file.
      * @param xlsxPath path where report file will be stored
      */
-    public <T> void build(Class<T> classType, List<T> objectsList,
+    public <T> void build(List<Field> reportFields, List<T> objectsList,
                             String sheetName ,String xlsxPath){
         Workbook wb = new XSSFWorkbook();
         Sheet sheet = wb.createSheet(sheetName);
@@ -41,26 +41,21 @@ public class XLSXReportBuilder {
         int currentCol = 0;
         int currentRow = 0;
         Row row = sheet.createRow(currentRow);
-        Field[] fields = classType.getDeclaredFields();
-        for(Field f : fields){
-            if(f.isAnnotationPresent(ForExport.class)){
-                row.createCell(currentCol).setCellValue(createHelper.
-                        createRichTextString(f.getAnnotation(ForExport.class).value()));
-                currentCol++;
-            }
+        for(Field field : reportFields){
+            row.createCell(currentCol).setCellValue(createHelper.
+                    createRichTextString(field.getAnnotation(ForExport.class).value()));
+            currentCol++;
         }
 
         //Getting info from list
         currentRow++;
         for(T object : objectsList){
             sheet.createRow(currentRow);
-            for(int j =0; j < fields.length; j++){
-                if(fields[j].isAnnotationPresent(ForExport.class)){
-                    try {
-                        writeField(fields[j], sheet, currentRow, j, object, cellStyle, createHelper);
-                    } catch (IllegalAccessException | NullPointerException e) {
-                        sheet.getRow(currentRow).createCell(j).setCellValue("null");
-                    }
+            for(int j =0; j < reportFields.size(); j++){
+                try {
+                    writeField(reportFields.get(j), sheet, currentRow, j, object, cellStyle, createHelper);
+                } catch (IllegalAccessException | NullPointerException e) {
+                    sheet.getRow(currentRow).createCell(j).setCellValue("null");
                 }
             }
             currentRow++;
