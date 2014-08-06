@@ -201,9 +201,5 @@ public class UserController {
         return new User();
     }
 
-    private List<String> parseProgrammingLaguages(String languages){
-        return Arrays.asList(languages.split(","));
-    }
-
 
 }
