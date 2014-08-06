@@ -26,7 +26,7 @@ public class Course implements Serializable {
 
     @Required
     @Minlength(2)
-    @Maxlength(30)
+    @Maxlength(50)
     @Column
     @ForExport("Name")
     private String name;
@@ -35,7 +35,7 @@ public class Course implements Serializable {
     @Column
     @ForExport("Type")
     @Enumerated(EnumType.STRING)
-    private CourseType type; //todo: change field type to CourseType +
+    private CourseType type;
 
     @Required
     @Temporal(TemporalType.TIMESTAMP)
@@ -66,7 +66,7 @@ public class Course implements Serializable {
     @Min(1)
     @Column
     @ForExport("Capacity")
-    private Integer capacity;
+    private Integer capacity = 10;
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name="courses_tags",

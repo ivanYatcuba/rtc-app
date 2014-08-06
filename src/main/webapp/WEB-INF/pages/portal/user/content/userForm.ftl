@@ -1,4 +1,5 @@
 <@spring.formHiddenInput "user.code" />
+<@spring.formHiddenInput "user.registerDate" />
 <div class="row-fluid span12" style="margin-left: 1px">
 
     <!--Email-->

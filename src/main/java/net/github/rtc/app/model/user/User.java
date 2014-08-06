@@ -25,20 +25,17 @@ public class User implements UserDetails {
 
     @Required
     @Maxlength(50)
-    @Minlength(5)
     @Column
     @ForExport("Surname")
     private String surname;
 
     @Required
     @Maxlength(50)
-    @Minlength(5)
     @Column
     @ForExport("Name")
     private String name;
 
     @Maxlength(50)
-    @Minlength(5)
     @Column
     @ForExport("Midle name")
     private String middleName;
@@ -61,25 +58,21 @@ public class User implements UserDetails {
     private String email;
 
     @Maxlength(30)
-    @Minlength(5)
     @Column
     @ForExport("City")
     private String city;
 
     @Maxlength(30)
-    @Minlength(5)
     @Column
     @ForExport("University")
     private String university;
 
     @Maxlength(30)
-    @Minlength(5)
     @Column
     @ForExport("Faculty")
     private String faculty;
 
     @Maxlength(30)
-    @Minlength(5)
     @Column
     @ForExport("Speciality")
     private String speciality;
@@ -104,14 +97,17 @@ public class User implements UserDetails {
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "UserProgLanguages", joinColumns =@JoinColumn(name = "user_id"))
-    private Set<String> programmingLanguages;     //todo: change field name to programming languages and use list of strings instead of string +
+    private Set<String> programmingLanguages;
 
-
+    @Required
+    @Column
+    @ForExport("Register Date")
+    private Date registerDate;
 
     /* Spring Security fields*/
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinTable(name="users_roles_refs",
-            joinColumns={@JoinColumn(name="ROLE_ID")},
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="User_Role",
+            joinColumns={@JoinColumn(name="USER_ID")},
             inverseJoinColumns={@JoinColumn(name="id")})
     private List<Role> authorities;
     @Column
@@ -304,6 +300,9 @@ public class User implements UserDetails {
     public long getId() { return id;}
 
     public void setId(long id) { this.id = id; }
+
+    public Date getRegisterDate() {return registerDate;}
+    public void setRegisterDate(Date registerDate) {this.registerDate = registerDate;}
 
     // for authentification
     public boolean hasRole(String role) {

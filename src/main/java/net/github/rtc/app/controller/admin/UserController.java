@@ -18,10 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author  Lapshin Ugene
@@ -72,7 +69,7 @@ public class UserController {
     @RequestMapping(value = "/delete/{code}", method = RequestMethod.GET)
     public String delete(@PathVariable String code) {
         userService.deleteByCode(code);
-        return  "redirect:/"+ROOT+"/user/viewAll";
+        return  "redirect:/admin/user/viewAll";
     }
 
     
@@ -86,30 +83,22 @@ public class UserController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute(ROOT_MODEL) @Valid User user,
                              SessionStatus session, @RequestParam RoleType selectedRole) {
-        List<Role> useRoles = new ArrayList<>();
-        useRoles.add(roleService.getRoleByType(selectedRole));
-        user.setAuthorities(useRoles);
+        user.setAuthorities(Arrays.asList(roleService.getRoleByType(selectedRole)));
+        user.setRegisterDate(new Date());
         userService.create(user);
         session.setComplete();
         return "redirect:/admin/user/viewAll";
     }
 
     @RequestMapping(value = "/update/{code}", method = RequestMethod.POST)
-    public ModelAndView update(@PathVariable String code, @ModelAttribute(ROOT_MODEL) @Valid User user,
+    public String update(@PathVariable String code, @ModelAttribute(ROOT_MODEL) @Valid User user,
                              BindingResult bindingResult,
-                             SessionStatus session) {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/viewAllusers");
-        List<Role> rol = new ArrayList<Role>();
-        rol.add(new Role());
-        user.setAuthorities(rol);
+                             SessionStatus session, @RequestParam RoleType selectedRole) {
+        user.setAuthorities(Arrays.asList(roleService.getRoleByType(selectedRole)));
         user.setCode(code);
-
         this.userService.update(user);
         session.setComplete();
-        Collection<User> listUser=userService.findAll();
-        mav.addObject("users", listUser);
-
-        return mav;
+        return "redirect:/admin/user/userPage/" + user.getCode();
     }
       
     @ModelAttribute(value = ROOT_MODEL)

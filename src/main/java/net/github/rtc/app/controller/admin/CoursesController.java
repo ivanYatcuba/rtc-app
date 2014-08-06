@@ -168,9 +168,9 @@ public class CoursesController {
         if (bindingResult.hasErrors()) {
             return  new ModelAndView(ROOT + "/page/createContent");
         }
-        course = coursesService.create(course);
+        coursesService.create(course);
         session.setComplete();
-        return new ModelAndView("redirect:"  + course.getCode());
+        return new ModelAndView("redirect:/admin/course/");
     }
 
     /**

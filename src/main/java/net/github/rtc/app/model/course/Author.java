@@ -30,6 +30,7 @@ public class Author implements Serializable {
 
     @Required
     @Email
+    @Maxlength(75)
     @Column
     private String email;
 

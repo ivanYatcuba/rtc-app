@@ -6,7 +6,7 @@
                 <div align="right"><@spring.message "user.email"/>:</div>
             </div>
             <div class="col-md-9">
-                <div align="left">${user.email}</div>
+                <div align="left">${(user.email)!" "}</div>
             </div>
         </div>
         <hr width="100%">
@@ -17,9 +17,9 @@
                 <div align="right"><@spring.message "user.middleName"/>:</div>
             </div>
             <div class="col-md-3">
-                <div align="left">${user.gender}</div>
-                <div align="left">${user.surname}</div>
-                <div align="left">${user.middleName}</div>
+                <div align="left">${(user.gender)!" "}</div>
+                <div align="left">${(user.surname)!" "}</div>
+                <div align="left">${(user.middleName)!" "}</div>
             </div>
             <div class="col-md-3">
                 <br>
@@ -28,8 +28,8 @@
             </div>
             <div class="col-md-3">
                 <br>
-                <div align="left">${user.name}</div>
-                <div align="left">${user.birthDate?date}</div>
+                <div align="left">${(user.name)!" "}</div>
+                <div align="left">${(user.birthDate?date)!" "}</div>
             </div>
         </div>
         <hr width="100%">
@@ -38,13 +38,13 @@
                 <div align="right"><@spring.message "user.city"/>:</div>
             </div>
             <div class="col-md-3">
-                <div align="left">${user.city}</div>
+                <div align="left">${(user.city)!" "}</div>
             </div>
             <div class="col-md-3">
                 <div align="right"><@spring.message "user.phone"/>:</div>
             </div>
             <div class="col-md-3">
-                <div align="left">${user.phone}</div>
+                <div align="left">${(user.phone)!" "}</div>
             </div>
         </div>
         <hr width="100%">
@@ -54,14 +54,14 @@
                 <div align="right"><@spring.message "user.faculty"/>:</div>
             </div>
             <div class="col-md-3">
-                <div align="left">${user.university}</div>
-                <div align="left">${user.faculty}</div>
+                <div align="left">${(user.university)!" "}</div>
+                <div align="left">${(user.faculty)!" "}</div>
             </div>
             <div class="col-md-3">
                 <div align="right"><@spring.message "user.speciality"/>:</div>
             </div>
             <div class="col-md-3">
-                <div align="left">${user.speciality}</div>
+                <div align="left">${(user.speciality)!" "}</div>
             </div>
         </div>
         <hr width="100%">
@@ -70,13 +70,19 @@
                 <div align="right"><@spring.message "user.programmingLanguages"/>:</div>
             </div>
             <div class="col-md-3">
-                <div align="left">${user.programmingLanguages}</div>
+                <div align="left">
+                    <#if (user.programmingLanguages)??>
+                        <#list user.programmingLanguages as progLang>
+                          ${progLang}<#if progLang_has_next>,</#if>
+                        </#list>
+                    </#if>
+                </div>
             </div>
             <div class="col-md-3">
                 <div align="right"><@spring.message "user.english"/>:</div>
             </div>
             <div class="col-md-3">
-                <div align="left">${user.english}</div>
+                <div align="left">${(user.english)!" "}</div>
             </div>
         </div>
         <hr width="100%">
@@ -85,7 +91,7 @@
                 <div align="right"><@spring.message "user.note"/>:</div>
             </div>
             <div class="col-md-9">
-                <div style="width:100%; word-wrap: break-word;" align="left">${user.note}</div>
+                <div style="width:100%; word-wrap: break-word;" align="left">${(user.note)!" "}</div>
             </div>
         </div>
         <hr width="100%">

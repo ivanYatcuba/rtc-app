@@ -28,17 +28,17 @@
             <td>None</td>
         </#if>
 
-        <#if (user.regDate)??>
-            <td>${user.regDate}</td>
+        <#if (user.registerDate)??>
+            <td>${user.registerDate}</td>
         <#else>
             <td>None</td>
         </#if>
 
-        <#if (user.role)??>
-            <td>${user.role}</td>
-        <#else>
-            <td>None</td>
-        </#if>
+        <td>
+            <#list user.authorities as role>
+            ${role}<#if role_has_next>,</#if>
+            </#list>
+        </td>
 
         <td><a href="<@spring.url "/admin/user/delete/${user.code}" />">Remove</a></td>
 
