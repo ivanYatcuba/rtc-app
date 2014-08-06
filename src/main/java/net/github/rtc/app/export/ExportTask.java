@@ -9,7 +9,7 @@ import java.util.List;
 public class ExportTask {
 
     public <T> void exportData(Class<T> aClass, List<T> list, String reportName, String reportPath) {
-        XLSXReportBuilder reportBuilder = new XLSXReportBuilder();
+        //XLSXReportBuilder reportBuilder = new XLSXReportBuilder();
         //reportBuilder.build(aClass, list, reportName, reportPath);
     }
 }

@@ -8,7 +8,6 @@ package net.github.rtc.app.resource.impl;
 
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.resource.UserResource;
-import org.hibernate.FetchMode;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
