@@ -11,7 +11,7 @@
     <tr>
         <#if (user.name) ?? && (user.surname) ?? >
             <td>
-                <a href="<@spring.url"/admin/user/userPage/${user.code}"/>">  ${user.name + " " + user.surname} </a></td>
+                <a href="<@spring.url"/admin/user/userPage/${user.code}"/>">  ${user.surname + " " + user.name } </a></td>
         <#else>
             <td>None</td>
         </#if>
