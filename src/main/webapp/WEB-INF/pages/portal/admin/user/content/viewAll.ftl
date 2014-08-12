@@ -55,7 +55,7 @@
 
 <br><br>
 <div align = "right">
-    <form name="createUser" action="/createUser" method="get">
+    <form name="createUser" action="/admin/user/createUser" method="get">
     <button type="submit">Create</button>
 </div>
 
