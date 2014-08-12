@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Service Implementation
@@ -55,7 +56,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     public void delete(String code) {
         LOG.info("Removing course with code " + code);
         checkCode(code);
-        resource.delete(code);
+        resource.deleteByCode(code);
     }
 
     /**
@@ -76,6 +77,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     @Transactional
     public Course create(Course course) {
         LOG.info("Creating course " + course);
+        course.setCode(UUID.randomUUID().toString());
         return resource.create(course);
     }
 
@@ -86,8 +88,6 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     @Transactional
     public void update(Course course) {
         LOG.info("Updating course: " + course);
-        Course courseToUpdate = resource.findByCode(course.getCode());
-        course.setId(courseToUpdate.getId());  //todo: course already must have id at this point
         resource.update(course);
     }
 
@@ -112,7 +112,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     @Transactional
     public List<Course> findAll() {
         LOG.info("Getting all courses from database...");
-        return resource.findAll();
+        return (List)resource.findAll();
     }
 
     @Override

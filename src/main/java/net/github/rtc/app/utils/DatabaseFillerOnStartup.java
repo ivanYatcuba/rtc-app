@@ -2,7 +2,6 @@ package net.github.rtc.app.utils;
 
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.service.RoleService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.service.UserServiceLogin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +25,16 @@ public class DatabaseFillerOnStartup implements ApplicationListener<ContextRefre
     UserService userService;
     @Autowired
     UserServiceLogin userServiceLogin;
-    @Autowired
-    RoleService roleService;
+
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         if(userServiceLogin.loadUserByUsername("admin") == null){
-            roleService.createRole(RoleType.ROLE_ADMIN);
-            roleService.createRole(RoleType.ROLE_USER);
-            roleService.createRole(RoleType.ROLE_EXPERT);
+            userService.createRole(RoleType.ROLE_ADMIN);
+            userService.createRole(RoleType.ROLE_USER);
+            userService.createRole(RoleType.ROLE_EXPERT);
             User admin = new User("TestName","TestMiddlename","TestSurname", "admin", "admin");
-            admin.setAuthorities(Arrays.asList(roleService.getRoleByType(RoleType.ROLE_ADMIN)));
+            admin.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_ADMIN)));
             admin.setRegisterDate(new Date());
             userService.create(admin);
         }

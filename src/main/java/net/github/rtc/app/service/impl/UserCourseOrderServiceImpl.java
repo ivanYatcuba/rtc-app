@@ -26,21 +26,21 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Transactional
     public void insert(UserCourseOrder order) {
         LOG.info("Creating order: " + order);
-        resource.insert(order);
+        resource.create(order);
     }
 
     @Override
     @Transactional
     public UserCourseOrder getUserOrder(long id) {
         LOG.info("Getting user course order with id: " + id);
-        return resource.findByID(id);
+        return resource.find(id);
     }
 
     @Override
     @Transactional
     public List<UserCourseOrder> getAll() {
         LOG.info("Getting all orders from database..");
-        return resource.getAll();
+        return (List)resource.findAll();
     }
 
     @Override
@@ -54,14 +54,14 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Transactional
     public void delete(UserCourseOrder order) {
         LOG.info("Removing user order: " + order);
-        resource.delete(order);
+        resource.delete(order.getId());
     }
 
     @Override
     @Transactional
-    public UserCourseOrder getUserOrderByUserCode(String code) {
-        LOG.info("Get user order by code: " + code);
-        return resource.getUserOrder(code);
+    public UserCourseOrder getUserOrderByUserCode(String userCode) {
+        LOG.info("Get user order by user code: " + userCode);
+        return resource.getUserOrder(userCode);
     }
 
     @Override

@@ -1,43 +1,14 @@
 package net.github.rtc.app.resource;
 
+import net.github.rtc.app.model.user.Role;
+import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import java.util.List;
 
 /**
  *
  * @author Саша
  */
-public interface UserResource {
-    User findByCode(String code);
-
-    /**
-     * Find collection of users
-     *
-     * @return collection of users
-     */
-    List<User> findAll();
-
-    /**
-     * Will be delete user by code
-     *
-     * @param user user to delete
-     */
-    void delete(User user);
-
-    /**
-     * Create a new user object
-     *
-     * @param user new user object
-     * @return user with updated fields
-     */
-    User create(User user);
-
-    /**
-     * Update a course object
-     *
-     * @param user user object for update
-     */
-    void update(User user);
+public interface UserResource extends GenericResource<User> {
 
     /**
      * Find user collection by email param
@@ -47,10 +18,7 @@ public interface UserResource {
      */
     User findByEmail(String email);
 
-    /**
-     * Delete user by code
-     *
-     * @param code user`s code param
-     */
-    void deleteByСode(String code);
+    Role getRoleByType(RoleType type);
+
+    void createRole(RoleType type);
 }

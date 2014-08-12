@@ -1,9 +1,7 @@
 package net.github.rtc.app.controller.admin;
 
-import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.service.RoleService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
@@ -31,8 +29,6 @@ public class UserController {
     private ValidationContext validationContext;
     @Autowired
     private UserService userService;
-    @Autowired
-    private RoleService roleService;
 
     private static final String ROOT = "portal/admin";
     private static final String ROOT_MODEL = "user";
@@ -83,7 +79,7 @@ public class UserController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute(ROOT_MODEL) @Valid User user,
                              SessionStatus session, @RequestParam RoleType selectedRole) {
-        user.setAuthorities(Arrays.asList(roleService.getRoleByType(selectedRole)));
+        user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
         user.setRegisterDate(new Date());
         userService.create(user);
         session.setComplete();
@@ -94,9 +90,10 @@ public class UserController {
     public String update(@PathVariable String code, @ModelAttribute(ROOT_MODEL) @Valid User user,
                              BindingResult bindingResult,
                              SessionStatus session, @RequestParam RoleType selectedRole) {
-        user.setAuthorities(Arrays.asList(roleService.getRoleByType(selectedRole)));
+        user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
         user.setCode(code);
-        this.userService.update(user);
+        user.setId(userService.findByCode(user.getCode()).getId());
+        userService.update(user);
         session.setComplete();
         return "redirect:/admin/user/userPage/" + user.getCode();
     }

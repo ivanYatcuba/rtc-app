@@ -119,17 +119,12 @@
 
 <div class="row-fluid span12" style="margin-left: 1px">
     <!--Languages-->
-<<<<<<< HEAD
     <div class="span6">
        <div><label for="user.progLanguages"><@spring.message "user.progLanguages"/>: </label>
-              <@spring.formInput "user.progLanguages" />
+              <@spring.formInput "user.programmingLanguages" />
        </div>
     </div>       
-    
-=======
-    <div class="span6"><@spring.formItem "user.programmingLanguages"/></div>
 
->>>>>>> d586f25fc0c6f2312ca8d5ee10214a9224d0c4f6
     <!--English-->
     <div class="span6">
         <div><label for="user.english">* <@spring.message "user.english"/>: </label>

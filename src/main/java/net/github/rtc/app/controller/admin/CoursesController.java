@@ -1,11 +1,11 @@
 package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.utils.datatable.Page;
 import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
-import net.github.rtc.app.service.CategoryService;
 import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.utils.Paginator;
 import net.github.rtc.util.converter.ValidationContext;
@@ -43,13 +43,6 @@ public class CoursesController {
     @Autowired
     public void setCoursesService(CoursesService coursesService) {
         this.coursesService = coursesService;
-    }
-
-    private CategoryService categoryService;
-
-    @Autowired
-    public void setCategoryService(CategoryService categoryService) {
-        this.categoryService = categoryService;
     }
 
     private Paginator paginator;
@@ -201,6 +194,7 @@ public class CoursesController {
         if (bindingResult.hasErrors()) {
             return new ModelAndView(ROOT + "/page/updateContent");
         }
+        course.setId(coursesService.findByCode(course.getCode()).getId());
         coursesService.update(course);
         session.setComplete();
         return new ModelAndView("redirect:" + course.getCode());
@@ -225,7 +219,7 @@ public class CoursesController {
      */
     @ModelAttribute("categories")
     public Collection<String> getCategories() {
-        return categoryService.findAll();
+        return CourseType.findAll();
     }
 
     /**

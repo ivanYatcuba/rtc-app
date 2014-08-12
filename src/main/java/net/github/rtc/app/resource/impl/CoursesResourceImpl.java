@@ -8,12 +8,10 @@ import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.resource.CoursesResource;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,62 +26,11 @@ import java.util.*;
  * @author Vladislav Pikus
  */
 @Repository
-public class CoursesResourceImpl implements CoursesResource {
-
-    @Autowired
-    SessionFactory sessionFactory;
-
-    @Override
-    public Course findByCode(String code) {
-        //todo: remove try-catch
-        Course course = null;
-        try{
-            //todo: remove useless variable query
-            String query = "select course from Course course where course.code = :code";
-            course = (Course)sessionFactory.getCurrentSession().
-                    createQuery(query).setString("code", code).uniqueResult();
-
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        return course;
-    }
-
-    /**
-     * @see CoursesResource#delete(String)
-     */
-    @Override
-    public void delete(String code) {
-        //todo: remove useless variable query
-        String query = "select course from Course course where course.code = :code";
-        sessionFactory.getCurrentSession().delete(sessionFactory.getCurrentSession().
-                createQuery(query).setString("code", code).uniqueResult());
-    }
-
-    /**
-     * @see CoursesResource#create(net.github.rtc.app.model.course.Course)
-     */
-    @Override
-    public Course create(Course course) {
-        course.setCode(UUID.randomUUID().toString());
-        sessionFactory.getCurrentSession().save(course);
-        return course;
-    }
-
-    /**
-     * @see CoursesResource#update(net.github.rtc.app.model.course.Course)
-     */
-    @Override
-    public void update(Course course) {
-        sessionFactory.getCurrentSession().merge(course);
-       }
-
-
+public class CoursesResourceImpl extends GenericResourceImpl<Course> implements CoursesResource {
 
     @Override
     public Integer getCount() {
-        return ((Long) sessionFactory.getCurrentSession().createCriteria(Course.class).setProjection(Projections.rowCount())
+        return ((Long) getCurrentSession().createCriteria(Course.class).setProjection(Projections.rowCount())
                 .uniqueResult()).intValue();
     }
 
@@ -100,10 +47,6 @@ public class CoursesResourceImpl implements CoursesResource {
         return ((Long)buildCriteria(filter).setProjection(Projections.rowCount()).uniqueResult()).intValue();
     }
 
-    @Override
-    public List<Course> findAll() {
-        return sessionFactory.getCurrentSession().createCriteria(Course.class).list();
-    }
 
     /**
      * Build search criteria by filter
@@ -111,7 +54,7 @@ public class CoursesResourceImpl implements CoursesResource {
      * @return criteria
      */
     private Criteria buildCriteria(SearchFilter filter) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Course.class);
+        Criteria criteria = getCurrentSession().createCriteria(Course.class);
         criteria.setFetchMode("tags", FetchMode.SELECT);
         criteria.setFetchMode("author", FetchMode.SELECT);
         final String title = filter.getTitle();

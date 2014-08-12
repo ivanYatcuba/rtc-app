@@ -35,8 +35,6 @@ public class UserController {
     private UserCourseOrderService userCourseOrderService;
     @Autowired
     private ValidationContext validationContext;
-    @Autowired
-    private RoleService roleService;
 
     private static final String ROOT = "portal/user";
     private static final String ROOT_MODEL = "user";
@@ -79,7 +77,8 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("redirect:/" + ROOT + "/edit/");
         }
-        user.setAuthorities(Arrays.asList(roleService.getRoleByType(RoleType.ROLE_USER)));
+        user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
+        user.setId(userService.findByCode(user.getCode()).getId());
         userService.update(user);
         session.setComplete();
         return new ModelAndView("redirect:/" + "login");
@@ -93,7 +92,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("redirect:/" + ROOT + "/register/");
         }
-        user.setAuthorities(Arrays.asList(roleService.getRoleByType(RoleType.ROLE_USER)));
+        user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
         user.setRegisterDate(new Date());
         userService.create(user);
         session.setComplete();

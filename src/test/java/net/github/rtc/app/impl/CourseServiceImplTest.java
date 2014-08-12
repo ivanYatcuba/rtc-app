@@ -47,7 +47,7 @@ public class CourseServiceImplTest {
     @Test
     public void testDelete() throws Exception {
         service.delete(code);
-        verify(mockResource).delete(code);
+        verify(mockResource).deleteByCode(code);
     }
 
     @Test(expected = ServiceProcessingException.class)

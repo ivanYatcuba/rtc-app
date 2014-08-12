@@ -5,7 +5,6 @@ import net.github.rtc.app.utils.datatable.PageDto;
 import net.github.rtc.app.utils.datatable.SearchFilter;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Data Access Object Interface
@@ -13,38 +12,7 @@ import java.util.List;
  *
  * @author Vladislav Pikus
  */
-public interface CoursesResource {
-
-    /**
-     * Find a course object by code
-     *
-     * @param code course code
-     * @return course object or null
-     */
-    Course findByCode(String code);
-
-    /**
-     * Delete existing course by code
-     *
-     * @param code course code
-     */
-    void delete(String code);
-
-    /**
-     * Create a new course object
-     *
-     * @param course new course object
-     * @return course with updated fields
-     */
-    Course create(Course course);
-
-    /**
-     * Update a course object
-     *
-     * @param course course object for update
-     */
-    void update(Course course);
-
+public interface CoursesResource extends GenericResource<Course> {
     /**
      * Find course collection by filtering param
      *
@@ -68,6 +36,4 @@ public interface CoursesResource {
      * @return total course count
      */
     Integer getCount(SearchFilter  filter);
-
-    List<Course> findAll();
 }

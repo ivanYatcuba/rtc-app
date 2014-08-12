@@ -6,6 +6,8 @@
 
 package net.github.rtc.app.service.impl;
 
+import net.github.rtc.app.model.user.Role;
+import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.resource.UserResource;
 import net.github.rtc.app.service.ModelService;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +41,7 @@ public class UserServiceImpl implements ModelService<User>, UserService{
     @Transactional
     public List<User> findAll() {
         LOG.info("Loading all users from database...");
-        return resource.findAll();
+        return (List)resource.findAll();
     }
 
 
@@ -46,14 +49,14 @@ public class UserServiceImpl implements ModelService<User>, UserService{
     @Transactional
     public void delete(User user) {
         LOG.info("Removing user  with email: " + user.getEmail());
-        resource.delete(user);
+        resource.deleteByCode(user.getCode());
     }
 
     @Override
     @Transactional
     public void deleteByCode(String code) {
         LOG.info("Removing user  with code: " + code);
-        resource.deleteByСode(code);
+        resource.deleteByCode(code);
     }
 
     @Override
@@ -67,6 +70,9 @@ public class UserServiceImpl implements ModelService<User>, UserService{
     @Transactional
     public User create(User user) {
         LOG.info("Creating user: " + user);
+        user.setCode(UUID.randomUUID().toString());
+        PasswordEncoder encoder = new StandardPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         return resource.create(user);
     }
 
@@ -76,10 +82,23 @@ public class UserServiceImpl implements ModelService<User>, UserService{
         LOG.info("Updating user: " + user);
         PasswordEncoder encoder = new StandardPasswordEncoder();
         User userToUpdate = resource.findByCode(user.getCode());
-        user.setId(userToUpdate.getId());     //todo: user already must have id
         if(user.getPassword() != userToUpdate.getPassword()){
             user.setPassword(encoder.encode(user.getPassword()));
         }
         resource.update(user);
+    }
+
+    @Override
+    @Transactional
+    public void createRole(RoleType type) {
+        LOG.info("Creating user role with type: " + type);
+        resource.createRole(type);
+    }
+
+    @Override
+    @Transactional
+    public Role getRoleByType(RoleType type) {
+        LOG.info("Getting user role with type: " + type);
+        return resource.getRoleByType(type);
     }
 }

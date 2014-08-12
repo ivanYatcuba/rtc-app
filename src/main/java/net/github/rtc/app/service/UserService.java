@@ -6,6 +6,8 @@
 
 package net.github.rtc.app.service;
 
+import net.github.rtc.app.model.user.Role;
+import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import java.util.List;
 
@@ -26,4 +28,8 @@ public interface UserService {
     User create(User user);
 
     void update(User user);
+
+    void createRole(RoleType type);
+
+    Role getRoleByType(RoleType type);
 }
