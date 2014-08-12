@@ -101,7 +101,7 @@
 
             <a href="<@spring.url "/user/edit"/>">
                 <button class="btn">Edit</button>
-            </a> or <a href="/user/view/">Cancel</a>
+            </a> or <a href="<@spring.url "/user/view"/>">Cancel</a>
 
         </div>
     </div>

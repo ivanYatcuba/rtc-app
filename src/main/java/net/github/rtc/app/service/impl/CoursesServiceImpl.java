@@ -27,10 +27,10 @@ import java.util.List;
 @Service("coursesService")
 public class CoursesServiceImpl implements ModelService<Course>, CoursesService {
 
-    private static Logger LOG = LoggerFactory.getLogger(CoursesServiceImpl.class.getName());
-
     @Autowired
     private CoursesResource resource;
+
+    private static Logger LOG = LoggerFactory.getLogger(CoursesServiceImpl.class.getName());
 
     /**
      * Check course code for null
@@ -39,6 +39,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
      * @throws ServiceProcessingException
      */
     private void checkCode(String code) {
+        LOG.info("Checking if course with code " + code + " exists");
         if (code == null) {
             RuntimeException ex = new ServiceProcessingException("Course code can't be null");
             LOG.error("Exception: ", ex);
@@ -52,6 +53,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     @Override
     @Transactional
     public void delete(String code) {
+        LOG.info("Removing course with code " + code);
         checkCode(code);
         resource.delete(code);
     }
@@ -62,6 +64,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     @Override
     @Transactional
     public Course findByCode(String code) {
+        LOG.info("Getting course with code " + code);
         checkCode(code);
         return resource.findByCode(code);
     }
@@ -72,6 +75,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     @Override
     @Transactional
     public Course create(Course course) {
+        LOG.info("Creating course " + course);
         return resource.create(course);
     }
 
@@ -81,6 +85,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     @Override
     @Transactional
     public void update(Course course) {
+        LOG.info("Updating course: " + course);
         Course courseToUpdate = resource.findByCode(course.getCode());
         course.setId(courseToUpdate.getId());  //todo: course already must have id at this point
         resource.update(course);
@@ -92,6 +97,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     @Override
     @Transactional
     public CourseSearchResult findByFilter(SearchFilter filter) {
+        LOG.info("Searching courses with filter: " + filter);
         Integer total = resource.getCount(filter);
         PageDto pageDto = new PageDto.Builder(total).page(filter.getPageNumber()).maxResult(filter.getMaxResult())
                 .build();
@@ -105,12 +111,14 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     @Override
     @Transactional
     public List<Course> findAll() {
+        LOG.info("Getting all courses from database...");
         return resource.findAll();
     }
 
     @Override
     @Transactional
     public void publish(Course course) {
+        LOG.info("Publishing course " + course);
         course.setStatus(CourseStatus.PUBLISHED);
         course.setPublishDate(new Date());
         resource.update(course);

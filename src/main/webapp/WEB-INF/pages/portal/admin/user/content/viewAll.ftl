@@ -29,7 +29,7 @@
         </#if>
 
         <#if (user.registerDate)??>
-            <td>${user.registerDate}</td>
+            <td>${user.registerDate?datetime?string("dd-MM-yyyy")}</td>
         <#else>
             <td>None</td>
         </#if>
