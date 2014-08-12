@@ -46,9 +46,16 @@
 </#list>
 </table>
 
+<br>
+<div align="center">
+<#list 1..(pages) as index>
+    <a href="<@spring.url"/admin/user/viewAll/${index}"/>">  ${index}</a>
+</#list>
+</div>
+
 <br><br>
 <div align = "right">
-    <form name="createUser" action="createUser" method="get">
+    <form name="createUser" action="/createUser" method="get">
     <button type="submit">Create</button>
 </div>
 
