@@ -9,7 +9,11 @@ import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -35,6 +39,9 @@ public class UserController {
     private UserCourseOrderService userCourseOrderService;
     @Autowired
     private ValidationContext validationContext;
+    @Autowired
+    @Qualifier("authenticationManager")
+    protected AuthenticationManager authenticationManager;
 
     private static final String ROOT = "portal/user";
     private static final String ROOT_MODEL = "user";
@@ -81,7 +88,9 @@ public class UserController {
         user.setId(userService.findByCode(user.getCode()).getId());
         userService.update(user);
         session.setComplete();
-        return new ModelAndView("redirect:/" + "login");
+        Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+        SecurityContextHolder.getContext().setAuthentication(request);
+        return new ModelAndView("redirect:/" + "user/view");
     }
 
 
