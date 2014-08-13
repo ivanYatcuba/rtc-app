@@ -19,10 +19,4 @@ html, body {
     text-align: center;
     background: #999;
 }
-.header {
-    background-image: url(../images/header.jpg);
-    height: 10%;
-    margin-bottom: 10px;
-    text-align: center;
 
-}
