@@ -10,7 +10,6 @@ import java.util.Map;
 /**
  * @author Vladislav Pikus
  */
-//todo: move class to net.github.rtc.app.util.datatable package
 public class SearchFilter {
     private String title;
     private String startDate;

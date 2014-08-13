@@ -1,6 +1,0 @@
-- AbstractResource:
-    - implement AbstractResource class with SessionFactory field and getCurrentSession() method;
-    - extend all resource classes from AbstractResource;
-- get by id:
-    - implement common get by id functionality: add method to AbstractResource and AbstractService,
-        this method should take id value (always Long) and return entity(tips: use generics)

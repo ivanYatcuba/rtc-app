@@ -21,23 +21,18 @@ public class CustomTagsEditor extends PropertyEditorSupport {
         if (obj == null) {
             return "";
         }
-        //todo: remove commented code
-        //if (obj instanceof Collection<Tag>) {
             Collection<Tag> tags = ((Collection<Tag>)obj);
             StringBuffer sb = new StringBuffer();
             for(Tag tag : tags) {
                 sb.append(tag.getValue()).append(",");
             }
             return sb.toString();
-       // } else {
-       //     return super.getAsText();
-       // }
     }
 
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
         List<String> tagsSplit = Arrays.asList(text.split(","));
-        Collection<Tag> tags = new ArrayList<Tag>();
+        Collection<Tag> tags = new ArrayList<>();
         for(String tagName : tagsSplit) {
             tags.add(new Tag(tagName));
         }
