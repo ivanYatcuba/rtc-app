@@ -16,7 +16,7 @@
     <tr>
         <td><a href="<@spring.url "/admin/course/${course.code}" />">${course.name}</a></td>
         <td>${course.type}</td>
-        <td>${course.startDate?date}&nbsp;-&nbsp;${course.endDate?date}</td>
+        <td>${course.startDate?datetime?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
         <td>${course.author.firstName}&nbsp;${course.author.lastName}</td>
         <td>${course.status}</td>
         <td><ul class="nav" role="navigation">

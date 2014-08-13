@@ -9,9 +9,17 @@
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="<@spring.url "/user/register" />">Register</a></li>
             </ul>
+
             <#if "${content}" != "/user/login">
                 <ul class="nav navbar-nav navbar-right"">
-                    <li><a href="<@spring.url'/login'/>">Sign In</a></li>
+                    <#if currentUser??>
+                    <#if currentUser != "anonymousUser">
+                        <li style="color: #ac2925">Logged as: ${currentUser}</li>
+                        <li><a href="<@spring.url'/logout'/>">Log Out</a></li>
+                    <#else>
+                        <li><a href="<@spring.url'/login'/>">Sign In</a></li>
+                    </#if>
+                    </#if>
                 </ul>
             </#if>
         </div>

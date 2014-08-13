@@ -200,5 +200,10 @@ public class UserController {
         return new User();
     }
 
+    @ModelAttribute("currentUser")
+    public String getCurrentUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
 
 }

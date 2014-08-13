@@ -6,7 +6,9 @@ import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.service.CoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,5 +54,10 @@ public class WelcomeController {
         mav.addObject("soonCourses", result.getCourses());
         mav.addObject("content","content/welcomeContent");
         return mav;
+    }
+
+    @ModelAttribute("currentUser")
+    public String getCurrentUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

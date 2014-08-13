@@ -7,6 +7,7 @@ import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -155,6 +156,11 @@ public class UserController {
         s.add("Intermidiate");
         s.add("Advanced");
         return s;
+    }
+
+    @ModelAttribute("currentUser")
+    public String getCurrentUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
     
 

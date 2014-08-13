@@ -1,6 +1,8 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.model.course.Author;
 import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.utils.datatable.Page;
@@ -11,6 +13,7 @@ import net.github.rtc.app.utils.Paginator;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -222,6 +225,11 @@ public class CoursesController {
         return CourseType.findAll();
     }
 
+    @ModelAttribute("status")
+    public Collection<String> getStats() {
+        return CourseStatus.findAll();
+    }
+
     /**
      * Prepare searchFilter as model attribute
      *
@@ -230,6 +238,11 @@ public class CoursesController {
     @ModelAttribute("searchFilter")
     public SearchFilter getFilter() {
         return new SearchFilter();
+    }
+
+    @ModelAttribute("currentUser")
+    public String getCurrentUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     /**

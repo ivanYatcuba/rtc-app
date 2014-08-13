@@ -16,6 +16,7 @@ public class SearchFilter {
     private Collection<String> categories;
     private Collection<String> tags;
     private CourseStatus status;
+    private String author;
     private Integer pageNumber = 0;
     private Integer maxResult = 0;
 
@@ -63,6 +64,10 @@ public class SearchFilter {
     public Integer getMaxResult() {return maxResult;}
 
     public void setMaxResult(Integer maxResult) {this.maxResult = maxResult;}
+
+    public String getAuthor() {return author;}
+
+    public void setAuthor(String author) {this.author = author;}
 
     public class QueryBuilder {
         private Map<String, String> map;

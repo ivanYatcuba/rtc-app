@@ -70,13 +70,14 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
         Date startDate = null;
         try {
             startDate = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(filter.getStartDate());
-        } catch (ParseException e ) {
-            e.printStackTrace();
-        }catch (NullPointerException e){
+        } catch (ParseException | NullPointerException e ) {
             e.printStackTrace();
         }
         if (startDate != null) {
-            criteria.add(Restrictions.gt("startDate", startDate));
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(startDate);
+            cal.add(Calendar.DATE, -1);
+            criteria.add(Restrictions.gt("startDate", cal.getTime()));
         }
         final Collection<String> categories = filter.getCategories();
         if (categories != null && categories.size() > 0) {

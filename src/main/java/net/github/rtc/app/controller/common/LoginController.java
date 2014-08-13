@@ -36,7 +36,7 @@ public class LoginController {
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public ModelAndView logout(ModelMap model) {
-
+        SecurityContextHolder.clearContext();
         return buildLoginMav(model);
 
     }
