@@ -14,7 +14,7 @@
                 <ul class="nav navbar-nav navbar-right"">
                     <#if currentUser??>
                     <#if currentUser != "anonymousUser">
-                        <li style="color: #ac2925">Logged as: ${currentUser}</li>
+                        <li style="color: #ac2925"><a href="<@spring.url'/login_attempt'/>">Logged as: ${currentUser}</a></li>
                         <li><a href="<@spring.url'/logout'/>">Log Out</a></li>
                     <#else>
                         <li><a href="<@spring.url'/login'/>">Sign In</a></li>
