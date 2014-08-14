@@ -18,28 +18,28 @@ public class Paginator {
         return maxPerPage;
     }
 
-    public Page getPage(int firstResult, int total) {
-        int maxResult = getMaxResult(total);
-        firstResult = getFirstResult(firstResult);
-        return new Page(firstResult,
-                getPrevResult(firstResult),
-                getNextResult(firstResult, maxResult),
-                maxResult);
+    public Page getPage(int currentPage, int total) {
+        int countPages = getCountPages(total);
+        currentPage = checkCurrentPage(currentPage);
+        return new Page(currentPage,
+                getPrevResult(currentPage),
+                getNextResult(currentPage, countPages),
+                countPages);
     }
 
-    private int getFirstResult(int firstResult) {
-        return (firstResult < 1) ? 0 : firstResult;
+    private int checkCurrentPage(int currentPage) {
+        return (currentPage < 1) ? 0 : currentPage;
     }
 
-    private int getMaxResult(int total) {
+    private int getCountPages(int total) {
         return  total / maxPerPage + ((total % 10 == 0) ? 0 : 1);
     }
 
-    private Integer getPrevResult(int firstResult) {
-        return (firstResult < 2) ? null : firstResult - 1;
+    private Integer getPrevResult(int currentPage) {
+        return (currentPage < 2) ? null : currentPage - 1;
     }
 
-    private Integer getNextResult(int firstResult, int maxResult) {
-        return (firstResult < maxResult) ? firstResult + 1 : null;
+    private Integer getNextResult(int currentPage, int countPages) {
+        return (currentPage < countPages) ? currentPage + 1 : null;
     }
 }

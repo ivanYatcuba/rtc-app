@@ -10,7 +10,7 @@ public class Page {
     private final int current;
     private final Integer prev;
     private final Integer next;
-    private final int start = 1;
+    private final int first = 1;
     private final int last;
 
     public Page(int current, Integer prev, Integer next, int last) {
@@ -32,8 +32,8 @@ public class Page {
         return next;
     }
 
-    public int getStart() {
-        return start;
+    public int getFirst() {
+        return first;
     }
 
     public int getLast() {
@@ -59,7 +59,7 @@ public class Page {
         }
 
         public MapBuilder byStartPage() {
-            map.put("startPage", start);
+            map.put("startPage", first);
             return this;
         }
 
