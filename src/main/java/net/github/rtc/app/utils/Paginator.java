@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Paginator {
-    private int maxPerPage = 10;
+    private int maxPerPage = 5;
 
     public void setMaxPerPage(int maxPerPage) {
         this.maxPerPage = maxPerPage;

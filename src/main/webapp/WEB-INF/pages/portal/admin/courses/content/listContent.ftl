@@ -34,27 +34,22 @@
     </tr>
 </#list>
 </table>
-
-<table style="width: 100%;">
-    <tr>
-        <td>Pages: </td>
+<div align="center">
         <#if startPage != currentPage>
-            <td><a href="<@spring.url "/admin/course?page=${startPage}" />" />First</a></td>
+            <a href="<@spring.url "/admin/course?page=${startPage}" />" />&laquo;</a>
         </#if>
         <#if prevPage??>
-            <td><a href="<@spring.url "/admin/course?page=${prevPage}" />" />${prevPage}</a></td>
+            <a href="<@spring.url "/admin/course?page=${prevPage}" />" />${prevPage}</a>
         </#if>
-        <td>${currentPage}</td>
+        ${currentPage}
         <#if nextPage??>
-            <td><a href="<@spring.url "/admin/course?page=${nextPage}" />" />${nextPage}</a></td>
+           <a href="<@spring.url "/admin/course?page=${nextPage}" />" />${nextPage}</a>
         </#if>
         <#if lastPage != currentPage>
-            <td><a href="<@spring.url "/admin/course?page=${lastPage}" />" />Last</a></td>
+            <a href="<@spring.url "/admin/course?page=${lastPage}" />" />&raquo;</a>
         </#if>
-    </tr>
-</table>
-
-
+</div>
+<br>
 <a style="float: right" href="<@spring.url "/admin/course/create" />">
     <button class="btn">Create New</button>
 </a>

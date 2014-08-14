@@ -62,12 +62,12 @@ public class CoursesController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index(@RequestParam(required = true, defaultValue = "1") int page) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
+        SearchFilter searchFilter = getFilter();
+        searchFilter.setPageNumber(page - 1);
+        searchFilter.setMaxResult(paginator.getMaxPerPage());
+        CourseSearchResult result = coursesService.findByFilter(searchFilter);
 
-        getFilter().setPageNumber(page - 1);
-        getFilter().setMaxResult(paginator.getMaxPerPage());
-        CourseSearchResult result = coursesService.findByFilter(getFilter());
-
-        Page pageModel = paginator.getPage(page, result.getTotalCount());
+        Page pageModel = paginator.getPage(page, result.getTotalCount()-1);
         mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
                 .byNextPage().byPrevPage().byStartPage().toMap());
 
