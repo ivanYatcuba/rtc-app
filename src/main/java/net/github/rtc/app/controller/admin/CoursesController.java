@@ -67,7 +67,7 @@ public class CoursesController {
         searchFilter.setMaxResult(paginator.getMaxPerPage());
         CourseSearchResult result = coursesService.findByFilter(searchFilter);
 
-        Page pageModel = paginator.getPage(page, result.getTotalCount()-1);
+        Page pageModel = paginator.getPage(page, result.getTotalCount());
         mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
                 .byNextPage().byPrevPage().byStartPage().toMap());
 
