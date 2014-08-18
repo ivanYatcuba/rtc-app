@@ -10,5 +10,6 @@ public interface ModelService <T> {
     List<T> findAll();
     T create(T var);
     void update(T var);
+    Class<T> getType();
 
 }

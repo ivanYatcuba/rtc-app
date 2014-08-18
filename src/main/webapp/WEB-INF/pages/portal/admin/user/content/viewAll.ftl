@@ -1,4 +1,6 @@
-<table width="100%" border="1px">
+<h3 class="page-header"><@spring.message "user.list"/></h3>
+
+<table width="100%" class="table-bordered table">
     <tr bgcolor="#d3d3d3" style="font-weight:bold">
         <td>Name</td>
         <td>Email</td>
@@ -56,6 +58,6 @@
 <br><br>
 <div align = "right">
     <form name="createUser" action="<@spring.url"/admin/user/createUser"/>" method="get">
-    <button type="submit">Create</button>
+    <button class="btn" type="submit">Create New</button>
 </div>
 

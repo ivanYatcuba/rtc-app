@@ -91,6 +91,11 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
         resource.update(course);
     }
 
+    @Override
+    public Class<Course> getType() {
+        return Course.class;
+    }
+
     /**
      * @see CoursesService#( net.github.rtc.app.utils.datatable.SearchFilter )
      */

@@ -2,10 +2,7 @@ package net.github.rtc.app.utils.datatable;
 
 import net.github.rtc.app.model.course.CourseStatus;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Vladislav Pikus

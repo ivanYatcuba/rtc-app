@@ -1,7 +1,11 @@
 package net.github.rtc.app.utils;
 
+import net.github.rtc.app.export.JobManager;
+import net.github.rtc.app.export.JobManagerAction;
+import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.service.UserServiceLogin;
 import org.springframework.beans.factory.InitializingBean;
@@ -20,6 +24,10 @@ public class Bootstrap implements InitializingBean {
     UserService userService;
     @Autowired
     UserServiceLogin userServiceLogin;
+    @Autowired
+    private ReportService reportService;
+    @Autowired
+    private JobManager jobManager;
 
 
     public void loadTestUsers() {
@@ -31,6 +39,13 @@ public class Bootstrap implements InitializingBean {
             admin.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_ADMIN)));
             admin.setRegisterDate(new Date());
             userService.create(admin);
+        }
+        for(ReportDetails reportDetails : reportService.getAll()){
+            try {
+                jobManager.manageJob(reportDetails, JobManagerAction.CREATE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

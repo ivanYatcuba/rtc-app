@@ -55,7 +55,7 @@ public class XLSXReportBuilder {
                 try {
                     writeField(reportFields.get(j), sheet, currentRow, j, object, cellStyle, createHelper);
                 } catch (IllegalAccessException | NullPointerException e) {
-                    sheet.getRow(currentRow).createCell(j).setCellValue("null");
+                    sheet.getRow(currentRow).createCell(j).setCellValue("");
                 }
             }
             currentRow++;

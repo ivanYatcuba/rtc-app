@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Ivan Yatcuba on 7/22/14.
  */
 public enum CourseStatus {
-    DRAFT, PUBLISHED;
+    ALL, DRAFT, PUBLISHED;
 
     public static List<String> findAll() {
         List<String> res = new ArrayList<>();

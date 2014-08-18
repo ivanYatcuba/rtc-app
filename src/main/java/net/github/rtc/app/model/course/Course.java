@@ -22,7 +22,7 @@ public class Course implements Serializable {
 
     @Column
     @ForExport("Code")
-    private String code;  //todo: do we really need this field?
+    private String code;
 
     @Required
     @Minlength(2)
@@ -50,7 +50,7 @@ public class Course implements Serializable {
     @Column
     @ForExport("Status")
     @Enumerated(EnumType.STRING)
-    private CourseStatus status = CourseStatus.DRAFT;  //todo: change field type to CourseStatus
+    private CourseStatus status = CourseStatus.DRAFT;
 
     @Column
     @ForExport("Publish date")

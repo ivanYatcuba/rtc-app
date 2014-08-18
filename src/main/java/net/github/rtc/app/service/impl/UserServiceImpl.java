@@ -89,6 +89,11 @@ public class UserServiceImpl implements ModelService<User>, UserService{
     }
 
     @Override
+    public Class<User> getType() {
+        return User.class;
+    }
+
+    @Override
     @Transactional
     public void createRole(RoleType type) {
         LOG.info("Creating user role with type: " + type);

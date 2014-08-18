@@ -2,8 +2,8 @@
 <script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
 
 <#include "searchPanel.ftl">
-
-<table width="100%" border="1px">
+<br/>
+<table width="100%" class="table-bordered table">
     <tr bgcolor="#d3d3d3" style="font-weight:bold">
         <td>Name</td>
         <td>Category</td>

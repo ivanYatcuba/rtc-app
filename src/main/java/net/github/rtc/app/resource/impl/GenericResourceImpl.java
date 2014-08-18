@@ -1,6 +1,7 @@
 package net.github.rtc.app.resource.impl;
 
 import net.github.rtc.app.resource.GenericResource;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -66,6 +67,6 @@ public abstract class GenericResourceImpl<T> implements GenericResource<T>{
 
     @Override
     public Collection<T> findAll(){
-        return getCurrentSession().createCriteria(type).list();
+        return getCurrentSession().createCriteria(type).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 }
