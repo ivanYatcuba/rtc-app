@@ -1,11 +1,11 @@
 package net.github.rtc.app.controller.expert;
 
+import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.model.user.Request;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.model.user.UserRequestStatus;
-import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class ExpertController {
     private static final String ROOT = "expert";
 
     @Autowired
-    private CoursesService coursesService;
+    private CourseService courseService;
     @Autowired
     private UserCourseOrderService userCourseOrderService;
     @Autowired
@@ -43,7 +43,7 @@ public class ExpertController {
                     Request request = new Request((int)order.getId(),
                     userService.findByCode(order.getUserCode()).getName(),
                     order.getReason(),
-                    coursesService.findByCode(order.getCourseCode()).getName(),
+                    courseService.findByCode(order.getCourseCode()).getName(),
                     order.getPosition().toString());
                     requestsList.add(request);
                 }catch (Throwable t){System.out.print("error");}
@@ -56,7 +56,7 @@ public class ExpertController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ModelAndView userCourses() {
         ModelAndView mav = new ModelAndView(ROOT + "/page/expertAllcourse");
-        CourseSearchResult result = coursesService.findByFilter(getFilter());
+        CourseSearchResult result = courseService.findByFilter(getFilter());
         mav.addObject("courses", result.getCourses());
         return mav;
     }

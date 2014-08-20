@@ -2,7 +2,7 @@ package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.model.course.*;
 import net.github.rtc.app.resource.CoursesResource;
-import net.github.rtc.app.service.CoursesService;
+import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.Date;
 import java.util.List;
@@ -20,18 +21,18 @@ import java.util.UUID;
 
 /**
  * Service Implementation
- * This's a wrapper for {@link CoursesService}
+ * This's a wrapper for {@link net.github.rtc.app.service.CourseService}
  *
  * @author Vladislav Pikus
  * @author Dmitry Pritula
  */
 @Service("coursesService")
-public class CoursesServiceImpl implements ModelService<Course>, CoursesService {
+public class CourseServiceImpl implements ModelService<Course>, CourseService {
+    private static Logger LOG = LoggerFactory.getLogger(CourseServiceImpl.class.getName());
 
     @Autowired
     private CoursesResource resource;
 
-    private static Logger LOG = LoggerFactory.getLogger(CoursesServiceImpl.class.getName());
 
     /**
      * Check course code for null
@@ -49,18 +50,19 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     }
 
     /**
-     * @see CoursesService#delete(String)
+     * @see net.github.rtc.app.service.CourseService#delete(String)
      */
     @Override
     @Transactional
     public void delete(String code) {
-        LOG.info("Removing course with code " + code);
+        LOG.debug("Removing course with code {} ", code);
+        Assert.notNull(code, "code cannot be null");
         checkCode(code);
         resource.deleteByCode(code);
     }
 
     /**
-     * @see CoursesService#findByCode(String)
+     * @see net.github.rtc.app.service.CourseService#findByCode(String)
      */
     @Override
     @Transactional
@@ -71,7 +73,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     }
 
     /**
-     * @see CoursesService#create(net.github.rtc.app.model.course.Course)
+     * @see net.github.rtc.app.service.CourseService#create(net.github.rtc.app.model.course.Course)
      */
     @Override
     @Transactional
@@ -82,7 +84,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     }
 
     /**
-     * @see CoursesService#update(net.github.rtc.app.model.course.Course)
+     * @see net.github.rtc.app.service.CourseService#update(net.github.rtc.app.model.course.Course)
      */
     @Override
     @Transactional
@@ -97,7 +99,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     }
 
     /**
-     * @see CoursesService#( net.github.rtc.app.utils.datatable.SearchFilter )
+     * @see net.github.rtc.app.service.CourseService#( net.github.rtc.app.utils.datatable.SearchFilter )
      */
     @Override
     @Transactional
@@ -117,7 +119,7 @@ public class CoursesServiceImpl implements ModelService<Course>, CoursesService 
     @Transactional
     public List<Course> findAll() {
         LOG.info("Getting all courses from database...");
-        return (List)resource.findAll();
+        return (List) resource.findAll();
     }
 
     @Override

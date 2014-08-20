@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CoursesControllerTest {
 
     @Mock
-    private CoursesService mockService;
+    private CourseService mockService;
 
     @Mock
     private CategoryService mockCategoryService;

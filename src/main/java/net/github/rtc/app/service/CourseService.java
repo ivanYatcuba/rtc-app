@@ -15,7 +15,7 @@ import java.util.List;
  * @author Vladislav Pikus
  * @author Dmitry Pritula
  */
-public interface CoursesService {
+public interface CourseService {
 
     /**
      * Delete a course by code

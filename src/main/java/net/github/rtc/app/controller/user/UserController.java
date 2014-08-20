@@ -34,7 +34,7 @@ public class UserController {
     @Autowired
     private UserServiceLogin userServiceLogin;
     @Autowired
-    private CoursesService coursesService;
+    private CourseService courseService;
     @Autowired
     private UserCourseOrderService userCourseOrderService;
     @Autowired
@@ -117,7 +117,7 @@ public class UserController {
 
             SearchFilter searchFilter = new SearchFilter();
             searchFilter.setStatus(CourseStatus.PUBLISHED);
-            CourseSearchResult result = coursesService.findByFilter(searchFilter);
+            CourseSearchResult result = courseService.findByFilter(searchFilter);
             Collections.sort((List<Course>)result.getCourses(), new Comparator<Course>() {
                 public int compare(Course course1, Course course2) {
                     if (course1.getStartDate() == null || course2.getStartDate() == null)
@@ -131,7 +131,7 @@ public class UserController {
             return mav;
         } else {
             ModelAndView mav = new ModelAndView(ROOT + "/page/courseorder");
-            Course orderedCourse = coursesService.findByCode(currentUserCourseOrder.getCourseCode());
+            Course orderedCourse = courseService.findByCode(currentUserCourseOrder.getCourseCode());
             mav.addObject("user", user);
             mav.addObject("orderStatus", currentUserCourseOrder.getStatus());
             mav.addObject("courseName", orderedCourse.getName());

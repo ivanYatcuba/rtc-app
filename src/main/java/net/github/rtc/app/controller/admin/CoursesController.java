@@ -3,11 +3,11 @@ package net.github.rtc.app.controller.admin;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
+import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.utils.datatable.Page;
 import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
-import net.github.rtc.app.service.CoursesService;
 import net.github.rtc.app.utils.Paginator;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +37,14 @@ public class CoursesController {
     private static final String ROOT = "portal/admin";
     private static final String ROOT_MODEL = "course";
 
-    private CoursesService coursesService;
+    private CourseService courseService;
 
     @Autowired
     private ValidationContext validationContext;
 
     @Autowired
-    public void setCoursesService(CoursesService coursesService) {
-        this.coursesService = coursesService;
+    public void setCourseService(CourseService courseService) {
+        this.courseService = courseService;
     }
 
     private Paginator paginator;
@@ -65,7 +65,7 @@ public class CoursesController {
         SearchFilter searchFilter = getFilter();
         searchFilter.setPageNumber(page - 1);
         searchFilter.setMaxResult(paginator.getMaxPerPage());
-        CourseSearchResult result = coursesService.findByFilter(searchFilter);
+        CourseSearchResult result = courseService.findByFilter(searchFilter);
 
         Page pageModel = paginator.getPage(page, result.getTotalCount());
         mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
@@ -86,13 +86,13 @@ public class CoursesController {
      */
     @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
     public String delete(@PathVariable String courseCode) {
-        coursesService.delete(courseCode);
+        courseService.delete(courseCode);
         return "redirect:/" + "admin";
     }
 
     @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
     public String publish(@PathVariable String courseCode) {
-        coursesService.publish(coursesService.findByCode(courseCode));
+        courseService.publish(courseService.findByCode(courseCode));
         return "redirect:/" + "admin";
     }
 
@@ -107,7 +107,7 @@ public class CoursesController {
     @RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/courseContent");
-        Course course = coursesService.findByCode(courseCode);
+        Course course = courseService.findByCode(courseCode);
         mav.addObject("course", course);
         return mav;
     }
@@ -125,7 +125,7 @@ public class CoursesController {
 
         searchFilter.setPageNumber(page - 1);
         searchFilter.setMaxResult(paginator.getMaxPerPage());
-        CourseSearchResult result = coursesService.findByFilter(searchFilter);
+        CourseSearchResult result = courseService.findByFilter(searchFilter);
 
         Page pageModel = paginator.getPage(page, result.getTotalCount());
         mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
@@ -163,7 +163,7 @@ public class CoursesController {
         if (bindingResult.hasErrors()) {
             return  new ModelAndView(ROOT + "/page/createContent");
         }
-        coursesService.create(course);
+        courseService.create(course);
         session.setComplete();
         return new ModelAndView("redirect:/admin/course/");
     }
@@ -176,7 +176,7 @@ public class CoursesController {
     @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/updateContent");
-        mav.getModelMap().addAttribute("course", coursesService.findByCode(courseCode));
+        mav.getModelMap().addAttribute("course", courseService.findByCode(courseCode));
         mav.addObject("validationRules", validationContext.get(Course.class));
         return mav;
     }
@@ -196,8 +196,8 @@ public class CoursesController {
         if (bindingResult.hasErrors()) {
             return new ModelAndView(ROOT + "/page/updateContent");
         }
-        course.setId(coursesService.findByCode(course.getCode()).getId());
-        coursesService.update(course);
+        course.setId(courseService.findByCode(course.getCode()).getId());
+        courseService.update(course);
         session.setComplete();
         return new ModelAndView("redirect:" + course.getCode());
     }

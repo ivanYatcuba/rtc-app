@@ -2,9 +2,9 @@ package net.github.rtc.app.controller.common;
 
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
+import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.utils.datatable.SearchFilter;
-import net.github.rtc.app.service.CoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ import java.util.*;
 public class WelcomeController {
 
     @Autowired
-    private CoursesService coursesService;
+    private CourseService courseService;
 
     /**
      * Request to main page, get three coming soon courses
@@ -43,7 +43,7 @@ public class WelcomeController {
         searchFilter.setStatus(CourseStatus.PUBLISHED);
                 searchFilter.setMaxResult(3);
 
-        CourseSearchResult result = coursesService.findByFilter(searchFilter);
+        CourseSearchResult result = courseService.findByFilter(searchFilter);
         Collections.sort((List<Course>)result.getCourses(), new Comparator<Course>() {
             public int compare(Course course1, Course course2) {
                 if (course1.getStartDate() == null || course2.getStartDate() == null)

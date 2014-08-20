@@ -2,7 +2,7 @@ package net.github.rtc.app.controller;
 
 import net.github.rtc.app.controller.common.WelcomeController;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
-import net.github.rtc.app.service.CoursesService;
+import net.github.rtc.app.service.CourseService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class WelcomeControllerTest {
 
 
     @Mock
-    private CoursesService coursesService;
+    private CourseService courseService;
     @Mock
     private CourseSearchResult result;
 
@@ -51,7 +51,7 @@ public class WelcomeControllerTest {
         Date date = new Date();
         String formattedDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
         searchFilter.setStartDate(formattedDate);
-        when(coursesService.findByFilter(searchFilter.createQuery(map).byDate().toString())).thenReturn(new CourseSearchResult());
+        when(courseService.findByFilter(searchFilter.createQuery(map).byDate().toString())).thenReturn(new CourseSearchResult());
         mockMvc.perform(get("/")).andExpect(status().isOk())
                 .andExpect(model().attribute("content", "content/welcomeContent"))
                 .andExpect(view().name("welcome/welcomeLayout"));*/
