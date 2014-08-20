@@ -6,7 +6,7 @@
             <@spring.bind "categories" />
             <@spring.bind "searchFilter.categories" />
             <@spring.message "searchFilter.categories"/><br/>
-            <select multiple>
+            <select>
                 <#list categories as cat>
                     <#assign isSelected = false>
                     <#if searchFilter.categories??>

@@ -57,9 +57,14 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
         Criteria criteria = getCurrentSession().createCriteria(Course.class);
         criteria.setFetchMode("tags", FetchMode.SELECT);
         criteria.setFetchMode("author", FetchMode.SELECT);
+        criteria.createAlias("author", "author");
         final String title = filter.getTitle();
         if (title != null && !title.equals("")) {
             criteria.add(Restrictions.like("name", "%" + title + "%"));
+        }
+        final String author = filter.getAuthor();
+        if (author != null && !author.equals("")) {
+            criteria.add(Restrictions.like("author.firstName", "%" + author + "%"));
         }
         final CourseStatus status = filter.getStatus();
         if (status != null && !status.equals("")) {
