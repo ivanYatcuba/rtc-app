@@ -16,10 +16,8 @@
             <pattern>%date{YYYY-MM-dd HH:mm:ss} %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
         </encoder>
     </appender>
-    <logger name="net.github.rtc.app" level="DEBUG"/>
-    <logger name="org.hibernate" level="DEBUG"/>
 
-  <root level="debug">
+  <root level="info">
     <appender-ref ref="FILE" />
   </root>
 </configuration>
