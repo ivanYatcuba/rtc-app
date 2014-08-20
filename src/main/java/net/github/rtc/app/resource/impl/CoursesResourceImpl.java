@@ -57,33 +57,41 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
      */
     private Criteria buildCriteria(SearchFilter filter) {
         Criteria criteria = getCurrentSession().createCriteria(Course.class);
-        criteria.createAlias("author", "author");
+
         final String title = filter.getTitle();
         if (title != null && !title.equals("")) {
             criteria.add(Restrictions.like("name", "%" + title + "%"));
         }
+
         final String author = filter.getAuthor();
         if (author != null && !author.equals("")) {
-            criteria.add(Restrictions.like("author.firstName", "%" + author + "%"));
+            criteria.createAlias("author", "author");
+            criteria.add(Restrictions.disjunction()
+                    .add(Restrictions.like("author.firstName", "%" + author + "%"))
+                    .add(Restrictions.like("author.lastName", "%" + author + "%")));
         }
+
         final CourseStatus status = filter.getStatus();
         if (status != null && !status.equals("")) {
             final Disjunction stat = Restrictions.disjunction();
             stat.add(Restrictions.eq("status", status));
             criteria.add(stat);
         }
+
         Date startDate = null;
         try {
             startDate = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(filter.getStartDate());
         } catch (ParseException | NullPointerException e ) {
             e.printStackTrace();
         }
+
         if (startDate != null) {
             Calendar cal = Calendar.getInstance();
             cal.setTime(startDate);
             cal.add(Calendar.DATE, -1);
             criteria.add(Restrictions.gt("startDate", cal.getTime()));
         }
+
         final Collection<String> categories = filter.getCategories();
         if (categories != null && categories.size() > 0) {
             final Disjunction catDis = Restrictions.disjunction();
@@ -92,6 +100,7 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
             }
             criteria.add(catDis);
         }
+
         final Collection<String> tags = filter.getTags();
         if (tags != null && tags.size() > 0) {
             criteria.createAlias("tags", "tags");
