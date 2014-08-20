@@ -3,11 +3,10 @@ package net.github.rtc.app.resource.impl;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
+import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.utils.datatable.PageDto;
 import net.github.rtc.app.utils.datatable.SearchFilter;
-import net.github.rtc.app.resource.CoursesResource;
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -17,7 +16,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Data Access Object Implementation
@@ -55,8 +57,6 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
      */
     private Criteria buildCriteria(SearchFilter filter) {
         Criteria criteria = getCurrentSession().createCriteria(Course.class);
-        criteria.setFetchMode("tags", FetchMode.SELECT);
-        criteria.setFetchMode("author", FetchMode.SELECT);
         criteria.createAlias("author", "author");
         final String title = filter.getTitle();
         if (title != null && !title.equals("")) {
