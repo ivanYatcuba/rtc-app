@@ -7,10 +7,7 @@ import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.utils.datatable.PageDto;
 import net.github.rtc.app.utils.datatable.SearchFilter;
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
@@ -66,14 +63,14 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
             List<String> firstLastName = new ArrayList<>();
             for (String string : author.split(" "))firstLastName.add(string);
             criteria.createAlias("author", "author");
-            Disjunction or = Restrictions.disjunction();
+            Conjunction or = Restrictions.conjunction();
             if(firstLastName.size()!=1) {
                 or.add(Restrictions.in("author.firstName", firstLastName));
                 or.add(Restrictions.in("author.lastName", firstLastName));
                 criteria.add(or);
             }else {
                 or.add(Restrictions.like("author.firstName", "%"+ author+"%"));
-                or.add(Restrictions.like("author.lastName", "%" + author +"%"));
+                or.add(Restrictions.like("author.lastName", "%" + author + "%"));
                 criteria.add(or);
             }
         }
