@@ -50,6 +50,20 @@ public class SearchFilter {
         this.tags = tags;
     }
 
+    @Override
+    public String toString() {
+        return "SearchFilter{" +
+                "title='" + title + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", categories=" + categories +
+                ", tags=" + tags +
+                ", status=" + status +
+                ", author='" + author + '\'' +
+                ", pageNumber=" + pageNumber +
+                ", maxResult=" + maxResult +
+                '}';
+    }
+
     public CourseStatus getStatus() { return status; }
 
     public void setStatus(CourseStatus status) { this.status = status; }
