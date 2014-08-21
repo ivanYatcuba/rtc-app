@@ -45,6 +45,7 @@
     </div>
 
     <div class="span10" style="text-align: right">
+        <br><hr><br>
         <input type="submit" class="btn" value="Search"/> or <a
             href="<@spring.url "/admin/course" />">Reset</a>
     </div>

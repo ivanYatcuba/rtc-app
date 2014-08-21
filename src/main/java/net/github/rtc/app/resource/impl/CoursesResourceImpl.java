@@ -16,10 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Data Access Object Implementation
@@ -46,12 +43,13 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
 
     @Override
     public Integer getCount(SearchFilter filter) {
-        return ((Long)buildCriteria(filter).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+        return ((Long) buildCriteria(filter).setProjection(Projections.rowCount()).uniqueResult()).intValue();
     }
 
 
     /**
      * Build search criteria by filter
+     *
      * @param filter filter course search
      * @return criteria
      */
@@ -65,10 +63,19 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
 
         final String author = filter.getAuthor();
         if (author != null && !author.equals("")) {
+            List<String> firstLastName = new ArrayList<>();
+            for (String string : author.split(" "))firstLastName.add(string);
             criteria.createAlias("author", "author");
-            criteria.add(Restrictions.disjunction()
-                    .add(Restrictions.like("author.firstName", "%" + author + "%"))
-                    .add(Restrictions.like("author.lastName", "%" + author + "%")));
+            Disjunction or = Restrictions.disjunction();
+            if(firstLastName.size()!=1) {
+                or.add(Restrictions.in("author.firstName", firstLastName));
+                or.add(Restrictions.in("author.lastName", firstLastName));
+                criteria.add(or);
+            }else {
+                or.add(Restrictions.like("author.firstName", "%"+ author+"%"));
+                or.add(Restrictions.like("author.lastName", "%" + author +"%"));
+                criteria.add(or);
+            }
         }
 
         final CourseStatus status = filter.getStatus();
@@ -81,7 +88,7 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
         Date startDate = null;
         try {
             startDate = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(filter.getStartDate());
-        } catch (ParseException | NullPointerException e ) {
+        } catch (ParseException | NullPointerException e) {
             e.printStackTrace();
         }
 
@@ -113,7 +120,6 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
 
         return criteria;
     }
-
 
 
 }
