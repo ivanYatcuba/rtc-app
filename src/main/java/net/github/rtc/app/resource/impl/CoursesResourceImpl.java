@@ -63,12 +63,14 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
             List<String> firstLastName = new ArrayList<>();
             for (String string : author.split(" "))firstLastName.add(string);
             criteria.createAlias("author", "author");
-            Conjunction or = Restrictions.conjunction();
+
             if(firstLastName.size()!=1) {
-                or.add(Restrictions.in("author.firstName", firstLastName));
-                or.add(Restrictions.in("author.lastName", firstLastName));
-                criteria.add(or);
+                Conjunction and = Restrictions.conjunction();
+                and.add(Restrictions.in("author.firstName", firstLastName));
+                and.add(Restrictions.in("author.lastName", firstLastName));
+                criteria.add(and);
             }else {
+                Disjunction or = Restrictions.disjunction();
                 or.add(Restrictions.like("author.firstName", "%"+ author+"%"));
                 or.add(Restrictions.like("author.lastName", "%" + author + "%"));
                 criteria.add(or);
