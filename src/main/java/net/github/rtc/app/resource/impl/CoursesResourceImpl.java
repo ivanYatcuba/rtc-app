@@ -8,6 +8,8 @@ import net.github.rtc.app.utils.datatable.PageDto;
 import net.github.rtc.app.utils.datatable.SearchFilter;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,6 +25,7 @@ import java.util.*;
  */
 @Repository
 public class CoursesResourceImpl extends GenericResourceImpl<Course> implements CoursesResource {
+    private static Logger LOG = LoggerFactory.getLogger(CoursesResourceImpl.class.getName());
 
     @Override
     public Integer getCount() {
@@ -51,6 +54,7 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
      * @return criteria
      */
     private Criteria buildCriteria(SearchFilter filter) {
+        LOG.debug(filter.toString());
         Criteria criteria = getCurrentSession().createCriteria(Course.class);
 
         final String title = filter.getTitle();
@@ -98,13 +102,12 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
             criteria.add(Restrictions.gt("startDate", cal.getTime()));
         }
 
-        final Collection<String> categories = filter.getCategories();
+        final Collection<CourseType> categories = filter.getCategories();
         if (categories != null && categories.size() > 0) {
-            final Disjunction catDis = Restrictions.disjunction();
-            for (final String cat : categories) {
-                catDis.add(Restrictions.eq("type", CourseType.valueOf(cat.toUpperCase())));
-            }
-            criteria.add(catDis);
+            criteria.add(Restrictions.in("type",categories));
+            /*for ( CourseType cat : categories) {
+                catDis.add(Restrictions.eq("type", cat));
+            }*/
         }
 
         final Collection<String> tags = filter.getTags();

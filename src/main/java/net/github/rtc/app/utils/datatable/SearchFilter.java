@@ -1,6 +1,7 @@
 package net.github.rtc.app.utils.datatable;
 
 import net.github.rtc.app.model.course.CourseStatus;
+import net.github.rtc.app.model.course.CourseType;
 
 import java.util.*;
 
@@ -10,7 +11,7 @@ import java.util.*;
 public class SearchFilter {
     private String title;
     private String startDate;
-    private Collection<String> categories;
+    private Collection<CourseType> categories;
     private Collection<String> tags;
     private CourseStatus status;
     private String author;
@@ -36,9 +37,9 @@ public class SearchFilter {
         this.startDate = startDate;
     }
 
-    public Collection<String> getCategories() {return categories;}
+    public Collection<CourseType> getCategories() {return categories;}
 
-    public void setCategories(Collection<String> categories) {
+    public void setCategories(Collection<CourseType> categories) {
         this.categories = categories;
     }
 
@@ -48,6 +49,20 @@ public class SearchFilter {
 
     public void setTags(Collection<String> tags) {
         this.tags = tags;
+    }
+
+    @Override
+    public String toString() {
+        return "SearchFilter{" +
+                "title='" + title + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", categories=" + categories +
+                ", tags=" + tags +
+                ", status=" + status +
+                ", author='" + author + '\'' +
+                ", pageNumber=" + pageNumber +
+                ", maxResult=" + maxResult +
+                '}';
     }
 
     public CourseStatus getStatus() { return status; }
@@ -95,7 +110,7 @@ public class SearchFilter {
             StringBuffer sb = new StringBuffer();
             String prefix = "";
             if (categories != null && categories.size() > 0) {
-                for (String cat : categories) {
+                for (CourseType cat : categories) {
                     sb.append(prefix);
                     prefix = ";";
                     sb.append(cat);

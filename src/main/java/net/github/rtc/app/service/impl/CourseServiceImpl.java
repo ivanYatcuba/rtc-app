@@ -1,9 +1,9 @@
 package net.github.rtc.app.service.impl;
 
-import net.github.rtc.app.model.course.*;
+import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.service.CourseService;
-import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.utils.datatable.PageDto;
@@ -33,22 +33,6 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Autowired
     private CoursesResource resource;
 
-
-    /**
-     * Check course code for null
-     *
-     * @param code course code
-     * @throws ServiceProcessingException
-     */
-    private void checkCode(String code) {
-        LOG.info("Checking if course with code " + code + " exists");
-        if (code == null) {
-            RuntimeException ex = new ServiceProcessingException("Course code can't be null");
-            LOG.error("Exception: ", ex);
-            throw ex;
-        }
-    }
-
     /**
      * @see net.github.rtc.app.service.CourseService#delete(String)
      */
@@ -67,7 +51,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Override
     @Transactional
     public Course findByCode(String code) {
-        LOG.info("Getting course with code " + code);
+        LOG.debug("Getting course with code " + code);
+        Assert.notNull(code, "code cannot be null");
         checkCode(code);
         return resource.findByCode(code);
     }
@@ -78,7 +63,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Override
     @Transactional
     public Course create(Course course) {
-        LOG.info("Creating course " + course);
+        LOG.debug("Creating course " + course);
+        Assert.notNull(course, "course cannot be null");
         course.setCode(UUID.randomUUID().toString());
         return resource.create(course);
     }
@@ -89,7 +75,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Override
     @Transactional
     public void update(Course course) {
-        LOG.info("Updating course: " + course);
+        LOG.debug("Updating course: " + course);
+        Assert.notNull(course, "course cannot be null");
         resource.update(course);
     }
 
@@ -104,7 +91,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Override
     @Transactional
     public CourseSearchResult findByFilter(SearchFilter filter) {
-        LOG.info("Searching courses with filter: " + filter);
+        LOG.debug("Searching courses with filter: " + filter);
         Integer total = resource.getCount(filter);
         PageDto pageDto = new PageDto.Builder(total).page(filter.getPageNumber()).maxResult(filter.getMaxResult())
                 .build();
@@ -118,16 +105,28 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Override
     @Transactional
     public List<Course> findAll() {
-        LOG.info("Getting all courses from database...");
+        LOG.debug("Getting all courses from database...");
         return (List) resource.findAll();
     }
 
     @Override
     @Transactional
     public void publish(Course course) {
-        LOG.info("Publishing course " + course);
+        LOG.debug("Publishing course " + course);
+        Assert.notNull(course, "course cannot be null");
         course.setStatus(CourseStatus.PUBLISHED);
         course.setPublishDate(new Date());
         resource.update(course);
     }
+
+    /**
+     * Check course code for null
+     *
+     * @param code course code
+     */
+    private void checkCode(String code) {
+        LOG.debug("Checking if course with code " + code + " exists");
+        Assert.notNull(code, "code cannot be null");
+    }
+
 }
