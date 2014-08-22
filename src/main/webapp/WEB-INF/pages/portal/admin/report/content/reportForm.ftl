@@ -2,11 +2,11 @@
 <div class="row" style="margin-left: 1px" >
     <div class="col-md-6" >
         <!--Report Name-->
-        <@spring.formItem "report.name"/>
+        <@spring.formItem "report.name" "class=\"required\""/>
         <!--Report Class-->
         <label><@spring.message "report.exportClass"/></label>
         <@spring.bind "types" />
-        <select id="selectedType" name="selectedType">
+        <select id="selectedType" name="selectedType" class="required">
             <#list types as type>
                 <option value="${type}" <#if report.exportClass?? && type == report.exportClass.simpleName>selected</#if>>${type}</option>
             </#list>
@@ -16,7 +16,7 @@
         <!--Report Format-->
         <label><@spring.message "report.exportFormat"/></label>
         <@spring.bind "formats" />
-        <@spring.formSingleSelect "report.exportFormat", formats, " "/>
+        <@spring.formSingleSelect "report.exportFormat", formats, "class=\"required\""/>
     </div>
 </div>
 &NonBreakingSpace;

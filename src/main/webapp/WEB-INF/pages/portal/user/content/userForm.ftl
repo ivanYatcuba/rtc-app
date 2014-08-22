@@ -4,14 +4,14 @@
 
     <!--Email-->
     <div class="col-md-6">
-    `<@spring.formItem  "user.email"/>
+    <@spring.formItem  "user.email" "class=\"required\""/>
     </div>
 
     <!--Password-->
     <div class="col-md-6">
         <div class="controls">
             <label  for="password"><@spring.message "user.password"/></label>
-        <@spring.formInput "user.password" "id=\"password\"" "password"/>
+        <@spring.formInput "user.password" "id=\"password\" class=\"required\"" "password"/>
         </div>
         <div class="controls">
             <label  for="check"></label>
@@ -36,16 +36,16 @@
 <div class="row">
     <div class="col-md-6">
         <!--Last Name-->
-    <@spring.formItem  "user.surname" />
+    <@spring.formItem  "user.surname" "class=\"required\""/>
         <!--Middle Name -->
     <@spring.formItem  "user.middleName" />
     </div>
 
     <div class="col-md-6">
         <!--First Name-->
-    <@spring.formItem  "user.name" />
+    <@spring.formItem  "user.name" "class=\"required\""/>
         <!--Birth Date-->
-    <@spring.formItem "user.birthDate"  "datepiker" 'class="input-medium"'/>
+    <@spring.formItem "user.birthDate"  'class="input-medium required"' "datepiker"/>
     </div>
 </div>
 
@@ -58,7 +58,7 @@
     </div>
     <div class="col-md-6">
         <!--Phone-->
-    <@spring.formItem  "user.phone" />
+    <@spring.formItem  "user.phone" "class=\"required\""/>
     </div>
 </div>
 
@@ -101,9 +101,12 @@
 <div class="row">
     <div class="col-md-12">
         <label for="note"><@spring.message "user.note"/></label>
-    <@spring.formTextarea "user.note" 'style="width:80%;" rows="3" maxlength="255" id=\"note\"' />
+    <@spring.formTextarea "user.note" 'style="width:80%;" rows="3" maxlength="255" id=\"note\" class=\"required\"' />
     </div>
 </div>
+
+<@spring.formValidation formName="user" jsonRules="${validationRules}"/>
+
 
 <@spring.formValidation formName="user" jsonRules="${validationRules}"/>
 

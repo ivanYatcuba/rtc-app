@@ -73,6 +73,7 @@ public class CoursesController {
 
         mav.addObject("courses", result.getCourses());
         mav.addObject("isFiltered", false);
+        mav.addObject("statuses", getStats());
         return mav;
     }
 
