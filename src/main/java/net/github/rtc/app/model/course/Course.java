@@ -33,7 +33,7 @@ public class Course implements Serializable {
 
     @Required
     @Column
-    @ForExport("Type")
+    @ForExport("Category")
     @Enumerated(EnumType.STRING)
     private CourseType type;
 
@@ -80,12 +80,6 @@ public class Course implements Serializable {
     @JoinColumn(name = "AUTHOR_ID")
     @ForExport("Author")
     private Author author;
-
-
-
-
-
-
 
 
 

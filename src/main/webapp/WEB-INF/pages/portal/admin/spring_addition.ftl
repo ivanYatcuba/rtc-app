@@ -1,6 +1,22 @@
 <#ftl strip_whitespace=true>
 <#include "/spring.ftl"/>
 
+<style type="text/css">
+    div.controls{
+        overflow:hidden;
+    }
+    label{
+        width:70px;
+        display:block;
+        float:left;
+        text-align:left;
+    }
+    input{
+        width:240px;
+        float:left;
+    }
+</style>
+
 <#macro includeHeader>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 
@@ -58,10 +74,10 @@
 <#macro formItem path type="text" attributes="">
     <@bind path/>
     <div>
-        <label class="control-label" for="${status.expression?replace('[','')?replace(']','')}">
-            <@message path/>
-        </label>
          <div class="controls">
+             <label  for="${status.expression?replace('[','')?replace(']','')}">
+                 <@message path/>
+             </label>
             <#if type == "text">
                 <@formInput path attributes/>
             <#else>
