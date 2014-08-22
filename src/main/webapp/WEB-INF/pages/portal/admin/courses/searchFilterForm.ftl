@@ -6,7 +6,8 @@
         <@spring.bind "searchFilter.categories" />
         <@spring.message "searchFilter.categories"/><br/>
         <#--<@spring.formSingleSelect "searchFilter.categories"/>-->
-            <select>
+            <select name="categories" >
+                <option/>
             <#list categories as cat>
                 <#assign isSelected = false>
                 <#if searchFilter.categories??>
@@ -16,7 +17,7 @@
                         </#if>
                     </#list>
                 </#if>
-                <option value="${cat}" name="categories"/>${cat}<br>
+                <option value="${cat}"  ${isSelected ?string("selected", "")} />${cat}<br>
             </#list>
             </select>
         <@spring.formItem "searchFilter.author" />
@@ -24,11 +25,12 @@
 
         <div class="span5">
         <@spring.formItem "searchFilter.startDate" "datepiker" />
-        <@spring.bind "status" />
+        <@spring.bind "statuses" />
         <@spring.bind "searchFilter.status" />
         <@spring.message "searchFilter.status"/><br/>
             <select name="status">
-            <#list status as stat>
+            <option value="">ALL</option>
+            <#list statuses as stat>
                 <#assign isSelected = false>
                 <#if searchFilter.status??>
                     <#if searchFilter.status == stat>

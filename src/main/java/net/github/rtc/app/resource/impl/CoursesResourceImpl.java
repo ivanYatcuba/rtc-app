@@ -102,13 +102,12 @@ public class CoursesResourceImpl extends GenericResourceImpl<Course> implements 
             criteria.add(Restrictions.gt("startDate", cal.getTime()));
         }
 
-        final Collection<String> categories = filter.getCategories();
+        final Collection<CourseType> categories = filter.getCategories();
         if (categories != null && categories.size() > 0) {
-            final Disjunction catDis = Restrictions.disjunction();
-            for (final String cat : categories) {
-                catDis.add(Restrictions.eq("type", CourseType.valueOf(cat.toUpperCase())));
-            }
-            criteria.add(catDis);
+            criteria.add(Restrictions.in("type",categories));
+            /*for ( CourseType cat : categories) {
+                catDis.add(Restrictions.eq("type", cat));
+            }*/
         }
 
         final Collection<String> tags = filter.getTags();

@@ -224,7 +224,7 @@ public class CoursesController {
         return CourseType.findAll();
     }
 
-    @ModelAttribute("status")
+    @ModelAttribute("statuses")
     public Collection<String> getStats() {
         return CourseStatus.findAll();
     }
