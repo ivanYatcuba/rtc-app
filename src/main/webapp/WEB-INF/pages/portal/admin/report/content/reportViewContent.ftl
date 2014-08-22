@@ -1,11 +1,11 @@
 <h3 class="page-header"><@spring.message "report.details"/></h3>
 <div class="row-fluid span12" style="margin-left: 1px">
     <div class="span6" >
-        <p><@spring.message "report.name"/>&nbsp${report.name}</p>
-        <p><@spring.message "report.exportClass"/>&nbsp${report.exportClass.simpleName}</p>
+        <label><@spring.message "report.name"/></label>&nbsp${report.name}</p>
+        <label><@spring.message "report.exportClass"/></label>&nbsp${report.exportClass.simpleName}</p>
     </div>
     <div class="span5">
-        <p><@spring.message "report.exportFormat"/>&nbsp${report.exportFormat}</p>
+        <label><@spring.message "report.exportFormat"/></label>&nbsp${report.exportFormat}</p>
     </div>
 </div>
 &NonBreakingSpace;
@@ -13,7 +13,7 @@
 <div class="span6" >
     <p><@spring.message "report.fields"/></p>
     <#list report.fields as field>
-        <p>${field}</p>
+        <label></label><p>${field}</p>
     </#list>
 </div>
 

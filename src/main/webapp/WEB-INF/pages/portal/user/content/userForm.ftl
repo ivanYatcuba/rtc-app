@@ -1,108 +1,109 @@
 <@spring.formHiddenInput "user.code" />
 <@spring.formHiddenInput "user.registerDate" />
-<div class="row-fluid span12" style="margin-left: 1px">
+<div class="row">
 
     <!--Email-->
-    <div class="span6">
-        <div><label for="user.email">* <@spring.message "user.email"/>: </label>
-        <@spring.formInput "user.email" 'style="background-color: #FFFACD;"' /></div>
+    <div class="col-md-6">
+    `<@spring.formItem  "user.email"/>
     </div>
 
     <!--Password-->
-    <div class="span6">
-        <div>
-            <div><label for="pass"><@spring.message "user.password"/>: </label>
-                <@spring.formInput "user.password" 'id="password" name="password" class="st-input" style="background-color: #FFFACD;"' 'password'/><br/>
-                <input onchange="if ($('#password').get(0).type=='password') $('#password').get(0).type='text'; else $('#password').get(0).type='password';" name="fff" type="checkbox" value="false" style="margin: 0px 0px 0px;">  <@spring.message "user.showPassword"/>
-            </div>
+    <div class="col-md-6">
+        <div class="controls">
+            <label  for="password"><@spring.message "user.password"/></label>
+        <@spring.formInput "user.password" "id=\"password\"" "password"/>
         </div>
-
+        <div class="controls">
+            <label  for="check"></label>
+            <input id="check" onchange="if ($('#password').get(0).type=='password') $('#password').get(0).type='text'; else $('#password').get(0).type='password';" name="fff" type="checkbox" value="false" style="margin: 0px 0px 0px;">  <@spring.message "user.showPassword"/>
+        </div>
+    </div>
 </div>
-
-<div class="row-fluid span12" style="margin-left: 1px;"><hr width="72%"></div>
+<hr />
 
 <!--Gender-->
-<div class="row-fluid span12" style="margin-left: 1px">
-    <div class="span6">
-        <div style="margin-bottom: 10px;">
-            <label for="user.gender"><@spring.message "user.gender"/>:</label>
-            <@spring.bind "user.gender"/>
-            <input type="radio" name="gender" id="optionsRadios1" value="Male" checked
-                   style="margin: -3px 0px 0px;"> <@spring.message "user.genderM"/>
-            <input type="radio" name="gender" id="optionsRadios2" value="Female"
-                   style="margin: -3px 0px 0px;"> <@spring.message "user.genderF"/>
-
-        </div>
+<div class="row">
+    <div class="col-md-6">
+        <label for="user.gender"><@spring.message "user.gender"/>:</label>
+    <@spring.bind "user.gender"/>
+        <input type="radio" name="gender" id="optionsRadios1" value="Male" checked
+               style="margin: -3px 0px 0px;"> <@spring.message "user.genderM"/>
+        <input type="radio" name="gender" id="optionsRadios2" value="Female"
+               style="margin: -3px 0px 0px;"> <@spring.message "user.genderF"/>
     </div>
 </div>
 
-<div class="row-fluid span12" style="margin-left: 1px">
-    <div class="span6">
+<div class="row">
+    <div class="col-md-6">
         <!--Last Name-->
-        <div><label for="user.surname">* <@spring.message "user.surname"/>: </label>
-        <@spring.formInput "user.surname" 'style="background-color: #FFFACD;"'/></div>
+    <@spring.formItem  "user.surname" />
         <!--Middle Name -->
-        <@spring.formItem "user.middleName"/>
+    <@spring.formItem  "user.middleName" />
     </div>
 
-    <div class="span6">
+    <div class="col-md-6">
         <!--First Name-->
-        <div><label for="user.name">* <@spring.message "user.name"/>: </label>
-        <@spring.formInput "user.name" 'style="background-color: #FFFACD;"'/></div>
-
+    <@spring.formItem  "user.name" />
         <!--Birth Date-->
-        <div><label for="user.birthDate">* <@spring.message "user.birthDate"/>: </label>
-        <@spring.formDatepicker "user.birthDate" 'style="background-color: #FFFACD;"'/></div>
+    <@spring.formItem "user.birthDate"  "datepiker" 'class="input-medium"'/>
     </div>
 </div>
 
-<div class="row-fluid span12" style="margin-left: 1px;"><hr width="72%"></div>
+<hr />
 
-<div class="row-fluid span12" style="margin-left: 1px">
-    <!--City-->
-    <div class="span6"><@spring.formItem "user.city"/></div>
-
-    <!--Phone-->
-    <div class="span6">
-        <div><label for="user.phone">* <@spring.message "user.phone"/>: </label>
-        <@spring.formInput "user.phone" 'style="background-color: #FFFACD;"'/></div>
+<div class="row" >
+    <div class="col-md-6">
+        <!--City-->
+    <@spring.formItem  "user.city" />
+    </div>
+    <div class="col-md-6">
+        <!--Phone-->
+    <@spring.formItem  "user.phone" />
     </div>
 </div>
 
-<div class="row-fluid span12" style="margin-left: 1px;"><hr width="72%"></div>
+<hr />
 
-<div class="row-fluid span12" style="margin-left: 1px">
-    <!--Univercity-->
-    <div class="span6"><@spring.formItem "user.university"/>
-    <!--Faculty-->
-    <@spring.formItem "user.faculty"/></div>
-    <!--Speciality-->
-    <div class="span6"><@spring.formItem "user.speciality"/></div>
+<div class="row">
+    <div class="col-md-6">
+        <!--University-->
+    <@spring.formItem  "user.university" />
+        <!--Speciality-->
+    <@spring.formItem  "user.faculty" />
+
+    </div>
+
+    <div class="col-md-6">
+        <!--Faculty-->
+    <@spring.formItem  "user.speciality" />
+    </div>
 </div>
 
-<div class="row-fluid span12" style="margin-left: 1px;"><hr width="72%"></div>
+<hr/>
 
-<div class="row-fluid span12" style="margin-left: 1px">
-    <!--Languages-->
-    <div class="span6"><@spring.formItem "user.programmingLanguages"/></div>
+<div class="row" >
+    <div class="col-md-6">
+        <!--Languages-->
+    <@spring.formItem "user.programmingLanguages" />
+    </div>
 
-    <!--English-->
-    <div class="span6">
-        <div><label for="user.english">* <@spring.message "user.english"/>: </label>
+    <div class="col-md-6">
+        <!--English-->
+        <div><label for="user.english"><@spring.message "user.english"/></label>
         <@spring.formSingleSelect "user.english", ["Basic", "Intermediate", "Advanced"], 'style="background-color: #FFFACD;"'/>
         </div>
     </div>
 </div>
 
-<div class="row-fluid span12" style="margin-left: 1px;"><hr width="72%"></div>
+<hr />
 
 <!--Note-->
-<div class="row-fluid span12" style="margin-left: 1px">
-    <div class="span12">
-        <div><label for="user.note">* <@spring.message "user.note"/>: </label>
-        <@spring.formTextarea "user.note" 'style="width:700px; background-color: #FFFACD;"' />
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <label for="note"><@spring.message "user.note"/></label>
+    <@spring.formTextarea "user.note" 'style="width:80%;" rows="3" maxlength="255" id=\"note\"' />
     </div>
 </div>
 
 <@spring.formValidation formName="user" jsonRules="${validationRules}"/>
+

@@ -13,7 +13,7 @@
         </div>
         <div class="span5" style="text-align: right">
             <button type="submit" class="btn" >Update</button> or
-            <a href="<@spring.url "/admin/export/viewAll" />">Cancel</a>
+            <a href="<@spring.url "/admin/export/${report.code}" />">Cancel</a>
         </div>
     </div>
 </form>

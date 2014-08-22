@@ -1,152 +1,80 @@
-<html>
+<h3 class="page-header"><@spring.message "course.details"/></h3>
 
-<head>
-<#--<#assign security=JspTaglibs["http://www.springframework.org/security/tag"]/>-->
-  <title>User Page</title>
- </head>
-
-<body>
-
-    <p1>User Details</p1>
-        <br>
-        <br>
-
-   <div class="row-fluid 12">
-        <div class="span3" style="margin-left: 95px">
-
-            <label>Email: ${user.email!" "}</label>
-
-        </div>
-         <br>
-          <br>
-       <div class="span3" style="margin-left: 100px">
-
-           <label>Role:
-               <#list user.authorities as role>
-                ${role}<#if role_has_next>,</#if>
-               </#list>
-           </label>
-
-       </div>
-
-   </div>
-
-        <hr>
-
-   <div class="row-fluid 12">
-
-        <div class="span12" style="margin-left: 80px">
-            <label>Gender: ${user.gender!" "}</label>
-
-            <br>
-
-            <div class="span3" style="margin-left: -15px">
-            <label>Last Name: ${user.surname!" "}</label>
-            </div>
-            <div class="span7" style="margin-left: 180px">
-            <label>First Name: ${user.name!" "}</label>
-            </div>
-
-        </div>
-
-
-       <div class="span12" style="margin-left: 80px">
-    <br>
-           <div class="span3" style="margin-left: -30px">
-               <label>Middle Name: ${user.middleName!" "}</label>
-           </div>
-           <div class="span7" style="margin-left: 200px">
-               <label>BirthDate: <#if user.birthDate??>${user.birthDate ? datetime ? string("yyyy-MM-dd")}</#if></label>
-           </div>
-
-       </div>
-
-   </div>
-
-        <hr>
-
-            <div class="row-fluid 12">
-
-                <div class="span12" style="margin-left: 80px">
-                <div class="span3" style="margin-left: 25px">
-                    <label>City:${user.city!" "}</label>
-                </div>
-                <div class="span7" style="margin-left: 165px">
-                    <label>Phone: ${user.phone!" "}</label>
-                </div>
-        </div>
-            </div>
-
-        <hr>
-
-    <div class="row-fluid 12">
-
-        <div class="span12" style="margin-left: 80px">
-            <div class="span3" style="margin-left: -15px">
-                <label>Univercity: ${user.university!" "}</label>
-            </div>
-            <div class="span7" style="margin-left: 180px">
-                <label>Speciality: ${user.speciality!" "}</label>
-            </div>
-
-            <div class="span3" style="margin-left: 0px">
-                <br>
-                <label>Faculty: ${user.faculty!" "}</label>
-            </div>
-        </div>
-
-    </div>
-
-        <hr>
-
-
-    <div class="row-fluid 12">
-
-        <div class="span12" style="margin-left: 80px">
-            <div class="span7" style="margin-left: -105px">
-                <label>Programming languages:
-                    <#list user.programmingLanguages as progLang>
-                        ${progLang}<#if progLang_has_next>,</#if>
-                    </#list>
-                </label>
-            </div>
-            <div class="span3" style="margin-left: -70px">
-                <label>English: ${user.english!" "}</label>
-            </div>
-        </div>
-    </div>
-
-        <hr>
-
-        <div class="row-fluid 12">
-
-            <div class="span12" style="margin-left: -35px">
-
-                <label>Why do you want to join us: ${user.note!" "}</label>
-
-            </div>
-
-
-        </div>
-
-        <hr>
-    <div class="row-fluid">
-        <div class="span10"></div>
-<div class="span1" style="text-align: right">
-
-
-    <form name ="editPage" action="editPage/${user.code}" method="get">
-    <button class="btn" type="submit"   >Edit</button>
-    </form>
-
-    </div>
-        <div class="span1" style="margin-left: -2px;text-align: right">
-             or
-    <a href="<@spring.url "/admin/user/viewAll" />">Cancel</a>
-
+<div class="row">
+    <div class="col-md-6">
+        <label>Email:</label><p>${user.email!" "}</p>
+        <label>Role:</label>
+        <p>
+            <#list user.authorities as role>
+            ${role}<#if role_has_next>,</#if>
+            </#list>
+        </p>
     </div>
 </div>
-    </div>
-</body>
 
-</html>
+<hr>
+
+<div class="row">
+    <label>Gender:</label><p>${user.gender!" "}</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <label>Last Name:</label><p>${user.surname!" "}</p>
+        <label>Middle Name:</label><p>${user.middleName!" "}</p>
+    </div>
+    <div class="col-md-6">
+        <label>First Name:</label><p>${user.name!" "}</p>
+        <label>BirthDate:</label><p><#if user.birthDate??>${user.birthDate ? datetime ? string("yyyy-MM-dd")}</#if></p>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <label>City:</label><p>${user.city!" "}</p>
+    </div>
+    <div class="col-md-6">
+        <label>Phone:</label><p>${user.phone!" "}</p>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-6"">
+        <label>Univercity:</label><p>${user.university!" "}</p>
+        <label>Faculty:</label><p>${user.faculty!" "}</p>
+    </div>
+    <div class="col-md-6">
+        <label>Speciality:</label><p>${user.speciality!" "}</p>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <label>Programming languages:</label>
+        <p><#list user.programmingLanguages as progLang>
+                ${progLang}<#if progLang_has_next>,</#if>
+            </#list></p>
+    </div>
+    <div class="col-md-6">
+        <label>English:</label><p>${user.english!" "}</p>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <p>Why do you want to join us: ${user.note!" "}</p>
+    </div>
+</div>
+
+<hr>
+<div class = "row">
+    <div class="span12" align="right">
+        <a href="<@spring.url "editPage/${user.code}" />"><button class="btn"><@spring.message "coursesPage.action.edit"/></button></a> or
+        <a href="<@spring.url "/admin/user/viewAll" />"><@spring.message "coursesPage.action.cancel"/></a>
+    </div>
+</div>
+</div>

@@ -55,7 +55,17 @@ public class ReportBuilder {
             for(int j =0; j < reportFields.size(); j++){
                 reportFields.get(j).setAccessible(true);
                 try {
-                    reportTable.createCell(currentRow, j, reportFields.get(j).get(object));
+                    if(reportFields.get(j).getDeclaringClass() != object.getClass()){
+                        for(Field f :object.getClass().getDeclaredFields()){
+                            if(f.getType() == reportFields.get(j).getDeclaringClass()){
+                                f.setAccessible(true);
+                                reportTable.createCell(currentRow, j, reportFields.get(j).get(f.get(object)));
+                                f.setAccessible(false);break;
+                            }
+                        }
+                    }else{
+                        reportTable.createCell(currentRow, j, reportFields.get(j).get(object));
+                    }
                 } catch (IllegalAccessException | NullPointerException e) {
                     reportTable.createCell(currentRow, j, "");
                 }

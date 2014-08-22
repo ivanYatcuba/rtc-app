@@ -7,6 +7,7 @@ import net.github.rtc.app.model.report.ExportFormat;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ReportService;
+import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,15 +155,7 @@ public class ExportController {
     }
 
     public List<String> getClassFields(Class aClass){
-        List<String> fieldsStr = new ArrayList<>();
-
-        Field[] typeFields = aClass.getDeclaredFields();
-        for(Field f : typeFields){
-            if(f.isAnnotationPresent(ForExport.class)){
-               fieldsStr.add(f.getAnnotation(ForExport.class).value());
-            }
-        }
-        return fieldsStr;
+        return ExportFieldExtractor.getAviableFieldList(aClass);
     }
 
     @ModelAttribute("stats")

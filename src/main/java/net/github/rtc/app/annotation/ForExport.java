@@ -7,5 +7,8 @@ package net.github.rtc.app.annotation;
 @java.lang.annotation.Target(java.lang.annotation.ElementType.FIELD)
 @java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
 public @interface ForExport {
+    //Name field in table header
     String value();
+    //If field is a class type contains list of fields that are marked with @ForExport in other entity
+    String[] inculdeField() default {};
 }

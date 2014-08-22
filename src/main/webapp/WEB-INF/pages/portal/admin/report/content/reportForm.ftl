@@ -1,6 +1,6 @@
 
-<div class="row-fluid span12" style="margin-left: 1px" >
-    <div class="span6" >
+<div class="row" style="margin-left: 1px" >
+    <div class="col-md-6" >
         <!--Report Name-->
         <@spring.formItem "report.name"/>
         <!--Report Class-->
@@ -21,12 +21,14 @@
 </div>
 &NonBreakingSpace;
 <hr>
-<div  class="span6" >
-    <!--Report Fields-->
-    <@spring.message "report.fields"/>
-    <div id="fields">
+<div class="row">
+    <div  class="col-md-6" >
+        <!--Report Fields-->
+        <@spring.message "report.fields"/>
+        <div id="fields">
+        </div>
+        <label for="addFieldH"></label><a id="addFieldH" href="#" onclick="addField()">Add Field</a>
     </div>
-    <a href="#" onclick="addField()">Add Field</a>
 </div>
 
 <script>
@@ -45,7 +47,8 @@
     }
 
     function getFieldsSelect(list){
-        var fieldsSelect ="<div id=\""+fieldsCount+"\"><select name=\"reportFields\">";
+        var fieldsSelect = "<label for=\"fieldsCount\"></label>"
+        fieldsSelect += "<div id=\""+fieldsCount+"\"><select name=\"reportFields\">";
         for(var i=0; i<list.length; i++){
             fieldsSelect+="<option>"+list[i]+"</option>";
         }
@@ -78,6 +81,7 @@
                     </#list>
                 </#if>
                 }
+
             },
             error : function(xhr, status, error) {
             }

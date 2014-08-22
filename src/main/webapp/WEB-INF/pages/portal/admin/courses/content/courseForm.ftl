@@ -1,45 +1,41 @@
-<div class="row-fluid span12" style="margin-left: 1px">
-        <div class="span6" >
-            <@spring.formItem "course.name"/>
+<div class="row">
+        <div class="col-md-6" >
+            <@spring.formItem "course.name" "class=\"required\""/>
             <div><label for="type">
-            <@spring.message "course.category"/>   </label>
+            <@spring.message "course.category" />   </label>
             <@spring.bind "categories" />
-            <@spring.formSingleSelect "course.type", categories, " "/></div>
+            <@spring.formSingleSelect "course.type", categories, "class=\"required\""/></div>
             <label><@spring.message "course.capacity"/> </label>
-            <@spring.formInput "course.capacity", 'onkeydown="return isNumber(event);" class="input-small" size="2" maxlength="2" ' />
+            <@spring.formInput "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
         </div>
 
-        <div class="span5">
-            <@spring.formItem "course.startDate" "datepiker" 'class="input-medium"'/>
-            <@spring.formItem "course.endDate" "datepiker" 'class="input-medium"'/>
+        <div class="col-md-6">
+            <@spring.formItem "course.startDate" 'class="input-medium required"' "datepiker"/>
+            <@spring.formItem "course.endDate" 'class="input-medium required"' "datepiker"/>
             <@spring.formItem "course.tags" "tag"/>
         </div>
 
 </div>
 &NonBreakingSpace;
 <hr>
-<div class="row-fluid span12" style="margin-left: 1px; ">
-    <div class="span6" >
-        <div>
+<div class="row">
+    <div class="col-md-6" >
         <@spring.formItem "course.author.lastName" />
         <@spring.formItem "course.author.firstName" />  </div>
-
-        <@spring.showErrors "<br>" />
-    </div>
-    <div class="span5">
+    <div class="col-md-6">
         <@spring.formItem "course.author.email"/>
     </div>
 </div>
 &NonBreakingSpace;
 <hr>
-<div class="row-fluid span12" style="margin-left: 1px">
-    <label><@spring.message "course.description"/> </label>
-    <@spring.formTextarea "course.description" 'style="width:100%;" rows="3" maxlength="255"'/>
+<div class="row">
+    <label for="description"><@spring.message "course.description"/> </label>
+    <@spring.formTextarea "course.description" 'style="width:80%;" rows="3" maxlength="255" id=\"description\" class=\"required\"'/>
 </div>
 &NonBreakingSpace;
 <hr>
-<div class="row-fluid span12" style="margin-left: 1px">
-    <@spring.message "course.status"/>&nbsp;${course.status}
+<div class="row">
+    <label><@spring.message "course.status"/></label>&nbsp;${course.status}
 </div>
 <script>
     function isNumber(event) {

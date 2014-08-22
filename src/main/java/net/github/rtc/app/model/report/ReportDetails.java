@@ -1,7 +1,7 @@
 package net.github.rtc.app.model.report;
 
 
-import net.github.rtc.app.annotation.ForExport;
+import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.util.annotation.Maxlength;
 import net.github.rtc.util.annotation.Required;
 import net.github.rtc.util.annotation.Validatable;
@@ -9,7 +9,6 @@ import net.github.rtc.util.annotation.Validatable;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -71,12 +70,6 @@ public class ReportDetails {
     public void setCreatedDate(Date createdDate) {this.createdDate = createdDate;}
 
     public List<Field> getFieldsFromClass() throws NoSuchFieldException {
-        List<Field> classFields = new ArrayList<>();
-        for(Field f : exportClass.getDeclaredFields()){
-            if(f.isAnnotationPresent(ForExport.class) && fields.contains(f.getAnnotation(ForExport.class).value())){
-                classFields.add(f);
-            }
-        }
-        return classFields;
+       return ExportFieldExtractor.getFieldsFromClass(exportClass, fields);
     }
 }

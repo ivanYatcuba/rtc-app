@@ -78,7 +78,7 @@ public class Course implements Serializable {
     @Required
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "AUTHOR_ID")
-    @ForExport("Author")
+    @ForExport(value = "Author", inculdeField = {"Author Email"})
     private Author author;
 
 

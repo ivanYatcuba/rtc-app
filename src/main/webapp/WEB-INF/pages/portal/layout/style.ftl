@@ -95,6 +95,25 @@ display: inline-block;
 border-radius: 50%;
 }
 
+label{
+    float: left;
+    width: 10em;
+    margin-right: 1em;
+    text-align: right;
+}
 
+ul.tagit {
+    display: inline-block;
+    width: 200px;
+}
+ul.tagit li { display: inline; }
+
+div.col-md-6{
+margin-right: 0px;
+}
+
+input.required, select.required, textarea.required{
+    background-color: #FFFACD;
+}
 </style>
 

@@ -1,12 +1,11 @@
 <form name="report" id="report" action="<@spring.url "/admin/export/insertReport" />" method="POST">
     <h3 class="page-header"><@spring.message "report.create"/></h3>
     <#include "reportForm.ftl" />
-
     <!--Create & Cancel-->
-    <div class="row-fluid span12" style="margin-left: 1px">
-        <div class="span6">
+    <div id="createAnfCancel" class="row" style="margin-left: 1px">
+        <div class="col-md-6">
         </div>
-        <div class="span5" style="text-align: right">
+        <div class="col-md-5" style="text-align: right">
             <button type="submit" class="btn" >Create</button> or
             <a href="<@spring.url "/admin/export/viewAll" />">Cancel</a>
         </div>

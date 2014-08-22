@@ -1,22 +1,6 @@
 <#ftl strip_whitespace=true>
 <#include "/spring.ftl"/>
 
-<style type="text/css">
-    div.controls{
-        overflow:hidden;
-    }
-    label{
-        width:70px;
-        display:block;
-        float:left;
-        text-align:left;
-    }
-    input{
-        width:240px;
-        float:left;
-    }
-</style>
-
 <#macro includeHeader>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 
@@ -59,19 +43,16 @@
 </#macro>
 
 <#macro formTagsInput path attributes="">
-    <@formHiddenInput path attributes/>
-    <ul id="${status.expression?replace('[','')?replace(']','')}Tag" style="margin: 0px"></ul>
+    <@formHiddenInput path attributes+" class=\"tagit-hidden-field\""/>
+    <input type="text" class="tagit ui-widget ui-widget-content ui-corner-all" id="${status.expression?replace('[','')?replace(']','')}Tag"/>
     <script type="text/javascript">
         $(function() {
-            $('#${status.expression?replace('[','')?replace(']','')}Tag').tagit({
-                singleField: true,
-                singleFieldNode: $('#${status.expression?replace('[','')?replace(']','')}')
-            });
+            $('#${status.expression?replace('[','')?replace(']','')}Tag').tagit();
         });
     </script>
 </#macro>
 
-<#macro formItem path type="text" attributes="">
+<#macro formItem path attributes="" type="text">
     <@bind path/>
     <div>
          <div class="controls">
@@ -79,7 +60,7 @@
                  <@message path/>
              </label>
             <#if type == "text">
-                <@formInput path attributes/>
+                <@formInput path attributes+" id=\"${status.expression?replace('[','')?replace(']','')}\""/>
             <#else>
                 <#if type == "datepiker">
                     <@formDatepicker path attributes/>

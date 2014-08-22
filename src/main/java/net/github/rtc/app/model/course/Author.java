@@ -1,5 +1,6 @@
 package net.github.rtc.app.model.course;
 
+import net.github.rtc.app.annotation.ForExport;
 import net.github.rtc.util.annotation.*;
 
 import javax.persistence.*;
@@ -32,6 +33,7 @@ public class Author implements Serializable {
     @Email
     @Maxlength(75)
     @Column
+    @ForExport("Author Email")
     private String email;
 
     public String getFirstName() {
