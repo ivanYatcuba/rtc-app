@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.AutoPopulatingList;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -61,7 +62,6 @@ public class ExportController {
         return mav;
     }
 
-
     @RequestMapping(value = "/update/{reportCode}", method = RequestMethod.GET)
     public ModelAndView openUpdatePage(@PathVariable String reportCode) {
         ModelAndView mav = new ModelAndView("portal/admin/page/reportEdit");
@@ -69,8 +69,6 @@ public class ExportController {
         ReportDetails reportDetails = reportService.findReportByCode(reportCode);
         mav.addObject("report", reportDetails);
         mav.addObject("types", formatLables);
-        List<String> fieldsStr = getClassFields(reportDetails.getExportClass());
-        mav.addObject("fieldsStr", fieldsStr);
         mav.addObject("validationRules", validationContext.get(ReportDetails.class));
         return mav;
     }
@@ -82,66 +80,37 @@ public class ExportController {
         return mav;
     }
 
-    @RequestMapping(value = "delete/{reportCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{reportCode}", method = RequestMethod.GET)
     public String deleteReport(@PathVariable String reportCode) {
         reportService.delete(reportService.findReportByCode(reportCode));
         return "redirect:/admin/export/viewAll";
     }
 
-    @RequestMapping(value = "/reportCreationAction", method = RequestMethod.GET)
-    public @ResponseBody ModelAndView createHandler(@ModelAttribute("report") ReportDetails report,
-                                 @RequestParam(required = false) String selectedType,
-                                 @RequestParam(required = false) String fieldCount,
-                                 @RequestParam String action,
-                                 HttpServletRequest httpServletRequest) {
-        return createOrEditAction("portal/admin/page/reportCreate", report, selectedType, fieldCount, action, httpServletRequest);
-    }
-
-    @RequestMapping(value = "/reportEditAction", method = RequestMethod.GET)
-    public @ResponseBody ModelAndView editHandler(@ModelAttribute("report") ReportDetails report,
-                                                    @RequestParam(required = false) String selectedType,
-                                                    @RequestParam(required = false) String fieldCount,
-                                                    @RequestParam String action,
-                                                    HttpServletRequest httpServletRequest) {
-        return createOrEditAction("portal/admin/page/reportEdit", report, selectedType, fieldCount, action, httpServletRequest);
-    }
-
-    private ModelAndView createOrEditAction(String currentPage, ReportDetails report,String selectedType,
-                                            String fieldCount,String action,HttpServletRequest httpServletRequest){
-        ModelAndView mav = new ModelAndView(currentPage);
-        mav.addObject("validationRules", validationContext.get(ReportDetails.class));
+    @RequestMapping(value = "/insertReport", method = RequestMethod.POST)
+    public @ResponseBody  ModelAndView createHandler(@ModelAttribute("report") ReportDetails report,
+                                 @RequestParam String selectedType,
+                                 @RequestParam("reportFields") List<String> reportFields) {
         report.setExportClass(getTypes().get(selectedType));
-        if(action.equals("addField")){
-            insertFields(report, httpServletRequest, Integer.parseInt(fieldCount), -1);
-            mav.addObject("addFieldTrue", "true");
-        }else if(action.contains("removeField_")) {
-            int fieldToRemove = Integer.parseInt(action.replace("removeField_", ""));
-            insertFields(report, httpServletRequest, Integer.parseInt(fieldCount), fieldToRemove);
-        }else if(action.equals("create")){
-            insertFields(report, httpServletRequest, Integer.parseInt(fieldCount), -1);
-            reportService.insert(report);
-            return new ModelAndView("redirect:/admin/export/"+report.getCode());
-        }else if(action.equals("update")){
-            insertFields(report, httpServletRequest, Integer.parseInt(fieldCount), -1);
-            reportService.update(report);
-            return new ModelAndView("redirect:/admin/export/"+report.getCode());
-        }
-
-        List<String> fieldsStr = getClassFields(getTypes().get(selectedType));
-        Set<String> formatLables = getTypes().keySet();
-        mav.addObject("fieldsStr", fieldsStr);
-        mav.addObject("types", formatLables);
-        return mav;
+        report.setFields(reportFields);
+        reportService.insert(report);
+        return new ModelAndView("redirect:/admin/export/"+report.getCode());
     }
 
-    private void insertFields(ReportDetails report, HttpServletRequest httpServletRequest, int fieldCount, int fieldToRemove){
-        report.setFields(new LinkedList<String>());
-        for(int i = 1; i <= fieldCount; i++){
-            if(fieldToRemove != i && httpServletRequest.getParameter("reportField_" + i)!=null){
-                report.getFields().add(httpServletRequest.getParameter("reportField_" + i));
-            }
-        }
+    @RequestMapping(value = "/updateReport", method = RequestMethod.POST)
+    public @ResponseBody  ModelAndView editHandler(@ModelAttribute("report") ReportDetails report,
+                                                     @RequestParam String selectedType,
+                                                     @RequestParam("reportFields") List<String> reportFields) {
+        report.setExportClass(getTypes().get(selectedType));
+        report.setFields(reportFields);
+        reportService.update(report);
+        return new ModelAndView("redirect:/admin/export/"+report.getCode());
     }
+
+    @RequestMapping(value = "/getFields", method = RequestMethod.GET)
+    public @ResponseBody List<String> getFields(@RequestParam String selectedType) {
+        return  getClassFields(getTypes().get(selectedType));
+    }
+
 
     @RequestMapping(value = "/download/{reportCode}", method = RequestMethod.GET)
     public void downloadUserExport(HttpServletResponse response, @PathVariable String reportCode) throws IOException {
