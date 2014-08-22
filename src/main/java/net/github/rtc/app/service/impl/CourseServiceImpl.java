@@ -1,9 +1,9 @@
 package net.github.rtc.app.service.impl;
 
-import net.github.rtc.app.model.course.*;
+import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.service.CourseService;
-import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.utils.datatable.PageDto;
@@ -123,7 +123,6 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      * Check course code for null
      *
      * @param code course code
-     * @throws ServiceProcessingException
      */
     private void checkCode(String code) {
         LOG.debug("Checking if course with code " + code + " exists");
