@@ -31,10 +31,10 @@ public class ReportJob implements Job {
     }
 
     private void actualExecute(ReportDetails reportDetails, ModelService modelService, String filePath){
-        XLSXReportBuilder reportBuilder = new XLSXReportBuilder();
+        ReportBuilder reportBuilder = new ReportBuilder();
         try {
             reportBuilder.build(reportDetails.getFieldsFromClass(), modelService.findAll(),
-                    reportDetails.getName() ,filePath);
+                    reportDetails.getName() ,filePath, reportDetails.getExportFormat());
             LOG.info("Job for report: " + reportDetails.getCode() + " completed!");
         } catch (NoSuchFieldException e) {
             LOG.info("Job for report: " + reportDetails.getCode() + " failed!");

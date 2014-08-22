@@ -72,11 +72,9 @@ public class ReportDetails {
 
     public List<Field> getFieldsFromClass() throws NoSuchFieldException {
         List<Field> classFields = new ArrayList<>();
-        for(String fieldName : fields){
-            for(Field f : exportClass.getDeclaredFields()){
-                if(f.getAnnotation(ForExport.class).value().equals(fieldName)){
-                    classFields.add(f);break;
-                }
+        for(Field f : exportClass.getDeclaredFields()){
+            if(f.isAnnotationPresent(ForExport.class) && fields.contains(f.getAnnotation(ForExport.class).value())){
+                classFields.add(f);
             }
         }
         return classFields;

@@ -21,54 +21,75 @@
 </div>
 &NonBreakingSpace;
 <hr>
-<div class="span6" >
+<div  class="span6" >
     <!--Report Fields-->
     <@spring.message "report.fields"/>
     <div id="fields">
-    <#if report.exportClass??>
-        <#assign i = 0>
-        <#if report.fields??>
-            <#list report.fields as f>
-                <#assign i = i+1>
-                <@spring.bind "fieldsStr" />
-                <select id="reportField_${i}" name="reportField_${i}">
-                    <#list fieldsStr as field>
-                            <option value="${field}" <#if f?? && field == f>selected</#if>>${field}</option>
-                    </#list>
-                </select>&nbsp;<button class="btn" type="submit" name="action" value="removeField_${i}" >-</button><br/>
-            </#list>
-        </#if>
-        <#if addFieldTrue??>
-            <#assign i = i+1>
-            <select id="reportField_${i}" name="reportField_${i}">
-                <#list fieldsStr as field>
-                    <option value="${field}">${field}</option>
-                </#list>
-            </select>&nbsp;<button class="btn" type="submit" name="action" value="removeField_${i}" >-</button><br/>
-        </#if>
-    </#if>
     </div>
-    <button type="submit" name="action" value="addField"
-            style="background:none; border-width:0px; color:blue; text-decoration:underline;" >
-        Add Field</button>
+    <a href="#" onclick="addField()">Add Field</a>
 </div>
-<#if report.fields??>
-    <input type="hidden" name="fieldCount" value="${report.fields?size+1}">
-<#else >
-    <input type="hidden" name="fieldCount" value="0">
-</#if>
 
 <script>
+    var fields;
+    var fieldsCount = 0;
+    function addField(){
+        var div = $("#fields");
+        div.append(getFieldsSelect(fields));
+    }
+
+    function removeField(field){
+        $("#"+field).remove();
+    }
+    function setFieldSelection(field, selection){
+        $("#"+field+" select").val(selection);
+    }
+
+    function getFieldsSelect(list){
+        var fieldsSelect ="<div id=\""+fieldsCount+"\"><select name=\"reportFields\">";
+        for(var i=0; i<list.length; i++){
+            fieldsSelect+="<option>"+list[i]+"</option>";
+        }
+        fieldsSelect+="</select>"+
+                "<button onclick='removeField("+fieldsCount+")' >-</button>"
+                +"<br/></div>";
+        fieldsCount++;
+        return fieldsSelect;
+    }
+
+    function getFields(clean){
+        var selectedType = $('#selectedType').val();
+        var data = 'selectedType=' + encodeURIComponent(selectedType);
+        $.ajax({
+            url : '<@spring.url "/admin/export/getFields" />',
+            data : data,
+            type : "GET",
+            success : function(response) {
+                fields = response;
+                if(clean == true){
+                    var div = $("#fields");
+                    div.html("");
+                }else{
+                <#if report.fields??>
+                    <#assign i = 0>
+                    <#list report.fields as f>
+                        addField();
+                        setFieldSelection(${i}, "${f}");
+                        <#assign i = i+1>
+                    </#list>
+                </#if>
+                }
+            },
+            error : function(xhr, status, error) {
+            }
+        });
+        return false;
+    }
+
     $(document).ready(function() {
-        $('#selectedType').change(function() {
-            var input = document.createElement("input");
-            input.setAttribute("type", "hidden");
-            input.setAttribute("name", "action");
-            input.setAttribute("value", "changeType");
-            document.getElementById("report").appendChild(input);
-            $("#report").submit();
+        getFields(false);
+        $('#selectedType').change(function(event) {
+            getFields(true);
         });
     });
 </script>
-
 <@spring.formValidation formName="report" jsonRules="${validationRules}"/>

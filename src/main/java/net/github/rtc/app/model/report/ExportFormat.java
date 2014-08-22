@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Ivan Yatcuba on 8/5/14.
  */
 public enum ExportFormat {
-    XLSX;
+    XLSX, XLS, CSV;
 
     public static List<String> findAll() {
         List<String> res = new ArrayList<>();

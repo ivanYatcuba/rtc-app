@@ -37,7 +37,7 @@ public class User implements UserDetails {
 
     @Maxlength(50)
     @Column
-    @ForExport("Midle name")
+    @ForExport("Middle name")
     private String middleName;
 
     @Required
@@ -92,11 +92,13 @@ public class User implements UserDetails {
     private String password;
 
     @Column
+    @ForExport("Gender")
     private String gender;
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "UserProgLanguages", joinColumns =@JoinColumn(name = "user_id"))
+    @ForExport("Programming Languages")
     private Set<String> programmingLanguages;
 
     @Required
@@ -109,6 +111,7 @@ public class User implements UserDetails {
     @JoinTable(name="User_Role",
             joinColumns={@JoinColumn(name="USER_ID")},
             inverseJoinColumns={@JoinColumn(name="id")})
+    @ForExport("Role")
     private List<Role> authorities;
     @Column
     private boolean accountNonExpired = true;

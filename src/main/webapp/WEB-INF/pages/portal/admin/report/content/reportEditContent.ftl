@@ -1,5 +1,5 @@
 
-<form name="report" id="report" action="<@spring.url "/admin/export/reportEditAction" />" method="get"
+<form name="report" id="report" action="<@spring.url "/admin/export/updateReport" />" method="POST"
       xmlns="http://www.w3.org/1999/html">
     <h3 class="page-header"><@spring.message "report.edit"/></h3>
     <@spring.formHiddenInput "report.id" />
@@ -12,7 +12,7 @@
         <div class="span6">
         </div>
         <div class="span5" style="text-align: right">
-            <button name="action"  type="submit" class="btn" value="update">Update</button> or
+            <button type="submit" class="btn" >Update</button> or
             <a href="<@spring.url "/admin/export/viewAll" />">Cancel</a>
         </div>
     </div>
