@@ -1,4 +1,5 @@
-<div  class="col-lg-6 col-lg-offset-2">
+<div  class="row">
+    <div class="center-block">
     <div id="carousel-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -25,6 +26,7 @@
         <!-- Controls -->
         <a class="left carousel-control" href="#carousel-generic" data-slide="prev">&lsaquo;</a>
         <a class="right carousel-control" href="#carousel-generic" data-slide="next">&rsaquo;</a>
+    </div>
     </div>
 </div>
 

@@ -27,7 +27,6 @@ public class LoginController {
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public ModelAndView login(ModelMap model) {
-
         return buildLoginMav(model);
     }
 

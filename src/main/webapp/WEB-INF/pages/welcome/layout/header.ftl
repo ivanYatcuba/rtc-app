@@ -1,5 +1,5 @@
 <!-- Fixed navbar -->
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="navbar navbar-inverse navbar-static-top" role="navigation">
     <div class="container">
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
