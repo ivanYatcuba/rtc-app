@@ -101,7 +101,7 @@
 <div class="row">
     <div class="col-md-12">
         <label for="note"><@spring.message "user.note"/></label>
-    <@spring.formTextarea "user.note" 'style="width:80%;" rows="3" maxlength="255" id=\"note\" class=\"required\"' />
+    <@spring.formTextarea "user.note" 'style="width:75%;" rows="3" maxlength="255" id=\"note\" class=\"required\"' />
     </div>
 </div>
 
