@@ -60,7 +60,7 @@
                  <@message path/>
              </label>
             <#if type == "text">
-                <@formInput path attributes+" id=\"${status.expression?replace('[','')?replace(']','')}\""/>
+                <@formInput path attributes/>
             <#else>
                 <#if type == "datepiker">
                     <@formDatepicker path attributes/>
@@ -89,7 +89,13 @@
                 form.submit();
             }
 
+        })
+        $(".required").each(function() {
+            var myid = this.id;
+            var text = $("label[for=\'"+myid+"\']").text();
+            $("label[for=\'"+myid+"\']").text('*' + text);
         });
+
     });
 </script>
 </#macro>
@@ -123,5 +129,6 @@
     </div>
 </div>
 </#macro>
+
 
 

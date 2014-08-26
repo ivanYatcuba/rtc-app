@@ -5,14 +5,13 @@
             <@spring.message "course.category" />   </label>
             <@spring.bind "categories" />
             <@spring.formSingleSelect "course.type", categories, "class=\"required\""/></div>
-            <label><@spring.message "course.capacity"/> </label>
-            <@spring.formInput "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
+            <@spring.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
         </div>
 
         <div class="col-md-6">
             <@spring.formItem "course.startDate" 'class="input-medium required"' "datepiker"/>
             <@spring.formItem "course.endDate" 'class="input-medium required"' "datepiker"/>
-            <@spring.formItem "course.tags" "tag"/>
+            <@spring.formItem "course.tags" "" "tag"/>
         </div>
 
 </div>
@@ -20,10 +19,10 @@
 <hr>
 <div class="row">
     <div class="col-md-6" >
-        <@spring.formItem "course.author.lastName" />
-        <@spring.formItem "course.author.firstName" />  </div>
+        <@spring.formItem "course.author.lastName"  "class=\"required\""/>
+        <@spring.formItem "course.author.firstName"  "class=\"required\""/>  </div>
     <div class="col-md-6">
-        <@spring.formItem "course.author.email"/>
+        <@spring.formItem "course.author.email"  "class=\"required\""/>
     </div>
 </div>
 &NonBreakingSpace;
@@ -52,5 +51,7 @@
     }
 </script>
 <@spring.formValidation formName="course" jsonRules="${validationRules}"/>
+
+
 
 

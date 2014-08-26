@@ -102,6 +102,8 @@ label{
     text-align: right;
 }
 
+
+
 ul.tagit {
     display: inline-block;
     width: 200px;
@@ -114,6 +116,12 @@ margin-right: 0px;
 
 input.required, select.required, textarea.required{
     background-color: #FFFACD;
+}
+
+label.alert{
+    width: auto;
+    display: block;
+    margin-left: 11em;
 }
 
 </style>
