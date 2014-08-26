@@ -1,108 +1,76 @@
-<div class="row-fluid span12" style="margin-left: 1px">
-    <div><h3>User details</h3></div>
-    <div class="span6">
-        <div class="row">
-            <div class="col-md-3">
-                <div align="right"><@spring.message "user.email"/>:</div>
-            </div>
-            <div class="col-md-9">
-                <div align="left">${(user.email)!" "}</div>
-            </div>
-        </div>
-        <hr width="100%">
-        <div class="row">
-            <div class="col-md-3">
-                <div align="right"><@spring.message "user.gender"/>:</div>
-                <div align="right"><@spring.message "user.surname"/>:</div>
-                <div align="right"><@spring.message "user.middleName"/>:</div>
-            </div>
-            <div class="col-md-3">
-                <div align="left">${(user.gender)!" "}</div>
-                <div align="left">${(user.surname)!" "}</div>
-                <div align="left">${(user.middleName)!" "}</div>
-            </div>
-            <div class="col-md-3">
-                <br>
-                <div align="right"><@spring.message "user.name"/>:</div>
-                <div align="right"><@spring.message "user.birthDate"/>:</div>
-            </div>
-            <div class="col-md-3">
-                <br>
-                <div align="left">${(user.name)!" "}</div>
-                <div align="left">${(user.birthDate?date)!" "}</div>
-            </div>
-        </div>
-        <hr width="100%">
-        <div class="row">
-            <div class="col-md-3">
-                <div align="right"><@spring.message "user.city"/>:</div>
-            </div>
-            <div class="col-md-3">
-                <div align="left">${(user.city)!" "}</div>
-            </div>
-            <div class="col-md-3">
-                <div align="right"><@spring.message "user.phone"/>:</div>
-            </div>
-            <div class="col-md-3">
-                <div align="left">${(user.phone)!" "}</div>
-            </div>
-        </div>
-        <hr width="100%">
-        <div class="row">
-            <div class="col-md-3">
-                <div align="right"><@spring.message "user.university"/>:</div>
-                <div align="right"><@spring.message "user.faculty"/>:</div>
-            </div>
-            <div class="col-md-3">
-                <div align="left">${(user.university)!" "}</div>
-                <div align="left">${(user.faculty)!" "}</div>
-            </div>
-            <div class="col-md-3">
-                <div align="right"><@spring.message "user.speciality"/>:</div>
-            </div>
-            <div class="col-md-3">
-                <div align="left">${(user.speciality)!" "}</div>
-            </div>
-        </div>
-        <hr width="100%">
-        <div class="row">
-            <div class="col-md-3">
-                <div align="right"><@spring.message "user.programmingLanguages"/>:</div>
-            </div>
-            <div class="col-md-3">
-                <div align="left">
-                    <#if (user.programmingLanguages)??>
-                        <#list user.programmingLanguages as progLang>
-                          ${progLang}<#if progLang_has_next>,</#if>
-                        </#list>
-                    </#if>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div align="right"><@spring.message "user.english"/>:</div>
-            </div>
-            <div class="col-md-3">
-                <div align="left">${(user.english)!" "}</div>
-            </div>
-        </div>
-        <hr width="100%">
-        <div class="row">
-            <div class="col-md-3">
-                <div align="right"><@spring.message "user.note"/>:</div>
-            </div>
-            <div class="col-md-9">
-                <div style="width:100%; word-wrap: break-word;" align="left">${(user.note)!" "}</div>
-            </div>
-        </div>
-        <hr width="100%">
-    </div>
-    <div class="row-fluid span12" style="margin-left: 1px">
-        <div class="span5" style="text-align: right">
+<h3 class="page-header"><@spring.message "user.details"/></h3>
 
-            <a href="<@spring.url "/user/edit"/>">
-                <button class="btn">Edit</button>
-            </a> or <a href="<@spring.url "/user/view"/>">Cancel</a>
-
-        </div>
+<div class="row">
+    <div class="col-md-6">
+        <label><@spring.message "user.email"/></label><p>${user.email!" "}</p>
     </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <label><@spring.message "user.gender"/></label><p>${user.gender!" "}</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <label><@spring.message "user.surname"/></label><p>${user.surname!" "}</p>
+        <label><@spring.message "user.middleName"/></label><p>${user.middleName!" "}</p>
+    </div>
+    <div class="col-md-6">
+        <label><@spring.message "user.name"/></label><p>${user.name!" "}</p>
+        <label><@spring.message "user.birthDate"/></label><p><#if user.birthDate??>${user.birthDate ? datetime ? string("yyyy-MM-dd")}</#if></p>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <label><@spring.message "user.city"/></label><p>${user.city!" "}</p>
+    </div>
+    <div class="col-md-6">
+        <label><@spring.message "user.phone"/></label><p>${user.phone!" "}</p>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-6"">
+    <label><@spring.message "user.university"/></label><p>${user.university!" "}</p><br/>
+    <label><@spring.message "user.faculty"/></label><p>${user.faculty!" "}</p>
+</div>
+<div class="col-md-6">
+    <label><@spring.message "user.speciality"/></label><p>${user.speciality!" "}</p>
+</div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <label><@spring.message "user.programmingLanguages"/></label>
+        <p><#list user.programmingLanguages as progLang>
+        ${progLang}<#if progLang_has_next>,</#if>
+        </#list></p>
+    </div>
+    <div class="col-md-6">
+        <label><@spring.message "user.english"/></label><p>${user.english!" "}</p>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <label><@spring.message "user.note"/></label> <p>${user.note!" "}</p>
+    </div>
+</div>
+
+<hr>
+<div class = "row">
+    <div class="span12" align="right">
+        <a href="<@spring.url "/admin/user/userPage/editPage/${user.code}" />"><button class="btn"><@spring.message "coursesPage.action.edit"/></button></a> or
+        <a href="<@spring.url "/admin/user/viewAll" />"><@spring.message "coursesPage.action.cancel"/></a>
+    </div>
+</div>
 </div>

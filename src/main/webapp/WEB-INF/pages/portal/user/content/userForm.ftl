@@ -89,8 +89,8 @@
 
     <div class="col-md-6">
         <!--English-->
-        <div><label for="user.english"><@spring.message "user.english"/></label>
-        <@spring.formSingleSelect "user.english", ["Basic", "Intermediate", "Advanced"], 'style="background-color: #FFFACD;"'/>
+        <div><label for="english"><@spring.message "user.english"/></label>
+        <@spring.formSingleSelect "user.english", ["Basic", "Intermediate", "Advanced"], 'class="required"'/>
         </div>
     </div>
 </div>
@@ -104,9 +104,6 @@
     <@spring.formTextarea "user.note" 'style="width:80%;" rows="3" maxlength="255" id=\"note\" class=\"required\"' />
     </div>
 </div>
-
-<@spring.formValidation formName="user" jsonRules="${validationRules}"/>
-
 
 <@spring.formValidation formName="user" jsonRules="${validationRules}"/>
 
