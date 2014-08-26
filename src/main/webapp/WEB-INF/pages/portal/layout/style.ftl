@@ -97,7 +97,7 @@ border-radius: 50%;
 
 label{
     float: left;
-    width: 10em;
+    width: 12em;
     margin-right: 1em;
     text-align: right;
 }
@@ -121,7 +121,7 @@ input.required, select.required, textarea.required{
 label.alert{
     width: auto;
     display: block;
-    margin-left: 11em;
+    margin-left: 13em;
 }
 
 </style>
