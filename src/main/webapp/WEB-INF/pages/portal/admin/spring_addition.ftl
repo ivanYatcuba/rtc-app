@@ -35,6 +35,13 @@
 
 
                         </#if>
+
+                        <#if "${status.expression?replace('[','')?replace(']','')}"=="birthDate">
+                            ,changeMonth : true,
+                            changeYear : true,
+                            yearRange: "-100:+0",
+                            maxDate: '-1d'
+                        </#if>
                     }
             );
 
