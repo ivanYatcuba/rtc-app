@@ -83,7 +83,10 @@
 </#macro>
 
 <#macro formValidation formName jsonRules>
+<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
 <script src="<@spring.url'/resources/css/js/jquery.validate.min.js'/>"></script>
+<script src="<@spring.url'/resources/css/js/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
+
 
 <script>
     $(document).ready(function() {
