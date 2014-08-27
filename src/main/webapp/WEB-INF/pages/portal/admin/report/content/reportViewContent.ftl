@@ -1,26 +1,27 @@
 <h3 class="page-header"><@spring.message "report.details"/></h3>
-<div class="row-fluid span12" style="margin-left: 1px">
-    <div class="span6" >
-        <label><@spring.message "report.name"/></label>&nbsp${report.name}</p>
-        <label><@spring.message "report.exportClass"/></label>&nbsp${report.exportClass.simpleName}</p>
+<div class="row">
+    <div class="col-md-6" >
+        <label><@spring.message "report.name"/></label><p>&nbsp${report.name}</p>
+        <label><@spring.message "report.exportClass"/></label><p>&nbsp${report.exportClass.simpleName}</p>
     </div>
-    <div class="span5">
-        <label><@spring.message "report.exportFormat"/></label>&nbsp${report.exportFormat}</p>
+    <div class="col-md-6">
+        <label><@spring.message "report.exportFormat"/></label><p>&nbsp${report.exportFormat}</p>
     </div>
 </div>
 &NonBreakingSpace;
 <hr>
-<div class="span6" >
-    <p><@spring.message "report.fields"/></p>
-    <#list report.fields as field>
-        <label></label><p>${field}</p>
-    </#list>
+<div class = "row">
+    <div class="col-md-6" >
+        <p style="margin-left: 6em"><@spring.message "report.fields"/></p>
+        <#list report.fields as field>
+            <label></label><p>&nbsp${field}</p>
+        </#list>
+    </div>
 </div>
-
-
-<div class = "row-fluid span12">
-    <hr>
-    <div class="span6" align="right">
+<hr>
+<div class = "row">
+    <div class="col-md-6" ></div>
+    <div class="col-md-5" style="text-align: right">
         <a href="<@spring.url "/admin/export/update/${report.code}" />"><button class="btn"><@spring.message "action.edit"/></button></a> or
         <a href="<@spring.url "/admin/export/viewAll" />"><@spring.message "action.cancel"/></a>
     </div>

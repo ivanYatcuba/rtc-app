@@ -24,7 +24,7 @@
 <div class="row">
     <div  class="col-md-6" >
         <!--Report Fields-->
-        <@spring.message "report.fields"/>
+        <p style="margin-left: 6em"><@spring.message "report.fields"/></p>
         <div id="fields">
         </div>
         <label for="addFieldH"></label><a id="addFieldH" href="#" onclick="addField()">Add Field</a>
@@ -47,8 +47,7 @@
     }
 
     function getFieldsSelect(list){
-        var fieldsSelect = "<label for=\"fieldsCount\"></label>"
-        fieldsSelect += "<div id=\""+fieldsCount+"\"><select name=\"reportFields\">";
+        var fieldsSelect = "<div id=\""+fieldsCount+"\"><label for=\"fieldsCount\"></label><select name=\"reportFields\">";
         for(var i=0; i<list.length; i++){
             fieldsSelect+="<option>"+list[i]+"</option>";
         }
