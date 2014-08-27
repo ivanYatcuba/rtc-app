@@ -32,9 +32,16 @@ public class Bootstrap implements InitializingBean {
 
     public void loadTestUsers() {
         if(userServiceLogin.loadUserByUsername("admin") == null){
-            userService.createRole(RoleType.ROLE_ADMIN);
-            userService.createRole(RoleType.ROLE_USER);
-            userService.createRole(RoleType.ROLE_EXPERT);
+            if(userService.getRoleByType(RoleType.ROLE_ADMIN) == null){
+                userService.createRole(RoleType.ROLE_ADMIN);
+            }
+            if(userService.getRoleByType(RoleType.ROLE_USER) == null){
+                userService.createRole(RoleType.ROLE_USER);
+            }
+            if(userService.getRoleByType(RoleType.ROLE_EXPERT) == null){
+                userService.createRole(RoleType.ROLE_EXPERT);
+            }
+
             User admin = new User("TestName","TestMiddlename","TestSurname", "admin", "admin");
             admin.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_ADMIN)));
             admin.setRegisterDate(new Date());
