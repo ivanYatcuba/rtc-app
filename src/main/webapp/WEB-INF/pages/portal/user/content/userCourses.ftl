@@ -38,27 +38,23 @@
 <div class="popup" id="window-popup">
     <div class="popup-content">
         <center>
-            <h2><@spring.message "userCourses"/>
-            </h2></center>
+            <h2><@spring.message "userCourses"/></h2>
+        </center>
         <strong>
         <@spring.message "userCourses.IHave"/>  <@spring.message "userCourses.IHave2"/>
         </strong>
 
-
         <form name="modal" action="sendOrder" method="post">
             <input name="selectedCode" type="hidden" id="selectedCode" value="test">
 
-            <label class="radio inline">
                 <input type="radio" name="userCourses" id="optionsRadios1"
                        value="<@spring.message "userCourses.developer"/>" checked>
             <@spring.message "userCourses.developer"/></label><br/>
 
-            <label class="radio inline">
                 <input type="radio" name="userCourses" id="optionsRadios2"
                        value="<@spring.message "userCourses.tester"/>">
             <@spring.message "userCourses.tester"/></label><br/>
 
-            <label class="radio inline">
                 <input type="radio" name="userCourses" id="optionsRadios2"
                        value="<@spring.message "userCourses.Business_Analyst"/>">
             <@spring.message "userCourses.Business_Analyst"/></label><br/>
