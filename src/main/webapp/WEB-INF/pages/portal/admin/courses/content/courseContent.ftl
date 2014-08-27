@@ -1,16 +1,16 @@
 <h3 class="page-header"><@spring.message "course.details"/></h3>
 <div class="row-fluid span12" style="margin-left: 1px">
     <div class="span6" >
-        <p><@spring.message "course.name"/>&nbsp${course.name}</p>
-        <p><@spring.message "course.category"/>&nbsp${course.type}</p>
-        <p><@spring.message "course.capacity"/>&nbsp${course.capacity}</p>
+        <label><@spring.message "course.name"/></label><p>&nbsp${course.name}</p>
+        <label><@spring.message "course.category"/></label><p>&nbsp${course.type}</p>
+        <label><@spring.message "course.capacity"/></label><p>&nbsp${course.capacity}</p>
     </div>
 
     <div class="span5">
 
-        <p><@spring.message "course.startDate"/>${course.startDate?date}</p>
-        <p><@spring.message "course.endDate"/>&nbsp${course.endDate?date}</p>
-        <p><@spring.message "course.tags"/>
+        <label><@spring.message "course.startDate"/></label><p>${course.startDate?date}</p>
+        <label><@spring.message "course.endDate"/></label><p>&nbsp${course.endDate?date}</p>
+        <label><@spring.message "course.tags"/></label><p>
         <#list course.tags as tag>${tag.value}<#if tag_has_next>,</#if> </#list></p>
 
     </div>
@@ -21,31 +21,31 @@
 <hr>
 <div class="row-fluid span12" style="margin-left: 1px; ">
     <div class="span6" >
-        <p><@spring.message "course.author.lastName"/>&nbsp${course.author.lastName}</p>
-        <p><@spring.message  "course.author.firstName"/>&nbsp${course.author.firstName}</p>
+        <label><@spring.message "course.author.lastName"/></label><p>&nbsp${course.author.lastName}</p>
+        <label><@spring.message  "course.author.firstName"/></label><p>&nbsp${course.author.firstName}</p>
     </div>
 
     <div class="span5">
-        <p><@spring.message  "course.author.email"/>&nbsp${course.author.email}</p>
+        <label><@spring.message  "course.author.email"/></label><p>&nbsp${course.author.email}</p>
     </div>
 </div>
 
 &NonBreakingSpace;
 <hr>
 <div class="row-fluid span12" style="margin-left: 1px">
-    <@spring.message  "course.description"/>&nbsp${course.description}
+    <label><@spring.message  "course.description"/></label><p>&nbsp${course.description}
 </div>
 
 &NonBreakingSpace;
 <hr>
 <div class="row-fluid span12" style="margin-left: 1px">
     <div class="span6" >
-        <@spring.message  "course.status"/>&nbsp${course.status}
+        <label><@spring.message  "course.status"/></label><p>&nbsp${course.status}
     </div>
 
     <div class="span5">
-        <@spring.message "course.pudlishDate"/>&nbsp
-        <#if course.publishDate??>${course.publishDate?date}</#if>
+        <label><@spring.message "course.pudlishDate"/>&nbsp</label>
+        <#if course.publishDate??><p>${course.publishDate?date}</p></#if>
     </div>
 </div>
 
