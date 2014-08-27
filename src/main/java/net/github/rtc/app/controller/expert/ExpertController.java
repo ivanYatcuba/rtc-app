@@ -1,6 +1,8 @@
 package net.github.rtc.app.controller.expert;
 
+import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
+import net.github.rtc.app.service.UserServiceLogin;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.model.user.Request;
@@ -9,6 +11,7 @@ import net.github.rtc.app.model.user.UserRequestStatus;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +25,8 @@ import java.util.*;
 @RequestMapping("/expert")
 public class ExpertController {
 
-    private static final String ROOT = "expert";
+    private static final String ROOT = "portal/expert";
+    private static final String ROOT_MODEL = "user";
 
     @Autowired
     private CourseService courseService;
@@ -30,13 +34,14 @@ public class ExpertController {
     private UserCourseOrderService userCourseOrderService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private UserServiceLogin userServiceLogin;
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public ModelAndView expertCourses() {
-        ModelAndView mav = new ModelAndView("expert" + "/page/Coursesexpert");
+        ModelAndView mav = new ModelAndView(ROOT + "/page/Coursesexpert");
         List<UserCourseOrder> orderList = userCourseOrderService.getOrderByStatus(UserRequestStatus.PENDING);
-        List<Request> requestsList = new ArrayList<Request>();
+        List<Request> requestsList = new ArrayList<>();
         if(!orderList.isEmpty()){
             for(UserCourseOrder order : orderList){
                 try{
@@ -49,6 +54,8 @@ public class ExpertController {
                 }catch (Throwable t){System.out.print("error");}
             }
         }
+        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        mav.addObject("user", user);
         mav.addObject("requests", requestsList);
         return mav;
     }
@@ -84,5 +91,16 @@ public class ExpertController {
     public SearchFilter getFilter() {
         return new SearchFilter();
     }
+
+    @ModelAttribute(value = ROOT_MODEL)
+    public User getCommandObject() {
+        return new User();
+    }
+
+    @ModelAttribute("currentUser")
+    public String getCurrentUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
 
 }

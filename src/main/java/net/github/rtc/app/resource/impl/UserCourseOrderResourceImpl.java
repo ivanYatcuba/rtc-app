@@ -23,6 +23,6 @@ public class UserCourseOrderResourceImpl extends GenericResourceImpl<UserCourseO
     @Override
     public List<UserCourseOrder> getOrderByStatus(UserRequestStatus status) {
         return getCurrentSession().createCriteria(UserCourseOrder.class).
-                add(Restrictions.eq("status", status.toString())).list();
+                add(Restrictions.eq("status", status)).list();
     }
 }

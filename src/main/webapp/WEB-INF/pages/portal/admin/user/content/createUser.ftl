@@ -29,7 +29,7 @@
 <!--Gender-->
 <div class="row">
     <div class="col-md-6">
-            <label for="user.gender"><@spring.message "user.gender"/>:</label>
+            <label for="user.gender"><@spring.message "user.gender"/></label>
             <@spring.bind "user.gender"/>
              <input type="radio" name="gender" id="optionsRadios1" value="Male" checked
                     style="margin: -3px 0px 0px;"> <@spring.message "user.genderM"/>
