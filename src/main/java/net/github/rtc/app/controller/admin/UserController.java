@@ -88,9 +88,10 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/delete/{code}", method = RequestMethod.GET)
-    public String delete(@PathVariable String code) {
-        userService.deleteByCode(code);
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String delete(@RequestParam String userCode) {
+        System.out.print("1111111111111");
+        userService.deleteByCode(userCode);
         return  "redirect:/admin/user/viewAll";
     }
 
