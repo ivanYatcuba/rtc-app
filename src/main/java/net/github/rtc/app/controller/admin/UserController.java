@@ -49,6 +49,7 @@ public class UserController {
         int numbOfPages = (int)Math.ceil(listUser.size()/(double)USERS_PER_PAGE);
         mav.addObject("users", NewListUser.subList(firstUser,lastUser));
         mav.addObject("pages", numbOfPages);
+        mav.addObject("numberOfPage", numberOfPage);
         return mav;
     }
 
@@ -64,6 +65,7 @@ public class UserController {
         int numbOfPages = (int)Math.ceil(listUser.size()/(double)USERS_PER_PAGE);
         mav.addObject("users", NewListUser.subList(firstUser,lastUser));
         mav.addObject("pages", numbOfPages);
+        mav.addObject("numberOfPage", numberOfPage);
         return mav;
     }
 

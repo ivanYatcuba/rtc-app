@@ -1,5 +1,21 @@
 <h3 class="page-header"><@spring.message "user.list"/></h3>
 
+<div class="row">
+    <div class="col-md-12" align="right">
+        Pages:
+        <#if numberOfPage-1&gt;1>
+            <a href="<@spring.url"/admin/user/viewAll/1"/>">&nbsp;&lt;&lt;</a>
+            <a href="<@spring.url"/admin/user/viewAll/${numberOfPage+1}"/>">&nbsp;&lt;</a>
+        </#if>
+    <#list 1..(pages) as index>
+        <a href="<@spring.url"/admin/user/viewAll/${index}"/>">  ${index}</a>
+    </#list>
+    <#if numberOfPage+1<pages?length>
+        <a href="<@spring.url"/admin/user/viewAll/${numberOfPage+1}"/>">&nbsp;&gt;</a>
+        <a href="<@spring.url"/admin/user/viewAll/${pages?length}"/>">&nbsp;&gt;&gt;</a>
+    </#if>
+    </div>
+</div>
 <table width="100%" class="table-bordered table">
     <tr bgcolor="#d3d3d3" style="font-weight:bold">
         <td>Name</td>
@@ -72,11 +88,7 @@
 
 
 <br>
-<div align="center">
-<#list 1..(pages) as index>
-    <a href="<@spring.url"/admin/user/viewAll/${index}"/>">  ${index}</a>
-</#list>
-</div>
+
 
 <br><br>
 <div align="right">

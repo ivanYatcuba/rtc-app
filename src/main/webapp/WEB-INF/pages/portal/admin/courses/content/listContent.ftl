@@ -3,6 +3,25 @@
 
 <#include "searchPanel.ftl">
 <br/>
+<div class="row">
+    <div class="col-md-12" align="right">
+        Pages:
+    <#if startPage != currentPage>
+        <a href="<@spring.url "/admin/course?page=${startPage}" />" />&laquo;</a>
+    </#if>
+    <#if prevPage??>
+        <a href="<@spring.url "/admin/course?page=${prevPage}" />" />${prevPage}</a>
+    </#if>
+    ${currentPage}
+    <#if nextPage??>
+        <a href="<@spring.url "/admin/course?page=${nextPage}" />" />${nextPage}</a>
+    </#if>
+    <#if lastPage != currentPage>
+        <a href="<@spring.url "/admin/course?page=${lastPage}" />" />&raquo;</a>
+    </#if>
+    </div>
+
+</div>
 <table width="100%" class="table-bordered table">
     <tr bgcolor="#d3d3d3" style="font-weight:bold">
         <td>Name</td>
@@ -34,21 +53,7 @@
     </tr>
 </#list>
 </table>
-<div align="center">
-        <#if startPage != currentPage>
-            <a href="<@spring.url "/admin/course?page=${startPage}" />" />&laquo;</a>
-        </#if>
-        <#if prevPage??>
-            <a href="<@spring.url "/admin/course?page=${prevPage}" />" />${prevPage}</a>
-        </#if>
-        ${currentPage}
-        <#if nextPage??>
-           <a href="<@spring.url "/admin/course?page=${nextPage}" />" />${nextPage}</a>
-        </#if>
-        <#if lastPage != currentPage>
-            <a href="<@spring.url "/admin/course?page=${lastPage}" />" />&raquo;</a>
-        </#if>
-</div>
+
 <br>
 <a style="float: right" href="<@spring.url "/admin/course/create" />">
     <button class="btn">Create New</button>
