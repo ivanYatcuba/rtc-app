@@ -1,6 +1,5 @@
 package net.github.rtc.app.controller.admin;
 
-import net.github.rtc.app.annotation.ForExport;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.report.ExportFormat;
@@ -8,14 +7,12 @@ import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
-import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.AutoPopulatingList;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -90,7 +87,7 @@ public class ExportController {
     @RequestMapping(value = "/insertReport", method = RequestMethod.POST)
     public @ResponseBody  ModelAndView createHandler(@ModelAttribute("report") ReportDetails report,
                                  @RequestParam String selectedType,
-                                 @RequestParam("reportFields") List<String> reportFields) {
+                                 @RequestParam(value = "reportFields", required = false) List<String> reportFields) {
         report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.insert(report);
@@ -100,7 +97,7 @@ public class ExportController {
     @RequestMapping(value = "/updateReport", method = RequestMethod.POST)
     public @ResponseBody  ModelAndView editHandler(@ModelAttribute("report") ReportDetails report,
                                                      @RequestParam String selectedType,
-                                                     @RequestParam("reportFields") List<String> reportFields) {
+                                                     @RequestParam(value = "reportFields", required = false) List<String> reportFields) {
         report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.update(report);
