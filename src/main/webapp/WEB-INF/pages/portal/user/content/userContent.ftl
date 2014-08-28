@@ -69,8 +69,8 @@
 <hr>
 <div class = "row">
     <div class="span12" align="right">
-        <a href="<@spring.url "/admin/user/userPage/editPage/${user.code}" />"><button class="btn"><@spring.message "coursesPage.action.edit"/></button></a> or
-        <a href="<@spring.url "/admin/user/viewAll" />"><@spring.message "coursesPage.action.cancel"/></a>
+        <a href="<@spring.url "/user/edit" />"><button class="btn"><@spring.message "coursesPage.action.edit"/></button></a> or
+        <a href="<@spring.url "/" />"><@spring.message "coursesPage.action.cancel"/></a>
     </div>
 </div>
 </div>

@@ -82,7 +82,7 @@
 </div>
 </#macro>
 
-<#macro formValidation formName jsonRules>
+<#macro formValidation formName jsonRules >
 <script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
 <script src="<@spring.url'/resources/css/js/jquery.validate.min.js'/>"></script>
 <script src="<@spring.url'/resources/css/js/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
@@ -90,16 +90,24 @@
 
 <script>
     $(document).ready(function() {
+
         $("#${formName}").validate({
             ${jsonRules}
-
-            errorClass: "alert alert-danger",
-            wrapper: "div",  // a wrapper around the error message
             submitHandler: function(form) {
                 form.submit();
             }
 
-        })
+        });
+        $("#email").rules('add', {
+            remote: {
+                url: "<@spring.url "/mailExist" />",
+                type: "post",
+                data : {email: function(){return $("#email").val();}}
+                },
+            messages: {
+                remote: "Email already exist!"
+            }
+            });
         $(".required").each(function() {
             var myid = this.id;
             var text = $("label[for=\'"+myid+"\']").text();
@@ -107,6 +115,10 @@
         });
 
     });
+    function IsEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+    }
 </script>
 </#macro>
 
