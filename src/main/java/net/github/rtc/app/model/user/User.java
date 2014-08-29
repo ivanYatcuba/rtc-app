@@ -1,7 +1,10 @@
 package net.github.rtc.app.model.user;
 
 import net.github.rtc.app.annotation.ForExport;
-import net.github.rtc.util.annotation.*;
+import net.github.rtc.util.annotation.Email;
+import net.github.rtc.util.annotation.Maxlength;
+import net.github.rtc.util.annotation.Required;
+import net.github.rtc.util.annotation.Validatable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -97,7 +100,7 @@ public class User implements UserDetails {
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "UserProgLanguages", joinColumns =@JoinColumn(name = "user_id"))
+    @CollectionTable(name = "UserProgLanguages", joinColumns = @JoinColumn(name = "user_id"))
     @ForExport("Programming Languages")
     private Set<String> programmingLanguages;
 
@@ -106,11 +109,20 @@ public class User implements UserDetails {
     @ForExport("Register Date")
     private Date registerDate;
 
+    @Column
+    private Date removalDate;
+
+    @Required
+    @Column
+    @ForExport("Status")
+    @Enumerated(EnumType.STRING)
+    private UserStatus status = UserStatus.ACTIVE;
+
     /* Spring Security fields*/
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="User_Role",
-            joinColumns={@JoinColumn(name="USER_ID")},
-            inverseJoinColumns={@JoinColumn(name="id")})
+    @JoinTable(name = "User_Role",
+            joinColumns = {@JoinColumn(name = "USER_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "id")})
     @ForExport("Role")
     private List<Role> authorities;
     @Column
@@ -242,7 +254,9 @@ public class User implements UserDetails {
         return password;
     }
 
-    public void setPassword(String password) { this.password = password; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getSurname() {
         return surname;
@@ -300,12 +314,37 @@ public class User implements UserDetails {
         this.code = code;
     }
 
-    public long getId() { return id;}
+    public long getId() {
+        return id;
+    }
 
-    public void setId(long id) { this.id = id; }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public Date getRegisterDate() {return registerDate;}
-    public void setRegisterDate(Date registerDate) {this.registerDate = registerDate;}
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public Date getRemovalDate() {
+        return removalDate;
+    }
+
+    public void setRemovalDate(Date removalDate) {
+        this.removalDate = removalDate;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
+    }
 
     // for authentification
     public boolean hasRole(String role) {
@@ -369,10 +408,10 @@ public class User implements UserDetails {
         this.english = english;
     }
 
-    public User(String name,String surname,String middleName, String email, String password) {
+    public User(String name, String surname, String middleName, String email, String password) {
         this.name = name;
-        this.surname=surname;
-        this.middleName=middleName;
+        this.surname = surname;
+        this.middleName = middleName;
         this.email = email;
         this.password = password;
     }
