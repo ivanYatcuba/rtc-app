@@ -4,7 +4,7 @@
     <@spring.formItem  "user.email" "class=\"required\""/>
         <!--Authorities-->
         <div>
-            <label for="type"><@spring.message "user.role"/></label>
+            <label for="selectedRole"><@spring.message "user.role"/></label>
             <select id="selectedRole" name="selectedRole" class="required">
             <#list roles as role>
                 <option value="${role}">${role}</option>
@@ -95,8 +95,9 @@
 
     <div class="col-md-6">
         <!--English-->
-        <div><label for="user.english"><@spring.message "user.english"/></label>
-        <@spring.formSingleSelect "user.english", ["Basic", "Intermediate", "Advanced"], 'style="background-color: #FFFACD;"'/>
+        <div>
+            <label for="english"><@spring.message "user.english"/></label>
+        <@spring.formSingleSelect "user.english", ["Basic", "Intermediate", "Advanced"], 'style="background-color: #FFFACD;" class=\"required\"'/>
         </div>
     </div>
 </div>
