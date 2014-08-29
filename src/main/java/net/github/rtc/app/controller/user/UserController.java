@@ -134,8 +134,7 @@ public class UserController {
             Course orderedCourse = courseService.findByCode(currentUserCourseOrder.getCourseCode());
             mav.addObject("user", user);
             mav.addObject("orderStatus", currentUserCourseOrder.getStatus());
-            mav.addObject("courseName", orderedCourse.getName());
-            mav.addObject("courseDescription", orderedCourse.getDescription());
+            mav.addObject("course", orderedCourse);
             return mav;
         }
     }
