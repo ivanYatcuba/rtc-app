@@ -98,20 +98,23 @@
             }
 
         });
-        $("#email").rules('add', {
-            remote: {
-                url: "<@spring.url "/mailExist" />",
-                type: "post",
-                data : {email: function(){return $("#email").val();}}
+        if($("#email").length){
+            $("#email").rules('add', {
+                remote: {
+                    url: "<@spring.url "/mailExist" />",
+                    type: "post",
+                    data : {email: function(){return $("#email").val();}}
                 },
-            messages: {
-                remote: "Email already exist!"
-            }
+                messages: {
+                    remote: "Email already exist!"
+                }
             });
+        }
         $(".required").each(function() {
             var myid = this.id;
-            var text = $("label[for=\'"+myid+"\']").text();
-            $("label[for=\'"+myid+"\']").text('*' + text);
+            var label = $("label[for=\'"+myid+"\']");
+            var text = label.text();
+            label.html('* ' + text);
         });
 
     });

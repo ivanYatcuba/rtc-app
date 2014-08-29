@@ -1,10 +1,11 @@
 <div class="row">
     <div class="col-md-6">
     <@spring.formItem "course.name" "class=\"required\""/>
-        <div><label for="type">
-        <@spring.message "course.category" />   </label>
+        <div>
+            <label for="type"><@spring.message "course.category" /></label>
         <@spring.bind "categories" />
-        <@spring.formSingleSelect "course.type", categories, "class=\"required\""/></div>
+        <@spring.formSingleSelect "course.type", categories, "class=\"required\""/>
+        </div>
     <@spring.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
     </div>
 
