@@ -141,6 +141,14 @@ public class UserController {
     }
 
 
+    @RequestMapping(value = "/courseDetails/{courseCode}", method = RequestMethod.GET)
+    public ModelAndView courseDetails(@PathVariable String courseCode) {
+        ModelAndView mav = new ModelAndView("portal/user/page/courseDetail");
+        mav.addObject("course", courseService.findByCode(courseCode));
+        mav.addObject("user",userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+        return mav;
+    }
+
     @RequestMapping(value = "/sendOrder", method = RequestMethod.POST)
     public ModelAndView sendCourseOrder(@RequestBody String orderData) {
         ModelAndView mav = new ModelAndView("redirect:/user/userCourses");

@@ -13,7 +13,7 @@
     <#list courses as course>
         <div class="span4"
              style="word-wrap: break-word; border: solid 1px #008000;text-align: center;margin-top:10px; margin-left: 5px;">
-            <a href="#">${course.name} </a>
+            <a href="/user/courseDetails/${course.code}">${course.name} </a>
             <br>
 
             <div class="thumbnail">
