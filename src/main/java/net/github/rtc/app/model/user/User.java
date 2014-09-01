@@ -358,6 +358,10 @@ public class User implements UserDetails {
         return hasRole;
     }
 
+    public boolean isForRemoval(){
+        return this.status == UserStatus.FOR_REMOVAL;
+    }
+
 
     public User() {
     }
