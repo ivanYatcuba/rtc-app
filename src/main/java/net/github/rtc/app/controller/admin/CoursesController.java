@@ -3,27 +3,26 @@ package net.github.rtc.app.controller.admin;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
+import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
+import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.utils.datatable.Page;
 import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.utils.Paginator;
+import net.github.rtc.app.utils.search.SearchCriteria;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Controller for {@link net.github.rtc.app.model.course.Course}
@@ -41,6 +40,8 @@ public class CoursesController {
 
     @Autowired
     private ValidationContext validationContext;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     public void setCourseService(CourseService courseService) {
@@ -153,20 +154,14 @@ public class CoursesController {
      * Process the request to post entered course in the form
      *
      * @param course        course object
-     * @param bindingResult binding course result
-     * @param session       current session
      * @return if all is OK the redirect to view new course or return to edit course
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute(ROOT_MODEL) @Valid Course course,
-                             BindingResult bindingResult,
-                             SessionStatus session) {
-        if (bindingResult.hasErrors()) {
-            return  new ModelAndView(ROOT + "/page/createContent");
-        }
+    public String save(@ModelAttribute(ROOT_MODEL) Course course,
+                             @RequestParam(value = "expertList", required = false) List<String> expertList) {
+        course.setExperts(bindExperts(expertList));
         courseService.create(course);
-        session.setComplete();
-        return new ModelAndView("redirect:/admin/course/");
+        return "redirect:/admin/course/";
     }
 
     /**
@@ -186,21 +181,28 @@ public class CoursesController {
      * Process the request to post entered course in the form
      *
      * @param course        course object
-     * @param bindingResult binding course result
-     * @param session       current session
      * @return if all is OK the redirect to view course or return to edit course
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView update(@ModelAttribute(ROOT_MODEL) Course course,
-                               BindingResult bindingResult,
-                               SessionStatus session) {
-        if (bindingResult.hasErrors()) {
-            return new ModelAndView(ROOT + "/page/updateContent");
-        }
-        course.setId(courseService.findByCode(course.getCode()).getId());
+    public String update(@ModelAttribute(ROOT_MODEL) Course course, @RequestParam(value = "expertList", required = false) List<String> expertList) {
+        course.setId(courseService.findByCode(course.getCode()).getId());// TO DO: id must be already present
+        course.setExperts(bindExperts(expertList));
         courseService.update(course);
-        session.setComplete();
-        return new ModelAndView("redirect:" + course.getCode());
+        return "redirect:" + course.getCode();
+    }
+
+    private Set<User> bindExperts(List<String> experts){
+        if(experts == null) return null;
+        Set<User> courseExperts = new HashSet<>();
+        for(String expert: experts){
+            String params[] = expert.split(" ");
+            SearchCriteria<User> userSearchCriteria = new SearchCriteria<>(User.class);
+            userSearchCriteria.addCriteria("name", params[0]);
+            userSearchCriteria.addCriteria("surname", params[1]);
+            userSearchCriteria.addCriteria("email", params[2]);
+            courseExperts.addAll(userService.search(userSearchCriteria).getResults());
+        }
+        return courseExperts;
     }
 
     /**

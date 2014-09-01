@@ -1,4 +1,4 @@
-<form name="course" id="course" action="<@spring.url "/admin/course/save" />" method="post">
+<form name="course" id="course" action="<@spring.url "/admin/course/save" />" method="POST">
 <h3 class="page-header"><@spring.message "create.message"/></h3>
     <#include "courseForm.ftl" />
     <!--Create & Cancel-->

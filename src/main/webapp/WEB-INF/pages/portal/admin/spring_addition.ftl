@@ -50,13 +50,16 @@
 </#macro>
 
 <#macro formTagsInput path attributes="">
-    <@formHiddenInput path attributes+" class=\"tagit-hidden-field\""/>
-    <input type="text" class="tagit ui-widget ui-widget-content ui-corner-all" id="${status.expression?replace('[','')?replace(']','')}Tag"/>
-    <script type="text/javascript">
-        $(function() {
-            $('#${status.expression?replace('[','')?replace(']','')}Tag').tagit();
+    <@formHiddenInput path attributes/>
+<ul id="${status.expression?replace('[','')?replace(']','')}Tag" style="margin: 0px"></ul>
+<script type="text/javascript">
+    $(function() {
+        $('#${status.expression?replace('[','')?replace(']','')}Tag').tagit({
+            singleField: true,
+            singleFieldNode: $('#${status.expression?replace('[','')?replace(']','')}')
         });
-    </script>
+    });
+</script>
 </#macro>
 
 <#macro formItem path attributes="" type="text">
@@ -68,14 +71,10 @@
              </label>
             <#if type == "text">
                 <@formInput path attributes/>
-            <#else>
-                <#if type == "datepiker">
-                    <@formDatepicker path attributes/>
-                <#else>
-                    <#if type == "tag">
-                        <@formTagsInput path attributes/>
-                    </#if>
-                </#if>
+            <#elseif type == "datepiker">
+                <@formDatepicker path attributes/>
+            <#elseif type == "tag">
+                <@formTagsInput path attributes/>
             </#if>
             <@showErrors "<br/>"/>
     </div>

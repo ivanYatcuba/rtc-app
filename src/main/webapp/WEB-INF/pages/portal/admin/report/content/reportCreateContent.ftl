@@ -2,7 +2,7 @@
     <h3 class="page-header"><@spring.message "report.create"/></h3>
     <#include "reportForm.ftl" />
     <!--Create & Cancel-->
-    <div id="createAnfCancel" class="row" style="margin-left: 1px">
+    <div id="createAndCancel" class="row" style="margin-left: 1px">
         <div class="col-md-6">
         </div>
         <div class="col-md-5" style="text-align: right">

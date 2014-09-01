@@ -19,14 +19,14 @@
 
 &NonBreakingSpace;
 <hr>
-<div class="row-fluid span12" style="margin-left: 1px; ">
-    <div class="span6" >
-        <label><@spring.message "course.author.lastName"/></label><p>&nbsp${course.author.lastName}</p>
-        <label><@spring.message  "course.author.firstName"/></label><p>&nbsp${course.author.firstName}</p>
-    </div>
-
-    <div class="span5">
-        <label><@spring.message  "course.author.email"/></label><p>&nbsp${course.author.email}</p>
+<div class="row">
+    <div class="col-md-6">
+        <label><@spring.message "course.experts"/></label>
+        <div id="experts">
+            <#list course.experts as expert>
+                <label></label><p>&nbsp${expert.name}&nbsp${expert.surname}&nbsp${expert.email}</p>
+            </#list>
+        </div>
     </div>
 </div>
 

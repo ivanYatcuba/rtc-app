@@ -1,12 +1,16 @@
 package net.github.rtc.app.model.course;
 
 import net.github.rtc.app.annotation.ForExport;
+import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.annotation.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Vladislav Pikus
@@ -76,10 +80,13 @@ public class Course implements Serializable {
     private List<Tag> tags;
 
     @Required
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "AUTHOR_ID")
-    @ForExport(value = "Author", inculdeField = {"Author Email"})
-    private Author author;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(name="courses_experts",
+            joinColumns={@JoinColumn(name="expertId")},
+            inverseJoinColumns={@JoinColumn(name="courseId")})
+    @ForExport(value = "Experts")//, inculdeField = {"Author Email"})
+    private Set<User> experts;
 
 
 
@@ -99,13 +106,9 @@ public class Course implements Serializable {
         this.type = type;
     }
 
-    public Author getAuthor() {
-        return author;
-    }
+    public Set<User> getExperts() {return experts;}
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
+    public void setExperts(Set<User> experts) {this.experts = experts;}
 
     public Date getStartDate() {
         return startDate;
@@ -163,12 +166,12 @@ public class Course implements Serializable {
 
     }
 
-    public Course(String code, String name, CourseType type, Author author, Date startDate, Date endDate,
+    public Course(String code, String name, CourseType type, Set<User> experts, Date startDate, Date endDate,
                   Date publishDate, Integer capacity, String description, CourseStatus status) {
         this.code = code;
         this.name = name;
         this.type = type;
-        this.author = author;
+        this.experts = experts;
         this.startDate = startDate;
         this.endDate = endDate;
         this.publishDate = publishDate;
@@ -183,7 +186,7 @@ public class Course implements Serializable {
         sb.append(", code='").append(code).append('\'');
         sb.append(", name='").append(name).append('\'');
         sb.append(", type=").append(type);
-        sb.append(", author=").append(author);
+        sb.append(", experts=").append(experts);
         sb.append(", capacity=").append(capacity);
         sb.append(", startDate=").append(startDate);
         sb.append(", endDate=").append(endDate);
@@ -202,7 +205,7 @@ public class Course implements Serializable {
 
         Course course = (Course) o;
 
-        if (author != null ? !author.equals(course.author) : course.author != null) return false;
+        if (experts != null ? !experts.equals(course.experts) : course.experts != null) return false;
         if (code != null ? !code.equals(course.code) : course.code != null) return false;
         if (endDate != null ? !endDate.equals(course.endDate) : course.endDate != null) return false;
         if (name != null ? !name.equals(course.name) : course.name != null) return false;
@@ -218,7 +221,7 @@ public class Course implements Serializable {
         int result = code != null ? code.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (experts != null ? experts.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + (tags != null ? tags.hashCode() : 0);

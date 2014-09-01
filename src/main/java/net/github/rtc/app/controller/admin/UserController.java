@@ -99,6 +99,16 @@ public class UserController {
         return  "redirect:/admin/user/viewAll";
     }
 
+    @RequestMapping(value = "/expertUsers", method = RequestMethod.POST)
+    public @ResponseBody List<String> getExpertUsers() {
+        List<String> results = new ArrayList<>();
+        List<User> users = userService.getUserByRole(RoleType.ROLE_EXPERT);
+        for(User user : users){
+            results.add(user.shortString());
+        }
+        return  results;
+    }
+
     
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {

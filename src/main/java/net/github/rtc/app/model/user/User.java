@@ -415,4 +415,8 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
     }
+
+    public String shortString(){
+        return  new StringBuilder(this.name).append(" ").append(this.surname).append(" ").append(this.email).toString();
+    }
 }

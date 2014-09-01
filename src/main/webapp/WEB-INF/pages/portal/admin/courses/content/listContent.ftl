@@ -36,7 +36,9 @@
         <td><a href="<@spring.url "/admin/course/${course.code}" />">${course.name}</a></td>
         <td>${course.type}</td>
         <td>${course.startDate?datetime?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
-        <td>${course.author.firstName}&nbsp;${course.author.lastName}</td>
+        <td> <#list course.experts as expert>
+           <p>&nbsp${expert.name}&nbsp${expert.surname}&nbsp${expert.email}</p>
+        </#list></td>
         <td>${course.status}</td>
         <td><ul class="nav" role="navigation">
             <li class="dropdown">

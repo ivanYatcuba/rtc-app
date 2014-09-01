@@ -12,6 +12,8 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.resource.UserResource;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.utils.search.SearchCriteria;
+import net.github.rtc.app.utils.search.SearchResults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,5 +107,18 @@ public class UserServiceImpl implements ModelService<User>, UserService{
     public Role getRoleByType(RoleType type) {
         LOG.info("Getting user role with type: " + type);
         return resource.getRoleByType(type);
+    }
+
+    @Override
+    @Transactional
+    public List<User> getUserByRole(RoleType type) {
+        LOG.info("Getting user list with type: " + type);
+        return resource.getUserByType(type);
+    }
+
+    @Override
+    @Transactional
+    public SearchResults<User> search(SearchCriteria<User> userSearchCriteria) {
+        return resource.search(userSearchCriteria);
     }
 }
