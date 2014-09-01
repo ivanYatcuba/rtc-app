@@ -23,6 +23,7 @@
         <td>Phone</td>
         <td>Register Date</td>
         <td>Role</td>
+        <td>Status</td>
         <td>Action</td>
 
     </tr>
@@ -60,9 +61,22 @@
             </#list>
         </td>
 
-        <td>
-            <button class="btn" onclick="javascript:PopUpShow('${user.code}')">Remove</button>
-        </td>
+        <#if (user.status)??>
+            <td>${user.status}</td>
+        <#else>
+            <td>None</td>
+        </#if>
+
+        <#if user.isForRemoval() >
+            <td>
+                <button class="btn" onclick="javascript:PopUpShow('${user.code}')">Restore</button>
+            </td>
+        <#else>
+            <td>
+                <button class="btn" onclick="javascript:PopUpShow('${user.code}')">Remove</button>
+            </td>
+        </#if>
+
     </tr>
 </#list>
 </table>
