@@ -1,4 +1,4 @@
-package net.github.rtc.app.resource;
+package net.github.rtc.app.dao;
 
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.utils.datatable.PageDto;
@@ -12,7 +12,7 @@ import java.util.Collection;
  *
  * @author Vladislav Pikus
  */
-public interface CoursesResource extends GenericResource<Course> {
+public interface CoursesDao extends GenericDao<Course> {
     /**
      * Find course collection by filtering param
      *

@@ -1,6 +1,6 @@
 package net.github.rtc.app.impl;
 
-import net.github.rtc.app.resource.impl.CoursesResourceImpl;
+import net.github.rtc.app.dao.impl.CoursesDaoImpl;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestTemplate;
 
 //import static org.junit.Assert.assertEquals;
 
@@ -21,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 public class CourseResourceImplTest {
 
    @Autowired
-    private CoursesResourceImpl resource;
+    private CoursesDaoImpl resource;
 
     private final String code = "fcb56955-5344-41e4-897b-d69387e5fa55";
 
@@ -46,10 +45,10 @@ public class CourseResourceImplTest {
    @Test
     public void testFindById() throws Exception {
         final String responseXml = loadXmlFile("course.json");
-        mockServer.expect(requestTo(resource.getHostUrl() + "courses/" + code))
+        mockServer.expect(requestTo(dao.getHostUrl() + "courses/" + code))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(responseXml, MediaType.APPLICATION_JSON));
-        final Course courses = resource.findByCode(code);
+        final Course courses = dao.findByCode(code);
         mockServer.verify();
         assertEquals(code, courses.getCode());
 
@@ -57,10 +56,10 @@ public class CourseResourceImplTest {
 
    @Test
     public void testDelete() throws Exception {
-        mockServer.expect(requestTo(resource.getHostUrl() + "courses/" + code))
+        mockServer.expect(requestTo(dao.getHostUrl() + "courses/" + code))
                 .andExpect(method(HttpMethod.DELETE))
                 .andRespond(withSuccess());
-        resource.delete(code);
+        dao.delete(code);
         mockServer.verify();
     } */
 }

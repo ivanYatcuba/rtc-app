@@ -1,4 +1,4 @@
-package net.github.rtc.app.resource;
+package net.github.rtc.app.dao;
 
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Саша
  */
-public interface UserResource extends GenericResource<User> {
+public interface UserDao extends GenericDao<User> {
 
     /**
      * Find user collection by email param

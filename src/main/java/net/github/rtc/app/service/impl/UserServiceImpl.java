@@ -6,10 +6,10 @@
 
 package net.github.rtc.app.service.impl;
 
+import net.github.rtc.app.dao.UserDao;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.resource.UserResource;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.search.SearchCriteria;
@@ -34,7 +34,7 @@ public class UserServiceImpl implements ModelService<User>, UserService{
 
 
     @Autowired
-    private UserResource resource;
+    private UserDao resource;
 
     private static Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class.getName());
 

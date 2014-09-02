@@ -1,8 +1,8 @@
 package net.github.rtc.app.service.impl;
 
+import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
-import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.utils.datatable.CourseSearchResult;
@@ -31,7 +31,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     private static Logger LOG = LoggerFactory.getLogger(CourseServiceImpl.class.getName());
 
     @Autowired
-    private CoursesResource resource;
+    private CoursesDao resource;
 
     /**
      * @see net.github.rtc.app.service.CourseService#delete(String)

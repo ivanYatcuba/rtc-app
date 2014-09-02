@@ -1,8 +1,8 @@
 package net.github.rtc.app.service.impl;
 
+import net.github.rtc.app.dao.UserCourseOrderDao;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.model.user.UserRequestStatus;
-import net.github.rtc.app.resource.UserCourseOrderResource;
 import net.github.rtc.app.service.UserCourseOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Autowired
-    UserCourseOrderResource resource;
+    UserCourseOrderDao resource;
 
     private static Logger LOG = LoggerFactory.getLogger(UserCourseOrderServiceImpl.class.getName());
 

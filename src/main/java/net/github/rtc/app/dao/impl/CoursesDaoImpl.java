@@ -1,9 +1,9 @@
-package net.github.rtc.app.resource.impl;
+package net.github.rtc.app.dao.impl;
 
+import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
-import net.github.rtc.app.resource.CoursesResource;
 import net.github.rtc.app.utils.datatable.PageDto;
 import net.github.rtc.app.utils.datatable.SearchFilter;
 import org.hibernate.Criteria;
@@ -24,8 +24,8 @@ import java.util.*;
  * @author Vladislav Pikus
  */
 @Repository
-public class CoursesResourceImpl extends GenericResourceImpl<Course> implements CoursesResource {
-    private static Logger LOG = LoggerFactory.getLogger(CoursesResourceImpl.class.getName());
+public class CoursesDaoImpl extends GenericDaoImpl<Course> implements CoursesDao {
+    private static Logger LOG = LoggerFactory.getLogger(CoursesDaoImpl.class.getName());
 
     @Override
     public Integer getCount() {

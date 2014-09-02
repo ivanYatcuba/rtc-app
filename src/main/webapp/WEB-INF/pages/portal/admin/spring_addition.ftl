@@ -130,7 +130,7 @@
 * @param path the name of the field to bind to
 * @param options a map (value=label) of all the available options
 * @param classes any additional classes for the surrounding label element (such as 'inline')
-* @param messageKey key to lookup in resource bundle, defaults to path
+* @param messageKey key to lookup in dao bundle, defaults to path
 -->
 <#macro radioButtons path options classes="" checkId=false messageKey=path>
     <@spring.bind path/>

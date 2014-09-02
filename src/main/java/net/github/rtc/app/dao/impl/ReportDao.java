@@ -1,4 +1,4 @@
-package net.github.rtc.app.resource.impl;
+package net.github.rtc.app.dao.impl;
 
 import net.github.rtc.app.model.report.ReportDetails;
 import org.springframework.stereotype.Repository;
@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
  * Created by Ivan Yatcuba on 8/16/14.
  */
 @Repository
-public class ReportResource extends GenericResourceImpl<ReportDetails> {
+public class ReportDao extends GenericDaoImpl<ReportDetails> {
 }

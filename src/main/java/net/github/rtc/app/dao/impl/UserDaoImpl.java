@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package net.github.rtc.app.resource.impl;
+package net.github.rtc.app.dao.impl;
 
+import net.github.rtc.app.dao.UserDao;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.resource.UserResource;
 import net.github.rtc.app.utils.search.SearchCriteria;
 import net.github.rtc.app.utils.search.SearchResults;
 import org.hibernate.Criteria;
@@ -25,7 +25,7 @@ import java.util.List;
  * @author Саша
  */
 @Repository
-public class UserResourseImpl extends GenericResourceImpl<User> implements UserResource{
+public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
     @Override
     public User findByEmail(String email) {

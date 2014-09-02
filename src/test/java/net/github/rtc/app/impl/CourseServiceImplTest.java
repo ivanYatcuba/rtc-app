@@ -1,9 +1,9 @@
 package net.github.rtc.app.impl;
 
+import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.resource.CoursesResource;
-import net.github.rtc.app.resource.impl.CoursesResourceImpl;
+import net.github.rtc.app.dao.impl.CoursesDaoImpl;
 import net.github.rtc.app.service.CourseService;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -26,7 +26,7 @@ public class CourseServiceImplTest {
 
     @Autowired
     private CourseService service;
-    private CoursesResource mockResource;
+    private CoursesDao mockResource;
 
     private final String code = "fcb56955-5344-41e4-897b-d69387e5fa55";
 
@@ -34,7 +34,7 @@ public class CourseServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        mockResource = mock(CoursesResourceImpl.class);
+        mockResource = mock(CoursesDaoImpl.class);
        // ((CourseServiceImpl)service).setResource(mockResource);
        // course = new Course("codeTest", "nameTest", CourseType.DEV, new Author("Vasya", "Pupkin", "vasia@gmail.com"),
          //       DateTime.now().toDate(), DateTime.now().toDate(), DateTime.now().toDate(), 10, "super description", CourseStatus.DRAFT);

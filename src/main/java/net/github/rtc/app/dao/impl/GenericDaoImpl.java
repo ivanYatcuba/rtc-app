@@ -1,6 +1,6 @@
-package net.github.rtc.app.resource.impl;
+package net.github.rtc.app.dao.impl;
 
-import net.github.rtc.app.resource.GenericResource;
+import net.github.rtc.app.dao.GenericDao;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,14 +16,14 @@ import java.util.Collection;
  * Created by Ivan Yatcuba on 8/12/14.
  */
 @Component
-public abstract class GenericResourceImpl<T> implements GenericResource<T>{
+public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Autowired
     SessionFactory sessionFactory;
 
     private Class<T> type;
 
-    public GenericResourceImpl() {
+    public GenericDaoImpl() {
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];

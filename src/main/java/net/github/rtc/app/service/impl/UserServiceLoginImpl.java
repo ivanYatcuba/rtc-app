@@ -1,7 +1,7 @@
 package net.github.rtc.app.service.impl;
 
+import net.github.rtc.app.dao.UserDao;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.resource.UserResource;
 import net.github.rtc.app.service.UserServiceLogin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceLoginImpl implements UserDetailsService, UserServiceLogin {
 
     @Autowired
-    private UserResource userResource;
+    private UserDao userDao;
 
     private static final Logger LOG =  LoggerFactory.getLogger(UserServiceLoginImpl.class.getName());
 
@@ -26,6 +26,6 @@ public class UserServiceLoginImpl implements UserDetailsService, UserServiceLogi
     @Transactional
     public User loadUserByUsername(String email) throws UsernameNotFoundException {
         LOG.info("Loading user with email: "+email);
-        return userResource.findByEmail(email);
+        return userDao.findByEmail(email);
     }
 }

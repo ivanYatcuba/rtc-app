@@ -1,8 +1,8 @@
-package net.github.rtc.app.resource.impl;
+package net.github.rtc.app.dao.impl;
 
+import net.github.rtc.app.dao.UserCourseOrderDao;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.model.user.UserRequestStatus;
-import net.github.rtc.app.resource.UserCourseOrderResource;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by ivan on 18.04.14.
  */
 @Repository
-public class UserCourseOrderResourceImpl extends GenericResourceImpl<UserCourseOrder> implements UserCourseOrderResource {
+public class UserCourseOrderDaoImpl extends GenericDaoImpl<UserCourseOrder> implements UserCourseOrderDao {
 
     @Override
     public UserCourseOrder getUserOrder(String userCode) {

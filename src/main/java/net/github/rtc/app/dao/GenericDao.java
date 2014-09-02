@@ -1,11 +1,11 @@
-package net.github.rtc.app.resource;
+package net.github.rtc.app.dao;
 
 import java.util.Collection;
 
 /**
  * Created by Ivan Yatcuba on 8/12/14.
  */
-public interface GenericResource<T> {
+public interface GenericDao<T> {
 
     T create(T t);
 
