@@ -1,4 +1,4 @@
-package net.github.rtc.app.security;
+package net.github.rtc.app.service.security;
 
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserServiceLogin;

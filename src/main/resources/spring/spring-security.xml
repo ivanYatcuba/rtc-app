@@ -26,8 +26,8 @@
     </authentication-manager>
 
     <beans:bean id="userAuthenticationProvider"
-                class="net.github.rtc.app.security.UserAuthenticationProvider" />
+                class="net.github.rtc.app.service.security.UserAuthenticationProvider" />
     <beans:bean id="simpleAuthenticationSuccessHandler"
-                class="net.github.rtc.app.security.SimpleAuthenticationSuccessHandler" />
+                class="net.github.rtc.app.service.security.SimpleAuthenticationSuccessHandler" />
 
 </beans:beans>

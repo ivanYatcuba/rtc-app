@@ -1,4 +1,4 @@
-package net.github.rtc.app.security;
+package net.github.rtc.app.service.security;
 
 
 import org.springframework.security.core.Authentication;
