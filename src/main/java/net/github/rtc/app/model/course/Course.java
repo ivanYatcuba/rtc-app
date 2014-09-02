@@ -1,6 +1,5 @@
 package net.github.rtc.app.model.course;
 
-import net.github.rtc.app.annotation.ForExport;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.annotation.*;
 import org.hibernate.annotations.Fetch;

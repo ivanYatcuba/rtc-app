@@ -1,6 +1,6 @@
 package net.github.rtc.app.model.user;
 
-import net.github.rtc.app.annotation.ForExport;
+import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.Email;
 import net.github.rtc.util.annotation.Maxlength;
 import net.github.rtc.util.annotation.Required;
