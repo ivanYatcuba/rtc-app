@@ -1,6 +1,6 @@
 package net.github.rtc.app.export;
 
-import net.github.rtc.app.annotation.ForExport;
+import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.app.export.table.CSVTable;
 import net.github.rtc.app.export.table.ReportTable;
 import net.github.rtc.app.export.table.XLSNXTable;
