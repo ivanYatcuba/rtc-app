@@ -219,7 +219,7 @@
         </dependency>
 
         <dependency>
-            <groupId>rtcCommunity</groupId>
+            <groupId>net.github.rtc</groupId>
             <artifactId>rtc-util</artifactId>
             <version>1.0-RELEASE</version>
             <type>jar</type>
