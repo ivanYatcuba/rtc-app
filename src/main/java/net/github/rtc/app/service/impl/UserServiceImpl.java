@@ -10,10 +10,12 @@ import net.github.rtc.app.dao.UserDao;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.search.SearchCriteria;
 import net.github.rtc.app.utils.search.SearchResults;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -120,5 +123,27 @@ public class UserServiceImpl implements ModelService<User>, UserService{
     @Transactional
     public SearchResults<User> search(SearchCriteria<User> userSearchCriteria) {
         return resource.search(userSearchCriteria);
+    }
+
+    @Override
+    @Transactional
+    public void markUserForRemoval(User user) {
+        if (user.getStatus() == UserStatus.ACTIVE) {
+            user.setStatus(UserStatus.FOR_REMOVAL);
+            user.setRemovalDate(new DateTime(new Date()).plusDays(3).toDate());
+            resource.update(user);
+        }
+        else{
+            user.setStatus(UserStatus.ACTIVE);
+            user.setRemovalDate(null);
+            resource.update(user);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void markUserForRemoval(String userCode) {
+        User user = findByCode(userCode);
+        markUserForRemoval(user);
     }
 }

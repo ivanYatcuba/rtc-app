@@ -90,12 +90,12 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/changeUserStatus", method = RequestMethod.POST)
     public String delete(@RequestParam String userCode) {
         //1. Do not forget to remove it
         //2. Use logs
         //System.out.print("1111111111111");
-        userService.deleteByCode(userCode);
+        userService.markUserForRemoval(userCode);
         return  "redirect:/admin/user/viewAll";
     }
 

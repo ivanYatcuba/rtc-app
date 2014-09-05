@@ -69,7 +69,7 @@
 
         <#if user.isForRemoval() >
             <td>
-                <button class="btn" onclick="">Restore</button>
+                <button class="btn" onclick="javascript:pushData('${user.code}');">Restore</button>
             </td>
         <#else>
             <td>
@@ -91,7 +91,7 @@
         </center>
         <br>
         <center>
-            <form name="deleteUser" action="<@spring.url"/admin/user/delete/"/>" method="post">
+            <form name="deleteUser" action="<@spring.url"/admin/user/changeUserStatus/"/>" method="post">
                 <input type="hidden" id="userCode" name="userCode"/>
                 <button class="btn" type="submit">Ok</button>
                 <button class="btn" type="button" onClick="javascript:PopUpHide()">Cancel</button>
@@ -123,5 +123,14 @@
     }
 </script>
 
-
-
+<script type="text/javascript">
+    function pushData(userCode) {
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url:"/admin/user/changeUserStatus/",
+            data: {userCode: userCode},
+        });
+        location.reload();
+    }
+</script>
