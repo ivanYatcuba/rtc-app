@@ -1,6 +1,6 @@
 package net.github.rtc.app.dao;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Ivan Yatcuba on 8/12/14.
@@ -15,7 +15,7 @@ public interface GenericDao<T> {
 
     T update(T t);
 
-    Collection<T> findAll();
+    List<T> findAll();
 
     void deleteByCode(String code);
 

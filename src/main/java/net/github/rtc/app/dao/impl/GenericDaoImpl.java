@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Ivan Yatcuba on 8/12/14.
@@ -66,7 +66,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     }
 
     @Override
-    public Collection<T> findAll(){
+    public List<T> findAll(){
         return getCurrentSession().createCriteria(type).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 }

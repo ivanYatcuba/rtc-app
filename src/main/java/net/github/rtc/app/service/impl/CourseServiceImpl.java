@@ -27,6 +27,7 @@ import java.util.UUID;
  * @author Dmitry Pritula
  */
 @Service("coursesService")
+@Transactional
 public class CourseServiceImpl implements ModelService<Course>, CourseService {
     private static Logger LOG = LoggerFactory.getLogger(CourseServiceImpl.class.getName());
 
@@ -37,11 +38,9 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      * @see net.github.rtc.app.service.CourseService#delete(String)
      */
     @Override
-    @Transactional
     public void delete(String code) {
         LOG.debug("Removing course with code {} ", code);
         Assert.notNull(code, "code cannot be null");
-        checkCode(code);
         resource.deleteByCode(code);
     }
 
@@ -49,11 +48,9 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      * @see net.github.rtc.app.service.CourseService#findByCode(String)
      */
     @Override
-    @Transactional
     public Course findByCode(String code) {
-        LOG.debug("Getting course with code " + code);
+        LOG.debug("Getting course with code {}", code);
         Assert.notNull(code, "code cannot be null");
-        checkCode(code);
         return resource.findByCode(code);
     }
 
@@ -61,9 +58,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      * @see net.github.rtc.app.service.CourseService#create(net.github.rtc.app.model.course.Course)
      */
     @Override
-    @Transactional
     public Course create(Course course) {
-        LOG.debug("Creating course " + course);
+        LOG.debug("Creating course {} ", course);
         Assert.notNull(course, "course cannot be null");
         course.setCode(UUID.randomUUID().toString());
         return resource.create(course);
@@ -73,9 +69,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      * @see net.github.rtc.app.service.CourseService#update(net.github.rtc.app.model.course.Course)
      */
     @Override
-    @Transactional
     public void update(Course course) {
-        LOG.debug("Updating course: " + course);
+        LOG.debug("Updating course: {} ", course);
         Assert.notNull(course, "course cannot be null");
         resource.update(course);
     }
@@ -89,9 +84,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      * @see net.github.rtc.app.service.CourseService#( net.github.rtc.app.utils.datatable.SearchFilter )
      */
     @Override
-    @Transactional
     public CourseSearchResult findByFilter(SearchFilter filter) {
-        LOG.debug("Searching courses with filter: " + filter);
+        LOG.debug("Searching courses with filter: {} ", filter);
         Integer total = resource.getCount(filter);
         PageDto pageDto = new PageDto.Builder(total).page(filter.getPageNumber()).maxResult(filter.getMaxResult())
                 .build();
@@ -103,30 +97,18 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     }
 
     @Override
-    @Transactional
     public List<Course> findAll() {
         LOG.debug("Getting all courses from database...");
-        return (List) resource.findAll();
+        return resource.findAll();
     }
 
     @Override
-    @Transactional
     public void publish(Course course) {
-        LOG.debug("Publishing course " + course);
+        LOG.debug("Publishing course: {}  ", course);
         Assert.notNull(course, "course cannot be null");
         course.setStatus(CourseStatus.PUBLISHED);
         course.setPublishDate(new Date());
         resource.update(course);
-    }
-
-    /**
-     * Check course code for null
-     *
-     * @param code course code
-     */
-    private void checkCode(String code) {
-        LOG.debug("Checking if course with code " + code + " exists");
-        Assert.notNull(code, "code cannot be null");
     }
 
 }
