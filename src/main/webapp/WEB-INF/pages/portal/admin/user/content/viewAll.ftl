@@ -69,7 +69,7 @@
 
         <#if user.isForRemoval() >
             <td>
-                <button class="btn" onclick="javascript:PopUpShow('${user.code}')">Restore</button>
+                <button class="btn" onclick="">Restore</button>
             </td>
         <#else>
             <td>
