@@ -1,12 +1,13 @@
 <h3 class="page-header"><@spring.message "user.list"/></h3>
 
+
 <div class="row">
     <div class="col-md-12" align="right">
         Pages:
-        <#if numberOfPage-1&gt;1>
-            <a href="<@spring.url"/admin/user/viewAll/1"/>">&nbsp;&lt;&lt;</a>
-            <a href="<@spring.url"/admin/user/viewAll/${numberOfPage+1}"/>">&nbsp;&lt;</a>
-        </#if>
+    <#if numberOfPage-1&gt;1>
+        <a href="<@spring.url"/admin/user/viewAll/1"/>">&nbsp;&lt;&lt;</a>
+        <a href="<@spring.url"/admin/user/viewAll/${numberOfPage+1}"/>">&nbsp;&lt;</a>
+    </#if>
     <#list 1..(pages) as index>
         <a href="<@spring.url"/admin/user/viewAll/${index}"/>">  ${index}</a>
     </#list>
@@ -16,7 +17,7 @@
     </#if>
     </div>
 </div>
-<table width="100%" class="table-bordered table">
+<table width="100%" class="table-bordered table" id="table">
     <tr bgcolor="#d3d3d3" style="font-weight:bold">
         <td>Name</td>
         <td>Email</td>
@@ -66,17 +67,15 @@
         <#else>
             <td>None</td>
         </#if>
-
-        <#if user.isForRemoval() >
-            <td>
-                <button class="btn" onclick="javascript:pushData('${user.code}');">Restore</button>
-            </td>
-        <#else>
-            <td>
+        <td id="action${user.code}">
+            <#if user.isForRemoval() >
+                <form style="margin: 0 0 0 ">
+                    <button class="btn" onclick="javascript:pushData('${user.code}')" type="submit">Restore</button>
+                </form>
+            <#else>
                 <button class="btn" onclick="javascript:PopUpShow('${user.code}')">Remove</button>
-            </td>
-        </#if>
-
+            </#if>
+        </td>
     </tr>
 </#list>
 </table>
@@ -128,9 +127,8 @@
         $.ajax({
             type: 'POST',
             async: false,
-            url:"/admin/user/changeUserStatus/",
+            url: "/admin/user/changeUserStatus/",
             data: {userCode: userCode},
         });
-        location.reload();
     }
 </script>
