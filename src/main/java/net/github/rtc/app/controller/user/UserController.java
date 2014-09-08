@@ -4,9 +4,9 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.*;
 import net.github.rtc.app.service.*;
-import net.github.rtc.app.utils.datatable.CourseSearchResult;
-import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
+import net.github.rtc.app.utils.datatable.FilterSettings;
+import net.github.rtc.app.utils.datatable.SearchCriteria;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -109,25 +109,21 @@ public class UserController {
     }
 
     @RequestMapping(value = "/userCourses", method = RequestMethod.GET)
-    public ModelAndView userCourses() {
+    public ModelAndView userCourses() throws Exception {
         User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         UserCourseOrder currentUserCourseOrder = userCourseOrderService.getUserOrderByUserCode(user.getCode());
         if (currentUserCourseOrder == null) {
             ModelAndView mav = new ModelAndView(ROOT + "/page/usercours");
 
-            SearchFilter searchFilter = new SearchFilter();
-            searchFilter.setStatus(CourseStatus.PUBLISHED);
-            CourseSearchResult result = courseService.findByFilter(searchFilter);
-            Collections.sort((List<Course>)result.getCourses(), new Comparator<Course>() {
-                public int compare(Course course1, Course course2) {
-                    if (course1.getStartDate() == null || course2.getStartDate() == null)
-                        return 0;
-                    return course1.getStartDate().compareTo(course2.getStartDate());
-                }
-            });
+            FilterSettings settings = new FilterSettings(Course.class);
+            settings.addOption("status",  SearchCriteria.RestrictionStrategy.EQ);
+            Course sample = new Course();
+            sample.setStatus(CourseStatus.PUBLISHED);
+            SearchCriteria searchCriteria = settings.buildSearchCriteria(sample);
+            searchCriteria.setPageSize(3);
 
             mav.addObject("user", user);
-            mav.addObject("courses", result.getCourses());
+            mav.addObject("courses", courseService.search(searchCriteria).getResults());
             return mav;
         } else {
             ModelAndView mav = new ModelAndView(ROOT + "/page/courseorder");
@@ -187,12 +183,6 @@ public class UserController {
         }
         return orderParamsMap;
     }
-
-    @ModelAttribute("searchFilter")
-    public SearchFilter getFilter() {
-        return new SearchFilter();
-    }
-
 
     /**
      * Binding user conditions for entry into the form conclusions

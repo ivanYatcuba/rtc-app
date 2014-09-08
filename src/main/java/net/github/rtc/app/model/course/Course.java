@@ -7,9 +7,8 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author Vladislav Pikus
@@ -72,6 +71,7 @@ public class Course implements Serializable {
     private Integer capacity = 10;
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name="courses_tags",
             joinColumns={@JoinColumn(name="tagId")},
             inverseJoinColumns={@JoinColumn(name="id")})
@@ -86,8 +86,6 @@ public class Course implements Serializable {
             inverseJoinColumns={@JoinColumn(name="courseId")})
     @ForExport(value = "Experts")//, inculdeField = {"Author Email"})
     private Set<User> experts;
-
-
 
     public List<Tag> getTags() {
         return tags;

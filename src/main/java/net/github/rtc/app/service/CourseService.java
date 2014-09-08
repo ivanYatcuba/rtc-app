@@ -1,8 +1,8 @@
 package net.github.rtc.app.service;
 
 import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.utils.datatable.CourseSearchResult;
-import net.github.rtc.app.utils.datatable.SearchFilter;
+import net.github.rtc.app.utils.datatable.SearchCriteria;
+import net.github.rtc.app.utils.datatable.SearchResults;
 
 import java.util.List;
 
@@ -51,13 +51,7 @@ public interface CourseService {
      */
     void update(Course course);
 
-    /**
-     * Find course collection by filtering param
-     *
-     * @param filter filter query
-     * @return courseDTO
-     */
-    CourseSearchResult findByFilter(SearchFilter filter);
+
 
     /**
      * Find all courses
@@ -71,6 +65,8 @@ public interface CourseService {
      * @param course  what course?
      */
     void publish(Course course);
+
+    SearchResults<Course> search(SearchCriteria searchCriteria);
 
 
 }

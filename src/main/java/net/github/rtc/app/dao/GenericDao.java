@@ -1,5 +1,8 @@
 package net.github.rtc.app.dao;
 
+import net.github.rtc.app.utils.datatable.SearchCriteria;
+import net.github.rtc.app.utils.datatable.SearchResults;
+
 import java.util.List;
 
 /**
@@ -20,5 +23,7 @@ public interface GenericDao<T> {
     void deleteByCode(String code);
 
     T findByCode(String code);
+
+    public SearchResults<T> search(SearchCriteria searchCriteria);
 
 }

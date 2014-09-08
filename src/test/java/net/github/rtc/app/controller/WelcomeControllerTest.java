@@ -1,7 +1,6 @@
 package net.github.rtc.app.controller;
 
 import net.github.rtc.app.controller.common.WelcomeController;
-import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.service.CourseService;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -30,8 +29,7 @@ public class WelcomeControllerTest {
 
     @Mock
     private CourseService courseService;
-    @Mock
-    private CourseSearchResult result;
+
 
     private MockMvc mockMvc;
 

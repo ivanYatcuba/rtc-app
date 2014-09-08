@@ -32,9 +32,12 @@ public class CustomTagsEditor extends PropertyEditorSupport {
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
         List<String> tagsSplit = Arrays.asList(text.split(","));
-        Collection<Tag> tags = new ArrayList<>();
-        for(String tagName : tagsSplit) {
-            tags.add(new Tag(tagName));
+        Collection<Tag> tags = null;
+        if(!tagsSplit.get(0).equals("")){
+            tags = new ArrayList<>();
+            for(String tagName : tagsSplit) {
+                tags.add(new Tag(tagName));
+            }
         }
         this.setValue(tags);
     }

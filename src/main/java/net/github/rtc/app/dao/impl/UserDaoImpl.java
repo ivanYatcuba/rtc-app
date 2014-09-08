@@ -10,10 +10,6 @@ import net.github.rtc.app.dao.UserDao;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.utils.search.SearchCriteria;
-import net.github.rtc.app.utils.search.SearchResults;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -50,19 +46,4 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
                 add(Restrictions.eq("a.name", type.name())).list();
     }
 
-    @Override
-    public SearchResults<User> search(SearchCriteria<User> userSearchCriteria) {
-        SearchResults<User> userSearchResults = new SearchResults<>();
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
-        for(String restriction : userSearchCriteria.getSearchCriteria().keySet()){
-            criteria.add(Restrictions.eq(restriction, userSearchCriteria.getSearchCriteria().get(restriction)));
-        }
-        if(userSearchCriteria.getPageSize() > 0){
-            userSearchResults.setResults(criteria.setFirstResult(userSearchCriteria.getPageSize()).list());
-        }else {
-            userSearchResults.setResults(criteria.list());
-        }
-        userSearchResults.setTotalResults(((Long) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue());
-        return userSearchResults;
-    }
 }

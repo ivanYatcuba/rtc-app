@@ -1,44 +1,32 @@
-<form name="searchFilter" id="searchFilter" action="<@spring.url "/admin/course/filter"/>" method="gets">
+<form name="course" id="course" action="<@spring.url "/admin/course/filter"/>" method="get">
     <div class="row">
         <div class="col-md-6">
-        <@spring.formItem "searchFilter.title"/>
-        <@spring.bind "searchFilter.categories" />
-        <label for="categories"><@spring.message "searchFilter.categories"/></label>
+        <@spring.formItem "course.name"/>
+        <@spring.bind "course.type" />
+        <label for="categories"><@spring.message "course.category"/></label>
         <#--<@spring.formSingleSelect "searchFilter.categories"/>-->
             <select id="categories" name="categories" >
-                <option/>
+            <option/>
             <#list categories as cat>
-                <#assign isSelected = false>
-                <#if searchFilter.categories??>
-                    <#list searchFilter.categories as ct>
-                        <#if ct == cat>
-                            <#assign isSelected = true>
-                        </#if>
-                    </#list>
-                </#if>
-                <option value="${cat}"  ${isSelected ?string("selected", "")} />${cat}<br>
+                <option value="${cat}"  />${cat}<br>
             </#list>
             </select>
-        <@spring.formItem "searchFilter.author" />
+            <label>*<@spring.message "course.experts"/></label>
+            <div id="experts"></div>
+            <label for="addExpertH"></label><a id="addExpertH" href="#" onclick="addExpert()">Add Expert</a>
         </div>
 
         <div class="col-md-6">
-        <@spring.formItem "searchFilter.startDate" "" "datepiker" />
-        <@spring.bind "searchFilter.status" />
+        <@spring.formItem "course.startDate" "" "datepiker" />
+        <@spring.bind "course.status" />
         <label for="status"><@spring.message "searchFilter.status"/></label>
             <select id="status" name="status">
             <option value="">ALL</option>
             <#list statuses as stat>
-                <#assign isSelected = false>
-                <#if searchFilter.status??>
-                    <#if searchFilter.status == stat>
-                        <#assign isSelected = true>
-                    </#if>
-                </#if>
-                <option value="${stat}" ${isSelected ?string("selected", "")}/>${stat}<br>
+                <option value="${stat}" />${stat}<br>
             </#list>
             </select>
-        <@spring.formItem "searchFilter.tags" "" "tag" />
+        <@spring.formItem "course.tags" "" "tag" />
         </div>
     </div>
 
@@ -51,3 +39,25 @@
     </div>
 
 </form>
+
+<script type="text/javascript"  src="<@spring.url'/resources/js/courseForm.js'/>"></script>
+<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
+<script src="<@spring.url'/resources/css/js/jquery.validate.min.js'/>"></script>
+<script src="<@spring.url'/resources/css/js/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
+
+
+<script>
+
+    $(function() {
+        $("#course").validate();
+        prepareCourseFormPage("<@spring.url "/admin/user/expertUsers"/>");
+    <#if course.experts??>
+        <#assign i = 0>
+        <#list  course.experts as f>
+            addExpert();
+            setFieldSelection(${i}, "${f.name}"+" "+"${f.surname}"+" "+"${f.email}");
+            <#assign i = i+1>
+        </#list>
+    </#if>
+    });
+</script>

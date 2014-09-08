@@ -9,8 +9,8 @@ package net.github.rtc.app.service;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.utils.search.SearchCriteria;
-import net.github.rtc.app.utils.search.SearchResults;
+import net.github.rtc.app.utils.datatable.SearchCriteria;
+import net.github.rtc.app.utils.datatable.SearchResults;
 
 import java.util.List;
 
@@ -38,9 +38,9 @@ public interface UserService {
 
     List<User> getUserByRole(RoleType type);
 
-    SearchResults<User> search(SearchCriteria<User> userSearchCriteria);
-
     void markUserForRemoval(User user);
 
     void markUserForRemoval(String userCode);
+
+    SearchResults<User> search(SearchCriteria userSearchCriteria);
 }

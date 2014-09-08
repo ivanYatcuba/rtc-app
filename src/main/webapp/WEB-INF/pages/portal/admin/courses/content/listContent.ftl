@@ -7,17 +7,17 @@
     <div class="col-md-12" align="right">
         Pages:
     <#if startPage != currentPage>
-        <a href="<@spring.url "/admin/course?page=${startPage}" />" />&laquo;</a>
+        <a href="<@spring.url "/admin/course/${startPage}" />">&laquo;</a>
     </#if>
     <#if prevPage??>
-        <a href="<@spring.url "/admin/course?page=${prevPage}" />" />${prevPage}</a>
+        <a href="<@spring.url "/admin/course/${prevPage}" />">>${prevPage}</a>
     </#if>
     ${currentPage}
     <#if nextPage??>
-        <a href="<@spring.url "/admin/course?page=${nextPage}" />" />${nextPage}</a>
+        <a href="<@spring.url "/admin/course/${nextPage}" />">>${nextPage}</a>
     </#if>
     <#if lastPage != currentPage>
-        <a href="<@spring.url "/admin/course?page=${lastPage}" />" />&raquo;</a>
+        <a href="<@spring.url "/admin/course/${lastPage}" />">>&raquo;</a>
     </#if>
     </div>
 
@@ -33,7 +33,7 @@
     </tr>
 <#list courses as course>
     <tr>
-        <td><a href="<@spring.url "/admin/course/${course.code}" />">${course.name}</a></td>
+        <td><a href="<@spring.url "/admin/course/view/${course.code}" />">${course.name}</a></td>
         <td>${course.type}</td>
         <td>${course.startDate?datetime?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
         <td> <#list course.experts as expert>
@@ -60,4 +60,5 @@
 <a style="float: right" href="<@spring.url "/admin/course/create" />">
     <button class="btn">Create New</button>
 </a>
+
 

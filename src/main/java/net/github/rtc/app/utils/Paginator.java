@@ -1,6 +1,8 @@
 package net.github.rtc.app.utils;
 
 import net.github.rtc.app.utils.datatable.Page;
+import net.github.rtc.app.utils.datatable.FilterSettings;
+import net.github.rtc.app.utils.datatable.SearchCriteria;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,6 +11,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class Paginator {
     private int maxPerPage = 5;
+    private  int currentPage = 1;
+
+    private Object filterTemplate;
+    private FilterSettings settings;
+
+    public void setSettings(FilterSettings settings) {this.settings = settings;}
+    public void setFilterTemplate(Object filterTemplate) {this.filterTemplate = filterTemplate;}
+
+    public SearchCriteria getSearchCriteria(){
+        try {
+                SearchCriteria searchCriteria = settings.buildSearchCriteria(filterTemplate);
+                searchCriteria.setPageSize(maxPerPage);
+                searchCriteria.setCurrentPage(currentPage);
+            return searchCriteria;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void setCurrentPage(int currentPage){
+        this.currentPage = currentPage;
+    }
 
     public void setMaxPerPage(int maxPerPage) {
         this.maxPerPage = maxPerPage;

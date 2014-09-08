@@ -5,9 +5,8 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.ModelService;
-import net.github.rtc.app.utils.datatable.CourseSearchResult;
-import net.github.rtc.app.utils.datatable.PageDto;
-import net.github.rtc.app.utils.datatable.SearchFilter;
+import net.github.rtc.app.utils.datatable.SearchCriteria;
+import net.github.rtc.app.utils.datatable.SearchResults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,23 +79,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
         return Course.class;
     }
 
-    /**
-     * @see net.github.rtc.app.service.CourseService#( net.github.rtc.app.utils.datatable.SearchFilter )
-     */
     @Override
-    public CourseSearchResult findByFilter(SearchFilter filter) {
-        LOG.debug("Searching courses with filter: {} ", filter);
-        Integer total = resource.getCount(filter);
-        PageDto pageDto = new PageDto.Builder(total).page(filter.getPageNumber()).maxResult(filter.getMaxResult())
-                .build();
-        CourseSearchResult result = new CourseSearchResult.Builder().courses(resource.findByCriteria(filter, pageDto))
-                .totalCount(total)
-                .limit(pageDto.getMaxResult())
-                .offset(pageDto.getFirstResult()).build();
-        return result;
-    }
-
-    @Override
+    @Transactional
     public List<Course> findAll() {
         LOG.debug("Getting all courses from database...");
         return resource.findAll();
@@ -109,6 +93,23 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
         course.setStatus(CourseStatus.PUBLISHED);
         course.setPublishDate(new Date());
         resource.update(course);
+    }
+
+    @Override
+    @Transactional
+    public SearchResults<Course> search(SearchCriteria searchCriteria) {
+        LOG.debug("Searching courses///");
+        return resource.search(searchCriteria);
+    }
+
+    /**
+     * Check course code for null
+     *
+     * @param code course code
+     */
+    private void checkCode(String code) {
+        LOG.debug("Checking if course with code " + code + " exists");
+        Assert.notNull(code, "code cannot be null");
     }
 
 }

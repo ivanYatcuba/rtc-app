@@ -6,12 +6,12 @@ import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.datatable.CourseSearchResult;
 import net.github.rtc.app.utils.datatable.Page;
-import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.utils.Paginator;
-import net.github.rtc.app.utils.search.SearchCriteria;
+import net.github.rtc.app.utils.datatable.FilterSettings;
+import net.github.rtc.app.utils.datatable.SearchCriteria;
+import net.github.rtc.app.utils.datatable.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -36,23 +36,28 @@ public class CoursesController {
     private static final String ROOT = "portal/admin";
     private static final String ROOT_MODEL = "course";
 
-    private CourseService courseService;
-
     @Autowired
-    private ValidationContext validationContext;
+    private CourseService courseService;
     @Autowired
     private UserService userService;
-
     @Autowired
-    public void setCourseService(CourseService courseService) {
-        this.courseService = courseService;
-    }
-
     private Paginator paginator;
-
     @Autowired
-    public void setPaginator(Paginator paginator) {
-        this.paginator = paginator;
+    private ValidationContext validationContext;
+
+
+    //Filtering settings
+    private static final FilterSettings courseFilterSettings;
+    static {
+        FilterSettings settings = new FilterSettings(Course.class);
+        settings.addOption("name", SearchCriteria.RestrictionStrategy.EQ);
+        settings.addOption("startDate", SearchCriteria.RestrictionStrategy.GE);
+        settings.addOption("status", SearchCriteria.RestrictionStrategy.EQ);
+        settings.addOption("tags",SearchCriteria.RestrictionStrategy.EQ,
+                Arrays.asList(new String[]{"value"}), SearchCriteria.JunctionStrategy.CONJUNCTION);
+        settings.addOption("experts",SearchCriteria.RestrictionStrategy.EQ,
+                Arrays.asList(new String[]{"email"}), SearchCriteria.JunctionStrategy.CONJUNCTION);
+        courseFilterSettings = settings;
     }
 
     /**
@@ -61,20 +66,45 @@ public class CoursesController {
      * @return modelAndView("admin/courses/courses")
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView index(@RequestParam(required = true, defaultValue = "1") int page) {
+    public ModelAndView index() throws Exception {
         ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
-        SearchFilter searchFilter = getFilter();
-        searchFilter.setPageNumber(page - 1);
-        searchFilter.setMaxResult(paginator.getMaxPerPage());
-        CourseSearchResult result = courseService.findByFilter(searchFilter);
-
-        Page pageModel = paginator.getPage(page, result.getTotalCount());
-        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
-                .byNextPage().byPrevPage().byStartPage().toMap());
-
-        mav.addObject("courses", result.getCourses());
-        mav.addObject("isFiltered", false);
+        Course sampleCourse = new Course();
+        sampleCourse.setStatus(null);
+        paginator.setSettings(courseFilterSettings);
+        paginator.setFilterTemplate(sampleCourse);
+        switchPage(mav, 1);
         mav.addObject("statuses", getStats());
+        return mav;
+    }
+
+
+    /**
+     * Process the request to get view about course by custom filter
+     *
+     * @return modelAndView("admin/courses/courses")
+     */
+    @RequestMapping(value = "/{page}", method = RequestMethod.GET)
+    public ModelAndView navigate(@PathVariable int page) throws Exception {
+        ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
+        switchPage(mav, page);
+        return mav;
+    }
+
+    /**
+     * Process the request to get view about course by custom filter
+     *
+     * @return modelAndView("admin/courses/courses")
+     */
+    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    public ModelAndView filter(@ModelAttribute(ROOT_MODEL) Course courseTemplate,
+                               @RequestParam(value = "expertList", required = false) List<String> expertList) throws Exception {
+        ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
+        if(expertList!=null){
+            courseTemplate.setExperts(bindExperts(expertList));
+        }
+        if(courseTemplate.getName().equals("")){courseTemplate.setName(null);}
+        paginator.setFilterTemplate(courseTemplate);
+        switchPage(mav,1);
         return mav;
     }
 
@@ -106,35 +136,11 @@ public class CoursesController {
      * @param courseCode course code
      * @return modelAndView("admin/courses/course")
      */
-    @RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "view/{courseCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/courseContent");
         Course course = courseService.findByCode(courseCode);
         mav.addObject("course", course);
-        return mav;
-    }
-
-    /**
-     * Process the request to get view about course by custom filter
-     *
-     * @param searchFilter searchFilter model
-     * @return modelAndView("admin/courses/courses")
-     */
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public ModelAndView filter(@ModelAttribute("searchFilter") SearchFilter searchFilter,
-                               @RequestParam(required = true, defaultValue = "1") int page) {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
-
-        searchFilter.setPageNumber(page - 1);
-        searchFilter.setMaxResult(paginator.getMaxPerPage());
-        CourseSearchResult result = courseService.findByFilter(searchFilter);
-
-        Page pageModel = paginator.getPage(page, result.getTotalCount());
-        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
-                .byNextPage().byPrevPage().byStartPage().toMap());
-
-        mav.addObject("courses", result.getCourses());
-        mav.addObject("isFiltered", false);
         return mav;
     }
 
@@ -188,7 +194,7 @@ public class CoursesController {
         course.setId(courseService.findByCode(course.getCode()).getId());// TO DO: id must be already present
         course.setExperts(bindExperts(expertList));
         courseService.update(course);
-        return "redirect:" + course.getCode();
+        return "redirect: view/" + course.getCode();
     }
 
     private Set<User> bindExperts(List<String> experts){
@@ -196,13 +202,20 @@ public class CoursesController {
         Set<User> courseExperts = new HashSet<>();
         for(String expert: experts){
             String params[] = expert.split(" ");
-            SearchCriteria<User> userSearchCriteria = new SearchCriteria<>(User.class);
-            userSearchCriteria.addCriteria("name", params[0]);
-            userSearchCriteria.addCriteria("surname", params[1]);
-            userSearchCriteria.addCriteria("email", params[2]);
+            SearchCriteria userSearchCriteria = new SearchCriteria(User.class);
+            userSearchCriteria.addUnitCriteria("email", params[2], SearchCriteria.RestrictionStrategy.EQ);
             courseExperts.addAll(userService.search(userSearchCriteria).getResults());
         }
         return courseExperts;
+    }
+
+    private void switchPage(ModelAndView mav, int page){
+        paginator.setCurrentPage(page);
+        SearchResults<Course> results = courseService.search(paginator.getSearchCriteria());
+        Page pageModel = paginator.getPage(page, results.getTotalResults());
+        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
+                .byNextPage().byPrevPage().byStartPage().toMap());
+        mav.addObject("courses", results.getResults());
     }
 
     /**
@@ -232,15 +245,6 @@ public class CoursesController {
         return CourseStatus.findAll();
     }
 
-    /**
-     * Prepare searchFilter as model attribute
-     *
-     * @return searchFilter object
-     */
-    @ModelAttribute("searchFilter")
-    public SearchFilter getFilter() {
-        return new SearchFilter();
-    }
 
     @ModelAttribute("currentUser")
     public String getCurrentUser() {
