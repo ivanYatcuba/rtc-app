@@ -102,14 +102,4 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
         return resource.search(searchCriteria);
     }
 
-    /**
-     * Check course code for null
-     *
-     * @param code course code
-     */
-    private void checkCode(String code) {
-        LOG.debug("Checking if course with code " + code + " exists");
-        Assert.notNull(code, "code cannot be null");
-    }
-
 }
