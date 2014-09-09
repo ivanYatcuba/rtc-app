@@ -32,8 +32,6 @@
                                 newDate = new Date( Date.parse( newDate ) );
                                 $('#endDate').datepicker("option","minDate",newDate);
                             }
-
-
                         </#if>
 
                         <#if "${status.expression?replace('[','')?replace(']','')}"=="birthDate">
@@ -115,12 +113,9 @@
             var text = label.text();
             label.html('* ' + text);
         });
+        alert("a")
 
     });
-    function IsEmail(email) {
-        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        return regex.test(email);
-    }
 </script>
 </#macro>
 
@@ -130,7 +125,7 @@
 * @param path the name of the field to bind to
 * @param options a map (value=label) of all the available options
 * @param classes any additional classes for the surrounding label element (such as 'inline')
-* @param messageKey key to lookup in dao bundle, defaults to path
+* @param messageKey key to lookup in resource bundle, defaults to path
 -->
 <#macro radioButtons path options classes="" checkId=false messageKey=path>
     <@spring.bind path/>

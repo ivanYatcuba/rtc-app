@@ -2,9 +2,7 @@ package net.github.rtc.app.model.report;
 
 
 import net.github.rtc.app.utils.ExportFieldExtractor;
-import net.github.rtc.util.annotation.Maxlength;
-import net.github.rtc.util.annotation.Required;
-import net.github.rtc.util.annotation.Validatable;
+import net.github.rtc.util.annotation.validation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;

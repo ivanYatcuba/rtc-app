@@ -2,6 +2,7 @@ package net.github.rtc.app.model.course;
 
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.annotation.*;
+import net.github.rtc.util.annotation.validation.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -66,7 +67,7 @@ public class Course implements Serializable {
     private String description;
 
     @Required
-    @net.github.rtc.util.annotation.Number
+    @net.github.rtc.util.annotation.validation.Number
     @Min(1)
     @Column
     @ForExport("Capacity")

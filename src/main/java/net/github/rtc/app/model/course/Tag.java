@@ -1,8 +1,7 @@
 package net.github.rtc.app.model.course;
 
 
-import net.github.rtc.util.annotation.Required;
-import net.github.rtc.util.annotation.Validatable;
+import net.github.rtc.util.annotation.validation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
