@@ -106,4 +106,10 @@
 </div>
 
 <@spring.formValidation formName="user" jsonRules="${validationRules}"/>
+<script type="text/javascript" charset="utf8" src="/resources/js/userMailValidation.js"></script>
+<script>
+    $(function() {
+        addMailValidation("<@spring.url "/mailExist/" />")
+    });
+</script>
 

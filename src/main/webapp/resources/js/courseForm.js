@@ -64,6 +64,23 @@ function prepareCourseFormPage(resourceUrl){
         }
         return true;
     }, 'Expert already in list');
+
+    $("#endDate").datepicker({
+        dateFormat: "dd.mm.yy"
+        ,minDate:  0
+        });
+    $("#startDate").datepicker({
+        dateFormat: "dd.mm.yy"
+        ,minDate:  0,
+        onSelect: function(date){
+            var date1 = $('#startDate').datepicker('getDate');
+            var date = new Date( Date.parse( date1 ) );
+            date.setDate( date.getDate() + 1 );
+            var newDate = date.toDateString();
+            newDate = new Date( Date.parse( newDate ) );
+            $('#endDate').datepicker("option","minDate",newDate);
+        }});
+
 }
 
 

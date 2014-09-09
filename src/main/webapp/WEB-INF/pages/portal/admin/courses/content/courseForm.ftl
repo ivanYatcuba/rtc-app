@@ -10,8 +10,8 @@
     </div>
 
     <div class="col-md-6">
-        <@spring.formItem "course.startDate" 'class="input-medium required"' "datepiker"/>
-        <@spring.formItem "course.endDate" 'class="input-medium required"' "datepiker"/>
+        <@spring.formItem "course.startDate" 'class="input-medium required"' />
+        <@spring.formItem "course.endDate" 'class="input-medium required"' />
         <@spring.formItem "course.tags" "" "tag"/>
     </div>
 </div>

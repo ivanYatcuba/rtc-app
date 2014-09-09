@@ -22,18 +22,6 @@
                     {
                         dateFormat: "dd.mm.yy"
 
-                        <#if "${status.expression?replace('[','')?replace(']','')}"=="startDate">
-                            ,minDate:  0,
-                            onSelect: function(date){
-                                var date1 = $('#startDate').datepicker('getDate');
-                                var date = new Date( Date.parse( date1 ) );
-                                date.setDate( date.getDate() + 1 );
-                                var newDate = date.toDateString();
-                                newDate = new Date( Date.parse( newDate ) );
-                                $('#endDate').datepicker("option","minDate",newDate);
-                            }
-                        </#if>
-
                         <#if "${status.expression?replace('[','')?replace(']','')}"=="birthDate">
                             ,changeMonth : true,
                             changeYear : true,
@@ -95,18 +83,7 @@
             }
 
         });
-        if($("#email").length){
-            $("#email").rules('add', {
-                remote: {
-                    url: "<@spring.url "/mailExist" />",
-                    type: "post",
-                    data : {email: function(){return $("#email").val();}}
-                },
-                messages: {
-                    remote: "Email already exist!"
-                }
-            });
-        }
+
         $(".required").each(function() {
             var myid = this.id;
             var label = $("label[for=\'"+myid+"\']");
