@@ -5,6 +5,8 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +27,7 @@ import java.util.*;
 @Controller ("adminNavigationController")
 @RequestMapping ("admin/user")
 public class UserController {
+    private static Logger LOG = LoggerFactory.getLogger(UserController.class.getName());
 
     @Autowired
     private ValidationContext validationContext;
@@ -92,6 +95,7 @@ public class UserController {
 
     @RequestMapping(value = "/changeUserStatus", method = RequestMethod.POST)
     public String delete(@RequestParam String userCode) {
+        LOG.info("Getting code: " + userCode);
         //1. Do not forget to remove it
         //2. Use logs
         //System.out.print("1111111111111");
