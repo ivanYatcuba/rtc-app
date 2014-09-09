@@ -69,7 +69,7 @@
         </#if>
         <td id="action${user.code}">
             <#if user.isForRemoval() >
-                <form name="deleteUser" action="<@spring.url"/admin/user/changeUserStatus/"/>" method="post">
+                <form style="margin: 0 0 0" name="deleteUser" action="<@spring.url"/admin/user/changeUserStatus/"/>" method="post">
                     <input type="hidden" name="userCode" value="${user.code}"/>
                     <button class="btn" type="submit">Restore</button>
                 </form>
