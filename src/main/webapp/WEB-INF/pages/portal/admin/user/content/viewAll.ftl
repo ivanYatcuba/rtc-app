@@ -69,8 +69,9 @@
         </#if>
         <td id="action${user.code}">
             <#if user.isForRemoval() >
-                <form style="margin: 0 0 0 ">
-                    <button class="btn" onclick="javascript:pushData('${user.code}')" type="submit">Restore</button>
+                <form name="deleteUser" action="<@spring.url"/admin/user/changeUserStatus/"/>" method="post">
+                    <input type="hidden" name="userCode" value="${user.code}"/>
+                    <button class="btn" type="submit">Restore</button>
                 </form>
             <#else>
                 <button class="btn" onclick="javascript:PopUpShow('${user.code}')">Remove</button>
@@ -119,16 +120,5 @@
     }
     function PopUpHide() {
         $("#window-popup").hide();
-    }
-</script>
-
-<script type="text/javascript">
-    function pushData(userCode) {
-        $.ajax({
-            type: 'POST',
-            async: false,
-            url: "/admin/user/changeUserStatus/",
-            data: {userCode: userCode},
-        });
     }
 </script>

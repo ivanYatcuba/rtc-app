@@ -131,9 +131,9 @@ public class UserServiceImpl implements ModelService<User>, UserService{
         if (user.getStatus() == UserStatus.ACTIVE) {
             user.setStatus(UserStatus.FOR_REMOVAL);
             user.setRemovalDate(new DateTime(new Date()).plusDays(3).toDate());
-            LOG.info("Getting user: " + user);
+            LOG.info("Getting user before update: " + user);
             resource.update(user);
-            LOG.info("Getting user: " + user);
+            LOG.info("Getting user after update: " + user);
         }
         else{
             user.setStatus(UserStatus.ACTIVE);
