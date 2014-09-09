@@ -113,8 +113,6 @@
             var text = label.text();
             label.html('* ' + text);
         });
-        alert("a")
-
     });
 </script>
 </#macro>
