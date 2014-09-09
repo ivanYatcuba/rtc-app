@@ -45,8 +45,8 @@ public class LoginController {
     }
 
     @RequestMapping(value="/mailExist/", method = RequestMethod.POST)
-    public @ResponseBody boolean mailExist(@RequestParam String email) {
-        if(email.equals(SecurityContextHolder.getContext().getAuthentication().getName())){
+    public @ResponseBody boolean mailExist(@RequestParam String email, @RequestParam String currentEmail) {
+        if(email.equals(currentEmail)){
             return true;
         }
         return userServiceLogin.loadUserByUsername(email) == null;

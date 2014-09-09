@@ -109,7 +109,7 @@
 <script type="text/javascript" charset="utf8" src="<@spring.url'/resources/js/userMailValidation.js'/>"></script>
 <script>
     $(function() {
-        addMailValidation("<@spring.url "/mailExist/" />")
+        addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")
     });
 </script>
 
