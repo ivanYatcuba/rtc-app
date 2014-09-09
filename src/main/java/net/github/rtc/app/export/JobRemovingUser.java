@@ -19,9 +19,9 @@ public class JobRemovingUser {
 
     @Scheduled(fixedDelay =300000)
     public void deletingUser(){
-        LOG.info("JobRemovingUser started");
+        LOG.debug("JobRemovingUser started");
         Collection<User> listUsers = userService.findAll();
-        LOG.info("Size of downloaded collection: {}", listUsers.size());
+        LOG.debug("Size of downloaded collection: {}", listUsers.size());
         for(User user: listUsers){
             if(user.getRemovalDate() != null){
                String userCode = user.getCode();

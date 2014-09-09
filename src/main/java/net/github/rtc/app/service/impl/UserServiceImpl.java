@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.dao.UserDao;
@@ -29,68 +23,64 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
- * @author Саша
+ * @author Sasha
  */
 @Service("userService")
-public class UserServiceImpl implements ModelService<User>, UserService{
-
-
-    @Autowired
-    private UserDao resource;
-
+public class UserServiceImpl implements ModelService<User>, UserService {
     private static Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class.getName());
 
+    @Autowired
+    private UserDao userDao;
 
     @Override
     @Transactional
     public List<User> findAll() {
-        LOG.info("Loading all users from database...");
-        return (List)resource.findAll();
+        LOG.debug("Loading all users from database...");
+        return (List) userDao.findAll();
     }
 
 
     @Override
     @Transactional
     public void delete(User user) {
-        LOG.info("Removing user  with email: " + user.getEmail());
-        resource.deleteByCode(user.getCode());
+        LOG.debug("Removing user  with email: " + user.getEmail());
+        userDao.deleteByCode(user.getCode());
     }
 
     @Override
     @Transactional
     public void deleteByCode(String code) {
-        LOG.info("Removing user  with code: " + code);
-        resource.deleteByCode(code);
+        LOG.debug("Removing user  with code: " + code);
+        userDao.deleteByCode(code);
     }
 
     @Override
     @Transactional
-    public User findByCode(String code){
-        LOG.info("Removing user  with code: " + code);
-        return resource.findByCode(code);
+    public User findByCode(String code) {
+        LOG.debug("Removing user  with code: " + code);
+        return userDao.findByCode(code);
     }
 
     @Override
     @Transactional
     public User create(User user) {
-        LOG.info("Creating user: " + user);
+        LOG.debug("Creating user: " + user);
         user.setCode(UUID.randomUUID().toString());
         PasswordEncoder encoder = new StandardPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        return resource.create(user);
+        return userDao.create(user);
     }
 
     @Override
     @Transactional
     public void update(User user) {
-        LOG.info("Updating user: " + user);
+        LOG.debug("Updating user: " + user);
         PasswordEncoder encoder = new StandardPasswordEncoder();
-        User userToUpdate = resource.findByCode(user.getCode());
-        if(user.getPassword() != userToUpdate.getPassword()){
+        User userToUpdate = userDao.findByCode(user.getCode());
+        if (user.getPassword() != userToUpdate.getPassword()) {
             user.setPassword(encoder.encode(user.getPassword()));
         }
-        resource.update(user);
+        userDao.update(user);
     }
 
     @Override
@@ -101,28 +91,28 @@ public class UserServiceImpl implements ModelService<User>, UserService{
     @Override
     @Transactional
     public void createRole(RoleType type) {
-        LOG.info("Creating user role with type: " + type);
-        resource.createRole(type);
+        LOG.debug("Creating user role with type: " + type);
+        userDao.createRole(type);
     }
 
     @Override
     @Transactional
     public Role getRoleByType(RoleType type) {
-        LOG.info("Getting user role with type: " + type);
-        return resource.getRoleByType(type);
+        LOG.debug("Getting user role with type: " + type);
+        return userDao.getRoleByType(type);
     }
 
     @Override
     @Transactional
     public List<User> getUserByRole(RoleType type) {
-        LOG.info("Getting user list with type: " + type);
-        return resource.getUserByType(type);
+        LOG.debug("Getting user list with type: " + type);
+        return userDao.getUserByType(type);
     }
 
     @Override
     @Transactional
     public SearchResults<User> search(SearchCriteria userSearchCriteria) {
-        return resource.search(userSearchCriteria);
+        return userDao.search(userSearchCriteria);
     }
 
     @Override
@@ -131,25 +121,24 @@ public class UserServiceImpl implements ModelService<User>, UserService{
         if (user.getStatus() == UserStatus.ACTIVE) {
             user.setStatus(UserStatus.FOR_REMOVAL);
             user.setRemovalDate(new DateTime(new Date()).plusDays(3).toDate());
-            LOG.info("Getting user before update: " + user);
-            resource.update(user);
-            LOG.info("Getting user after update: " + user);
-        }
-        else{
+            LOG.debug("Getting user before update: " + user);
+            userDao.update(user);
+            LOG.debug("Getting user after update: " + user);
+        } else {
             user.setStatus(UserStatus.ACTIVE);
             user.setRemovalDate(null);
-            LOG.info("Getting user: " + user);
-            resource.update(user);
-            LOG.info("Getting user: " + user);
+            LOG.debug("Getting user: " + user);
+            userDao.update(user);
+            LOG.debug("Getting user: " + user);
         }
     }
 
     @Override
     @Transactional
     public void markUserForRemoval(String userCode) {
-        LOG.info("Getting code: " + userCode);
+        LOG.debug("Getting code: " + userCode);
         User user = findByCode(userCode);
-        LOG.info("User: " + user);
+        LOG.debug("User: " + user);
         markUserForRemoval(user);
     }
 }

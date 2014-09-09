@@ -48,14 +48,15 @@ public class CoursesController {
 
     //Filtering settings
     private static final FilterSettings courseFilterSettings;
+
     static {
         FilterSettings settings = new FilterSettings(Course.class);
         settings.addOption("name", SearchCriteria.RestrictionStrategy.EQ);
         settings.addOption("startDate", SearchCriteria.RestrictionStrategy.GE);
         settings.addOption("status", SearchCriteria.RestrictionStrategy.EQ);
-        settings.addOption("tags",SearchCriteria.RestrictionStrategy.EQ,
+        settings.addOption("tags", SearchCriteria.RestrictionStrategy.EQ,
                 Arrays.asList(new String[]{"value"}), SearchCriteria.JunctionStrategy.CONJUNCTION);
-        settings.addOption("experts",SearchCriteria.RestrictionStrategy.EQ,
+        settings.addOption("experts", SearchCriteria.RestrictionStrategy.EQ,
                 Arrays.asList(new String[]{"email"}), SearchCriteria.JunctionStrategy.CONJUNCTION);
         courseFilterSettings = settings;
     }
@@ -99,12 +100,14 @@ public class CoursesController {
     public ModelAndView filter(@ModelAttribute(ROOT_MODEL) Course courseTemplate,
                                @RequestParam(value = "expertList", required = false) List<String> expertList) throws Exception {
         ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
-        if(expertList!=null){
+        if (expertList != null) {
             courseTemplate.setExperts(bindExperts(expertList));
         }
-        if(courseTemplate.getName().equals("")){courseTemplate.setName(null);}
+        if (courseTemplate.getName().equals("")) {
+            courseTemplate.setName(null);
+        }
         paginator.setFilterTemplate(courseTemplate);
-        switchPage(mav,1);
+        switchPage(mav, 1);
         return mav;
     }
 
@@ -159,12 +162,12 @@ public class CoursesController {
     /**
      * Process the request to post entered course in the form
      *
-     * @param course        course object
+     * @param course course object
      * @return if all is OK the redirect to view new course or return to edit course
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute(ROOT_MODEL) Course course,
-                             @RequestParam(value = "expertList", required = false) List<String> expertList) {
+                       @RequestParam(value = "expertList", required = false) List<String> expertList) {
         course.setExperts(bindExperts(expertList));
         courseService.create(course);
         return "redirect:/admin/course/";
@@ -186,7 +189,7 @@ public class CoursesController {
     /**
      * Process the request to post entered course in the form
      *
-     * @param course        course object
+     * @param course course object
      * @return if all is OK the redirect to view course or return to edit course
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -197,10 +200,10 @@ public class CoursesController {
         return "redirect: view/" + course.getCode();
     }
 
-    private Set<User> bindExperts(List<String> experts){
-        if(experts == null) return null;
+    private Set<User> bindExperts(List<String> experts) {
+        if (experts == null) return null;
         Set<User> courseExperts = new HashSet<>();
-        for(String expert: experts){
+        for (String expert : experts) {
             String params[] = expert.split(" ");
             SearchCriteria userSearchCriteria = new SearchCriteria(User.class);
             userSearchCriteria.addUnitCriteria("email", params[2], SearchCriteria.RestrictionStrategy.EQ);
@@ -209,7 +212,7 @@ public class CoursesController {
         return courseExperts;
     }
 
-    private void switchPage(ModelAndView mav, int page){
+    private void switchPage(ModelAndView mav, int page) {
         paginator.setCurrentPage(page);
         SearchResults<Course> results = courseService.search(paginator.getSearchCriteria());
         Page pageModel = paginator.getPage(page, results.getTotalResults());

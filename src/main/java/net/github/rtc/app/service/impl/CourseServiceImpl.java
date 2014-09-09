@@ -31,7 +31,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     private static Logger LOG = LoggerFactory.getLogger(CourseServiceImpl.class.getName());
 
     @Autowired
-    private CoursesDao resource;
+    private CoursesDao coursesDao;
 
     /**
      * @see net.github.rtc.app.service.CourseService#delete(String)
@@ -40,7 +40,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     public void delete(String code) {
         LOG.debug("Removing course with code {} ", code);
         Assert.notNull(code, "code cannot be null");
-        resource.deleteByCode(code);
+        coursesDao.deleteByCode(code);
     }
 
     /**
@@ -50,7 +50,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     public Course findByCode(String code) {
         LOG.debug("Getting course with code {}", code);
         Assert.notNull(code, "code cannot be null");
-        return resource.findByCode(code);
+        return coursesDao.findByCode(code);
     }
 
     /**
@@ -61,7 +61,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
         LOG.debug("Creating course {} ", course);
         Assert.notNull(course, "course cannot be null");
         course.setCode(UUID.randomUUID().toString());
-        return resource.create(course);
+        return coursesDao.create(course);
     }
 
     /**
@@ -71,7 +71,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     public void update(Course course) {
         LOG.debug("Updating course: {} ", course);
         Assert.notNull(course, "course cannot be null");
-        resource.update(course);
+        coursesDao.update(course);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Transactional
     public List<Course> findAll() {
         LOG.debug("Getting all courses from database...");
-        return resource.findAll();
+        return coursesDao.findAll();
     }
 
     @Override
@@ -92,14 +92,14 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
         Assert.notNull(course, "course cannot be null");
         course.setStatus(CourseStatus.PUBLISHED);
         course.setPublishDate(new Date());
-        resource.update(course);
+        coursesDao.update(course);
     }
 
     @Override
     @Transactional
     public SearchResults<Course> search(SearchCriteria searchCriteria) {
         LOG.debug("Searching courses///");
-        return resource.search(searchCriteria);
+        return coursesDao.search(searchCriteria);
     }
 
 }
