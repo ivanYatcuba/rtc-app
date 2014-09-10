@@ -1,7 +1,7 @@
 <div class="row">
     <!--Email-->
     <div class="col-md-6">
-    <@spring.formItem  "user.email" "class=\"required\""/>
+    <@spring.formItem  "user.email" "class=required"/>
         <!--Authorities-->
         <div>
             <label for="selectedRole"><@spring.message "user.role"/></label>
@@ -17,7 +17,7 @@
     <div class="col-md-6">
         <div class="controls">
             <label for="password"><@spring.message "user.password"/></label>
-        <@spring.formInput "user.password" "id=\"password\" class=\"required\"" "password"/>
+        <@spring.formInput "user.password" "id=password class=required" "password"/>
         </div>
         <div class="controls">
             <label for="check"></label>
