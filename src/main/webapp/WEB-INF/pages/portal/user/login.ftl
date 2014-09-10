@@ -8,11 +8,8 @@
 </#if>
     <form name="f" action= <@spring.url "/j_spring_security_check"/> method=
     "POST">
-    <scripttype
-    ="text/javascript" src="/resources/css/js/jquery.js"></script>
-    <
-    script
-    src = "//code.jquery.com/jquery-1.9.1.js" ></script>
+    <scripttype="text/javascript" src="/resources/css/js/jquery.js"></script>
+      <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 
     <div>
         <span class="message"><b>Please sign in</b></span>
@@ -21,8 +18,7 @@
     <div>
         <p><input id="username" name="j_username" style="width:250px;height:35px" placeholder="E-mail" type="text"></p>
 
-        <p><input id="password" name="j_password" style="width:250px;height:35px" placeholder="Password"
-                  title="password"
+        <p><input id="password" name="j_password" style="width:250px;height:35px" placeholder="Password" title="password"
                   type="password"></p>
     </div>
     <div>
@@ -32,18 +28,17 @@
         <td colspan="2">
         </p>
 
-        <p class="remember"><input type="checkbox" id="ch"> Show password
-            <script language="JavaScript" type="text/javascript">
-                $("#ch").change(function () {
+                   <p class="remember" ><input type="checkbox" id="ch" > Show password
+                       <script language="JavaScript" type="text/javascript">
+                           $("#ch").change(function(){
 
-                    if (ch.checked) {
-                        password.type = "text"
-                    } else {
-                        password.type = "password"
+                               if (ch.checked) {
+                                  password.type = "text"
+                               } else {
+                                   password.type = "password"
 
-                    }
-                });
-            </script>
+                               }});
+                       </script>
             <input type="checkbox" name="_spring_security_remember_me">Remember me
         </p>
     </div>
