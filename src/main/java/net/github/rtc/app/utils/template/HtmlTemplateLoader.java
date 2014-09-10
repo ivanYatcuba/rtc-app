@@ -1,6 +1,5 @@
 package net.github.rtc.app.utils.template;
 
-import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.TemplateLoader;
 import org.apache.commons.io.IOUtils;
 
