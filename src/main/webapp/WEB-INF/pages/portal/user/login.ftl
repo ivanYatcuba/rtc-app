@@ -11,7 +11,7 @@
     <scripttype="text/javascript" src="/resources/css/js/jquery.js"></script>
       <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 
-    <div>
+    <div align="left" style="margin: 0 330 ">
         <span class="message"><b>Please sign in</b></span>
     </div>
 
