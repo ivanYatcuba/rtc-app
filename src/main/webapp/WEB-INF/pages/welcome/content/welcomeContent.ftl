@@ -1,6 +1,8 @@
-<div id="content"  class="jumbotron">
+
     <div class="row">
+        <header class="jumbotron hero-spacer ">
         <#include "carousel.ftl">
+        </header>
     </div>
 
     <div class="row">
@@ -9,4 +11,4 @@
         <#include "startingSoon.ftl">
         </div>
     </div>
-</div>
+
