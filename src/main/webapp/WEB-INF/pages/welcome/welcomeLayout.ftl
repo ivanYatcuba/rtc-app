@@ -1,5 +1,5 @@
 <html>
-<#import "/spring.ftl" as spring/>
+<#import "../customSpring.ftl" as spring/>
 <head>
     <#include "layout/link.ftl">
     <#include "layout/header.ftl" />

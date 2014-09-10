@@ -1,5 +1,5 @@
 <#ftl strip_whitespace=true>
-<#include "/spring.ftl"/>
+<#include "../../customSpring.ftl"/>
 
 <#macro includeHeader>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
