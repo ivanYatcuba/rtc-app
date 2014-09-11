@@ -35,6 +35,10 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Email cannot be empty");
         }
 
+        if(password == null || password.trim().isEmpty()){
+            throw new BadCredentialsException("Password cannot be empty");
+        }
+
         User user = userService.loadUserByUsername(username);
 
         if (user == null) {

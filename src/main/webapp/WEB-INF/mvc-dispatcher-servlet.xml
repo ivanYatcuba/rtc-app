@@ -16,7 +16,7 @@
     <context:property-placeholder location="classpath:/hibernate.properties, classpath:/export.properties"/>
 
     <!-- freemarker config -->
-    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <bean id="freemarkerConfig" class="net.github.rtc.app.utils.template.HtmlFreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/pages/"/>
         <property name="freemarkerSettings">
             <props>

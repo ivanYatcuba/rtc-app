@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6">
-    <@spring.formItem "course.name", 'class=\"required\" maxlength="50"'/>
+    <@spring.formItem "course.name", 'class="required" maxlength="50"'/>
         <div>
             <label for="type"><@spring.message "course.category" /></label>
         <@spring.bind "categories" />

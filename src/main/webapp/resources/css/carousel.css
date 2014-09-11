@@ -1,8 +1,4 @@
-.carousel {
-    height: 330px;
-    width: 940px;
-    margin-bottom: 30px;
-}
+
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
     z-index: 10;
@@ -15,7 +11,6 @@
     background-color: #777;
 }
 .carousel-inner > .item > img {
-    position: absolute;
     top: 0;
     left: 0;
     min-width: 100%;
