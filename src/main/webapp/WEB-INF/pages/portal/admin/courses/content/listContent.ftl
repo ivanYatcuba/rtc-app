@@ -10,14 +10,14 @@
         <a href="<@spring.url "/admin/course/${startPage}" />">&laquo;</a>
     </#if>
     <#if prevPage??>
-        <a href="<@spring.url "/admin/course/${prevPage}" />">>${prevPage}</a>
+        <a href="<@spring.url "/admin/course/${prevPage}" />">${prevPage}</a>
     </#if>
     ${currentPage}
     <#if nextPage??>
-        <a href="<@spring.url "/admin/course/${nextPage}" />">>${nextPage}</a>
+        <a href="<@spring.url "/admin/course/${nextPage}" />">${nextPage}</a>
     </#if>
     <#if lastPage != currentPage>
-        <a href="<@spring.url "/admin/course/${lastPage}" />">>&raquo;</a>
+        <a href="<@spring.url "/admin/course/${lastPage}" />">&raquo;</a>
     </#if>
     </div>
 
@@ -27,7 +27,7 @@
         <td>Name</td>
         <td>Category</td>
         <td>Dates</td>
-        <td>Author</td>
+        <td>Expert</td>
         <td>Status</td>
         <td>&nbsp;</td>
     </tr>
