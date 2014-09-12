@@ -1,13 +1,13 @@
 <!-- Fixed navbar -->
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: #c0c0c0;">
     <div class="container">
         <div class="navbar-collapse collapse" style="margin-left: -1.36em">
             <ul class="nav navbar-nav">
-                <li><a style="text-decoration: underline;" href="#">How it works</a></li>
-                <li><a style="text-decoration: underline;" href="#">Courses</a></li>
-                <li><a style="text-decoration: underline;" href="#">About</a></li>
-                <li><a style="text-decoration: underline;" href="#">Contact</a></li>
-                <li><a style="text-decoration: underline;" href="<@spring.url "/user/register" />">Register</a></li>
+                <li><a style="color: #ffffff; text-decoration: underline;" href="#">How it works</a></li>
+                <li><a style="color: #ffffff; text-decoration: underline;" href="#">Courses</a></li>
+                <li><a style="color: #ffffff; text-decoration: underline;" href="#">About</a></li>
+                <li><a style="color: #ffffff; text-decoration: underline;" href="#">Contact</a></li>
+                <li><a style="color: #ffffff; text-decoration: underline;" href="<@spring.url "/user/register" />">Register</a></li>
             </ul>
 
             <#if "${content}" != "/user/login">
