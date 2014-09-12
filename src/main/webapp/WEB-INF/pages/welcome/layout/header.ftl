@@ -1,17 +1,17 @@
 <!-- Fixed navbar -->
-<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" style="margin-left: -1.36em">
             <ul class="nav navbar-nav">
-                <li><a href="#">How it works</a></li>
-                <li><a href="#">Courses</a></li>
-                <li><a href="#">About</a></li>
-                <li ><a href="#">Contact</a></li>
-                <li><a href="<@spring.url "/user/register" />">Register</a></li>
+                <li><a style="text-decoration: underline;" href="#">How it works</a></li>
+                <li><a style="text-decoration: underline;" href="#">Courses</a></li>
+                <li><a style="text-decoration: underline;" href="#">About</a></li>
+                <li><a style="text-decoration: underline;" href="#">Contact</a></li>
+                <li><a style="text-decoration: underline;" href="<@spring.url "/user/register" />">Register</a></li>
             </ul>
 
             <#if "${content}" != "/user/login">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 1.50em">
                     <#if currentUser??>
                     <#if currentUser != "anonymousUser">
                         <li style="color: #ac2925"><a href="<@spring.url'/login_attempt'/>">Logged as: ${currentUser}</a></li>
