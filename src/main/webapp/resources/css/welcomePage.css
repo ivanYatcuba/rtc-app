@@ -32,3 +32,21 @@ body {
     color: inherit;
     text-decoration: inherit;
 }
+
+.navbar .nav > li > a {
+    float: none;
+    line-height: 23px;
+    padding: 9px 10px 11px;
+    text-shadow: none;
+    text-decoration: underline;
+    color:  #ffffff;
+}
+
+.navbar .nav > li > a.loginButton{
+    float: none;
+    line-height: 23px;
+    padding: 9px 10px 11px;
+    text-shadow: none;
+    text-decoration: underline;
+    color:  #0044cc;
+}
