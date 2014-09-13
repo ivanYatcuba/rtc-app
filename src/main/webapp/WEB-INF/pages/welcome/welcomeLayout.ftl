@@ -2,17 +2,16 @@
 <#import "../customSpring.ftl" as spring/>
 <head>
     <#include "layout/link.ftl">
-    <#include "layout/header.ftl" />
 </head>
 
 <body>
-    <div id="wrap" class="container">
-        <#include "${content}.ftl" />
+    <div id="wrap">
+        <#include "layout/header.ftl" />
+        <div class="container">
+            <#include "${content}.ftl" />
+        </div>
     </div>
-    <div id="push"></div>
-    <footer>
-        <#include "layout/footer.ftl" />
-    </footer>
+    <#include "layout/footer.ftl" />
 </body>
 
 <script src="<@spring.url'/resources/js/jquery-1.11.1.min.js'/>"></script>
