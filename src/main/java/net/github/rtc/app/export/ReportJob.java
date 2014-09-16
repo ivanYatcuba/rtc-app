@@ -15,26 +15,26 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
  */
 public class ReportJob implements Job {
 
-    private static final Logger LOG =  LoggerFactory.getLogger(ReportJob.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(ReportJob.class.getName());
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        ReportDetails reportDetails = (ReportDetails)context.getMergedJobDataMap().get("report");
-        ModelService modelService = (ModelService)context.getMergedJobDataMap().get("modelService");
-        String filePath = (String)context.getMergedJobDataMap().get("filePath");
+        ReportDetails reportDetails = (ReportDetails) context.getMergedJobDataMap().get("report");
+        ModelService modelService = (ModelService) context.getMergedJobDataMap().get("modelService");
+        String filePath = (String) context.getMergedJobDataMap().get("filePath");
         actualExecute(reportDetails, modelService, filePath);
     }
 
-    public void runOutOfContext(ReportDetails reportDetails, ModelService modelService, String filePath){
+    public void runOutOfContext(ReportDetails reportDetails, ModelService modelService, String filePath) {
         actualExecute(reportDetails, modelService, filePath);
     }
 
-    private void actualExecute(ReportDetails reportDetails, ModelService modelService, String filePath){
+    private void actualExecute(ReportDetails reportDetails, ModelService modelService, String filePath) {
         ReportBuilder reportBuilder = new ReportBuilder();
         try {
             reportBuilder.build(reportDetails.getFieldsFromClass(), modelService.findAll(),
-                    reportDetails.getName() ,filePath, reportDetails.getExportFormat());
+                    reportDetails.getName(), filePath, reportDetails.getExportFormat());
             LOG.info("Job for report: " + reportDetails.getCode() + " completed!");
         } catch (NoSuchFieldException e) {
             LOG.info("Job for report: " + reportDetails.getCode() + " failed!");

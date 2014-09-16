@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Paginator {
     private int maxPerPage = 5;
-    private  int currentPage = 1;
+    private int currentPage = 1;
     SearchFilter searchFilter;
 
     public int getCurrentPage() {
@@ -25,7 +25,7 @@ public class Paginator {
         this.searchFilter = searchFilter;
     }
 
-    public void setCurrentPage(int currentPage){
+    public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
     }
 
@@ -38,7 +38,7 @@ public class Paginator {
     }
 
     public Page getPage(int currentPage, int total) {
-        int countPages = getCountPages(total-1);
+        int countPages = getCountPages(total - 1);
         currentPage = checkCurrentPage(currentPage);
         return new Page(currentPage,
                 getPrevResult(currentPage),
@@ -51,7 +51,7 @@ public class Paginator {
     }
 
     private int getCountPages(int total) {
-        return  total / maxPerPage + ((total % 10 == 0) ? 0 : 1);
+        return total / maxPerPage + ((total % 10 == 0) ? 0 : 1);
     }
 
     private Integer getPrevResult(int currentPage) {

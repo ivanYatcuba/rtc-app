@@ -45,29 +45,70 @@ public class UserCourseOrder {
         this.position = position;
     }
 
-    public UserCourseOrder() {}
+    public UserCourseOrder() {
+    }
 
-    public long getId() { return id; }
-    public void setId(long id) { this.id = id;}
+    public long getId() {
+        return id;
+    }
 
-    public String getUserCode() { return userCode; }
-    public void setUserCode(String userCode) { this.userCode = userCode; }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public String getCourseCode() { return courseCode; }
-    public void setCourseCode(String courseCode) { this.courseCode = courseCode; }
+    public String getUserCode() {
+        return userCode;
+    }
 
-    public Date getResponseDate() { return responseDate; }
-    public void setResponseDate(Date responseDate) { this.responseDate = responseDate; }
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
 
-    public Date getRequestDate() {return requestDate; }
-    public void setRequestDate(Date requestDate) { this.requestDate = requestDate; }
+    public String getCourseCode() {
+        return courseCode;
+    }
 
-    public UserRequestStatus getStatus() { return status; }
-    public void setStatus(UserRequestStatus status) { this.status = status; }
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
 
-    public TraineePosition getPosition() { return position; }
-    public void setPosition(TraineePosition position) { this.position = position; }
+    public Date getResponseDate() {
+        return responseDate;
+    }
 
-    public String getReason() { return reason; }
-    public void setReason(String reason) { this.reason = reason; }
+    public void setResponseDate(Date responseDate) {
+        this.responseDate = responseDate;
+    }
+
+    public Date getRequestDate() {
+        return requestDate;
+    }
+
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    public UserRequestStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserRequestStatus status) {
+        this.status = status;
+    }
+
+    public TraineePosition getPosition() {
+        return position;
+    }
+
+    public void setPosition(TraineePosition position) {
+        this.position = position;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 }

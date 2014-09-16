@@ -40,7 +40,7 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Transactional
     public List<UserCourseOrder> getAll() {
         LOG.info("Getting all orders from database..");
-        return (List)resource.findAll();
+        return (List) resource.findAll();
     }
 
     @Override

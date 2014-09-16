@@ -1,9 +1,9 @@
 package net.github.rtc.app.service.impl;
 
+import net.github.rtc.app.dao.impl.ReportDao;
 import net.github.rtc.app.export.JobManager;
 import net.github.rtc.app.export.JobManagerAction;
 import net.github.rtc.app.model.report.ReportDetails;
-import net.github.rtc.app.dao.impl.ReportDao;
 import net.github.rtc.app.service.ReportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +55,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public List<ReportDetails> getAll() {
         LOG.info("Getting all reports from database...");
-        return (List)reportResource.findAll();
+        return (List) reportResource.findAll();
     }
 
     @Override

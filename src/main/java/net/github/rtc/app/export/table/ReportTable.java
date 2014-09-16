@@ -7,6 +7,8 @@ import java.io.IOException;
  */
 public interface ReportTable {
     void createRow(int rowIndex);
+
     void createCell(int rowIndex, int cellIndex, Object value);
+
     void writeToFile(String fileName) throws IOException;
 }

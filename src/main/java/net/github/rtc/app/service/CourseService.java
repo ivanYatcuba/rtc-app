@@ -52,7 +52,6 @@ public interface CourseService {
     void update(Course course);
 
 
-
     /**
      * Find all courses
      *
@@ -62,7 +61,8 @@ public interface CourseService {
 
     /**
      * Set course status as published
-     * @param course  what course?
+     *
+     * @param course what course?
      */
     void publish(Course course);
 

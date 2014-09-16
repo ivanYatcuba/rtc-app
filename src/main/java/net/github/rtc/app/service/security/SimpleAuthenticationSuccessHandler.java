@@ -30,22 +30,26 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
     protected void handle(HttpServletRequest request,
                           HttpServletResponse response, Authentication authentication) throws IOException {
         String targetUrl = determineTargetUrl(authentication);
-        if (response.isCommitted()) {return;        }
+        if (response.isCommitted()) {
+            return;
+        }
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
-    /** Builds the target URL according to the logic defined in the main class Javadoc. */
+    /**
+     * Builds the target URL according to the logic defined in the main class Javadoc.
+     */
     protected String determineTargetUrl(Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
-                 return "/admin";
+                return "/admin";
             }
             if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
                 return "/user/view/";
             }
         }
-            return "/";
+        return "/";
     }
 
     protected void clearAuthenticationAttributes(HttpServletRequest request) {
@@ -59,6 +63,7 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
     public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
         this.redirectStrategy = redirectStrategy;
     }
+
     protected RedirectStrategy getRedirectStrategy() {
         return redirectStrategy;
     }

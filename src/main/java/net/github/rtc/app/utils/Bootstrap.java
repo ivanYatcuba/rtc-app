@@ -31,23 +31,23 @@ public class Bootstrap implements InitializingBean {
 
 
     public void loadTestUsers() {
-        if(userServiceLogin.loadUserByUsername("admin") == null){
-            if(userService.getRoleByType(RoleType.ROLE_ADMIN) == null){
+        if (userServiceLogin.loadUserByUsername("admin") == null) {
+            if (userService.getRoleByType(RoleType.ROLE_ADMIN) == null) {
                 userService.createRole(RoleType.ROLE_ADMIN);
             }
-            if(userService.getRoleByType(RoleType.ROLE_USER) == null){
+            if (userService.getRoleByType(RoleType.ROLE_USER) == null) {
                 userService.createRole(RoleType.ROLE_USER);
             }
-            if(userService.getRoleByType(RoleType.ROLE_EXPERT) == null){
+            if (userService.getRoleByType(RoleType.ROLE_EXPERT) == null) {
                 userService.createRole(RoleType.ROLE_EXPERT);
             }
 
-            User admin = new User("TestName","TestMiddlename","TestSurname", "admin", "admin");
+            User admin = new User("TestName", "TestMiddlename", "TestSurname", "admin", "admin");
             admin.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_ADMIN)));
             admin.setRegisterDate(new Date());
             userService.create(admin);
         }
-        for(ReportDetails reportDetails : reportService.getAll()){
+        for (ReportDetails reportDetails : reportService.getAll()) {
             try {
                 jobManager.manageJob(reportDetails, JobManagerAction.CREATE);
             } catch (Exception e) {

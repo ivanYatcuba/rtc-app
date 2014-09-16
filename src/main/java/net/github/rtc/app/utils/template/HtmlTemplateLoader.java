@@ -33,9 +33,9 @@ public class HtmlTemplateLoader implements TemplateLoader {
         Reader reader = delegate.getReader(templateSource, encoding);
         try {
             String templateText = IOUtils.toString(reader);
-            if(!templateText.contains("<#ftl")){
+            if (!templateText.contains("<#ftl")) {
                 return new StringReader(ESCAPE_PREFIX + templateText + ESCAPE_SUFFIX);
-            }else {
+            } else {
                 return new StringReader(templateText);
             }
 

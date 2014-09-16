@@ -32,44 +32,44 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         type = (Class) pt.getActualTypeArguments()[0];
     }
 
-    protected Session getCurrentSession(){
+    protected Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
 
     @Override
-    public T create(T t){
+    public T create(T t) {
         getCurrentSession().save(t);
         return t;
     }
 
     @Override
-    public void delete(long id){
+    public void delete(long id) {
         getCurrentSession().delete(find(id));
     }
 
     @Override
-    public void deleteByCode(String code){
+    public void deleteByCode(String code) {
         getCurrentSession().delete(findByCode(code));
     }
 
     @Override
-    public T find(long id){
-        return (T)getCurrentSession().get(type, id);
+    public T find(long id) {
+        return (T) getCurrentSession().get(type, id);
     }
 
     @Override
-    public T findByCode(String code){
-        return (T)getCurrentSession().createCriteria(type).add(Restrictions.eq("code", code)).uniqueResult();
+    public T findByCode(String code) {
+        return (T) getCurrentSession().createCriteria(type).add(Restrictions.eq("code", code)).uniqueResult();
     }
 
     @Override
-    public T update(T t){
+    public T update(T t) {
         getCurrentSession().merge(t);
         return t;
     }
 
     @Override
-    public List<T> findAll(){
+    public List<T> findAll() {
         return getCurrentSession().createCriteria(type).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
@@ -77,11 +77,11 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     public SearchResults<T> search(DetachedCriteria dCriteria, int start, int max) {
         Criteria criteria = dCriteria.getExecutableCriteria(getCurrentSession());
         SearchResults<T> results = new SearchResults<>();
-        results.setTotalResults(((Long)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue());
+        results.setTotalResults(((Long) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue());
         criteria.setProjection(null);
         criteria.setResultTransformer(Criteria.ROOT_ENTITY);
-        criteria.setMaxResults((start-1)*max+max);
-        criteria.setFirstResult((start-1)*max);
+        criteria.setMaxResults((start - 1) * max + max);
+        criteria.setFirstResult((start - 1) * max);
         results.setResults(criteria.list());
         return results;
     }

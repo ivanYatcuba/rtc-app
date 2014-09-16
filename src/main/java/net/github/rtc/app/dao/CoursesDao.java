@@ -9,5 +9,5 @@ import net.github.rtc.app.model.course.Course;
  * @author Vladislav Pikus
  */
 public interface CoursesDao extends GenericDao<Course> {
-   
+
 }

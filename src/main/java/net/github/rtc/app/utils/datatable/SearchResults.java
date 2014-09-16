@@ -10,10 +10,17 @@ public class SearchResults<T> {
     private int totalResults = 0;
     private List<T> results = null;
 
-    public int getTotalResults() {return totalResults;}
-    public void setTotalResults(int totalResults) {this.totalResults = totalResults;}
+    public int getTotalResults() {
+        return totalResults;
+    }
 
-    public List<T> getResults() {return results;}
+    public void setTotalResults(int totalResults) {
+        this.totalResults = totalResults;
+    }
+
+    public List<T> getResults() {
+        return results;
+    }
 
     public void setResults(List<T> aRresults) {
         if (aRresults == null) {

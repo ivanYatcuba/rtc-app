@@ -27,29 +27,59 @@ public class CourseSearchFilter implements SearchFilter {
 
     private Set<User> experts;
 
-    public String getName() {return name;}
-    public void setName(String name) {this.name = name;}
+    public String getName() {
+        return name;
+    }
 
-    public CourseType getType() {return type;}
-    public void setType(CourseType type) {this.type = type;}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public Date getStartDate() {return startDate;}
-    public void setStartDate(Date startDate) {this.startDate = startDate;}
+    public CourseType getType() {
+        return type;
+    }
 
-    public CourseStatus getStatus() {return status;}
-    public void setStatus(CourseStatus status) {this.status = status;}
+    public void setType(CourseType type) {
+        this.type = type;
+    }
 
-    public List<Tag> getTags() {return tags;}
-    public void setTags(List<Tag> tags) {this.tags = tags;}
+    public Date getStartDate() {
+        return startDate;
+    }
 
-    public Set<User> getExperts() {return experts;}
-    public void setExperts(Set<User> experts) {this.experts = experts;}
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public CourseStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CourseStatus status) {
+        this.status = status;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public Set<User> getExperts() {
+        return experts;
+    }
+
+    public void setExperts(Set<User> experts) {
+        this.experts = experts;
+    }
 
     @Override
     public DetachedCriteria getCriteria() {
         DetachedCriteria criteria = DetachedCriteria.forClass(Course.class);
 
-        if(name != null && !name.equals("")) {
+        if (name != null && !name.equals("")) {
             criteria.add(Restrictions.like("name", "%" + name + "%"));
         }
         if (status != null && !status.equals("")) {
