@@ -255,6 +255,7 @@
                 <configuration>
                     <path>/rtc-app</path>
                     <port>8080</port>
+                    <contextReloadable>true</contextReloadable>
                 </configuration>
             </plugin>
 

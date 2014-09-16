@@ -2,7 +2,9 @@ package net.github.rtc.app.model.report;
 
 
 import net.github.rtc.app.utils.ExportFieldExtractor;
-import net.github.rtc.util.annotation.validation.*;
+import net.github.rtc.util.annotation.validation.Maxlength;
+import net.github.rtc.util.annotation.validation.Required;
+import net.github.rtc.util.annotation.validation.Validatable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -40,34 +42,69 @@ public class ReportDetails {
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "ReportField", joinColumns =@JoinColumn(name = "report_id"))
+    @CollectionTable(name = "ReportField", joinColumns = @JoinColumn(name = "report_id"))
     private List<String> fields;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 
-    public long getId() {return id;}
-    public void setId(long id) {this.id = id;}
+    public long getId() {
+        return id;
+    }
 
-    public String getCode() {return code;}
-    public void setCode(String code) {this.code = code;}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public String getName() {return name;}
-    public void setName(String name) {this.name = name;}
+    public String getCode() {
+        return code;
+    }
 
-    public ExportFormat getExportFormat() {return exportFormat;}
-    public void setExportFormat(ExportFormat exportFormat) {this.exportFormat = exportFormat;}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-    public Class getExportClass() {return exportClass;}
-    public void setExportClass(Class exportClass) {this.exportClass = exportClass;}
+    public String getName() {
+        return name;
+    }
 
-    public List<String> getFields() {return fields;}
-    public void setFields(List<String> fields) {this.fields = fields;}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public Date getCreatedDate() {return createdDate;}
-    public void setCreatedDate(Date createdDate) {this.createdDate = createdDate;}
+    public ExportFormat getExportFormat() {
+        return exportFormat;
+    }
+
+    public void setExportFormat(ExportFormat exportFormat) {
+        this.exportFormat = exportFormat;
+    }
+
+    public Class getExportClass() {
+        return exportClass;
+    }
+
+    public void setExportClass(Class exportClass) {
+        this.exportClass = exportClass;
+    }
+
+    public List<String> getFields() {
+        return fields;
+    }
+
+    public void setFields(List<String> fields) {
+        this.fields = fields;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
 
     public List<Field> getFieldsFromClass() throws NoSuchFieldException {
-       return ExportFieldExtractor.getFieldsFromClass(exportClass, fields);
+        return ExportFieldExtractor.getFieldsFromClass(exportClass, fields);
     }
 }

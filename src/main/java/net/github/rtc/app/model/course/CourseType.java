@@ -11,7 +11,7 @@ public enum CourseType {
 
     public static List<String> findAll() {
         List<String> res = new ArrayList<>();
-        for(CourseType type : CourseType.values()){
+        for (CourseType type : CourseType.values()) {
             res.add(type.name());
         }
         return res;

@@ -34,15 +34,17 @@ public class JobManager {
 
     public void manageJob(ReportDetails report, JobManagerAction managerAction) throws Exception {
         ModelService modelService = getModelService(report.getExportClass());
-        if(modelService == null){throw  new Exception("Service class of type" + report.getExportClass() + " not found!");}
+        if (modelService == null) {
+            throw new Exception("Service class of type" + report.getExportClass() + " not found!");
+        }
         final String filePath = exportPath + report.getCode() + "." + report.getExportFormat().toString().toLowerCase();
-        if(managerAction == JobManagerAction.UPDATE || managerAction == JobManagerAction.DELETE){
+        if (managerAction == JobManagerAction.UPDATE || managerAction == JobManagerAction.DELETE) {
             scheduler.getObject().unscheduleJob(TriggerKey.triggerKey(report.getCode()));
             File file = new File(filePath);
             file.delete();
         }
-        if(managerAction == JobManagerAction.CREATE || managerAction == JobManagerAction.UPDATE){
-            ReportJob reportJob =  new ReportJob();
+        if (managerAction == JobManagerAction.CREATE || managerAction == JobManagerAction.UPDATE) {
+            ReportJob reportJob = new ReportJob();
             JobDataMap dataMap = new JobDataMap();
             dataMap.put("filePath", filePath);
             dataMap.put("modelService", modelService);
@@ -55,10 +57,12 @@ public class JobManager {
         }
     }
 
-    private ModelService getModelService(Class aClass){
-        for(ModelService service : applicationContext.getBeansOfType(ModelService.class).values()){
-            if(service.getType().equals(aClass)){return service;}
-         }
+    private ModelService getModelService(Class aClass) {
+        for (ModelService service : applicationContext.getBeansOfType(ModelService.class).values()) {
+            if (service.getType().equals(aClass)) {
+                return service;
+            }
+        }
         return null;
     }
 }

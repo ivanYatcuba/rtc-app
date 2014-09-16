@@ -34,10 +34,10 @@ public class XLSNXTable implements ReportTable {
 
     @Override
     public void createCell(int rowIndex, int cellIndex, Object value) {
-        if(value instanceof Date){
+        if (value instanceof Date) {
             sheet.getRow(rowIndex).createCell(cellIndex).setCellValue((Date) value);
             sheet.getRow(rowIndex).getCell(cellIndex).setCellStyle(cellStyle);
-        }else {
+        } else {
             sheet.getRow(rowIndex).createCell(cellIndex).
                     setCellValue(createHelper.createRichTextString(value.toString()));
         }

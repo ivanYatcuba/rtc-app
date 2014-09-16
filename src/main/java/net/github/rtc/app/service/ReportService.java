@@ -1,6 +1,7 @@
 package net.github.rtc.app.service;
 
 import net.github.rtc.app.model.report.ReportDetails;
+
 import java.util.List;
 
 /**
@@ -8,8 +9,12 @@ import java.util.List;
  */
 public interface ReportService {
     void insert(ReportDetails report);
+
     ReportDetails findReportByCode(String code);
+
     List<ReportDetails> getAll();
+
     void update(ReportDetails report);
+
     void delete(ReportDetails report);
 }

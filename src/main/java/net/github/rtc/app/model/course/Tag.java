@@ -1,7 +1,8 @@
 package net.github.rtc.app.model.course;
 
 
-import net.github.rtc.util.annotation.validation.*;
+import net.github.rtc.util.annotation.validation.Required;
+import net.github.rtc.util.annotation.validation.Validatable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -29,9 +30,13 @@ public class Tag implements Serializable {
         this.value = value;
     }
 
-    public long getId() {return id;}
+    public long getId() {
+        return id;
+    }
 
-    public void setId(long id) {this.id = id;}
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Tag(String value) {
         this.value = value;

@@ -11,7 +11,7 @@ public enum ExportFormat {
 
     public static List<String> findAll() {
         List<String> res = new ArrayList<>();
-        for(ExportFormat type : ExportFormat.values()){
+        for (ExportFormat type : ExportFormat.values()) {
             res.add(type.name());
         }
         return res;

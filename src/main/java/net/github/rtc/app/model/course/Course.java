@@ -75,18 +75,18 @@ public class Course implements Serializable {
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    @JoinTable(name="courses_tags",
-            joinColumns={@JoinColumn(name="tagId")},
-            inverseJoinColumns={@JoinColumn(name="id")})
+    @JoinTable(name = "courses_tags",
+            joinColumns = {@JoinColumn(name = "tagId")},
+            inverseJoinColumns = {@JoinColumn(name = "id")})
     @ForExport("Tags")
     private List<Tag> tags;
 
     @Required
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    @JoinTable(name="courses_experts",
-            joinColumns={@JoinColumn(name="expertId")},
-            inverseJoinColumns={@JoinColumn(name="courseId")})
+    @JoinTable(name = "courses_experts",
+            joinColumns = {@JoinColumn(name = "expertId")},
+            inverseJoinColumns = {@JoinColumn(name = "courseId")})
     @ForExport(value = "Experts")//, inculdeField = {"Author Email"})
     private Set<User> experts;
 
@@ -106,9 +106,13 @@ public class Course implements Serializable {
         this.type = type;
     }
 
-    public Set<User> getExperts() {return experts;}
+    public Set<User> getExperts() {
+        return experts;
+    }
 
-    public void setExperts(Set<User> experts) {this.experts = experts;}
+    public void setExperts(Set<User> experts) {
+        this.experts = experts;
+    }
 
     public Date getStartDate() {
         return startDate;
@@ -142,25 +146,45 @@ public class Course implements Serializable {
         this.name = name;
     }
 
-    public Integer getCapacity() { return capacity;}
+    public Integer getCapacity() {
+        return capacity;
+    }
 
-    public void setCapacity(Integer capacity) { this.capacity = capacity; }
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public void setDescription(String description) { this.description = description; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public CourseStatus getStatus() { return status; }
+    public CourseStatus getStatus() {
+        return status;
+    }
 
-    public void setStatus(CourseStatus status) { this.status = status; }
+    public void setStatus(CourseStatus status) {
+        this.status = status;
+    }
 
-    public Date getPublishDate() { return publishDate; }
+    public Date getPublishDate() {
+        return publishDate;
+    }
 
-    public void setPublishDate(Date publishDate) { this.publishDate = publishDate; }
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
+    }
 
-    public long getId() {return id; }
+    public long getId() {
+        return id;
+    }
 
-    public void setId(long id) { this.id = id; }
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Course() {
 

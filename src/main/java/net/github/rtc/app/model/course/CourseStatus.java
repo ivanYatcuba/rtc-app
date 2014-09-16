@@ -11,7 +11,7 @@ public enum CourseStatus {
 
     public static List<String> findAll() {
         List<String> res = new ArrayList<>();
-        for(CourseStatus status : CourseStatus.values()){
+        for (CourseStatus status : CourseStatus.values()) {
             res.add(status.name());
         }
         return res;

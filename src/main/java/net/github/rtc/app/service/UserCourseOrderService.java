@@ -10,11 +10,17 @@ import java.util.List;
  */
 public interface UserCourseOrderService {
     void insert(UserCourseOrder request);
+
     UserCourseOrder getUserOrder(long id);
+
     List<UserCourseOrder> getAll();
+
     void update(UserCourseOrder request);
+
     void delete(UserCourseOrder request);
+
     UserCourseOrder getUserOrderByUserCode(String userCode);
+
     List<UserCourseOrder> getOrderByStatus(UserRequestStatus status);
 
 }

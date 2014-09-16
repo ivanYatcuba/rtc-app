@@ -7,7 +7,6 @@ import net.github.rtc.app.model.user.User;
 import java.util.List;
 
 /**
- *
  * @author Саша
  */
 public interface UserDao extends GenericDao<User> {

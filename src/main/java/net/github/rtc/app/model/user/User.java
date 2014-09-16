@@ -356,7 +356,7 @@ public class User implements UserDetails {
         return hasRole;
     }
 
-    public boolean isForRemoval(){
+    public boolean isForRemoval() {
         return this.status == UserStatus.FOR_REMOVAL;
     }
 
@@ -418,7 +418,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String shortString(){
-        return  new StringBuilder(this.name).append(" ").append(this.surname).append(" ").append(this.email).toString();
+    public String shortString() {
+        return new StringBuilder(this.name).append(" ").append(this.surname).append(" ").append(this.email).toString();
     }
 }

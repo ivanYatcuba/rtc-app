@@ -16,7 +16,7 @@ public class UserCourseOrderDaoImpl extends GenericDaoImpl<UserCourseOrder> impl
 
     @Override
     public UserCourseOrder getUserOrder(String userCode) {
-        return (UserCourseOrder)getCurrentSession().createCriteria(UserCourseOrder.class).
+        return (UserCourseOrder) getCurrentSession().createCriteria(UserCourseOrder.class).
                 add(Restrictions.eq("userCode", userCode)).uniqueResult();
     }
 

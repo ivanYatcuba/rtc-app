@@ -12,7 +12,7 @@ public class CSVTable implements ReportTable {
 
     List<List<String>> table;
 
-    public CSVTable(){
+    public CSVTable() {
         table = new ArrayList<>();
     }
 
@@ -29,8 +29,8 @@ public class CSVTable implements ReportTable {
     @Override
     public void writeToFile(String fileName) throws IOException {
         FileWriter writer = new FileWriter(fileName);
-        for(List<String> row: table){
-            for(String cell : row){
+        for (List<String> row : table) {
+            for (String cell : row) {
                 writer.append(cell).append(',');
             }
             writer.append('\n');

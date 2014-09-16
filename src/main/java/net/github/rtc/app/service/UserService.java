@@ -15,7 +15,6 @@ import org.hibernate.criterion.DetachedCriteria;
 import java.util.List;
 
 /**
- *
  * @author Саша
  */
 public interface UserService {
