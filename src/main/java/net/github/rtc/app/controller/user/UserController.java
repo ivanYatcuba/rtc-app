@@ -4,9 +4,8 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.*;
 import net.github.rtc.app.service.*;
+import net.github.rtc.app.utils.datatable.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
-import net.github.rtc.app.utils.datatable.FilterSettings;
-import net.github.rtc.app.utils.datatable.SearchCriteria;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -115,15 +114,10 @@ public class UserController {
         if (currentUserCourseOrder == null) {
             ModelAndView mav = new ModelAndView(ROOT + "/page/usercours");
 
-            FilterSettings settings = new FilterSettings(Course.class);
-            settings.addOption("status",  SearchCriteria.RestrictionStrategy.EQ);
-            Course sample = new Course();
-            sample.setStatus(CourseStatus.PUBLISHED);
-            SearchCriteria searchCriteria = settings.buildSearchCriteria(sample);
-            searchCriteria.setPageSize(3);
-
+            CourseSearchFilter courseSearchFilter = new CourseSearchFilter();
+            courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
             mav.addObject("user", user);
-            mav.addObject("courses", courseService.search(searchCriteria).getResults());
+            mav.addObject("courses", courseService.search(courseSearchFilter.getCriteria(), 1,3).getResults());
             return mav;
         } else {
             ModelAndView mav = new ModelAndView(ROOT + "/page/courseorder");

@@ -6,13 +6,12 @@ import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.datatable.Page;
+import net.github.rtc.app.service.UserServiceLogin;
+import net.github.rtc.app.utils.datatable.*;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.utils.Paginator;
-import net.github.rtc.app.utils.datatable.FilterSettings;
-import net.github.rtc.app.utils.datatable.SearchCriteria;
-import net.github.rtc.app.utils.datatable.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,27 +38,11 @@ public class CoursesController {
     @Autowired
     private CourseService courseService;
     @Autowired
-    private UserService userService;
+    private UserServiceLogin userServiceLogin;
     @Autowired
     private Paginator paginator;
     @Autowired
     private ValidationContext validationContext;
-
-
-    //Filtering settings
-    private static final FilterSettings courseFilterSettings;
-
-    static {
-        FilterSettings settings = new FilterSettings(Course.class);
-        settings.addOption("name", SearchCriteria.RestrictionStrategy.EQ);
-        settings.addOption("startDate", SearchCriteria.RestrictionStrategy.GE);
-        settings.addOption("status", SearchCriteria.RestrictionStrategy.EQ);
-        settings.addOption("tags", SearchCriteria.RestrictionStrategy.EQ,
-                Arrays.asList(new String[]{"value"}), SearchCriteria.JunctionStrategy.CONJUNCTION);
-        settings.addOption("experts", SearchCriteria.RestrictionStrategy.EQ,
-                Arrays.asList(new String[]{"email"}), SearchCriteria.JunctionStrategy.CONJUNCTION);
-        courseFilterSettings = settings;
-    }
 
     /**
      * Processes the request to view all courses page
@@ -67,47 +50,39 @@ public class CoursesController {
      * @return modelAndView("admin/courses/courses")
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView index() throws Exception {
+    public ModelAndView index(@ModelAttribute("filterCourse") SearchFilter filterCourse) throws Exception {
         ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
-        Course sampleCourse = new Course();
-        sampleCourse.setStatus(null);
-        paginator.setSettings(courseFilterSettings);
-        paginator.setFilterTemplate(sampleCourse);
-        switchPage(mav, 1);
+        paginator.setSearchFilter(filterCourse);
+        mav.addObject("types", CourseType.findAll());
         mav.addObject("statuses", getStats());
+        if(paginator.getSearchFilter() != null){
+            mav.addObject("filterCourse", paginator.getSearchFilter());
+        }else {
+            mav.addObject("filterCourse", new CourseSearchFilter());
+        }
+
         return mav;
     }
 
-
-    /**
-     * Process the request to get view about course by custom filter
-     *
-     * @return modelAndView("admin/courses/courses")
-     */
-    @RequestMapping(value = "/{page}", method = RequestMethod.GET)
-    public ModelAndView navigate(@PathVariable int page) throws Exception {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
-        switchPage(mav, page);
-        return mav;
+    @RequestMapping(value = "/filter",method = RequestMethod.GET)
+    public ModelAndView filter(@ModelAttribute("filterCourse") SearchFilter filterCourse) throws Exception {
+        paginator.setSearchFilter(filterCourse);
+        return switchPage(1);
     }
 
-    /**
-     * Process the request to get view about course by custom filter
-     *
-     * @return modelAndView("admin/courses/courses")
-     */
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public ModelAndView filter(@ModelAttribute(ROOT_MODEL) Course courseTemplate,
-                               @RequestParam(value = "expertList", required = false) List<String> expertList) throws Exception {
+
+    @RequestMapping(value = "/{page}", method = RequestMethod.POST)
+    public @ResponseBody ModelAndView switchPage(@PathVariable int page) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
-        if (expertList != null) {
-            courseTemplate.setExperts(bindExperts(expertList));
-        }
-        if (courseTemplate.getName().equals("")) {
-            courseTemplate.setName(null);
-        }
-        paginator.setFilterTemplate(courseTemplate);
-        switchPage(mav, 1);
+        paginator.setCurrentPage(page);
+        SearchResults<Course> results = courseService.search(paginator.getSearchFilter().getCriteria(), page, paginator.getMaxPerPage());
+        Page pageModel = paginator.getPage(page, results.getTotalResults());
+        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
+                .byNextPage().byPrevPage().byStartPage().toMap());
+        mav.addObject("courses", results.getResults());
+        mav.addObject("types", CourseType.findAll());
+        mav.addObject("statuses", getStats());
+        mav.addObject("filterCourse", paginator.getSearchFilter());
         return mav;
     }
 
@@ -205,20 +180,9 @@ public class CoursesController {
         Set<User> courseExperts = new HashSet<>();
         for (String expert : experts) {
             String params[] = expert.split(" ");
-            SearchCriteria userSearchCriteria = new SearchCriteria(User.class);
-            userSearchCriteria.addUnitCriteria("email", params[2], SearchCriteria.RestrictionStrategy.EQ);
-            courseExperts.addAll(userService.search(userSearchCriteria).getResults());
+            courseExperts.add(userServiceLogin.loadUserByUsername( params[2]));
         }
         return courseExperts;
-    }
-
-    private void switchPage(ModelAndView mav, int page) {
-        paginator.setCurrentPage(page);
-        SearchResults<Course> results = courseService.search(paginator.getSearchCriteria());
-        Page pageModel = paginator.getPage(page, results.getTotalResults());
-        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
-                .byNextPage().byPrevPage().byStartPage().toMap());
-        mav.addObject("courses", results.getResults());
     }
 
     /**
@@ -231,6 +195,11 @@ public class CoursesController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
+    }
+
+    @InitBinder("filterCourse")
+    public void initFilterBinder(WebDataBinder binder) {
+        initBinder(binder);
     }
 
     /**
@@ -252,6 +221,11 @@ public class CoursesController {
     @ModelAttribute("currentUser")
     public String getCurrentUser() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    @ModelAttribute("filterCourse")
+    public CourseSearchFilter getFilterCourse() {
+        return new CourseSearchFilter();
     }
 
     /**

@@ -7,8 +7,8 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.datatable.SearchCriteria;
 import net.github.rtc.app.utils.datatable.SearchResults;
+import org.hibernate.criterion.DetachedCriteria;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,8 +111,8 @@ public class UserServiceImpl implements ModelService<User>, UserService {
 
     @Override
     @Transactional
-    public SearchResults<User> search(SearchCriteria userSearchCriteria) {
-        return userDao.search(userSearchCriteria);
+    public SearchResults<User> search(DetachedCriteria criteria, int start, int max) {
+        return userDao.search(criteria, start, max);
     }
 
     @Override

@@ -1,7 +1,7 @@
 
-<form name="report" id="report" action="<@spring.url "/admin/export/updateReport" />" method="POST"
+<form class="form-horizontal" name="report" id="report" action="<@spring.url "/admin/export/updateReport" />" method="POST"
       xmlns="http://www.w3.org/1999/html">
-    <h3 class="page-header"><@spring.message "report.edit"/></h3>
+    <h3 class="page-header"><@spring.message "report.edit"/></h3><br/>
     <@spring.formHiddenInput "report.id" />
     <@spring.formHiddenInput "report.code" />
     <@spring.formHiddenInput "report.createdDate" />

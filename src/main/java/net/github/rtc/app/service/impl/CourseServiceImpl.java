@@ -5,8 +5,10 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.ModelService;
-import net.github.rtc.app.utils.datatable.SearchCriteria;
+import net.github.rtc.app.utils.datatable.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.SearchResults;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,9 +99,17 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
 
     @Override
     @Transactional
-    public SearchResults<Course> search(SearchCriteria searchCriteria) {
+    public SearchResults<Course> search(DetachedCriteria criteria, int start, int max) {
         LOG.debug("Searching courses///");
-        return coursesDao.search(searchCriteria);
+        return coursesDao.search(criteria, start, max);
+    }
+
+    @Override
+    public List<Course> startingSoonCourses() {
+        CourseSearchFilter searchFilter = new CourseSearchFilter();
+        searchFilter.setStartDate(new Date());
+        searchFilter.setStatus(CourseStatus.PUBLISHED);
+        return coursesDao.search(searchFilter.getCriteria().addOrder(Order.asc("startDate")), 1, 3).getResults();
     }
 
 }

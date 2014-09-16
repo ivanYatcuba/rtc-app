@@ -1,33 +1,44 @@
 
-<div class="row" style="margin-left: 1px" >
+<div class="row">
     <div class="col-md-6" >
         <!--Report Name-->
         <@spring.formItem "report.name" "class=\"required\""/>
         <!--Report Class-->
-        <label><@spring.message "report.exportClass"/></label>
-        <@spring.bind "types" />
-        <select id="selectedType" name="selectedType" class="required">
-            <#list types as type>
-                <option value="${type}" <#if report.exportClass?? && type == report.exportClass.simpleName>selected</#if>>${type}</option>
-            </#list>
-        </select>
+        <div class="form-group">
+            <label  class="control-label col-md-2">*<@spring.message "report.exportClass"/></label>
+            <div class="col-md-4">
+                <@spring.bind "types" />
+                <select id="selectedType" name="selectedType" class="required">
+                    <#list types as type>
+                        <option value="${type}" <#if report.exportClass?? && type == report.exportClass.simpleName>selected</#if>>${type}</option>
+                    </#list>
+                </select>
+            </div>
+        </div>
+
     </div>
     <div class="span5">
         <!--Report Format-->
-        <label><@spring.message "report.exportFormat"/></label>
-        <@spring.bind "formats" />
-        <@spring.formSingleSelect "report.exportFormat", formats, "class=\"required\""/>
+        <div class="form-group">
+            <label class="control-label col-md-2">*<@spring.message "report.exportFormat"/></label>
+            <div class="col-md-4">
+                <@spring.bind "formats" />
+                <@spring.formSingleSelect "report.exportFormat", formats, "class=\"required\""/>
+            </div>
+        </div>
     </div>
 </div>
 &NonBreakingSpace;
 <hr>
 <div class="row">
-    <div  class="col-md-6" >
-        <!--Report Fields-->
-        <p style="margin-left: 6em"><@spring.message "report.fields"/></p>
-        <div id="fields">
+    <div class="col-md-12">
+        <div class="form-group" >
+            <div class="col-md-4"  for="addFieldH"><@spring.message "report.fields"/></div>
+            <div class="col-md-6" style="text-align: left; margin-left: -170px">
+                <div id="fields"></div>
+                <a id="addFieldH" href="#" onclick="addField()">Add Field</a>
+            </div>
         </div>
-        <label for="addFieldH"></label><a id="addFieldH" href="#" onclick="addField()">Add Field</a>
     </div>
 </div>
 

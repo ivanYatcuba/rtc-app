@@ -1,7 +1,6 @@
-<form  name="user" id="user" action="<@spring.url '/admin/user/save'/>" method="post">
-    <h3 class="page-header"><@spring.message "user.createUser"/></h3>
+<form class="form-horizontal" id="user" name="user" action="<@spring.url '/admin/user/save'/>" method="post">
+    <h3 class="page-header"><@spring.message "user.createUser"/></h3><br/>
     <#include "createUser.ftl" />
-    <!--Create & Cancel-->
     <div class="row">
         <div class="col-md-6">
         </div>
@@ -11,3 +10,4 @@
         </div>
     </div>
 </form>
+

@@ -1,4 +1,14 @@
-<h3 class="page-header"><@spring.message "report.details"/></h3>
+<h3 class="page-header"><@spring.message "report.details"/></h3><br>
+<style>
+    label{
+        float: left;
+        width: 13em;
+        margin-right: 1em;
+        text-align: right;
+        font-size: 10pt;
+        margin-bottom: 10px;
+    }
+</style>
 <div class="row">
     <div class="col-md-6" >
         <label><@spring.message "report.name"/></label><p>&nbsp${report.name}</p>

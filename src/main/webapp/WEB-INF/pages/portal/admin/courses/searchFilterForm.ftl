@@ -1,59 +1,55 @@
-<form name="course" id="course" action="<@spring.url "/admin/course/filter"/>" method="get">
+<form class="form-horizontal" name="courseFilter" role="form" action="<@spring.url "/admin/course/"/>" method="get">
     <div class="row">
         <div class="col-md-6">
-        <@spring.formItem "course.name"/>
-        <@spring.bind "course.type" />
-        <label for="categories"><@spring.message "course.category"/></label>
-        <#--<@spring.formSingleSelect "searchFilter.categories"/>-->
-            <select id="categories" name="categories" >
-            <option/>
-            <#list categories as cat>
-                <option value="${cat}"  />${cat}<br>
-            </#list>
-            </select>
-            <label>*<@spring.message "course.experts"/></label>
-            <div id="experts"></div>
-            <label for="addExpertH"></label><a id="addExpertH" href="#" onclick="addExpert()">Add Expert</a>
-        </div>
+            <@spring.formItem "filterCourse.name"/>
 
+            <@spring.bind "filterCourse.type"/>
+            <div class="form-group">
+                <label class="control-label col-md-2"  for="types"><@spring.message "filterCourse.type"/></label>
+                <div class="col-md-4">
+                    <select multiple="multiple" name="types" class="input-medium">
+                    <#list types as type>
+                        <option value="${type}" <#if type=="QA">selected="selected"</#if>>${type}</option>
+                    </#list>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2"  for="addExpertH"><@spring.message "filterCourse.experts"/></label>
+                <div class="col-md-8">
+                    <div id="experts"></div>
+                    <a id="addExpertH" href="#" onclick="addExpert()">Add Expert</a>
+                </div>
+            </div>
+        </div>
         <div class="col-md-6">
-        <@spring.formItem "course.startDate" "" "datepiker" />
-        <@spring.bind "course.status" />
-        <label for="status"><@spring.message "searchFilter.status"/></label>
-            <select id="status" name="status">
-            <option value="">ALL</option>
-            <#list statuses as stat>
-                <option value="${stat}" />${stat}<br>
-            </#list>
-            </select>
-        <@spring.formItem "course.tags" "" "tag" />
+            <@spring.formItem "filterCourse.startDate" 'class="input-small"' "datepiker" />
+            <@spring.formItem "filterCourse.status" 'class="input-medium"' "singleSelect" statuses/>
+            <@spring.formItem "filterCourse.tags" "" "tag" />
         </div>
     </div>
-
-    <div class="col-md-10">
-        <br>
-        <hr>
-        <br>
-        <input type="submit" class="btn" value="Search"/> or <a
-            href="<@spring.url "/admin/course" />">Reset</a>
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-5" style="text-align: right">
+            <input type="submit" class="btn" value="Search"/> or <a
+                href="<@spring.url "/admin/course" />">Reset</a>
+        </div>
     </div>
-
 </form>
 
-<script type="text/javascript"  src="<@spring.url'/resources/js/courseForm.js'/>"></script>
-<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
-<script src="<@spring.url'/resources/css/js/jquery.validate.min.js'/>"></script>
-<script src="<@spring.url'/resources/css/js/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
-
-
+<script src="<@spring.url'/resources/js/pages/courseForm.js'/>"></script>
+<script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
+<script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
 <script>
-
     $(function() {
         $("#course").validate();
         prepareCourseFormPage("<@spring.url "/admin/user/expertUsers"/>");
-    <#if course.experts??>
+    <#if filterCourse.experts??>
         <#assign i = 0>
-        <#list  course.experts as f>
+        <#list  filterCourse.experts as f>
             addExpert();
             setFieldSelection(${i}, "${f.name}"+" "+"${f.surname}"+" "+"${f.email}");
             <#assign i = i+1>

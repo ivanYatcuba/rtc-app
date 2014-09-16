@@ -1,5 +1,5 @@
-<form name="report" id="report" action="<@spring.url "/admin/export/insertReport" />" method="POST">
-    <h3 class="page-header"><@spring.message "report.create"/></h3>
+<form class="form-horizontal" name="report" id="report" action="<@spring.url "/admin/export/insertReport" />" method="POST">
+    <h3 class="page-header"><@spring.message "report.create"/></h3><br/>
     <#include "reportForm.ftl" />
     <!--Create & Cancel-->
     <div id="createAndCancel" class="row" style="margin-left: 1px">

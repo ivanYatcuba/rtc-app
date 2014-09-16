@@ -1,7 +1,10 @@
 <html>
-<#import "../customSpring.ftl" as spring/>
+<#import "../spring.ftl" as spring/>
 <head>
-    <#include "layout/link.ftl">
+    <link href="<@spring.url'/resources/Bootstrap/css/bootstrap.css'/>" rel="stylesheet"/>
+    <link href="<@spring.url'/resources/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet"/>
+    <link href="<@spring.url'/resources/css/welcomePage.css'/>" rel="stylesheet"/>
+    <link href="<@spring.url'/resources/css/carousel.css'/>" rel="stylesheet"/>
 </head>
 
 <body>
@@ -14,9 +17,8 @@
     <#include "layout/footer.ftl" />
 </body>
 
-<script src="<@spring.url'/resources/js/jquery-1.11.1.min.js'/>"></script>
-<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.min.js'/>"></script>
-<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap.js'/>"></script>
+<script src="<@spring.url'/resources/js/jquery/jquery-1.11.1.min.js'/>"></script>
+<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>"></script>
 </html>
 
 

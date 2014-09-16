@@ -1,4 +1,14 @@
-<h3 class="page-header"><@spring.message "course.details"/></h3>
+<style>
+    label{
+        float: left;
+        width: 13em;
+        margin-right: 1em;
+        text-align: right;
+        font-size: 10pt;
+        margin-bottom: 10px;
+    }
+</style>
+<h3 class="page-header"><@spring.message "course.details"/></h3><br>
 <div class="row-fluid span12" style="margin-left: 1px">
     <div class="span6" >
         <label><@spring.message "course.name"/></label><p>&nbsp${course.name}</p>

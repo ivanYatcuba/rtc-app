@@ -9,8 +9,8 @@ package net.github.rtc.app.service;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.utils.datatable.SearchCriteria;
 import net.github.rtc.app.utils.datatable.SearchResults;
+import org.hibernate.criterion.DetachedCriteria;
 
 import java.util.List;
 
@@ -42,5 +42,5 @@ public interface UserService {
 
     void markUserForRemoval(String userCode);
 
-    SearchResults<User> search(SearchCriteria userSearchCriteria);
+    SearchResults<User> search(DetachedCriteria criteria, int start, int max);
 }

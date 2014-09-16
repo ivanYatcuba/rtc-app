@@ -1,5 +1,5 @@
-<script src="<@spring.url'/resources/css/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
-<h3 class="page-header"><@spring.message "report.list"/></h3>
+<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
+<h3 class="page-header"><@spring.message "report.list"/></h3><br/>
 
 <table width="100%" class="table-bordered table">
     <tr bgcolor="#d3d3d3" style="font-weight:bold">

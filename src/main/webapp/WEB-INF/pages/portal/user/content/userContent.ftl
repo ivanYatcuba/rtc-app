@@ -1,4 +1,14 @@
-<h3 class="page-header"><@spring.message "user.details"/></h3>
+<style>
+    label{
+        float: left;
+        width: 13em;
+        margin-right: 1em;
+        text-align: right;
+        font-size: 10pt;
+        margin-bottom: 10px;
+    }
+</style>
+<h3 class="page-header"><@spring.message "user.details"/></h3><br/>
 
 <div class="row">
     <div class="col-md-6">
