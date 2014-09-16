@@ -10,7 +10,8 @@ import java.util.List;
 
 /**
  * Service Interface
- * Provides operations with {@link net.github.rtc.app.model.course.Course} objects
+ * Provides operations with {@link net.github.rtc.app.model.course.Course}
+ * objects
  *
  * @author Vladislav Pikus
  * @author Dmitry Pritula
@@ -21,8 +22,9 @@ public interface CourseService {
      * Delete a course by code
      *
      * @param code course code
-     * @throws net.github.rtc.app.exception.ServiceProcessingException
-     *          if code is null
+     * @throws net.github.rtc.app.exception.ServiceProcessingException if
+     *                                                                 code
+     *                                                                 is null
      */
     void delete(String code);
 
@@ -31,8 +33,9 @@ public interface CourseService {
      *
      * @param code course code
      * @return course object
-     * @throws net.github.rtc.app.exception.ServiceProcessingException
-     *          if code is null
+     * @throws net.github.rtc.app.exception.ServiceProcessingException if
+     *                                                                 code
+     *                                                                 is null
      */
     Course findByCode(String code);
 

@@ -42,7 +42,8 @@ public class ReportDetails {
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "ReportField", joinColumns = @JoinColumn(name = "report_id"))
+    @CollectionTable(name = "ReportField", joinColumns = @JoinColumn(name =
+            "report_id"))
     private List<String> fields;
 
     @Temporal(TemporalType.TIMESTAMP)

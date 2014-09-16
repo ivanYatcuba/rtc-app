@@ -24,13 +24,15 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
     @Override
     public User findByEmail(String email) {
-        return (User) sessionFactory.getCurrentSession().createCriteria(User.class).
+        return (User) sessionFactory.getCurrentSession().createCriteria(User
+                .class).
                 add(Restrictions.eq("email", email)).uniqueResult();
     }
 
     @Override
     public Role getRoleByType(RoleType type) {
-        return (Role) sessionFactory.getCurrentSession().createCriteria(Role.class).
+        return (Role) sessionFactory.getCurrentSession().createCriteria(Role
+                .class).
                 add(Restrictions.eq("name", type.name())).uniqueResult();
     }
 
@@ -41,7 +43,8 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
     @Override
     public List<User> getUserByType(RoleType type) {
-        return sessionFactory.getCurrentSession().createCriteria(User.class).createAlias("authorities", "a").
+        return sessionFactory.getCurrentSession().createCriteria(User.class)
+                .createAlias("authorities", "a").
                 add(Restrictions.eq("a.name", type.name())).list();
     }
 

@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Vladislav Pikus
  */
 @Repository
-public class CoursesDaoImpl extends GenericDaoImpl<Course> implements CoursesDao {
+public class CoursesDaoImpl extends GenericDaoImpl<Course> implements
+        CoursesDao {
 
 }

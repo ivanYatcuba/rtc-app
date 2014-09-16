@@ -24,6 +24,7 @@ public interface GenericDao<T> {
 
     T findByCode(String code);
 
-    public SearchResults<T> search(DetachedCriteria criteria, int start, int max);
+    public SearchResults<T> search(
+            DetachedCriteria criteria, int start, int max);
 
 }

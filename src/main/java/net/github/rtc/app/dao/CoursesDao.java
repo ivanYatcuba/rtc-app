@@ -4,7 +4,8 @@ import net.github.rtc.app.model.course.Course;
 
 /**
  * Data Access Object Interface
- * Provides CRUD operations with {@link net.github.rtc.app.model.course.Course} objects
+ * Provides CRUD operations with {@link net.github.rtc.app.model.course
+ * .Course} objects
  *
  * @author Vladislav Pikus
  */

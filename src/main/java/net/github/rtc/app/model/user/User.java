@@ -98,7 +98,8 @@ public class User implements UserDetails {
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "UserProgLanguages", joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "UserProgLanguages", joinColumns = @JoinColumn
+            (name = "user_id"))
     @ForExport("Programming Languages")
     private Set<String> programmingLanguages;
 
@@ -364,11 +365,12 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String code, String surname, String name, String middleName,
-                String phone, String email, Date birthDate, String city,
-                String university, String faculty, String speciality,
-                String note, String password, String gender,
-                Set<String> programmingLanguages, String english) {
+    public User(
+            String code, String surname, String name, String middleName,
+            String phone, String email, Date birthDate, String city,
+            String university, String faculty, String speciality,
+            String note, String password, String gender,
+            Set<String> programmingLanguages, String english) {
 
         this.code = code;
         this.surname = surname;
@@ -389,10 +391,11 @@ public class User implements UserDetails {
         this.english = english;
     }
 
-    public User(String surname, String name, String middleName, String phone,
-                String email, Date birthDate, String city, String university,
-                String faculty, String speciality, String note, String password,
-                String gender, Set<String> programmingLanguages, String english) {
+    public User(
+            String surname, String name, String middleName, String phone,
+            String email, Date birthDate, String city, String university,
+            String faculty, String speciality, String note, String password,
+            String gender, Set<String> programmingLanguages, String english) {
         this.surname = surname;
         this.name = name;
         this.middleName = middleName;
@@ -410,7 +413,9 @@ public class User implements UserDetails {
         this.english = english;
     }
 
-    public User(String name, String surname, String middleName, String email, String password) {
+    public User(
+            String name, String surname, String middleName, String email,
+            String password) {
         this.name = name;
         this.surname = surname;
         this.middleName = middleName;
@@ -419,6 +424,7 @@ public class User implements UserDetails {
     }
 
     public String shortString() {
-        return new StringBuilder(this.name).append(" ").append(this.surname).append(" ").append(this.email).toString();
+        return new StringBuilder(this.name).append(" ").append(this.surname)
+                .append(" ").append(this.email).toString();
     }
 }

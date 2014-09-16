@@ -190,8 +190,10 @@ public class Course implements Serializable {
 
     }
 
-    public Course(String code, String name, CourseType type, Set<User> experts, Date startDate, Date endDate,
-                  Date publishDate, Integer capacity, String description, CourseStatus status) {
+    public Course(
+            String code, String name, CourseType type, Set<User> experts,
+            Date startDate, Date endDate, Date publishDate, Integer capacity,
+            String description, CourseStatus status) {
         this.code = code;
         this.name = name;
         this.type = type;
@@ -224,18 +226,39 @@ public class Course implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Course course = (Course) o;
 
-        if (experts != null ? !experts.equals(course.experts) : course.experts != null) return false;
-        if (code != null ? !code.equals(course.code) : course.code != null) return false;
-        if (endDate != null ? !endDate.equals(course.endDate) : course.endDate != null) return false;
-        if (name != null ? !name.equals(course.name) : course.name != null) return false;
-        if (startDate != null ? !startDate.equals(course.startDate) : course.startDate != null) return false;
-        if (tags != null ? !tags.equals(course.tags) : course.tags != null) return false;
-        if (type != null ? !type.equals(course.type) : course.type != null) return false;
+        if (experts != null ? !experts.equals(course.experts) : course
+                .experts != null) {
+            return false;
+        }
+        if (code != null ? !code.equals(course.code) : course.code != null) {
+            return false;
+        }
+        if (endDate != null ? !endDate.equals(course.endDate) : course
+                .endDate != null) {
+            return false;
+        }
+        if (name != null ? !name.equals(course.name) : course.name != null) {
+            return false;
+        }
+        if (startDate != null ? !startDate.equals(course.startDate) : course
+                .startDate != null) {
+            return false;
+        }
+        if (tags != null ? !tags.equals(course.tags) : course.tags != null) {
+            return false;
+        }
+        if (type != null ? !type.equals(course.type) : course.type != null) {
+            return false;
+        }
 
         return true;
     }
@@ -250,8 +273,10 @@ public class Course implements Serializable {
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + (tags != null ? tags.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (publishDate != null ? publishDate.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode()
+                : 0);
+        result = 31 * result + (publishDate != null ? publishDate.hashCode()
+                : 0);
         result = 31 * result + (capacity != null ? capacity.hashCode() : 0);
         return result;
     }

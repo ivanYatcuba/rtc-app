@@ -15,7 +15,8 @@ import java.util.List;
 /**
  * Created by Ivan Yatcuba on 7/29/14.
  * <p/>
- * This class helps to create xlsx report file of some model  class collection on disk
+ * This class helps to create xlsx report file of some model  class
+ * collection on disk
  */
 public class ReportBuilder {
 
@@ -23,13 +24,15 @@ public class ReportBuilder {
      * Create xlsx report file
      *
      * @param reportFields report about this model class,
-     *                     which fields that needs to be in report are annotated by @ForExport.
+     *                     which fields that needs to be in report are
+     *                     annotated by @ForExport.
      * @param objectsList  list of object that will be stored in report table.
      * @param sheetName    name of sheet in xlsx file.
      * @param filePath     path where report file will be stored
      */
-    public <T> void build(List<Field> reportFields, List<T> objectsList,
-                          String sheetName, String filePath, ExportFormat exportFormat) {
+    public <T> void build(
+            List<Field> reportFields, List<T> objectsList, String sheetName,
+            String filePath, ExportFormat exportFormat) {
 
         ReportTable reportTable = null;
         if (exportFormat.equals(ExportFormat.XLSX)) {
@@ -45,7 +48,8 @@ public class ReportBuilder {
         int currentRow = 0;
         reportTable.createRow(currentRow);
         for (Field field : reportFields) {
-            reportTable.createCell(currentRow, currentCol, field.getAnnotation(ForExport.class).value());
+            reportTable.createCell(currentRow, currentCol,
+                    field.getAnnotation(ForExport.class).value());
             currentCol++;
         }
         //Getting info from list
@@ -55,17 +59,21 @@ public class ReportBuilder {
             for (int j = 0; j < reportFields.size(); j++) {
                 reportFields.get(j).setAccessible(true);
                 try {
-                    if (reportFields.get(j).getDeclaringClass() != object.getClass()) {
+                    if (reportFields.get(j).getDeclaringClass() != object
+                            .getClass()) {
                         for (Field f : object.getClass().getDeclaredFields()) {
-                            if (f.getType() == reportFields.get(j).getDeclaringClass()) {
+                            if (f.getType() == reportFields.get(j)
+                                    .getDeclaringClass()) {
                                 f.setAccessible(true);
-                                reportTable.createCell(currentRow, j, reportFields.get(j).get(f.get(object)));
+                                reportTable.createCell(currentRow, j,
+                                        reportFields.get(j).get(f.get(object)));
                                 f.setAccessible(false);
                                 break;
                             }
                         }
                     } else {
-                        reportTable.createCell(currentRow, j, reportFields.get(j).get(object));
+                        reportTable.createCell(currentRow, j,
+                                reportFields.get(j).get(object));
                     }
                 } catch (IllegalAccessException | NullPointerException e) {
                     reportTable.createCell(currentRow, j, "");

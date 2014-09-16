@@ -13,7 +13,9 @@ public class Request {
     public Request() {
     }
 
-    public Request(Integer orderId, String traineeName, String reason, String courseName, String speciality) {
+    public Request(
+            Integer orderId, String traineeName, String reason,
+            String courseName, String speciality) {
         this.orderId = orderId;
         this.traineeName = traineeName;
         this.reason = reason;

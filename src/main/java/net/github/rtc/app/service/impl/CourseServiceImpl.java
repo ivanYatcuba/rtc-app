@@ -30,7 +30,8 @@ import java.util.UUID;
 @Service("coursesService")
 @Transactional
 public class CourseServiceImpl implements ModelService<Course>, CourseService {
-    private static Logger LOG = LoggerFactory.getLogger(CourseServiceImpl.class.getName());
+    private static Logger LOG = LoggerFactory.getLogger(CourseServiceImpl
+            .class.getName());
 
     @Autowired
     private CoursesDao coursesDao;
@@ -56,7 +57,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     }
 
     /**
-     * @see net.github.rtc.app.service.CourseService#create(net.github.rtc.app.model.course.Course)
+     * @see net.github.rtc.app.service.CourseService#create(net.github.rtc
+     * .app.model.course.Course)
      */
     @Override
     public Course create(Course course) {
@@ -67,7 +69,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     }
 
     /**
-     * @see net.github.rtc.app.service.CourseService#update(net.github.rtc.app.model.course.Course)
+     * @see net.github.rtc.app.service.CourseService#update(net.github.rtc
+     * .app.model.course.Course)
      */
     @Override
     public void update(Course course) {
@@ -99,7 +102,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
 
     @Override
     @Transactional
-    public SearchResults<Course> search(DetachedCriteria criteria, int start, int max) {
+    public SearchResults<Course> search(
+            DetachedCriteria criteria, int start, int max) {
         LOG.debug("Searching courses///");
         return coursesDao.search(criteria, start, max);
     }
@@ -109,7 +113,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
         CourseSearchFilter searchFilter = new CourseSearchFilter();
         searchFilter.setStartDate(new Date());
         searchFilter.setStatus(CourseStatus.PUBLISHED);
-        return coursesDao.search(searchFilter.getCriteria().addOrder(Order.asc("startDate")), 1, 3).getResults();
+        return coursesDao.search(searchFilter.getCriteria().addOrder(Order
+                .asc("startDate")), 1, 3).getResults();
     }
 
 }

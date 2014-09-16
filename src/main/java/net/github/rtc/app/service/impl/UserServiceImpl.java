@@ -27,7 +27,8 @@ import java.util.UUID;
  */
 @Service("userService")
 public class UserServiceImpl implements ModelService<User>, UserService {
-    private static Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class.getName());
+    private static Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class
+            .getName());
 
     @Autowired
     private UserDao userDao;
@@ -111,7 +112,8 @@ public class UserServiceImpl implements ModelService<User>, UserService {
 
     @Override
     @Transactional
-    public SearchResults<User> search(DetachedCriteria criteria, int start, int max) {
+    public SearchResults<User> search(
+            DetachedCriteria criteria, int start, int max) {
         return userDao.search(criteria, start, max);
     }
 

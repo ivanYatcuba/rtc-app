@@ -56,7 +56,8 @@ public class ExportController {
         Set<String> formatLables = getTypes().keySet();
         ModelAndView mav = new ModelAndView("portal/admin/page/reportCreate");
         mav.addObject("types", formatLables);
-        mav.addObject("validationRules", validationContext.get(ReportDetails.class));
+        mav.addObject("validationRules", validationContext.get(ReportDetails
+                .class));
         return mav;
     }
 
@@ -64,10 +65,12 @@ public class ExportController {
     public ModelAndView openUpdatePage(@PathVariable String reportCode) {
         ModelAndView mav = new ModelAndView("portal/admin/page/reportEdit");
         Set<String> formatLables = getTypes().keySet();
-        ReportDetails reportDetails = reportService.findReportByCode(reportCode);
+        ReportDetails reportDetails = reportService.findReportByCode
+                (reportCode);
         mav.addObject("report", reportDetails);
         mav.addObject("types", formatLables);
-        mav.addObject("validationRules", validationContext.get(ReportDetails.class));
+        mav.addObject("validationRules", validationContext.get(ReportDetails
+                .class));
         return mav;
     }
 
@@ -85,36 +88,52 @@ public class ExportController {
     }
 
     @RequestMapping(value = "/insertReport", method = RequestMethod.POST)
-    public @ResponseBody  ModelAndView createHandler(@ModelAttribute("report") ReportDetails report,
-                                 @RequestParam String selectedType,
-                                 @RequestParam(value = "reportFields", required = false) List<String> reportFields) {
+    public
+    @ResponseBody
+    ModelAndView createHandler(
+            @ModelAttribute("report") ReportDetails report,
+            @RequestParam String selectedType, @RequestParam(value =
+            "reportFields",
+            required = false) List<String> reportFields) {
         report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.insert(report);
-        return new ModelAndView("redirect:/admin/export/"+report.getCode());
+        return new ModelAndView("redirect:/admin/export/" + report.getCode());
     }
 
     @RequestMapping(value = "/updateReport", method = RequestMethod.POST)
-    public @ResponseBody  ModelAndView editHandler(@ModelAttribute("report") ReportDetails report,
-                                                     @RequestParam String selectedType,
-                                                     @RequestParam(value = "reportFields", required = false) List<String> reportFields) {
+    public
+    @ResponseBody
+    ModelAndView editHandler(
+            @ModelAttribute("report") ReportDetails report,
+            @RequestParam String selectedType, @RequestParam(value =
+            "reportFields",
+            required = false) List<String> reportFields) {
         report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.update(report);
-        return new ModelAndView("redirect:/admin/export/"+report.getCode());
+        return new ModelAndView("redirect:/admin/export/" + report.getCode());
     }
 
     @RequestMapping(value = "/getFields", method = RequestMethod.GET)
-    public @ResponseBody List<String> getFields(@RequestParam String selectedType) {
-        return  getClassFields(getTypes().get(selectedType));
+    public
+    @ResponseBody
+    List<String> getFields(@RequestParam String selectedType) {
+        return getClassFields(getTypes().get(selectedType));
     }
 
 
-    @RequestMapping(value = "/download/{reportCode}", method = RequestMethod.GET)
-    public void downloadUserExport(HttpServletResponse response, @PathVariable String reportCode) throws IOException {
-        ReportDetails reportDetails = reportService.findReportByCode(reportCode);
-        StringBuilder filePath = new StringBuilder(exportPath).append("/").append(reportCode).append(".").
-                append(reportDetails.getExportFormat().toString().toLowerCase());
+    @RequestMapping(value = "/download/{reportCode}", method = RequestMethod
+            .GET)
+    public void downloadUserExport(
+            HttpServletResponse response, @PathVariable String reportCode)
+            throws IOException {
+        ReportDetails reportDetails = reportService.findReportByCode
+                (reportCode);
+        StringBuilder filePath = new StringBuilder(exportPath).append("/")
+                .append(reportCode).append(".").
+                append(reportDetails.getExportFormat().toString().toLowerCase
+                        ());
         File downloadFile = new File(filePath.toString());
         FileInputStream inputStream = new FileInputStream(downloadFile);
 
@@ -122,7 +141,8 @@ public class ExportController {
         response.setContentLength((int) downloadFile.length());
 
         String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"", reportDetails.getName());
+        String headerValue = String.format("attachment; filename=\"%s\"",
+                reportDetails.getName());
         response.setHeader(headerKey, headerValue);
         OutputStream outStream = response.getOutputStream();
         byte[] buffer = new byte[BUFFER_SIZE];
@@ -144,14 +164,14 @@ public class ExportController {
         return ExportFormat.findAll();
     }
 
-    public  Map<String, Class> getTypes(){
+    public Map<String, Class> getTypes() {
         Map<String, Class> types = new HashMap<>();
         types.put("User", User.class);
         types.put("Course", Course.class);
         return types;
     }
 
-    public List<String> getClassFields(Class aClass){
+    public List<String> getClassFields(Class aClass) {
         return ExportFieldExtractor.getAviableFieldList(aClass);
     }
 
@@ -172,7 +192,8 @@ public class ExportController {
     @InitBinder("report")
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor
+                (dateFormat, true));
     }
 
 }

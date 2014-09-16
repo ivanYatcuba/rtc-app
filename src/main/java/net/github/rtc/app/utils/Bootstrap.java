@@ -42,8 +42,10 @@ public class Bootstrap implements InitializingBean {
                 userService.createRole(RoleType.ROLE_EXPERT);
             }
 
-            User admin = new User("TestName", "TestMiddlename", "TestSurname", "admin", "admin");
-            admin.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_ADMIN)));
+            User admin = new User("TestName", "TestMiddlename",
+                    "TestSurname", "admin", "admin");
+            admin.setAuthorities(Arrays.asList(userService.getRoleByType
+                    (RoleType.ROLE_ADMIN)));
             admin.setRegisterDate(new Date());
             userService.create(admin);
         }

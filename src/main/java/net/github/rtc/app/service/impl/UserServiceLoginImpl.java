@@ -15,16 +15,19 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Vladislav Pikus
  */
 @Service("userDetailsService")
-public class UserServiceLoginImpl implements UserDetailsService, UserServiceLogin {
+public class UserServiceLoginImpl implements UserDetailsService,
+        UserServiceLogin {
 
     @Autowired
     private UserDao userDao;
 
-    private static final Logger LOG = LoggerFactory.getLogger(UserServiceLoginImpl.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger
+            (UserServiceLoginImpl.class.getName());
 
     @Override
     @Transactional
-    public User loadUserByUsername(String email) throws UsernameNotFoundException {
+    public User loadUserByUsername(String email) throws
+            UsernameNotFoundException {
         LOG.info("Loading user with email: " + email);
         return userDao.findByEmail(email);
     }

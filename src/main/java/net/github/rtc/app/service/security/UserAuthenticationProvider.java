@@ -5,7 +5,8 @@ import net.github.rtc.app.service.UserServiceLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication
+        .UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,7 +28,8 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws
+            AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
@@ -49,9 +51,11 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Wrong password.");
         }
 
-        Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+        Collection<? extends GrantedAuthority> authorities = user
+                .getAuthorities();
 
-        return new UsernamePasswordAuthenticationToken(username, password, authorities);
+        return new UsernamePasswordAuthenticationToken(username, password,
+                authorities);
     }
 
     @Override

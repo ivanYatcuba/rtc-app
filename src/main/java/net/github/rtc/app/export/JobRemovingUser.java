@@ -12,7 +12,8 @@ import java.util.Collection;
 
 @Component
 public class JobRemovingUser {
-    private static Logger LOG = LoggerFactory.getLogger(JobRemovingUser.class.getName());
+    private static Logger LOG = LoggerFactory.getLogger(JobRemovingUser.class
+            .getName());
 
     @Autowired
     private UserService userService;

@@ -12,13 +12,19 @@ import java.util.List;
  */
 public class ExportFieldExtractor {
 
-    public static List<Field> getFieldsFromClass(Class exportClass, List<String> fields) throws NoSuchFieldException {
+    public static List<Field> getFieldsFromClass(
+            Class exportClass, List<String> fields) throws
+            NoSuchFieldException {
         List<Field> classFields = new ArrayList<>();
         for (Field f : exportClass.getDeclaredFields()) {
-            if (f.isAnnotationPresent(ForExport.class) && fields.contains(f.getAnnotation(ForExport.class).value())) {
+            if (f.isAnnotationPresent(ForExport.class) && fields.contains(f
+                    .getAnnotation(ForExport.class).value())) {
                 classFields.add(f);
-                if (f.getAnnotation(ForExport.class).inculdeField().length != 0) {
-                    classFields.addAll(getFieldsFromClass(f.getType(), Arrays.asList(f.getAnnotation(ForExport.class).inculdeField())));
+                if (f.getAnnotation(ForExport.class).inculdeField().length !=
+                        0) {
+                    classFields.addAll(getFieldsFromClass(f.getType(),
+                            Arrays.asList(f.getAnnotation(ForExport.class)
+                                    .inculdeField())));
                 }
             }
         }
@@ -30,8 +36,10 @@ public class ExportFieldExtractor {
         for (Field f : aClass.getDeclaredFields()) {
             if (f.isAnnotationPresent(ForExport.class)) {
                 classFields.add(f.getAnnotation(ForExport.class).value());
-                if (f.getAnnotation(ForExport.class).inculdeField().length != 0) {
-                    classFields.addAll(Arrays.asList(f.getAnnotation(ForExport.class).inculdeField()));
+                if (f.getAnnotation(ForExport.class).inculdeField().length !=
+                        0) {
+                    classFields.addAll(Arrays.asList(f.getAnnotation
+                            (ForExport.class).inculdeField()));
                 }
             }
         }

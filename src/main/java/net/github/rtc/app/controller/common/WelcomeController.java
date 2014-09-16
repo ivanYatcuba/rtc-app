@@ -21,13 +21,14 @@ public class WelcomeController {
 
     /**
      * Request to main page, get three coming soon courses
+     *
      * @return ModelAndView("welcome/welcomeLayout")
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView welcome() throws Exception {
         ModelAndView mav = new ModelAndView("welcome/welcomeLayout");
-        mav.addObject("soonCourses",courseService.startingSoonCourses());
-        mav.addObject("content","content/welcomeContent");
+        mav.addObject("soonCourses", courseService.startingSoonCourses());
+        mav.addObject("content", "content/welcomeContent");
         return mav;
     }
 

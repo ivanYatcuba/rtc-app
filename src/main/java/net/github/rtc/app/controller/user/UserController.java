@@ -3,7 +3,10 @@ package net.github.rtc.app.controller.user;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.*;
-import net.github.rtc.app.service.*;
+import net.github.rtc.app.service.CourseService;
+import net.github.rtc.app.service.UserCourseOrderService;
+import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.UserServiceLogin;
 import net.github.rtc.app.utils.datatable.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
@@ -11,7 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication
+        .UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -49,7 +53,8 @@ public class UserController {
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView user() {
         ModelAndView mav = new ModelAndView(ROOT + "/page/userdataview");
-        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder
+                .getContext().getAuthentication().getName());
         mav.addObject("user", user);
         return mav;
     }
@@ -61,7 +66,8 @@ public class UserController {
      */
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView edit() {
-        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder
+                .getContext().getAuthentication().getName());
         ModelAndView mav = new ModelAndView(ROOT + "/page/edituser");
         mav.getModelMap().addAttribute("user", user);
         mav.addObject("validationRules", validationContext.get(User.class));
@@ -77,30 +83,33 @@ public class UserController {
      * @return if all is OK the redirect to view user details
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView update(@ModelAttribute(ROOT_MODEL) User user,
-                               BindingResult bindingResult,
-                               SessionStatus session) {
+    public ModelAndView update(
+            @ModelAttribute(ROOT_MODEL) User user,
+            BindingResult bindingResult, SessionStatus session) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("redirect:/" + ROOT + "/edit/");
         }
-        user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
+        user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType
+                .ROLE_USER)));
         user.setId(userService.findByCode(user.getCode()).getId());
         userService.update(user);
         session.setComplete();
-        Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+        Authentication request = new UsernamePasswordAuthenticationToken(user
+                .getUsername(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(request);
         return new ModelAndView("redirect:/" + "user/view");
     }
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute(ROOT_MODEL) User user,
-                             BindingResult bindingResult,
-                             SessionStatus session) {
+    public ModelAndView save(
+            @ModelAttribute(ROOT_MODEL) User user,
+            BindingResult bindingResult, SessionStatus session) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("redirect:/" + ROOT + "/register/");
         }
-        user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
+        user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType
+                .ROLE_USER)));
         user.setRegisterDate(new Date());
         userService.create(user);
         session.setComplete();
@@ -109,19 +118,23 @@ public class UserController {
 
     @RequestMapping(value = "/userCourses", method = RequestMethod.GET)
     public ModelAndView userCourses() throws Exception {
-        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        UserCourseOrder currentUserCourseOrder = userCourseOrderService.getUserOrderByUserCode(user.getCode());
+        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder
+                .getContext().getAuthentication().getName());
+        UserCourseOrder currentUserCourseOrder = userCourseOrderService
+                .getUserOrderByUserCode(user.getCode());
         if (currentUserCourseOrder == null) {
             ModelAndView mav = new ModelAndView(ROOT + "/page/usercours");
 
             CourseSearchFilter courseSearchFilter = new CourseSearchFilter();
             courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
             mav.addObject("user", user);
-            mav.addObject("courses", courseService.search(courseSearchFilter.getCriteria(), 1,3).getResults());
+            mav.addObject("courses", courseService.search(courseSearchFilter
+                    .getCriteria(), 1, 3).getResults());
             return mav;
         } else {
             ModelAndView mav = new ModelAndView(ROOT + "/page/courseorder");
-            Course orderedCourse = courseService.findByCode(currentUserCourseOrder.getCourseCode());
+            Course orderedCourse = courseService.findByCode
+                    (currentUserCourseOrder.getCourseCode());
             mav.addObject("user", user);
             mav.addObject("orderStatus", currentUserCourseOrder.getStatus());
             mav.addObject("course", orderedCourse);
@@ -130,11 +143,14 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/courseDetails/{courseCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/courseDetails/{courseCode}",
+            method = RequestMethod.GET)
     public ModelAndView courseDetails(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView("portal/user/page/courseDetail");
         mav.addObject("course", courseService.findByCode(courseCode));
-        mav.addObject("user",userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+        mav.addObject("user", userServiceLogin.loadUserByUsername
+                (SecurityContextHolder.getContext().getAuthentication()
+                        .getName()));
         return mav;
     }
 
@@ -142,15 +158,19 @@ public class UserController {
     public ModelAndView sendCourseOrder(@RequestBody String orderData) {
         ModelAndView mav = new ModelAndView("redirect:/user/userCourses");
         //I'm sorry for this...
-        Map<String, String> orderParamsMap = getUserCourseOrderParams(orderData);
-        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        UserCourseOrder userCourseOrder = buildUserCourseOrder(orderParamsMap, user.getCode());
+        Map<String, String> orderParamsMap = getUserCourseOrderParams
+                (orderData);
+        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder
+                .getContext().getAuthentication().getName());
+        UserCourseOrder userCourseOrder = buildUserCourseOrder
+                (orderParamsMap, user.getCode());
         userCourseOrderService.insert(userCourseOrder);
         return mav;
     }
 
 
-    private UserCourseOrder buildUserCourseOrder(Map<String, String> orderParamsMap, String userCode) {
+    private UserCourseOrder buildUserCourseOrder(
+            Map<String, String> orderParamsMap, String userCode) {
         UserCourseOrder userCourseOrder = new UserCourseOrder();
         userCourseOrder.setUserCode(userCode);
         userCourseOrder.setCourseCode(orderParamsMap.get("selectedCode"));
@@ -159,7 +179,8 @@ public class UserController {
             userCourseOrder.setPosition(TraineePosition.DEVELOPER);
         } else if (orderParamsMap.get("userCourses").equals("Tester")) {
             userCourseOrder.setPosition(TraineePosition.TESTER);
-        } else if (orderParamsMap.get("userCourses").equals("Business Analyst ")) {
+        } else if (orderParamsMap.get("userCourses").equals("Business " +
+                "Analyst" + " ")) {
             userCourseOrder.setPosition(TraineePosition.BUSINESS_ANALYST);
         }
         userCourseOrder.setReason(orderParamsMap.get("userTextArea"));
@@ -186,7 +207,8 @@ public class UserController {
     @InitBinder(ROOT_MODEL)
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor
+                (dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomStringEditor());
     }
 

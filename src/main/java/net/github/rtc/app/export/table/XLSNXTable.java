@@ -23,8 +23,8 @@ public class XLSNXTable implements ReportTable {
         this.sheet = workbook.createSheet(sheetName);
         this.cellStyle = workbook.createCellStyle();
         this.createHelper = workbook.getCreationHelper();
-        this.cellStyle.setDataFormat(
-                createHelper.createDataFormat().getFormat("dd/mm/yy"));
+        this.cellStyle.setDataFormat(createHelper.createDataFormat()
+                .getFormat("dd/mm/yy"));
     }
 
     @Override
@@ -35,11 +35,13 @@ public class XLSNXTable implements ReportTable {
     @Override
     public void createCell(int rowIndex, int cellIndex, Object value) {
         if (value instanceof Date) {
-            sheet.getRow(rowIndex).createCell(cellIndex).setCellValue((Date) value);
+            sheet.getRow(rowIndex).createCell(cellIndex).setCellValue((Date)
+                    value);
             sheet.getRow(rowIndex).getCell(cellIndex).setCellStyle(cellStyle);
         } else {
             sheet.getRow(rowIndex).createCell(cellIndex).
-                    setCellValue(createHelper.createRichTextString(value.toString()));
+                    setCellValue(createHelper.createRichTextString(value
+                            .toString()));
         }
     }
 

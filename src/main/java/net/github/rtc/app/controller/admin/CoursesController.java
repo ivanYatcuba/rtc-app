@@ -5,13 +5,14 @@ import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
-import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.service.UserServiceLogin;
-import net.github.rtc.app.utils.datatable.*;
-import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.utils.Paginator;
+import net.github.rtc.app.utils.datatable.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.Page;
+import net.github.rtc.app.utils.datatable.SearchFilter;
+import net.github.rtc.app.utils.datatable.SearchResults;
+import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
-import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,32 +51,40 @@ public class CoursesController {
      * @return modelAndView("admin/courses/courses")
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView index(@ModelAttribute("filterCourse") SearchFilter filterCourse) throws Exception {
+    public ModelAndView index(
+            @ModelAttribute("filterCourse") SearchFilter filterCourse) throws
+            Exception {
         ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
         paginator.setSearchFilter(filterCourse);
         mav.addObject("types", CourseType.findAll());
         mav.addObject("statuses", getStats());
-        if(paginator.getSearchFilter() != null){
+        if (paginator.getSearchFilter() != null) {
             mav.addObject("filterCourse", paginator.getSearchFilter());
-        }else {
+        } else {
             mav.addObject("filterCourse", new CourseSearchFilter());
         }
 
         return mav;
     }
 
-    @RequestMapping(value = "/filter",method = RequestMethod.GET)
-    public ModelAndView filter(@ModelAttribute("filterCourse") SearchFilter filterCourse) throws Exception {
+    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    public ModelAndView filter(
+            @ModelAttribute("filterCourse") SearchFilter filterCourse) throws
+            Exception {
         paginator.setSearchFilter(filterCourse);
         return switchPage(1);
     }
 
 
     @RequestMapping(value = "/{page}", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView switchPage(@PathVariable int page) {
+    public
+    @ResponseBody
+    ModelAndView switchPage(@PathVariable int page) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
         paginator.setCurrentPage(page);
-        SearchResults<Course> results = courseService.search(paginator.getSearchFilter().getCriteria(), page, paginator.getMaxPerPage());
+        SearchResults<Course> results = courseService.search(paginator
+                .getSearchFilter().getCriteria(), page,
+                paginator.getMaxPerPage());
         Page pageModel = paginator.getPage(page, results.getTotalResults());
         mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
                 .byNextPage().byPrevPage().byStartPage().toMap());
@@ -138,11 +147,14 @@ public class CoursesController {
      * Process the request to post entered course in the form
      *
      * @param course course object
-     * @return if all is OK the redirect to view new course or return to edit course
+     * @return if all is OK the redirect to view new course or return to edit
+     * course
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute(ROOT_MODEL) Course course,
-                       @RequestParam(value = "expertList", required = false) List<String> expertList) {
+    public String save(
+            @ModelAttribute(ROOT_MODEL) Course course, @RequestParam(value =
+            "expertList",
+            required = false) List<String> expertList) {
         course.setExperts(bindExperts(expertList));
         courseService.create(course);
         return "redirect:/admin/course/";
@@ -156,7 +168,8 @@ public class CoursesController {
     @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable String courseCode) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/updateContent");
-        mav.getModelMap().addAttribute("course", courseService.findByCode(courseCode));
+        mav.getModelMap().addAttribute("course", courseService.findByCode
+                (courseCode));
         mav.addObject("validationRules", validationContext.get(Course.class));
         return mav;
     }
@@ -168,19 +181,25 @@ public class CoursesController {
      * @return if all is OK the redirect to view course or return to edit course
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute(ROOT_MODEL) Course course, @RequestParam(value = "expertList", required = false) List<String> expertList) {
-        course.setId(courseService.findByCode(course.getCode()).getId());// TO DO: id must be already present
+    public String update(
+            @ModelAttribute(ROOT_MODEL) Course course, @RequestParam(value =
+            "expertList",
+            required = false) List<String> expertList) {
+        course.setId(courseService.findByCode(course.getCode()).getId());//
+        // TO DO: id must be already present
         course.setExperts(bindExperts(expertList));
         courseService.update(course);
         return "redirect: view/" + course.getCode();
     }
 
     private Set<User> bindExperts(List<String> experts) {
-        if (experts == null) return null;
+        if (experts == null) {
+            return null;
+        }
         Set<User> courseExperts = new HashSet<>();
         for (String expert : experts) {
             String params[] = expert.split(" ");
-            courseExperts.add(userServiceLogin.loadUserByUsername( params[2]));
+            courseExperts.add(userServiceLogin.loadUserByUsername(params[2]));
         }
         return courseExperts;
     }
@@ -193,7 +212,8 @@ public class CoursesController {
     @InitBinder(ROOT_MODEL)
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor
+                (dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
     }
 

@@ -27,7 +27,8 @@ import java.util.*;
 @Controller("adminNavigationController")
 @RequestMapping("admin/user")
 public class UserController {
-    private static Logger LOG = LoggerFactory.getLogger(UserController.class.getName());
+    private static Logger LOG = LoggerFactory.getLogger(UserController.class
+            .getName());
 
     @Autowired
     private ValidationContext validationContext;
@@ -48,15 +49,19 @@ public class UserController {
         int numberOfPage = 1;
         int lastUser = USERS_PER_PAGE * numberOfPage;
         int firstUser = lastUser - USERS_PER_PAGE;
-        if (lastUser > NewListUser.size()) lastUser = NewListUser.size();
-        int numbOfPages = (int) Math.ceil(listUser.size() / (double) USERS_PER_PAGE);
+        if (lastUser > NewListUser.size()) {
+            lastUser = NewListUser.size();
+        }
+        int numbOfPages = (int) Math.ceil(listUser.size() / (double)
+                USERS_PER_PAGE);
         mav.addObject("users", NewListUser.subList(firstUser, lastUser));
         mav.addObject("pages", numbOfPages);
         mav.addObject("numberOfPage", numberOfPage);
         return mav;
     }
 
-    @RequestMapping(value = "/viewAll/{numberOfPage}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewAll/{numberOfPage}", method = RequestMethod
+            .GET)
     public ModelAndView viewAll(@PathVariable int numberOfPage) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/viewAllusers");
         Collection<User> listUser = userService.findAll();
@@ -64,8 +69,11 @@ public class UserController {
         for (User user : listUser) NewListUser.add(user);
         int lastUser = USERS_PER_PAGE * numberOfPage;
         int firstUser = lastUser - USERS_PER_PAGE;
-        if (lastUser > NewListUser.size()) lastUser = NewListUser.size();
-        int numbOfPages = (int) Math.ceil(listUser.size() / (double) USERS_PER_PAGE);
+        if (lastUser > NewListUser.size()) {
+            lastUser = NewListUser.size();
+        }
+        int numbOfPages = (int) Math.ceil(listUser.size() / (double)
+                USERS_PER_PAGE);
         mav.addObject("users", NewListUser.subList(firstUser, lastUser));
         mav.addObject("pages", numbOfPages);
         mav.addObject("numberOfPage", numberOfPage);
@@ -78,7 +86,8 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "userPage/editPage/{code}", method = RequestMethod.GET)
+    @RequestMapping(value = "userPage/editPage/{code}",
+            method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable String code) {
         ModelAndView mav = new ModelAndView(ROOT + "/page/editPages");
         mav.addObject("validationRules", validationContext.get(User.class));
@@ -125,9 +134,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute(ROOT_MODEL) @Valid User user,
-                       SessionStatus session, @RequestParam RoleType selectedRole) {
-        user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
+    public String save(
+            @ModelAttribute(ROOT_MODEL) @Valid User user,
+            SessionStatus session, @RequestParam RoleType selectedRole) {
+        user.setAuthorities(Arrays.asList(userService.getRoleByType
+                (selectedRole)));
         user.setRegisterDate(new Date());
         userService.create(user);
         session.setComplete();
@@ -135,10 +146,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update/{code}", method = RequestMethod.POST)
-    public String update(@PathVariable String code, @ModelAttribute(ROOT_MODEL) @Valid User user,
-                         BindingResult bindingResult,
-                         SessionStatus session, @RequestParam RoleType selectedRole) {
-        user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
+    public String update(
+            @PathVariable String code, @ModelAttribute(ROOT_MODEL) @Valid
+    User user, BindingResult bindingResult, SessionStatus session,
+            @RequestParam RoleType selectedRole) {
+        user.setAuthorities(Arrays.asList(userService.getRoleByType
+                (selectedRole)));
         user.setCode(code);
         user.setId(userService.findByCode(user.getCode()).getId());
         userService.update(user);
@@ -154,7 +167,8 @@ public class UserController {
     @InitBinder(ROOT_MODEL)
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor
+                (dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomStringEditor());
     }
 

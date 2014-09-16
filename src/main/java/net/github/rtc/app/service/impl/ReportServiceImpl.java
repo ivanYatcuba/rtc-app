@@ -26,7 +26,8 @@ public class ReportServiceImpl implements ReportService {
     @Autowired
     private JobManager jobManager;
 
-    private static Logger LOG = LoggerFactory.getLogger(ReportServiceImpl.class.getName());
+    private static Logger LOG = LoggerFactory.getLogger(ReportServiceImpl
+            .class.getName());
 
     @Override
     @Transactional

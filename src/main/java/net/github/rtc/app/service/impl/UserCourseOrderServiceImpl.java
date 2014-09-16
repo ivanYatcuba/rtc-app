@@ -20,7 +20,8 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Autowired
     UserCourseOrderDao resource;
 
-    private static Logger LOG = LoggerFactory.getLogger(UserCourseOrderServiceImpl.class.getName());
+    private static Logger LOG = LoggerFactory.getLogger
+            (UserCourseOrderServiceImpl.class.getName());
 
     @Override
     @Transactional

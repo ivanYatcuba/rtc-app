@@ -12,11 +12,13 @@ import java.util.List;
  * Created by ivan on 18.04.14.
  */
 @Repository
-public class UserCourseOrderDaoImpl extends GenericDaoImpl<UserCourseOrder> implements UserCourseOrderDao {
+public class UserCourseOrderDaoImpl extends GenericDaoImpl<UserCourseOrder>
+        implements UserCourseOrderDao {
 
     @Override
     public UserCourseOrder getUserOrder(String userCode) {
-        return (UserCourseOrder) getCurrentSession().createCriteria(UserCourseOrder.class).
+        return (UserCourseOrder) getCurrentSession().createCriteria
+                (UserCourseOrder.class).
                 add(Restrictions.eq("userCode", userCode)).uniqueResult();
     }
 

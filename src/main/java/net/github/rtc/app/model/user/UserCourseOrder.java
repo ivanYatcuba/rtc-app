@@ -35,8 +35,10 @@ public class UserCourseOrder {
     @Column
     private String reason;
 
-    public UserCourseOrder(String userCode, String courseCode, Date requestDate, Date responseDate,
-                           UserRequestStatus status, TraineePosition position) {
+    public UserCourseOrder(
+            String userCode, String courseCode, Date requestDate,
+            Date responseDate, UserRequestStatus status,
+            TraineePosition position) {
         this.userCode = userCode;
         this.courseCode = courseCode;
         this.requestDate = requestDate;

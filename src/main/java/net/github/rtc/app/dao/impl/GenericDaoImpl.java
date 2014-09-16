@@ -59,7 +59,8 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Override
     public T findByCode(String code) {
-        return (T) getCurrentSession().createCriteria(type).add(Restrictions.eq("code", code)).uniqueResult();
+        return (T) getCurrentSession().createCriteria(type).add(Restrictions
+                .eq("code", code)).uniqueResult();
     }
 
     @Override
@@ -70,14 +71,18 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Override
     public List<T> findAll() {
-        return getCurrentSession().createCriteria(type).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+        return getCurrentSession().createCriteria(type).setResultTransformer
+                (Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
     @Override
-    public SearchResults<T> search(DetachedCriteria dCriteria, int start, int max) {
-        Criteria criteria = dCriteria.getExecutableCriteria(getCurrentSession());
+    public SearchResults<T> search(
+            DetachedCriteria dCriteria, int start, int max) {
+        Criteria criteria = dCriteria.getExecutableCriteria(getCurrentSession
+                ());
         SearchResults<T> results = new SearchResults<>();
-        results.setTotalResults(((Long) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue());
+        results.setTotalResults(((Long) criteria.setProjection(Projections
+                .rowCount()).uniqueResult()).intValue());
         criteria.setProjection(null);
         criteria.setResultTransformer(Criteria.ROOT_ENTITY);
         criteria.setMaxResults((start - 1) * max + max);
