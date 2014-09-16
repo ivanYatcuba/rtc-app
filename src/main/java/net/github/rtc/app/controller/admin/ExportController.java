@@ -17,10 +17,11 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.lang.reflect.Field;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -39,7 +40,6 @@ public class ExportController {
 
     private static final int BUFFER_SIZE = 4096;
     private static final String ROOT = "portal/admin";
-    private static final String ROOT_MODEL = "export";
 
     @Value("${report.export.path}")
     private String exportPath;

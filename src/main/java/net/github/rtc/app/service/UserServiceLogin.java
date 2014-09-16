@@ -6,5 +6,5 @@ import net.github.rtc.app.model.user.User;
  * Created by Ivan Yatcuba on 7/22/14.
  */
 public interface UserServiceLogin {
-    public User loadUserByUsername(String email);
+    User loadUserByUsername(String email);
 }

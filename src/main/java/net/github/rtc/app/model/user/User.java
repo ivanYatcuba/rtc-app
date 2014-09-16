@@ -2,6 +2,7 @@ package net.github.rtc.app.model.user;
 
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.*;
+import net.github.rtc.util.annotation.validation.Number;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -46,7 +47,7 @@ public class User implements UserDetails {
     private Date birthDate;
 
     @Required
-    @net.github.rtc.util.annotation.validation.Number
+    @Number
     @Column
     @ForExport("Phone")
     private String phone;

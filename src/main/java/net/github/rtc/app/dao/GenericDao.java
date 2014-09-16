@@ -24,6 +24,6 @@ public interface GenericDao<T> {
 
     T findByCode(String code);
 
-    public SearchResults<T> search(SearchCriteria searchCriteria);
+    SearchResults<T> search(SearchCriteria searchCriteria);
 
 }

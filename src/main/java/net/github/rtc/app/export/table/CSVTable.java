@@ -1,6 +1,5 @@
 package net.github.rtc.app.export.table;
 
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;

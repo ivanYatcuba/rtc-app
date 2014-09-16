@@ -53,7 +53,7 @@ public class Paginator {
     }
 
     private int checkCurrentPage(int currentPage) {
-        return (currentPage < 1) ? 0 : currentPage;
+        return currentPage < 1 ? 0 : currentPage;
     }
 
     private int getCountPages(int total) {
@@ -61,10 +61,10 @@ public class Paginator {
     }
 
     private Integer getPrevResult(int currentPage) {
-        return (currentPage < 2) ? null : currentPage - 1;
+        return currentPage < 2 ? null : currentPage - 1;
     }
 
     private Integer getNextResult(int currentPage, int countPages) {
-        return (currentPage < countPages) ? currentPage + 1 : null;
+        return currentPage < countPages ? currentPage + 1 : null;
     }
 }

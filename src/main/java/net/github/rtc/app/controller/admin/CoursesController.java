@@ -200,7 +200,7 @@ public class CoursesController {
         return "redirect: view/" + course.getCode();
     }
 
-    private Set<User> bindExperts(List<String> experts) {
+    protected Set<User> bindExperts(List<String> experts) {
         if (experts == null) return null;
         Set<User> courseExperts = new HashSet<>();
         for (String expert : experts) {

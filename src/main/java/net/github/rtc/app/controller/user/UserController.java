@@ -174,8 +174,8 @@ public class UserController {
         return userCourseOrder;
     }
 
-    private Map<String, String> getUserCourseOrderParams(String orderData) {
-        Map<String, String> orderParamsMap = new HashMap<String, String>();
+    protected Map<String, String> getUserCourseOrderParams(String orderData) {
+        Map<String, String> orderParamsMap = new HashMap<>();
         String[] orderParams = orderData.split("&");
         for (String param : orderParams) {
             String[] value = param.split("=");

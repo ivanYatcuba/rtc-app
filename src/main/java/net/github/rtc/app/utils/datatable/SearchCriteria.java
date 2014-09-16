@@ -74,7 +74,7 @@ public class SearchCriteria {
         criteria.add(junction);
     }
 
-    private void attachCriteria(String field, Object val, String alias, Addable addable, RestrictionStrategy strategy){
+    protected void attachCriteria(String field, Object val, String alias, Addable addable, RestrictionStrategy strategy){
         try {
             Field f = val.getClass().getDeclaredField(field);
             f.setAccessible(true);
