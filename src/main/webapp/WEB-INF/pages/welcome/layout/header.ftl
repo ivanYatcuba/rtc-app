@@ -19,6 +19,8 @@
                     <#else>
                         <li><a href="<@spring.url'/login'/>" class="loginButton">Sign In</a></li>
                     </#if>
+                    <#else>
+                        <li><a href="<@spring.url'/login'/>" class="loginButton">Sign In</a></li>
                     </#if>
                 </ul>
             </#if>

@@ -22,25 +22,28 @@
                   type="password"></p>
     </div>
     <div>
-        <p><input style="width:250px;height:35px" id="signin_submit" value="Sign in" type="submit" name="submit"></p>
 
         <p>
         <td colspan="2">
         </p>
 
-                   <p class="remember" ><input type="checkbox" id="ch" > Show password
-                       <script language="JavaScript" type="text/javascript">
-                           $("#ch").change(function(){
+        <p class="remember" ><input type="checkbox" id="ch" > Show password
+            <script language="JavaScript" type="text/javascript">
+                $("#ch").change(function(){
 
-                               if (ch.checked) {
-                                  password.type = "text"
-                               } else {
-                                   password.type = "password"
+                    if (ch.checked) {
+                        password.type = "text"
+                    } else {
+                        password.type = "password"
 
-                               }});
-                       </script>
+                    }});
+            </script>
             <input type="checkbox" name="_spring_security_remember_me">Remember me
         </p>
+
+        <p><input style="width:250px;height:35px" id="signin_submit" value="Sign in" type="submit" name="submit"></p>
+
+
     </div>
 </div>
 
