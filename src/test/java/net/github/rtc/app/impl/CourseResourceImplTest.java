@@ -3,11 +3,14 @@ package net.github.rtc.app.impl;
 import net.github.rtc.app.dao.impl.CoursesDaoImpl;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
+
+import static junit.framework.Assert.assertEquals;
 
 //import static org.junit.Assert.assertEquals;
 
@@ -35,6 +38,10 @@ public class CourseResourceImplTest {
     }
 
 
+    @Test
+    public void fakeTest() throws Exception {
+        assertEquals(true,true);
+    }
     /*
 
     private String loadXmlFile(final String filename) throws IOException {
