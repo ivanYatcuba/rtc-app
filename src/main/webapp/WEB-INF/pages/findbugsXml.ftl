@@ -1645,7 +1645,7 @@
                      (20 packages),
                      (78 classes)
                   </td>
-<td class="summary-size">2146</td>
+<td class="summary-size">2145</td>
 <td class="summary-priority-all">37</td>
 <td class="summary-priority-1">1</td>
 <td class="summary-priority-2">36</td>
@@ -1654,7 +1654,7 @@
 </tr>
 <tr>
 <td class="summary-name">net.github.rtc.app.controller.admin</td>
-<td class="summary-size">291</td>
+<td class="summary-size">290</td>
 <td class="summary-priority-all">1</td>
 <td class="summary-priority-1" />
 <td class="summary-priority-2">1</td>
@@ -2024,7 +2024,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In class net.github.rtc.app.export.table.CSVTable</div>
 <div class="b-r">In method net.github.rtc.app.export.table.CSVTable.writeToFile(String)</div>
 <div class="b-r">Called method new java.io.FileWriter(String)</div>
-<div class="b-r">At CSVTable.java:[line 32]</div>
+<div class="b-r">At CSVTable.java:[line 31]</div>
 <div class="b-d">Found reliance on default encoding in net.github.rtc.app.export.table.CSVTable.writeToFile(String): new java.io.FileWriter(String)</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-f94682a48ff1bc0fe296b3492213a538-0">
@@ -2032,9 +2032,9 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.export.table.CSVTable.writeToFile(String)</div>
 <div class="b-r">Reference type java.io.Writer</div>
 <div class="b-r">1 instances of obligation remaining</div>
-<div class="b-r">Obligation to clean up resource created at CSVTable.java:[line 32] is not discharged</div>
-<div class="b-r">Path continues at CSVTable.java:[line 33]</div>
-<div class="b-r">Path continues at CSVTable.java:[line 39]</div>
+<div class="b-r">Obligation to clean up resource created at CSVTable.java:[line 31] is not discharged</div>
+<div class="b-r">Path continues at CSVTable.java:[line 32]</div>
+<div class="b-r">Path continues at CSVTable.java:[line 38]</div>
 <div class="b-r">Remaining obligations: {Writer x 1}</div>
 <div class="b-d">net.github.rtc.app.export.table.CSVTable.writeToFile(String) may fail to clean up java.io.Writer on checked exception</div>
 </div>
@@ -2143,21 +2143,21 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In class net.github.rtc.app.model.user.User</div>
 <div class="b-r">In method net.github.rtc.app.model.user.User.getBirthDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.birthDate</div>
-<div class="b-r">At User.java:[line 299]</div>
+<div class="b-r">At User.java:[line 300]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.getBirthDate() may expose internal representation by returning User.birthDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-91276797e9fa3e541eb6c9c916413650-0">
 <div class="b-r">In class net.github.rtc.app.model.user.User</div>
 <div class="b-r">In method net.github.rtc.app.model.user.User.getRegisterDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.registerDate</div>
-<div class="b-r">At User.java:[line 323]</div>
+<div class="b-r">At User.java:[line 324]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.getRegisterDate() may expose internal representation by returning User.registerDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-f78df78cef32c8a662c5c5ac0d006d27-0">
 <div class="b-r">In class net.github.rtc.app.model.user.User</div>
 <div class="b-r">In method net.github.rtc.app.model.user.User.getRemovalDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.removalDate</div>
-<div class="b-r">At User.java:[line 331]</div>
+<div class="b-r">At User.java:[line 332]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.getRemovalDate() may expose internal representation by returning User.removalDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-82a2696c4a9cf3574f0bf076681d3c7b-0">
@@ -2165,7 +2165,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method new net.github.rtc.app.model.user.User(String, String, String, String, String, String, Date, String, String, String, String, String, String, String, Set, String)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.birthDate</div>
 <div class="b-r">Local variable named birthDate</div>
-<div class="b-r">At User.java:[line 378]</div>
+<div class="b-r">At User.java:[line 379]</div>
 <div class="b-d">new net.github.rtc.app.model.user.User(String, String, String, String, String, String, Date, String, String, String, String, String, String, String, Set, String) may expose internal representation by storing an externally mutable object into User.birthDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-1abfa43792aa460a5950daffcfcb1798-0">
@@ -2173,7 +2173,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method new net.github.rtc.app.model.user.User(String, String, String, String, String, Date, String, String, String, String, String, String, String, Set, String)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.birthDate</div>
 <div class="b-r">Local variable named birthDate</div>
-<div class="b-r">At User.java:[line 400]</div>
+<div class="b-r">At User.java:[line 401]</div>
 <div class="b-d">new net.github.rtc.app.model.user.User(String, String, String, String, String, Date, String, String, String, String, String, String, String, Set, String) may expose internal representation by storing an externally mutable object into User.birthDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-7905a5b44a304d4f9b37ce458f13137c-0">
@@ -2181,7 +2181,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.user.User.setBirthDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.birthDate</div>
 <div class="b-r">Local variable named birthDate</div>
-<div class="b-r">At User.java:[line 303]</div>
+<div class="b-r">At User.java:[line 304]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.setBirthDate(Date) may expose internal representation by storing an externally mutable object into User.birthDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-e83cdd5403fc6c4de5536ba885d7e1ea-0">
@@ -2189,7 +2189,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.user.User.setRegisterDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.registerDate</div>
 <div class="b-r">Local variable named registerDate</div>
-<div class="b-r">At User.java:[line 327]</div>
+<div class="b-r">At User.java:[line 328]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.setRegisterDate(Date) may expose internal representation by storing an externally mutable object into User.registerDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-9a6e41a06caebe3d9be0247091507f-0">
@@ -2197,7 +2197,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.user.User.setRemovalDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.removalDate</div>
 <div class="b-r">Local variable named removalDate</div>
-<div class="b-r">At User.java:[line 335]</div>
+<div class="b-r">At User.java:[line 336]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.setRemovalDate(Date) may expose internal representation by storing an externally mutable object into User.removalDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-7ade47ccbbc2730a511488ce1ccd8f6e-0">

@@ -77,7 +77,7 @@ public class ExpertController {
         return "redirect:/expert/requests";
     }
 
-    protected void changeOrderStatus(UserRequestStatus userRequestStatus, Integer orderId){
+    private void changeOrderStatus(UserRequestStatus userRequestStatus, Integer orderId){
         UserCourseOrder order = userCourseOrderService.getUserOrder(orderId.longValue());
         order.setResponseDate(new Date());
         order.setStatus(userRequestStatus);

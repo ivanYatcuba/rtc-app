@@ -258,24 +258,7 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.2</version>
-                <configuration>
-                    <targetJdk>1.7</targetJdk>
-                    <verbose>true</verbose>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>check</goal>
-                            <goal>cpd-check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
@@ -364,12 +347,12 @@
                     <configLocation>checkstyle/config.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
                 </configuration>
-                <executions>
+                <!--<executions>
                     <execution>
                         <phase>package</phase>
                         <goals><goal>check</goal></goals>
                     </execution>
-                </executions>
+                </executions>-->
             </plugin>
         </plugins>
     </build>
