@@ -73,11 +73,11 @@ public class Course implements Serializable {
     @ForExport("Capacity")
     private Integer capacity = 10;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "courses_tags",
-            joinColumns = {@JoinColumn(name = "tagId")},
-            inverseJoinColumns = {@JoinColumn(name = "id")})
+      joinColumns = { @JoinColumn(name = "tagId") },
+      inverseJoinColumns = { @JoinColumn(name = "id") })
     @ForExport("Tags")
     private List<Tag> tags;
 
@@ -85,8 +85,8 @@ public class Course implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "courses_experts",
-            joinColumns = {@JoinColumn(name = "expertId")},
-            inverseJoinColumns = {@JoinColumn(name = "courseId")})
+      joinColumns = { @JoinColumn(name = "expertId") },
+      inverseJoinColumns = { @JoinColumn(name = "courseId") })
     @ForExport(value = "Experts")//, inculdeField = {"Author Email"})
     private Set<User> experts;
 
@@ -94,7 +94,7 @@ public class Course implements Serializable {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(final List<Tag> tags) {
         this.tags = tags;
     }
 
@@ -102,7 +102,7 @@ public class Course implements Serializable {
         return type;
     }
 
-    public void setType(CourseType type) {
+    public void setType(final CourseType type) {
         this.type = type;
     }
 
@@ -110,7 +110,7 @@ public class Course implements Serializable {
         return experts;
     }
 
-    public void setExperts(Set<User> experts) {
+    public void setExperts(final Set<User> experts) {
         this.experts = experts;
     }
 
@@ -118,7 +118,7 @@ public class Course implements Serializable {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(final Date startDate) {
         this.startDate = startDate;
     }
 
@@ -126,7 +126,7 @@ public class Course implements Serializable {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(final Date endDate) {
         this.endDate = endDate;
     }
 
@@ -134,7 +134,7 @@ public class Course implements Serializable {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(final String code) {
         this.code = code;
     }
 
@@ -142,7 +142,7 @@ public class Course implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -150,7 +150,7 @@ public class Course implements Serializable {
         return capacity;
     }
 
-    public void setCapacity(Integer capacity) {
+    public void setCapacity(final Integer capacity) {
         this.capacity = capacity;
     }
 
@@ -158,7 +158,7 @@ public class Course implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -166,7 +166,7 @@ public class Course implements Serializable {
         return status;
     }
 
-    public void setStatus(CourseStatus status) {
+    public void setStatus(final CourseStatus status) {
         this.status = status;
     }
 
@@ -174,7 +174,7 @@ public class Course implements Serializable {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(final Date publishDate) {
         this.publishDate = publishDate;
     }
 
@@ -182,7 +182,7 @@ public class Course implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -191,9 +191,16 @@ public class Course implements Serializable {
     }
 
     public Course(
-            String code, String name, CourseType type, Set<User> experts,
-            Date startDate, Date endDate, Date publishDate, Integer capacity,
-            String description, CourseStatus status) {
+      final String code,
+      final String name,
+      final CourseType type,
+      final Set<User> experts,
+      final Date startDate,
+      final Date endDate,
+      final Date publishDate,
+      final Integer capacity,
+      final String description,
+      final CourseStatus status) {
         this.code = code;
         this.name = name;
         this.type = type;
@@ -225,38 +232,53 @@ public class Course implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(final Object o) {
+        if (this
+          == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o
+          == null
+          || getClass()
+          != o.getClass()) {
             return false;
         }
 
-        Course course = (Course) o;
+        final Course course = (Course) o;
 
-        if (experts != null ? !experts.equals(course.experts) : course
-                .experts != null) {
+        if (experts
+          != null ? !experts.equals(course.experts) : course.experts
+          != null) {
             return false;
         }
-        if (code != null ? !code.equals(course.code) : course.code != null) {
+        if (code
+          != null ? !code.equals(course.code) : course.code
+          != null) {
             return false;
         }
-        if (endDate != null ? !endDate.equals(course.endDate) : course
-                .endDate != null) {
+        if (endDate
+          != null ? !endDate.equals(course.endDate) : course.endDate
+          != null) {
             return false;
         }
-        if (name != null ? !name.equals(course.name) : course.name != null) {
+        if (name
+          != null ? !name.equals(course.name) : course.name
+          != null) {
             return false;
         }
-        if (startDate != null ? !startDate.equals(course.startDate) : course
-                .startDate != null) {
+        if (startDate
+          != null ? !startDate.equals(course.startDate) : course.startDate
+          != null) {
             return false;
         }
-        if (tags != null ? !tags.equals(course.tags) : course.tags != null) {
+        if (tags
+          != null ? !tags.equals(course.tags) : course.tags
+          != null) {
             return false;
         }
-        if (type != null ? !type.equals(course.type) : course.type != null) {
+        if (type
+          != null ? !type.equals(course.type) : course.type
+          != null) {
             return false;
         }
 
@@ -265,19 +287,48 @@ public class Course implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = code != null ? code.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (experts != null ? experts.hashCode() : 0);
-        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
-        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
-        result = 31 * result + (tags != null ? tags.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode()
-                : 0);
-        result = 31 * result + (publishDate != null ? publishDate.hashCode()
-                : 0);
-        result = 31 * result + (capacity != null ? capacity.hashCode() : 0);
+        int result = code
+          != null ? code.hashCode() : 0;
+        result = 31
+          * result
+          + (name
+          != null ? name.hashCode() : 0);
+        result = 31
+          * result
+          + (type
+          != null ? type.hashCode() : 0);
+        result = 31
+          * result
+          + (experts
+          != null ? experts.hashCode() : 0);
+        result = 31
+          * result
+          + (startDate
+          != null ? startDate.hashCode() : 0);
+        result = 31
+          * result
+          + (endDate
+          != null ? endDate.hashCode() : 0);
+        result = 31
+          * result
+          + (tags
+          != null ? tags.hashCode() : 0);
+        result = 31
+          * result
+          + (status
+          != null ? status.hashCode() : 0);
+        result = 31
+          * result
+          + (description
+          != null ? description.hashCode() : 0);
+        result = 31
+          * result
+          + (publishDate
+          != null ? publishDate.hashCode() : 0);
+        result = 31
+          * result
+          + (capacity
+          != null ? capacity.hashCode() : 0);
         return result;
     }
 }

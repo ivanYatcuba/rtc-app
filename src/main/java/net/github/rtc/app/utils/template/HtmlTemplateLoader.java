@@ -9,35 +9,37 @@ import java.io.StringReader;
 
 public class HtmlTemplateLoader implements TemplateLoader {
 
-    public static final String ESCAPE_PREFIX = "<#ftl " +
-            "strip_whitespace=true><#escape x as x?html>";
+    public static final String ESCAPE_PREFIX = "<#ftl "
+      + "strip_whitespace=true><#escape x as x?html>";
     public static final String ESCAPE_SUFFIX = "</#escape>";
 
     private final TemplateLoader delegate;
 
-    public HtmlTemplateLoader(TemplateLoader delegate) {
+    public HtmlTemplateLoader(final TemplateLoader delegate) {
         this.delegate = delegate;
     }
 
     @Override
-    public Object findTemplateSource(String name) throws IOException {
+    public Object findTemplateSource(final String name) throws IOException {
         return delegate.findTemplateSource(name);
     }
 
     @Override
-    public long getLastModified(Object templateSource) {
+    public long getLastModified(final Object templateSource) {
         return delegate.getLastModified(templateSource);
     }
 
     @Override
-    public Reader getReader(Object templateSource, String encoding) throws
-            IOException {
-        Reader reader = delegate.getReader(templateSource, encoding);
+    public Reader getReader(
+      final Object templateSource, final String encoding) throws IOException {
+        final Reader reader = delegate.getReader(templateSource, encoding);
         try {
-            String templateText = IOUtils.toString(reader);
+            final String templateText = IOUtils.toString(reader);
             if (!templateText.contains("<#ftl")) {
-                return new StringReader(ESCAPE_PREFIX + templateText +
-                        ESCAPE_SUFFIX);
+                return new StringReader(ESCAPE_PREFIX
+                  + templateText
+                  +
+                  ESCAPE_SUFFIX);
             } else {
                 return new StringReader(templateText);
             }
@@ -48,7 +50,8 @@ public class HtmlTemplateLoader implements TemplateLoader {
     }
 
     @Override
-    public void closeTemplateSource(Object templateSource) throws IOException {
+    public void closeTemplateSource(final Object templateSource) throws
+      IOException {
         delegate.closeTemplateSource(templateSource);
     }
 }

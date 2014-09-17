@@ -20,39 +20,47 @@ public class ErrorController {
     }
 
     @RequestMapping("error")
-    public ModelAndView customError(HttpServletRequest request) {
-        Integer statusCode = (Integer) request.getAttribute("javax.servlet" +
-                ".error.status_code");
-        Throwable throwable = (Throwable) request.getAttribute("javax" +
-                ".servlet" + ".error.exception");
-        String exceptionMessage = getExceptionMessage(throwable, statusCode);
+    public ModelAndView customError(final HttpServletRequest request) {
+        final Integer statusCode = (Integer) request.getAttribute("javax"
+          +
+          ".servlet"
+          + ".error.status_code");
+        final Throwable throwable = (Throwable) request.getAttribute("javax"
+          +
+          ".servlet"
+          + ".error.exception");
+        final String exceptionMessage = getExceptionMessage(throwable,
+          statusCode);
 
-
-        String requestUri = (String) request.getAttribute("javax.servlet" + "" +
-                ".error.request_uri");
-        if (requestUri == null) {
+        String requestUri = (String) request.getAttribute("javax.servlet"
+          + ""
+          +
+          ".error.request_uri");
+        if (requestUri
+          == null) {
             requestUri = "Unknown";
         }
 
-        String message = formatErrorMessage(statusCode, requestUri,
-                exceptionMessage);
-        ModelAndView mnv = new ModelAndView("error/error");
+        final String message = formatErrorMessage(statusCode, requestUri,
+          exceptionMessage);
+        final ModelAndView mnv = new ModelAndView("error/error");
         mnv.addObject("errorMessage", message);
         return mnv;
     }
 
     private String getExceptionMessage(
-            Throwable throwable, Integer statusCode) {
-        if (throwable != null) {
+      final Throwable throwable, final Integer statusCode) {
+        if (throwable
+          != null) {
             return Throwables.getRootCause(throwable).getMessage();
         }
-        HttpStatus httpStatus = HttpStatus.valueOf(statusCode);
+        final HttpStatus httpStatus = HttpStatus.valueOf(statusCode);
         return httpStatus.getReasonPhrase();
     }
 
     private String formatErrorMessage(
-            Integer statusCode, String requestUri, String message) {
-        StringBuilder sb = new StringBuilder();
+      final Integer statusCode, final String requestUri, final String message) {
+        final StringBuilder sb = new StringBuilder();
         sb.append("<!--");
         sb.append("\nERROR DETAILS\n");
         sb.append("Error code: ").append(statusCode);

@@ -22,27 +22,28 @@ public class LoginController {
     @Autowired
     private UserServiceLogin userServiceLogin;
 
-    private ModelAndView buildLoginMav(ModelMap model) {
-        ModelAndView mav = new ModelAndView("welcome/welcomeLayout", model);
+    private ModelAndView buildLoginMav(final ModelMap model) {
+        final ModelAndView mav = new ModelAndView("welcome/welcomeLayout",
+          model);
         mav.addObject("content", "../portal/user/login");
         return mav;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login(ModelMap model) {
+    public ModelAndView login(final ModelMap model) {
         return buildLoginMav(model);
     }
 
     @RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
-    public ModelAndView loginerror(ModelMap model) {
-        ModelAndView mav = buildLoginMav(model);
+    public ModelAndView loginerror(final ModelMap model) {
+        final ModelAndView mav = buildLoginMav(model);
         mav.addObject("error", "true");
 
         return mav;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ModelAndView logout(ModelMap model) {
+    public ModelAndView logout(final ModelMap model) {
         SecurityContextHolder.clearContext();
         return buildLoginMav(model);
 
@@ -52,18 +53,20 @@ public class LoginController {
     public
     @ResponseBody
     boolean mailExist(
-            @RequestParam String email, @RequestParam String currentEmail) {
+      @RequestParam final String email,
+      @RequestParam final String currentEmail) {
         if (email.equals(currentEmail)) {
             return true;
         }
-        return userServiceLogin.loadUserByUsername(email) == null;
+        return userServiceLogin.loadUserByUsername(email)
+          == null;
 
     }
 
     @RequestMapping(value = "/login_attempt", method = RequestMethod.GET)
     public String loginAttempt() {
-        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder
-                .getContext().getAuthentication().getName());
+        final User user = userServiceLogin.loadUserByUsername(
+          SecurityContextHolder.getContext().getAuthentication().getName());
         if (user.hasRole(RoleType.ROLE_ADMIN.name())) {
             return "redirect:/admin";
         } else {

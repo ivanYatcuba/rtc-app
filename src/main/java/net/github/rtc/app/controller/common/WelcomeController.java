@@ -26,7 +26,7 @@ public class WelcomeController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView welcome() throws Exception {
-        ModelAndView mav = new ModelAndView("welcome/welcomeLayout");
+        final ModelAndView mav = new ModelAndView("welcome/welcomeLayout");
         mav.addObject("soonCourses", courseService.startingSoonCourses());
         mav.addObject("content", "content/welcomeContent");
         return mav;

@@ -42,8 +42,8 @@ public class ReportDetails {
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "ReportField", joinColumns = @JoinColumn(name =
-            "report_id"))
+    @CollectionTable(name = "ReportField",
+      joinColumns = @JoinColumn(name = "report_id"))
     private List<String> fields;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,7 +53,7 @@ public class ReportDetails {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -61,7 +61,7 @@ public class ReportDetails {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(final String code) {
         this.code = code;
     }
 
@@ -69,7 +69,7 @@ public class ReportDetails {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -77,7 +77,7 @@ public class ReportDetails {
         return exportFormat;
     }
 
-    public void setExportFormat(ExportFormat exportFormat) {
+    public void setExportFormat(final ExportFormat exportFormat) {
         this.exportFormat = exportFormat;
     }
 
@@ -85,7 +85,7 @@ public class ReportDetails {
         return exportClass;
     }
 
-    public void setExportClass(Class exportClass) {
+    public void setExportClass(final Class exportClass) {
         this.exportClass = exportClass;
     }
 
@@ -93,7 +93,7 @@ public class ReportDetails {
         return fields;
     }
 
-    public void setFields(List<String> fields) {
+    public void setFields(final List<String> fields) {
         this.fields = fields;
     }
 
@@ -101,7 +101,7 @@ public class ReportDetails {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(final Date createdDate) {
         this.createdDate = createdDate;
     }
 

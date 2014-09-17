@@ -31,7 +31,7 @@ public class CourseSearchFilter implements SearchFilter {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -39,7 +39,7 @@ public class CourseSearchFilter implements SearchFilter {
         return type;
     }
 
-    public void setType(CourseType type) {
+    public void setType(final CourseType type) {
         this.type = type;
     }
 
@@ -47,7 +47,7 @@ public class CourseSearchFilter implements SearchFilter {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(final Date startDate) {
         this.startDate = startDate;
     }
 
@@ -55,7 +55,7 @@ public class CourseSearchFilter implements SearchFilter {
         return status;
     }
 
-    public void setStatus(CourseStatus status) {
+    public void setStatus(final CourseStatus status) {
         this.status = status;
     }
 
@@ -63,7 +63,7 @@ public class CourseSearchFilter implements SearchFilter {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(final List<Tag> tags) {
         this.tags = tags;
     }
 
@@ -71,24 +71,35 @@ public class CourseSearchFilter implements SearchFilter {
         return experts;
     }
 
-    public void setExperts(Set<User> experts) {
+    public void setExperts(final Set<User> experts) {
         this.experts = experts;
     }
 
     @Override
     public DetachedCriteria getCriteria() {
-        DetachedCriteria criteria = DetachedCriteria.forClass(Course.class);
+        final DetachedCriteria criteria = DetachedCriteria.forClass(Course
+          .class);
 
-        if (name != null && !name.equals("")) {
-            criteria.add(Restrictions.like("name", "%" + name + "%"));
+        if (name
+          != null
+          && !name.equals("")) {
+            criteria.add(Restrictions.like("name", "%"
+              + name
+              + "%"));
         }
-        if (status != null && !status.equals("")) {
+        if (status
+          != null
+          && !status.equals("")) {
             criteria.add(Restrictions.eq("status", status));
         }
-        if (startDate != null) {
+        if (startDate
+          != null) {
             criteria.add(Restrictions.ge("startDate", startDate));
         }
-        if (tags != null && tags.size() > 0) {
+        if (tags
+          != null
+          && tags.size()
+          > 0) {
             criteria.createAlias("tags", "tags");
             final Disjunction tagDis = Restrictions.disjunction();
             for (final Tag tag : tags) {

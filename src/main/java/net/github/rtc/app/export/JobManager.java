@@ -33,42 +33,53 @@ public class JobManager {
 
 
     public void manageJob(
-            ReportDetails report, JobManagerAction managerAction) throws
-            Exception {
-        ModelService modelService = getModelService(report.getExportClass());
-        if (modelService == null) {
-            throw new Exception("Service class of type" + report
-                    .getExportClass() + " not found!");
+      final ReportDetails report,
+      final JobManagerAction managerAction) throws Exception {
+        final ModelService modelService = getModelService(
+          report.getExportClass());
+        if (modelService
+          == null) {
+            throw new Exception("Service class of type"
+              + report.getExportClass()
+              + " not "
+              +
+              "found!");
         }
-        final String filePath = exportPath + report.getCode() + "." + report
-                .getExportFormat().toString().toLowerCase();
-        if (managerAction == JobManagerAction.UPDATE || managerAction ==
-                JobManagerAction.DELETE) {
-            scheduler.getObject().unscheduleJob(TriggerKey.triggerKey(report
-                    .getCode()));
-            File file = new File(filePath);
+        final String filePath = exportPath
+          + report.getCode()
+          + "."
+          + report.getExportFormat().toString().toLowerCase();
+        if (managerAction
+          == JobManagerAction.UPDATE
+          || managerAction
+          == JobManagerAction.DELETE) {
+            scheduler.getObject().unscheduleJob(
+              TriggerKey.triggerKey(report.getCode()));
+            final File file = new File(filePath);
             file.delete();
         }
-        if (managerAction == JobManagerAction.CREATE || managerAction ==
-                JobManagerAction.UPDATE) {
-            ReportJob reportJob = new ReportJob();
-            JobDataMap dataMap = new JobDataMap();
+        if (managerAction
+          == JobManagerAction.CREATE
+          || managerAction
+          == JobManagerAction.UPDATE) {
+            final ReportJob reportJob = new ReportJob();
+            final JobDataMap dataMap = new JobDataMap();
             dataMap.put("filePath", filePath);
             dataMap.put("modelService", modelService);
             dataMap.put("report", report);
 
-            scheduler.getObject().scheduleJob(newJob(reportJob.getClass())
-                    .withIdentity(report.getCode()).
-                    setJobData(dataMap).build(), newTrigger().withIdentity
-                    (report.getCode()).withSchedule(cronSchedule
-                    (croneExpression)).build());
+            scheduler.getObject().scheduleJob(
+              newJob(reportJob.getClass()).withIdentity(report.getCode()).
+                setJobData(dataMap).build(),
+              newTrigger().withIdentity(report.getCode()).withSchedule(
+                cronSchedule(croneExpression)).build());
             reportJob.runOutOfContext(report, modelService, filePath);
         }
     }
 
-    private ModelService getModelService(Class aClass) {
-        for (ModelService service : applicationContext.getBeansOfType
-                (ModelService.class).values()) {
+    private ModelService getModelService(final Class aClass) {
+        for (final ModelService service : applicationContext.getBeansOfType(
+          ModelService.class).values()) {
             if (service.getType().equals(aClass)) {
                 return service;
             }

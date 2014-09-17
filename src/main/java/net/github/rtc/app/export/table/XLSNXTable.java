@@ -19,39 +19,39 @@ public class XLSNXTable implements ReportTable {
     private CellStyle cellStyle;
     private CreationHelper createHelper;
 
-    public XLSNXTable(Workbook workbook, String sheetName) {
+    public XLSNXTable(final Workbook workbook, final String sheetName) {
         this.sheet = workbook.createSheet(sheetName);
         this.cellStyle = workbook.createCellStyle();
         this.createHelper = workbook.getCreationHelper();
-        this.cellStyle.setDataFormat(createHelper.createDataFormat()
-                .getFormat("dd/mm/yy"));
+        this.cellStyle.setDataFormat(
+          createHelper.createDataFormat().getFormat("dd/mm/yy"));
     }
 
     @Override
-    public void createRow(int rowIndex) {
+    public void createRow(final int rowIndex) {
         sheet.createRow(rowIndex);
     }
 
     @Override
-    public void createCell(int rowIndex, int cellIndex, Object value) {
+    public void createCell(
+      final int rowIndex, final int cellIndex, final Object value) {
         if (value instanceof Date) {
-            sheet.getRow(rowIndex).createCell(cellIndex).setCellValue((Date)
-                    value);
+            sheet.getRow(rowIndex).createCell(cellIndex).setCellValue(
+              (Date) value);
             sheet.getRow(rowIndex).getCell(cellIndex).setCellStyle(cellStyle);
         } else {
             sheet.getRow(rowIndex).createCell(cellIndex).
-                    setCellValue(createHelper.createRichTextString(value
-                            .toString()));
+              setCellValue(createHelper.createRichTextString(value.toString()));
         }
     }
 
     @Override
-    public void writeToFile(String fileName) throws IOException {
-        File file = new File(fileName);
+    public void writeToFile(final String fileName) throws IOException {
+        final File file = new File(fileName);
         if (!file.exists()) {
             file.createNewFile();
         }
-        FileOutputStream fileOut = new FileOutputStream(file);
+        final FileOutputStream fileOut = new FileOutputStream(file);
         sheet.getWorkbook().write(fileOut);
         fileOut.close();
     }

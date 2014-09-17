@@ -23,29 +23,29 @@ import java.util.List;
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
     @Override
-    public User findByEmail(String email) {
+    public User findByEmail(final String email) {
         return (User) sessionFactory.getCurrentSession().createCriteria(User
-                .class).
-                add(Restrictions.eq("email", email)).uniqueResult();
+          .class).
+          add(Restrictions.eq("email", email)).uniqueResult();
     }
 
     @Override
-    public Role getRoleByType(RoleType type) {
+    public Role getRoleByType(final RoleType type) {
         return (Role) sessionFactory.getCurrentSession().createCriteria(Role
-                .class).
-                add(Restrictions.eq("name", type.name())).uniqueResult();
+          .class).
+          add(Restrictions.eq("name", type.name())).uniqueResult();
     }
 
     @Override
-    public void createRole(RoleType type) {
+    public void createRole(final RoleType type) {
         sessionFactory.getCurrentSession().save(new Role(type));
     }
 
     @Override
-    public List<User> getUserByType(RoleType type) {
-        return sessionFactory.getCurrentSession().createCriteria(User.class)
-                .createAlias("authorities", "a").
-                add(Restrictions.eq("a.name", type.name())).list();
+    public List<User> getUserByType(final RoleType type) {
+        return sessionFactory.getCurrentSession().createCriteria(
+          User.class).createAlias("authorities", "a").
+          add(Restrictions.eq("a.name", type.name())).list();
     }
 
 }

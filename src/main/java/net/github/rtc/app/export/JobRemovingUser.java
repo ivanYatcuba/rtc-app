@@ -12,8 +12,8 @@ import java.util.Collection;
 
 @Component
 public class JobRemovingUser {
-    private static Logger LOG = LoggerFactory.getLogger(JobRemovingUser.class
-            .getName());
+    private static Logger LOG = LoggerFactory.getLogger(
+      JobRemovingUser.class.getName());
 
     @Autowired
     private UserService userService;
@@ -21,11 +21,12 @@ public class JobRemovingUser {
     @Scheduled(fixedDelay = 300000)
     public void deletingUser() {
         LOG.debug("JobRemovingUser started");
-        Collection<User> listUsers = userService.findAll();
+        final Collection<User> listUsers = userService.findAll();
         LOG.debug("Size of downloaded collection: {}", listUsers.size());
-        for (User user : listUsers) {
-            if (user.getRemovalDate() != null) {
-                String userCode = user.getCode();
+        for (final User user : listUsers) {
+            if (user.getRemovalDate()
+              != null) {
+                final String userCode = user.getCode();
                 userService.deleteByCode(userCode);
             }
         }

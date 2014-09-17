@@ -9,7 +9,7 @@ public class ServiceProcessingException extends RuntimeException {
     public ServiceProcessingException() {
     }
 
-    public ServiceProcessingException(String message) {
+    public ServiceProcessingException(final String message) {
         super(message);
     }
 }

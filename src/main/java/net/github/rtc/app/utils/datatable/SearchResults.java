@@ -14,7 +14,7 @@ public class SearchResults<T> {
         return totalResults;
     }
 
-    public void setTotalResults(int totalResults) {
+    public void setTotalResults(final int totalResults) {
         this.totalResults = totalResults;
     }
 
@@ -23,7 +23,8 @@ public class SearchResults<T> {
     }
 
     public void setResults(List<T> aRresults) {
-        if (aRresults == null) {
+        if (aRresults
+          == null) {
             aRresults = new ArrayList<>();
         }
         this.results = aRresults;

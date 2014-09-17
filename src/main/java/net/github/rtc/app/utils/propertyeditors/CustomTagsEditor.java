@@ -17,25 +17,26 @@ public class CustomTagsEditor extends PropertyEditorSupport {
 
     @Override
     public String getAsText() {
-        Object obj = this.getValue();
-        if (obj == null) {
+        final Object obj = this.getValue();
+        if (obj
+          == null) {
             return "";
         }
-        Collection<Tag> tags = ((Collection<Tag>) obj);
-        StringBuffer sb = new StringBuffer();
-        for (Tag tag : tags) {
+        final Collection<Tag> tags = ((Collection<Tag>) obj);
+        final StringBuffer sb = new StringBuffer();
+        for (final Tag tag : tags) {
             sb.append(tag.getValue()).append(",");
         }
         return sb.toString();
     }
 
     @Override
-    public void setAsText(String text) throws IllegalArgumentException {
-        List<String> tagsSplit = Arrays.asList(text.split(","));
+    public void setAsText(final String text) throws IllegalArgumentException {
+        final List<String> tagsSplit = Arrays.asList(text.split(","));
         Collection<Tag> tags = null;
         if (!tagsSplit.get(0).equals("")) {
             tags = new ArrayList<>();
-            for (String tagName : tagsSplit) {
+            for (final String tagName : tagsSplit) {
                 tags.add(new Tag(tagName));
             }
         }

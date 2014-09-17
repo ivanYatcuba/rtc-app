@@ -15,23 +15,24 @@ public class CustomStringEditor extends PropertyEditorSupport {
 
     @Override
     public String getAsText() {
-        Object obj = this.getValue();
-        if (obj == null) {
+        final Object obj = this.getValue();
+        if (obj
+          == null) {
             return "";
         }
-        Collection<String> strs = ((Collection<String>) obj);
-        StringBuffer sb = new StringBuffer();
-        for (String str : strs) {
+        final Collection<String> strs = ((Collection<String>) obj);
+        final StringBuffer sb = new StringBuffer();
+        for (final String str : strs) {
             sb.append(str).append(",");
         }
         return sb.toString();
     }
 
     @Override
-    public void setAsText(String text) throws IllegalArgumentException {
-        List<String> strsSplit = Arrays.asList(text.split(","));
-        Collection<String> strs = new HashSet<>();
-        for (String str : strsSplit) {
+    public void setAsText(final String text) throws IllegalArgumentException {
+        final List<String> strsSplit = Arrays.asList(text.split(","));
+        final Collection<String> strs = new HashSet<>();
+        for (final String str : strsSplit) {
             strs.add(str);
         }
         this.setValue(strs);

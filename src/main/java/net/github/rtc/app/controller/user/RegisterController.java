@@ -19,8 +19,9 @@ public class RegisterController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView openRegisterPage() {
-        ModelAndView mav = new ModelAndView("portal/user/page/registration");
-        User u = new User();
+        final ModelAndView mav = new ModelAndView(
+          "portal/user/page/registration");
+        final User u = new User();
         mav.getModelMap().addAttribute("user", u);
         mav.addObject("validationRules", validationContext.get(User.class));
         return mav;

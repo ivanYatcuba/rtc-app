@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication
-        .UsernamePasswordAuthenticationToken;
+  .UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,22 +28,27 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws
-            AuthenticationException {
-        String username = authentication.getName();
-        String password = (String) authentication.getCredentials();
+    public Authentication authenticate(final Authentication authentication)
+      throws AuthenticationException {
+        final String username = authentication.getName();
+        final String password = (String) authentication.getCredentials();
 
-        if (username == null || username.trim().isEmpty()) {
+        if (username
+          == null
+          || username.trim().isEmpty()) {
             throw new BadCredentialsException("Email cannot be empty");
         }
 
-        if (password == null || password.trim().isEmpty()) {
+        if (password
+          == null
+          || password.trim().isEmpty()) {
             throw new BadCredentialsException("Password cannot be empty");
         }
 
-        User user = userService.loadUserByUsername(username);
+        final User user = userService.loadUserByUsername(username);
 
-        if (user == null) {
+        if (user
+          == null) {
             throw new BadCredentialsException("Username not found.");
         }
 
@@ -51,15 +56,15 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Wrong password.");
         }
 
-        Collection<? extends GrantedAuthority> authorities = user
-                .getAuthorities();
+        final Collection<? extends GrantedAuthority> authorities
+          = user.getAuthorities();
 
         return new UsernamePasswordAuthenticationToken(username, password,
-                authorities);
+          authorities);
     }
 
     @Override
-    public boolean supports(Class<?> aClass) {
+    public boolean supports(final Class<?> aClass) {
         return true;
     }
 }

@@ -20,7 +20,7 @@ public class Role implements GrantedAuthority {
     public Role() {
     }
 
-    public Role(RoleType name) {
+    public Role(final RoleType name) {
         this.name = name.name();
     }
 
@@ -28,7 +28,7 @@ public class Role implements GrantedAuthority {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -36,7 +36,7 @@ public class Role implements GrantedAuthority {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 

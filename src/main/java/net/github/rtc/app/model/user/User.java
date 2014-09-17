@@ -98,8 +98,8 @@ public class User implements UserDetails {
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "UserProgLanguages", joinColumns = @JoinColumn
-            (name = "user_id"))
+    @CollectionTable(name = "UserProgLanguages",
+      joinColumns = @JoinColumn(name = "user_id"))
     @ForExport("Programming Languages")
     private Set<String> programmingLanguages;
 
@@ -120,8 +120,8 @@ public class User implements UserDetails {
     /* Spring Security fields*/
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "User_Role",
-            joinColumns = {@JoinColumn(name = "USER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "id")})
+      joinColumns = { @JoinColumn(name = "USER_ID") },
+      inverseJoinColumns = { @JoinColumn(name = "id") })
     @ForExport("Role")
     private List<Role> authorities;
     @Column
@@ -134,7 +134,7 @@ public class User implements UserDetails {
     private boolean enabled = true;
 
 
-    public void setEnglish(String english) {
+    public void setEnglish(final String english) {
         this.english = english;
     }
 
@@ -142,7 +142,7 @@ public class User implements UserDetails {
         return this.english;
     }
 
-    public void setGender(String gender) {
+    public void setGender(final String gender) {
         this.gender = gender;
     }
 
@@ -155,7 +155,7 @@ public class User implements UserDetails {
         return email;
     }
 
-    public void setProgrammingLanguages(Set<String> progrLanguage) {
+    public void setProgrammingLanguages(final Set<String> progrLanguage) {
         this.programmingLanguages = progrLanguage;
     }
 
@@ -168,7 +168,7 @@ public class User implements UserDetails {
         return authorities;
     }
 
-    public void setAuthorities(List<Role> authorities) {
+    public void setAuthorities(final List<Role> authorities) {
         this.authorities = authorities;
     }
 
@@ -177,7 +177,7 @@ public class User implements UserDetails {
         return accountNonExpired;
     }
 
-    public void setAccountNonExpired(boolean accountNonExpired) {
+    public void setAccountNonExpired(final boolean accountNonExpired) {
         this.accountNonExpired = accountNonExpired;
     }
 
@@ -186,7 +186,7 @@ public class User implements UserDetails {
         return accountNonLocked;
     }
 
-    public void setAccountNonLocked(boolean accountNonLocked) {
+    public void setAccountNonLocked(final boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
     }
 
@@ -195,7 +195,7 @@ public class User implements UserDetails {
         return credentialsNonExpired;
     }
 
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+    public void setCredentialsNonExpired(final boolean credentialsNonExpired) {
         this.credentialsNonExpired = credentialsNonExpired;
     }
 
@@ -204,7 +204,7 @@ public class User implements UserDetails {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
     }
 
@@ -212,7 +212,7 @@ public class User implements UserDetails {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(final String city) {
         this.city = city;
     }
 
@@ -220,7 +220,7 @@ public class User implements UserDetails {
         return university;
     }
 
-    public void setUniversity(String university) {
+    public void setUniversity(final String university) {
         this.university = university;
     }
 
@@ -228,7 +228,7 @@ public class User implements UserDetails {
         return faculty;
     }
 
-    public void setFaculty(String faculty) {
+    public void setFaculty(final String faculty) {
         this.faculty = faculty;
     }
 
@@ -236,7 +236,7 @@ public class User implements UserDetails {
         return speciality;
     }
 
-    public void setSpeciality(String speciality) {
+    public void setSpeciality(final String speciality) {
         this.speciality = speciality;
     }
 
@@ -244,7 +244,7 @@ public class User implements UserDetails {
         return note;
     }
 
-    public void setNote(String note) {
+    public void setNote(final String note) {
         this.note = note;
     }
 
@@ -253,7 +253,7 @@ public class User implements UserDetails {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
@@ -261,7 +261,7 @@ public class User implements UserDetails {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    public void setSurname(final String surname) {
         this.surname = surname;
     }
 
@@ -269,7 +269,7 @@ public class User implements UserDetails {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -277,7 +277,7 @@ public class User implements UserDetails {
         return middleName;
     }
 
-    public void setMiddleName(String middleName) {
+    public void setMiddleName(final String middleName) {
         this.middleName = middleName;
     }
 
@@ -285,7 +285,7 @@ public class User implements UserDetails {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(final String phone) {
         this.phone = phone;
     }
 
@@ -293,7 +293,7 @@ public class User implements UserDetails {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -301,7 +301,7 @@ public class User implements UserDetails {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(final Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -309,7 +309,7 @@ public class User implements UserDetails {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(final String code) {
         this.code = code;
     }
 
@@ -317,7 +317,7 @@ public class User implements UserDetails {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -325,7 +325,7 @@ public class User implements UserDetails {
         return registerDate;
     }
 
-    public void setRegisterDate(Date registerDate) {
+    public void setRegisterDate(final Date registerDate) {
         this.registerDate = registerDate;
     }
 
@@ -333,7 +333,7 @@ public class User implements UserDetails {
         return removalDate;
     }
 
-    public void setRemovalDate(Date removalDate) {
+    public void setRemovalDate(final Date removalDate) {
         this.removalDate = removalDate;
     }
 
@@ -341,14 +341,14 @@ public class User implements UserDetails {
         return status;
     }
 
-    public void setStatus(UserStatus status) {
+    public void setStatus(final UserStatus status) {
         this.status = status;
     }
 
     // for authentification
-    public boolean hasRole(String role) {
+    public boolean hasRole(final String role) {
         boolean hasRole = false;
-        for (GrantedAuthority authority : this.getAuthorities()) {
+        for (final GrantedAuthority authority : this.getAuthorities()) {
             if (authority.getAuthority().equals(role)) {
                 hasRole = true;
                 break;
@@ -358,7 +358,8 @@ public class User implements UserDetails {
     }
 
     public boolean isForRemoval() {
-        return this.status == UserStatus.FOR_REMOVAL;
+        return this.status
+          == UserStatus.FOR_REMOVAL;
     }
 
 
@@ -366,11 +367,22 @@ public class User implements UserDetails {
     }
 
     public User(
-            String code, String surname, String name, String middleName,
-            String phone, String email, Date birthDate, String city,
-            String university, String faculty, String speciality,
-            String note, String password, String gender,
-            Set<String> programmingLanguages, String english) {
+      final String code,
+      final String surname,
+      final String name,
+      final String middleName,
+      final String phone,
+      final String email,
+      final Date birthDate,
+      final String city,
+      final String university,
+      final String faculty,
+      final String speciality,
+      final String note,
+      final String password,
+      final String gender,
+      final Set<String> programmingLanguages,
+      final String english) {
 
         this.code = code;
         this.surname = surname;
@@ -392,10 +404,21 @@ public class User implements UserDetails {
     }
 
     public User(
-            String surname, String name, String middleName, String phone,
-            String email, Date birthDate, String city, String university,
-            String faculty, String speciality, String note, String password,
-            String gender, Set<String> programmingLanguages, String english) {
+      final String surname,
+      final String name,
+      final String middleName,
+      final String phone,
+      final String email,
+      final Date birthDate,
+      final String city,
+      final String university,
+      final String faculty,
+      final String speciality,
+      final String note,
+      final String password,
+      final String gender,
+      final Set<String> programmingLanguages,
+      final String english) {
         this.surname = surname;
         this.name = name;
         this.middleName = middleName;
@@ -414,8 +437,11 @@ public class User implements UserDetails {
     }
 
     public User(
-            String name, String surname, String middleName, String email,
-            String password) {
+      final String name,
+      final String surname,
+      final String middleName,
+      final String email,
+      final String password) {
         this.name = name;
         this.surname = surname;
         this.middleName = middleName;
@@ -424,7 +450,7 @@ public class User implements UserDetails {
     }
 
     public String shortString() {
-        return new StringBuilder(this.name).append(" ").append(this.surname)
-                .append(" ").append(this.email).toString();
+        return new StringBuilder(this.name).append(" ").append(
+          this.surname).append(" ").append(this.email).toString();
     }
 }

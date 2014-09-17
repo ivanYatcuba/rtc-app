@@ -21,15 +21,15 @@ public class Paginator {
         return searchFilter;
     }
 
-    public void setSearchFilter(SearchFilter searchFilter) {
+    public void setSearchFilter(final SearchFilter searchFilter) {
         this.searchFilter = searchFilter;
     }
 
-    public void setCurrentPage(int currentPage) {
+    public void setCurrentPage(final int currentPage) {
         this.currentPage = currentPage;
     }
 
-    public void setMaxPerPage(int maxPerPage) {
+    public void setMaxPerPage(final int maxPerPage) {
         this.maxPerPage = maxPerPage;
     }
 
@@ -37,26 +37,36 @@ public class Paginator {
         return maxPerPage;
     }
 
-    public Page getPage(int currentPage, int total) {
-        int countPages = getCountPages(total - 1);
+    public Page getPage(int currentPage, final int total) {
+        final int countPages = getCountPages(total
+          - 1);
         currentPage = checkCurrentPage(currentPage);
         return new Page(currentPage, getPrevResult(currentPage),
-                getNextResult(currentPage, countPages), countPages);
+          getNextResult(currentPage, countPages), countPages);
     }
 
-    private int checkCurrentPage(int currentPage) {
-        return currentPage < 1 ? 0 : currentPage;
+    private int checkCurrentPage(final int currentPage) {
+        return currentPage
+          < 1 ? 0 : currentPage;
     }
 
-    private int getCountPages(int total) {
-        return total / maxPerPage + ((total % 10 == 0) ? 0 : 1);
+    private int getCountPages(final int total) {
+        return total
+          / maxPerPage
+          + ((total
+          % 10
+          == 0) ? 0 : 1);
     }
 
-    private Integer getPrevResult(int currentPage) {
-        return currentPage < 2 ? null : currentPage - 1;
+    private Integer getPrevResult(final int currentPage) {
+        return currentPage
+          < 2 ? null : currentPage
+          - 1;
     }
 
-    private Integer getNextResult(int currentPage, int countPages) {
-        return currentPage < countPages ? currentPage + 1 : null;
+    private Integer getNextResult(final int currentPage, final int countPages) {
+        return currentPage
+          < countPages ? currentPage
+          + 1 : null;
     }
 }

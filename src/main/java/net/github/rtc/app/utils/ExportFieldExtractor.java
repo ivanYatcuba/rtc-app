@@ -13,33 +13,33 @@ import java.util.List;
 public class ExportFieldExtractor {
 
     public static List<Field> getFieldsFromClass(
-            Class exportClass, List<String> fields) throws
-            NoSuchFieldException {
-        List<Field> classFields = new ArrayList<>();
-        for (Field f : exportClass.getDeclaredFields()) {
-            if (f.isAnnotationPresent(ForExport.class) && fields.contains(f
-                    .getAnnotation(ForExport.class).value())) {
+      final Class exportClass,
+      final List<String> fields) throws NoSuchFieldException {
+        final List<Field> classFields = new ArrayList<>();
+        for (final Field f : exportClass.getDeclaredFields()) {
+            if (f.isAnnotationPresent(ForExport.class)
+              && fields.contains(f.getAnnotation(ForExport.class).value())) {
                 classFields.add(f);
-                if (f.getAnnotation(ForExport.class).inculdeField().length !=
-                        0) {
+                if (f.getAnnotation(ForExport.class).inculdeField().length
+                  != 0) {
                     classFields.addAll(getFieldsFromClass(f.getType(),
-                            Arrays.asList(f.getAnnotation(ForExport.class)
-                                    .inculdeField())));
+                      Arrays.asList(
+                        f.getAnnotation(ForExport.class).inculdeField())));
                 }
             }
         }
         return classFields;
     }
 
-    public static List<String> getAviableFieldList(Class aClass) {
-        List<String> classFields = new ArrayList<>();
-        for (Field f : aClass.getDeclaredFields()) {
+    public static List<String> getAviableFieldList(final Class aClass) {
+        final List<String> classFields = new ArrayList<>();
+        for (final Field f : aClass.getDeclaredFields()) {
             if (f.isAnnotationPresent(ForExport.class)) {
                 classFields.add(f.getAnnotation(ForExport.class).value());
-                if (f.getAnnotation(ForExport.class).inculdeField().length !=
-                        0) {
-                    classFields.addAll(Arrays.asList(f.getAnnotation
-                            (ForExport.class).inculdeField()));
+                if (f.getAnnotation(ForExport.class).inculdeField().length
+                  != 0) {
+                    classFields.addAll(Arrays.asList(
+                      f.getAnnotation(ForExport.class).inculdeField()));
                 }
             }
         }

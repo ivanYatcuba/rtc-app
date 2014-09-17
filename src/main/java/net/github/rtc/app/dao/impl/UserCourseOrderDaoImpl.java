@@ -13,18 +13,19 @@ import java.util.List;
  */
 @Repository
 public class UserCourseOrderDaoImpl extends GenericDaoImpl<UserCourseOrder>
-        implements UserCourseOrderDao {
+  implements UserCourseOrderDao {
 
     @Override
-    public UserCourseOrder getUserOrder(String userCode) {
-        return (UserCourseOrder) getCurrentSession().createCriteria
-                (UserCourseOrder.class).
-                add(Restrictions.eq("userCode", userCode)).uniqueResult();
+    public UserCourseOrder getUserOrder(final String userCode) {
+        return (UserCourseOrder) getCurrentSession().createCriteria(
+          UserCourseOrder.class).
+          add(Restrictions.eq("userCode", userCode)).uniqueResult();
     }
 
     @Override
-    public List<UserCourseOrder> getOrderByStatus(UserRequestStatus status) {
+    public List<UserCourseOrder> getOrderByStatus(
+      final UserRequestStatus status) {
         return getCurrentSession().createCriteria(UserCourseOrder.class).
-                add(Restrictions.eq("status", status)).list();
+          add(Restrictions.eq("status", status)).list();
     }
 }

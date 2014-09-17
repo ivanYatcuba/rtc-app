@@ -13,7 +13,11 @@ public class Page {
     private final int first = 1;
     private final int last;
 
-    public Page(int current, Integer prev, Integer next, int last) {
+    public Page(
+      final int current,
+      final Integer prev,
+      final Integer next,
+      final int last) {
         this.current = current;
         this.prev = prev;
         this.next = next;

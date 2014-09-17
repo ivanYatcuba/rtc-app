@@ -27,28 +27,33 @@ public class ReportServiceImpl implements ReportService {
     private JobManager jobManager;
 
     private static Logger LOG = LoggerFactory.getLogger(ReportServiceImpl
-            .class.getName());
+      .class.getName());
 
     @Override
     @Transactional
-    public void insert(ReportDetails report) {
-        LOG.info("Creating report: " + report);
+    public void insert(final ReportDetails report) {
+        LOG.info("Creating report: "
+          + report);
         report.setCode(UUID.randomUUID().toString());
         report.setCreatedDate(new Date());
         try {
             jobManager.manageJob(report, JobManagerAction.CREATE);
             reportResource.create(report);
-            LOG.info("Report: " + report.getCode() + " created successfully!");
-        } catch (Exception e) {
-            LOG.info("Report creation failed: " + report.getCode());
+            LOG.info("Report: "
+              + report.getCode()
+              + " created successfully!");
+        } catch (final Exception e) {
+            LOG.info("Report creation failed: "
+              + report.getCode());
             e.printStackTrace();
         }
     }
 
     @Override
     @Transactional
-    public ReportDetails findReportByCode(String code) {
-        LOG.info("Getting report with code: " + code);
+    public ReportDetails findReportByCode(final String code) {
+        LOG.info("Getting report with code: "
+          + code);
         return reportResource.findByCode(code);
     }
 
@@ -61,28 +66,36 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     @Transactional
-    public void update(ReportDetails report) {
-        LOG.info("Updating report: " + report);
+    public void update(final ReportDetails report) {
+        LOG.info("Updating report: "
+          + report);
         try {
             jobManager.manageJob(report, JobManagerAction.UPDATE);
             reportResource.update(report);
-            LOG.info("Report: " + report.getCode() + " updated successfully!");
-        } catch (Exception e) {
-            LOG.info("Report update failed: " + report.getCode());
+            LOG.info("Report: "
+              + report.getCode()
+              + " updated successfully!");
+        } catch (final Exception e) {
+            LOG.info("Report update failed: "
+              + report.getCode());
             e.printStackTrace();
         }
     }
 
     @Override
     @Transactional
-    public void delete(ReportDetails report) {
-        LOG.info("Removing report: " + report);
+    public void delete(final ReportDetails report) {
+        LOG.info("Removing report: "
+          + report);
         try {
             jobManager.manageJob(report, JobManagerAction.DELETE);
             reportResource.deleteByCode(report.getCode());
-            LOG.info("Report: " + report.getCode() + " removed successfully!");
-        } catch (Exception e) {
-            LOG.info("Report removal failed: " + report.getCode());
+            LOG.info("Report: "
+              + report.getCode()
+              + " removed successfully!");
+        } catch (final Exception e) {
+            LOG.info("Report removal failed: "
+              + report.getCode());
             e.printStackTrace();
         }
 

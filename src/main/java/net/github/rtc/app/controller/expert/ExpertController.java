@@ -39,26 +39,27 @@ public class ExpertController {
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public ModelAndView expertCourses() {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/Coursesexpert");
-        List<UserCourseOrder> orderList = userCourseOrderService
-                .getOrderByStatus(UserRequestStatus.PENDING);
-        List<Request> requestsList = new ArrayList<>();
+        final ModelAndView mav = new ModelAndView(ROOT
+          + "/page/Coursesexpert");
+        final List<UserCourseOrder> orderList
+          = userCourseOrderService.getOrderByStatus(UserRequestStatus.PENDING);
+        final List<Request> requestsList = new ArrayList<>();
         if (!orderList.isEmpty()) {
-            for (UserCourseOrder order : orderList) {
+            for (final UserCourseOrder order : orderList) {
                 try {
-                    Request request = new Request((int) order.getId(),
-                            userService.findByCode(order.getUserCode())
-                                    .getName(), order.getReason(),
-                            courseService.findByCode(order.getCourseCode())
-                                    .getName(), order.getPosition().toString());
+                    final Request request = new Request((int) order.getId(),
+                      userService.findByCode(order.getUserCode()).getName(),
+                      order.getReason(),
+                      courseService.findByCode(order.getCourseCode()).getName(),
+                      order.getPosition().toString());
                     requestsList.add(request);
-                } catch (Throwable t) {
+                } catch (final Throwable t) {
                     System.out.print("error");
                 }
             }
         }
-        User user = userServiceLogin.loadUserByUsername(SecurityContextHolder
-                .getContext().getAuthentication().getName());
+        final User user = userServiceLogin.loadUserByUsername(
+          SecurityContextHolder.getContext().getAuthentication().getName());
         mav.addObject("user", user);
         mav.addObject("requests", requestsList);
         return mav;
@@ -66,27 +67,28 @@ public class ExpertController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ModelAndView userCourses() {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/expertAllcourse");
+        final ModelAndView mav = new ModelAndView(ROOT
+          + "/page/expertAllcourse");
         mav.addObject("courses", courseService.findAll());
         return mav;
     }
 
     @RequestMapping(value = "/accept/{orderId}", method = RequestMethod.GET)
-    public String acceptRequest(@PathVariable Integer orderId) {
+    public String acceptRequest(@PathVariable final Integer orderId) {
         changeOrderStatus(UserRequestStatus.ACCEPTED, orderId);
         return "redirect:/expert/requests";
     }
 
     @RequestMapping(value = "/decline/{orderId}", method = RequestMethod.GET)
-    public String declineRequest(@PathVariable Integer orderId) {
+    public String declineRequest(@PathVariable final Integer orderId) {
         changeOrderStatus(UserRequestStatus.REJECTED, orderId);
         return "redirect:/expert/requests";
     }
 
     private void changeOrderStatus(
-            UserRequestStatus userRequestStatus, Integer orderId) {
-        UserCourseOrder order = userCourseOrderService.getUserOrder(orderId
-                .longValue());
+      final UserRequestStatus userRequestStatus, final Integer orderId) {
+        final UserCourseOrder order = userCourseOrderService.getUserOrder(
+          orderId.longValue());
         order.setResponseDate(new Date());
         order.setStatus(userRequestStatus);
         userCourseOrderService.update(order);

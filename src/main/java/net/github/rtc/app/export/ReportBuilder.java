@@ -31,8 +31,11 @@ public class ReportBuilder {
      * @param filePath     path where report file will be stored
      */
     public <T> void build(
-            List<Field> reportFields, List<T> objectsList, String sheetName,
-            String filePath, ExportFormat exportFormat) {
+      final List<Field> reportFields,
+      final List<T> objectsList,
+      final String sheetName,
+      final String filePath,
+      final ExportFormat exportFormat) {
 
         ReportTable reportTable = null;
         if (exportFormat.equals(ExportFormat.XLSX)) {
@@ -47,33 +50,35 @@ public class ReportBuilder {
         int currentCol = 0;
         int currentRow = 0;
         reportTable.createRow(currentRow);
-        for (Field field : reportFields) {
+        for (final Field field : reportFields) {
             reportTable.createCell(currentRow, currentCol,
-                    field.getAnnotation(ForExport.class).value());
+              field.getAnnotation(ForExport.class).value());
             currentCol++;
         }
         //Getting info from list
         currentRow++;
-        for (T object : objectsList) {
+        for (final T object : objectsList) {
             reportTable.createRow(currentRow);
-            for (int j = 0; j < reportFields.size(); j++) {
+            for (int j = 0; j
+              < reportFields.size(); j++) {
                 reportFields.get(j).setAccessible(true);
                 try {
-                    if (reportFields.get(j).getDeclaringClass() != object
-                            .getClass()) {
-                        for (Field f : object.getClass().getDeclaredFields()) {
-                            if (f.getType() == reportFields.get(j)
-                                    .getDeclaringClass()) {
+                    if (reportFields.get(j).getDeclaringClass()
+                      != object.getClass()) {
+                        for (final Field f : object.getClass()
+                          .getDeclaredFields()) {
+                            if (f.getType()
+                              == reportFields.get(j).getDeclaringClass()) {
                                 f.setAccessible(true);
                                 reportTable.createCell(currentRow, j,
-                                        reportFields.get(j).get(f.get(object)));
+                                  reportFields.get(j).get(f.get(object)));
                                 f.setAccessible(false);
                                 break;
                             }
                         }
                     } else {
                         reportTable.createCell(currentRow, j,
-                                reportFields.get(j).get(object));
+                          reportFields.get(j).get(object));
                     }
                 } catch (IllegalAccessException | NullPointerException e) {
                     reportTable.createCell(currentRow, j, "");
@@ -84,7 +89,7 @@ public class ReportBuilder {
         }
         try {
             reportTable.writeToFile(filePath);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }

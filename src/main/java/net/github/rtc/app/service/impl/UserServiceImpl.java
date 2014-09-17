@@ -27,8 +27,8 @@ import java.util.UUID;
  */
 @Service("userService")
 public class UserServiceImpl implements ModelService<User>, UserService {
-    private static Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class
-            .getName());
+    private static Logger LOG = LoggerFactory.getLogger(
+      UserServiceImpl.class.getName());
 
     @Autowired
     private UserDao userDao;
@@ -43,42 +43,48 @@ public class UserServiceImpl implements ModelService<User>, UserService {
 
     @Override
     @Transactional
-    public void delete(User user) {
-        LOG.debug("Removing user  with email: " + user.getEmail());
+    public void delete(final User user) {
+        LOG.debug("Removing user  with email: "
+          + user.getEmail());
         userDao.deleteByCode(user.getCode());
     }
 
     @Override
     @Transactional
-    public void deleteByCode(String code) {
-        LOG.debug("Removing user  with code: " + code);
+    public void deleteByCode(final String code) {
+        LOG.debug("Removing user  with code: "
+          + code);
         userDao.deleteByCode(code);
     }
 
     @Override
     @Transactional
-    public User findByCode(String code) {
-        LOG.debug("Removing user  with code: " + code);
+    public User findByCode(final String code) {
+        LOG.debug("Removing user  with code: "
+          + code);
         return userDao.findByCode(code);
     }
 
     @Override
     @Transactional
-    public User create(User user) {
-        LOG.debug("Creating user: " + user);
+    public User create(final User user) {
+        LOG.debug("Creating user: "
+          + user);
         user.setCode(UUID.randomUUID().toString());
-        PasswordEncoder encoder = new StandardPasswordEncoder();
+        final PasswordEncoder encoder = new StandardPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         return userDao.create(user);
     }
 
     @Override
     @Transactional
-    public void update(User user) {
-        LOG.debug("Updating user: " + user);
-        PasswordEncoder encoder = new StandardPasswordEncoder();
-        User userToUpdate = userDao.findByCode(user.getCode());
-        if (user.getPassword() != userToUpdate.getPassword()) {
+    public void update(final User user) {
+        LOG.debug("Updating user: "
+          + user);
+        final PasswordEncoder encoder = new StandardPasswordEncoder();
+        final User userToUpdate = userDao.findByCode(user.getCode());
+        if (user.getPassword()
+          != userToUpdate.getPassword()) {
             user.setPassword(encoder.encode(user.getPassword()));
         }
         userDao.update(user);
@@ -91,56 +97,66 @@ public class UserServiceImpl implements ModelService<User>, UserService {
 
     @Override
     @Transactional
-    public void createRole(RoleType type) {
-        LOG.debug("Creating user role with type: " + type);
+    public void createRole(final RoleType type) {
+        LOG.debug("Creating user role with type: "
+          + type);
         userDao.createRole(type);
     }
 
     @Override
     @Transactional
-    public Role getRoleByType(RoleType type) {
-        LOG.debug("Getting user role with type: " + type);
+    public Role getRoleByType(final RoleType type) {
+        LOG.debug("Getting user role with type: "
+          + type);
         return userDao.getRoleByType(type);
     }
 
     @Override
     @Transactional
-    public List<User> getUserByRole(RoleType type) {
-        LOG.debug("Getting user list with type: " + type);
+    public List<User> getUserByRole(final RoleType type) {
+        LOG.debug("Getting user list with type: "
+          + type);
         return userDao.getUserByType(type);
     }
 
     @Override
     @Transactional
     public SearchResults<User> search(
-            DetachedCriteria criteria, int start, int max) {
+      final DetachedCriteria criteria, final int start, final int max) {
         return userDao.search(criteria, start, max);
     }
 
     @Override
     @Transactional
-    public void markUserForRemoval(User user) {
-        if (user.getStatus() == UserStatus.ACTIVE) {
+    public void markUserForRemoval(final User user) {
+        if (user.getStatus()
+          == UserStatus.ACTIVE) {
             user.setStatus(UserStatus.FOR_REMOVAL);
             user.setRemovalDate(new DateTime(new Date()).plusDays(3).toDate());
-            LOG.debug("Getting user before update: " + user);
+            LOG.debug("Getting user before update: "
+              + user);
             userDao.update(user);
-            LOG.debug("Getting user after update: " + user);
+            LOG.debug("Getting user after update: "
+              + user);
         } else {
             user.setStatus(UserStatus.ACTIVE);
             user.setRemovalDate(null);
-            LOG.debug("Getting user: " + user);
+            LOG.debug("Getting user: "
+              + user);
             userDao.update(user);
-            LOG.debug("Getting user: " + user);
+            LOG.debug("Getting user: "
+              + user);
         }
     }
 
     @Override
     @Transactional
-    public void markUserForRemoval(String userCode) {
-        LOG.debug("Getting code: " + userCode);
-        User user = findByCode(userCode);
-        LOG.debug("User: " + user);
+    public void markUserForRemoval(final String userCode) {
+        LOG.debug("Getting code: "
+          + userCode);
+        final User user = findByCode(userCode);
+        LOG.debug("User: "
+          + user);
         markUserForRemoval(user);
     }
 }

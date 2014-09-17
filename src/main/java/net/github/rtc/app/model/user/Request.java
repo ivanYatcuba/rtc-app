@@ -14,8 +14,11 @@ public class Request {
     }
 
     public Request(
-            Integer orderId, String traineeName, String reason,
-            String courseName, String speciality) {
+      final Integer orderId,
+      final String traineeName,
+      final String reason,
+      final String courseName,
+      final String speciality) {
         this.orderId = orderId;
         this.traineeName = traineeName;
         this.reason = reason;
@@ -27,7 +30,7 @@ public class Request {
         return orderId;
     }
 
-    public void setOrderId(long orderId) {
+    public void setOrderId(final long orderId) {
         this.orderId = orderId;
     }
 
@@ -35,7 +38,7 @@ public class Request {
         return traineeName;
     }
 
-    public void setTraineeName(String traineeName) {
+    public void setTraineeName(final String traineeName) {
         this.traineeName = traineeName;
     }
 
@@ -43,7 +46,7 @@ public class Request {
         return reason;
     }
 
-    public void setReason(String reason) {
+    public void setReason(final String reason) {
         this.reason = reason;
     }
 
@@ -51,7 +54,7 @@ public class Request {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
+    public void setCourseName(final String courseName) {
         this.courseName = courseName;
     }
 
@@ -59,7 +62,7 @@ public class Request {
         return speciality;
     }
 
-    public void setSpeciality(String speciality) {
+    public void setSpeciality(final String speciality) {
         this.speciality = speciality;
     }
 }

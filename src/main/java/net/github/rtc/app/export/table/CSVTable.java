@@ -10,32 +10,41 @@ import java.util.List;
  */
 public class CSVTable implements ReportTable {
 
-    List<List<String>> table;
+    private List<List<String>> table;
 
     public CSVTable() {
         table = new ArrayList<>();
     }
 
     @Override
-    public void createRow(int rowIndex) {
+    public void createRow(final int rowIndex) {
         table.add(rowIndex, new ArrayList<String>());
     }
 
     @Override
-    public void createCell(int rowIndex, int cellIndex, Object value) {
+    public void createCell(
+      final int rowIndex, final int cellIndex, final Object value) {
         table.get(rowIndex).add(cellIndex, value.toString());
     }
 
     @Override
-    public void writeToFile(String fileName) throws IOException {
-        FileWriter writer = new FileWriter(fileName);
-        for (List<String> row : table) {
-            for (String cell : row) {
+    public void writeToFile(final String fileName) throws IOException {
+        final FileWriter writer = new FileWriter(fileName);
+        for (final List<String> row : table) {
+            for (final String cell : row) {
                 writer.append(cell).append(',');
             }
             writer.append('\n');
         }
         writer.flush();
         writer.close();
+    }
+
+    public List<List<String>> getTable() {
+        return table;
+    }
+
+    public void setTable(final List<List<String>> table) {
+        this.table = table;
     }
 }

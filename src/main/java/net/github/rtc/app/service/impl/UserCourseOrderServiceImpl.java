@@ -20,20 +20,22 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Autowired
     UserCourseOrderDao resource;
 
-    private static Logger LOG = LoggerFactory.getLogger
-            (UserCourseOrderServiceImpl.class.getName());
+    private static Logger LOG = LoggerFactory.getLogger(
+      UserCourseOrderServiceImpl.class.getName());
 
     @Override
     @Transactional
-    public void insert(UserCourseOrder order) {
-        LOG.info("Creating order: " + order);
+    public void insert(final UserCourseOrder order) {
+        LOG.info("Creating order: "
+          + order);
         resource.create(order);
     }
 
     @Override
     @Transactional
-    public UserCourseOrder getUserOrder(long id) {
-        LOG.info("Getting user course order with id: " + id);
+    public UserCourseOrder getUserOrder(final long id) {
+        LOG.info("Getting user course order with id: "
+          + id);
         return resource.find(id);
     }
 
@@ -46,29 +48,34 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
 
     @Override
     @Transactional
-    public void update(UserCourseOrder order) {
-        LOG.info("Updating user course order: " + order);
+    public void update(final UserCourseOrder order) {
+        LOG.info("Updating user course order: "
+          + order);
         resource.update(order);
     }
 
     @Override
     @Transactional
-    public void delete(UserCourseOrder order) {
-        LOG.info("Removing user order: " + order);
+    public void delete(final UserCourseOrder order) {
+        LOG.info("Removing user order: "
+          + order);
         resource.delete(order.getId());
     }
 
     @Override
     @Transactional
-    public UserCourseOrder getUserOrderByUserCode(String userCode) {
-        LOG.info("Get user order by user code: " + userCode);
+    public UserCourseOrder getUserOrderByUserCode(final String userCode) {
+        LOG.info("Get user order by user code: "
+          + userCode);
         return resource.getUserOrder(userCode);
     }
 
     @Override
     @Transactional
-    public List<UserCourseOrder> getOrderByStatus(UserRequestStatus status) {
-        LOG.info("Get user orders with status: " + status);
+    public List<UserCourseOrder> getOrderByStatus(
+      final UserRequestStatus status) {
+        LOG.info("Get user orders with status: "
+          + status);
         return resource.getOrderByStatus(status);
     }
 

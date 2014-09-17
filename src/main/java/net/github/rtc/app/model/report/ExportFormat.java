@@ -10,8 +10,8 @@ public enum ExportFormat {
     XLSX, XLS, CSV;
 
     public static List<String> findAll() {
-        List<String> res = new ArrayList<>();
-        for (ExportFormat type : ExportFormat.values()) {
+        final List<String> res = new ArrayList<>();
+        for (final ExportFormat type : ExportFormat.values()) {
             res.add(type.name());
         }
         return res;

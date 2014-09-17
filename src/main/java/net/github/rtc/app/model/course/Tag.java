@@ -26,7 +26,7 @@ public class Tag implements Serializable {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(final String value) {
         this.value = value;
     }
 
@@ -34,11 +34,11 @@ public class Tag implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
-    public Tag(String value) {
+    public Tag(final String value) {
         this.value = value;
     }
 
@@ -47,17 +47,23 @@ public class Tag implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(final Object o) {
+        if (this
+          == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o
+          == null
+          || getClass()
+          != o.getClass()) {
             return false;
         }
 
-        Tag tag = (Tag) o;
+        final Tag tag = (Tag) o;
 
-        if (value != null ? !value.equals(tag.value) : tag.value != null) {
+        if (value
+          != null ? !value.equals(tag.value) : tag.value
+          != null) {
             return false;
         }
 
@@ -66,7 +72,8 @@ public class Tag implements Serializable {
 
     @Override
     public int hashCode() {
-        return value != null ? value.hashCode() : 0;
+        return value
+          != null ? value.hashCode() : 0;
     }
 
     @Override

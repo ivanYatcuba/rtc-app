@@ -36,9 +36,12 @@ public class UserCourseOrder {
     private String reason;
 
     public UserCourseOrder(
-            String userCode, String courseCode, Date requestDate,
-            Date responseDate, UserRequestStatus status,
-            TraineePosition position) {
+      final String userCode,
+      final String courseCode,
+      final Date requestDate,
+      final Date responseDate,
+      final UserRequestStatus status,
+      final TraineePosition position) {
         this.userCode = userCode;
         this.courseCode = courseCode;
         this.requestDate = requestDate;
@@ -54,7 +57,7 @@ public class UserCourseOrder {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -62,7 +65,7 @@ public class UserCourseOrder {
         return userCode;
     }
 
-    public void setUserCode(String userCode) {
+    public void setUserCode(final String userCode) {
         this.userCode = userCode;
     }
 
@@ -70,7 +73,7 @@ public class UserCourseOrder {
         return courseCode;
     }
 
-    public void setCourseCode(String courseCode) {
+    public void setCourseCode(final String courseCode) {
         this.courseCode = courseCode;
     }
 
@@ -78,7 +81,7 @@ public class UserCourseOrder {
         return responseDate;
     }
 
-    public void setResponseDate(Date responseDate) {
+    public void setResponseDate(final Date responseDate) {
         this.responseDate = responseDate;
     }
 
@@ -86,7 +89,7 @@ public class UserCourseOrder {
         return requestDate;
     }
 
-    public void setRequestDate(Date requestDate) {
+    public void setRequestDate(final Date requestDate) {
         this.requestDate = requestDate;
     }
 
@@ -94,7 +97,7 @@ public class UserCourseOrder {
         return status;
     }
 
-    public void setStatus(UserRequestStatus status) {
+    public void setStatus(final UserRequestStatus status) {
         this.status = status;
     }
 
@@ -102,7 +105,7 @@ public class UserCourseOrder {
         return position;
     }
 
-    public void setPosition(TraineePosition position) {
+    public void setPosition(final TraineePosition position) {
         this.position = position;
     }
 
@@ -110,7 +113,7 @@ public class UserCourseOrder {
         return reason;
     }
 
-    public void setReason(String reason) {
+    public void setReason(final String reason) {
         this.reason = reason;
     }
 }

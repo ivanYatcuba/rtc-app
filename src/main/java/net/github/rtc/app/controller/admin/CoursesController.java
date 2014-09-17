@@ -52,13 +52,15 @@ public class CoursesController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index(
-            @ModelAttribute("filterCourse") SearchFilter filterCourse) throws
-            Exception {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
+      @ModelAttribute(
+        "filterCourse") final SearchFilter filterCourse) throws Exception {
+        final ModelAndView mav = new ModelAndView(ROOT
+          + "/page/listcontent");
         paginator.setSearchFilter(filterCourse);
         mav.addObject("types", CourseType.findAll());
         mav.addObject("statuses", getStats());
-        if (paginator.getSearchFilter() != null) {
+        if (paginator.getSearchFilter()
+          != null) {
             mav.addObject("filterCourse", paginator.getSearchFilter());
         } else {
             mav.addObject("filterCourse", new CourseSearchFilter());
@@ -69,8 +71,8 @@ public class CoursesController {
 
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     public ModelAndView filter(
-            @ModelAttribute("filterCourse") SearchFilter filterCourse) throws
-            Exception {
+      @ModelAttribute(
+        "filterCourse") final SearchFilter filterCourse) throws Exception {
         paginator.setSearchFilter(filterCourse);
         return switchPage(1);
     }
@@ -79,15 +81,18 @@ public class CoursesController {
     @RequestMapping(value = "/{page}", method = RequestMethod.POST)
     public
     @ResponseBody
-    ModelAndView switchPage(@PathVariable int page) {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/listcontent");
+    ModelAndView switchPage(@PathVariable final int page) {
+        final ModelAndView mav = new ModelAndView(ROOT
+          + "/page/listcontent");
         paginator.setCurrentPage(page);
-        SearchResults<Course> results = courseService.search(paginator
-                .getSearchFilter().getCriteria(), page,
-                paginator.getMaxPerPage());
-        Page pageModel = paginator.getPage(page, results.getTotalResults());
-        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
-                .byNextPage().byPrevPage().byStartPage().toMap());
+        final SearchResults<Course> results = courseService.search(
+          paginator.getSearchFilter().getCriteria(), page,
+          paginator.getMaxPerPage());
+        final Page pageModel = paginator.getPage(page,
+          results.getTotalResults());
+        mav.addAllObjects(
+          pageModel.createMap().byCurrentPage().byLastPage().byNextPage()
+            .byPrevPage().byStartPage().toMap());
         mav.addObject("courses", results.getResults());
         mav.addObject("types", CourseType.findAll());
         mav.addObject("statuses", getStats());
@@ -104,15 +109,17 @@ public class CoursesController {
      * @return redirect to "/admin/courses"
      */
     @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
-    public String delete(@PathVariable String courseCode) {
+    public String delete(@PathVariable final String courseCode) {
         courseService.delete(courseCode);
-        return "redirect:/" + "admin";
+        return "redirect:/"
+          + "admin";
     }
 
     @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
-    public String publish(@PathVariable String courseCode) {
+    public String publish(@PathVariable final String courseCode) {
         courseService.publish(courseService.findByCode(courseCode));
-        return "redirect:/" + "admin";
+        return "redirect:/"
+          + "admin";
     }
 
     /**
@@ -124,9 +131,10 @@ public class CoursesController {
      * @return modelAndView("admin/courses/course")
      */
     @RequestMapping(value = "view/{courseCode}", method = RequestMethod.GET)
-    public ModelAndView single(@PathVariable String courseCode) {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/courseContent");
-        Course course = courseService.findByCode(courseCode);
+    public ModelAndView single(@PathVariable final String courseCode) {
+        final ModelAndView mav = new ModelAndView(ROOT
+          + "/page/courseContent");
+        final Course course = courseService.findByCode(courseCode);
         mav.addObject("course", course);
         return mav;
     }
@@ -138,7 +146,8 @@ public class CoursesController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/createContent");
+        final ModelAndView mav = new ModelAndView(ROOT
+          + "/page/createContent");
         mav.addObject("validationRules", validationContext.get(Course.class));
         return mav;
     }
@@ -152,9 +161,9 @@ public class CoursesController {
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(
-            @ModelAttribute(ROOT_MODEL) Course course, @RequestParam(value =
-            "expertList",
-            required = false) List<String> expertList) {
+      @ModelAttribute(ROOT_MODEL) final Course course,
+      @RequestParam(value = "expertList",
+        required = false) final List<String> expertList) {
         course.setExperts(bindExperts(expertList));
         courseService.create(course);
         return "redirect:/admin/course/";
@@ -166,10 +175,11 @@ public class CoursesController {
      * @return modelAndView("admin/courses/layout")
      */
     @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
-    public ModelAndView update(@PathVariable String courseCode) {
-        ModelAndView mav = new ModelAndView(ROOT + "/page/updateContent");
-        mav.getModelMap().addAttribute("course", courseService.findByCode
-                (courseCode));
+    public ModelAndView update(@PathVariable final String courseCode) {
+        final ModelAndView mav = new ModelAndView(ROOT
+          + "/page/updateContent");
+        mav.getModelMap().addAttribute("course",
+          courseService.findByCode(courseCode));
         mav.addObject("validationRules", validationContext.get(Course.class));
         return mav;
     }
@@ -182,23 +192,25 @@ public class CoursesController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(
-            @ModelAttribute(ROOT_MODEL) Course course, @RequestParam(value =
-            "expertList",
-            required = false) List<String> expertList) {
+      @ModelAttribute(ROOT_MODEL) final Course course,
+      @RequestParam(value = "expertList",
+        required = false) final List<String> expertList) {
         course.setId(courseService.findByCode(course.getCode()).getId());//
         // TO DO: id must be already present
         course.setExperts(bindExperts(expertList));
         courseService.update(course);
-        return "redirect: view/" + course.getCode();
+        return "redirect: view/"
+          + course.getCode();
     }
 
-    private Set<User> bindExperts(List<String> experts) {
-        if (experts == null) {
+    private Set<User> bindExperts(final List<String> experts) {
+        if (experts
+          == null) {
             return null;
         }
-        Set<User> courseExperts = new HashSet<>();
-        for (String expert : experts) {
-            String params[] = expert.split(" ");
+        final Set<User> courseExperts = new HashSet<>();
+        for (final String expert : experts) {
+            final String[] params = expert.split(" ");
             courseExperts.add(userServiceLogin.loadUserByUsername(params[2]));
         }
         return courseExperts;
@@ -210,15 +222,15 @@ public class CoursesController {
      * @param binder
      */
     @InitBinder(ROOT_MODEL)
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor
-                (dateFormat, true));
+    public void initBinder(final WebDataBinder binder) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        binder.registerCustomEditor(Date.class,
+          new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
     }
 
     @InitBinder("filterCourse")
-    public void initFilterBinder(WebDataBinder binder) {
+    public void initFilterBinder(final WebDataBinder binder) {
         initBinder(binder);
     }
 

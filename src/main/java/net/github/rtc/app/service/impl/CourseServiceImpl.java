@@ -31,7 +31,7 @@ import java.util.UUID;
 @Transactional
 public class CourseServiceImpl implements ModelService<Course>, CourseService {
     private static Logger LOG = LoggerFactory.getLogger(CourseServiceImpl
-            .class.getName());
+      .class.getName());
 
     @Autowired
     private CoursesDao coursesDao;
@@ -40,7 +40,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      * @see net.github.rtc.app.service.CourseService#delete(String)
      */
     @Override
-    public void delete(String code) {
+    public void delete(final String code) {
         LOG.debug("Removing course with code {} ", code);
         Assert.notNull(code, "code cannot be null");
         coursesDao.deleteByCode(code);
@@ -50,7 +50,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      * @see net.github.rtc.app.service.CourseService#findByCode(String)
      */
     @Override
-    public Course findByCode(String code) {
+    public Course findByCode(final String code) {
         LOG.debug("Getting course with code {}", code);
         Assert.notNull(code, "code cannot be null");
         return coursesDao.findByCode(code);
@@ -61,7 +61,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      * .app.model.course.Course)
      */
     @Override
-    public Course create(Course course) {
+    public Course create(final Course course) {
         LOG.debug("Creating course {} ", course);
         Assert.notNull(course, "course cannot be null");
         course.setCode(UUID.randomUUID().toString());
@@ -73,7 +73,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      * .app.model.course.Course)
      */
     @Override
-    public void update(Course course) {
+    public void update(final Course course) {
         LOG.debug("Updating course: {} ", course);
         Assert.notNull(course, "course cannot be null");
         coursesDao.update(course);
@@ -92,7 +92,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     }
 
     @Override
-    public void publish(Course course) {
+    public void publish(final Course course) {
         LOG.debug("Publishing course: {}  ", course);
         Assert.notNull(course, "course cannot be null");
         course.setStatus(CourseStatus.PUBLISHED);
@@ -103,18 +103,19 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Override
     @Transactional
     public SearchResults<Course> search(
-            DetachedCriteria criteria, int start, int max) {
+      final DetachedCriteria criteria, final int start, final int max) {
         LOG.debug("Searching courses///");
         return coursesDao.search(criteria, start, max);
     }
 
     @Override
     public List<Course> startingSoonCourses() {
-        CourseSearchFilter searchFilter = new CourseSearchFilter();
+        final CourseSearchFilter searchFilter = new CourseSearchFilter();
         searchFilter.setStartDate(new Date());
         searchFilter.setStatus(CourseStatus.PUBLISHED);
-        return coursesDao.search(searchFilter.getCriteria().addOrder(Order
-                .asc("startDate")), 1, 3).getResults();
+        return coursesDao.search(
+          searchFilter.getCriteria().addOrder(Order.asc("startDate")), 1,
+          3).getResults();
     }
 
 }

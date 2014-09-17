@@ -10,8 +10,8 @@ public enum CourseType {
     QA, DEV, BA;
 
     public static List<String> findAll() {
-        List<String> res = new ArrayList<>();
-        for (CourseType type : CourseType.values()) {
+        final List<String> res = new ArrayList<>();
+        for (final CourseType type : CourseType.values()) {
             res.add(type.name());
         }
         return res;
