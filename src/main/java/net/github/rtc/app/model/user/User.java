@@ -15,6 +15,8 @@ import java.util.Set;
 @Entity
 @Validatable
 public class User implements UserDetails {
+    public static final int PRIMARY_LENGTH = 50;
+    public static final int SECONDARY_LENGTH = 30;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @ForExport("Id")
@@ -25,18 +27,18 @@ public class User implements UserDetails {
     private String code;
 
     @Required
-    @Maxlength(50)
+    @Maxlength(PRIMARY_LENGTH)
     @Column
     @ForExport("Surname")
     private String surname;
 
     @Required
-    @Maxlength(50)
+    @Maxlength(PRIMARY_LENGTH)
     @Column
     @ForExport("Name")
     private String name;
 
-    @Maxlength(50)
+    @Maxlength(PRIMARY_LENGTH)
     @Column
     @ForExport("Middle name")
     private String middleName;
@@ -58,22 +60,22 @@ public class User implements UserDetails {
     @ForExport("Email")
     private String email;
 
-    @Maxlength(30)
+    @Maxlength(SECONDARY_LENGTH)
     @Column
     @ForExport("City")
     private String city;
 
-    @Maxlength(30)
+    @Maxlength(SECONDARY_LENGTH)
     @Column
     @ForExport("University")
     private String university;
 
-    @Maxlength(30)
+    @Maxlength(SECONDARY_LENGTH)
     @Column
     @ForExport("Faculty")
     private String faculty;
 
-    @Maxlength(30)
+    @Maxlength(SECONDARY_LENGTH)
     @Column
     @ForExport("Speciality")
     private String speciality;

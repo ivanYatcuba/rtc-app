@@ -12,13 +12,14 @@ import java.util.Collection;
 
 @Component
 public class JobRemovingUser {
+    public static final int JOB_DELY = 300000;
     private static Logger LOG = LoggerFactory.getLogger(
       JobRemovingUser.class.getName());
 
     @Autowired
     private UserService userService;
 
-    @Scheduled(fixedDelay = 300000)
+    @Scheduled(fixedDelay = JOB_DELY)
     public void deletingUser() {
         LOG.debug("JobRemovingUser started");
         final Collection<User> listUsers = userService.findAll();

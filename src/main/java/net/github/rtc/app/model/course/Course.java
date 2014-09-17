@@ -20,6 +20,10 @@ import java.util.Set;
 @Validatable
 public class Course implements Serializable {
 
+    public static final int HASH_CODE_CONSTANT = 31;
+    public static final int PRIMARY_LENGTH = 50;
+    public static final int DEFAULT_CAPACITY = 10;
+    public static final int DESCRIPTION_LENGTH = 255;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @ForExport("Id")
@@ -31,7 +35,7 @@ public class Course implements Serializable {
 
     @Required
     @Minlength(2)
-    @Maxlength(50)
+    @Maxlength(PRIMARY_LENGTH)
     @Column
     @ForExport("Name")
     private String name;
@@ -61,7 +65,7 @@ public class Course implements Serializable {
     @ForExport("Publish date")
     private Date publishDate;
 
-    @Maxlength(255)
+    @Maxlength(DESCRIPTION_LENGTH)
     @Column
     @ForExport("Description")
     private String description;
@@ -71,7 +75,7 @@ public class Course implements Serializable {
     @Min(1)
     @Column
     @ForExport("Capacity")
-    private Integer capacity = 10;
+    private Integer capacity = DEFAULT_CAPACITY;
 
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -289,43 +293,43 @@ public class Course implements Serializable {
     public int hashCode() {
         int result = code
           != null ? code.hashCode() : 0;
-        result = 31
+        result = HASH_CODE_CONSTANT
           * result
           + (name
           != null ? name.hashCode() : 0);
-        result = 31
+        result = HASH_CODE_CONSTANT
           * result
           + (type
           != null ? type.hashCode() : 0);
-        result = 31
+        result = HASH_CODE_CONSTANT
           * result
           + (experts
           != null ? experts.hashCode() : 0);
-        result = 31
+        result = HASH_CODE_CONSTANT
           * result
           + (startDate
           != null ? startDate.hashCode() : 0);
-        result = 31
+        result = HASH_CODE_CONSTANT
           * result
           + (endDate
           != null ? endDate.hashCode() : 0);
-        result = 31
+        result = HASH_CODE_CONSTANT
           * result
           + (tags
           != null ? tags.hashCode() : 0);
-        result = 31
+        result = HASH_CODE_CONSTANT
           * result
           + (status
           != null ? status.hashCode() : 0);
-        result = 31
+        result = HASH_CODE_CONSTANT
           * result
           + (description
           != null ? description.hashCode() : 0);
-        result = 31
+        result = HASH_CODE_CONSTANT
           * result
           + (publishDate
           != null ? publishDate.hashCode() : 0);
-        result = 31
+        result = HASH_CODE_CONSTANT
           * result
           + (capacity
           != null ? capacity.hashCode() : 0);
