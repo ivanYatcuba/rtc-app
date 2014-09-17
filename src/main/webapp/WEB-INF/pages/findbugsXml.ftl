@@ -930,6 +930,8 @@
             
                [ "Dm", "Dubious method used" ],
             
+               [ "EC", "Comparing incompatible types for equality" ],
+            
                [ "EI", "Method returning array may expose internal representation" ],
             
                [ "EI2", "Storing reference to mutable object" ],
@@ -942,8 +944,6 @@
             
                [ "RV", "Bad use of return value from method" ],
             
-               [ "SIC", "Inner class could be made static" ],
-            
                [ "SS", "Unread field should be static" ],
             
                [ "", "" ]
@@ -953,6 +953,9 @@
          var patterns = new Array(
             
                [ "I18N", "Dm", "DM_DEFAULT_ENCODING", "Reliance on default encoding" ],
+
+            
+               [ "CORRECTNESS", "EC", "EC_UNRELATED_TYPES", "Call to equals() comparing different types" ],
 
             
                [ "MALICIOUS_CODE", "EI", "EI_EXPOSE_REP", "May expose internal representation by returning reference to mutable object" ],
@@ -971,9 +974,6 @@
 
             
                [ "BAD_PRACTICE", "RV", "RV_RETURN_VALUE_IGNORED_BAD_PRACTICE", "Method ignores exceptional return value" ],
-
-            
-               [ "PERFORMANCE", "SIC", "SIC_INNER_SHOULD_BE_STATIC", "Should be a static inner class" ],
 
             
                [ "PERFORMANCE", "SS", "SS_SHOULD_BE_STATIC", "Unread field: should this field be static?" ],
@@ -1101,31 +1101,13 @@
             
                [ "net.github.rtc.app.utils.Bootstrap", "net.github.rtc.app.utils", "false", "0", "", "", "", "" ],
             
-               [ "net.github.rtc.app.utils.datatable.FilterSettings", "net.github.rtc.app.utils.datatable", "false", "0", "", "", "", "" ],
-            
-               [ "net.github.rtc.app.utils.datatable.FilterSettings$1", "net.github.rtc.app.utils.datatable", "false", "0", "", "", "", "" ],
-            
-               [ "net.github.rtc.app.utils.datatable.FilterSettings$ComplexOption", "net.github.rtc.app.utils.datatable", "false", "1", "", "1", "", "" ],
+               [ "net.github.rtc.app.utils.datatable.CourseSearchFilter", "net.github.rtc.app.utils.datatable", "false", "3", "1", "2", "", "" ],
             
                [ "net.github.rtc.app.utils.datatable.Page", "net.github.rtc.app.utils.datatable", "false", "1", "", "1", "", "" ],
             
                [ "net.github.rtc.app.utils.datatable.Page$MapBuilder", "net.github.rtc.app.utils.datatable", "false", "0", "", "", "", "" ],
             
-               [ "net.github.rtc.app.utils.datatable.SearchCriteria", "net.github.rtc.app.utils.datatable", "false", "0", "", "", "", "" ],
-            
-               [ "net.github.rtc.app.utils.datatable.SearchCriteria$1", "net.github.rtc.app.utils.datatable", "false", "0", "", "", "", "" ],
-            
-               [ "net.github.rtc.app.utils.datatable.SearchCriteria$Addable", "net.github.rtc.app.utils.datatable", "true", "0", "", "", "", "" ],
-            
-               [ "net.github.rtc.app.utils.datatable.SearchCriteria$CriteriaAddable", "net.github.rtc.app.utils.datatable", "false", "1", "", "1", "", "" ],
-            
-               [ "net.github.rtc.app.utils.datatable.SearchCriteria$JunctionAddable", "net.github.rtc.app.utils.datatable", "false", "1", "", "1", "", "" ],
-            
-               [ "net.github.rtc.app.utils.datatable.SearchCriteria$JunctionStrategy", "net.github.rtc.app.utils.datatable", "false", "0", "", "", "", "" ],
-            
-               [ "net.github.rtc.app.utils.datatable.SearchCriteria$RestrictionStrategy", "net.github.rtc.app.utils.datatable", "false", "0", "", "", "", "" ],
-            
-               [ "net.github.rtc.app.utils.datatable.SearchCriteria$SortOrder", "net.github.rtc.app.utils.datatable", "false", "0", "", "", "", "" ],
+               [ "net.github.rtc.app.utils.datatable.SearchFilter", "net.github.rtc.app.utils.datatable", "true", "0", "", "", "", "" ],
             
                [ "net.github.rtc.app.utils.datatable.SearchResults", "net.github.rtc.app.utils.datatable", "false", "0", "", "", "", "" ],
             
@@ -1181,7 +1163,7 @@
             
                [ "net.github.rtc.app.utils", "0", "", "", "", "" ],
             
-               [ "net.github.rtc.app.utils.datatable", "4", "", "4", "", "" ],
+               [ "net.github.rtc.app.utils.datatable", "4", "1", "3", "", "" ],
             
                [ "net.github.rtc.app.utils.propertyeditors", "0", "", "", "", "" ],
             
@@ -1525,13 +1507,33 @@
                  ""],
             
 
-               [ "add0bc0213445814db9580765cc76507-0",
-                 "PERFORMANCE",
-                 "SIC",
-                 "SIC_INNER_SHOULD_BE_STATIC",
+               [ "feb84ae17379b0d30a250ccc3de7e7d7-0",
+                 "CORRECTNESS",
+                 "EC",
+                 "EC_UNRELATED_TYPES",
+                 1,
+                 0,
+                 "net.github.rtc.app.utils.datatable.CourseSearchFilter",
+                 ""],
+            
+
+               [ "15ce7ab046d98ad701a60bc63cf5789c-0",
+                 "MALICIOUS_CODE",
+                 "EI",
+                 "EI_EXPOSE_REP",
                  2,
                  0,
-                 "net.github.rtc.app.utils.datatable.FilterSettings$ComplexOption",
+                 "net.github.rtc.app.utils.datatable.CourseSearchFilter",
+                 ""],
+            
+
+               [ "fe6f014c88d1069e6ab7e9e9c5952a0c-0",
+                 "MALICIOUS_CODE",
+                 "EI2",
+                 "EI_EXPOSE_REP2",
+                 2,
+                 0,
+                 "net.github.rtc.app.utils.datatable.CourseSearchFilter",
                  ""],
             
 
@@ -1542,26 +1544,6 @@
                  2,
                  0,
                  "net.github.rtc.app.utils.datatable.Page",
-                 ""],
-            
-
-               [ "2644dd5d21e8afe6ecc1189fcbb24874-0",
-                 "PERFORMANCE",
-                 "SIC",
-                 "SIC_INNER_SHOULD_BE_STATIC",
-                 2,
-                 0,
-                 "net.github.rtc.app.utils.datatable.SearchCriteria$CriteriaAddable",
-                 ""],
-            
-
-               [ "1bd08762f0b16cd9063333ac58a97065-0",
-                 "PERFORMANCE",
-                 "SIC",
-                 "SIC_INNER_SHOULD_BE_STATIC",
-                 2,
-                 0,
-                 "net.github.rtc.app.utils.datatable.SearchCriteria$JunctionAddable",
                  ""],
             
                [ "", "", "", "", 0, 0, "", "" ]
@@ -1643,18 +1625,18 @@
 <td class="summary-name">
                      Overall
                      (20 packages),
-                     (78 classes)
+                     (69 classes)
                   </td>
-<td class="summary-size">2145</td>
+<td class="summary-size">2053</td>
 <td class="summary-priority-all">37</td>
-<td class="summary-priority-1">1</td>
-<td class="summary-priority-2">36</td>
+<td class="summary-priority-1">2</td>
+<td class="summary-priority-2">35</td>
 <td class="summary-priority-3" />
 <td class="summary-priority-4" />
 </tr>
 <tr>
 <td class="summary-name">net.github.rtc.app.controller.admin</td>
-<td class="summary-size">290</td>
+<td class="summary-size">291</td>
 <td class="summary-priority-all">1</td>
 <td class="summary-priority-1" />
 <td class="summary-priority-2">1</td>
@@ -1663,7 +1645,7 @@
 </tr>
 <tr>
 <td class="summary-name">net.github.rtc.app.export</td>
-<td class="summary-size">120</td>
+<td class="summary-size">127</td>
 <td class="summary-priority-all">2</td>
 <td class="summary-priority-1" />
 <td class="summary-priority-2">2</td>
@@ -1672,7 +1654,7 @@
 </tr>
 <tr>
 <td class="summary-name">net.github.rtc.app.export.table</td>
-<td class="summary-size">55</td>
+<td class="summary-size">60</td>
 <td class="summary-priority-all">4</td>
 <td class="summary-priority-1">1</td>
 <td class="summary-priority-2">3</td>
@@ -1681,7 +1663,7 @@
 </tr>
 <tr>
 <td class="summary-name">net.github.rtc.app.model.course</td>
-<td class="summary-size">185</td>
+<td class="summary-size">208</td>
 <td class="summary-priority-all">9</td>
 <td class="summary-priority-1" />
 <td class="summary-priority-2">9</td>
@@ -1690,7 +1672,7 @@
 </tr>
 <tr>
 <td class="summary-name">net.github.rtc.app.model.report</td>
-<td class="summary-size">57</td>
+<td class="summary-size">64</td>
 <td class="summary-priority-all">2</td>
 <td class="summary-priority-1" />
 <td class="summary-priority-2">2</td>
@@ -1699,7 +1681,7 @@
 </tr>
 <tr>
 <td class="summary-name">net.github.rtc.app.model.user</td>
-<td class="summary-size">373</td>
+<td class="summary-size">390</td>
 <td class="summary-priority-all">14</td>
 <td class="summary-priority-1" />
 <td class="summary-priority-2">14</td>
@@ -1708,7 +1690,7 @@
 </tr>
 <tr>
 <td class="summary-name">net.github.rtc.app.service.impl</td>
-<td class="summary-size">204</td>
+<td class="summary-size">209</td>
 <td class="summary-priority-all">1</td>
 <td class="summary-priority-1" />
 <td class="summary-priority-2">1</td>
@@ -1717,10 +1699,10 @@
 </tr>
 <tr>
 <td class="summary-name">net.github.rtc.app.utils.datatable</td>
-<td class="summary-size">268</td>
+<td class="summary-size">130</td>
 <td class="summary-priority-all">4</td>
-<td class="summary-priority-1" />
-<td class="summary-priority-2">4</td>
+<td class="summary-priority-1">1</td>
+<td class="summary-priority-2">3</td>
 <td class="summary-priority-3" />
 <td class="summary-priority-4" />
 </tr>
@@ -1730,138 +1712,138 @@
 <div id="analyzed-files">
 <h3>Analyzed Files:</h3>
 <ul>
-<li>/media/disk1/Dropbox/practice_repository/rtc-app/target/classes</li>
+<li>D:\IdeaProjects\practice\rtc-app\target\classes</li>
 </ul>
 </div>
 <div id="used-libraries">
 <h3>Used Libraries:</h3>
 <ul>
-<li>/home/kostya/.m2/repository/org/codehaus/mojo/findbugs-maven-plugin/3.0.0/findbugs-maven-plugin-3.0.0.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/gmaven/gmaven-mojo/1.4/gmaven-mojo-1.4.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/gmaven/runtime/gmaven-runtime-api/1.4/gmaven-runtime-api-1.4.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/gmaven/feature/gmaven-feature-api/1.4/gmaven-feature-api-1.4.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/gmaven/runtime/gmaven-runtime-1.5/1.4/gmaven-runtime-1.5-1.4.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/gmaven/feature/gmaven-feature-support/1.4/gmaven-feature-support-1.4.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/groovy/groovy-all-minimal/1.5.8/groovy-all-minimal-1.5.8.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/ant/ant/1.8.2/ant-1.8.2.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/ant/ant-launcher/1.8.2/ant-launcher-1.8.2.jar</li>
-<li>/home/kostya/.m2/repository/jline/jline/0.9.94/jline-0.9.94.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.1/plexus-interpolation-1.1.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/gmaven/gmaven-plugin/1.4/gmaven-plugin-1.4.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/gmaven/runtime/gmaven-runtime-loader/1.4/gmaven-runtime-loader-1.4.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/gmaven/runtime/gmaven-runtime-support/1.4/gmaven-runtime-support-1.4.jar</li>
-<li>/home/kostya/.m2/repository/org/sonatype/gshell/gshell-io/2.4/gshell-io-2.4.jar</li>
-<li>/home/kostya/.m2/repository/com/thoughtworks/qdox/qdox/1.12/qdox-1.12.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/shared/file-management/1.2.1/file-management-1.2.1.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/shared/maven-shared-io/1.1/maven-shared-io-1.1.jar</li>
-<li>/home/kostya/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar</li>
-<li>/home/kostya/.m2/repository/org/slf4j/slf4j-api/1.5.10/slf4j-api-1.5.10.jar</li>
-<li>/home/kostya/.m2/repository/org/sonatype/gossip/gossip/1.2/gossip-1.2.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/reporting/maven-reporting-impl/2.1/maven-reporting-impl-2.1.jar</li>
-<li>/home/kostya/.m2/repository/commons-validator/commons-validator/1.2.0/commons-validator-1.2.0.jar</li>
-<li>/home/kostya/.m2/repository/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar</li>
-<li>/home/kostya/.m2/repository/commons-digester/commons-digester/1.6/commons-digester-1.6.jar</li>
-<li>/home/kostya/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar</li>
-<li>/home/kostya/.m2/repository/oro/oro/2.0.8/oro-2.0.8.jar</li>
-<li>/home/kostya/.m2/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/groovy/groovy-all/1.7.4/groovy-all-1.7.4.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/reporting/maven-reporting-api/3.0/maven-reporting-api-3.0.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/doxia/doxia-core/1.1.3/doxia-core-1.1.3.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/doxia/doxia-logging-api/1.1.3/doxia-logging-api-1.1.3.jar</li>
-<li>/home/kostya/.m2/repository/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.jar</li>
-<li>/home/kostya/.m2/repository/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar</li>
-<li>/home/kostya/.m2/repository/commons-codec/commons-codec/1.2/commons-codec-1.2.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.1.3/doxia-sink-api-1.1.3.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/doxia/doxia-decoration-model/1.1.3/doxia-decoration-model-1.1.3.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/doxia/doxia-site-renderer/1.1.3/doxia-site-renderer-1.1.3.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/doxia/doxia-module-xhtml/1.1.3/doxia-module-xhtml-1.1.3.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/doxia/doxia-module-fml/1.1.3/doxia-module-fml-1.1.3.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/plexus/plexus-i18n/1.0-beta-7/plexus-i18n-1.0-beta-7.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/plexus/plexus-velocity/1.1.7/plexus-velocity-1.1.7.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/velocity/velocity/1.5/velocity-1.5.jar</li>
-<li>/home/kostya/.m2/repository/commons-collections/commons-collections/3.2/commons-collections-3.2.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/maven/shared/maven-doxia-tools/1.2.1/maven-doxia-tools-1.2.1.jar</li>
-<li>/home/kostya/.m2/repository/commons-io/commons-io/1.4/commons-io-1.4.jar</li>
-<li>/home/kostya/.m2/repository/com/google/code/findbugs/findbugs/3.0.0/findbugs-3.0.0.jar</li>
-<li>/home/kostya/.m2/repository/com/google/code/findbugs/bcel-findbugs/6.0/bcel-findbugs-6.0.jar</li>
-<li>/home/kostya/.m2/repository/com/google/code/findbugs/annotations/3.0.0/annotations-3.0.0.jar</li>
-<li>/home/kostya/.m2/repository/com/google/code/findbugs/jFormatString/3.0.0/jFormatString-3.0.0.jar</li>
-<li>/home/kostya/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar</li>
-<li>/home/kostya/.m2/repository/jaxen/jaxen/1.1.6/jaxen-1.1.6.jar</li>
-<li>/home/kostya/.m2/repository/org/ow2/asm/asm-debug-all/5.0.2/asm-debug-all-5.0.2.jar</li>
-<li>/home/kostya/.m2/repository/jgoodies/plastic/1.2.0/plastic-1.2.0.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/plexus/plexus-resources/1.0-alpha-7/plexus-resources-1.0-alpha-7.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/plexus/plexus-utils/1.5.6/plexus-utils-1.5.6.jar</li>
-<li>/home/kostya/.m2/repository/org/sonatype/plexus/plexus-build-api/0.0.7/plexus-build-api-0.0.7.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/spring-core/4.0.6.RELEASE/spring-core-4.0.6.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/spring-context-support/4.0.6.RELEASE/spring-context-support-4.0.6.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/spring-beans/4.0.6.RELEASE/spring-beans-4.0.6.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/spring-context/4.0.6.RELEASE/spring-context-4.0.6.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/spring-web/4.0.6.RELEASE/spring-web-4.0.6.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/spring-aop/4.0.6.RELEASE/spring-aop-4.0.6.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/spring-webmvc/4.0.6.RELEASE/spring-webmvc-4.0.6.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/spring-expression/4.0.6.RELEASE/spring-expression-4.0.6.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/spring-tx/4.0.6.RELEASE/spring-tx-4.0.6.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/spring-orm/4.0.6.RELEASE/spring-orm-4.0.6.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/spring-jdbc/4.0.6.RELEASE/spring-jdbc-4.0.6.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/security/spring-security-core/3.2.4.RELEASE/spring-security-core-3.2.4.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/security/spring-security-web/3.2.4.RELEASE/spring-security-web-3.2.4.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/org/springframework/security/spring-security-config/3.2.4.RELEASE/spring-security-config-3.2.4.RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar</li>
-<li>/home/kostya/.m2/repository/org/freemarker/freemarker/2.3.20/freemarker-2.3.20.jar</li>
-<li>/home/kostya/.m2/repository/org/hibernate/hibernate-validator/5.0.1.Final/hibernate-validator-5.0.1.Final.jar</li>
-<li>/home/kostya/.m2/repository/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar</li>
-<li>/home/kostya/.m2/repository/org/jboss/logging/jboss-logging/3.1.1.GA/jboss-logging-3.1.1.GA.jar</li>
-<li>/home/kostya/.m2/repository/com/fasterxml/classmate/0.8.0/classmate-0.8.0.jar</li>
-<li>/home/kostya/.m2/repository/com/sun/jersey/jersey-client/1.9.1/jersey-client-1.9.1.jar</li>
-<li>/home/kostya/.m2/repository/com/sun/jersey/jersey-core/1.9.1/jersey-core-1.9.1.jar</li>
-<li>/home/kostya/.m2/repository/com/sun/jersey/jersey-server/1.9.1/jersey-server-1.9.1.jar</li>
-<li>/home/kostya/.m2/repository/asm/asm/3.1/asm-3.1.jar</li>
-<li>/home/kostya/.m2/repository/com/sun/jersey/jersey-json/1.9.1/jersey-json-1.9.1.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/jettison/jettison/1.1/jettison-1.1.jar</li>
-<li>/home/kostya/.m2/repository/stax/stax-api/1.0.1/stax-api-1.0.1.jar</li>
-<li>/home/kostya/.m2/repository/com/sun/xml/bind/jaxb-impl/2.2.3-1/jaxb-impl-2.2.3-1.jar</li>
-<li>/home/kostya/.m2/repository/javax/xml/bind/jaxb-api/2.2.2/jaxb-api-2.2.2.jar</li>
-<li>/home/kostya/.m2/repository/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar</li>
-<li>/home/kostya/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.8.3/jackson-core-asl-1.8.3.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.8.3/jackson-mapper-asl-1.8.3.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/jackson/jackson-jaxrs/1.8.3/jackson-jaxrs-1.8.3.jar</li>
-<li>/home/kostya/.m2/repository/org/codehaus/jackson/jackson-xc/1.8.3/jackson-xc-1.8.3.jar</li>
-<li>/home/kostya/.m2/repository/org/mockito/mockito-all/1.9.5/mockito-all-1.9.5.jar</li>
-<li>/home/kostya/.m2/repository/joda-time/joda-time/2.1/joda-time-2.1.jar</li>
-<li>/home/kostya/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar</li>
-<li>/home/kostya/.m2/repository/org/slf4j/slf4j-simple/1.6.1/slf4j-simple-1.6.1.jar</li>
-<li>/home/kostya/.m2/repository/ch/qos/logback/logback-core/0.9.28/logback-core-0.9.28.jar</li>
-<li>/home/kostya/.m2/repository/ch/qos/logback/logback-classic/0.9.28/logback-classic-0.9.28.jar</li>
-<li>/home/kostya/.m2/repository/commons-dbcp/commons-dbcp/1.2.2/commons-dbcp-1.2.2.jar</li>
-<li>/home/kostya/.m2/repository/commons-pool/commons-pool/1.3/commons-pool-1.3.jar</li>
-<li>/home/kostya/.m2/repository/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar</li>
-<li>/home/kostya/.m2/repository/org/hibernate/hibernate-core/4.2.2.Final/hibernate-core-4.2.2.Final.jar</li>
-<li>/home/kostya/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar</li>
-<li>/home/kostya/.m2/repository/org/jboss/spec/javax/transaction/jboss-transaction-api_1.1_spec/1.0.1.Final/jboss-transaction-api_1.1_spec-1.0.1.Final.jar</li>
-<li>/home/kostya/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final.jar</li>
-<li>/home/kostya/.m2/repository/org/hibernate/common/hibernate-commons-annotations/4.0.2.Final/hibernate-commons-annotations-4.0.2.Final.jar</li>
-<li>/home/kostya/.m2/repository/org/javassist/javassist/3.15.0-GA/javassist-3.15.0-GA.jar</li>
-<li>/home/kostya/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar</li>
-<li>/home/kostya/.m2/repository/org/reflections/reflections/0.9.9-RC1/reflections-0.9.9-RC1.jar</li>
-<li>/home/kostya/.m2/repository/com/google/guava/guava/r05/guava-r05.jar</li>
-<li>/home/kostya/.m2/repository/org/quartz-scheduler/quartz/2.2.1/quartz-2.2.1.jar</li>
-<li>/home/kostya/.m2/repository/c3p0/c3p0/0.9.1.1/c3p0-0.9.1.1.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/poi/poi/3.10-FINAL/poi-3.10-FINAL.jar</li>
-<li>/home/kostya/.m2/repository/commons-codec/commons-codec/1.5/commons-codec-1.5.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/poi/poi-ooxml/3.10-FINAL/poi-ooxml-3.10-FINAL.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/poi/poi-ooxml-schemas/3.10-FINAL/poi-ooxml-schemas-3.10-FINAL.jar</li>
-<li>/home/kostya/.m2/repository/org/apache/xmlbeans/xmlbeans/2.3.0/xmlbeans-2.3.0.jar</li>
-<li>/home/kostya/.m2/repository/org/liquibase/liquibase-core/3.2.2/liquibase-core-3.2.2.jar</li>
-<li>/home/kostya/.m2/repository/org/yaml/snakeyaml/1.13/snakeyaml-1.13.jar</li>
-<li>/home/kostya/.m2/repository/net/github/rtc/rtc-util/1.1-RELEASE/rtc-util-1.1-RELEASE.jar</li>
-<li>/home/kostya/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.2.2/jackson-core-2.2.2.jar</li>
-<li>/home/kostya/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.2.2/jackson-databind-2.2.2.jar</li>
-<li>/home/kostya/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.2.2/jackson-annotations-2.2.2.jar</li>
-<li>/home/kostya/.m2/repository/commons-io/commons-io/1.3.2/commons-io-1.3.2.jar</li>
+<li>D:\.m2\repository\org\codehaus\mojo\findbugs-maven-plugin\3.0.0\findbugs-maven-plugin-3.0.0.jar</li>
+<li>D:\.m2\repository\org\codehaus\gmaven\gmaven-mojo\1.4\gmaven-mojo-1.4.jar</li>
+<li>D:\.m2\repository\org\codehaus\gmaven\runtime\gmaven-runtime-api\1.4\gmaven-runtime-api-1.4.jar</li>
+<li>D:\.m2\repository\org\codehaus\gmaven\feature\gmaven-feature-api\1.4\gmaven-feature-api-1.4.jar</li>
+<li>D:\.m2\repository\org\codehaus\gmaven\runtime\gmaven-runtime-1.5\1.4\gmaven-runtime-1.5-1.4.jar</li>
+<li>D:\.m2\repository\org\codehaus\gmaven\feature\gmaven-feature-support\1.4\gmaven-feature-support-1.4.jar</li>
+<li>D:\.m2\repository\org\codehaus\groovy\groovy-all-minimal\1.5.8\groovy-all-minimal-1.5.8.jar</li>
+<li>D:\.m2\repository\org\apache\ant\ant\1.8.2\ant-1.8.2.jar</li>
+<li>D:\.m2\repository\org\apache\ant\ant-launcher\1.8.2\ant-launcher-1.8.2.jar</li>
+<li>D:\.m2\repository\jline\jline\0.9.94\jline-0.9.94.jar</li>
+<li>D:\.m2\repository\org\codehaus\plexus\plexus-interpolation\1.1\plexus-interpolation-1.1.jar</li>
+<li>D:\.m2\repository\org\codehaus\gmaven\gmaven-plugin\1.4\gmaven-plugin-1.4.jar</li>
+<li>D:\.m2\repository\org\codehaus\gmaven\runtime\gmaven-runtime-loader\1.4\gmaven-runtime-loader-1.4.jar</li>
+<li>D:\.m2\repository\org\codehaus\gmaven\runtime\gmaven-runtime-support\1.4\gmaven-runtime-support-1.4.jar</li>
+<li>D:\.m2\repository\org\sonatype\gshell\gshell-io\2.4\gshell-io-2.4.jar</li>
+<li>D:\.m2\repository\com\thoughtworks\qdox\qdox\1.12\qdox-1.12.jar</li>
+<li>D:\.m2\repository\org\apache\maven\shared\file-management\1.2.1\file-management-1.2.1.jar</li>
+<li>D:\.m2\repository\org\apache\maven\shared\maven-shared-io\1.1\maven-shared-io-1.1.jar</li>
+<li>D:\.m2\repository\commons-lang\commons-lang\2.6\commons-lang-2.6.jar</li>
+<li>D:\.m2\repository\org\slf4j\slf4j-api\1.5.10\slf4j-api-1.5.10.jar</li>
+<li>D:\.m2\repository\org\sonatype\gossip\gossip\1.2\gossip-1.2.jar</li>
+<li>D:\.m2\repository\org\apache\maven\reporting\maven-reporting-impl\2.1\maven-reporting-impl-2.1.jar</li>
+<li>D:\.m2\repository\commons-validator\commons-validator\1.2.0\commons-validator-1.2.0.jar</li>
+<li>D:\.m2\repository\commons-beanutils\commons-beanutils\1.7.0\commons-beanutils-1.7.0.jar</li>
+<li>D:\.m2\repository\commons-digester\commons-digester\1.6\commons-digester-1.6.jar</li>
+<li>D:\.m2\repository\commons-logging\commons-logging\1.0.4\commons-logging-1.0.4.jar</li>
+<li>D:\.m2\repository\oro\oro\2.0.8\oro-2.0.8.jar</li>
+<li>D:\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar</li>
+<li>D:\.m2\repository\org\codehaus\groovy\groovy-all\1.7.4\groovy-all-1.7.4.jar</li>
+<li>D:\.m2\repository\org\apache\maven\reporting\maven-reporting-api\3.0\maven-reporting-api-3.0.jar</li>
+<li>D:\.m2\repository\org\apache\maven\doxia\doxia-core\1.1.3\doxia-core-1.1.3.jar</li>
+<li>D:\.m2\repository\org\apache\maven\doxia\doxia-logging-api\1.1.3\doxia-logging-api-1.1.3.jar</li>
+<li>D:\.m2\repository\xerces\xercesImpl\2.9.1\xercesImpl-2.9.1.jar</li>
+<li>D:\.m2\repository\commons-httpclient\commons-httpclient\3.1\commons-httpclient-3.1.jar</li>
+<li>D:\.m2\repository\commons-codec\commons-codec\1.2\commons-codec-1.2.jar</li>
+<li>D:\.m2\repository\org\apache\maven\doxia\doxia-sink-api\1.1.3\doxia-sink-api-1.1.3.jar</li>
+<li>D:\.m2\repository\org\apache\maven\doxia\doxia-decoration-model\1.1.3\doxia-decoration-model-1.1.3.jar</li>
+<li>D:\.m2\repository\org\apache\maven\doxia\doxia-site-renderer\1.1.3\doxia-site-renderer-1.1.3.jar</li>
+<li>D:\.m2\repository\org\apache\maven\doxia\doxia-module-xhtml\1.1.3\doxia-module-xhtml-1.1.3.jar</li>
+<li>D:\.m2\repository\org\apache\maven\doxia\doxia-module-fml\1.1.3\doxia-module-fml-1.1.3.jar</li>
+<li>D:\.m2\repository\org\codehaus\plexus\plexus-i18n\1.0-beta-7\plexus-i18n-1.0-beta-7.jar</li>
+<li>D:\.m2\repository\org\codehaus\plexus\plexus-velocity\1.1.7\plexus-velocity-1.1.7.jar</li>
+<li>D:\.m2\repository\org\apache\velocity\velocity\1.5\velocity-1.5.jar</li>
+<li>D:\.m2\repository\commons-collections\commons-collections\3.2\commons-collections-3.2.jar</li>
+<li>D:\.m2\repository\org\apache\maven\shared\maven-doxia-tools\1.2.1\maven-doxia-tools-1.2.1.jar</li>
+<li>D:\.m2\repository\commons-io\commons-io\1.4\commons-io-1.4.jar</li>
+<li>D:\.m2\repository\com\google\code\findbugs\findbugs\3.0.0\findbugs-3.0.0.jar</li>
+<li>D:\.m2\repository\com\google\code\findbugs\bcel-findbugs\6.0\bcel-findbugs-6.0.jar</li>
+<li>D:\.m2\repository\com\google\code\findbugs\annotations\3.0.0\annotations-3.0.0.jar</li>
+<li>D:\.m2\repository\com\google\code\findbugs\jFormatString\3.0.0\jFormatString-3.0.0.jar</li>
+<li>D:\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar</li>
+<li>D:\.m2\repository\jaxen\jaxen\1.1.6\jaxen-1.1.6.jar</li>
+<li>D:\.m2\repository\org\ow2\asm\asm-debug-all\5.0.2\asm-debug-all-5.0.2.jar</li>
+<li>D:\.m2\repository\jgoodies\plastic\1.2.0\plastic-1.2.0.jar</li>
+<li>D:\.m2\repository\org\codehaus\plexus\plexus-resources\1.0-alpha-7\plexus-resources-1.0-alpha-7.jar</li>
+<li>D:\.m2\repository\org\codehaus\plexus\plexus-utils\1.5.6\plexus-utils-1.5.6.jar</li>
+<li>D:\.m2\repository\org\sonatype\plexus\plexus-build-api\0.0.7\plexus-build-api-0.0.7.jar</li>
+<li>D:\.m2\repository\org\springframework\spring-core\4.0.6.RELEASE\spring-core-4.0.6.RELEASE.jar</li>
+<li>D:\.m2\repository\commons-logging\commons-logging\1.1.3\commons-logging-1.1.3.jar</li>
+<li>D:\.m2\repository\org\springframework\spring-context-support\4.0.6.RELEASE\spring-context-support-4.0.6.RELEASE.jar</li>
+<li>D:\.m2\repository\org\springframework\spring-beans\4.0.6.RELEASE\spring-beans-4.0.6.RELEASE.jar</li>
+<li>D:\.m2\repository\org\springframework\spring-context\4.0.6.RELEASE\spring-context-4.0.6.RELEASE.jar</li>
+<li>D:\.m2\repository\org\springframework\spring-web\4.0.6.RELEASE\spring-web-4.0.6.RELEASE.jar</li>
+<li>D:\.m2\repository\org\springframework\spring-aop\4.0.6.RELEASE\spring-aop-4.0.6.RELEASE.jar</li>
+<li>D:\.m2\repository\org\springframework\spring-webmvc\4.0.6.RELEASE\spring-webmvc-4.0.6.RELEASE.jar</li>
+<li>D:\.m2\repository\org\springframework\spring-expression\4.0.6.RELEASE\spring-expression-4.0.6.RELEASE.jar</li>
+<li>D:\.m2\repository\org\springframework\spring-tx\4.0.6.RELEASE\spring-tx-4.0.6.RELEASE.jar</li>
+<li>D:\.m2\repository\org\springframework\spring-orm\4.0.6.RELEASE\spring-orm-4.0.6.RELEASE.jar</li>
+<li>D:\.m2\repository\org\springframework\spring-jdbc\4.0.6.RELEASE\spring-jdbc-4.0.6.RELEASE.jar</li>
+<li>D:\.m2\repository\org\springframework\security\spring-security-core\3.2.4.RELEASE\spring-security-core-3.2.4.RELEASE.jar</li>
+<li>D:\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar</li>
+<li>D:\.m2\repository\org\springframework\security\spring-security-web\3.2.4.RELEASE\spring-security-web-3.2.4.RELEASE.jar</li>
+<li>D:\.m2\repository\org\springframework\security\spring-security-config\3.2.4.RELEASE\spring-security-config-3.2.4.RELEASE.jar</li>
+<li>D:\.m2\repository\javax\servlet\servlet-api\2.5\servlet-api-2.5.jar</li>
+<li>D:\.m2\repository\org\freemarker\freemarker\2.3.20\freemarker-2.3.20.jar</li>
+<li>D:\.m2\repository\org\hibernate\hibernate-validator\5.0.1.Final\hibernate-validator-5.0.1.Final.jar</li>
+<li>D:\.m2\repository\javax\validation\validation-api\1.1.0.Final\validation-api-1.1.0.Final.jar</li>
+<li>D:\.m2\repository\org\jboss\logging\jboss-logging\3.1.1.GA\jboss-logging-3.1.1.GA.jar</li>
+<li>D:\.m2\repository\com\fasterxml\classmate\0.8.0\classmate-0.8.0.jar</li>
+<li>D:\.m2\repository\com\sun\jersey\jersey-client\1.9.1\jersey-client-1.9.1.jar</li>
+<li>D:\.m2\repository\com\sun\jersey\jersey-core\1.9.1\jersey-core-1.9.1.jar</li>
+<li>D:\.m2\repository\com\sun\jersey\jersey-server\1.9.1\jersey-server-1.9.1.jar</li>
+<li>D:\.m2\repository\asm\asm\3.1\asm-3.1.jar</li>
+<li>D:\.m2\repository\com\sun\jersey\jersey-json\1.9.1\jersey-json-1.9.1.jar</li>
+<li>D:\.m2\repository\org\codehaus\jettison\jettison\1.1\jettison-1.1.jar</li>
+<li>D:\.m2\repository\stax\stax-api\1.0.1\stax-api-1.0.1.jar</li>
+<li>D:\.m2\repository\com\sun\xml\bind\jaxb-impl\2.2.3-1\jaxb-impl-2.2.3-1.jar</li>
+<li>D:\.m2\repository\javax\xml\bind\jaxb-api\2.2.2\jaxb-api-2.2.2.jar</li>
+<li>D:\.m2\repository\javax\xml\stream\stax-api\1.0-2\stax-api-1.0-2.jar</li>
+<li>D:\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar</li>
+<li>D:\.m2\repository\org\codehaus\jackson\jackson-core-asl\1.8.3\jackson-core-asl-1.8.3.jar</li>
+<li>D:\.m2\repository\org\codehaus\jackson\jackson-mapper-asl\1.8.3\jackson-mapper-asl-1.8.3.jar</li>
+<li>D:\.m2\repository\org\codehaus\jackson\jackson-jaxrs\1.8.3\jackson-jaxrs-1.8.3.jar</li>
+<li>D:\.m2\repository\org\codehaus\jackson\jackson-xc\1.8.3\jackson-xc-1.8.3.jar</li>
+<li>D:\.m2\repository\org\mockito\mockito-all\1.9.5\mockito-all-1.9.5.jar</li>
+<li>D:\.m2\repository\joda-time\joda-time\2.1\joda-time-2.1.jar</li>
+<li>D:\.m2\repository\org\slf4j\slf4j-api\1.6.1\slf4j-api-1.6.1.jar</li>
+<li>D:\.m2\repository\org\slf4j\slf4j-simple\1.6.1\slf4j-simple-1.6.1.jar</li>
+<li>D:\.m2\repository\ch\qos\logback\logback-core\0.9.28\logback-core-0.9.28.jar</li>
+<li>D:\.m2\repository\ch\qos\logback\logback-classic\0.9.28\logback-classic-0.9.28.jar</li>
+<li>D:\.m2\repository\commons-dbcp\commons-dbcp\1.2.2\commons-dbcp-1.2.2.jar</li>
+<li>D:\.m2\repository\commons-pool\commons-pool\1.3\commons-pool-1.3.jar</li>
+<li>D:\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar</li>
+<li>D:\.m2\repository\org\hibernate\hibernate-core\4.2.2.Final\hibernate-core-4.2.2.Final.jar</li>
+<li>D:\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar</li>
+<li>D:\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.1_spec\1.0.1.Final\jboss-transaction-api_1.1_spec-1.0.1.Final.jar</li>
+<li>D:\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.0-api\1.0.1.Final\hibernate-jpa-2.0-api-1.0.1.Final.jar</li>
+<li>D:\.m2\repository\org\hibernate\common\hibernate-commons-annotations\4.0.2.Final\hibernate-commons-annotations-4.0.2.Final.jar</li>
+<li>D:\.m2\repository\org\javassist\javassist\3.15.0-GA\javassist-3.15.0-GA.jar</li>
+<li>D:\.m2\repository\com\googlecode\json-simple\json-simple\1.1.1\json-simple-1.1.1.jar</li>
+<li>D:\.m2\repository\org\reflections\reflections\0.9.9-RC1\reflections-0.9.9-RC1.jar</li>
+<li>D:\.m2\repository\com\google\guava\guava\r05\guava-r05.jar</li>
+<li>D:\.m2\repository\org\quartz-scheduler\quartz\2.2.1\quartz-2.2.1.jar</li>
+<li>D:\.m2\repository\c3p0\c3p0\0.9.1.1\c3p0-0.9.1.1.jar</li>
+<li>D:\.m2\repository\org\apache\poi\poi\3.10-FINAL\poi-3.10-FINAL.jar</li>
+<li>D:\.m2\repository\commons-codec\commons-codec\1.5\commons-codec-1.5.jar</li>
+<li>D:\.m2\repository\org\apache\poi\poi-ooxml\3.10-FINAL\poi-ooxml-3.10-FINAL.jar</li>
+<li>D:\.m2\repository\org\apache\poi\poi-ooxml-schemas\3.10-FINAL\poi-ooxml-schemas-3.10-FINAL.jar</li>
+<li>D:\.m2\repository\org\apache\xmlbeans\xmlbeans\2.3.0\xmlbeans-2.3.0.jar</li>
+<li>D:\.m2\repository\org\liquibase\liquibase-core\3.2.2\liquibase-core-3.2.2.jar</li>
+<li>D:\.m2\repository\org\yaml\snakeyaml\1.13\snakeyaml-1.13.jar</li>
+<li>D:\.m2\repository\net\github\rtc\rtc-util\1.1-RELEASE\rtc-util-1.1-RELEASE.jar</li>
+<li>D:\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.2.2\jackson-core-2.2.2.jar</li>
+<li>D:\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.2.2\jackson-databind-2.2.2.jar</li>
+<li>D:\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.2.2\jackson-annotations-2.2.2.jar</li>
+<li>D:\.m2\repository\commons-io\commons-io\1.3.2\commons-io-1.3.2.jar</li>
 </ul>
 </div>
 <div id="analysis-error">
@@ -1963,13 +1945,19 @@ signals unexpected behavior by returning an atypical return value.
 </p>
 
     </div>
-<div id="tip-SIC_INNER_SHOULD_BE_STATIC" class="tip">
+<div id="tip-EC_UNRELATED_TYPES" class="tip">
 
-  <p> This class is an inner class, but does not use its embedded reference
-  to the object which created it.&nbsp; This reference makes the instances
-  of the class larger, and may keep the reference to the creator object
-  alive longer than necessary.&nbsp; If possible, the class should be
-   made static.
+<p> This method calls equals(Object) on two references of different
+class types with no common subclasses.
+Therefore, the objects being compared
+are unlikely to be members of the same class at runtime
+(unless some application classes were not analyzed, or dynamic class
+loading can occur at runtime).
+According to the contract of equals(),
+objects of different
+classes should always compare as unequal; therefore, according to the
+contract defined by java.lang.Object.equals(Object),
+the result of this comparison will always be false at runtime.
 </p>
 
     </div>
@@ -1999,8 +1987,8 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.controller.admin.ExportController.downloadUserExport(HttpServletResponse, String)</div>
 <div class="b-r">Reference type java.io.InputStream</div>
 <div class="b-r">1 instances of obligation remaining</div>
-<div class="b-r">Obligation to clean up resource created at ExportController.java:[line 119] is not discharged</div>
-<div class="b-r">Path continues at ExportController.java:[line 121]</div>
+<div class="b-r">Obligation to clean up resource created at ExportController.java:[line 143] is not discharged</div>
+<div class="b-r">Path continues at ExportController.java:[line 145]</div>
 <div class="b-r">Remaining obligations: {InputStream x 1}</div>
 <div class="b-d">net.github.rtc.app.controller.admin.ExportController.downloadUserExport(HttpServletResponse, String) may fail to clean up java.io.InputStream on checked exception</div>
 </div>
@@ -2008,23 +1996,23 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In class net.github.rtc.app.export.JobManager</div>
 <div class="b-r">In method net.github.rtc.app.export.JobManager.manageJob(ReportDetails, JobManagerAction)</div>
 <div class="b-r">Called method java.io.File.delete()</div>
-<div class="b-r">At JobManager.java:[line 42]</div>
+<div class="b-r">At JobManager.java:[line 59]</div>
 <div class="b-d">Exceptional return value of java.io.File.delete() ignored in net.github.rtc.app.export.JobManager.manageJob(ReportDetails, JobManagerAction)</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-cc4d74a70d51553ef7ad1e8b16639e2b-0">
 <div class="b-r">In class net.github.rtc.app.export.ReportBuilder</div>
 <div class="b-r">In method net.github.rtc.app.export.ReportBuilder.build(List, List, String, String, ExportFormat)</div>
 <div class="b-r">Value loaded from reportTable</div>
-<div class="b-r">Dereferenced at ReportBuilder.java:[line 46]</div>
-<div class="b-r">Null value at ReportBuilder.java:[line 34]</div>
-<div class="b-r">Known null at ReportBuilder.java:[line 39]</div>
+<div class="b-r">Dereferenced at ReportBuilder.java:[line 52]</div>
+<div class="b-r">Null value at ReportBuilder.java:[line 40]</div>
+<div class="b-r">Known null at ReportBuilder.java:[line 45]</div>
 <div class="b-d">Possible null pointer dereference of reportTable in net.github.rtc.app.export.ReportBuilder.build(List, List, String, String, ExportFormat)</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-c5f1a6e3faee0e9eeb1619e9544bb1ae-0">
 <div class="b-r">In class net.github.rtc.app.export.table.CSVTable</div>
 <div class="b-r">In method net.github.rtc.app.export.table.CSVTable.writeToFile(String)</div>
 <div class="b-r">Called method new java.io.FileWriter(String)</div>
-<div class="b-r">At CSVTable.java:[line 31]</div>
+<div class="b-r">At CSVTable.java:[line 32]</div>
 <div class="b-d">Found reliance on default encoding in net.github.rtc.app.export.table.CSVTable.writeToFile(String): new java.io.FileWriter(String)</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-f94682a48ff1bc0fe296b3492213a538-0">
@@ -2032,9 +2020,9 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.export.table.CSVTable.writeToFile(String)</div>
 <div class="b-r">Reference type java.io.Writer</div>
 <div class="b-r">1 instances of obligation remaining</div>
-<div class="b-r">Obligation to clean up resource created at CSVTable.java:[line 31] is not discharged</div>
-<div class="b-r">Path continues at CSVTable.java:[line 32]</div>
-<div class="b-r">Path continues at CSVTable.java:[line 38]</div>
+<div class="b-r">Obligation to clean up resource created at CSVTable.java:[line 32] is not discharged</div>
+<div class="b-r">Path continues at CSVTable.java:[line 33]</div>
+<div class="b-r">Path continues at CSVTable.java:[line 39]</div>
 <div class="b-r">Remaining obligations: {Writer x 1}</div>
 <div class="b-d">net.github.rtc.app.export.table.CSVTable.writeToFile(String) may fail to clean up java.io.Writer on checked exception</div>
 </div>
@@ -2043,8 +2031,8 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.export.table.XLSNXTable.writeToFile(String)</div>
 <div class="b-r">Reference type java.io.OutputStream</div>
 <div class="b-r">1 instances of obligation remaining</div>
-<div class="b-r">Obligation to clean up resource created at XLSNXTable.java:[line 52] is not discharged</div>
-<div class="b-r">Path continues at XLSNXTable.java:[line 53]</div>
+<div class="b-r">Obligation to clean up resource created at XLSNXTable.java:[line 54] is not discharged</div>
+<div class="b-r">Path continues at XLSNXTable.java:[line 55]</div>
 <div class="b-r">Remaining obligations: {OutputStream x 1}</div>
 <div class="b-d">net.github.rtc.app.export.table.XLSNXTable.writeToFile(String) may fail to clean up java.io.OutputStream on checked exception</div>
 </div>
@@ -2052,28 +2040,28 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In class net.github.rtc.app.export.table.XLSNXTable</div>
 <div class="b-r">In method net.github.rtc.app.export.table.XLSNXTable.writeToFile(String)</div>
 <div class="b-r">Called method java.io.File.createNewFile()</div>
-<div class="b-r">At XLSNXTable.java:[line 50]</div>
+<div class="b-r">At XLSNXTable.java:[line 52]</div>
 <div class="b-d">Exceptional return value of java.io.File.createNewFile() ignored in net.github.rtc.app.export.table.XLSNXTable.writeToFile(String)</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-a73f8d86a16b8fb355fc79857b3e5d09-0">
 <div class="b-r">In class net.github.rtc.app.model.course.Course</div>
 <div class="b-r">In method net.github.rtc.app.model.course.Course.getEndDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.course.Course.endDate</div>
-<div class="b-r">At Course.java:[line 122]</div>
+<div class="b-r">At Course.java:[line 130]</div>
 <div class="b-d">net.github.rtc.app.model.course.Course.getEndDate() may expose internal representation by returning Course.endDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-b9e82145fc4b22e5e7c06db17e2ca86d-0">
 <div class="b-r">In class net.github.rtc.app.model.course.Course</div>
 <div class="b-r">In method net.github.rtc.app.model.course.Course.getPublishDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.course.Course.publishDate</div>
-<div class="b-r">At Course.java:[line 157]</div>
+<div class="b-r">At Course.java:[line 178]</div>
 <div class="b-d">net.github.rtc.app.model.course.Course.getPublishDate() may expose internal representation by returning Course.publishDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-6c87ec86afe625f800c4fda9b20c81e9-0">
 <div class="b-r">In class net.github.rtc.app.model.course.Course</div>
 <div class="b-r">In method net.github.rtc.app.model.course.Course.getStartDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.course.Course.startDate</div>
-<div class="b-r">At Course.java:[line 114]</div>
+<div class="b-r">At Course.java:[line 122]</div>
 <div class="b-d">net.github.rtc.app.model.course.Course.getStartDate() may expose internal representation by returning Course.startDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-172003e6ab279dfe45a8c7affdc150b0-0">
@@ -2081,7 +2069,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method new net.github.rtc.app.model.course.Course(String, String, CourseType, Set, Date, Date, Date, Integer, String, CourseStatus)</div>
 <div class="b-r">Field net.github.rtc.app.model.course.Course.endDate</div>
 <div class="b-r">Local variable named endDate</div>
-<div class="b-r">At Course.java:[line 176]</div>
+<div class="b-r">At Course.java:[line 213]</div>
 <div class="b-d">new net.github.rtc.app.model.course.Course(String, String, CourseType, Set, Date, Date, Date, Integer, String, CourseStatus) may expose internal representation by storing an externally mutable object into Course.endDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-49a85b84378c5f1742b465b82fc2d85e-0">
@@ -2089,7 +2077,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method new net.github.rtc.app.model.course.Course(String, String, CourseType, Set, Date, Date, Date, Integer, String, CourseStatus)</div>
 <div class="b-r">Field net.github.rtc.app.model.course.Course.publishDate</div>
 <div class="b-r">Local variable named publishDate</div>
-<div class="b-r">At Course.java:[line 177]</div>
+<div class="b-r">At Course.java:[line 214]</div>
 <div class="b-d">new net.github.rtc.app.model.course.Course(String, String, CourseType, Set, Date, Date, Date, Integer, String, CourseStatus) may expose internal representation by storing an externally mutable object into Course.publishDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-f9fae2e41923284008ea5c9732f79d0f-0">
@@ -2097,7 +2085,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method new net.github.rtc.app.model.course.Course(String, String, CourseType, Set, Date, Date, Date, Integer, String, CourseStatus)</div>
 <div class="b-r">Field net.github.rtc.app.model.course.Course.startDate</div>
 <div class="b-r">Local variable named startDate</div>
-<div class="b-r">At Course.java:[line 175]</div>
+<div class="b-r">At Course.java:[line 212]</div>
 <div class="b-d">new net.github.rtc.app.model.course.Course(String, String, CourseType, Set, Date, Date, Date, Integer, String, CourseStatus) may expose internal representation by storing an externally mutable object into Course.startDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-5536ffa6c3b49698ec4cb5ec415cdefd-0">
@@ -2105,7 +2093,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.course.Course.setEndDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.course.Course.endDate</div>
 <div class="b-r">Local variable named endDate</div>
-<div class="b-r">At Course.java:[line 126]</div>
+<div class="b-r">At Course.java:[line 134]</div>
 <div class="b-d">net.github.rtc.app.model.course.Course.setEndDate(Date) may expose internal representation by storing an externally mutable object into Course.endDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-c02b432ac560e82e52df8e5583f7ae2b-0">
@@ -2113,7 +2101,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.course.Course.setPublishDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.course.Course.publishDate</div>
 <div class="b-r">Local variable named publishDate</div>
-<div class="b-r">At Course.java:[line 159]</div>
+<div class="b-r">At Course.java:[line 182]</div>
 <div class="b-d">net.github.rtc.app.model.course.Course.setPublishDate(Date) may expose internal representation by storing an externally mutable object into Course.publishDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-3eee85b07f632f459fdb8dc6f8a334c8-0">
@@ -2121,14 +2109,14 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.course.Course.setStartDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.course.Course.startDate</div>
 <div class="b-r">Local variable named startDate</div>
-<div class="b-r">At Course.java:[line 118]</div>
+<div class="b-r">At Course.java:[line 126]</div>
 <div class="b-d">net.github.rtc.app.model.course.Course.setStartDate(Date) may expose internal representation by storing an externally mutable object into Course.startDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-1e1ad131d41af9576c01dad7377ce55-0">
 <div class="b-r">In class net.github.rtc.app.model.report.ReportDetails</div>
 <div class="b-r">In method net.github.rtc.app.model.report.ReportDetails.getCreatedDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.report.ReportDetails.createdDate</div>
-<div class="b-r">At ReportDetails.java:[line 67]</div>
+<div class="b-r">At ReportDetails.java:[line 101]</div>
 <div class="b-d">net.github.rtc.app.model.report.ReportDetails.getCreatedDate() may expose internal representation by returning ReportDetails.createdDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-6780ac4da9b290a0496a6f4cef34f9b2-0">
@@ -2136,28 +2124,28 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.report.ReportDetails.setCreatedDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.report.ReportDetails.createdDate</div>
 <div class="b-r">Local variable named createdDate</div>
-<div class="b-r">At ReportDetails.java:[line 68]</div>
+<div class="b-r">At ReportDetails.java:[line 105]</div>
 <div class="b-d">net.github.rtc.app.model.report.ReportDetails.setCreatedDate(Date) may expose internal representation by storing an externally mutable object into ReportDetails.createdDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-c21f6a2c222e1c2d19241f378629faf8-0">
 <div class="b-r">In class net.github.rtc.app.model.user.User</div>
 <div class="b-r">In method net.github.rtc.app.model.user.User.getBirthDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.birthDate</div>
-<div class="b-r">At User.java:[line 300]</div>
+<div class="b-r">At User.java:[line 303]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.getBirthDate() may expose internal representation by returning User.birthDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-91276797e9fa3e541eb6c9c916413650-0">
 <div class="b-r">In class net.github.rtc.app.model.user.User</div>
 <div class="b-r">In method net.github.rtc.app.model.user.User.getRegisterDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.registerDate</div>
-<div class="b-r">At User.java:[line 324]</div>
+<div class="b-r">At User.java:[line 327]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.getRegisterDate() may expose internal representation by returning User.registerDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-f78df78cef32c8a662c5c5ac0d006d27-0">
 <div class="b-r">In class net.github.rtc.app.model.user.User</div>
 <div class="b-r">In method net.github.rtc.app.model.user.User.getRemovalDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.removalDate</div>
-<div class="b-r">At User.java:[line 332]</div>
+<div class="b-r">At User.java:[line 335]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.getRemovalDate() may expose internal representation by returning User.removalDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-82a2696c4a9cf3574f0bf076681d3c7b-0">
@@ -2165,7 +2153,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method new net.github.rtc.app.model.user.User(String, String, String, String, String, String, Date, String, String, String, String, String, String, String, Set, String)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.birthDate</div>
 <div class="b-r">Local variable named birthDate</div>
-<div class="b-r">At User.java:[line 379]</div>
+<div class="b-r">At User.java:[line 395]</div>
 <div class="b-d">new net.github.rtc.app.model.user.User(String, String, String, String, String, String, Date, String, String, String, String, String, String, String, Set, String) may expose internal representation by storing an externally mutable object into User.birthDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-1abfa43792aa460a5950daffcfcb1798-0">
@@ -2173,7 +2161,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method new net.github.rtc.app.model.user.User(String, String, String, String, String, Date, String, String, String, String, String, String, String, Set, String)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.birthDate</div>
 <div class="b-r">Local variable named birthDate</div>
-<div class="b-r">At User.java:[line 401]</div>
+<div class="b-r">At User.java:[line 429]</div>
 <div class="b-d">new net.github.rtc.app.model.user.User(String, String, String, String, String, Date, String, String, String, String, String, String, String, Set, String) may expose internal representation by storing an externally mutable object into User.birthDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-7905a5b44a304d4f9b37ce458f13137c-0">
@@ -2181,7 +2169,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.user.User.setBirthDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.birthDate</div>
 <div class="b-r">Local variable named birthDate</div>
-<div class="b-r">At User.java:[line 304]</div>
+<div class="b-r">At User.java:[line 307]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.setBirthDate(Date) may expose internal representation by storing an externally mutable object into User.birthDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-e83cdd5403fc6c4de5536ba885d7e1ea-0">
@@ -2189,7 +2177,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.user.User.setRegisterDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.registerDate</div>
 <div class="b-r">Local variable named registerDate</div>
-<div class="b-r">At User.java:[line 328]</div>
+<div class="b-r">At User.java:[line 331]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.setRegisterDate(Date) may expose internal representation by storing an externally mutable object into User.registerDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-9a6e41a06caebe3d9be0247091507f-0">
@@ -2197,21 +2185,21 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.user.User.setRemovalDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.User.removalDate</div>
 <div class="b-r">Local variable named removalDate</div>
-<div class="b-r">At User.java:[line 336]</div>
+<div class="b-r">At User.java:[line 339]</div>
 <div class="b-d">net.github.rtc.app.model.user.User.setRemovalDate(Date) may expose internal representation by storing an externally mutable object into User.removalDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-7ade47ccbbc2730a511488ce1ccd8f6e-0">
 <div class="b-r">In class net.github.rtc.app.model.user.UserCourseOrder</div>
 <div class="b-r">In method net.github.rtc.app.model.user.UserCourseOrder.getRequestDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.user.UserCourseOrder.requestDate</div>
-<div class="b-r">At UserCourseOrder.java:[line 62]</div>
+<div class="b-r">At UserCourseOrder.java:[line 89]</div>
 <div class="b-d">net.github.rtc.app.model.user.UserCourseOrder.getRequestDate() may expose internal representation by returning UserCourseOrder.requestDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-1478645d3370d2e50e4b1c754c7702c0-0">
 <div class="b-r">In class net.github.rtc.app.model.user.UserCourseOrder</div>
 <div class="b-r">In method net.github.rtc.app.model.user.UserCourseOrder.getResponseDate()</div>
 <div class="b-r">Field net.github.rtc.app.model.user.UserCourseOrder.responseDate</div>
-<div class="b-r">At UserCourseOrder.java:[line 59]</div>
+<div class="b-r">At UserCourseOrder.java:[line 81]</div>
 <div class="b-d">net.github.rtc.app.model.user.UserCourseOrder.getResponseDate() may expose internal representation by returning UserCourseOrder.responseDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-d2488b1648b0bf5ca51e9a87212a8a97-0">
@@ -2219,7 +2207,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method new net.github.rtc.app.model.user.UserCourseOrder(String, String, Date, Date, UserRequestStatus, TraineePosition)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.UserCourseOrder.requestDate</div>
 <div class="b-r">Local variable named requestDate</div>
-<div class="b-r">At UserCourseOrder.java:[line 42]</div>
+<div class="b-r">At UserCourseOrder.java:[line 47]</div>
 <div class="b-d">new net.github.rtc.app.model.user.UserCourseOrder(String, String, Date, Date, UserRequestStatus, TraineePosition) may expose internal representation by storing an externally mutable object into UserCourseOrder.requestDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-c6b00182162e90b6d0e7db0518b6dca6-0">
@@ -2227,7 +2215,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method new net.github.rtc.app.model.user.UserCourseOrder(String, String, Date, Date, UserRequestStatus, TraineePosition)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.UserCourseOrder.responseDate</div>
 <div class="b-r">Local variable named responseDate</div>
-<div class="b-r">At UserCourseOrder.java:[line 43]</div>
+<div class="b-r">At UserCourseOrder.java:[line 48]</div>
 <div class="b-d">new net.github.rtc.app.model.user.UserCourseOrder(String, String, Date, Date, UserRequestStatus, TraineePosition) may expose internal representation by storing an externally mutable object into UserCourseOrder.responseDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-4df94521a15ce30fb6e1a3be3cfb7d2f-0">
@@ -2235,7 +2223,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.user.UserCourseOrder.setRequestDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.UserCourseOrder.requestDate</div>
 <div class="b-r">Local variable named requestDate</div>
-<div class="b-r">At UserCourseOrder.java:[line 63]</div>
+<div class="b-r">At UserCourseOrder.java:[line 93]</div>
 <div class="b-d">net.github.rtc.app.model.user.UserCourseOrder.setRequestDate(Date) may expose internal representation by storing an externally mutable object into UserCourseOrder.requestDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-1ec67227d8ae7715b8ac208de27209a1-0">
@@ -2243,7 +2231,7 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.model.user.UserCourseOrder.setResponseDate(Date)</div>
 <div class="b-r">Field net.github.rtc.app.model.user.UserCourseOrder.responseDate</div>
 <div class="b-r">Local variable named responseDate</div>
-<div class="b-r">At UserCourseOrder.java:[line 60]</div>
+<div class="b-r">At UserCourseOrder.java:[line 85]</div>
 <div class="b-d">net.github.rtc.app.model.user.UserCourseOrder.setResponseDate(Date) may expose internal representation by storing an externally mutable object into UserCourseOrder.responseDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-6a336e276249458bbe549d928c1d1222-0">
@@ -2251,29 +2239,40 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.service.impl.UserServiceImpl.update(User)</div>
 <div class="b-r">Actual type String</div>
 <div class="b-r">Return value of net.github.rtc.app.model.user.User.getPassword()</div>
-<div class="b-r">At UserServiceImpl.java:[line 80]</div>
+<div class="b-r">At UserServiceImpl.java:[line 86]</div>
 <div class="b-d">Comparison of String objects using == or != in net.github.rtc.app.service.impl.UserServiceImpl.update(User) </div>
 </div>
-<div class="bug" style="display:none;" id="b-uid-add0bc0213445814db9580765cc76507-0">
-<div class="b-r">In class net.github.rtc.app.utils.datatable.FilterSettings$ComplexOption</div>
-<div class="b-r">At FilterSettings.java:[lines 17-29]</div>
-<div class="b-d">Should net.github.rtc.app.utils.datatable.FilterSettings$ComplexOption be a _static_ inner class?</div>
+<div class="bug" style="display:none;" id="b-uid-feb84ae17379b0d30a250ccc3de7e7d7-0">
+<div class="b-r">In class net.github.rtc.app.utils.datatable.CourseSearchFilter</div>
+<div class="b-r">In method net.github.rtc.app.utils.datatable.CourseSearchFilter.getCriteria()</div>
+<div class="b-r">Actual type String</div>
+<div class="b-r">Expected net.github.rtc.app.model.course.CourseStatus</div>
+<div class="b-r">String constant ""</div>
+<div class="b-r">Value loaded from field net.github.rtc.app.utils.datatable.CourseSearchFilter.status</div>
+<div class="b-r">Enum.equals(Object) used to determine equality</div>
+<div class="b-r">At CourseSearchFilter.java:[line 90]</div>
+<div class="b-d">Call to net.github.rtc.app.model.course.CourseStatus.equals(String) in net.github.rtc.app.utils.datatable.CourseSearchFilter.getCriteria()</div>
+</div>
+<div class="bug" style="display:none;" id="b-uid-15ce7ab046d98ad701a60bc63cf5789c-0">
+<div class="b-r">In class net.github.rtc.app.utils.datatable.CourseSearchFilter</div>
+<div class="b-r">In method net.github.rtc.app.utils.datatable.CourseSearchFilter.getStartDate()</div>
+<div class="b-r">Field net.github.rtc.app.utils.datatable.CourseSearchFilter.startDate</div>
+<div class="b-r">At CourseSearchFilter.java:[line 47]</div>
+<div class="b-d">net.github.rtc.app.utils.datatable.CourseSearchFilter.getStartDate() may expose internal representation by returning CourseSearchFilter.startDate</div>
+</div>
+<div class="bug" style="display:none;" id="b-uid-fe6f014c88d1069e6ab7e9e9c5952a0c-0">
+<div class="b-r">In class net.github.rtc.app.utils.datatable.CourseSearchFilter</div>
+<div class="b-r">In method net.github.rtc.app.utils.datatable.CourseSearchFilter.setStartDate(Date)</div>
+<div class="b-r">Field net.github.rtc.app.utils.datatable.CourseSearchFilter.startDate</div>
+<div class="b-r">Local variable named startDate</div>
+<div class="b-r">At CourseSearchFilter.java:[line 51]</div>
+<div class="b-d">net.github.rtc.app.utils.datatable.CourseSearchFilter.setStartDate(Date) may expose internal representation by storing an externally mutable object into CourseSearchFilter.startDate</div>
 </div>
 <div class="bug" style="display:none;" id="b-uid-6f56d382153754cedadef83e7dc65ccd-0">
 <div class="b-r">In class net.github.rtc.app.utils.datatable.Page</div>
 <div class="b-r">Field net.github.rtc.app.utils.datatable.Page.first</div>
 <div class="b-r">At Page.java:[line 13]</div>
 <div class="b-d">Unread field: net.github.rtc.app.utils.datatable.Page.first; should this field be static?</div>
-</div>
-<div class="bug" style="display:none;" id="b-uid-2644dd5d21e8afe6ecc1189fcbb24874-0">
-<div class="b-r">In class net.github.rtc.app.utils.datatable.SearchCriteria$CriteriaAddable</div>
-<div class="b-r">At SearchCriteria.java:[lines 92-95]</div>
-<div class="b-d">Should net.github.rtc.app.utils.datatable.SearchCriteria$CriteriaAddable be a _static_ inner class?</div>
-</div>
-<div class="bug" style="display:none;" id="b-uid-1bd08762f0b16cd9063333ac58a97065-0">
-<div class="b-r">In class net.github.rtc.app.utils.datatable.SearchCriteria$JunctionAddable</div>
-<div class="b-r">At SearchCriteria.java:[lines 100-101]</div>
-<div class="b-d">Should net.github.rtc.app.utils.datatable.SearchCriteria$JunctionAddable be a _static_ inner class?</div>
 </div>
 </div>
 </body>
