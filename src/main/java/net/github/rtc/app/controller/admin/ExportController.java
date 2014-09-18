@@ -39,7 +39,7 @@ public class ExportController {
     private static final String STRING_TYPES = "types";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_REPORT = "report";
-    private static final String REDIRECT_ADMIN_EXPORT = "redirect:/admin/export/";
+    private static final String REDIRECT_EXPORT = "redirect:/admin/export/";
 
     @Autowired
     private ReportService reportService;
@@ -109,7 +109,7 @@ public class ExportController {
         report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.insert(report);
-        return new ModelAndView(REDIRECT_ADMIN_EXPORT
+        return new ModelAndView(REDIRECT_EXPORT
           + report.getCode());
     }
 
@@ -124,7 +124,7 @@ public class ExportController {
         report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.update(report);
-        return new ModelAndView(REDIRECT_ADMIN_EXPORT
+        return new ModelAndView(REDIRECT_EXPORT
           + report.getCode());
     }
 

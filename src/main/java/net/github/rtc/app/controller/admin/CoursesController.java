@@ -39,7 +39,7 @@ public class CoursesController {
     private static final String STRING_TYPES = "types";
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_COURSE = "filterCourse";
-    private static final String STRING_REDIRECT = "redirect:/";
+    private static final String REDIRECT = "redirect:/";
     private static final String STRING_ADMIN = "admin";
     private static final String STRING_VALIDATION_RULES = "validationRules";
 
@@ -119,14 +119,14 @@ public class CoursesController {
     @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
     public String delete(@PathVariable final String courseCode) {
         courseService.delete(courseCode);
-        return STRING_REDIRECT
+        return REDIRECT
                 + STRING_ADMIN;
     }
 
     @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
     public String publish(@PathVariable final String courseCode) {
         courseService.publish(courseService.findByCode(courseCode));
-        return STRING_REDIRECT
+        return REDIRECT
                 + STRING_ADMIN;
     }
 
