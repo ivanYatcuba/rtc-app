@@ -1627,7 +1627,7 @@
                      (20 packages),
                      (69 classes)
                   </td>
-<td class="summary-size">2053</td>
+<td class="summary-size">2056</td>
 <td class="summary-priority-all">37</td>
 <td class="summary-priority-1">2</td>
 <td class="summary-priority-2">35</td>
@@ -1636,7 +1636,7 @@
 </tr>
 <tr>
 <td class="summary-name">net.github.rtc.app.controller.admin</td>
-<td class="summary-size">291</td>
+<td class="summary-size">294</td>
 <td class="summary-priority-all">1</td>
 <td class="summary-priority-1" />
 <td class="summary-priority-2">1</td>
@@ -1987,8 +1987,8 @@ the null pointer exception can't ever be executed; deciding that is beyond the a
 <div class="b-r">In method net.github.rtc.app.controller.admin.ExportController.downloadUserExport(HttpServletResponse, String)</div>
 <div class="b-r">Reference type java.io.InputStream</div>
 <div class="b-r">1 instances of obligation remaining</div>
-<div class="b-r">Obligation to clean up resource created at ExportController.java:[line 143] is not discharged</div>
-<div class="b-r">Path continues at ExportController.java:[line 145]</div>
+<div class="b-r">Obligation to clean up resource created at ExportController.java:[line 147] is not discharged</div>
+<div class="b-r">Path continues at ExportController.java:[line 149]</div>
 <div class="b-r">Remaining obligations: {InputStream x 1}</div>
 <div class="b-d">net.github.rtc.app.controller.admin.ExportController.downloadUserExport(HttpServletResponse, String) may fail to clean up java.io.InputStream on checked exception</div>
 </div>

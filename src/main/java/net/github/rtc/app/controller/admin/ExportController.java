@@ -39,6 +39,7 @@ public class ExportController {
     private static final String STRING_TYPES = "types";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_REPORT = "report";
+    private static final String REDIRECT_ADMIN_EXPORT = "redirect:/admin/export/";
 
     @Autowired
     private ReportService reportService;
@@ -62,8 +63,8 @@ public class ExportController {
         final ModelAndView mav = new ModelAndView(
           "portal/admin/page/reportCreate");
         mav.addObject(STRING_TYPES, formatLables);
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(ReportDetails
-          .class));
+        mav.addObject(STRING_VALIDATION_RULES,
+                validationContext.get(ReportDetails.class));
         return mav;
     }
 
@@ -76,7 +77,8 @@ public class ExportController {
           reportCode);
         mav.addObject(STRING_REPORT, reportDetails);
         mav.addObject(STRING_TYPES, formatLables);
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(ReportDetails
+        mav.addObject(STRING_VALIDATION_RULES,
+                validationContext.get(ReportDetails
           .class));
         return mav;
     }
@@ -85,7 +87,8 @@ public class ExportController {
     public ModelAndView viewReport(@PathVariable final String reportCode) {
         final ModelAndView mav = new ModelAndView(
           "portal/admin/page/reportDetails");
-        mav.addObject(STRING_REPORT, reportService.findReportByCode(reportCode));
+        mav.addObject(STRING_REPORT,
+                reportService.findReportByCode(reportCode));
         return mav;
     }
 
@@ -106,7 +109,7 @@ public class ExportController {
         report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.insert(report);
-        return new ModelAndView("redirect:/admin/export/"
+        return new ModelAndView(REDIRECT_ADMIN_EXPORT
           + report.getCode());
     }
 
@@ -121,7 +124,7 @@ public class ExportController {
         report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.update(report);
-        return new ModelAndView("redirect:/admin/export/"
+        return new ModelAndView(REDIRECT_ADMIN_EXPORT
           + report.getCode());
     }
 
