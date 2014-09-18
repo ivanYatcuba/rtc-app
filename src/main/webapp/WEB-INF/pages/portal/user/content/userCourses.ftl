@@ -25,7 +25,8 @@
             <div class="userCourses"> ${course.description}</div>
             <br>
 
-            <div class="btn btn-success" id="${course.code}" style="margin-bottom: 5px "
+            <div class="btn btn-success" id="${course.code}"
+                 style="margin-bottom: 5px "
                  onClick="setCode(this.id);javascript:PopUpShow()"> Apply
             </div>
         </div>
@@ -45,30 +46,34 @@
         </strong>
 
         <form name="modal" action="sendOrder" method="post">
-            <input name="selectedCode" type="hidden" id="selectedCode" value="test">
+            <input name="selectedCode" type="hidden" id="selectedCode"
+                   value="test">
 
-                <input type="radio" name="userCourses" id="optionsRadios1"
-                       value="<@spring.message "userCourses.developer"/>" checked>
+            <input type="radio" name="userCourses" id="optionsRadios1"
+                   value="<@spring.message "userCourses.developer"/>" checked>
             <@spring.message "userCourses.developer"/></label><br/>
 
-                <input type="radio" name="userCourses" id="optionsRadios2"
-                       value="<@spring.message "userCourses.tester"/>">
+            <input type="radio" name="userCourses" id="optionsRadios2"
+                   value="<@spring.message "userCourses.tester"/>">
             <@spring.message "userCourses.tester"/></label><br/>
 
-                <input type="radio" name="userCourses" id="optionsRadios2"
-                       value="<@spring.message "userCourses.Business_Analyst"/>">
+            <input type="radio" name="userCourses" id="optionsRadios2"
+                   value="<@spring.message "userCourses.Business_Analyst"/>">
             <@spring.message "userCourses.Business_Analyst"/></label><br/>
 
             <strong><@spring.message "userCourses.because"/></strong><br/>
 
-            <textarea class="input-block-level" name="userTextArea" id="redex" rows="10"></textarea>
+            <textarea class="input-block-level" name="userTextArea" id="redex"
+                      rows="10"></textarea>
             <style type="text/css">#redex {
                 resize: none;
             }</style>
             <br/>
             <center>
                 <button class="btn" onclick="pushData()">Ok</button>
-                <button class="btn" type="button" onClick="javascript:PopUpHide()">Cancel</button>
+                <button class="btn" type="button"
+                        onClick="javascript:PopUpHide()">Cancel
+                </button>
             </center>
         </form>
 

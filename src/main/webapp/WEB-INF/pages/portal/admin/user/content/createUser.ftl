@@ -2,10 +2,12 @@
 
     <div class="col-md-6">
         <!--Email-->
-        <@spring.formItem  "user.email" "class=required"/>
+    <@spring.formItem  "user.email" "class=required"/>
         <!--Authorities-->
         <div class="form-group">
-            <label class="control-label col-md-2" for="selectedRole"><@spring.message "user.role"/></label>
+            <label class="control-label col-md-2"
+                   for="selectedRole"><@spring.message "user.role"/></label>
+
             <div class="col-md-4">
                 <select id="selectedRole" name="selectedRole" class="required">
                 <#list roles as role>
@@ -19,7 +21,7 @@
 
     <div class="col-md-6">
         <!--Password-->
-        <@spring.formItem "user.password" "id=password class=required" "password"/>
+    <@spring.formItem "user.password" "id=password class=required" "password"/>
         <div class="controls">
             <label for="check"></label>
             <input id="check"
@@ -34,12 +36,16 @@
     <div class="col-md-6">
         <!--Gender-->
         <div class="form-group">
-            <label class="control-label col-md-2" for="user.gender"><@spring.message "user.gender"/></label>
+            <label class="control-label col-md-2"
+                   for="user.gender"><@spring.message "user.gender"/></label>
+
             <div class="col-md-4" style="padding-top: 5px">
             <@spring.bind "user.gender"/>
-                <input type="radio" name="gender" id="optionsRadios1" value="Male" checked
+                <input type="radio" name="gender" id="optionsRadios1"
+                       value="Male" checked
                        style="margin: -3px 0px 0px;"> <@spring.message "user.genderM"/>
-                <input type="radio" name="gender" id="optionsRadios2" value="Female"
+                <input type="radio" name="gender" id="optionsRadios2"
+                       value="Female"
                        style="margin: -3px 0px 0px;"> <@spring.message "user.genderF"/>
             </div>
         </div>
@@ -104,9 +110,11 @@
     <div class="col-md-6">
         <!--English-->
         <div class="form-group">
-            <label class="control-label col-md-2" for="english"><@spring.message "user.english"/></label>
+            <label class="control-label col-md-2"
+                   for="english"><@spring.message "user.english"/></label>
+
             <div class="col-md-4">
-                <@spring.formSingleSelect "user.english", ["Basic", "Intermediate", "Advanced"], 'style="background-color: #FFFACD;" class=\"required\"'/>
+            <@spring.formSingleSelect "user.english", ["Basic", "Intermediate", "Advanced"], 'style="background-color: #FFFACD;" class=\"required\"'/>
             </div>
         </div>
     </div>
@@ -118,7 +126,9 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-            <label  class="control-label col-md-2" for="note"><@spring.message "user.note"/></label>
+            <label class="control-label col-md-2"
+                   for="note"><@spring.message "user.note"/></label>
+
             <div class="col-md-9">    <@spring.formTextarea "user.note"
             'style="width:100%;" rows="3" maxlength="255" id=\"note\" class=\"required\"' /> </div>
         </div>
@@ -126,9 +136,10 @@
 </div>
 
 <@spring.formValidation formName="user" jsonRules="${validationRules}"/>
-<script type="text/javascript" charset="utf8" src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
+<script type="text/javascript" charset="utf8"
+        src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
 <script>
-    $(function() {
+    $(function () {
         addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")
     });
 </script>

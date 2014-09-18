@@ -12,11 +12,14 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
         >
 
-    <context:component-scan base-package=" net.github.rtc.app, net.github.rtc.util"/>
-    <context:property-placeholder location="classpath:/hibernate.properties, classpath:/export.properties"/>
+    <context:component-scan
+            base-package=" net.github.rtc.app, net.github.rtc.util"/>
+    <context:property-placeholder
+            location="classpath:/hibernate.properties, classpath:/export.properties"/>
 
     <!-- freemarker config -->
-    <bean id="freemarkerConfig" class="net.github.rtc.app.utils.template.HtmlFreeMarkerConfigurer">
+    <bean id="freemarkerConfig"
+          class="net.github.rtc.app.utils.template.HtmlFreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/pages/"/>
         <property name="freemarkerSettings">
             <props>
@@ -30,21 +33,22 @@
       View resolvers can also be configured with ResourceBundles or XML files. If you need
       different view resolving based on Locale, you have to use the dao bundle resolver.
     -->
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="cache" value="true"/>
         <property name="prefix" value=""/>
         <property name="suffix" value=".ftl"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
-        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
     </bean>
-
 
 
     <!-- MESSAGE SOURCE CONFIG AREA AND LOCALIZATION-->
 
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="/resources/messages" />
+        <property name="basename" value="/resources/messages"/>
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
@@ -62,23 +66,26 @@
     </mvc:interceptors>
 
 
-    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
     <mvc:annotation-driven/>
-    <mvc:default-servlet-handler />
+    <mvc:default-servlet-handler/>
 
     <!--Import spring settings from util-->
     <import resource="classpath:spring-config.xml"/>
     <!-- Import spring security configurations -->
-    <import resource="classpath:/spring/spring-security.xml" />
+    <import resource="classpath:/spring/spring-security.xml"/>
     <!-- Import data source security configurations -->
-    <import resource="classpath:/spring/dataSource.xml" />
+    <import resource="classpath:/spring/dataSource.xml"/>
     <!-- Import quartz configurations -->
-    <import resource="classpath:/spring/spring-quartz.xml" />
+    <import resource="classpath:/spring/spring-quartz.xml"/>
 
-    <bean id="validationConverter" class="net.github.rtc.util.converter.Converter" />
-    <bean id="validationContext" class="net.github.rtc.util.converter.ValidationContext" >
+    <bean id="validationConverter"
+          class="net.github.rtc.util.converter.Converter"/>
+    <bean id="validationContext"
+          class="net.github.rtc.util.converter.ValidationContext">
         <constructor-arg index="0" name="converter" ref="validationConverter"/>
-        <constructor-arg index="1" name="packagePath" value="net.github.rtc.app.model"/>
+        <constructor-arg index="1" name="packagePath"
+                         value="net.github.rtc.app.model"/>
     </bean>
 
 </beans>

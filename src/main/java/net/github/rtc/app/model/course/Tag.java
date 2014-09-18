@@ -46,22 +46,16 @@ public class Tag implements Serializable {
 
     @Override
     public boolean equals(final Object o) {
-        if (this
-          == o) {
+        if (this == o) {
             return true;
         }
-        if (o
-          == null
-          || getClass()
-          != o.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
         final Tag tag = (Tag) o;
 
-        if (value
-          != null ? !value.equals(tag.value) : tag.value
-          != null) {
+        if (value != null ? !value.equals(tag.value) : tag.value != null) {
             return false;
         }
 
@@ -70,8 +64,7 @@ public class Tag implements Serializable {
 
     @Override
     public int hashCode() {
-        return value
-          != null ? value.hashCode() : 0;
+        return value != null ? value.hashCode() : 0;
     }
 
     @Override

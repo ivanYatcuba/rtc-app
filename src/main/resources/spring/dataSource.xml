@@ -12,27 +12,30 @@
 
     <!--Data source config-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="${db.driver}" />
-        <property name="url" value="${db.url}" />
-        <property name="username" value="${db.username}" />
-        <property name="password" value="${db.password}" />
+        <property name="driverClassName" value="${db.driver}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
     </bean>
 
     <!--Data hibernate session factory config-->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-    <property name="dataSource" ref="dataSource" />
-    <property name="packagesToScan" value="net.github.rtc.app.model" />
-    <property name="hibernateProperties">
-        <props>
-            <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-            <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-        </props>
-    </property>
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="net.github.rtc.app.model"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}
+                </prop>
+            </props>
+        </property>
     </bean>
 
     <!-- Hibernate Transaction Manager -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="dataSource" ref="dataSource" />
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
@@ -41,8 +44,8 @@
 
     <!-- Liquibase -->
     <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
-        <property name="dataSource" ref="dataSource" />
-        <property name="changeLog" value="classpath:db-changelog.xml" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="changeLog" value="classpath:db-changelog.xml"/>
     </bean>
 
 </beans>

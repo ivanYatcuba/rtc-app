@@ -31,8 +31,8 @@ public class UserServiceImpl implements ModelService<User>, UserService {
     public static final int USER_REMOVAL_DELY = 3;
     private static Logger log = LoggerFactory.getLogger(
       UserServiceImpl.class.getName());
-    private static final String REMOVING_USER_WITH_CODE =
-            "Removing user  with code: ";
+    private static final String REMOVING_USER_WITH_CODE
+      = "Removing user  with code: ";
     private static final String GETTING_USER = "Getting user: ";
 
     @Autowired
@@ -49,32 +49,28 @@ public class UserServiceImpl implements ModelService<User>, UserService {
     @Override
     @Transactional
     public void delete(final User user) {
-        log.debug("Removing user  with email: "
-                + user.getEmail());
+        log.debug("Removing user  with email: " + user.getEmail());
         userDao.deleteByCode(user.getCode());
     }
 
     @Override
     @Transactional
     public void deleteByCode(final String code) {
-        log.debug(REMOVING_USER_WITH_CODE
-                + code);
+        log.debug(REMOVING_USER_WITH_CODE + code);
         userDao.deleteByCode(code);
     }
 
     @Override
     @Transactional
     public User findByCode(final String code) {
-        log.debug(REMOVING_USER_WITH_CODE
-                + code);
+        log.debug(REMOVING_USER_WITH_CODE + code);
         return userDao.findByCode(code);
     }
 
     @Override
     @Transactional
     public User create(final User user) {
-        log.debug("Creating user: "
-                + user);
+        log.debug("Creating user: " + user);
         user.setCode(UUID.randomUUID().toString());
         final PasswordEncoder encoder = new StandardPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
@@ -84,12 +80,10 @@ public class UserServiceImpl implements ModelService<User>, UserService {
     @Override
     @Transactional
     public void update(final User user) {
-        log.debug("Updating user: "
-                + user);
+        log.debug("Updating user: " + user);
         final PasswordEncoder encoder = new StandardPasswordEncoder();
         final User userToUpdate = userDao.findByCode(user.getCode());
-        if (user.getPassword()
-          != userToUpdate.getPassword()) {
+        if (user.getPassword() != userToUpdate.getPassword()) {
             user.setPassword(encoder.encode(user.getPassword()));
         }
         userDao.update(user);
@@ -103,24 +97,21 @@ public class UserServiceImpl implements ModelService<User>, UserService {
     @Override
     @Transactional
     public void createRole(final RoleType type) {
-        log.debug("Creating user role with type: "
-                + type);
+        log.debug("Creating user role with type: " + type);
         userDao.createRole(type);
     }
 
     @Override
     @Transactional
     public Role getRoleByType(final RoleType type) {
-        log.debug("Getting user role with type: "
-                + type);
+        log.debug("Getting user role with type: " + type);
         return userDao.getRoleByType(type);
     }
 
     @Override
     @Transactional
     public List<User> getUserByRole(final RoleType type) {
-        log.debug("Getting user list with type: "
-                + type);
+        log.debug("Getting user list with type: " + type);
         return userDao.getUserByType(type);
     }
 
@@ -134,35 +125,28 @@ public class UserServiceImpl implements ModelService<User>, UserService {
     @Override
     @Transactional
     public void markUserForRemoval(final User user) {
-        if (user.getStatus()
-          == UserStatus.ACTIVE) {
+        if (user.getStatus() == UserStatus.ACTIVE) {
             user.setStatus(UserStatus.FOR_REMOVAL);
-            user.setRemovalDate(new DateTime(new Date()).plusDays(
-              USER_REMOVAL_DELY).toDate());
-            log.debug("Getting user before update: "
-                    + user);
+            user.setRemovalDate(
+              new DateTime(new Date()).plusDays(USER_REMOVAL_DELY).toDate());
+            log.debug("Getting user before update: " + user);
             userDao.update(user);
-            log.debug("Getting user after update: "
-                    + user);
+            log.debug("Getting user after update: " + user);
         } else {
             user.setStatus(UserStatus.ACTIVE);
             user.setRemovalDate(null);
-            log.debug(GETTING_USER
-                    + user);
+            log.debug(GETTING_USER + user);
             userDao.update(user);
-            log.debug(GETTING_USER
-                    + user);
+            log.debug(GETTING_USER + user);
         }
     }
 
     @Override
     @Transactional
     public void markUserForRemoval(final String userCode) {
-        log.debug("Getting code: "
-                + userCode);
+        log.debug("Getting code: " + userCode);
         final User user = findByCode(userCode);
-        log.debug("User: "
-                + user);
+        log.debug("User: " + user);
         markUserForRemoval(user);
     }
 }

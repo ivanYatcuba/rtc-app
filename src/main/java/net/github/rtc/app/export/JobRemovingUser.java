@@ -27,8 +27,7 @@ public class JobRemovingUser {
         final Collection<User> listUsers = userService.findAll();
         log.debug("Size of downloaded collection: {}", listUsers.size());
         for (final User user : listUsers) {
-            if (user.getRemovalDate()
-              != null) {
+            if (user.getRemovalDate() != null) {
                 final String userCode = user.getCode();
                 userService.deleteByCode(userCode);
             }

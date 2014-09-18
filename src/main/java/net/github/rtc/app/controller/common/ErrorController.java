@@ -24,21 +24,16 @@ public class ErrorController {
 
     @RequestMapping("error")
     public ModelAndView customError(final HttpServletRequest request) {
-        final Integer statusCode = (Integer) request.getAttribute(STRING_JAVAX
-          + STRING_DOT_SERVLET
-          + ".error.status_code");
+        final Integer statusCode = (Integer) request.getAttribute(
+          STRING_JAVAX + STRING_DOT_SERVLET + ".error.status_code");
         final Throwable throwable = (Throwable) request.getAttribute(
-                STRING_JAVAX + STRING_DOT_SERVLET
-          + ".error.exception");
+          STRING_JAVAX + STRING_DOT_SERVLET + ".error.exception");
         final String exceptionMessage = getExceptionMessage(throwable,
           statusCode);
 
-        String requestUri = (String) request.getAttribute("javax.servlet"
-          + ""
-          +
-          ".error.request_uri");
-        if (requestUri
-          == null) {
+        String requestUri = (String) request.getAttribute("javax.servlet" + ""
+          + ".error.request_uri");
+        if (requestUri == null) {
             requestUri = "Unknown";
         }
 
@@ -51,8 +46,7 @@ public class ErrorController {
 
     private String getExceptionMessage(
       final Throwable throwable, final Integer statusCode) {
-        if (throwable
-          != null) {
+        if (throwable != null) {
             return Throwables.getRootCause(throwable).getMessage();
         }
         final HttpStatus httpStatus = HttpStatus.valueOf(statusCode);

@@ -214,52 +214,37 @@ public class Course implements Serializable {
 
     @Override
     public boolean equals(final Object o) {
-        if (this
-          == o) {
+        if (this == o) {
             return true;
         }
-        if (o
-          == null
-          || getClass()
-          != o.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
         final Course course = (Course) o;
 
-        if (experts
-          != null ? !experts.equals(course.experts) : course.experts
-          != null) {
+        if (experts != null ? !experts.equals(
+          course.experts) : course.experts != null) {
             return false;
         }
-        if (code
-          != null ? !code.equals(course.code) : course.code
-          != null) {
+        if (code != null ? !code.equals(course.code) : course.code != null) {
             return false;
         }
-        if (endDate
-          != null ? !endDate.equals(course.endDate) : course.endDate
-          != null) {
+        if (endDate != null ? !endDate.equals(
+          course.endDate) : course.endDate != null) {
             return false;
         }
-        if (name
-          != null ? !name.equals(course.name) : course.name
-          != null) {
+        if (name != null ? !name.equals(course.name) : course.name != null) {
             return false;
         }
-        if (startDate
-          != null ? !startDate.equals(course.startDate) : course.startDate
-          != null) {
+        if (startDate != null ? !startDate.equals(
+          course.startDate) : course.startDate != null) {
             return false;
         }
-        if (tags
-          != null ? !tags.equals(course.tags) : course.tags
-          != null) {
+        if (tags != null ? !tags.equals(course.tags) : course.tags != null) {
             return false;
         }
-        if (type
-          != null ? !type.equals(course.type) : course.type
-          != null) {
+        if (type != null ? !type.equals(course.type) : course.type != null) {
             return false;
         }
 
@@ -268,48 +253,34 @@ public class Course implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = code
-          != null ? code.hashCode() : 0;
-        result = HASH_CODE_CONSTANT
-          * result
-          + (name
-          != null ? name.hashCode() : 0);
-        result = HASH_CODE_CONSTANT
-          * result
-          + (type
-          != null ? type.hashCode() : 0);
-        result = HASH_CODE_CONSTANT
-          * result
-          + (experts
-          != null ? experts.hashCode() : 0);
-        result = HASH_CODE_CONSTANT
-          * result
-          + (startDate
-          != null ? startDate.hashCode() : 0);
-        result = HASH_CODE_CONSTANT
-          * result
-          + (endDate
-          != null ? endDate.hashCode() : 0);
-        result = HASH_CODE_CONSTANT
-          * result
-          + (tags
-          != null ? tags.hashCode() : 0);
-        result = HASH_CODE_CONSTANT
-          * result
-          + (status
-          != null ? status.hashCode() : 0);
-        result = HASH_CODE_CONSTANT
-          * result
-          + (description
-          != null ? description.hashCode() : 0);
-        result = HASH_CODE_CONSTANT
-          * result
-          + (publishDate
-          != null ? publishDate.hashCode() : 0);
-        result = HASH_CODE_CONSTANT
-          * result
-          + (capacity
-          != null ? capacity.hashCode() : 0);
+        int result = code != null ? code.hashCode() : 0;
+        result
+          = HASH_CODE_CONSTANT * result + (name != null ? name.hashCode() : 0);
+        result
+          = HASH_CODE_CONSTANT * result + (type != null ? type.hashCode() : 0);
+        result
+          = HASH_CODE_CONSTANT * result + (experts != null ? experts.hashCode(
+        ) : 0);
+        result
+          = HASH_CODE_CONSTANT * result + (startDate != null ? startDate
+          .hashCode() : 0);
+        result
+          = HASH_CODE_CONSTANT * result + (endDate != null ? endDate.hashCode(
+        ) : 0);
+        result
+          = HASH_CODE_CONSTANT * result + (tags != null ? tags.hashCode() : 0);
+        result
+          = HASH_CODE_CONSTANT * result + (status != null ? status.hashCode()
+          : 0);
+        result
+          = HASH_CODE_CONSTANT * result + (description != null ? description
+          .hashCode() : 0);
+        result
+          = HASH_CODE_CONSTANT * result + (publishDate != null ? publishDate
+          .hashCode() : 0);
+        result
+          = HASH_CODE_CONSTANT * result + (capacity != null ? capacity
+          .hashCode() : 0);
         return result;
     }
 }

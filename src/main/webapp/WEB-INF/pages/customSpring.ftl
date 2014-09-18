@@ -156,7 +156,10 @@ kind of variable. This temp value is only used in this macro lib -->
  -->
 <#macro formInput path attributes="" fieldType="text">
     <@bind path/>
-<input type="${fieldType}" id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" value="<#if fieldType!="password">${stringStatusValue}</#if>" ${attributes}<@closeTag/>
+<input type="${fieldType}"
+       id="${status.expression?replace('[','')?replace(']','')}"
+       name="${status.expression}"
+       value="<#if fieldType!="password">${stringStatusValue}</#if>" ${attributes}<@closeTag/>
 </#macro>
 
 <#--
@@ -201,7 +204,8 @@ kind of variable. This temp value is only used in this macro lib -->
  -->
 <#macro formTextarea path attributes="">
     <@bind path/>
-<textarea id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" ${attributes}>${stringStatusValue}</textarea>
+<textarea id="${status.expression?replace('[','')?replace(']','')}"
+          name="${status.expression}" ${attributes}>${stringStatusValue}</textarea>
 </#macro>
 
 <#--
@@ -217,7 +221,8 @@ kind of variable. This temp value is only used in this macro lib -->
 -->
 <#macro formSingleSelect path options attributes="">
     <@bind path/>
-<select id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" ${attributes}>
+<select id="${status.expression?replace('[','')?replace(']','')}"
+        name="${status.expression}" ${attributes}>
     <#if options?is_hash>
         <#list options?keys as value>
             <option value="${value?html}"<@checkSelected value/>>${options[value]?html}</option>
@@ -243,10 +248,13 @@ kind of variable. This temp value is only used in this macro lib -->
 -->
 <#macro formMultiSelect path options attributes="">
     <@bind path/>
-<select multiple="multiple" id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" ${attributes}>
+<select multiple="multiple"
+        id="${status.expression?replace('[','')?replace(']','')}"
+        name="${status.expression}" ${attributes}>
     <#list options?keys as value>
         <#assign isSelected = contains(status.actualValue?default([""]), value)>
-        <option value="${value?html}"<#if isSelected> selected="selected"</#if>>${options[value]?html}</option>
+        <option value="${value?html}"<#if isSelected>
+                selected="selected"</#if>>${options[value]?html}</option>
     </#list>
 </select>
 </#macro>
@@ -267,7 +275,9 @@ kind of variable. This temp value is only used in this macro lib -->
     <@bind path/>
     <#list options?keys as value>
         <#assign id="${status.expression?replace('[','')?replace(']','')}${value_index}">
-            <input type="radio" id="${id}" name="${status.expression}" value="${value?html}"<#if stringStatusValue == value> checked="checked"</#if> ${attributes}<@closeTag/>
+            <input type="radio" id="${id}" name="${status.expression}"
+                   value="${value?html}"<#if stringStatusValue == value>
+                   checked="checked"</#if> ${attributes}<@closeTag/>
     <label for="${id}">${options[value]?html}</label>${separator}
     </#list>
 </#macro>
@@ -289,7 +299,9 @@ kind of variable. This temp value is only used in this macro lib -->
     <#list options?keys as value>
         <#assign id="${status.expression?replace('[','')?replace(']','')}${value_index}">
         <#assign isSelected = contains(status.actualValue?default([""]), value)>
-            <input type="checkbox" id="${id}" name="${status.expression}" value="${value?html}"<#if isSelected> checked="checked"</#if> ${attributes}<@closeTag/>
+            <input type="checkbox" id="${id}" name="${status.expression}"
+                   value="${value?html}"<#if isSelected>
+                   checked="checked"</#if> ${attributes}<@closeTag/>
     <label for="${id}">${options[value]?html}</label>${separator}
     </#list>
 <input type="hidden" name="_${status.expression}" value="on"/>
@@ -309,7 +321,8 @@ kind of variable. This temp value is only used in this macro lib -->
     <#assign id="${status.expression?replace('[','')?replace(']','')}">
     <#assign isSelected = status.value?? && status.value?string=="true">
 <input type="hidden" name="_${status.expression}" value="on"/>
-<input type="checkbox" id="${id}" name="${status.expression}"<#if isSelected> checked="checked"</#if> ${attributes}/>
+<input type="checkbox" id="${id}" name="${status.expression}"<#if isSelected>
+       checked="checked"</#if> ${attributes}/>
 </#macro>
 
 <#--

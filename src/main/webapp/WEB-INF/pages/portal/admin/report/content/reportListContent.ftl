@@ -9,23 +9,33 @@
         <td>Created Date</td>
         <td>&nbsp;</td>
     </tr>
-    <#list reports as report>
-        <tr>
-            <td><a href="<@spring.url "/admin/export/${report.code}" />">${report.name}</a></td>
-            <td>${report.exportClass.simpleName}</td>
-            <td>${report.exportFormat}</td>
-            <td>${report.createdDate?datetime?string("dd-MM-yyyy")}</td>
-            <td><ul class="nav" role="navigation">
+<#list reports as report>
+    <tr>
+        <td>
+            <a href="<@spring.url "/admin/export/${report.code}" />">${report.name}</a>
+        </td>
+        <td>${report.exportClass.simpleName}</td>
+        <td>${report.exportFormat}</td>
+        <td>${report.createdDate?datetime?string("dd-MM-yyyy")}</td>
+        <td>
+            <ul class="nav" role="navigation">
                 <li class="dropdown">
-                    <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/export/download/${report.code}"/>">Download!</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/export/delete/${report.code}"/>">Delete</a></li>
+                    <a href="#" class="btn dropdown-toggle"
+                       data-toggle="dropdown">Action <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu"
+                        aria-labelledby="drop1">
+                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                   href="<@spring.url "/admin/export/download/${report.code}"/>">Download!</a>
+                        </li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                   href="<@spring.url "/admin/export/delete/${report.code}"/>">Delete</a>
+                        </li>
                     </ul>
                 </li>
-            </ul></td>
-        </tr>
-    </#list>
+            </ul>
+        </td>
+    </tr>
+</#list>
 </table>
 
 <br/>

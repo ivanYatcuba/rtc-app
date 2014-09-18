@@ -83,24 +83,17 @@ public class CourseSearchFilter implements SearchFilter {
         final DetachedCriteria criteria = DetachedCriteria.forClass(Course
           .class);
 
-        if (name
-          != null
-          && !("").equals(name)) {
-            criteria.add(Restrictions.like("name", STRING_PROCENT
-              + name
-              + STRING_PROCENT));
+        if (name != null && !("").equals(name)) {
+            criteria.add(Restrictions.like("name",
+              STRING_PROCENT + name + STRING_PROCENT));
         }
         if (status != null) {
             criteria.add(Restrictions.eq("status", status));
         }
-        if (startDate
-          != null) {
+        if (startDate != null) {
             criteria.add(Restrictions.ge("startDate", startDate));
         }
-        if (tags
-          != null
-          && tags.size()
-          > 0) {
+        if (tags != null && tags.size() > 0) {
             criteria.createAlias(STRING_TAGS, STRING_TAGS);
             final Disjunction tagDis = Restrictions.disjunction();
             for (final Tag tag : tags) {

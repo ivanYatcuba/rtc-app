@@ -18,8 +18,7 @@ public class CustomStringEditor extends PropertyEditorSupport {
     @Override
     public String getAsText() {
         final Object obj = this.getValue();
-        if (obj
-          == null) {
+        if (obj == null) {
             return "";
         }
         final Collection<String> strs = ((Collection<String>) obj);

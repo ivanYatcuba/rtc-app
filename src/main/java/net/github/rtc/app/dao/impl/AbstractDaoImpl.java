@@ -85,13 +85,8 @@ public abstract class AbstractDaoImpl<T> implements GenericDao<T> {
           Projections.rowCount()).uniqueResult()).intValue());
         criteria.setProjection(null);
         criteria.setResultTransformer(Criteria.ROOT_ENTITY);
-        criteria.setMaxResults((start
-          - 1)
-          * max
-          + max);
-        criteria.setFirstResult((start
-          - 1)
-          * max);
+        criteria.setMaxResults((start - 1) * max + max);
+        criteria.setFirstResult((start - 1) * max);
         results.setResults(criteria.list());
         return results;
     }

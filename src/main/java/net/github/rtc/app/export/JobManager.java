@@ -37,30 +37,22 @@ public class JobManager {
       final JobManagerAction managerAction) throws Exception {
         final ModelService modelService = getModelService(
           report.getExportClass());
-        if (modelService
-          == null) {
-            throw new Exception("Service class of type"
-              + report.getExportClass()
-              + " not "
-              +
-              "found!");
+        if (modelService == null) {
+            throw new Exception(
+              "Service class of type" + report.getExportClass() + " not "
+                + "found!");
         }
-        final String filePath = exportPath
-          + report.getCode()
-          + "."
-          + report.getExportFormat().toString().toLowerCase();
-        if (managerAction
-          == JobManagerAction.UPDATE
-          || managerAction
+        final String filePath
+          = exportPath + report.getCode() + "." + report.getExportFormat()
+          .toString().toLowerCase();
+        if (managerAction == JobManagerAction.UPDATE || managerAction
           == JobManagerAction.DELETE) {
             scheduler.getObject().unscheduleJob(
               TriggerKey.triggerKey(report.getCode()));
             final File file = new File(filePath);
             file.delete();
         }
-        if (managerAction
-          == JobManagerAction.CREATE
-          || managerAction
+        if (managerAction == JobManagerAction.CREATE || managerAction
           == JobManagerAction.UPDATE) {
             final ReportJob reportJob = new ReportJob();
             final JobDataMap dataMap = new JobDataMap();

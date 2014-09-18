@@ -1,6 +1,7 @@
-<form class="form-horizontal" name="user" id="user" action="<@spring.url "/user/update" />" method="post">
+<form class="form-horizontal" name="user" id="user"
+      action="<@spring.url "/user/update" />" method="post">
     <h3 class="page-header"><@spring.message "user.editTitle"/></h3><br/>
-    <#include "userForm.ftl" />
+<#include "userForm.ftl" />
 
     <div class="row-fluid span12" style="margin-left: 1px">
         <div class="span6">

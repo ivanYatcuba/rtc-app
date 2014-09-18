@@ -69,12 +69,16 @@
         </#if>
         <td id="action${user.code}">
             <#if user.isForRemoval() >
-                <form style="margin: 0 0 0" name="deleteUser" action="<@spring.url"/admin/user/changeUserStatus/"/>" method="post">
+                <form style="margin: 0 0 0" name="deleteUser"
+                      action="<@spring.url"/admin/user/changeUserStatus/"/>"
+                      method="post">
                     <input type="hidden" name="userCode" value="${user.code}"/>
                     <button class="btn" type="submit">Restore</button>
                 </form>
             <#else>
-                <button class="btn" onclick="javascript:PopUpShow('${user.code}')">Remove</button>
+                <button class="btn"
+                        onclick="javascript:PopUpShow('${user.code}')">Remove
+                </button>
             </#if>
         </td>
     </tr>
@@ -91,10 +95,14 @@
         </center>
         <br>
         <center>
-            <form name="deleteUser" action="<@spring.url"/admin/user/changeUserStatus/"/>" method="post">
+            <form name="deleteUser"
+                  action="<@spring.url"/admin/user/changeUserStatus/"/>"
+                  method="post">
                 <input type="hidden" id="userCode" name="userCode"/>
                 <button class="btn" type="submit">Ok</button>
-                <button class="btn" type="button" onClick="javascript:PopUpHide()">Cancel</button>
+                <button class="btn" type="button"
+                        onClick="javascript:PopUpHide()">Cancel
+                </button>
             </form>
         </center>
     </div>
@@ -106,7 +114,8 @@
 
 <br><br>
 <div align="right">
-    <form name="createUser" action="<@spring.url"/admin/user/createUser"/>" method="get">
+    <form name="createUser" action="<@spring.url"/admin/user/createUser"/>"
+          method="get">
         <button class="btn" type="submit">Create New</button>
 </div>
 
