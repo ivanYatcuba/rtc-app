@@ -94,6 +94,33 @@ public class Course implements Serializable {
     @ForExport(value = "Experts")//, inculdeField = {"Author Email"})
     private Set<User> experts;
 
+    public Course() {
+
+    }
+
+    public Course(
+            final String code,
+            final String name,
+            final CourseType type,
+            final Set<User> experts,
+            final Date startDate,
+            final Date endDate,
+            final Date publishDate,
+            final Integer capacity,
+            final String description,
+            final CourseStatus status) {
+        this.code = code;
+        this.name = name;
+        this.type = type;
+        this.experts = experts;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.publishDate = publishDate;
+        this.capacity = capacity;
+        this.description = description;
+        this.status = status;
+    }
+
     public List<Tag> getTags() {
         return tags;
     }
@@ -188,33 +215,6 @@ public class Course implements Serializable {
 
     public void setId(final long id) {
         this.id = id;
-    }
-
-    public Course() {
-
-    }
-
-    public Course(
-      final String code,
-      final String name,
-      final CourseType type,
-      final Set<User> experts,
-      final Date startDate,
-      final Date endDate,
-      final Date publishDate,
-      final Integer capacity,
-      final String description,
-      final CourseStatus status) {
-        this.code = code;
-        this.name = name;
-        this.type = type;
-        this.experts = experts;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.publishDate = publishDate;
-        this.capacity = capacity;
-        this.description = description;
-        this.status = status;
     }
 
     @Override

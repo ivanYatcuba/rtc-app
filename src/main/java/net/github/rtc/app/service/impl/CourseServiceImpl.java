@@ -30,7 +30,10 @@ import java.util.UUID;
 @Service("coursesService")
 @Transactional
 public class CourseServiceImpl implements ModelService<Course>, CourseService {
-    private static Logger LOG = LoggerFactory.getLogger(CourseServiceImpl
+
+    private static final String CODE_CANNOT_BE_NULL = "code cannot be null";
+    private static final String COURSE_CANNOT_BE_NULL = "course cannot be null";
+    private static Logger log = LoggerFactory.getLogger(CourseServiceImpl
       .class.getName());
 
     @Autowired
@@ -41,8 +44,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      */
     @Override
     public void delete(final String code) {
-        LOG.debug("Removing course with code {} ", code);
-        Assert.notNull(code, "code cannot be null");
+        log.debug("Removing course with code {} ", code);
+        Assert.notNull(code, CODE_CANNOT_BE_NULL);
         coursesDao.deleteByCode(code);
     }
 
@@ -51,8 +54,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      */
     @Override
     public Course findByCode(final String code) {
-        LOG.debug("Getting course with code {}", code);
-        Assert.notNull(code, "code cannot be null");
+        log.debug("Getting course with code {}", code);
+        Assert.notNull(code, CODE_CANNOT_BE_NULL);
         return coursesDao.findByCode(code);
     }
 
@@ -62,8 +65,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      */
     @Override
     public Course create(final Course course) {
-        LOG.debug("Creating course {} ", course);
-        Assert.notNull(course, "course cannot be null");
+        log.debug("Creating course {} ", course);
+        Assert.notNull(course, COURSE_CANNOT_BE_NULL);
         course.setCode(UUID.randomUUID().toString());
         return coursesDao.create(course);
     }
@@ -74,8 +77,8 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
      */
     @Override
     public void update(final Course course) {
-        LOG.debug("Updating course: {} ", course);
-        Assert.notNull(course, "course cannot be null");
+        log.debug("Updating course: {} ", course);
+        Assert.notNull(course, COURSE_CANNOT_BE_NULL);
         coursesDao.update(course);
     }
 
@@ -87,14 +90,14 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Override
     @Transactional
     public List<Course> findAll() {
-        LOG.debug("Getting all courses from database...");
+        log.debug("Getting all courses from database...");
         return coursesDao.findAll();
     }
 
     @Override
     public void publish(final Course course) {
-        LOG.debug("Publishing course: {}  ", course);
-        Assert.notNull(course, "course cannot be null");
+        log.debug("Publishing course: {}  ", course);
+        Assert.notNull(course, COURSE_CANNOT_BE_NULL);
         course.setStatus(CourseStatus.PUBLISHED);
         course.setPublishDate(new Date());
         coursesDao.update(course);
@@ -104,7 +107,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Transactional
     public SearchResults<Course> search(
       final DetachedCriteria criteria, final int start, final int max) {
-        LOG.debug("Searching courses///");
+        log.debug("Searching courses///");
         return coursesDao.search(criteria, start, max);
     }
 

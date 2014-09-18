@@ -15,6 +15,8 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
  */
 public class ReportJob implements Job {
 
+    private static final String STRING_REPORT_JOB = "Job for report: ";
+
     private static final Logger LOG = LoggerFactory.getLogger(
       ReportJob.class.getName());
 
@@ -47,15 +49,15 @@ public class ReportJob implements Job {
             reportBuilder.build(reportDetails.getFieldsFromClass(),
               modelService.findAll(), reportDetails.getName(), filePath,
               reportDetails.getExportFormat());
-            LOG.info("Job for report: "
-              + reportDetails.getCode()
-              + " "
-              +
-              "completed!");
+            LOG.info(STRING_REPORT_JOB
+                    + reportDetails.getCode()
+                    + " "
+                    +
+                    "completed!");
         } catch (final NoSuchFieldException e) {
-            LOG.info("Job for report: "
-              + reportDetails.getCode()
-              + " failed!");
+            LOG.info(STRING_REPORT_JOB
+                    + reportDetails.getCode()
+                    + " failed!");
         }
     }
 }

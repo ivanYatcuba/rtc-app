@@ -21,6 +21,12 @@ public class Tag implements Serializable {
     @Column
     private String value;
 
+    public Tag() {
+    }
+
+    public Tag(final String value) {
+        this.value = value;
+    }
 
     public String getValue() {
         return value;
@@ -36,14 +42,6 @@ public class Tag implements Serializable {
 
     public void setId(final long id) {
         this.id = id;
-    }
-
-    public Tag(final String value) {
-        this.value = value;
-    }
-
-    public Tag() {
-
     }
 
     @Override

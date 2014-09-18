@@ -22,7 +22,7 @@ import java.util.List;
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Autowired
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     private Class<T> type;
 

@@ -27,8 +27,8 @@ public class ErrorController {
         final Integer statusCode = (Integer) request.getAttribute(STRING_JAVAX
           + STRING_DOT_SERVLET
           + ".error.status_code");
-        final Throwable throwable = (Throwable) request.getAttribute(STRING_JAVAX
-          + STRING_DOT_SERVLET
+        final Throwable throwable = (Throwable) request.getAttribute(
+                STRING_JAVAX + STRING_DOT_SERVLET
           + ".error.exception");
         final String exceptionMessage = getExceptionMessage(throwable,
           statusCode);

@@ -17,56 +17,57 @@ import java.util.List;
  */
 @Service
 public class UserCourseOrderServiceImpl implements UserCourseOrderService {
-    @Autowired
-    UserCourseOrderDao resource;
 
-    private static Logger LOG = LoggerFactory.getLogger(
-      UserCourseOrderServiceImpl.class.getName());
+    private static Logger log = LoggerFactory.getLogger(
+            UserCourseOrderServiceImpl.class.getName());
+
+    @Autowired
+    private UserCourseOrderDao resource;
 
     @Override
     @Transactional
     public void insert(final UserCourseOrder order) {
-        LOG.info("Creating order: "
-          + order);
+        log.info("Creating order: "
+                + order);
         resource.create(order);
     }
 
     @Override
     @Transactional
     public UserCourseOrder getUserOrder(final long id) {
-        LOG.info("Getting user course order with id: "
-          + id);
+        log.info("Getting user course order with id: "
+                + id);
         return resource.find(id);
     }
 
     @Override
     @Transactional
     public List<UserCourseOrder> getAll() {
-        LOG.info("Getting all orders from database..");
+        log.info("Getting all orders from database..");
         return (List) resource.findAll();
     }
 
     @Override
     @Transactional
     public void update(final UserCourseOrder order) {
-        LOG.info("Updating user course order: "
-          + order);
+        log.info("Updating user course order: "
+                + order);
         resource.update(order);
     }
 
     @Override
     @Transactional
     public void delete(final UserCourseOrder order) {
-        LOG.info("Removing user order: "
-          + order);
+        log.info("Removing user order: "
+                + order);
         resource.delete(order.getId());
     }
 
     @Override
     @Transactional
     public UserCourseOrder getUserOrderByUserCode(final String userCode) {
-        LOG.info("Get user order by user code: "
-          + userCode);
+        log.info("Get user order by user code: "
+                + userCode);
         return resource.getUserOrder(userCode);
     }
 
@@ -74,8 +75,8 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Transactional
     public List<UserCourseOrder> getOrderByStatus(
       final UserRequestStatus status) {
-        LOG.info("Get user orders with status: "
-          + status);
+        log.info("Get user orders with status: "
+                + status);
         return resource.getOrderByStatus(status);
     }
 

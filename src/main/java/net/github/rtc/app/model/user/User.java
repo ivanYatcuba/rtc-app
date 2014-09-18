@@ -15,8 +15,11 @@ import java.util.Set;
 @Entity
 @Validatable
 public class User implements UserDetails {
+
     public static final int PRIMARY_LENGTH = 50;
     public static final int SECONDARY_LENGTH = 30;
+    public static final String STRING_SPACE = " ";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @ForExport("Id")
@@ -135,6 +138,91 @@ public class User implements UserDetails {
     @Column
     private boolean enabled = true;
 
+    public User() {
+    }
+
+    public User(
+            final String code,
+            final String surname,
+            final String name,
+            final String middleName,
+            final String phone,
+            final String email,
+            final Date birthDate,
+            final String city,
+            final String university,
+            final String faculty,
+            final String speciality,
+            final String note,
+            final String password,
+            final String gender,
+            final Set<String> programmingLanguages,
+            final String english) {
+
+        this.code = code;
+        this.surname = surname;
+        this.name = name;
+        this.middleName = middleName;
+        this.phone = phone;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.city = city;
+        this.university = university;
+        this.faculty = faculty;
+        this.speciality = speciality;
+
+        this.note = note;
+        this.password = password;
+        this.gender = gender;
+        this.programmingLanguages = programmingLanguages;
+        this.english = english;
+    }
+
+    public User(
+            final String surname,
+            final String name,
+            final String middleName,
+            final String phone,
+            final String email,
+            final Date birthDate,
+            final String city,
+            final String university,
+            final String faculty,
+            final String speciality,
+            final String note,
+            final String password,
+            final String gender,
+            final Set<String> programmingLanguages,
+            final String english) {
+        this.surname = surname;
+        this.name = name;
+        this.middleName = middleName;
+        this.phone = phone;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.city = city;
+        this.university = university;
+        this.faculty = faculty;
+        this.speciality = speciality;
+        this.note = note;
+        this.password = password;
+        this.gender = gender;
+        this.programmingLanguages = programmingLanguages;
+        this.english = english;
+    }
+
+    public User(
+            final String name,
+            final String surname,
+            final String middleName,
+            final String email,
+            final String password) {
+        this.name = name;
+        this.surname = surname;
+        this.middleName = middleName;
+        this.email = email;
+        this.password = password;
+    }
 
     public void setEnglish(final String english) {
         this.english = english;
@@ -364,95 +452,8 @@ public class User implements UserDetails {
           == UserStatus.FOR_REMOVAL;
     }
 
-
-    public User() {
-    }
-
-    public User(
-      final String code,
-      final String surname,
-      final String name,
-      final String middleName,
-      final String phone,
-      final String email,
-      final Date birthDate,
-      final String city,
-      final String university,
-      final String faculty,
-      final String speciality,
-      final String note,
-      final String password,
-      final String gender,
-      final Set<String> programmingLanguages,
-      final String english) {
-
-        this.code = code;
-        this.surname = surname;
-        this.name = name;
-        this.middleName = middleName;
-        this.phone = phone;
-        this.email = email;
-        this.birthDate = birthDate;
-        this.city = city;
-        this.university = university;
-        this.faculty = faculty;
-        this.speciality = speciality;
-
-        this.note = note;
-        this.password = password;
-        this.gender = gender;
-        this.programmingLanguages = programmingLanguages;
-        this.english = english;
-    }
-
-    public User(
-      final String surname,
-      final String name,
-      final String middleName,
-      final String phone,
-      final String email,
-      final Date birthDate,
-      final String city,
-      final String university,
-      final String faculty,
-      final String speciality,
-      final String note,
-      final String password,
-      final String gender,
-      final Set<String> programmingLanguages,
-      final String english) {
-        this.surname = surname;
-        this.name = name;
-        this.middleName = middleName;
-        this.phone = phone;
-        this.email = email;
-        this.birthDate = birthDate;
-        this.city = city;
-        this.university = university;
-        this.faculty = faculty;
-        this.speciality = speciality;
-        this.note = note;
-        this.password = password;
-        this.gender = gender;
-        this.programmingLanguages = programmingLanguages;
-        this.english = english;
-    }
-
-    public User(
-      final String name,
-      final String surname,
-      final String middleName,
-      final String email,
-      final String password) {
-        this.name = name;
-        this.surname = surname;
-        this.middleName = middleName;
-        this.email = email;
-        this.password = password;
-    }
-
     public String shortString() {
-        return new StringBuilder(this.name).append(" ").append(
-          this.surname).append(" ").append(this.email).toString();
+        return new StringBuilder(this.name).append(STRING_SPACE).append(
+          this.surname).append(STRING_SPACE).append(this.email).toString();
     }
 }

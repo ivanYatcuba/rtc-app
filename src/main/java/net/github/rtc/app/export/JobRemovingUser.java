@@ -12,18 +12,20 @@ import java.util.Collection;
 
 @Component
 public class JobRemovingUser {
-    public static final int JOB_DELY = 300000;
-    private static Logger LOG = LoggerFactory.getLogger(
+
+    public static final int JOB_DELAY = 300000;
+
+    private static Logger log = LoggerFactory.getLogger(
       JobRemovingUser.class.getName());
 
     @Autowired
     private UserService userService;
 
-    @Scheduled(fixedDelay = JOB_DELY)
+    @Scheduled(fixedDelay = JOB_DELAY)
     public void deletingUser() {
-        LOG.debug("JobRemovingUser started");
+        log.debug("JobRemovingUser started");
         final Collection<User> listUsers = userService.findAll();
-        LOG.debug("Size of downloaded collection: {}", listUsers.size());
+        log.debug("Size of downloaded collection: {}", listUsers.size());
         for (final User user : listUsers) {
             if (user.getRemovalDate()
               != null) {

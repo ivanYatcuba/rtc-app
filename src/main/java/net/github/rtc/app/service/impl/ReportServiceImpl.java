@@ -21,30 +21,31 @@ import java.util.UUID;
 @Service
 public class ReportServiceImpl implements ReportService {
 
+    private static Logger log = LoggerFactory.getLogger(ReportServiceImpl
+            .class.getName());
+    private static final String STRING_REPORT = "Report: ";
+
     @Autowired
     private ReportDao reportResource;
     @Autowired
     private JobManager jobManager;
 
-    private static Logger LOG = LoggerFactory.getLogger(ReportServiceImpl
-      .class.getName());
-
     @Override
     @Transactional
     public void insert(final ReportDetails report) {
-        LOG.info("Creating report: "
-          + report);
+        log.info("Creating report: "
+                + report);
         report.setCode(UUID.randomUUID().toString());
         report.setCreatedDate(new Date());
         try {
             jobManager.manageJob(report, JobManagerAction.CREATE);
             reportResource.create(report);
-            LOG.info("Report: "
-              + report.getCode()
-              + " created successfully!");
+            log.info(STRING_REPORT
+                    + report.getCode()
+                    + " created successfully!");
         } catch (final Exception e) {
-            LOG.info("Report creation failed: "
-              + report.getCode());
+            log.info("Report creation failed: "
+                    + report.getCode());
             e.printStackTrace();
         }
     }
@@ -52,32 +53,32 @@ public class ReportServiceImpl implements ReportService {
     @Override
     @Transactional
     public ReportDetails findReportByCode(final String code) {
-        LOG.info("Getting report with code: "
-          + code);
+        log.info("Getting report with code: "
+                + code);
         return reportResource.findByCode(code);
     }
 
     @Override
     @Transactional
     public List<ReportDetails> getAll() {
-        LOG.info("Getting all reports from database...");
+        log.info("Getting all reports from database...");
         return (List) reportResource.findAll();
     }
 
     @Override
     @Transactional
     public void update(final ReportDetails report) {
-        LOG.info("Updating report: "
-          + report);
+        log.info("Updating report: "
+                + report);
         try {
             jobManager.manageJob(report, JobManagerAction.UPDATE);
             reportResource.update(report);
-            LOG.info("Report: "
-              + report.getCode()
-              + " updated successfully!");
+            log.info(STRING_REPORT
+                    + report.getCode()
+                    + " updated successfully!");
         } catch (final Exception e) {
-            LOG.info("Report update failed: "
-              + report.getCode());
+            log.info("Report update failed: "
+                    + report.getCode());
             e.printStackTrace();
         }
     }
@@ -85,17 +86,17 @@ public class ReportServiceImpl implements ReportService {
     @Override
     @Transactional
     public void delete(final ReportDetails report) {
-        LOG.info("Removing report: "
-          + report);
+        log.info("Removing report: "
+                + report);
         try {
             jobManager.manageJob(report, JobManagerAction.DELETE);
             reportResource.deleteByCode(report.getCode());
-            LOG.info("Report: "
-              + report.getCode()
-              + " removed successfully!");
+            log.info(STRING_REPORT
+                    + report.getCode()
+                    + " removed successfully!");
         } catch (final Exception e) {
-            LOG.info("Report removal failed: "
-              + report.getCode());
+            log.info("Report removal failed: "
+                    + report.getCode());
             e.printStackTrace();
         }
 

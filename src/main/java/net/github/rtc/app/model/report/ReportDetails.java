@@ -19,13 +19,15 @@ import java.util.List;
 @Validatable
 public class ReportDetails {
 
+    private static final int PRIMARY_LENGTH = 50;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column
     @Required
-    @Maxlength(50)
+    @Maxlength(PRIMARY_LENGTH)
     private String name;
 
     @Column
