@@ -26,7 +26,8 @@ import java.util.List;
 public class ExpertController {
 
     private static final String ROOT = "portal/expert";
-    private static final String ROOT_MODEL = "user";
+    private static final String STRING_USER = "user";
+    private static final String REDIRECT_REQUESTS = "redirect:/expert/requests";
 
     @Autowired
     private CourseService courseService;
@@ -76,13 +77,13 @@ public class ExpertController {
     @RequestMapping(value = "/accept/{orderId}", method = RequestMethod.GET)
     public String acceptRequest(@PathVariable final Integer orderId) {
         changeOrderStatus(UserRequestStatus.ACCEPTED, orderId);
-        return "redirect:/expert/requests";
+        return REDIRECT_REQUESTS;
     }
 
     @RequestMapping(value = "/decline/{orderId}", method = RequestMethod.GET)
     public String declineRequest(@PathVariable final Integer orderId) {
         changeOrderStatus(UserRequestStatus.REJECTED, orderId);
-        return "redirect:/expert/requests";
+        return REDIRECT_REQUESTS;
     }
 
     private void changeOrderStatus(
@@ -94,7 +95,7 @@ public class ExpertController {
         userCourseOrderService.update(order);
     }
 
-    @ModelAttribute(value = ROOT_MODEL)
+    @ModelAttribute(value = STRING_USER)
     public User getCommandObject() {
         return new User();
     }

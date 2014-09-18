@@ -49,10 +49,7 @@
     -->
     <!-- <module name="JavadocPackage"/> -->
     <!--  Checks whether files end with a new line.                         -->
-    <!--
-     See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile
-    -->
-    <module name="NewlineAtEndOfFile"/>
+
     <!--  Checks that property files contain the same keys.          -->
     <!--
      See http://checkstyle.sf.net/config_misc.html#Translation
@@ -142,7 +139,6 @@
         <module name="WhitespaceAround"/>
         <!--  Modifier Checks                                     -->
         <!--  See http://checkstyle.sf.net/config_modifiers.html  -->
-        <module name="ModifierOrder"/>
         <module name="RedundantModifier"/>
         <!--  Checks for blocks. You know, those {}'s          -->
         <!--  See http://checkstyle.sf.net/config_blocks.html  -->

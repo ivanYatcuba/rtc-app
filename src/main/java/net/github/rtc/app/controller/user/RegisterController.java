@@ -14,8 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller("registerController")
 @RequestMapping("user/register")
 public class RegisterController {
+
     @Autowired
-    ValidationContext validationContext;
+    private ValidationContext validationContext;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView openRegisterPage() {

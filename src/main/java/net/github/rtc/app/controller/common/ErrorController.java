@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ErrorController {
 
+    private static final String STRING_JAVAX = "javax";
+    private static final String STRING_DOT_SERVLET = ".servlet";
+
     @RequestMapping("error404")
     public ModelAndView redirectToErrorPage() {
         return new ModelAndView("error/error404");
@@ -21,13 +24,11 @@ public class ErrorController {
 
     @RequestMapping("error")
     public ModelAndView customError(final HttpServletRequest request) {
-        final Integer statusCode = (Integer) request.getAttribute("javax"
-          +
-          ".servlet"
+        final Integer statusCode = (Integer) request.getAttribute(STRING_JAVAX
+          + STRING_DOT_SERVLET
           + ".error.status_code");
-        final Throwable throwable = (Throwable) request.getAttribute("javax"
-          +
-          ".servlet"
+        final Throwable throwable = (Throwable) request.getAttribute(STRING_JAVAX
+          + STRING_DOT_SERVLET
           + ".error.exception");
         final String exceptionMessage = getExceptionMessage(throwable,
           statusCode);

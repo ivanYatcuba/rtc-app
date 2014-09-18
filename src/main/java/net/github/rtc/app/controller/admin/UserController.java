@@ -55,9 +55,9 @@ public class UserController {
         final ModelAndView mav = new ModelAndView(ROOT
           + PATH_PAGE_VIEW_ALL_USERS);
         final Collection<User> listUser = userService.findAll();
-        final ArrayList<User> NewListUser = new ArrayList<User>();
+        final ArrayList<User> newListUser = new ArrayList<User>();
         for (final User user : listUser) {
-            NewListUser.add(user);
+            newListUser.add(user);
         }
         final int numberOfPage = 1;
         int lastUser = USERS_PER_PAGE
@@ -65,12 +65,12 @@ public class UserController {
         final int firstUser = lastUser
           - USERS_PER_PAGE;
         if (lastUser
-          > NewListUser.size()) {
-            lastUser = NewListUser.size();
+          > newListUser.size()) {
+            lastUser = newListUser.size();
         }
         final int numbOfPages = (int) Math.ceil(listUser.size()
           / (double) USERS_PER_PAGE);
-        mav.addObject(STRING_USERS, NewListUser.subList(firstUser, lastUser));
+        mav.addObject(STRING_USERS, newListUser.subList(firstUser, lastUser));
         mav.addObject(STRING_PAGES, numbOfPages);
         mav.addObject(STRING_NUMBER_OF_PAGE, numberOfPage);
         return mav;
@@ -114,7 +114,7 @@ public class UserController {
     public ModelAndView editPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT
           + "/page/editPages");
-        mav.addObject(STRING_VALIDATION_RULES,validationContext
+        mav.addObject(STRING_VALIDATION_RULES, validationContext
                 .get(User.class));
         final User us = userService.findByCode(code);
         mav.addObject(STRING_USER, us);

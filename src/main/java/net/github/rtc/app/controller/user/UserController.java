@@ -33,7 +33,12 @@ import java.util.*;
 public class UserController {
 
     private static final String ROOT = "portal/user";
-    private static final String ROOT_MODEL = "user";
+    private static final String STRING_USER = "user";
+    private static final String STRING_REDIRECT = "redirect:/";
+    private static final int START_SEARCH = 3;
+    private static final String STRING_COURSE = "course";
+    private static final String STRING_USER_COURSES = "userCourses";
+
     @Autowired
     @Qualifier("authenticationManager")
     protected AuthenticationManager authenticationManager;
@@ -54,7 +59,7 @@ public class UserController {
           + "/page/userdataview");
         final User user = userServiceLogin.loadUserByUsername(
           SecurityContextHolder.getContext().getAuthentication().getName());
-        mav.addObject("user", user);
+        mav.addObject(STRING_USER, user);
         return mav;
     }
 
@@ -69,7 +74,7 @@ public class UserController {
           SecurityContextHolder.getContext().getAuthentication().getName());
         final ModelAndView mav = new ModelAndView(ROOT
           + "/page/edituser");
-        mav.getModelMap().addAttribute("user", user);
+        mav.getModelMap().addAttribute(STRING_USER, user);
         mav.addObject("validationRules", validationContext.get(User.class));
         return mav;
     }
@@ -84,11 +89,11 @@ public class UserController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView update(
-      @ModelAttribute(ROOT_MODEL) final User user,
+      @ModelAttribute(STRING_USER) final User user,
       final BindingResult bindingResult,
       final SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("redirect:/"
+            return new ModelAndView(STRING_REDIRECT
               + ROOT
               + "/edit/");
         }
@@ -100,18 +105,16 @@ public class UserController {
         final Authentication request = new UsernamePasswordAuthenticationToken(
           user.getUsername(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(request);
-        return new ModelAndView("redirect:/"
-          + "user/view");
+        return new ModelAndView(STRING_REDIRECT + "user/view");
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView save(
-      @ModelAttribute(ROOT_MODEL) final User user,
+      @ModelAttribute(STRING_USER) final User user,
       final BindingResult bindingResult,
       final SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("redirect:/"
-              + ROOT
+            return new ModelAndView(STRING_REDIRECT + ROOT
               + "/register/");
         }
         user.setAuthorities(
@@ -136,19 +139,19 @@ public class UserController {
             final CourseSearchFilter courseSearchFilter
               = new CourseSearchFilter();
             courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
-            mav.addObject("user", user);
+            mav.addObject(STRING_USER, user);
             mav.addObject("courses",
               courseService.search(courseSearchFilter.getCriteria(), 1,
-                3).getResults());
+                      START_SEARCH).getResults());
             return mav;
         } else {
             final ModelAndView mav = new ModelAndView(ROOT
               + "/page/courseorder");
             final Course orderedCourse = courseService.findByCode(
               currentUserCourseOrder.getCourseCode());
-            mav.addObject("user", user);
+            mav.addObject(STRING_USER, user);
             mav.addObject("orderStatus", currentUserCourseOrder.getStatus());
-            mav.addObject("course", orderedCourse);
+            mav.addObject(STRING_COURSE, orderedCourse);
             return mav;
         }
     }
@@ -158,8 +161,8 @@ public class UserController {
     public ModelAndView courseDetails(@PathVariable final String courseCode) {
         final ModelAndView mav = new ModelAndView(
           "portal/user/page/courseDetail");
-        mav.addObject("course", courseService.findByCode(courseCode));
-        mav.addObject("user", userServiceLogin.loadUserByUsername(
+        mav.addObject(STRING_COURSE, courseService.findByCode(courseCode));
+        mav.addObject(STRING_USER, userServiceLogin.loadUserByUsername(
           SecurityContextHolder.getContext().getAuthentication().getName()));
         return mav;
     }
@@ -184,14 +187,12 @@ public class UserController {
         userCourseOrder.setUserCode(userCode);
         userCourseOrder.setCourseCode(orderParamsMap.get("selectedCode"));
 
-        if (orderParamsMap.get("userCourses").equals("Developer")) {
+        if (orderParamsMap.get("Developer").equals(STRING_USER_COURSES)) {
             userCourseOrder.setPosition(TraineePosition.DEVELOPER);
-        } else if (orderParamsMap.get("userCourses").equals("Tester")) {
+        } else if (orderParamsMap.get("Tester").equals(STRING_USER_COURSES)) {
             userCourseOrder.setPosition(TraineePosition.TESTER);
-        } else if (orderParamsMap.get("userCourses").equals("Business "
-          +
-          "Analyst"
-          + " ")) {
+        } else if (orderParamsMap.get("Business Analyst ")
+                .equals(STRING_USER_COURSES)) {
             userCourseOrder.setPosition(TraineePosition.BUSINESS_ANALYST);
         }
         userCourseOrder.setReason(orderParamsMap.get("userTextArea"));
@@ -216,7 +217,7 @@ public class UserController {
      *
      * @param binder
      */
-    @InitBinder(ROOT_MODEL)
+    @InitBinder(STRING_USER)
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class,
@@ -229,7 +230,7 @@ public class UserController {
      *
      * @return user object
      */
-    @ModelAttribute(value = ROOT_MODEL)
+    @ModelAttribute(value = STRING_USER)
     public User getCommandObject() {
         return new User();
     }
