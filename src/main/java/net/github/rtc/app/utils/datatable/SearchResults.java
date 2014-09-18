@@ -22,12 +22,11 @@ public class SearchResults<T> {
         return results;
     }
 
-    public void setResults(List<T> results) {
-        if (results
-          == null) {
-            results = new ArrayList<>();
+    public void setResults(List<T> newResults) {
+        if (newResults == null) {
+            newResults = new ArrayList<>();
         }
-        this.results = results;
+        this.results = newResults;
     }
 
 }

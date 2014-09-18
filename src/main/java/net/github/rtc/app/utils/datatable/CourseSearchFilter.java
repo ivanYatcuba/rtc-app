@@ -90,9 +90,7 @@ public class CourseSearchFilter implements SearchFilter {
               + name
               + STRING_PROCENT));
         }
-        if (status
-          != null
-          && !status.equals("")) {
+        if (status != null) {
             criteria.add(Restrictions.eq("status", status));
         }
         if (startDate

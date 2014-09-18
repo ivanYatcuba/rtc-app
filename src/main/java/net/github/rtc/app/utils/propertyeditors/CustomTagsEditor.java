@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class CustomTagsEditor extends PropertyEditorSupport {
 
+    private static final String STRING_COMMA = ",";
+
     @Override
     public String getAsText() {
         final Object obj = this.getValue();
@@ -25,16 +27,16 @@ public class CustomTagsEditor extends PropertyEditorSupport {
         final Collection<Tag> tags = ((Collection<Tag>) obj);
         final StringBuffer sb = new StringBuffer();
         for (final Tag tag : tags) {
-            sb.append(tag.getValue()).append(",");
+            sb.append(tag.getValue()).append(STRING_COMMA);
         }
         return sb.toString();
     }
 
     @Override
-    public void setAsText(final String text) throws IllegalArgumentException {
-        final List<String> tagsSplit = Arrays.asList(text.split(","));
+    public void setAsText(final String text) {
+        final List<String> tagsSplit = Arrays.asList(text.split(STRING_COMMA));
         Collection<Tag> tags = null;
-        if (!tagsSplit.get(0).equals("")) {
+        if (!tagsSplit.get(0).isEmpty()) {
             tags = new ArrayList<>();
             for (final String tagName : tagsSplit) {
                 tags.add(new Tag(tagName));

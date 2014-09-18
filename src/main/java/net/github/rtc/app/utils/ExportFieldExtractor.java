@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Ivan Yatcuba on 8/22/14.
  */
-public class ExportFieldExtractor {
+public final class ExportFieldExtractor {
 
     private ExportFieldExtractor() {
     }
