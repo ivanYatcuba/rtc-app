@@ -26,7 +26,7 @@
     function switchPage(page) {
         $.ajax({
             type: "POST",
-            url: "/admin/course/" + page + "/",
+            url: "<@spring.url "/admin/course/" />" + page + "/",
             success: function (result) {
                 var str = result;
                 var live_str = $('<div>', {html: str});
@@ -34,6 +34,9 @@
                 var data = live_str.find('#data').html();
                 $('#navigation').html(nav);
                 $('#data').html(data);
+            }, error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
             }
         });
     }
