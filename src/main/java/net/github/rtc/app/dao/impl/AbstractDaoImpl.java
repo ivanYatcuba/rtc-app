@@ -19,14 +19,14 @@ import java.util.List;
  * Created by Ivan Yatcuba on 8/12/14.
  */
 @Component
-public abstract class GenericDaoImpl<T> implements GenericDao<T> {
+public abstract class AbstractDaoImpl<T> implements GenericDao<T> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     private Class<T> type;
 
-    public GenericDaoImpl() {
+    public AbstractDaoImpl() {
         final Type t = getClass().getGenericSuperclass();
         final ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];

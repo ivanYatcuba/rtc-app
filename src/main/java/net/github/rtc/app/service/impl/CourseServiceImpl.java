@@ -33,6 +33,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
 
     private static final String CODE_CANNOT_BE_NULL = "code cannot be null";
     private static final String COURSE_CANNOT_BE_NULL = "course cannot be null";
+    private static final int STARTING_SOON_COURSE_COUNT = 3;
     private static Logger log = LoggerFactory.getLogger(CourseServiceImpl
       .class.getName());
 
@@ -118,7 +119,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
         searchFilter.setStatus(CourseStatus.PUBLISHED);
         return coursesDao.search(
           searchFilter.getCriteria().addOrder(Order.asc("startDate")), 1,
-          3).getResults();
+          STARTING_SOON_COURSE_COUNT).getResults();
     }
 
 }

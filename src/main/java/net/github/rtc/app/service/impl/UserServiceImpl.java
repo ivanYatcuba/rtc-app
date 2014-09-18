@@ -28,6 +28,7 @@ import java.util.UUID;
 @Service("userService")
 public class UserServiceImpl implements ModelService<User>, UserService {
 
+    public static final int USER_REMOVAL_DELY = 3;
     private static Logger log = LoggerFactory.getLogger(
       UserServiceImpl.class.getName());
     private static final String REMOVING_USER_WITH_CODE =
@@ -136,7 +137,8 @@ public class UserServiceImpl implements ModelService<User>, UserService {
         if (user.getStatus()
           == UserStatus.ACTIVE) {
             user.setStatus(UserStatus.FOR_REMOVAL);
-            user.setRemovalDate(new DateTime(new Date()).plusDays(3).toDate());
+            user.setRemovalDate(new DateTime(new Date()).plusDays(
+              USER_REMOVAL_DELY).toDate());
             log.debug("Getting user before update: "
                     + user);
             userDao.update(user);

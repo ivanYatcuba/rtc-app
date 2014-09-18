@@ -9,9 +9,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Paginator {
-    private int maxPerPage = 5;
+    private static final int DEFAULT_MAX_PER_PAGE = 5;
+    private static final int MAX_PAGES_NUM = 10;
+
+    private int maxPerPage = DEFAULT_MAX_PER_PAGE;
     private int currentPage = 1;
-    SearchFilter searchFilter;
+    private SearchFilter searchFilter;
 
     public int getCurrentPage() {
         return currentPage;
@@ -40,9 +43,9 @@ public class Paginator {
     public Page getPage(int currentPage, final int total) {
         final int countPages = getCountPages(total
           - 1);
-        currentPage = checkCurrentPage(currentPage);
-        return new Page(currentPage, getPrevResult(currentPage),
-          getNextResult(currentPage, countPages), countPages);
+        final int newCurrentPage = checkCurrentPage(currentPage);
+        return new Page(newCurrentPage, getPrevResult(newCurrentPage),
+          getNextResult(newCurrentPage, countPages), countPages);
     }
 
     private int checkCurrentPage(final int currentPage) {
@@ -54,7 +57,7 @@ public class Paginator {
         return total
           / maxPerPage
           + ((total
-          % 10
+          % MAX_PAGES_NUM
           == 0) ? 0 : 1);
     }
 
