@@ -41,7 +41,7 @@ public class Paginator {
     }
 
     public Page getPage(int currentPage, final int total) {
-        final int countPages = getCountPages(total - 1);
+        final int countPages = getCountPages(total );
         final int newCurrentPage = checkCurrentPage(currentPage);
         return new Page(newCurrentPage, getPrevResult(newCurrentPage),
           getNextResult(newCurrentPage, countPages), countPages);

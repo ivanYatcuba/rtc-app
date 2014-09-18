@@ -109,19 +109,34 @@
         <div class="row">
             <div class="col-md-12" align="right">
                 Pages:
-                <#if startPage != currentPage>
-                    <a href="#" onclick="switchPage(${startPage})">>&laquo;</a>
-                </#if>
+                    <a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a>
                 <#if prevPage??>
-                    <a href="#" onclick="switchPage(${prevPage})">>>${prevPage}</a>
+                    <a href="#" onclick="switchPage(${prevPage})">&lsaquo;&nbsp</a>
+                <#else >
+                    <a href="#" onclick="switchPage(${startPage})">&lsaquo;&nbsp</a>
                 </#if>
-            ${currentPage}
-                <#if nextPage??>
-                    <a href="#" onclick="switchPage(${nextPage})">${nextPage}</a>
-                </#if>
-                <#if lastPage != currentPage>
-                    <a href="#" onclick="switchPage(${lastPage})">>>&raquo;</a>
-                </#if>
+
+                <#list currentPage-5..currentPage+5 as i>
+                    <#if i <= lastPage && i &gt; 0>
+                        <#if currentPage == i>
+                            <u>${i}</u>
+                        <#else >
+                            <a href="#" onclick="switchPage(${i})">${i}</a>
+                        </#if>
+                    </#if>
+                </#list>
+
+                    <#if nextPage??>
+                        <a href="#" onclick="switchPage(${nextPage})">&nbsp&rsaquo;</a>
+                    <#else >
+                        <a href="#" onclick="switchPage(${lastPage})
+                                ">&nbsp&rsaquo;</a>
+                    </#if>
+                    <a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a>
+
+
+
+
             </div>
         </div>
     </#if>
@@ -140,9 +155,9 @@
                 var data = live_str.find('#data').html();
                 $('#navigation').html(nav);
                 $('#data').html(data);
-            }, error: function (xhr, ajaxOptions, thrownError) {
-                alert(xhr.status);
-                alert(thrownError);
+            }, error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
             }
         });
     }
