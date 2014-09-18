@@ -22,11 +22,10 @@ import static junit.framework.Assert.assertEquals;
 @ContextConfiguration(locations = { "classpath:mvc-test.xml" })
 public class CourseResourceImplTest {
 
-   @Autowired
+    @Autowired
     private CoursesDaoImpl resource;
 
     private final String code = "fcb56955-5344-41e4-897b-d69387e5fa55";
-
 
 
     private MockRestServiceServer mockServer;
@@ -34,13 +33,12 @@ public class CourseResourceImplTest {
     @Before
     public void setUp() throws Exception {
 
-
     }
 
 
     @Test
     public void fakeTest() throws Exception {
-        assertEquals(true,true);
+        assertEquals(true, true);
     }
     /*
 
@@ -54,7 +52,8 @@ public class CourseResourceImplTest {
         final String responseXml = loadXmlFile("course.json");
         mockServer.expect(requestTo(dao.getHostUrl() + "courses/" + code))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(responseXml, MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(responseXml,
+                MediaType.APPLICATION_JSON));
         final Course courses = dao.findByCode(code);
         mockServer.verify();
         assertEquals(code, courses.getCode());

@@ -34,18 +34,14 @@ public class Bootstrap implements InitializingBean {
 
 
     public void loadTestUsers() {
-        if (userServiceLogin.loadUserByUsername(STRING_ADMIN)
-          == null) {
-            if (userService.getRoleByType(RoleType.ROLE_ADMIN)
-              == null) {
+        if (userServiceLogin.loadUserByUsername(STRING_ADMIN) == null) {
+            if (userService.getRoleByType(RoleType.ROLE_ADMIN) == null) {
                 userService.createRole(RoleType.ROLE_ADMIN);
             }
-            if (userService.getRoleByType(RoleType.ROLE_USER)
-              == null) {
+            if (userService.getRoleByType(RoleType.ROLE_USER) == null) {
                 userService.createRole(RoleType.ROLE_USER);
             }
-            if (userService.getRoleByType(RoleType.ROLE_EXPERT)
-              == null) {
+            if (userService.getRoleByType(RoleType.ROLE_EXPERT) == null) {
                 userService.createRole(RoleType.ROLE_EXPERT);
             }
 

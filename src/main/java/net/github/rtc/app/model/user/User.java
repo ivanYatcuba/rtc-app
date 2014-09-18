@@ -143,11 +143,11 @@ public class User implements UserDetails {
 
 
     public User(
-            final String name,
-            final String surname,
-            final String middleName,
-            final String email,
-            final String password) {
+      final String name,
+      final String surname,
+      final String middleName,
+      final String email,
+      final String password) {
         this.name = name;
         this.surname = surname;
         this.middleName = middleName;
@@ -379,8 +379,7 @@ public class User implements UserDetails {
     }
 
     public boolean isForRemoval() {
-        return this.status
-          == UserStatus.FOR_REMOVAL;
+        return this.status == UserStatus.FOR_REMOVAL;
     }
 
     public String shortString() {

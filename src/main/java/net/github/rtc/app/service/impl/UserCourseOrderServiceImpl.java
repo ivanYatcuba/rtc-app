@@ -19,7 +19,7 @@ import java.util.List;
 public class UserCourseOrderServiceImpl implements UserCourseOrderService {
 
     private static Logger log = LoggerFactory.getLogger(
-            UserCourseOrderServiceImpl.class.getName());
+      UserCourseOrderServiceImpl.class.getName());
 
     @Autowired
     private UserCourseOrderDao resource;
@@ -27,16 +27,14 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Override
     @Transactional
     public void insert(final UserCourseOrder order) {
-        log.info("Creating order: "
-                + order);
+        log.info("Creating order: " + order);
         resource.create(order);
     }
 
     @Override
     @Transactional
     public UserCourseOrder getUserOrder(final long id) {
-        log.info("Getting user course order with id: "
-                + id);
+        log.info("Getting user course order with id: " + id);
         return resource.find(id);
     }
 
@@ -50,24 +48,21 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Override
     @Transactional
     public void update(final UserCourseOrder order) {
-        log.info("Updating user course order: "
-                + order);
+        log.info("Updating user course order: " + order);
         resource.update(order);
     }
 
     @Override
     @Transactional
     public void delete(final UserCourseOrder order) {
-        log.info("Removing user order: "
-                + order);
+        log.info("Removing user order: " + order);
         resource.delete(order.getId());
     }
 
     @Override
     @Transactional
     public UserCourseOrder getUserOrderByUserCode(final String userCode) {
-        log.info("Get user order by user code: "
-                + userCode);
+        log.info("Get user order by user code: " + userCode);
         return resource.getUserOrder(userCode);
     }
 
@@ -75,8 +70,7 @@ public class UserCourseOrderServiceImpl implements UserCourseOrderService {
     @Transactional
     public List<UserCourseOrder> getOrderByStatus(
       final UserRequestStatus status) {
-        log.info("Get user orders with status: "
-                + status);
+        log.info("Get user orders with status: " + status);
         return resource.getOrderByStatus(status);
     }
 

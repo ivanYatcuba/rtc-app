@@ -51,8 +51,7 @@ public class ExportController {
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView exportCourses() {
-        final ModelAndView mav = new ModelAndView(ROOT
-          + "/page/reportList");
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/reportList");
         mav.addObject("reports", reportService.getAll());
         return mav;
     }
@@ -64,7 +63,7 @@ public class ExportController {
           "portal/admin/page/reportCreate");
         mav.addObject(STRING_TYPES, formatLables);
         mav.addObject(STRING_VALIDATION_RULES,
-                validationContext.get(ReportDetails.class));
+          validationContext.get(ReportDetails.class));
         return mav;
     }
 
@@ -78,8 +77,8 @@ public class ExportController {
         mav.addObject(STRING_REPORT, reportDetails);
         mav.addObject(STRING_TYPES, formatLables);
         mav.addObject(STRING_VALIDATION_RULES,
-                validationContext.get(ReportDetails
-          .class));
+          validationContext.get(ReportDetails
+            .class));
         return mav;
     }
 
@@ -88,7 +87,7 @@ public class ExportController {
         final ModelAndView mav = new ModelAndView(
           "portal/admin/page/reportDetails");
         mav.addObject(STRING_REPORT,
-                reportService.findReportByCode(reportCode));
+          reportService.findReportByCode(reportCode));
         return mav;
     }
 
@@ -109,8 +108,7 @@ public class ExportController {
         report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.insert(report);
-        return new ModelAndView(REDIRECT_EXPORT
-          + report.getCode());
+        return new ModelAndView(REDIRECT_EXPORT + report.getCode());
     }
 
     @RequestMapping(value = "/updateReport", method = RequestMethod.POST)
@@ -124,8 +122,7 @@ public class ExportController {
         report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.update(report);
-        return new ModelAndView(REDIRECT_EXPORT
-          + report.getCode());
+        return new ModelAndView(REDIRECT_EXPORT + report.getCode());
     }
 
     @RequestMapping(value = "/getFields", method = RequestMethod.GET)
@@ -153,14 +150,13 @@ public class ExportController {
         response.setContentLength((int) downloadFile.length());
 
         final String headerKey = "Content-Disposition";
-        final String headerValue = String.format("attachment; "
-          + "filename=\"%s\"", reportDetails.getName());
+        final String headerValue = String.format(
+          "attachment; " + "filename=\"%s\"", reportDetails.getName());
         response.setHeader(headerKey, headerValue);
         final OutputStream outStream = response.getOutputStream();
         final byte[] buffer = new byte[BUFFER_SIZE];
         int bytesRead = -1;
-        while ((bytesRead = inputStream.read(buffer))
-          != -1) {
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
             outStream.write(buffer, 0, bytesRead);
         }
         inputStream.close();

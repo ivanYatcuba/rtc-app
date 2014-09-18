@@ -49,15 +49,10 @@ public class ReportJob implements Job {
             reportBuilder.build(reportDetails.getFieldsFromClass(),
               modelService.findAll(), reportDetails.getName(), filePath,
               reportDetails.getExportFormat());
-            LOG.info(STRING_REPORT_JOB
-                    + reportDetails.getCode()
-                    + " "
-                    +
-                    "completed!");
+            LOG.info(STRING_REPORT_JOB + reportDetails.getCode() + " "
+              + "completed!");
         } catch (final NoSuchFieldException e) {
-            LOG.info(STRING_REPORT_JOB
-                    + reportDetails.getCode()
-                    + " failed!");
+            LOG.info(STRING_REPORT_JOB + reportDetails.getCode() + " failed!");
         }
     }
 }

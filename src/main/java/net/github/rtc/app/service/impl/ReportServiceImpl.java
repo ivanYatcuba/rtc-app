@@ -22,7 +22,7 @@ import java.util.UUID;
 public class ReportServiceImpl implements ReportService {
 
     private static Logger log = LoggerFactory.getLogger(ReportServiceImpl
-            .class.getName());
+      .class.getName());
     private static final String STRING_REPORT = "Report: ";
 
     @Autowired
@@ -33,19 +33,16 @@ public class ReportServiceImpl implements ReportService {
     @Override
     @Transactional
     public void insert(final ReportDetails report) {
-        log.info("Creating report: "
-                + report);
+        log.info("Creating report: " + report);
         report.setCode(UUID.randomUUID().toString());
         report.setCreatedDate(new Date());
         try {
             jobManager.manageJob(report, JobManagerAction.CREATE);
             reportResource.create(report);
-            log.info(STRING_REPORT
-                    + report.getCode()
-                    + " created successfully!");
+            log.info(
+              STRING_REPORT + report.getCode() + " created successfully!");
         } catch (final Exception e) {
-            log.info("Report creation failed: "
-                    + report.getCode());
+            log.info("Report creation failed: " + report.getCode());
             e.printStackTrace();
         }
     }
@@ -53,8 +50,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     @Transactional
     public ReportDetails findReportByCode(final String code) {
-        log.info("Getting report with code: "
-                + code);
+        log.info("Getting report with code: " + code);
         return reportResource.findByCode(code);
     }
 
@@ -68,17 +64,14 @@ public class ReportServiceImpl implements ReportService {
     @Override
     @Transactional
     public void update(final ReportDetails report) {
-        log.info("Updating report: "
-                + report);
+        log.info("Updating report: " + report);
         try {
             jobManager.manageJob(report, JobManagerAction.UPDATE);
             reportResource.update(report);
-            log.info(STRING_REPORT
-                    + report.getCode()
-                    + " updated successfully!");
+            log.info(
+              STRING_REPORT + report.getCode() + " updated successfully!");
         } catch (final Exception e) {
-            log.info("Report update failed: "
-                    + report.getCode());
+            log.info("Report update failed: " + report.getCode());
             e.printStackTrace();
         }
     }
@@ -86,17 +79,14 @@ public class ReportServiceImpl implements ReportService {
     @Override
     @Transactional
     public void delete(final ReportDetails report) {
-        log.info("Removing report: "
-                + report);
+        log.info("Removing report: " + report);
         try {
             jobManager.manageJob(report, JobManagerAction.DELETE);
             reportResource.deleteByCode(report.getCode());
-            log.info(STRING_REPORT
-                    + report.getCode()
-                    + " removed successfully!");
+            log.info(
+              STRING_REPORT + report.getCode() + " removed successfully!");
         } catch (final Exception e) {
-            log.info("Report removal failed: "
-                    + report.getCode());
+            log.info("Report removal failed: " + report.getCode());
             e.printStackTrace();
         }
 

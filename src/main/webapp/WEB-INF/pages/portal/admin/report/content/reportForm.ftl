@@ -1,17 +1,18 @@
-
 <div class="row">
-    <div class="col-md-6" >
+    <div class="col-md-6">
         <!--Report Name-->
-        <@spring.formItem "report.name" "class=\"required\""/>
+    <@spring.formItem "report.name" "class=\"required\""/>
         <!--Report Class-->
         <div class="form-group">
-            <label  class="control-label col-md-2">*<@spring.message "report.exportClass"/></label>
+            <label class="control-label col-md-2">*<@spring.message "report.exportClass"/></label>
+
             <div class="col-md-4">
-                <@spring.bind "types" />
+            <@spring.bind "types" />
                 <select id="selectedType" name="selectedType" class="required">
-                    <#list types as type>
-                        <option value="${type}" <#if report.exportClass?? && type == report.exportClass.simpleName>selected</#if>>${type}</option>
-                    </#list>
+                <#list types as type>
+                    <option value="${type}"
+                            <#if report.exportClass?? && type == report.exportClass.simpleName>selected</#if>>${type}</option>
+                </#list>
                 </select>
             </div>
         </div>
@@ -21,8 +22,9 @@
         <!--Report Format-->
         <div class="form-group">
             <label class="control-label col-md-2">*<@spring.message "report.exportFormat"/></label>
+
             <div class="col-md-4">
-                <@spring.bind "formats" />
+            <@spring.bind "formats" />
                 <@spring.formSingleSelect "report.exportFormat", formats, "class=\"required\""/>
             </div>
         </div>
@@ -32,8 +34,9 @@
 <hr>
 <div class="row">
     <div class="col-md-12">
-        <div class="form-group" >
-            <div class="col-md-4"  for="addFieldH"><@spring.message "report.fields"/></div>
+        <div class="form-group">
+            <div class="col-md-4"
+                 for="addFieldH"><@spring.message "report.fields"/></div>
             <div class="col-md-6" style="text-align: left; margin-left: -170px">
                 <div id="fields"></div>
                 <a id="addFieldH" href="#" onclick="addField()">Add Field</a>
@@ -45,43 +48,43 @@
 <script>
     var fields;
     var fieldsCount = 0;
-    function addField(){
+    function addField() {
         var div = $("#fields");
         div.append(getFieldsSelect(fields));
     }
 
-    function removeField(field){
-        $("#"+field).remove();
+    function removeField(field) {
+        $("#" + field).remove();
     }
-    function setFieldSelection(field, selection){
-        $("#"+field+" select").val(selection);
+    function setFieldSelection(field, selection) {
+        $("#" + field + " select").val(selection);
     }
 
-    function getFieldsSelect(list){
-        var fieldsSelect = "<div id=\""+fieldsCount+"\"><label for=\"fieldsCount\"></label><select name=\"reportFields\">";
-        for(var i=0; i<list.length; i++){
-            fieldsSelect+="<option>"+list[i]+"</option>";
+    function getFieldsSelect(list) {
+        var fieldsSelect = "<div id=\"" + fieldsCount + "\"><label for=\"fieldsCount\"></label><select name=\"reportFields\">";
+        for (var i = 0; i < list.length; i++) {
+            fieldsSelect += "<option>" + list[i] + "</option>";
         }
-        fieldsSelect+="</select>"+
-                "<button onclick='removeField("+fieldsCount+")' >-</button>"
-                +"<br/></div>";
+        fieldsSelect += "</select>" +
+                "<button onclick='removeField(" + fieldsCount + ")' >-</button>"
+                + "<br/></div>";
         fieldsCount++;
         return fieldsSelect;
     }
 
-    function getFields(clean){
+    function getFields(clean) {
         var selectedType = $('#selectedType').val();
         var data = 'selectedType=' + encodeURIComponent(selectedType);
         $.ajax({
-            url : '<@spring.url "/admin/export/getFields" />',
-            data : data,
-            type : "GET",
-            success : function(response) {
+            url: '<@spring.url "/admin/export/getFields" />',
+            data: data,
+            type: "GET",
+            success: function (response) {
                 fields = response;
-                if(clean == true){
+                if (clean == true) {
                     var div = $("#fields");
                     div.html("");
-                }else{
+                } else {
                 <#if report.fields??>
                     <#assign i = 0>
                     <#list report.fields as f>
@@ -93,15 +96,15 @@
                 }
 
             },
-            error : function(xhr, status, error) {
+            error: function (xhr, status, error) {
             }
         });
         return false;
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         getFields(false);
-        $('#selectedType').change(function(event) {
+        $('#selectedType').change(function (event) {
             getFields(true);
         });
     });

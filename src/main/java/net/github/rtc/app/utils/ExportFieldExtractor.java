@@ -20,11 +20,11 @@ public final class ExportFieldExtractor {
       final List<String> fields) throws NoSuchFieldException {
         final List<Field> classFields = new ArrayList<>();
         for (final Field f : exportClass.getDeclaredFields()) {
-            if (f.isAnnotationPresent(ForExport.class)
-              && fields.contains(f.getAnnotation(ForExport.class).value())) {
+            if (f.isAnnotationPresent(ForExport.class) && fields.contains(
+              f.getAnnotation(ForExport.class).value())) {
                 classFields.add(f);
-                if (f.getAnnotation(ForExport.class).inculdeField().length
-                  != 0) {
+                if (f.getAnnotation(
+                  ForExport.class).inculdeField().length != 0) {
                     classFields.addAll(getFieldsFromClass(f.getType(),
                       Arrays.asList(
                         f.getAnnotation(ForExport.class).inculdeField())));
@@ -39,8 +39,8 @@ public final class ExportFieldExtractor {
         for (final Field f : aClass.getDeclaredFields()) {
             if (f.isAnnotationPresent(ForExport.class)) {
                 classFields.add(f.getAnnotation(ForExport.class).value());
-                if (f.getAnnotation(ForExport.class).inculdeField().length
-                  != 0) {
+                if (f.getAnnotation(
+                  ForExport.class).inculdeField().length != 0) {
                     classFields.addAll(Arrays.asList(
                       f.getAnnotation(ForExport.class).inculdeField()));
                 }

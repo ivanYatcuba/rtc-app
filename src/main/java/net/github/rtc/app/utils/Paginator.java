@@ -41,35 +41,25 @@ public class Paginator {
     }
 
     public Page getPage(int currentPage, final int total) {
-        final int countPages = getCountPages(total
-          - 1);
+        final int countPages = getCountPages(total - 1);
         final int newCurrentPage = checkCurrentPage(currentPage);
         return new Page(newCurrentPage, getPrevResult(newCurrentPage),
           getNextResult(newCurrentPage, countPages), countPages);
     }
 
     private int checkCurrentPage(final int currentPage) {
-        return currentPage
-          < 1 ? 0 : currentPage;
+        return currentPage < 1 ? 0 : currentPage;
     }
 
     private int getCountPages(final int total) {
-        return total
-          / maxPerPage
-          + ((total
-          % MAX_PAGES_NUM
-          == 0) ? 0 : 1);
+        return total / maxPerPage + ((total % MAX_PAGES_NUM == 0) ? 0 : 1);
     }
 
     private Integer getPrevResult(final int currentPage) {
-        return currentPage
-          < 2 ? null : currentPage
-          - 1;
+        return currentPage < 2 ? null : currentPage - 1;
     }
 
     private Integer getNextResult(final int currentPage, final int countPages) {
-        return currentPage
-          < countPages ? currentPage
-          + 1 : null;
+        return currentPage < countPages ? currentPage + 1 : null;
     }
 }

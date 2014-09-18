@@ -40,7 +40,7 @@ public class UserController {
     private static final String PATH_PAGE_USER_PAGE = "/page/userPagea";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_VIEW_ALL
-            = "redirect:/admin/user/viewAll";
+      = "redirect:/admin/user/viewAll";
 
     @Autowired
     private ValidationContext validationContext;
@@ -48,28 +48,23 @@ public class UserController {
     private UserService userService;
 
 
-
-
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView viewAll() {
-        final ModelAndView mav = new ModelAndView(ROOT
-          + PATH_PAGE_VIEW_ALL_USERS);
+        final ModelAndView mav = new ModelAndView(
+          ROOT + PATH_PAGE_VIEW_ALL_USERS);
         final Collection<User> listUser = userService.findAll();
         final ArrayList<User> newListUser = new ArrayList<User>();
         for (final User user : listUser) {
             newListUser.add(user);
         }
         final int numberOfPage = 1;
-        int lastUser = USERS_PER_PAGE
-          * numberOfPage;
-        final int firstUser = lastUser
-          - USERS_PER_PAGE;
-        if (lastUser
-          > newListUser.size()) {
+        int lastUser = USERS_PER_PAGE * numberOfPage;
+        final int firstUser = lastUser - USERS_PER_PAGE;
+        if (lastUser > newListUser.size()) {
             lastUser = newListUser.size();
         }
-        final int numbOfPages = (int) Math.ceil(listUser.size()
-          / (double) USERS_PER_PAGE);
+        final int numbOfPages = (int) Math.ceil(
+          listUser.size() / (double) USERS_PER_PAGE);
         mav.addObject(STRING_USERS, newListUser.subList(firstUser, lastUser));
         mav.addObject(STRING_PAGES, numbOfPages);
         mav.addObject(STRING_NUMBER_OF_PAGE, numberOfPage);
@@ -79,23 +74,20 @@ public class UserController {
     @RequestMapping(value = "/viewAll/{numberOfPage}",
       method = RequestMethod.GET)
     public ModelAndView viewAll(@PathVariable final int numberOfPage) {
-        final ModelAndView mav = new ModelAndView(ROOT
-          + PATH_PAGE_VIEW_ALL_USERS);
+        final ModelAndView mav = new ModelAndView(
+          ROOT + PATH_PAGE_VIEW_ALL_USERS);
         final Collection<User> listUser = userService.findAll();
         final ArrayList<User> newListUser = new ArrayList<>();
         for (final User user : listUser) {
             newListUser.add(user);
         }
-        int lastUser = USERS_PER_PAGE
-          * numberOfPage;
-        final int firstUser = lastUser
-          - USERS_PER_PAGE;
-        if (lastUser
-          > newListUser.size()) {
+        int lastUser = USERS_PER_PAGE * numberOfPage;
+        final int firstUser = lastUser - USERS_PER_PAGE;
+        if (lastUser > newListUser.size()) {
             lastUser = newListUser.size();
         }
-        final int numbOfPages = (int) Math.ceil(listUser.size()
-          / (double) USERS_PER_PAGE);
+        final int numbOfPages = (int) Math.ceil(
+          listUser.size() / (double) USERS_PER_PAGE);
         mav.addObject(STRING_USERS, newListUser.subList(firstUser, lastUser));
         mav.addObject(STRING_PAGES, numbOfPages);
         mav.addObject(STRING_NUMBER_OF_PAGE, numberOfPage);
@@ -104,18 +96,16 @@ public class UserController {
 
     @RequestMapping(value = "/view/{code}", method = RequestMethod.GET)
     public ModelAndView user(@PathVariable final Integer code) {
-        final ModelAndView mav = new ModelAndView(ROOT
-          + PATH_PAGE_USER_PAGE);
+        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_USER_PAGE);
         return mav;
     }
 
     @RequestMapping(value = "userPage/editPage/{code}",
       method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable final String code) {
-        final ModelAndView mav = new ModelAndView(ROOT
-          + "/page/editPages");
-        mav.addObject(STRING_VALIDATION_RULES, validationContext
-                .get(User.class));
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/editPages");
+        mav.addObject(STRING_VALIDATION_RULES,
+          validationContext.get(User.class));
         final User us = userService.findByCode(code);
         mav.addObject(STRING_USER, us);
         return mav;
@@ -123,16 +113,14 @@ public class UserController {
 
     @RequestMapping(value = "/userPage/{code}", method = RequestMethod.GET)
     public ModelAndView userPage(@PathVariable final String code) {
-        final ModelAndView mav = new ModelAndView(ROOT
-          + PATH_PAGE_USER_PAGE);
+        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_USER_PAGE);
         mav.addObject(STRING_USER, userService.findByCode(code));
         return mav;
     }
 
     @RequestMapping(value = "/changeUserStatus", method = RequestMethod.POST)
     public String delete(@RequestParam final String userCode) {
-        log.info("Getting code: "
-                + userCode);
+        log.info("Getting code: " + userCode);
         //1. Do not forget to remove it
         //2. Use logs
         //System.out.print("1111111111111");
@@ -156,10 +144,9 @@ public class UserController {
 
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
-        final ModelAndView mav = new ModelAndView(ROOT
-          + "/page/createuser");
-        mav.addObject(STRING_VALIDATION_RULES, validationContext
-                .get(User.class));
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/createuser");
+        mav.addObject(STRING_VALIDATION_RULES,
+          validationContext.get(User.class));
         return mav;
     }
 
@@ -190,8 +177,7 @@ public class UserController {
         user.setId(userService.findByCode(user.getCode()).getId());
         userService.update(user);
         session.setComplete();
-        return "redirect:/admin/user/userPage/"
-          + user.getCode();
+        return "redirect:/admin/user/userPage/" + user.getCode();
     }
 
     @ModelAttribute(value = STRING_USER)

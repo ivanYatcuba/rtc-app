@@ -20,8 +20,7 @@ public class CustomTagsEditor extends PropertyEditorSupport {
     @Override
     public String getAsText() {
         final Object obj = this.getValue();
-        if (obj
-          == null) {
+        if (obj == null) {
             return "";
         }
         final Collection<Tag> tags = ((Collection<Tag>) obj);

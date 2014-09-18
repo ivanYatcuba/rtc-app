@@ -40,8 +40,7 @@ public class ExpertController {
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public ModelAndView expertCourses() {
-        final ModelAndView mav = new ModelAndView(ROOT
-          + "/page/Coursesexpert");
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/Coursesexpert");
         final List<UserCourseOrder> orderList
           = userCourseOrderService.getOrderByStatus(UserRequestStatus.PENDING);
         final List<Request> requestsList = new ArrayList<>();
@@ -68,8 +67,8 @@ public class ExpertController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ModelAndView userCourses() {
-        final ModelAndView mav = new ModelAndView(ROOT
-          + "/page/expertAllcourse");
+        final ModelAndView mav = new ModelAndView(
+          ROOT + "/page/expertAllcourse");
         mav.addObject("courses", courseService.findAll());
         return mav;
     }

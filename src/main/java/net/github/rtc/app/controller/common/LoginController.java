@@ -58,8 +58,7 @@ public class LoginController {
         if (email.equals(currentEmail)) {
             return true;
         }
-        return userServiceLogin.loadUserByUsername(email)
-          == null;
+        return userServiceLogin.loadUserByUsername(email) == null;
 
     }
 

@@ -59,16 +59,15 @@ public class ReportBuilder {
         currentRow++;
         for (final T object : objectsList) {
             reportTable.createRow(currentRow);
-            for (int j = 0; j
-              < reportFields.size(); j++) {
+            for (int j = 0; j < reportFields.size(); j++) {
                 reportFields.get(j).setAccessible(true);
                 try {
-                    if (reportFields.get(j).getDeclaringClass()
-                      != object.getClass()) {
+                    if (reportFields.get(
+                      j).getDeclaringClass() != object.getClass()) {
                         for (final Field f : object.getClass()
                           .getDeclaredFields()) {
-                            if (f.getType()
-                              == reportFields.get(j).getDeclaringClass()) {
+                            if (f.getType() == reportFields.get(
+                              j).getDeclaringClass()) {
                                 f.setAccessible(true);
                                 reportTable.createCell(currentRow, j,
                                   reportFields.get(j).get(f.get(object)));

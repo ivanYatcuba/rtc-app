@@ -31,22 +31,17 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         final String username = authentication.getName();
         final String password = (String) authentication.getCredentials();
 
-        if (username
-          == null
-          || username.trim().isEmpty()) {
+        if (username == null || username.trim().isEmpty()) {
             throw new BadCredentialsException("Email cannot be empty");
         }
 
-        if (password
-          == null
-          || password.trim().isEmpty()) {
+        if (password == null || password.trim().isEmpty()) {
             throw new BadCredentialsException("Password cannot be empty");
         }
 
         final User user = userService.loadUserByUsername(username);
 
-        if (user
-          == null) {
+        if (user == null) {
             throw new BadCredentialsException("Username not found.");
         }
 

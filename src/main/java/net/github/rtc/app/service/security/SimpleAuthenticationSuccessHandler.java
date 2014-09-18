@@ -7,7 +7,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication
-        .AuthenticationSuccessHandler;
+  .AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,8 +63,7 @@ public class SimpleAuthenticationSuccessHandler implements
     protected void clearAuthenticationAttributes(
       final HttpServletRequest request) {
         final HttpSession session = request.getSession(false);
-        if (session
-          == null) {
+        if (session == null) {
             return;
         }
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);

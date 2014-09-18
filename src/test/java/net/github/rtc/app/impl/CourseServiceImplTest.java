@@ -1,9 +1,8 @@
 package net.github.rtc.app.impl;
 
 import net.github.rtc.app.dao.CoursesDao;
-import net.github.rtc.app.exception.ServiceProcessingException;
-import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.dao.impl.CoursesDaoImpl;
+import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.service.CourseService;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -15,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Vladislav Pikus
@@ -36,14 +34,17 @@ public class CourseServiceImplTest {
     @Before
     public void setUp() throws Exception {
         mockResource = mock(CoursesDaoImpl.class);
-       // ((CourseServiceImpl)service).setResource(mockResource);
-       // course = new Course("codeTest", "nameTest", CourseType.DEV, new Author("Vasya", "Pupkin", "vasia@gmail.com"),
-         //       DateTime.now().toDate(), DateTime.now().toDate(), DateTime.now().toDate(), 10, "super description", CourseStatus.DRAFT);
+        // ((CourseServiceImpl)service).setResource(mockResource);
+        // course = new Course("codeTest", "nameTest", CourseType.DEV,
+        // new Author("Vasya", "Pupkin", "vasia@gmail.com"),
+        //       DateTime.now().toDate(), DateTime.now().toDate(),
+        // DateTime.now().toDate(), 10, "super description",
+        // CourseStatus.DRAFT);
     }
 
     @Test
     public void fakeTest() throws Exception {
-        assertEquals(true,true);
+        assertEquals(true, true);
     }
     /*@Test
     public void testDelete() throws Exception {

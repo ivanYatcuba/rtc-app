@@ -1,6 +1,8 @@
-<form class="form-horizontal" name="user" id="user" action="<@spring.url "/user/save" />" method="post">
-    <h3 class="page-header"><@spring.message "user.registrationTitle"/></h3><br/>
-    <#include "userForm.ftl" />
+<form class="form-horizontal" name="user" id="user"
+      action="<@spring.url "/user/save" />" method="post">
+    <h3 class="page-header"><@spring.message "user.registrationTitle"/></h3>
+    <br/>
+<#include "userForm.ftl" />
 
     <div class="row-fluid span12" style="margin-left: 1px">
         <div class="span6">

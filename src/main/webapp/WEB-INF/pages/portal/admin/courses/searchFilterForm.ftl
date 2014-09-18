@@ -1,30 +1,38 @@
-<form class="form-horizontal" name="courseFilter" role="form" action="<@spring.url "/admin/course/"/>" method="get">
+<form class="form-horizontal" name="courseFilter" role="form"
+      action="<@spring.url "/admin/course/"/>" method="get">
     <div class="row">
         <div class="col-md-6">
-            <@spring.formItem "filterCourse.name"/>
+        <@spring.formItem "filterCourse.name"/>
 
-            <@spring.bind "filterCourse.type"/>
+        <@spring.bind "filterCourse.type"/>
             <div class="form-group">
-                <label class="control-label col-md-2"  for="types"><@spring.message "filterCourse.type"/></label>
+                <label class="control-label col-md-2"
+                       for="types"><@spring.message "filterCourse.type"/></label>
+
                 <div class="col-md-4">
-                    <select multiple="multiple" name="types" class="input-medium">
+                    <select multiple="multiple" name="types"
+                            class="input-medium">
                     <#list types as type>
-                        <option value="${type}" <#if type=="QA">selected="selected"</#if>>${type}</option>
+                        <option value="${type}"
+                                <#if type=="QA">selected="selected"</#if>>${type}</option>
                     </#list>
                     </select>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2"  for="addExpertH"><@spring.message "filterCourse.experts"/></label>
+                <label class="control-label col-md-2"
+                       for="addExpertH"><@spring.message "filterCourse.experts"/></label>
+
                 <div class="col-md-8">
                     <div id="experts"></div>
-                    <a id="addExpertH" href="#" onclick="addExpert()">Add Expert</a>
+                    <a id="addExpertH" href="#" onclick="addExpert()">Add
+                        Expert</a>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <@spring.formItem "filterCourse.startDate" 'class="input-small"' "datepiker" />
+        <@spring.formItem "filterCourse.startDate" 'class="input-small"' "datepiker" />
             <@spring.formItem "filterCourse.status" 'class="input-medium"' "singleSelect" statuses/>
             <@spring.formItem "filterCourse.tags" "" "tag" />
         </div>
@@ -44,14 +52,14 @@
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
 <script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
 <script>
-    $(function() {
+    $(function () {
         $("#course").validate();
         prepareCourseFormPage("<@spring.url "/admin/user/expertUsers"/>");
     <#if filterCourse.experts??>
         <#assign i = 0>
         <#list  filterCourse.experts as f>
             addExpert();
-            setFieldSelection(${i}, "${f.name}"+" "+"${f.surname}"+" "+"${f.email}");
+            setFieldSelection(${i}, "${f.name}" + " " + "${f.surname}" + " " + "${f.email}");
             <#assign i = i+1>
         </#list>
     </#if>

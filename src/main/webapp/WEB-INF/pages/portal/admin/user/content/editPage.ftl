@@ -1,5 +1,6 @@
-<form class="form-horizontal" name="user" id="user" action="<@spring.url '/admin/user/update/${user.code}'/>" method="post">
-<h3 class="page-header"><@spring.message "user.createUser"/></h3><br>
+<form class="form-horizontal" name="user" id="user"
+      action="<@spring.url '/admin/user/update/${user.code}'/>" method="post">
+    <h3 class="page-header"><@spring.message "user.createUser"/></h3><br>
 <@spring.formHiddenInput "user.registerDate" />
 <#include "createUser.ftl"/>
     <div class="row">

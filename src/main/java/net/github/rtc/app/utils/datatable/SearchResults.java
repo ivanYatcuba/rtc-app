@@ -24,7 +24,7 @@ public class SearchResults<T> {
 
     public void setResults(List<T> newResults) {
         if (newResults == null) {
-            newResults = new ArrayList<>();
+            this.results = new ArrayList<>();
         }
         this.results = newResults;
     }

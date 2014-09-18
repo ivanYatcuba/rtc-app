@@ -1,6 +1,7 @@
-<form class="form-horizontal" id="user" name="user" action="<@spring.url '/admin/user/save'/>" method="post">
+<form class="form-horizontal" id="user" name="user"
+      action="<@spring.url '/admin/user/save'/>" method="post">
     <h3 class="page-header"><@spring.message "user.createUser"/></h3><br/>
-    <#include "createUser.ftl" />
+<#include "createUser.ftl" />
     <div class="row">
         <div class="col-md-6">
         </div>

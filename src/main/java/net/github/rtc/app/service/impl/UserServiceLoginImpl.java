@@ -18,7 +18,7 @@ public class UserServiceLoginImpl implements UserDetailsService,
   UserServiceLogin {
 
     private static final Logger LOG = LoggerFactory.getLogger(
-            UserServiceLoginImpl.class.getName());
+      UserServiceLoginImpl.class.getName());
 
     @Autowired
     private UserDao userDao;
@@ -26,8 +26,7 @@ public class UserServiceLoginImpl implements UserDetailsService,
     @Override
     @Transactional
     public User loadUserByUsername(final String email) {
-        LOG.info("Loading user with email: "
-                + email);
+        LOG.info("Loading user with email: " + email);
         return userDao.findByEmail(email);
     }
 }

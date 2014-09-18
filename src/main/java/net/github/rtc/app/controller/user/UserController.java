@@ -12,7 +12,8 @@ import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication
+  .UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -49,8 +50,7 @@ public class UserController {
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView user() {
-        final ModelAndView mav = new ModelAndView(ROOT
-          + "/page/userdataview");
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/userdataview");
         final User user = userServiceLogin.loadUserByUsername(
           SecurityContextHolder.getContext().getAuthentication().getName());
         mav.addObject(STRING_USER, user);
@@ -66,8 +66,7 @@ public class UserController {
     public ModelAndView edit() {
         final User user = userServiceLogin.loadUserByUsername(
           SecurityContextHolder.getContext().getAuthentication().getName());
-        final ModelAndView mav = new ModelAndView(ROOT
-          + "/page/edituser");
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/edituser");
         mav.getModelMap().addAttribute(STRING_USER, user);
         mav.addObject("validationRules", validationContext.get(User.class));
         return mav;
@@ -87,9 +86,7 @@ public class UserController {
       final BindingResult bindingResult,
       final SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView(STRING_REDIRECT
-              + ROOT
-              + "/edit/");
+            return new ModelAndView(STRING_REDIRECT + ROOT + "/edit/");
         }
         user.setAuthorities(
           Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
@@ -108,8 +105,7 @@ public class UserController {
       final BindingResult bindingResult,
       final SessionStatus session) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView(STRING_REDIRECT + ROOT
-              + "/register/");
+            return new ModelAndView(STRING_REDIRECT + ROOT + "/register/");
         }
         user.setAuthorities(
           Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
@@ -125,10 +121,8 @@ public class UserController {
           SecurityContextHolder.getContext().getAuthentication().getName());
         final UserCourseOrder currentUserCourseOrder
           = userCourseOrderService.getUserOrderByUserCode(user.getCode());
-        if (currentUserCourseOrder
-          == null) {
-            final ModelAndView mav = new ModelAndView(ROOT
-              + "/page/usercours");
+        if (currentUserCourseOrder == null) {
+            final ModelAndView mav = new ModelAndView(ROOT + "/page/usercours");
 
             final CourseSearchFilter courseSearchFilter
               = new CourseSearchFilter();
@@ -136,11 +130,11 @@ public class UserController {
             mav.addObject(STRING_USER, user);
             mav.addObject("courses",
               courseService.search(courseSearchFilter.getCriteria(), 1,
-                      START_SEARCH).getResults());
+                START_SEARCH).getResults());
             return mav;
         } else {
-            final ModelAndView mav = new ModelAndView(ROOT
-              + "/page/courseorder");
+            final ModelAndView mav = new ModelAndView(
+              ROOT + "/page/courseorder");
             final Course orderedCourse = courseService.findByCode(
               currentUserCourseOrder.getCourseCode());
             mav.addObject(STRING_USER, user);
@@ -185,8 +179,8 @@ public class UserController {
             userCourseOrder.setPosition(TraineePosition.DEVELOPER);
         } else if (orderParamsMap.get("Tester").equals(STRING_USER_COURSES)) {
             userCourseOrder.setPosition(TraineePosition.TESTER);
-        } else if (orderParamsMap.get("Business Analyst ")
-                .equals(STRING_USER_COURSES)) {
+        } else if (orderParamsMap.get("Business Analyst ").equals(
+          STRING_USER_COURSES)) {
             userCourseOrder.setPosition(TraineePosition.BUSINESS_ANALYST);
         }
         userCourseOrder.setReason(orderParamsMap.get("userTextArea"));
