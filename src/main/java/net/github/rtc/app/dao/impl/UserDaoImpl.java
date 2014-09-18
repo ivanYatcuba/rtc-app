@@ -24,26 +24,26 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
 
     @Override
     public User findByEmail(final String email) {
-        return (User) sessionFactory.getCurrentSession().createCriteria(User
+        return (User) getCurrentSession().createCriteria(User
           .class).
           add(Restrictions.eq("email", email)).uniqueResult();
     }
 
     @Override
     public Role getRoleByType(final RoleType type) {
-        return (Role) sessionFactory.getCurrentSession().createCriteria(Role
+        return (Role) getCurrentSession().createCriteria(Role
           .class).
           add(Restrictions.eq("name", type.name())).uniqueResult();
     }
 
     @Override
     public void createRole(final RoleType type) {
-        sessionFactory.getCurrentSession().save(new Role(type));
+        getCurrentSession().save(new Role(type));
     }
 
     @Override
     public List<User> getUserByType(final RoleType type) {
-        return sessionFactory.getCurrentSession().createCriteria(
+        return getCurrentSession().createCriteria(
           User.class).createAlias("authorities", "a").
           add(Restrictions.eq("a.name", type.name())).list();
     }
