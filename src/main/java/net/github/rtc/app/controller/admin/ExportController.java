@@ -33,13 +33,17 @@ import java.util.*;
 @Controller("exportController")
 @RequestMapping("admin/export")
 public class ExportController {
+
+    private static final int BUFFER_SIZE = 4096;
+    private static final String ROOT = "portal/admin";
+    private static final String STRING_TYPES = "types";
+    private static final String STRING_VALIDATION_RULES = "validationRules";
+    private static final String STRING_REPORT = "report";
+
     @Autowired
     private ReportService reportService;
     @Autowired
     private ValidationContext validationContext;
-
-    private static final int BUFFER_SIZE = 4096;
-    private static final String ROOT = "portal/admin";
 
     @Value("${report.export.path}")
     private String exportPath;
@@ -57,8 +61,8 @@ public class ExportController {
         final Set<String> formatLables = getTypes().keySet();
         final ModelAndView mav = new ModelAndView(
           "portal/admin/page/reportCreate");
-        mav.addObject("types", formatLables);
-        mav.addObject("validationRules", validationContext.get(ReportDetails
+        mav.addObject(STRING_TYPES, formatLables);
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(ReportDetails
           .class));
         return mav;
     }
@@ -70,9 +74,9 @@ public class ExportController {
         final Set<String> formatLables = getTypes().keySet();
         final ReportDetails reportDetails = reportService.findReportByCode(
           reportCode);
-        mav.addObject("report", reportDetails);
-        mav.addObject("types", formatLables);
-        mav.addObject("validationRules", validationContext.get(ReportDetails
+        mav.addObject(STRING_REPORT, reportDetails);
+        mav.addObject(STRING_TYPES, formatLables);
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(ReportDetails
           .class));
         return mav;
     }
@@ -81,7 +85,7 @@ public class ExportController {
     public ModelAndView viewReport(@PathVariable final String reportCode) {
         final ModelAndView mav = new ModelAndView(
           "portal/admin/page/reportDetails");
-        mav.addObject("report", reportService.findReportByCode(reportCode));
+        mav.addObject(STRING_REPORT, reportService.findReportByCode(reportCode));
         return mav;
     }
 
