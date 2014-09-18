@@ -8,7 +8,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication
   .UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -28,8 +27,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
 
     @Override
-    public Authentication authenticate(final Authentication authentication)
-      throws AuthenticationException {
+    public Authentication authenticate(final Authentication authentication) {
         final String username = authentication.getName();
         final String password = (String) authentication.getCredentials();
 
