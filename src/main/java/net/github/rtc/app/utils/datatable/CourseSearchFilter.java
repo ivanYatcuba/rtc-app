@@ -15,6 +15,9 @@ import java.util.Set;
 
 public class CourseSearchFilter implements SearchFilter {
 
+    private static final String STRING_PROCENT = "%";
+    private static final String STRING_TAGS = "tags";
+
     private String name;
 
     private CourseType type;
@@ -82,10 +85,10 @@ public class CourseSearchFilter implements SearchFilter {
 
         if (name
           != null
-          && !name.equals("")) {
-            criteria.add(Restrictions.like("name", "%"
+          && !("").equals(name)) {
+            criteria.add(Restrictions.like("name", STRING_PROCENT
               + name
-              + "%"));
+              + STRING_PROCENT));
         }
         if (status
           != null
@@ -100,7 +103,7 @@ public class CourseSearchFilter implements SearchFilter {
           != null
           && tags.size()
           > 0) {
-            criteria.createAlias("tags", "tags");
+            criteria.createAlias(STRING_TAGS, STRING_TAGS);
             final Disjunction tagDis = Restrictions.disjunction();
             for (final Tag tag : tags) {
                 tagDis.add(Restrictions.eq("tags.value", tag.getValue()));

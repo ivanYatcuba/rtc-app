@@ -20,10 +20,13 @@ import java.util.Date;
  */
 @Component
 public class Bootstrap implements InitializingBean {
+
+    private static final String STRING_ADMIN = "admin";
+
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    UserServiceLogin userServiceLogin;
+    private UserServiceLogin userServiceLogin;
     @Autowired
     private ReportService reportService;
     @Autowired
@@ -31,7 +34,7 @@ public class Bootstrap implements InitializingBean {
 
 
     public void loadTestUsers() {
-        if (userServiceLogin.loadUserByUsername("admin")
+        if (userServiceLogin.loadUserByUsername(STRING_ADMIN)
           == null) {
             if (userService.getRoleByType(RoleType.ROLE_ADMIN)
               == null) {
@@ -47,7 +50,7 @@ public class Bootstrap implements InitializingBean {
             }
 
             final User admin = new User("TestName", "TestMiddlename",
-              "TestSurname", "admin", "admin");
+              "TestSurname", STRING_ADMIN, STRING_ADMIN);
             admin.setAuthorities(
               Arrays.asList(userService.getRoleByType(RoleType.ROLE_ADMIN)));
             admin.setRegisterDate(new Date());

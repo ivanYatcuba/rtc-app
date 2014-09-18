@@ -30,7 +30,8 @@ public class UserServiceImpl implements ModelService<User>, UserService {
 
     private static Logger log = LoggerFactory.getLogger(
       UserServiceImpl.class.getName());
-    private static final String REMOVING_USER_WITH_CODE = "Removing user  with code: ";
+    private static final String REMOVING_USER_WITH_CODE =
+            "Removing user  with code: ";
     private static final String GETTING_USER = "Getting user: ";
 
     @Autowired

@@ -7,7 +7,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication
-  .AuthenticationSuccessHandler;
+        .AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,10 +50,10 @@ public class SimpleAuthenticationSuccessHandler implements
         final Collection<? extends GrantedAuthority> authorities
           = authentication.getAuthorities();
         for (final GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+            if (("ROLE_ADMIN").equals(grantedAuthority.getAuthority())) {
                 return "/admin";
             }
-            if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
+            if ("ROLE_USER".equals(grantedAuthority.getAuthority())) {
                 return "/user/view/";
             }
         }

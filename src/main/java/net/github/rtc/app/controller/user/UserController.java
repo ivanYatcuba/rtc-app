@@ -11,11 +11,8 @@ import net.github.rtc.app.utils.datatable.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication
-  .UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -39,9 +36,6 @@ public class UserController {
     private static final String STRING_COURSE = "course";
     private static final String STRING_USER_COURSES = "userCourses";
 
-    @Autowired
-    @Qualifier("authenticationManager")
-    protected AuthenticationManager authenticationManager;
     @Autowired
     private UserService userService;
     @Autowired

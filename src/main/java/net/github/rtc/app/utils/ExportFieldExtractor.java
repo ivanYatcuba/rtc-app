@@ -12,6 +12,9 @@ import java.util.List;
  */
 public class ExportFieldExtractor {
 
+    private ExportFieldExtractor() {
+    }
+
     public static List<Field> getFieldsFromClass(
       final Class exportClass,
       final List<String> fields) throws NoSuchFieldException {
