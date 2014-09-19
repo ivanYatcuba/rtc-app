@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <div style=" position: fixed;
       top: 50%;
       left: 50%;
