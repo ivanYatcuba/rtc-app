@@ -71,10 +71,13 @@
 
 <#macro formTagsInput path attributes="">
     <@formHiddenInput path attributes/>
-<ul id="${status.expression?replace('[','')?replace(']','')}Tag"></ul>
+<ul id="${status.expression?replace('[','')?replace(']','')}Tag" ></ul>
 <script type="text/javascript">
-    $(function () {
-        $('#${status.expression?replace('[','')?replace(']','')}Tag').tagit();
+    $(function() {
+        $('#${status.expression?replace('[','')?replace(']','')}Tag').tagit({
+            singleField: true,
+            singleFieldNode: $('#${status.expression?replace('[','')?replace(']','')}')
+        });
     });
 </script>
 </#macro>
