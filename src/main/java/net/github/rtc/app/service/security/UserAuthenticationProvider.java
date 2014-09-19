@@ -1,6 +1,7 @@
 package net.github.rtc.app.service.security;
 
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.UserServiceLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -43,6 +44,10 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
         if (user == null) {
             throw new BadCredentialsException("Username not found.");
+        }
+
+        if (user.getStatus() == UserStatus.FOR_REMOVAL) {
+            throw new BadCredentialsException("Contact the administrator tatyana.bulanaya@gmail.com");
         }
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
