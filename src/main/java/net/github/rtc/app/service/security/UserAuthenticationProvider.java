@@ -47,7 +47,8 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         }
 
         if (user.getStatus() == UserStatus.FOR_REMOVAL) {
-            throw new BadCredentialsException("Contact the administrator tatyana.bulanaya@gmail.com");
+            throw new BadCredentialsException(
+                    "Contact the administrator tatyana.bulanaya@gmail.com");
         }
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
