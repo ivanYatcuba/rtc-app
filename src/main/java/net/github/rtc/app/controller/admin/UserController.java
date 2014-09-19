@@ -47,13 +47,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView viewAll() {
         final ModelAndView mav = new ModelAndView(
           ROOT + PATH_PAGE_VIEW_ALL_USERS);
         final Collection<User> listUser = userService.findAll();
-        final ArrayList<User> newListUser = new ArrayList<User>();
+        final ArrayList<User> newListUser = new ArrayList<>();
         for (final User user : listUser) {
             newListUser.add(user);
         }
@@ -94,12 +93,6 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/view/{code}", method = RequestMethod.GET)
-    public ModelAndView user(@PathVariable final Integer code) {
-        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_USER_PAGE);
-        return mav;
-    }
-
     @RequestMapping(value = "userPage/editPage/{code}",
       method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable final String code) {
@@ -121,9 +114,6 @@ public class UserController {
     @RequestMapping(value = "/changeUserStatus", method = RequestMethod.POST)
     public String delete(@RequestParam final String userCode) {
         log.info("Getting code: " + userCode);
-        //1. Do not forget to remove it
-        //2. Use logs
-        //System.out.print("1111111111111");
         userService.markUserForRemoval(userCode);
         return REDIRECT_VIEW_ALL;
     }
@@ -140,7 +130,6 @@ public class UserController {
         }
         return results;
     }
-
 
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
@@ -192,7 +181,6 @@ public class UserController {
           new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomStringEditor());
     }
-
 
     @ModelAttribute("roles")
     public List<RoleType> getCategories() {
