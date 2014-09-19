@@ -117,6 +117,7 @@
     <form name="createUser" action="<@spring.url"/admin/user/createUser"/>"
           method="get">
         <button class="btn" type="submit">Create New</button>
+    </form>
 </div>
 
 <script type="text/javascript">
