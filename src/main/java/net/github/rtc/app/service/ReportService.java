@@ -20,5 +20,8 @@ public interface ReportService {
 
     void delete(ReportDetails report);
 
-    SearchResults<ReportDetails> search(DetachedCriteria criteria, int start, int max);
+    SearchResults<ReportDetails> search(
+      DetachedCriteria criteria,
+      int start,
+      int max);
 }

@@ -23,10 +23,9 @@ import java.util.UUID;
 @Service
 public class ReportServiceImpl implements ReportService {
 
+    private static final String STRING_REPORT = "Report: ";
     private static Logger log = LoggerFactory.getLogger(ReportServiceImpl
       .class.getName());
-    private static final String STRING_REPORT = "Report: ";
-
     @Autowired
     private ReportDao reportResource;
     @Autowired

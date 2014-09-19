@@ -44,7 +44,7 @@ public class ExportController {
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_REPORT = "report";
     private static final String REDIRECT_EXPORT = "redirect:/admin/export/";
-    public static final String PAGE_REPORT_LIST = "/page/reportList";
+    private static final String PAGE_REPORT_LIST = "/page/reportList";
 
     @Autowired
     private ReportService reportService;
