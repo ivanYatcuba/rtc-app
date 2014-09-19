@@ -2,7 +2,7 @@ package net.github.rtc.app.controller.common;
 
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.service.UserServiceLogin;
+import net.github.rtc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,11 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
     @Autowired
-    private UserServiceLogin userServiceLogin;
+    private UserService userService;
 
     private ModelAndView buildLoginMav(final ModelMap model) {
-        final ModelAndView mav = new ModelAndView("welcome/welcomeLayout",
-          model);
+        final ModelAndView mav
+                = new ModelAndView("welcome/welcomeLayout", model);
         mav.addObject("content", "../portal/user/login");
         return mav;
     }
@@ -53,19 +53,21 @@ public class LoginController {
     public
     @ResponseBody
     boolean mailExist(
-      @RequestParam final String email,
-      @RequestParam final String currentEmail) {
+            @RequestParam final String email,
+            @RequestParam final String currentEmail) {
         if (email.equals(currentEmail)) {
             return true;
         }
-        return userServiceLogin.loadUserByUsername(email) == null;
+        return userService.loadUserByUsername(email)
+                == null;
 
     }
 
     @RequestMapping(value = "/login_attempt", method = RequestMethod.GET)
     public String loginAttempt() {
-        final User user = userServiceLogin.loadUserByUsername(
-          SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user
+                = userService.loadUserByUsername(SecurityContextHolder
+                .getContext().getAuthentication().getName());
         if (user.hasRole(RoleType.ROLE_ADMIN.name())) {
             return "redirect:/admin";
         } else {

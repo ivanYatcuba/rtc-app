@@ -7,7 +7,6 @@ import net.github.rtc.app.model.user.UserRequestStatus;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.service.UserServiceLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -35,31 +34,33 @@ public class ExpertController {
     private UserCourseOrderService userCourseOrderService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserServiceLogin userServiceLogin;
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public ModelAndView expertCourses() {
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/Coursesexpert");
+        final ModelAndView mav = new ModelAndView(ROOT
+                + "/page/Coursesexpert");
         final List<UserCourseOrder> orderList
-          = userCourseOrderService.getOrderByStatus(UserRequestStatus.PENDING);
+                = userCourseOrderService.getOrderByStatus(UserRequestStatus
+                .PENDING);
         final List<Request> requestsList = new ArrayList<>();
         if (!orderList.isEmpty()) {
             for (final UserCourseOrder order : orderList) {
                 try {
-                    final Request request = new Request((int) order.getId(),
-                      userService.findByCode(order.getUserCode()).getName(),
-                      order.getReason(),
-                      courseService.findByCode(order.getCourseCode()).getName(),
-                      order.getPosition().toString());
+                    final Request request
+                            = new Request((int) order.getId(),
+                            userService.findByCode(order.getUserCode())
+                                    .getName(), order.getReason(),
+                            courseService.findByCode(order.getCourseCode())
+                                    .getName(), order.getPosition().toString());
                     requestsList.add(request);
                 } catch (final Throwable t) {
                     System.out.print("error");
                 }
             }
         }
-        final User user = userServiceLogin.loadUserByUsername(
-          SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user
+                = userService.loadUserByUsername(SecurityContextHolder
+                .getContext().getAuthentication().getName());
         mav.addObject(STRING_USER, user);
         mav.addObject("requests", requestsList);
         return mav;
@@ -67,8 +68,8 @@ public class ExpertController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ModelAndView userCourses() {
-        final ModelAndView mav = new ModelAndView(
-          ROOT + "/page/expertAllcourse");
+        final ModelAndView mav = new ModelAndView(ROOT
+                + "/page/expertAllcourse");
         mav.addObject("courses", courseService.findAll());
         return mav;
     }
@@ -86,9 +87,9 @@ public class ExpertController {
     }
 
     private void changeOrderStatus(
-      final UserRequestStatus userRequestStatus, final Integer orderId) {
-        final UserCourseOrder order = userCourseOrderService.getUserOrder(
-          orderId.longValue());
+            final UserRequestStatus userRequestStatus, final Integer orderId) {
+        final UserCourseOrder order
+                = userCourseOrderService.getUserOrder(orderId.longValue());
         order.setResponseDate(new Date());
         order.setStatus(userRequestStatus);
         userCourseOrderService.update(order);

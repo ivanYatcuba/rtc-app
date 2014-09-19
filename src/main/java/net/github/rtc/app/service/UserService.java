@@ -42,4 +42,6 @@ public interface UserService {
     void markUserForRemoval(String userCode);
 
     SearchResults<User> search(DetachedCriteria criteria, int start, int max);
+
+    User loadUserByUsername(String email);
 }

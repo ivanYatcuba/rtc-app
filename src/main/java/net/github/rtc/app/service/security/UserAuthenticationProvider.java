@@ -2,12 +2,12 @@ package net.github.rtc.app.service.security;
 
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
-import net.github.rtc.app.service.UserServiceLogin;
+import net.github.rtc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication
-  .UsernamePasswordAuthenticationToken;
+        .UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +22,7 @@ import java.util.Collection;
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private UserServiceLogin userService;
+    private UserService userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -47,8 +47,8 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         }
 
         if (user.getStatus() == UserStatus.FOR_REMOVAL) {
-            throw new BadCredentialsException(
-                    "Contact the administrator tatyana.bulanaya@gmail.com");
+            throw new BadCredentialsException("Contact the administrator "
+                    + "tatyana.bulanaya@gmail.com");
         }
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
@@ -56,10 +56,10 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         }
 
         final Collection<? extends GrantedAuthority> authorities
-          = user.getAuthorities();
+                = user.getAuthorities();
 
         return new UsernamePasswordAuthenticationToken(username, password,
-          authorities);
+                authorities);
     }
 
     @Override
