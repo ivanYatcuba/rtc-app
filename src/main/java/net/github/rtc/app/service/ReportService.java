@@ -1,6 +1,8 @@
 package net.github.rtc.app.service;
 
 import net.github.rtc.app.model.report.ReportDetails;
+import net.github.rtc.app.utils.datatable.SearchResults;
+import org.hibernate.criterion.DetachedCriteria;
 
 import java.util.List;
 
@@ -17,4 +19,6 @@ public interface ReportService {
     void update(ReportDetails report);
 
     void delete(ReportDetails report);
+
+    SearchResults<ReportDetails> search(DetachedCriteria criteria, int start, int max);
 }

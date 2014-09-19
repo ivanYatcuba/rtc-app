@@ -7,7 +7,11 @@ import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
+import net.github.rtc.app.utils.Paginator;
+import net.github.rtc.app.utils.datatable.Page;
+import net.github.rtc.app.utils.datatable.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -40,19 +44,41 @@ public class ExportController {
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_REPORT = "report";
     private static final String REDIRECT_EXPORT = "redirect:/admin/export/";
+    public static final String PAGE_REPORT_LIST = "/page/reportList";
 
     @Autowired
     private ReportService reportService;
     @Autowired
     private ValidationContext validationContext;
+    @Autowired
+    private Paginator paginator;
 
     @Value("${report.export.path}")
     private String exportPath;
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView exportCourses() {
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/reportList");
-        mav.addObject("reports", reportService.getAll());
+        return viewAll(1);
+    }
+
+
+    @RequestMapping(value = "/viewAll/{numberOfPage}",
+      method = RequestMethod.POST)
+    public ModelAndView viewAll(@PathVariable final int numberOfPage) {
+
+        final ModelAndView mav = new ModelAndView(ROOT
+          + PAGE_REPORT_LIST);
+        paginator.setCurrentPage(numberOfPage);
+        final SearchResults<ReportDetails> results
+          = reportService.search(DetachedCriteria.forClass(ReportDetails.class),
+          numberOfPage,
+          paginator.getMaxPerPage());
+        final Page pageModel
+          = paginator.getPage(numberOfPage, results.getTotalResults());
+        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
+          .byNextPage().byPrevPage().byStartPage().toMap());
+
+        mav.addObject("reports", results.getResults());
         return mav;
     }
 
