@@ -3,8 +3,12 @@ package net.github.rtc.app.controller.admin;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.utils.Paginator;
+import net.github.rtc.app.utils.datatable.Page;
+import net.github.rtc.app.utils.datatable.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
+import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,50 +50,31 @@ public class UserController {
     private ValidationContext validationContext;
     @Autowired
     private UserService userService;
+    @Autowired
+    private Paginator paginator;
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView viewAll() {
-        final ModelAndView mav = new ModelAndView(
-          ROOT + PATH_PAGE_VIEW_ALL_USERS);
-        final Collection<User> listUser = userService.findAll();
-        final ArrayList<User> newListUser = new ArrayList<>();
-        for (final User user : listUser) {
-            newListUser.add(user);
-        }
-        final int numberOfPage = 1;
-        int lastUser = USERS_PER_PAGE * numberOfPage;
-        final int firstUser = lastUser - USERS_PER_PAGE;
-        if (lastUser > newListUser.size()) {
-            lastUser = newListUser.size();
-        }
-        final int numbOfPages = (int) Math.ceil(
-          listUser.size() / (double) USERS_PER_PAGE);
-        mav.addObject(STRING_USERS, newListUser.subList(firstUser, lastUser));
-        mav.addObject(STRING_PAGES, numbOfPages);
-        mav.addObject(STRING_NUMBER_OF_PAGE, numberOfPage);
-        return mav;
+        return viewAll(1);
     }
 
     @RequestMapping(value = "/viewAll/{numberOfPage}",
-      method = RequestMethod.GET)
+      method = RequestMethod.POST)
     public ModelAndView viewAll(@PathVariable final int numberOfPage) {
-        final ModelAndView mav = new ModelAndView(
-          ROOT + PATH_PAGE_VIEW_ALL_USERS);
-        final Collection<User> listUser = userService.findAll();
-        final ArrayList<User> newListUser = new ArrayList<>();
-        for (final User user : listUser) {
-            newListUser.add(user);
-        }
-        int lastUser = USERS_PER_PAGE * numberOfPage;
-        final int firstUser = lastUser - USERS_PER_PAGE;
-        if (lastUser > newListUser.size()) {
-            lastUser = newListUser.size();
-        }
-        final int numbOfPages = (int) Math.ceil(
-          listUser.size() / (double) USERS_PER_PAGE);
-        mav.addObject(STRING_USERS, newListUser.subList(firstUser, lastUser));
-        mav.addObject(STRING_PAGES, numbOfPages);
-        mav.addObject(STRING_NUMBER_OF_PAGE, numberOfPage);
+
+        final ModelAndView mav = new ModelAndView(ROOT
+          + PATH_PAGE_VIEW_ALL_USERS);
+        paginator.setCurrentPage(numberOfPage);
+        final SearchResults<User> results
+          = userService.search(DetachedCriteria.forClass(User.class),
+          numberOfPage,
+          paginator.getMaxPerPage());
+        final Page pageModel
+          = paginator.getPage(numberOfPage, results.getTotalResults());
+        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
+          .byNextPage().byPrevPage().byStartPage().toMap());
+
+        mav.addObject(STRING_USERS, results.getResults());
         return mav;
     }
 

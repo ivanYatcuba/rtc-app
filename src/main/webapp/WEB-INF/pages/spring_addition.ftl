@@ -159,6 +159,7 @@
                 $('#navigation').html(nav);
                 $('#data').html(data);
             }, error: function (xhr, status, error) {
+                alert("error")
                 var err = eval("(" + xhr.responseText + ")");
                 alert(err.Message);
             }
