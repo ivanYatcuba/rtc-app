@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.datatable;
+package net.github.rtc.app.utils.datatable.search;
 
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
@@ -8,12 +8,14 @@ import net.github.rtc.app.model.user.User;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-public class CourseSearchFilter implements SearchFilter {
+@Component
+public class CourseSearchFilter {
 
     private static final String STRING_PROCENT = "%";
     private static final String STRING_TAGS = "tags";
@@ -78,7 +80,6 @@ public class CourseSearchFilter implements SearchFilter {
         this.experts = experts;
     }
 
-    @Override
     public DetachedCriteria getCriteria() {
         final DetachedCriteria criteria = DetachedCriteria.forClass(Course
           .class);

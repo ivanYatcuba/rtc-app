@@ -6,7 +6,7 @@ import net.github.rtc.app.model.user.*;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.datatable.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;

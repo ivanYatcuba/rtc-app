@@ -165,9 +165,6 @@
             }
         });
     }
-    $(function () {
-        switchPage(1);
-    });
 </script>
 </#macro>
 

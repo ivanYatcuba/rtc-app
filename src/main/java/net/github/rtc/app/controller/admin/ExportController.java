@@ -7,9 +7,7 @@ import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
-import net.github.rtc.app.utils.Paginator;
-import net.github.rtc.app.utils.datatable.Page;
-import net.github.rtc.app.utils.datatable.SearchResults;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +36,7 @@ import java.util.*;
 @RequestMapping("admin/export")
 public class ExportController {
 
+    private static final int REPORTS_PER_PAGE = 10;
     private static final int BUFFER_SIZE = 4096;
     private static final String ROOT = "portal/admin";
     private static final String STRING_TYPES = "types";
@@ -50,8 +49,6 @@ public class ExportController {
     private ReportService reportService;
     @Autowired
     private ValidationContext validationContext;
-    @Autowired
-    private Paginator paginator;
 
     @Value("${report.export.path}")
     private String exportPath;
@@ -68,15 +65,10 @@ public class ExportController {
 
         final ModelAndView mav = new ModelAndView(ROOT
           + PAGE_REPORT_LIST);
-        paginator.setCurrentPage(numberOfPage);
         final SearchResults<ReportDetails> results
           = reportService.search(DetachedCriteria.forClass(ReportDetails.class),
-          numberOfPage,
-          paginator.getMaxPerPage());
-        final Page pageModel
-          = paginator.getPage(numberOfPage, results.getTotalResults());
-        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
-          .byNextPage().byPrevPage().byStartPage().toMap());
+          numberOfPage, REPORTS_PER_PAGE);
+        mav.addAllObjects(results.getPageModel(REPORTS_PER_PAGE, numberOfPage));
 
         mav.addObject("reports", results.getResults());
         return mav;

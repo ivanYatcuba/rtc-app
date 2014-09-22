@@ -4,9 +4,7 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.Paginator;
-import net.github.rtc.app.utils.datatable.Page;
-import net.github.rtc.app.utils.datatable.SearchResults;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.hibernate.criterion.DetachedCriteria;
@@ -35,6 +33,7 @@ public class UserController {
     private static Logger log = LoggerFactory.getLogger(
       UserController.class.getName());
 
+    private static final int USERS_PER_PAGE = 10;
     private static final String ROOT = "portal/admin";
     private static final String STRING_USER = "user";
     private static final String STRING_USERS = "users";
@@ -49,8 +48,6 @@ public class UserController {
     private ValidationContext validationContext;
     @Autowired
     private UserService userService;
-    @Autowired
-    private Paginator paginator;
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView viewAll() {
@@ -63,15 +60,10 @@ public class UserController {
 
         final ModelAndView mav = new ModelAndView(ROOT
           + PATH_PAGE_VIEW_ALL_USERS);
-        paginator.setCurrentPage(numberOfPage);
         final SearchResults<User> results
           = userService.search(DetachedCriteria.forClass(User.class),
-          numberOfPage,
-          paginator.getMaxPerPage());
-        final Page pageModel
-          = paginator.getPage(numberOfPage, results.getTotalResults());
-        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
-          .byNextPage().byPrevPage().byStartPage().toMap());
+          numberOfPage, USERS_PER_PAGE);
+        mav.addAllObjects(results.getPageModel(USERS_PER_PAGE, numberOfPage));
 
         mav.addObject(STRING_USERS, results.getResults());
         return mav;

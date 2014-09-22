@@ -6,11 +6,8 @@ import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.Paginator;
-import net.github.rtc.app.utils.datatable.CourseSearchFilter;
-import net.github.rtc.app.utils.datatable.Page;
-import net.github.rtc.app.utils.datatable.SearchFilter;
-import net.github.rtc.app.utils.datatable.SearchResults;
+import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +30,7 @@ import java.util.*;
 @RequestMapping("admin/course")
 public class CoursesController {
 
+    private static final  int COURSES_PER_PAGE = 5;
     private static final String ROOT = "portal/admin";
     private static final String STRING_COURSE = "course";
     private static final String PATH_PAGE_LISTCONTENT = "/page/listcontent";
@@ -49,8 +47,6 @@ public class CoursesController {
     @Autowired
     private UserService userService;
     @Autowired
-    private Paginator paginator;
-    @Autowired
     private ValidationContext validationContext;
 
     /**
@@ -59,52 +55,34 @@ public class CoursesController {
      * @return modelAndView("admin/courses/courses")
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView index(
-            @ModelAttribute(
-                    STRING_FILTER_COURSE) final SearchFilter filterCourse)
-            throws Exception {
-        final ModelAndView mav = new ModelAndView(ROOT
-                + PATH_PAGE_LISTCONTENT);
-        paginator.setSearchFilter(filterCourse);
-        mav.addObject(STRING_TYPES, CourseType.findAll());
-        mav.addObject(STRING_STATUSES, getStats());
-        if (paginator.getSearchFilter()
-                != null) {
-            mav.addObject(STRING_FILTER_COURSE, paginator.getSearchFilter());
-        } else {
-            mav.addObject(STRING_FILTER_COURSE, new CourseSearchFilter());
-        }
-        return mav;
+    public ModelAndView index() {
+        return switchPage(1, getFilterCourse());
     }
 
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public ModelAndView filter(
-            @ModelAttribute(
-                    STRING_FILTER_COURSE) final SearchFilter filterCourse)
-            throws Exception {
-        paginator.setSearchFilter(filterCourse);
-        return switchPage(1);
+    public ModelAndView filter(@ModelAttribute(STRING_FILTER_COURSE) final
+    CourseSearchFilter  filterCourse) {
+        return switchPage(1, filterCourse);
     }
 
 
     @RequestMapping(value = "/{page}", method = RequestMethod.POST)
     public
     @ResponseBody
-    ModelAndView switchPage(@PathVariable final int page) {
+    ModelAndView switchPage(@PathVariable final int page,
+      @ModelAttribute(STRING_FILTER_COURSE) final
+      CourseSearchFilter  filterCourse) {
         final ModelAndView mav = new ModelAndView(ROOT
                 + PATH_PAGE_LISTCONTENT);
-        paginator.setCurrentPage(page);
         final SearchResults<Course> results
-                = courseService.search(paginator.getSearchFilter()
-                .getCriteria(), page, paginator.getMaxPerPage());
-        final Page pageModel
-                = paginator.getPage(page, results.getTotalResults());
-        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
-                .byNextPage().byPrevPage().byStartPage().toMap());
+                = courseService.search(filterCourse.getCriteria(), page,
+          COURSES_PER_PAGE);
+        mav.addAllObjects(results.getPageModel(COURSES_PER_PAGE, page
+          ));
         mav.addObject("courses", results.getResults());
         mav.addObject(STRING_TYPES, CourseType.findAll());
-        mav.addObject(STRING_STATUSES, getStats());
-        mav.addObject(STRING_FILTER_COURSE, paginator.getSearchFilter());
+        mav.addObject(STRING_STATUSES, getStatuses());
+        mav.addObject(STRING_FILTER_COURSE, filterCourse);
         return mav;
     }
 
@@ -255,7 +233,7 @@ public class CoursesController {
     }
 
     @ModelAttribute(STRING_STATUSES)
-    public Collection<String> getStats() {
+    public Collection<String> getStatuses() {
         return CourseStatus.findAll();
     }
 
