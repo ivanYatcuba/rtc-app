@@ -111,7 +111,7 @@
 
 <hr>
 <div class="row">
-    <div class="span12"  style="margin:10px 0px 80px 855px; ">
+    <div class="span11"  align="right" style="margin:10px 0px 0px 0px; ">
         <a href="<@spring.url "/admin/user/userPage/editPage/${user.code}" />">
             <button class="btn"><@spring.message "coursesPage.action.edit"/></button>
         </a> or
