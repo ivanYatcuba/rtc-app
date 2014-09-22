@@ -26,7 +26,7 @@
 
   Most Checks are configurable, be sure to consult the documentation.
 
-  To completely disable a check, just comment it out or delete it from the file.
+  To completely disable a check, just comment it out or setStatusActive it from the file.
 
   Finally, it is worth reading the documentation.
 
@@ -120,7 +120,6 @@
         <!-- <module name="ImportOrder"/> -->
         <!--  Checks for Size Violations.                     -->
         <!--  See http://checkstyle.sf.net/config_sizes.html  -->
-        <module name="LineLength"/>
         <module name="MethodLength"/>
         <module name="ParameterNumber"/>
         <!--  Checks for whitespace                                -->

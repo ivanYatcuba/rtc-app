@@ -81,6 +81,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
+            <scope>provided</scope>
         </dependency>
 
 
@@ -264,15 +265,6 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
                 <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>findbug</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
                     <findbugsXmlOutputDirectory>
                         ${project.build.directory}/findbugs
@@ -285,34 +277,17 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>copy-swf-files</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target name="copy findbugs report to webapp dir">
-                                <copy file="${project.build.directory}/findbugs/findbugsXml.html" tofile="${project.basedir}/src/main/webapp/WEB-INF/pages/findbugsXml.ftl" />
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
+                <configuration>
+                    <target name="copy findbugs report to webapp dir">
+                        <copy file="${project.build.directory}/findbugs/findbugsXml.html" tofile="${project.basedir}/src/main/webapp/WEB-INF/pages/findbugsXml.ftl" />
+                    </target>
+                </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>xml-maven-plugin</artifactId>
                 <version>1.0</version>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>transform</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
                     <transformationSets>
                         <transformationSet>

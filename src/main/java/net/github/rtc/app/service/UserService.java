@@ -37,9 +37,7 @@ public interface UserService {
 
     List<User> getUserByRole(RoleType type);
 
-    void markUserForRemoval(User user);
-
-    void markUserForRemoval(String userCode);
-
     SearchResults<User> search(DetachedCriteria criteria, int start, int max);
+
+    User loadUserByUsername(String email);
 }

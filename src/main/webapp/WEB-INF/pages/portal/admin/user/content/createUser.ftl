@@ -11,7 +11,7 @@
             <div class="col-md-4">
                 <select id="selectedRole" name="selectedRole" class="required">
                 <#list roles as role>
-                    <option value="${role}">${role}</option>
+                    <option value="${role}">${role.roleViewName}</option>
                 </#list>
                 </select>
             </div>
@@ -124,15 +124,20 @@
 
 <!--Note-->
 <div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="note"><@spring.message "user.note"/></label>
-
-            <div class="col-md-9">    <@spring.formTextarea "user.note"
-            'style="width:100%;" rows="3" maxlength="255" id=\"note\" class=\"required\"' /> </div>
+<div class="col-md-12" >
+    <div class="form-group">
+        <label class="control-label col-md-2"
+               for="note"><@spring.message "user.note"/></label>
+        <div class="col-md-10">
+            <@spring.formTextarea
+            "user.note" 'rows="3" maxlength="255"
+            id=\"note\"
+            class=\"required field col-md-10\"' />
         </div>
     </div>
+</div>
+
+
 </div>
 
 <@spring.formValidation formName="user" jsonRules="${validationRules}"/>

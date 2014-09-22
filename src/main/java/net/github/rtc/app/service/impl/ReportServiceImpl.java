@@ -5,6 +5,8 @@ import net.github.rtc.app.export.JobManager;
 import net.github.rtc.app.export.JobManagerAction;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.service.ReportService;
+import net.github.rtc.app.utils.datatable.SearchResults;
+import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,9 @@ import java.util.UUID;
 @Service
 public class ReportServiceImpl implements ReportService {
 
+    private static final String STRING_REPORT = "Report: ";
     private static Logger log = LoggerFactory.getLogger(ReportServiceImpl
       .class.getName());
-    private static final String STRING_REPORT = "Report: ";
-
     @Autowired
     private ReportDao reportResource;
     @Autowired
@@ -90,5 +91,12 @@ public class ReportServiceImpl implements ReportService {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    @Transactional
+    public SearchResults<ReportDetails> search(
+      final DetachedCriteria criteria, final int start, final int max) {
+        return reportResource.search(criteria, start, max);
     }
 }

@@ -71,10 +71,13 @@
 
 <#macro formTagsInput path attributes="">
     <@formHiddenInput path attributes/>
-<ul id="${status.expression?replace('[','')?replace(']','')}Tag"></ul>
+<ul id="${status.expression?replace('[','')?replace(']','')}Tag" ></ul>
 <script type="text/javascript">
-    $(function () {
-        $('#${status.expression?replace('[','')?replace(']','')}Tag').tagit();
+    $(function() {
+        $('#${status.expression?replace('[','')?replace(']','')}Tag').tagit({
+            singleField: true,
+            singleFieldNode: $('#${status.expression?replace('[','')?replace(']','')}')
+        });
     });
 </script>
 </#macro>
@@ -101,6 +104,73 @@
     });
 </script>
 </#macro>
+
+
+<#macro addPagination switchUrl>
+<div id="navigation">
+    <#if startPage??>
+        <div class="row">
+            <div class="col-md-12" align="right">
+                Pages:
+                    <a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a>
+                <#if prevPage??>
+                    <a href="#" onclick="switchPage(${prevPage})">&lsaquo;&nbsp</a>
+                <#else >
+                    <a href="#" onclick="switchPage(${startPage})">&lsaquo;&nbsp</a>
+                </#if>
+
+                <#list currentPage-5..currentPage+5 as i>
+                    <#if i <= lastPage && i &gt; 0>
+                        <#if currentPage == i>
+                            <u>${i}</u>
+                        <#else >
+                            <a href="#" onclick="switchPage(${i})">${i}</a>
+                        </#if>
+                    </#if>
+                </#list>
+
+                    <#if nextPage??>
+                        <a href="#" onclick="switchPage(${nextPage})">&nbsp&rsaquo;</a>
+                    <#else >
+                        <a href="#" onclick="switchPage(${lastPage})
+                                ">&nbsp&rsaquo;</a>
+                    </#if>
+                    <a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a>
+
+
+
+
+            </div>
+        </div>
+    </#if>
+</div>
+
+
+<script>
+    function switchPage(page) {
+        $.ajax({
+            type: "POST",
+            url: "<@spring.url "${switchUrl}" />" + page + "/",
+            success: function (result) {
+                var str = result;
+                var live_str = $('<div>', {html: str});
+                var nav = live_str.find('#navigation').html();
+                var data = live_str.find('#data').html();
+                $('#navigation').html(nav);
+                $('#data').html(data);
+            }, error: function (xhr, status, error) {
+                alert("error")
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    $(function () {
+        switchPage(1);
+    });
+</script>
+</#macro>
+
 
 
 

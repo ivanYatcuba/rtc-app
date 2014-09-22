@@ -24,7 +24,7 @@ public class CourseSearchFilter implements SearchFilter {
 
     private Date startDate;
 
-    private CourseStatus status;
+    private CourseStatus status = CourseStatus.ALL;
 
     private List<Tag> tags;
 
@@ -87,7 +87,7 @@ public class CourseSearchFilter implements SearchFilter {
             criteria.add(Restrictions.like("name",
               STRING_PROCENT + name + STRING_PROCENT));
         }
-        if (status != null) {
+        if (status != null && status != CourseStatus.ALL) {
             criteria.add(Restrictions.eq("status", status));
         }
         if (startDate != null) {

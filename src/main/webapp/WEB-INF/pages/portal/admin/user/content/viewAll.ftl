@@ -1,23 +1,8 @@
 <h3 class="page-header"><@spring.message "user.list"/></h3>
 
 
-<div class="row">
-    <div class="col-md-12" align="right">
-        Pages:
-    <#if numberOfPage-1&gt;1>
-        <a href="<@spring.url"/admin/user/viewAll/1"/>">&nbsp;&lt;&lt;</a>
-        <a href="<@spring.url"/admin/user/viewAll/${numberOfPage+1}"/>">&nbsp;&lt;</a>
-    </#if>
-    <#list 1..(pages) as index>
-        <a href="<@spring.url"/admin/user/viewAll/${index}"/>">  ${index}</a>
-    </#list>
-    <#if numberOfPage+1<pages?length>
-        <a href="<@spring.url"/admin/user/viewAll/${numberOfPage+1}"/>">&nbsp;&gt;</a>
-        <a href="<@spring.url"/admin/user/viewAll/${pages?length}"/>">&nbsp;&gt;&gt;</a>
-    </#if>
-    </div>
-</div>
-<table width="100%" class="table-bordered table" id="table">
+<@spring.addPagination "/admin/user/viewAll/" />
+<table width="100%" class="table-bordered table" id="data">
     <tr bgcolor="#d3d3d3" style="font-weight:bold">
         <td>Name</td>
         <td>Email</td>
@@ -70,7 +55,7 @@
         <td id="action${user.code}">
             <#if user.isForRemoval() >
                 <form style="margin: 0 0 0" name="deleteUser"
-                      action="<@spring.url"/admin/user/changeUserStatus/"/>"
+                      action="<@spring.url"/admin/user/restore/"/>"
                       method="post">
                     <input type="hidden" name="userCode" value="${user.code}"/>
                     <button class="btn" type="submit">Restore</button>
@@ -96,7 +81,7 @@
         <br>
         <center>
             <form name="deleteUser"
-                  action="<@spring.url"/admin/user/changeUserStatus/"/>"
+                  action="<@spring.url"/admin/user/remove/"/>"
                   method="post">
                 <input type="hidden" id="userCode" name="userCode"/>
                 <button class="btn" type="submit">Ok</button>
@@ -117,6 +102,7 @@
     <form name="createUser" action="<@spring.url"/admin/user/createUser"/>"
           method="get">
         <button class="btn" type="submit">Create New</button>
+    </form>
 </div>
 
 <script type="text/javascript">

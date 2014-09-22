@@ -2,16 +2,21 @@ package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.utils.Paginator;
+import net.github.rtc.app.utils.datatable.Page;
+import net.github.rtc.app.utils.datatable.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
+import org.hibernate.criterion.DetachedCriteria;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
@@ -33,70 +38,42 @@ public class UserController {
     private static final String ROOT = "portal/admin";
     private static final String STRING_USER = "user";
     private static final String STRING_USERS = "users";
-    private static final int USERS_PER_PAGE = 10;
     private static final String PATH_PAGE_VIEW_ALL_USERS = "/page/viewAllusers";
-    private static final String STRING_PAGES = "pages";
-    private static final String STRING_NUMBER_OF_PAGE = "numberOfPage";
     private static final String PATH_PAGE_USER_PAGE = "/page/userPagea";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_VIEW_ALL
       = "redirect:/admin/user/viewAll";
+    public static final int USER_REMOVAL_DELY = 3;
 
     @Autowired
     private ValidationContext validationContext;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private Paginator paginator;
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView viewAll() {
-        final ModelAndView mav = new ModelAndView(
-          ROOT + PATH_PAGE_VIEW_ALL_USERS);
-        final Collection<User> listUser = userService.findAll();
-        final ArrayList<User> newListUser = new ArrayList<User>();
-        for (final User user : listUser) {
-            newListUser.add(user);
-        }
-        final int numberOfPage = 1;
-        int lastUser = USERS_PER_PAGE * numberOfPage;
-        final int firstUser = lastUser - USERS_PER_PAGE;
-        if (lastUser > newListUser.size()) {
-            lastUser = newListUser.size();
-        }
-        final int numbOfPages = (int) Math.ceil(
-          listUser.size() / (double) USERS_PER_PAGE);
-        mav.addObject(STRING_USERS, newListUser.subList(firstUser, lastUser));
-        mav.addObject(STRING_PAGES, numbOfPages);
-        mav.addObject(STRING_NUMBER_OF_PAGE, numberOfPage);
-        return mav;
+        return viewAll(1);
     }
 
     @RequestMapping(value = "/viewAll/{numberOfPage}",
-      method = RequestMethod.GET)
+      method = RequestMethod.POST)
     public ModelAndView viewAll(@PathVariable final int numberOfPage) {
-        final ModelAndView mav = new ModelAndView(
-          ROOT + PATH_PAGE_VIEW_ALL_USERS);
-        final Collection<User> listUser = userService.findAll();
-        final ArrayList<User> newListUser = new ArrayList<>();
-        for (final User user : listUser) {
-            newListUser.add(user);
-        }
-        int lastUser = USERS_PER_PAGE * numberOfPage;
-        final int firstUser = lastUser - USERS_PER_PAGE;
-        if (lastUser > newListUser.size()) {
-            lastUser = newListUser.size();
-        }
-        final int numbOfPages = (int) Math.ceil(
-          listUser.size() / (double) USERS_PER_PAGE);
-        mav.addObject(STRING_USERS, newListUser.subList(firstUser, lastUser));
-        mav.addObject(STRING_PAGES, numbOfPages);
-        mav.addObject(STRING_NUMBER_OF_PAGE, numberOfPage);
-        return mav;
-    }
 
-    @RequestMapping(value = "/view/{code}", method = RequestMethod.GET)
-    public ModelAndView user(@PathVariable final Integer code) {
-        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_USER_PAGE);
+        final ModelAndView mav = new ModelAndView(ROOT
+          + PATH_PAGE_VIEW_ALL_USERS);
+        paginator.setCurrentPage(numberOfPage);
+        final SearchResults<User> results
+          = userService.search(DetachedCriteria.forClass(User.class),
+          numberOfPage,
+          paginator.getMaxPerPage());
+        final Page pageModel
+          = paginator.getPage(numberOfPage, results.getTotalResults());
+        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
+          .byNextPage().byPrevPage().byStartPage().toMap());
+
+        mav.addObject(STRING_USERS, results.getResults());
         return mav;
     }
 
@@ -118,13 +95,24 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/changeUserStatus", method = RequestMethod.POST)
-    public String delete(@RequestParam final String userCode) {
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public String setStatusForRemoval(@RequestParam final String userCode) {
         log.info("Getting code: " + userCode);
-        //1. Do not forget to remove it
-        //2. Use logs
-        //System.out.print("1111111111111");
-        userService.markUserForRemoval(userCode);
+        User user = userService.findByCode(userCode);
+        user.setStatus(UserStatus.FOR_REMOVAL);
+        user.setRemovalDate(new DateTime(new Date())
+                .plusDays(USER_REMOVAL_DELY).toDate());
+        userService.update(user);
+        return REDIRECT_VIEW_ALL;
+    }
+
+    @RequestMapping(value = "/restore", method = RequestMethod.POST)
+    public String setStatusActive(@RequestParam final String userCode) {
+        log.info("Getting code: " + userCode);
+        User user = userService.findByCode(userCode);
+        user.setStatus(UserStatus.ACTIVE);
+        user.setRemovalDate(null);
+        userService.update(user);
         return REDIRECT_VIEW_ALL;
     }
 
@@ -140,7 +128,6 @@ public class UserController {
         }
         return results;
     }
-
 
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
@@ -168,7 +155,6 @@ public class UserController {
       @PathVariable final String code,
       @ModelAttribute(STRING_USER) @Valid
       final User user,
-      final BindingResult bindingResult,
       final SessionStatus session,
       @RequestParam final RoleType selectedRole) {
         user.setAuthorities(
@@ -192,7 +178,6 @@ public class UserController {
           new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomStringEditor());
     }
-
 
     @ModelAttribute("roles")
     public List<RoleType> getCategories() {

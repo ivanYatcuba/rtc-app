@@ -7,7 +7,6 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.service.UserServiceLogin;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,15 +25,13 @@ public class Bootstrap implements InitializingBean {
     @Autowired
     private UserService userService;
     @Autowired
-    private UserServiceLogin userServiceLogin;
-    @Autowired
     private ReportService reportService;
     @Autowired
     private JobManager jobManager;
 
 
     public void loadTestUsers() {
-        if (userServiceLogin.loadUserByUsername(STRING_ADMIN) == null) {
+        if (userService.loadUserByUsername(STRING_ADMIN) == null) {
             if (userService.getRoleByType(RoleType.ROLE_ADMIN) == null) {
                 userService.createRole(RoleType.ROLE_ADMIN);
             }

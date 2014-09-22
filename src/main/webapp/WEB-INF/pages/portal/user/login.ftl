@@ -6,13 +6,9 @@
     ${Session["SPRING_SECURITY_LAST_EXCEPTION"].message}
     </div>
 </#if>
-    <form name="f" action= <@spring.url "/j_spring_security_check"/> method=
-    "POST">
-    <scripttype
-    ="text/javascript" src="/resources/css/js/jquery.js"></script>
-    <
-    script
-    src = "//code.jquery.com/jquery-1.9.1.js" ></script>
+    <form name="f" action= <@spring.url "/j_spring_security_check"/> method= "POST">
+    <scripttype="text/javascript" src="/resources/css/js/jquery.js"></script>
+    <script src = "//code.jquery.com/jquery-1.9.1.js" ></script>
 
     <div align="left" style="margin: 0 330 ">
         <span class="message"><b>Please sign in</b></span>
@@ -34,7 +30,7 @@
         <td colspan="2">
         </p>
 
-        <p class="remember"><input type="checkbox" id="ch"> Show password
+        <p class="remember"><input type="checkbox" id="ch" style="vertical-align: top"> Show password
             <script language="JavaScript" type="text/javascript">
                 $("#ch").change(function () {
 
@@ -46,7 +42,7 @@
                     }
                 });
             </script>
-            <input type="checkbox" name="_spring_security_remember_me">Remember
+            <input type="checkbox" name="_spring_security_remember_me" style="vertical-align: top">Remember
             me
         </p>
 
