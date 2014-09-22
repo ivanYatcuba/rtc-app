@@ -4,12 +4,10 @@ import net.github.rtc.app.dao.UserDao;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,12 +27,10 @@ import java.util.UUID;
 public class UserServiceImpl implements ModelService<User>, UserService,
         UserDetailsService {
 
-    public static final int USER_REMOVAL_DELY = 3;
     private static Logger log
             = LoggerFactory.getLogger(UserServiceImpl.class.getName());
     private static final String REMOVING_USER_WITH_CODE
             = "Removing user  with code: ";
-    private static final String GETTING_USER = "Getting user: ";
 
     @Autowired
     private UserDao userDao;
@@ -131,41 +126,6 @@ public class UserServiceImpl implements ModelService<User>, UserService,
     public SearchResults<User> search(
             final DetachedCriteria criteria, final int start, final int max) {
         return userDao.search(criteria, start, max);
-    }
-
-    @Override
-    @Transactional
-    public void markUserForRemoval(final User user) {
-        if (user.getStatus()
-                == UserStatus.ACTIVE) {
-            user.setStatus(UserStatus.FOR_REMOVAL);
-            user.setRemovalDate(new DateTime(new Date())
-                    .plusDays(USER_REMOVAL_DELY).toDate());
-            log.debug("Getting user before update: "
-                    + user);
-            userDao.update(user);
-            log.debug("Getting user after update: "
-                    + user);
-        } else {
-            user.setStatus(UserStatus.ACTIVE);
-            user.setRemovalDate(null);
-            log.debug(GETTING_USER
-                    + user);
-            userDao.update(user);
-            log.debug(GETTING_USER
-                    + user);
-        }
-    }
-
-    @Override
-    @Transactional
-    public void markUserForRemoval(final String userCode) {
-        log.debug("Getting code: "
-                + userCode);
-        final User user = findByCode(userCode);
-        log.debug("User: "
-                + user);
-        markUserForRemoval(user);
     }
 
     @Override
