@@ -9,6 +9,10 @@
     left: 0px;
 }
 
+.nav-sidebar li.active a:hover {
+ background-color: #428bca;
+}
+
 .popup .popup-content {
     margin: 100px auto 0px auto;
     width: 400px;
