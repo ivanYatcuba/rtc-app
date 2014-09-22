@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-6">
         </div>
-        <div class="col-md-5" style="text-align: right">
+        <div class="col-md-4" style="text-align: right">
             <br>
             <input type="submit" class="btn" value="Save"/> or
             <a href="<@spring.url "/admin/user/userPage/${user.code}" />">Cancel</a>
