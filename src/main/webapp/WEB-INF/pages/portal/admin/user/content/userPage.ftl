@@ -29,9 +29,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <label><@spring.message "user.gender"/></label>
-
-        <p>${user.gender!" "}</p>
+        <label><@spring.message "user.gender"/></label><p>${user.gender!" "}</p>
     </div>
 </div>
 
@@ -113,7 +111,7 @@
 
 <hr>
 <div class="row">
-    <div class="span12" align="right">
+    <div class="span12"  style="margin:10px 0px 80px 975px; ">
         <a href="<@spring.url "/admin/user/userPage/editPage/${user.code}" />">
             <button class="btn"><@spring.message "coursesPage.action.edit"/></button>
         </a> or
