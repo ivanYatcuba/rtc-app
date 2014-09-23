@@ -36,7 +36,6 @@ public class UserController {
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_VIEW_ALL = "redirect:/admin/user/viewAll";
 
-
     @Autowired
     private ValidationContext validationContext;
     @Autowired
