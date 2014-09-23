@@ -1,18 +1,18 @@
 <ul class="nav nav-sidebar">
-    <li id="course"><a href="<@spring.url'/admin/course/'/>">Courses</a></li>
-    <li id="user"><a href="<@spring.url'/admin/user/viewAll'/>">Users</a></li>
-    <li id="export"><a href="<@spring.url'/admin/export/viewAll'/>">Reports</a></li>
+    <li class="" id="course"><a href="<@spring.url'/admin/course/'/>">Courses</a></li>
+    <li class="" id="user"><a href="<@spring.url'/admin/user/viewAll'/>">Users</a></li>
+    <li class="" id="export"><a href="<@spring.url'/admin/export/viewAll'/>">Reports</a></li>
 </ul>
  <script type="text/javascript">
      $(function() {
          var pathname = window.location.pathname;
-         if(pathname.contains("course")){
-             $( "#course" ).addClass( "active" );
+         if(pathname.indexOf("course") > -1){
+             $("#course" ).addClass( "active" );
          }
-         if(pathname.contains("user")){
+         if(pathname.indexOf("user") > -1){
              $( "#user" ).addClass( "active" );
          }
-         if(pathname.contains("export")){
+         if(pathname.indexOf("export") > -1){
              $( "#export" ).addClass( "active" );
          }
      });

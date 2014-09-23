@@ -2,29 +2,22 @@
 <#include "/spring.ftl"/>
 
 <#macro includeLink>
-<link href="<@spring.url'/resources/Bootstrap/css/bootstrap.css'/>"
-      rel="stylesheet"/>
-<link href="<@spring.url'/resources/Bootstrap/css/bootstrap.min.css'/>"
-      rel="stylesheet"/>
-<link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet"/>
-<link href="<@spring.url'/resources/tag-it/css/jquery.tagit.css'/>"
-      rel="stylesheet" type="text/css">
-<link href="<@spring.url'/resources/tag-it/css/tagit.ui-zendesk.css'/>"
-      rel="stylesheet" type="text/css">
-<link href="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.css'/>"
-      rel="stylesheet" type="text/css">
+<link href="<@spring.url'/resources/Bootstrap/css/bootstrap.css'/>" rel="stylesheet"/>
+<link href="<@spring.url'/resources/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet"/>
+<link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
+<link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
+<link href="<@spring.url'/resources/tag-it/css/jquery.tagit.css'/>" rel="stylesheet" type="text/css">
+<link href="<@spring.url'/resources/tag-it/css/tagit.ui-zendesk.css'/>" rel="stylesheet" type="text/css">
+<link href="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.css'/>" rel="stylesheet" type="text/css">
 </#macro>
 
 <#macro includeScript>
 <script src="<@spring.url'/resources/js/jquery/jquery-1.11.1.min.js'/>"></script>
-<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>"
-        type="text/javascript"></script>
+<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
 <script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
-<script src="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.js'/>"
-        type="text/javascript" charset="utf-8"></script>
-<script src="<@spring.url'/resources/tag-it/js/tag-it.js'/>"
-        type="text/javascript" charset="utf-8"></script>
+<script src="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.js'/>" type="text/javascript" charset="utf-8"></script>
+<script src="<@spring.url'/resources/tag-it/js/tag-it.js'/>" type="text/javascript" charset="utf-8"></script>
 </#macro>
 
 <#macro formItem path attributes="" type="text" collectionAttribute="">
@@ -105,7 +98,6 @@
 </script>
 </#macro>
 
-
 <#macro addPagination switchUrl>
 <div id="navigation">
     <#if startPage??>
@@ -128,7 +120,6 @@
                         </#if>
                     </#if>
                 </#list>
-
                     <#if nextPage??>
                         <a href="#" onclick="switchPage(${nextPage})">&nbsp&rsaquo;</a>
                     <#else >
@@ -136,15 +127,10 @@
                                 ">&nbsp&rsaquo;</a>
                     </#if>
                     <a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a>
-
-
-
-
             </div>
         </div>
     </#if>
 </div>
-
 
 <script>
     function switchPage(page) {

@@ -30,9 +30,6 @@ import java.util.*;
 @Controller("adminNavigationController")
 @RequestMapping("admin/user")
 public class UserController {
-    public static final String GETTING_CODE = "Getting code: ";
-    private static Logger log = LoggerFactory.getLogger(
-      UserController.class.getName());
 
     private static final int USERS_PER_PAGE = 10;
     private static final String ROOT = "portal/admin";
@@ -42,9 +39,10 @@ public class UserController {
     private static final String PATH_PAGE_USER_PAGE = "/page/userPagea";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_VIEW_ALL
-      = "redirect:/admin/user/viewAll";
+            = "redirect:/admin/user/viewAll";
     private static final int USER_REMOVAL_DELY = 3;
-
+    private static Logger log = LoggerFactory.getLogger(
+            UserController.class.getName());
     @Autowired
     private ValidationContext validationContext;
     @Autowired
@@ -55,27 +53,19 @@ public class UserController {
         return viewAll(1);
     }
 
-    @RequestMapping(value = "/viewAll/{numberOfPage}",
-      method = RequestMethod.POST)
+    @RequestMapping(value = "/viewAll/{numberOfPage}", method = RequestMethod.POST)
     public ModelAndView viewAll(@PathVariable final int numberOfPage) {
-
-        final ModelAndView mav = new ModelAndView(ROOT
-          + PATH_PAGE_VIEW_ALL_USERS);
-        final SearchResults<User> results
-          = userService.search(DetachedCriteria.forClass(User.class),
-          numberOfPage, USERS_PER_PAGE);
+        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
+        final SearchResults<User> results = userService.search(DetachedCriteria.forClass(User.class), numberOfPage, USERS_PER_PAGE);
         mav.addAllObjects(results.getPageModel(USERS_PER_PAGE, numberOfPage));
-
         mav.addObject(STRING_USERS, results.getResults());
         return mav;
     }
 
-    @RequestMapping(value = "userPage/editPage/{code}",
-      method = RequestMethod.GET)
+    @RequestMapping(value = "userPage/editPage/{code}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/editPages");
-        mav.addObject(STRING_VALIDATION_RULES,
-          validationContext.get(User.class));
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         final User us = userService.findByCode(code);
         mav.addObject(STRING_USER, us);
         return mav;
@@ -90,18 +80,15 @@ public class UserController {
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String setStatusForRemoval(@RequestParam final String userCode) {
-        log.info(GETTING_CODE + userCode);
         final User user = userService.findByCode(userCode);
         user.setStatus(UserStatus.FOR_REMOVAL);
-        user.setRemovalDate(new DateTime(new Date())
-                .plusDays(USER_REMOVAL_DELY).toDate());
+        user.setRemovalDate(new DateTime(new Date()).plusDays(USER_REMOVAL_DELY).toDate());
         userService.update(user);
         return REDIRECT_VIEW_ALL;
     }
 
     @RequestMapping(value = "/restore", method = RequestMethod.POST)
     public String setStatusActive(@RequestParam final String userCode) {
-        log.info(GETTING_CODE + userCode);
         final User user = userService.findByCode(userCode);
         user.setStatus(UserStatus.ACTIVE);
         user.setRemovalDate(null);
@@ -114,8 +101,7 @@ public class UserController {
     @ResponseBody
     List<String> getExpertUsers() {
         final List<String> results = new ArrayList<>();
-        final List<User> users = userService.getUserByRole(
-          RoleType.ROLE_EXPERT);
+        final List<User> users = userService.getUserByRole(RoleType.ROLE_EXPERT);
         for (final User user : users) {
             results.add(user.shortString());
         }
@@ -125,18 +111,13 @@ public class UserController {
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/createuser");
-        mav.addObject(STRING_VALIDATION_RULES,
-          validationContext.get(User.class));
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         return mav;
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(
-      @ModelAttribute(STRING_USER) @Valid final User user,
-      final SessionStatus session,
-      @RequestParam final RoleType selectedRole) {
-        user.setAuthorities(
-          Arrays.asList(userService.getRoleByType(selectedRole)));
+    public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session, @RequestParam final RoleType selectedRole) {
+        user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
         user.setRegisterDate(new Date());
         userService.create(user);
         session.setComplete();
@@ -144,14 +125,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update/{code}", method = RequestMethod.POST)
-    public String update(
-      @PathVariable final String code,
-      @ModelAttribute(STRING_USER) @Valid
-      final User user,
-      final SessionStatus session,
-      @RequestParam final RoleType selectedRole) {
-        user.setAuthorities(
-          Arrays.asList(userService.getRoleByType(selectedRole)));
+    public String update(@PathVariable final String code, @ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session,
+                         @RequestParam final RoleType selectedRole) {
+        user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
         user.setCode(code);
         user.setId(userService.findByCode(user.getCode()).getId());
         userService.update(user);
@@ -167,25 +143,21 @@ public class UserController {
     @InitBinder(STRING_USER)
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class,
-          new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomStringEditor());
     }
 
     @ModelAttribute("roles")
     public List<RoleType> getCategories() {
-
         final List<RoleType> roles = new ArrayList<>();
         roles.add(RoleType.ROLE_USER);
         roles.add(RoleType.ROLE_ADMIN);
         roles.add(RoleType.ROLE_EXPERT);
-
         return roles;
     }
 
     @ModelAttribute("english")
     public Collection<String> getEnglish() {
-
         final Collection<String> s = new ArrayList<String>();
         s.add("Basic");
         s.add("Intermidiate");
