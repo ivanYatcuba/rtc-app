@@ -2,15 +2,11 @@ package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.hibernate.criterion.DetachedCriteria;
-import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,11 +34,9 @@ public class UserController {
     private static final String PATH_PAGE_VIEW_ALL_USERS = "/page/viewAllusers";
     private static final String PATH_PAGE_USER_PAGE = "/page/userPagea";
     private static final String STRING_VALIDATION_RULES = "validationRules";
-    private static final String REDIRECT_VIEW_ALL
-            = "redirect:/admin/user/viewAll";
-    private static final int USER_REMOVAL_DELY = 3;
-    private static Logger log = LoggerFactory.getLogger(
-            UserController.class.getName());
+    private static final String REDIRECT_VIEW_ALL = "redirect:/admin/user/viewAll";
+
+
     @Autowired
     private ValidationContext validationContext;
     @Autowired
@@ -80,19 +74,13 @@ public class UserController {
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String setStatusForRemoval(@RequestParam final String userCode) {
-        final User user = userService.findByCode(userCode);
-        user.setStatus(UserStatus.FOR_REMOVAL);
-        user.setRemovalDate(new DateTime(new Date()).plusDays(USER_REMOVAL_DELY).toDate());
-        userService.update(user);
+        userService.setUserStatusForRemoval(userCode);
         return REDIRECT_VIEW_ALL;
     }
 
     @RequestMapping(value = "/restore", method = RequestMethod.POST)
     public String setStatusActive(@RequestParam final String userCode) {
-        final User user = userService.findByCode(userCode);
-        user.setStatus(UserStatus.ACTIVE);
-        user.setRemovalDate(null);
-        userService.update(user);
+        userService.setUserStatusActive(userCode);
         return REDIRECT_VIEW_ALL;
     }
 

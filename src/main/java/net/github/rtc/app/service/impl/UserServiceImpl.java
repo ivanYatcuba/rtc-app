@@ -4,10 +4,12 @@ import net.github.rtc.app.dao.UserDao;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,11 +31,9 @@ import java.util.UUID;
 public class UserServiceImpl implements ModelService<User>, UserService,
         UserDetailsService {
 
-    private static Logger log
-            = LoggerFactory.getLogger(UserServiceImpl.class.getName());
-    private static final String REMOVING_USER_WITH_CODE
-            = "Removing user  with code: ";
-
+    private static final String REMOVING_USER_WITH_CODE = "Removing user  with code: ";
+    private static final int USER_REMOVAL_DELAY = 3;
+    private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class.getName());
     @Autowired
     private UserDao userDao;
 
@@ -131,8 +133,23 @@ public class UserServiceImpl implements ModelService<User>, UserService,
     @Override
     @Transactional
     public User loadUserByUsername(final String email) {
-        log.info("Loading user with email: "
-                + email);
+        log.info("Loading user with email: " + email);
         return userDao.findByEmail(email);
+    }
+
+    @Override
+    public void setUserStatusForRemoval(String userCode) {
+        final User user = findByCode(userCode);
+        user.setStatus(UserStatus.FOR_REMOVAL);
+        user.setRemovalDate(new DateTime(new Date()).plusDays(USER_REMOVAL_DELAY).toDate());
+        update(user);
+    }
+
+    @Override
+    public void setUserStatusActive(String userCode) {
+        final User user = findByCode(userCode);
+        user.setStatus(UserStatus.ACTIVE);
+        user.setRemovalDate(null);
+        update(user);
     }
 }

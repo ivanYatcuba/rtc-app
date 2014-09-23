@@ -40,4 +40,8 @@ public interface UserService {
     SearchResults<User> search(DetachedCriteria criteria, int start, int max);
 
     User loadUserByUsername(String email);
+
+    void setUserStatusForRemoval(String userCode);
+
+    void setUserStatusActive(String userCode);
 }
