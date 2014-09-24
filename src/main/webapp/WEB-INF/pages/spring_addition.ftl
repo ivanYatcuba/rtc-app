@@ -13,10 +13,10 @@
 
 <#macro includeScript>
 <script src="<@spring.url'/resources/js/jquery/jquery-1.11.1.min.js'/>"></script>
-<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
+<#--<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>-->
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
 <script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
-<script src="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.js'/>" type="text/javascript" charset="utf-8"></script>
+ <script src="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.js'/>" type="text/javascript" charset="utf-8"></script>
 <script src="<@spring.url'/resources/tag-it/js/tag-it.js'/>" type="text/javascript" charset="utf-8"></script>
 </#macro>
 
