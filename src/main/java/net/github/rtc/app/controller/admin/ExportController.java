@@ -186,8 +186,10 @@ public class ExportController {
             inputStream.close();
             outStream.close();
         }
-        catch(ServiceProcessingException e){log.error("Catching: ", e); }
-        catch(IOException e){log.error("Catching: ", e); }
+        catch(IOException e){
+            log.error("Catching ServiceProcessingException");
+            throw new ServiceProcessingException();
+         }
     }
 
     @ModelAttribute("currentUser")
