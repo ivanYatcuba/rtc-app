@@ -159,7 +159,7 @@ public class ExportController {
       method = RequestMethod.GET)
     public void downloadUserExport(
       final HttpServletResponse response,
-      @PathVariable final String reportCode){
+      @PathVariable final String reportCode) {
         try {
             final ReportDetails reportDetails = reportService.findReportByCode(
                     reportCode);
@@ -185,8 +185,7 @@ public class ExportController {
             }
             inputStream.close();
             outStream.close();
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             log.error("Catching ServiceProcessingException");
             throw new ServiceProcessingException();
          }
