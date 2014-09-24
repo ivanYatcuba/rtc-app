@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.report.ExportFormat;
@@ -10,6 +11,8 @@ import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
 import org.hibernate.criterion.DetachedCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -44,6 +47,7 @@ public class ExportController {
     private static final String STRING_REPORT = "report";
     private static final String REDIRECT_EXPORT = "redirect:/admin/export/";
     private static final String PAGE_REPORT_LIST = "/page/reportList";
+    private static Logger log = LoggerFactory.getLogger(ExportController.class.getName());
 
     @Autowired
     private ReportService reportService;
@@ -155,30 +159,35 @@ public class ExportController {
       method = RequestMethod.GET)
     public void downloadUserExport(
       final HttpServletResponse response,
-      @PathVariable final String reportCode) throws IOException {
-        final ReportDetails reportDetails = reportService.findReportByCode(
-          reportCode);
-        final StringBuilder filePath = new StringBuilder(exportPath).append(
-          "/").append(reportCode).append(".").
-          append(reportDetails.getExportFormat().toString().toLowerCase());
-        final File downloadFile = new File(filePath.toString());
-        final FileInputStream inputStream = new FileInputStream(downloadFile);
+      @PathVariable final String reportCode){
+        try {
+            final ReportDetails reportDetails = reportService.findReportByCode(
+                    reportCode);
+            final StringBuilder filePath = new StringBuilder(exportPath).append(
+                    "/").append(reportCode).append(".").
+                    append(reportDetails.getExportFormat().toString().toLowerCase());
+            final File downloadFile = new File(filePath.toString());
+            final FileInputStream inputStream = new FileInputStream(downloadFile);
 
-        response.setContentType(Files.probeContentType(downloadFile.toPath()));
-        response.setContentLength((int) downloadFile.length());
+            response.setContentType(Files.probeContentType(downloadFile.toPath()));
+            response.setContentLength((int) downloadFile.length());
 
-        final String headerKey = "Content-Disposition";
-        final String headerValue = String.format(
-          "attachment; " + "filename=\"%s\"", reportDetails.getName());
-        response.setHeader(headerKey, headerValue);
-        final OutputStream outStream = response.getOutputStream();
-        final byte[] buffer = new byte[BUFFER_SIZE];
-        int bytesRead = -1;
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outStream.write(buffer, 0, bytesRead);
+            final String headerKey = "Content-Disposition";
+            final String headerValue = String.format(
+                    "attachment; " + "filename=\"%s\"", reportDetails.getName());
+            response.setHeader(headerKey, headerValue);
+            final OutputStream outStream = response.getOutputStream();
+            final byte[] buffer = new byte[BUFFER_SIZE];
+            int bytesRead = -1;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outStream.write(buffer, 0, bytesRead);
+
+            }
+            inputStream.close();
+            outStream.close();
         }
-        inputStream.close();
-        outStream.close();
+        catch(ServiceProcessingException e){log.error("Catching: ", e);}
+        catch(IOException e){log.error("Catching: ", e);}
     }
 
     @ModelAttribute("currentUser")
