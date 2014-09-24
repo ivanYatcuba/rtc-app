@@ -2,12 +2,12 @@
 <#include "/spring.ftl"/>
 
 <#macro includeLink>
-<link href="<@spring.url'/resources/Bootstrap/css/bootstrap.css'/>" rel="stylesheet"/>
-<link href="<@spring.url'/resources/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet"/>
+<link href="<@spring.url'/resources/css/bootstrap.css'/>" rel="stylesheet"/>
+<link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
 <link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
 <link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
-<link href="<@spring.url'/resources/tag-it/css/jquery.tagit.css'/>" rel="stylesheet" type="text/css">
-<link href="<@spring.url'/resources/tag-it/css/tagit.ui-zendesk.css'/>" rel="stylesheet" type="text/css">
+<link href="<@spring.url'/resources/css/jquery.tagit.css'/>" rel="stylesheet" type="text/css">
+<link href="<@spring.url'/resources/css/tagit.ui-zendesk.css'/>" rel="stylesheet" type="text/css">
 <link href="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.css'/>" rel="stylesheet" type="text/css">
 </#macro>
 
@@ -17,7 +17,7 @@
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
 <script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
  <script src="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.js'/>" type="text/javascript" charset="utf-8"></script>
-<script src="<@spring.url'/resources/tag-it/js/tag-it.js'/>" type="text/javascript" charset="utf-8"></script>
+<script src="<@spring.url'/resources/js/tag-it.js'/>" type="text/javascript" charset="utf-8"></script>
 </#macro>
 
 <#macro formItem path attributes="" type="text" collectionAttribute="">
