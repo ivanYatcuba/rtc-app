@@ -87,8 +87,7 @@ public class UserServiceImpl implements ModelService<User>, UserService,
                 + user);
         final PasswordEncoder encoder = new StandardPasswordEncoder();
         final User userToUpdate = userDao.findByCode(user.getCode());
-        if (user.getPassword()
-                != userToUpdate.getPassword()) {
+        if (!user.getPassword().equals(userToUpdate.getPassword())) {
             user.setPassword(encoder.encode(user.getPassword()));
         }
         userDao.update(user);
