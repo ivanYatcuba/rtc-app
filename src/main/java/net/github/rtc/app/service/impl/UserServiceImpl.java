@@ -150,4 +150,11 @@ public class UserServiceImpl implements ModelService<User>, UserService,
         user.setRemovalDate(null);
         update(user);
     }
+
+    @Override
+    @Transactional
+    public void deletingUserWithRemovalDate() {
+        userDao.deletingUser();
+    }
+
 }

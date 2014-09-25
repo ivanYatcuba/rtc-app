@@ -44,4 +44,6 @@ public interface UserService {
     void setUserStatusForRemoval(String userCode);
 
     void setUserStatusActive(String userCode);
+
+    void deletingUserWithRemovalDate();
 }
