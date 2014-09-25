@@ -52,9 +52,9 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
 
     @Override
     public void deletingUser() {
-        Session session = getCurrentSession();
-        Collection<User> listUser = session.createQuery("from User u where u.removalDate is not null").list();
-        for(final User user : listUser) {
+        final Session session = getCurrentSession();
+        final Collection<User> listUser = session.createQuery("from User u where u.removalDate is not null").list();
+        for (final User user : listUser) {
             session.delete(user);
         }
     }
