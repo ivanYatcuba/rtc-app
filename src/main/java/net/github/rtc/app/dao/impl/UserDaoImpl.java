@@ -10,9 +10,11 @@ import net.github.rtc.app.dao.UserDao;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -46,6 +48,15 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
         return getCurrentSession().createCriteria(
           User.class).createAlias("authorities", "a").
           add(Restrictions.eq("a.name", type.name())).list();
+    }
+
+    @Override
+    public void deletingUser() {
+        final Session session = getCurrentSession();
+        final Collection<User> listUser = session.createQuery("from User u where u.removalDate is not null").list();
+        for (final User user : listUser) {
+            session.delete(user);
+        }
     }
 
 }

@@ -136,6 +136,7 @@ public class UserServiceImpl implements ModelService<User>, UserService,
     }
 
     @Override
+    @Transactional
     public void setUserStatusForRemoval(String userCode) {
         final User user = findByCode(userCode);
         user.setStatus(UserStatus.FOR_REMOVAL);
@@ -144,10 +145,18 @@ public class UserServiceImpl implements ModelService<User>, UserService,
     }
 
     @Override
+    @Transactional
     public void setUserStatusActive(String userCode) {
         final User user = findByCode(userCode);
         user.setStatus(UserStatus.ACTIVE);
         user.setRemovalDate(null);
         update(user);
     }
+
+    @Override
+    @Transactional
+    public void deletingUserWithRemovalDate() {
+        userDao.deletingUser();
+    }
+
 }
