@@ -64,8 +64,7 @@ public class UserServiceImpl implements ModelService<User>, UserService,
     @Override
     @Transactional
     public User findByCode(final String code) {
-        log.debug(REMOVING_USER_WITH_CODE
-                + code);
+        log.debug(REMOVING_USER_WITH_CODE + code);
         return userDao.findByCode(code);
     }
 
