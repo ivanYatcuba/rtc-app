@@ -22,7 +22,7 @@ import java.util.List;
  * @author Саша
  */
 @Repository
-public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
+public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao {
 
     @Override
     public User findByEmail(final String email) {

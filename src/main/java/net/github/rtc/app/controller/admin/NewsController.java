@@ -13,13 +13,13 @@ public class NewsController {
     private static final String ROOT = "portal/admin";
 
     @RequestMapping(value = "/news", method = RequestMethod.GET)
-    public ModelAndView viewAll(){
+    public ModelAndView viewAll() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/pageListNews");
         return mav;
     }
 
     @RequestMapping(value = "/createNews", method = RequestMethod.GET)
-    public ModelAndView create(){
+    public ModelAndView create() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/pageCreateNews");
         return mav;
     }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author Vladislav Pikus
  */
 @Repository
-public class CoursesDaoImpl extends AbstractDaoImpl<Course> implements
+public class CoursesDaoImpl extends AbstractGenericDaoImpl<Course> implements
   CoursesDao {
 
 }
