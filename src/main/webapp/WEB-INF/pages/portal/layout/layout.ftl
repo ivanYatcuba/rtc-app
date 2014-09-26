@@ -4,6 +4,7 @@
     <#import "/spring.ftl" as spring/>
     <#import "../../spring_addition.ftl" as spring/>
 <head>
+
     <@spring.includeLink />
     <@spring.includeScript/>
 </head>

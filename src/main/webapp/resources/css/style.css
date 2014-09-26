@@ -107,10 +107,25 @@ input:-webkit-autofill.focus {
     -webkit-box-shadow: 0 0 0px 1000px #FFFACD inset;
 }
 
-.round-image {
-    width: 30%;
-    height: 25%;
-    border-radius: 50%;
+.dropdown-button {
+    height: 30px;
 }
+.inline-box {
+    display: inline-block;
+    /*height: 40px;*/
+    vertical-align: middle;
+    text-align: left;
+    margin: 1em;
+   }
+.inline-box-right {
+    display: inline-block;
+    /*height: 40px;*/
+    vertical-align: middle;
+    text-align: right;
+    margin: 1em;
+}
+
+
+
 
 

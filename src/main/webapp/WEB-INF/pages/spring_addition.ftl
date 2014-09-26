@@ -2,7 +2,8 @@
 <#include "/spring.ftl"/>
 
 <#macro includeLink>
-<link href="<@spring.url'/resources/css/bootstrap.css'/>" rel="stylesheet"/>
+<#--<link href="<@spring.url'/resources/css/bootstrap.css'/>" rel="stylesheet"/>-->
+<#--<link href="<@spring.url'/resources/css/dashboard.css'/>" rel="stylesheet" type="text/css"-->
 <link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
 <link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
 <link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
@@ -57,7 +58,7 @@
 					</#if>
                 }
         );
-
+        $("#${status.expression?replace('[','')?replace(']','')}").attr('readonly','readonly');
     });
 </script>
 </#macro>
@@ -99,37 +100,46 @@
 </#macro>
 
 <#macro addPagination switchUrl>
-<div id="navigation">
+<div class="inline-box-right" id="navigation">
 	<#if startPage??>
-        <div class="row">
-            <div class="col-md-12" align="right">
-                Pages:
-                <a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a>
-				<#if prevPage??>
-                    <a href="#" onclick="switchPage(${prevPage})">&lsaquo;&nbsp</a>
-				<#else >
-                    <a href="#" onclick="switchPage(${startPage})">&lsaquo;&nbsp</a>
-				</#if>
+        <#--<div class="row">-->
+            <#--<div class="col-md-12" align="right">-->
+                <#--Pages:-->
+                <#--<a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a>-->
+				<#--<#if prevPage??>-->
+                    <#--<a href="#" onclick="switchPage(${prevPage})">&lsaquo;&nbsp</a>-->
+				<#--<#else >-->
+                    <#--<a href="#" onclick="switchPage(${startPage})">&lsaquo;&nbsp</a>-->
+				<#--</#if>-->
 
-				<#list currentPage-5..currentPage+5 as i>
-					<#if i <= lastPage && i &gt; 0>
-						<#if currentPage == i>
-                            <u>${i}</u>
-						<#else >
-                            <a href="#" onclick="switchPage(${i})">${i}</a>
-						</#if>
-					</#if>
-				</#list>
-				<#if nextPage??>
-                    <a href="#" onclick="switchPage(${nextPage})">&nbsp&rsaquo;</a>
-				<#else >
-                    <a href="#" onclick="switchPage(${lastPage})
-                            ">&nbsp&rsaquo;</a>
-				</#if>
-                <a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a>
-            </div>
-        </div>
+				<#--<#list currentPage-5..currentPage+5 as i>-->
+					<#--<#if i <= lastPage && i &gt; 0>-->
+						<#--<#if currentPage == i>-->
+                            <#--<u>${i}</u>-->
+						<#--<#else >-->
+                            <#--<a href="#" onclick="switchPage(${i})">${i}</a>-->
+						<#--</#if>-->
+					<#--</#if>-->
+				<#--</#list>-->
+				<#--<#if nextPage??>-->
+                    <#--<a href="#" onclick="switchPage(${nextPage})">&nbsp&rsaquo;</a>-->
+				<#--<#else >-->
+                    <#--<a href="#" onclick="switchPage(${lastPage})-->
+                            <#--">&nbsp&rsaquo;</a>-->
+				<#--</#if>-->
+                <#--<a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a>-->
+            <#--</div>-->
+        <#--</div>-->
 	</#if>
+        <ul class="pagination inline-box">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
 </div>
 
 <script>

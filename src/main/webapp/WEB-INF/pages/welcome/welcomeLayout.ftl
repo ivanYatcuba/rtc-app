@@ -1,8 +1,8 @@
 <html>
 <#import "../spring.ftl" as spring/>
 <head>
-    <link href="<@spring.url'/resources/css/bootstrap.css'/>"
-          rel="stylesheet"/>
+    <#--<link href="<@spring.url'/resources/css/bootstrap.css'/>"-->
+          <#--rel="stylesheet"/>-->
     <link href="<@spring.url'/resources/css/bootstrap.min.css'/>"
           rel="stylesheet"/>
     <link href="<@spring.url'/resources/css/welcomePage.css'/>"
