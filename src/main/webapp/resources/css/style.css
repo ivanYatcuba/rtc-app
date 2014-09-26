@@ -107,5 +107,10 @@ input:-webkit-autofill.focus {
     -webkit-box-shadow: 0 0 0px 1000px #FFFACD inset;
 }
 
+.round-image {
+    width: 30%;
+    height: 25%;
+    border-radius: 50%;
+}
 
 
