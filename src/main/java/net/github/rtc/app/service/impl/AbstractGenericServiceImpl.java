@@ -1,11 +1,15 @@
 package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.dao.GenericDao;
+import net.github.rtc.app.model.WithCode;
 import net.github.rtc.app.service.GenericService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
-public abstract class AbstractGenericServiceImpl<T> implements GenericService<T> {
+@Transactional
+public abstract class AbstractGenericServiceImpl<T extends WithCode> implements GenericService<T> {
     @Override
     public void deleteByCode(String code) {
         getDao().deleteByCode(code);
@@ -18,6 +22,7 @@ public abstract class AbstractGenericServiceImpl<T> implements GenericService<T>
 
     @Override
     public T create(T t) {
+        t.setCode(UUID.randomUUID().toString());
         return getDao().create(t);
     }
 

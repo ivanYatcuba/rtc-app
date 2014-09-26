@@ -1,11 +1,13 @@
 package net.github.rtc.app.model.news;
 
 
+import net.github.rtc.app.model.WithCode;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class News implements Serializable {
+public class News implements Serializable, WithCode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +21,15 @@ public class News implements Serializable {
 
     @Column
     private String description;
+
+    public News() {
+
+    }
+
+    public News(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 
     public long getId() {
         return id;
