@@ -1,7 +1,8 @@
 <ul class="nav nav-sidebar">
-    <li class="" id="course"><a href="<@spring.url'/admin/course/'/>">Courses</a></li>
-    <li class="" id="user"><a href="<@spring.url'/admin/user/viewAll'/>">Users</a></li>
-    <li class="" id="export"><a href="<@spring.url'/admin/export/viewAll'/>">Reports</a></li>
+    <li id="news"><a href="<@spring.url'/admin/news/'/>">News</a></li>
+    <li id="course"><a href="<@spring.url'/admin/course/'/>">Courses</a></li>
+    <li id="user"><a href="<@spring.url'/admin/user/viewAll'/>">Users</a></li>
+    <li id="export"><a href="<@spring.url'/admin/export/viewAll'/>">Reports</a></li>
 </ul>
  <script type="text/javascript">
      $(function() {
@@ -14,6 +15,9 @@
          }
          if(pathname.indexOf("export") > -1){
              $( "#export" ).addClass( "active" );
+         }
+         if(pathname.indexOf("news") > -1){
+             $( "#news" ).addClass( "active" );
          }
      });
  </script>

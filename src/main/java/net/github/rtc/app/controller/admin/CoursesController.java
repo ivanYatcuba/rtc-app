@@ -72,13 +72,9 @@ public class CoursesController {
     ModelAndView switchPage(@PathVariable final int page,
       @ModelAttribute(STRING_FILTER_COURSE) final
       CourseSearchFilter  filterCourse) {
-        final ModelAndView mav = new ModelAndView(ROOT
-                + PATH_PAGE_LISTCONTENT);
-        final SearchResults<Course> results
-                = courseService.search(filterCourse.getCriteria(), page,
-          COURSES_PER_PAGE);
-        mav.addAllObjects(results.getPageModel(COURSES_PER_PAGE, page
-          ));
+        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_LISTCONTENT);
+        final SearchResults<Course> results = courseService.search(filterCourse.getCriteria(), page, COURSES_PER_PAGE);
+        mav.addAllObjects(results.getPageModel(COURSES_PER_PAGE, page));
         mav.addObject("courses", results.getResults());
         mav.addObject(STRING_TYPES, CourseType.findAll());
         mav.addObject(STRING_STATUSES, getStatuses());
