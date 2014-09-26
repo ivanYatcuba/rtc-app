@@ -1,6 +1,6 @@
 <@spring.formHiddenInput "user.code" />
 <@spring.formHiddenInput "user.registerDate" />
-<div class="row">
+<div class="row" xmlns="http://www.w3.org/1999/html">
 
     <div class="col-md-6">
         <!--Email-->
@@ -132,5 +132,4 @@
         addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")
     });
 </script>
-
 

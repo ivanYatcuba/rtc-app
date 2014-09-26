@@ -58,7 +58,7 @@
 					</#if>
                 }
         );
-
+        $("#${status.expression?replace('[','')?replace(']','')}").attr('readonly','readonly');
     });
 </script>
 </#macro>
