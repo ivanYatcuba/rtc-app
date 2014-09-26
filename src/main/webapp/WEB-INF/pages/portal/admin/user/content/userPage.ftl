@@ -8,6 +8,7 @@
         margin-bottom: 10px;
     }
 </style>
+
 <h3 class="page-header"><@spring.message "user.details"/></h3>
 
 <div class="row">
