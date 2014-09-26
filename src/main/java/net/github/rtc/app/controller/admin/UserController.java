@@ -35,6 +35,7 @@ public class UserController {
     private static Logger log = LoggerFactory.getLogger(
       UserController.class.getName());
 
+    private static final int USER_REMOVAL_DELY = 3;
     private static final String ROOT = "portal/admin";
     private static final String STRING_USER = "user";
     private static final String STRING_USERS = "users";
@@ -43,7 +44,6 @@ public class UserController {
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_VIEW_ALL
       = "redirect:/admin/user/viewAll";
-    public static final int USER_REMOVAL_DELY = 3;
 
     @Autowired
     private ValidationContext validationContext;
@@ -97,8 +97,8 @@ public class UserController {
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String setStatusForRemoval(@RequestParam final String userCode) {
-        log.info("Getting code: " + userCode);
-        User user = userService.findByCode(userCode);
+        log.info("Getting user code: " + userCode);
+        final User user = userService.findByCode(userCode);
         user.setStatus(UserStatus.FOR_REMOVAL);
         user.setRemovalDate(new DateTime(new Date())
                 .plusDays(USER_REMOVAL_DELY).toDate());
@@ -109,7 +109,7 @@ public class UserController {
     @RequestMapping(value = "/restore", method = RequestMethod.POST)
     public String setStatusActive(@RequestParam final String userCode) {
         log.info("Getting code: " + userCode);
-        User user = userService.findByCode(userCode);
+        final User user = userService.findByCode(userCode);
         user.setStatus(UserStatus.ACTIVE);
         user.setRemovalDate(null);
         userService.update(user);

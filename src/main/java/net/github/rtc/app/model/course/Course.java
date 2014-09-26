@@ -41,10 +41,13 @@ public class Course implements Serializable {
     private String name;
 
     @Required
-    @Column
-    @ForExport("Category")
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "CourseTypes",
+            joinColumns = @JoinColumn(name = "course_id"))
     @Enumerated(EnumType.STRING)
-    private CourseType type;
+    @ForExport("Category")
+    private Set<CourseType> types;
 
     @Required
     @Temporal(TemporalType.TIMESTAMP)
@@ -106,12 +109,12 @@ public class Course implements Serializable {
         this.tags = tags;
     }
 
-    public CourseType getType() {
-        return type;
+    public Set<CourseType> getTypes() {
+        return types;
     }
 
-    public void setType(final CourseType type) {
-        this.type = type;
+    public void setTypes(final Set<CourseType> types) {
+        this.types = types;
     }
 
     public Set<User> getExperts() {
@@ -199,7 +202,7 @@ public class Course implements Serializable {
         final StringBuffer sb = new StringBuffer("Course{");
         sb.append(", code='").append(code).append('\'');
         sb.append(", name='").append(name).append('\'');
-        sb.append(", type=").append(type);
+        sb.append(", types=").append(types);
         sb.append(", experts=").append(experts);
         sb.append(", capacity=").append(capacity);
         sb.append(", startDate=").append(startDate);
@@ -217,7 +220,7 @@ public class Course implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || !getClass().equals(o.getClass())) {
             return false;
         }
 
@@ -244,7 +247,7 @@ public class Course implements Serializable {
         if (tags != null ? !tags.equals(course.tags) : course.tags != null) {
             return false;
         }
-        if (type != null ? !type.equals(course.type) : course.type != null) {
+        if (types != null ? !types.equals(course.types) : course.types != null) {
             return false;
         }
 
@@ -257,7 +260,7 @@ public class Course implements Serializable {
         result
           = HASH_CODE_CONSTANT * result + (name != null ? name.hashCode() : 0);
         result
-          = HASH_CODE_CONSTANT * result + (type != null ? type.hashCode() : 0);
+          = HASH_CODE_CONSTANT * result + (types != null ? types.hashCode() : 0);
         result
           = HASH_CODE_CONSTANT * result + (experts != null ? experts.hashCode(
         ) : 0);

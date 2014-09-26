@@ -1,8 +1,15 @@
 <div class="row">
     <div class="col-md-6">
     <@spring.formItem "course.name", 'class="required" maxlength="50"'/>
-        <@spring.formItem "course.type", 'class="required"' "singleSelect" categories/>
-        <@spring.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
+        <label for="types"><@spring.message "course.category" /></label>
+
+    <#--<select multiple="multiple" name="types">
+    <#list categories as category>
+        <option value="${category}">${category}</option>
+    </#list>
+    </select>-->
+    <@spring.formMultiSelect "course.types", categories/>
+    <@spring.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
     </div>
     <div class="col-md-6">
     <@spring.formItem "course.startDate" 'class="input-medium required"' />

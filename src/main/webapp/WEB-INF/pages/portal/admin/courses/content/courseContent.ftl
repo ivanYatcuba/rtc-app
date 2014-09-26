@@ -16,7 +16,7 @@
         <p>&nbsp${course.name}</p>
         <label><@spring.message "course.category"/></label>
 
-        <p>&nbsp${course.type}</p>
+        <p>&nbsp${course.types?join(", ")}</p>
         <label><@spring.message "course.capacity"/></label>
 
         <p>&nbsp${course.capacity}</p>

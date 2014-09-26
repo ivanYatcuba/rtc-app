@@ -251,10 +251,10 @@ kind of variable. This temp value is only used in this macro lib -->
 <select multiple="multiple"
         id="${status.expression?replace('[','')?replace(']','')}"
         name="${status.expression}" ${attributes}>
-    <#list options?keys as value>
+    <#list options as value>
         <#assign isSelected = contains(status.actualValue?default([""]), value)>
-        <option value="${value?html}"<#if isSelected>
-                selected="selected"</#if>>${options[value]?html}</option>
+        <option value="${value}"<#if isSelected>
+                selected="selected"</#if>>${value}</option>
     </#list>
 </select>
 </#macro>

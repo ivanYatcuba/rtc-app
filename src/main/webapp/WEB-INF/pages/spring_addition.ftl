@@ -1,5 +1,6 @@
 <#ftl strip_whitespace=true>
 <#include "/spring.ftl"/>
+<
 
 <#macro includeLink>
 <link href="<@spring.url'/resources/Bootstrap/css/bootstrap.css'/>"
@@ -44,6 +45,19 @@
         </#if>
     </div>
 </div>
+</#macro>
+
+<#macro formMultiSelect path options attributes="">
+    <@bind path/>
+<select multiple="multiple"
+        id="${status.expression?replace('[','')?replace(']','')}"
+        name="${status.expression}" ${attributes}>
+    <#list options as value>
+        <#assign isSelected = contains(status.actualValue?default([""]), value)>
+        <option value="${value}"<#if isSelected>
+                selected="selected"</#if>>${value}</option>
+    </#list>
+</select>
 </#macro>
 
 

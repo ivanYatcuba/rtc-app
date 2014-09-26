@@ -11,6 +11,7 @@ import net.github.rtc.app.utils.datatable.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.Page;
 import net.github.rtc.app.utils.datatable.SearchFilter;
 import net.github.rtc.app.utils.datatable.SearchResults;
+import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,10 +170,11 @@ public class CoursesController {
      * course
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(
-            @ModelAttribute(STRING_COURSE) final Course course,
-            @RequestParam(value = "expertList",
-                    required = false) final List<String> expertList) {
+    public String save( @RequestParam Map<String, String> allParams,
+                        @ModelAttribute(STRING_COURSE) final Course course,
+                        @RequestParam(value = "expertList",
+                                required = false) final List<String> expertList) {
+        System.out.print(allParams);
         course.setExperts(bindExperts(expertList));
         courseService.create(course);
         return "redirect:/admin/course/";
@@ -236,7 +238,8 @@ public class CoursesController {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class,
                 new CustomDateEditor(dateFormat, true));
-        binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
+        binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
+        binder.registerCustomEditor(List.class, "types", new CustomStringEditor());
     }
 
     @InitBinder(STRING_FILTER_COURSE)

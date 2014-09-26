@@ -20,7 +20,7 @@ public class CourseSearchFilter implements SearchFilter {
 
     private String name;
 
-    private CourseType type;
+    private Set<CourseType> types;
 
     private Date startDate;
 
@@ -38,12 +38,12 @@ public class CourseSearchFilter implements SearchFilter {
         this.name = name;
     }
 
-    public CourseType getType() {
-        return type;
+    public Set<CourseType> getTypes() {
+        return types;
     }
 
-    public void setType(final CourseType type) {
-        this.type = type;
+    public void setTypes(final Set<CourseType> types) {
+        this.types = types;
     }
 
     public Date getStartDate() {
