@@ -212,7 +212,7 @@ public class CoursesController {
         binder.registerCustomEditor(Date.class,
                 new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
-        binder.registerCustomEditor(List.class, "types", new CustomStringEditor());
+        binder.registerCustomEditor(List.class, STRING_TYPES, new CustomStringEditor());
     }
 
     @InitBinder(STRING_FILTER_COURSE)
