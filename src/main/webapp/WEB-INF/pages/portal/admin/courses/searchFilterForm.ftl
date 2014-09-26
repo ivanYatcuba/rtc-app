@@ -1,5 +1,5 @@
 <form class="form-horizontal" name="courseFilter" role="form"
-      action="<@spring.url "/admin/course/"/>" method="get">
+      action="<@spring.url "/admin/course/filter"/>" method="get">
     <div class="row">
         <div class="col-md-6">
         <@spring.formItem "filterCourse.name"/>

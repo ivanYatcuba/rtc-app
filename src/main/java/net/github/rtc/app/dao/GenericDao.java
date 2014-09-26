@@ -1,6 +1,6 @@
 package net.github.rtc.app.dao;
 
-import net.github.rtc.app.utils.datatable.SearchResults;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 
 import java.util.List;

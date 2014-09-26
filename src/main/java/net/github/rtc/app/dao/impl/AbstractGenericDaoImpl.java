@@ -1,7 +1,7 @@
 package net.github.rtc.app.dao.impl;
 
 import net.github.rtc.app.dao.GenericDao;
-import net.github.rtc.app.utils.datatable.SearchResults;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,14 +19,14 @@ import java.util.List;
  * Created by Ivan Yatcuba on 8/12/14.
  */
 @Component
-public abstract class AbstractDaoImpl<T> implements GenericDao<T> {
+public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     private Class<T> type;
 
-    public AbstractDaoImpl() {
+    public AbstractGenericDaoImpl() {
         final Type t = getClass().getGenericSuperclass();
         final ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];
@@ -87,7 +87,8 @@ public abstract class AbstractDaoImpl<T> implements GenericDao<T> {
         criteria.setResultTransformer(Criteria.ROOT_ENTITY);
         criteria.setFirstResult((start - 1) * max);
         criteria.setMaxResults(max);
-        results.setResults(criteria.list());
+        results.setResults(criteria.setResultTransformer(
+          Criteria.DISTINCT_ROOT_ENTITY).list());
         return results;
     }
 }

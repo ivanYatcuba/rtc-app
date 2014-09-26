@@ -6,7 +6,7 @@ import net.github.rtc.app.model.user.*;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.datatable.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -187,12 +187,12 @@ public class UserController {
         userCourseOrder.setUserCode(userCode);
         userCourseOrder.setCourseCode(orderParamsMap.get("selectedCode"));
 
-        if (orderParamsMap.get("Developer").equals(STRING_USER_COURSES)) {
+        if ("Developer".equals(orderParamsMap.get(STRING_USER_COURSES))) {
             userCourseOrder.setPosition(TraineePosition.DEVELOPER);
-        } else if (orderParamsMap.get("Tester").equals(STRING_USER_COURSES)) {
+        } else if ("Tester".equals(orderParamsMap.get(STRING_USER_COURSES))) {
             userCourseOrder.setPosition(TraineePosition.TESTER);
-        } else if (orderParamsMap.get("Business Analyst ")
-                .equals(STRING_USER_COURSES)) {
+        } else if ("Business Analyst".equals(
+          orderParamsMap.get(STRING_USER_COURSES))) {
             userCourseOrder.setPosition(TraineePosition.BUSINESS_ANALYST);
         }
         userCourseOrder.setReason(orderParamsMap.get("userTextArea"));

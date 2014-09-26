@@ -5,7 +5,7 @@ import net.github.rtc.app.export.JobManager;
 import net.github.rtc.app.export.JobManagerAction;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.service.ReportService;
-import net.github.rtc.app.utils.datatable.SearchResults;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

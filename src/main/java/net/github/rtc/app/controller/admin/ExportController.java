@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.report.ExportFormat;
@@ -7,11 +8,11 @@ import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
-import net.github.rtc.app.utils.Paginator;
-import net.github.rtc.app.utils.datatable.Page;
-import net.github.rtc.app.utils.datatable.SearchResults;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
 import org.hibernate.criterion.DetachedCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -38,6 +39,7 @@ import java.util.*;
 @RequestMapping("admin/export")
 public class ExportController {
 
+    private static final int REPORTS_PER_PAGE = 10;
     private static final int BUFFER_SIZE = 4096;
     private static final String ROOT = "portal/admin";
     private static final String STRING_TYPES = "types";
@@ -45,13 +47,12 @@ public class ExportController {
     private static final String STRING_REPORT = "report";
     private static final String REDIRECT_EXPORT = "redirect:/admin/export/";
     private static final String PAGE_REPORT_LIST = "/page/reportList";
+    private static Logger log = LoggerFactory.getLogger(ExportController.class.getName());
 
     @Autowired
     private ReportService reportService;
     @Autowired
     private ValidationContext validationContext;
-    @Autowired
-    private Paginator paginator;
 
     @Value("${report.export.path}")
     private String exportPath;
@@ -68,15 +69,10 @@ public class ExportController {
 
         final ModelAndView mav = new ModelAndView(ROOT
           + PAGE_REPORT_LIST);
-        paginator.setCurrentPage(numberOfPage);
         final SearchResults<ReportDetails> results
           = reportService.search(DetachedCriteria.forClass(ReportDetails.class),
-          numberOfPage,
-          paginator.getMaxPerPage());
-        final Page pageModel
-          = paginator.getPage(numberOfPage, results.getTotalResults());
-        mav.addAllObjects(pageModel.createMap().byCurrentPage().byLastPage()
-          .byNextPage().byPrevPage().byStartPage().toMap());
+          numberOfPage, REPORTS_PER_PAGE);
+        mav.addAllObjects(results.getPageModel(REPORTS_PER_PAGE, numberOfPage));
 
         mav.addObject("reports", results.getResults());
         return mav;
@@ -163,30 +159,36 @@ public class ExportController {
       method = RequestMethod.GET)
     public void downloadUserExport(
       final HttpServletResponse response,
-      @PathVariable final String reportCode) throws IOException {
-        final ReportDetails reportDetails = reportService.findReportByCode(
-          reportCode);
-        final StringBuilder filePath = new StringBuilder(exportPath).append(
-          "/").append(reportCode).append(".").
-          append(reportDetails.getExportFormat().toString().toLowerCase());
-        final File downloadFile = new File(filePath.toString());
-        final FileInputStream inputStream = new FileInputStream(downloadFile);
+      @PathVariable final String reportCode) {
+        try {
+            final ReportDetails reportDetails = reportService.findReportByCode(
+                    reportCode);
+            final StringBuilder filePath = new StringBuilder(exportPath).append(
+                    "/").append(reportCode).append(".").
+                    append(reportDetails.getExportFormat().toString().toLowerCase());
+            final File downloadFile = new File(filePath.toString());
+            final FileInputStream inputStream = new FileInputStream(downloadFile);
 
-        response.setContentType(Files.probeContentType(downloadFile.toPath()));
-        response.setContentLength((int) downloadFile.length());
+            response.setContentType(Files.probeContentType(downloadFile.toPath()));
+            response.setContentLength((int) downloadFile.length());
 
-        final String headerKey = "Content-Disposition";
-        final String headerValue = String.format(
-          "attachment; " + "filename=\"%s\"", reportDetails.getName());
-        response.setHeader(headerKey, headerValue);
-        final OutputStream outStream = response.getOutputStream();
-        final byte[] buffer = new byte[BUFFER_SIZE];
-        int bytesRead = -1;
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outStream.write(buffer, 0, bytesRead);
-        }
-        inputStream.close();
-        outStream.close();
+            final String headerKey = "Content-Disposition";
+            final String headerValue = String.format(
+                    "attachment; " + "filename=\"%s\"", reportDetails.getName());
+            response.setHeader(headerKey, headerValue);
+            final OutputStream outStream = response.getOutputStream();
+            final byte[] buffer = new byte[BUFFER_SIZE];
+            int bytesRead = -1;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outStream.write(buffer, 0, bytesRead);
+
+            }
+            inputStream.close();
+            outStream.close();
+        } catch (IOException e) {
+            log.error("Catching ServiceProcessingException");
+            throw new ServiceProcessingException();
+         }
     }
 
     @ModelAttribute("currentUser")

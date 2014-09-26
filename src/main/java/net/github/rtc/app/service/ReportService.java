@@ -1,7 +1,7 @@
 package net.github.rtc.app.service;
 
 import net.github.rtc.app.model.report.ReportDetails;
-import net.github.rtc.app.utils.datatable.SearchResults;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 
 import java.util.List;

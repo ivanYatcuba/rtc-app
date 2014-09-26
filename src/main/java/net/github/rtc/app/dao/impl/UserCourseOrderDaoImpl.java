@@ -12,7 +12,7 @@ import java.util.List;
  * Created by ivan on 18.04.14.
  */
 @Repository
-public class UserCourseOrderDaoImpl extends AbstractDaoImpl<UserCourseOrder>
+public class UserCourseOrderDaoImpl extends AbstractGenericDaoImpl<UserCourseOrder>
   implements UserCourseOrderDao {
 
     @Override
