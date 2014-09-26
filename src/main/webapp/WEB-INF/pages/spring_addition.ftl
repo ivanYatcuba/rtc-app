@@ -2,7 +2,8 @@
 <#include "/spring.ftl"/>
 
 <#macro includeLink>
-<link href="<@spring.url'/resources/css/bootstrap.css'/>" rel="stylesheet"/>
+<#--<link href="<@spring.url'/resources/css/bootstrap.css'/>" rel="stylesheet"/>-->
+<#--<link href="<@spring.url'/resources/css/dashboard.css'/>" rel="stylesheet" type="text/css"-->
 <link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
 <link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
 <link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>

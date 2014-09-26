@@ -37,7 +37,7 @@
                 <#if (user.status)=="ACTIVE">
                     <span class="label label-success">Active</span>
                 <#else>
-                    <span class="label label-important">Deleted</span>
+                    <span class="label label-danger">Deleted</span>
                 </#if>
 
             </td>
@@ -50,11 +50,10 @@
             <#if user.isForRemoval() >
                 <form style="margin: 0 0 0" name="deleteUser" action="<@spring.url"/admin/user/restore/"/>" method="post">
                     <input type="hidden" name="userCode" value="${user.code}"/>
-                    <button class="btn" type="submit">Restore</button>
+                    <button class="btn btn-default" type="submit">Restore</button>
                 </form>
             <#else>
-
-                <button class="btn" onclick="javascript:PopUpShow('${user.code}')">Remove</button>
+                <button class="btn btn-default" onclick="javascript:PopUpShow('${user.code}')">Remove</button>
             </#if>
                 <#--<div class="btn-group">-->
                     <#--<button type="button" class="btn btn-default">Action</button>-->
@@ -76,9 +75,9 @@
 </table>
 <div>
         <form  class="inline-box"  name="createUser" action="<@spring.url"/admin/user/createUser"/>"method="get">
-            <button  class="btn-primary" type="submit">Create New</button>
+            <button  class="btn btn-primary" type="submit">Create New</button>
         </form>
-       <@spring.addPagination "/admin/user/viewAll/"/>
+        <@spring.addPagination "/admin/user/viewAll/"/>
 </div>
 
 <div class="popup " id="window-popup" style="display: none">
