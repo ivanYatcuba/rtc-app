@@ -2,46 +2,46 @@
 <#include "/spring.ftl"/>
 
 <#macro includeLink>
-<link href="<@spring.url'/resources/Bootstrap/css/bootstrap.css'/>" rel="stylesheet"/>
-<link href="<@spring.url'/resources/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet"/>
+<link href="<@spring.url'/resources/css/bootstrap.css'/>" rel="stylesheet"/>
+<link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
 <link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
 <link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
-<link href="<@spring.url'/resources/tag-it/css/jquery.tagit.css'/>" rel="stylesheet" type="text/css">
-<link href="<@spring.url'/resources/tag-it/css/tagit.ui-zendesk.css'/>" rel="stylesheet" type="text/css">
+<link href="<@spring.url'/resources/css/jquery.tagit.css'/>" rel="stylesheet" type="text/css">
+<link href="<@spring.url'/resources/css/tagit.ui-zendesk.css'/>" rel="stylesheet" type="text/css">
 <link href="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.css'/>" rel="stylesheet" type="text/css">
 </#macro>
 
 <#macro includeScript>
 <script src="<@spring.url'/resources/js/jquery/jquery-1.11.1.min.js'/>"></script>
-<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
+<#--<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>-->
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
 <script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
 <script src="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.js'/>" type="text/javascript" charset="utf-8"></script>
-<script src="<@spring.url'/resources/tag-it/js/tag-it.js'/>" type="text/javascript" charset="utf-8"></script>
+<script src="<@spring.url'/resources/js/tag-it.js'/>" type="text/javascript" charset="utf-8"></script>
 </#macro>
 
 <#macro formItem path attributes="" type="text" collectionAttribute="">
-    <@bind path/>
+	<@bind path/>
 <div class="form-group">
     <label class="control-label col-md-2"
            for="${status.expression?replace('[','')?replace(']','')}"><@message path/></label>
 
     <div class="col-md-4">
-        <#if type == "text"><@formInput path attributes/>
-            <#elseif type == "textArea"><@formTextarea path attributes/>
-        <#elseif type == "multiSelect"><@formMultiSelect path collectionAttribute attributes/>
-        <#elseif type == "password"><@formPasswordInput path attributes/>
-        <#elseif type == "singleSelect"><@formSingleSelect path collectionAttribute attributes/>
-        <#elseif type == "datepiker"><@formDatepicker path attributes/>
-        <#elseif type == "tag"><@formTagsInput path attributes/>
-        </#if>
+		<#if type == "text"><@formInput path attributes/>
+                <#elseif type == "textArea"><@formTextarea path attributes/>
+		<#elseif type == "multiSelect"><@formMultiSelect path collectionAttribute attributes/>
+		<#elseif type == "password"><@formPasswordInput path attributes/>
+		<#elseif type == "singleSelect"><@formSingleSelect path collectionAttribute attributes/>
+		<#elseif type == "datepiker"><@formDatepicker path attributes/>
+		<#elseif type == "tag"><@formTagsInput path attributes/>
+		</#if>
     </div>
 </div>
 </#macro>
 
 
 <#macro formDatepicker path attributes="">
-    <@formInput path attributes/>
+	<@formInput path attributes/>
 <script type="text/javascript">
 
     $(function () {
@@ -49,12 +49,12 @@
                 {
                     dateFormat: "dd.mm.yy"
 
-                    <#if "${status.expression?replace('[','')?replace(']','')}"=="birthDate">
+					<#if "${status.expression?replace('[','')?replace(']','')}"=="birthDate">
                         , changeMonth: true,
                         changeYear: true,
                         yearRange: "-100:+0",
                         maxDate: '-1d'
-                    </#if>
+					</#if>
                 }
         );
         $("#${status.expression?replace('[','')?replace(']','')}").attr('readonly','readonly');
@@ -63,10 +63,10 @@
 </#macro>
 
 <#macro formTagsInput path attributes="">
-    <@formHiddenInput path attributes/>
-<ul id="${status.expression?replace('[','')?replace(']','')}Tag" ></ul>
+	<@formHiddenInput path attributes/>
+<ul id="${status.expression?replace('[','')?replace(']','')}Tag"></ul>
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         $('#${status.expression?replace('[','')?replace(']','')}Tag').tagit({
             singleField: true,
             singleFieldNode: $('#${status.expression?replace('[','')?replace(']','')}')
@@ -82,7 +82,7 @@
 <script>
     $(document).ready(function () {
         $("#${formName}").validate({
-        ${jsonRules}
+		${jsonRules}
             submitHandler: function (form) {
                 form.submit();
             }
@@ -100,36 +100,36 @@
 
 <#macro addPagination switchUrl>
 <div id="navigation">
-    <#if startPage??>
+	<#if startPage??>
         <div class="row">
             <div class="col-md-12" align="right">
                 Pages:
-                    <a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a>
-                <#if prevPage??>
+                <a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a>
+				<#if prevPage??>
                     <a href="#" onclick="switchPage(${prevPage})">&lsaquo;&nbsp</a>
-                <#else >
+				<#else >
                     <a href="#" onclick="switchPage(${startPage})">&lsaquo;&nbsp</a>
-                </#if>
+				</#if>
 
-                <#list currentPage-5..currentPage+5 as i>
-                    <#if i <= lastPage && i &gt; 0>
-                        <#if currentPage == i>
+				<#list currentPage-5..currentPage+5 as i>
+					<#if i <= lastPage && i &gt; 0>
+						<#if currentPage == i>
                             <u>${i}</u>
-                        <#else >
+						<#else >
                             <a href="#" onclick="switchPage(${i})">${i}</a>
-                        </#if>
-                    </#if>
-                </#list>
-                    <#if nextPage??>
-                        <a href="#" onclick="switchPage(${nextPage})">&nbsp&rsaquo;</a>
-                    <#else >
-                        <a href="#" onclick="switchPage(${lastPage})
-                                ">&nbsp&rsaquo;</a>
-                    </#if>
-                    <a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a>
+						</#if>
+					</#if>
+				</#list>
+				<#if nextPage??>
+                    <a href="#" onclick="switchPage(${nextPage})">&nbsp&rsaquo;</a>
+				<#else >
+                    <a href="#" onclick="switchPage(${lastPage})
+                            ">&nbsp&rsaquo;</a>
+				</#if>
+                <a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a>
             </div>
         </div>
-    </#if>
+	</#if>
 </div>
 
 <script>
@@ -153,7 +153,3 @@
     }
 </script>
 </#macro>
-
-
-
-

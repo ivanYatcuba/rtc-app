@@ -12,8 +12,7 @@
         <form-login login-page="/login" default-target-url="/login_attempt"
                     authentication-failure-url="/loginfailed"
                     authentication-success-handler-ref="simpleAuthenticationSuccessHandler"/>
-        <logout logout-success-url="/logout"/>
-        <logout delete-cookies="JSESSIONID"/>
+        <logout logout-url="/logout" delete-cookies="JSESSIONID"/>
         <remember-me key="uniqueAndSecret" token-validity-seconds="86400"/>
     </http>
 

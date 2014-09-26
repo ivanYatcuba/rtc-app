@@ -64,8 +64,7 @@ public class UserServiceImpl implements ModelService<User>, UserService,
     @Override
     @Transactional
     public User findByCode(final String code) {
-        log.debug(REMOVING_USER_WITH_CODE
-                + code);
+        log.debug(REMOVING_USER_WITH_CODE + code);
         return userDao.findByCode(code);
     }
 
@@ -87,8 +86,7 @@ public class UserServiceImpl implements ModelService<User>, UserService,
                 + user);
         final PasswordEncoder encoder = new StandardPasswordEncoder();
         final User userToUpdate = userDao.findByCode(user.getCode());
-        if (user.getPassword()
-                != userToUpdate.getPassword()) {
+        if (!user.getPassword().equals(userToUpdate.getPassword())) {
             user.setPassword(encoder.encode(user.getPassword()));
         }
         userDao.update(user);
@@ -138,6 +136,7 @@ public class UserServiceImpl implements ModelService<User>, UserService,
     }
 
     @Override
+    @Transactional
     public void setUserStatusForRemoval(String userCode) {
         final User user = findByCode(userCode);
         user.setStatus(UserStatus.FOR_REMOVAL);
@@ -146,10 +145,18 @@ public class UserServiceImpl implements ModelService<User>, UserService,
     }
 
     @Override
+    @Transactional
     public void setUserStatusActive(String userCode) {
         final User user = findByCode(userCode);
         user.setStatus(UserStatus.ACTIVE);
         user.setRemovalDate(null);
         update(user);
     }
+
+    @Override
+    @Transactional
+    public void deletingUserWithRemovalDate() {
+        userDao.deletingUser();
+    }
+
 }
