@@ -14,7 +14,13 @@ public class NewsController {
 
     @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ModelAndView viewAll(){
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/listNews");
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/pageListNews");
+        return mav;
+    }
+
+    @RequestMapping(value = "/createNews", method = RequestMethod.GET)
+    public ModelAndView create(){
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/pageCreateNews");
         return mav;
     }
 
