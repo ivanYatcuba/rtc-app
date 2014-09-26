@@ -20,7 +20,7 @@
                     <td>
                         <a href="<@spring.url "/admin/course/view/${course.code}" />">${course.name}</a>
                     </td>
-                    <td>${course.type}</td>
+                    <td>${course.types?join(", ")}</td>
                     <td>${course.startDate?datetime?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
                     <td> <#list course.experts as expert>
                         <p>&nbsp${expert.name}&nbsp${expert.surname}
