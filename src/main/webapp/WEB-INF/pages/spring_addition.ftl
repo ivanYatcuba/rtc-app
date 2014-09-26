@@ -99,7 +99,7 @@
 </#macro>
 
 <#macro addPagination switchUrl>
-<div id="navigation">
+<div class="inline-box-right" id="navigation">
 	<#if startPage??>
         <#--<div class="row">-->
             <#--<div class="col-md-12" align="right">-->
@@ -130,7 +130,7 @@
             <#--</div>-->
         <#--</div>-->
 	</#if>
-        <ul class="pagination">
+        <ul class="pagination inline-box">
             <li><a href="#">&laquo;</a></li>
             <li><a href="#">1</a></li>
             <li><a href="#">2</a></li>

@@ -1,6 +1,4 @@
-<#--<h3 class="page-header"><@spring.message "user.list"/></h3>-->
 <h4><@spring.message "user.search.result.page.header"/></h4>
-
 
 <table width="100%" class="table" id="UserTable">
         <thead>
@@ -28,76 +26,59 @@
             <td>None</td>
         </#if>
 
-        <#--<#if (user.phone)??>-->
-            <#--<td>${user.phone}</td>-->
-        <#--<#else>-->
-            <#--<td>None</td>-->
-        <#--</#if>-->
-
         <#if (user.registerDate)??>
             <td>${user.registerDate?datetime?string("dd-MM-yyyy")}</td>
         <#else>
             <td>None</td>
         </#if>
 
-        <#--<td>-->
-            <#--<#list user.authorities as role>-->
-            <#--${role}<#if role_has_next>,</#if>-->
-            <#--</#list>-->
-        <#--</td>-->
-
         <#if (user.status)??>
-            <td>
+            <td style="vertical-align: middle">
                 <#if (user.status)=="ACTIVE">
                     <span class="label label-success">Active</span>
                 <#else>
-                    <span class="label label-danger">Deleted</span>
+                    <span class="label label-important">Deleted</span>
                 </#if>
 
             </td>
         <#else>
-            <td>
+            <td style="vertical-align: middle">
                 <span class="label label-default">None</span>
             </td>
         </#if>
         <td>
-            <#--<#if user.isForRemoval() >-->
-                <#--<form style="margin: 0 0 0" name="deleteUser" action="<@spring.url"/admin/user/restore/"/>" method="post">-->
-                    <#--<input type="hidden" name="userCode" value="${user.code}"/>-->
-                    <#--<button class="btn" type="submit">Restore</button>-->
-                <#--</form>-->
-            <#--<#else>-->
-            <#---->
-                <#--<button class="btn" onclick="javascript:PopUpShow('${user.code}')">Remove</button>-->
-            <#--</#if>-->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default">Action</button>
-                    <button type="button" class="btn btn-default dropdown-toggle dropdown-button" data-toggle="dropdown">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div>
+            <#if user.isForRemoval() >
+                <form style="margin: 0 0 0" name="deleteUser" action="<@spring.url"/admin/user/restore/"/>" method="post">
+                    <input type="hidden" name="userCode" value="${user.code}"/>
+                    <button class="btn" type="submit">Restore</button>
+                </form>
+            <#else>
+
+                <button class="btn" onclick="javascript:PopUpShow('${user.code}')">Remove</button>
+            </#if>
+                <#--<div class="btn-group">-->
+                    <#--<button type="button" class="btn btn-default">Action</button>-->
+                    <#--<button type="button" class="btn btn-default dropdown-toggle dropdown-button" data-toggle="dropdown">-->
+                        <#--<span class="caret"></span>-->
+                        <#--<span class="sr-only">Toggle Dropdown</span>-->
+                    <#--</button>-->
+                    <#--<ul class="dropdown-menu" role="menu">-->
+                        <#--<li><a href="#">Action</a></li>-->
+                        <#--<li><a href="#">Another action</a></li>-->
+                        <#--<li><a href="#">Something else here</a></li>-->
+                        <#--<li class="divider"></li>-->
+                        <#--<li><a href="#">Separated link</a></li>-->
+                    <#--</ul>-->
+                <#--</div>-->
         </td>
     </tr>
 </#list>
 </table>
-
 <div>
-    <div style="float:left;">
-        <form name="createUser" action="<@spring.url"/admin/user/createUser"/>"method="get">
-            <button class="btn-primary" type="submit">Create New</button>
+        <form  class="inline-box"  name="createUser" action="<@spring.url"/admin/user/createUser"/>"method="get">
+            <button  class="btn-primary" type="submit">Create New</button>
         </form>
-    </div>
-    <div style="float:right;">
-        <@spring.addPagination "/admin/user/viewAll/" />
-    </div>
+       <@spring.addPagination "/admin/user/viewAll/"/>
 </div>
 
 <div class="popup " id="window-popup" style="display: none">
