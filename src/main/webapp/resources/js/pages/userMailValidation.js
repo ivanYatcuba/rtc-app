@@ -6,7 +6,7 @@ function addMailValidation(url, currentMail) {
                 type: "post",
                 data: {email: function () {
                     return $("#email").val();
-                },xxxxx
+                },
                     currentEmail: currentMail}
             },
             messages: {
