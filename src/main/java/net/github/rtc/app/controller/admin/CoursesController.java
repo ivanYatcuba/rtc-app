@@ -8,6 +8,7 @@ import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
+import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ import java.util.*;
 @RequestMapping("admin/course")
 public class CoursesController {
 
-    private static final  int COURSES_PER_PAGE = 5;
+    private static final int COURSES_PER_PAGE = 5;
     private static final String ROOT = "portal/admin";
     private static final String STRING_COURSE = "course";
     private static final String PATH_PAGE_LISTCONTENT = "/page/listcontent";
@@ -61,7 +62,7 @@ public class CoursesController {
 
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     public ModelAndView filter(@ModelAttribute(STRING_FILTER_COURSE) final
-    CourseSearchFilter  filterCourse) {
+                               CourseSearchFilter filterCourse) {
         return switchPage(1, filterCourse);
     }
 
@@ -70,8 +71,8 @@ public class CoursesController {
     public
     @ResponseBody
     ModelAndView switchPage(@PathVariable final int page,
-      @ModelAttribute(STRING_FILTER_COURSE) final
-      CourseSearchFilter  filterCourse) {
+                            @ModelAttribute(STRING_FILTER_COURSE) final
+                            CourseSearchFilter filterCourse) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_LISTCONTENT);
         final SearchResults<Course> results = courseService.search(filterCourse.getCriteria(), page, COURSES_PER_PAGE);
         mav.addAllObjects(results.getPageModel(COURSES_PER_PAGE, page));
@@ -210,7 +211,8 @@ public class CoursesController {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class,
                 new CustomDateEditor(dateFormat, true));
-        binder.registerCustomEditor(Collection.class, new CustomTagsEditor());
+        binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
+        binder.registerCustomEditor(List.class, STRING_TYPES, new CustomStringEditor());
     }
 
     @InitBinder(STRING_FILTER_COURSE)

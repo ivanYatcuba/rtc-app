@@ -1,9 +1,9 @@
 package net.github.rtc.app.utils.propertyeditors;
 
 import java.beans.PropertyEditorSupport;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -32,7 +32,7 @@ public class CustomStringEditor extends PropertyEditorSupport {
     @Override
     public void setAsText(final String text) {
         final List<String> strsSplit = Arrays.asList(text.split(STRING_COMMA));
-        final Collection<String> strs = new HashSet<>();
+        final Collection<String> strs = new ArrayList<>();
         for (final String str : strsSplit) {
             strs.add(str);
         }

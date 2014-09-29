@@ -4,19 +4,13 @@
         <div class="col-md-6">
         <@spring.formItem "filterCourse.name"/>
 
-        <@spring.bind "filterCourse.type"/>
+        <@spring.bind "filterCourse.types"/>
             <div class="form-group">
                 <label class="control-label col-md-2"
                        for="types"><@spring.message "filterCourse.type"/></label>
 
                 <div class="col-md-4">
-                    <select multiple="multiple" name="types"
-                            class="input-medium">
-                    <#list types as type>
-                        <option value="${type}"
-                                <#if type=="QA">selected="selected"</#if>>${type}</option>
-                    </#list>
-                    </select>
+                    <@spring.formMultiSelect "filterCourse.types", categories/>
                 </div>
             </div>
 

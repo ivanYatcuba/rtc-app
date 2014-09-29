@@ -125,6 +125,11 @@ input:-webkit-autofill.focus {
     margin: 1em;
 }
 
+.round-image {
+    width: 35%;
+    height: 27%;
+    border-radius: 50%;
+}
 
 
 
