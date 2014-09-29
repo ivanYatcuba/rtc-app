@@ -164,7 +164,7 @@
         <#--<#list currentPage-5..currentPage+5 as i>-->
         <#--<#if i <= lastPage && i &gt; 0>-->
         <#--<#if currentPage == i>-->
-        <#--<#--<u>${i}</u>-->-->
+        <#--<#--<u>${i}</u>-->
         <#--<#else >-->
         <#--<li><a href="#" onclick="switchPage(${i})">${i}</a></li>-->
         <#--</#if>-->
