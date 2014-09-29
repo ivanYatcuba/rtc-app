@@ -16,6 +16,10 @@ public class News extends AbstractPersistenceObject implements Serializable {
     @Column
     private String title;
 
+    /*@OneToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    private User author;*/
+
     @Column
     private String description;
 
@@ -51,4 +55,12 @@ public class News extends AbstractPersistenceObject implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    /*public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }*/
 }
