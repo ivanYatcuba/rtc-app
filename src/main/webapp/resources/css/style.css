@@ -125,6 +125,8 @@ input:-webkit-autofill.focus {
     margin: 1em;
 }
 
+
+
 input {
     display: block;
     width: 100%;
@@ -142,6 +144,12 @@ input {
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.round-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 
 
