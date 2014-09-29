@@ -91,9 +91,9 @@
 </#macro>
 
 <#macro formValidation formName jsonRules >
-<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>"></script>
-<script src="<@spring.url'/resources/js/jquery.validate.min.js'/>"></script>
-<script src="<@spring.url'/resources/js/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
+<#--<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>"></script>-->
+<script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
+<script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
 <script>
     $(document).ready(function () {
         $("#${formName}").validate({
