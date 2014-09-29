@@ -1,5 +1,6 @@
 package net.github.rtc.app.model.user;
 
+import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.*;
 import net.github.rtc.util.annotation.validation.Number;
@@ -14,7 +15,7 @@ import java.util.Set;
 
 @Entity
 @Validatable
-public class User implements UserDetails {
+public class User extends AbstractPersistenceObject implements UserDetails {
 
     public static final int PRIMARY_LENGTH = 50;
     public static final int SECONDARY_LENGTH = 30;
@@ -25,9 +26,8 @@ public class User implements UserDetails {
     @ForExport("Id")
     private long id;
 
-    @Column
-    @ForExport("Code")
-    private String code;
+   /* @Column
+    private String code;*/
 
     @Required
     @Maxlength(PRIMARY_LENGTH)
@@ -326,13 +326,13 @@ public class User implements UserDetails {
         this.birthDate = birthDate;
     }
 
-    public String getCode() {
+/*    public String getCode() {
         return code;
     }
 
     public void setCode(final String code) {
         this.code = code;
-    }
+    }*/
 
     public long getId() {
         return id;
@@ -384,6 +384,6 @@ public class User implements UserDetails {
 
     public String shortString() {
         return new StringBuilder(this.name).append(STRING_SPACE).append(
-          this.surname).append(STRING_SPACE).append(this.email).toString();
+          this.surname).append(STRING_SPACE).append(this.email).append(getCode()).toString();
     }
 }

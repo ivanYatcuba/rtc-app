@@ -3,11 +3,12 @@ package net.github.rtc.app.service.impl;
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.NewsDao;
 import net.github.rtc.app.model.news.News;
+import net.github.rtc.app.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class NewsServiceImpl extends AbstractGenericServiceImpl<News> {
+public class NewsServiceImpl extends AbstractGenericServiceImpl<News> implements NewsService {
     @Autowired
     private NewsDao newsDao;
 

@@ -8,9 +8,9 @@ public interface GenericService<T> {
 
     T findByCode(String code);
 
-    T create(T course);
+    T create(T type);
 
-    void update(T course);
+    void update(T type);
 
     List<T> findAll();
 }

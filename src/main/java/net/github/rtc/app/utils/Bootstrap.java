@@ -2,9 +2,11 @@ package net.github.rtc.app.utils;
 
 import net.github.rtc.app.export.JobManager;
 import net.github.rtc.app.export.JobManagerAction;
+import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.service.NewsService;
 import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.service.UserService;
 import org.springframework.beans.factory.InitializingBean;
@@ -28,6 +30,8 @@ public class Bootstrap implements InitializingBean {
     private ReportService reportService;
     @Autowired
     private JobManager jobManager;
+    @Autowired
+    private NewsService newsService;
 
 
     public void loadTestUsers() {
@@ -58,8 +62,20 @@ public class Bootstrap implements InitializingBean {
         }
     }
 
+    public void loadTestNews() {
+        if (newsService.findAll().isEmpty()) {
+            final int count = 5;
+            final News news = new News("Test news", "Test description");
+            for (int i = 0; i < count; i++) {
+                newsService.create(news);
+            }
+
+        }
+    }
+
     @Override
     public void afterPropertiesSet() throws Exception {
         loadTestUsers();
+        loadTestNews();
     }
 }
