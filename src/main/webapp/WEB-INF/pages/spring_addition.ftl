@@ -91,9 +91,9 @@
 </#macro>
 
 <#macro formValidation formName jsonRules >
-<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>"></script>
-<script src="<@spring.url'/resources/js/jquery.validate.min.js'/>"></script>
-<script src="<@spring.url'/resources/js/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
+<#--<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>"></script>-->
+<script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
+<script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
 <script>
     $(document).ready(function () {
         $("#${formName}").validate({
@@ -164,7 +164,7 @@
         <#--<#list currentPage-5..currentPage+5 as i>-->
         <#--<#if i <= lastPage && i &gt; 0>-->
         <#--<#if currentPage == i>-->
-        <#--<#--<u>${i}</u>-->-->
+        <#--<#--<u>${i}</u>-->
         <#--<#else >-->
         <#--<li><a href="#" onclick="switchPage(${i})">${i}</a></li>-->
         <#--</#if>-->
