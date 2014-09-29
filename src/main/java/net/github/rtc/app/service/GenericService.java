@@ -1,10 +1,8 @@
 package net.github.rtc.app.service;
 
-import net.github.rtc.app.model.WithCode;
-
 import java.util.List;
 
-public interface GenericService< T extends WithCode> {
+public interface GenericService<T> {
 
     void deleteByCode(String code);
 

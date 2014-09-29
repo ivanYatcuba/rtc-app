@@ -1,5 +1,6 @@
 package net.github.rtc.app.model.course;
 
+import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.*;
@@ -18,7 +19,7 @@ import java.util.Set;
  */
 @Entity
 @Validatable
-public class Course implements Serializable {
+public class Course extends AbstractPersistenceObject implements Serializable {
 
     public static final int HASH_CODE_CONSTANT = 31;
     public static final int PRIMARY_LENGTH = 50;
@@ -28,10 +29,6 @@ public class Course implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @ForExport("Id")
     private long id;
-
-    @Column
-    @ForExport("Code")
-    private String code;
 
     @Required
     @Minlength(2)
@@ -141,14 +138,6 @@ public class Course implements Serializable {
         this.endDate = endDate;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(final String code) {
-        this.code = code;
-    }
-
     public String getName() {
         return name;
     }
@@ -200,7 +189,7 @@ public class Course implements Serializable {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Course{");
-        sb.append(", code='").append(code).append('\'');
+        sb.append(", code='").append(getCode()).append('\'');
         sb.append(", name='").append(name).append('\'');
         sb.append(", types=").append(types);
         sb.append(", experts=").append(experts);
@@ -230,7 +219,7 @@ public class Course implements Serializable {
           course.experts) : course.experts != null) {
             return false;
         }
-        if (code != null ? !code.equals(course.code) : course.code != null) {
+        if (getCode() != null ? !getCode().equals(course.getCode()) : course.getCode() != null) {
             return false;
         }
         if (endDate != null ? !endDate.equals(
@@ -256,7 +245,7 @@ public class Course implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = code != null ? code.hashCode() : 0;
+        int result = getCode() != null ? getCode().hashCode() : 0;
         result
           = HASH_CODE_CONSTANT * result + (name != null ? name.hashCode() : 0);
         result
