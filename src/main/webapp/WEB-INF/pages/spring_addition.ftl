@@ -144,9 +144,6 @@
                 </#if>
                 <a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a>
 
-
-
-
             </div>
         </div>
     </#if>
