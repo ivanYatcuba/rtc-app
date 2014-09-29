@@ -384,6 +384,6 @@ public class User extends AbstractPersistenceObject implements UserDetails {
 
     public String shortString() {
         return new StringBuilder(this.name).append(STRING_SPACE).append(
-          this.surname).append(STRING_SPACE).append(this.email).append(getCode()).toString();
+          this.surname).append(STRING_SPACE).append(this.email).toString();
     }
 }
