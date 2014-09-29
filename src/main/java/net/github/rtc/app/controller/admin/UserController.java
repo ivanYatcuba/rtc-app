@@ -50,6 +50,7 @@ public class UserController {
     public ModelAndView viewAll(@PathVariable final int numberOfPage) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
         final SearchResults<User> results = userService.search(DetachedCriteria.forClass(User.class), numberOfPage, USERS_PER_PAGE);
+        for(User user :results.getResults()) System.out.println(user.shortString());
         mav.addAllObjects(results.getPageModel(USERS_PER_PAGE, numberOfPage));
         mav.addObject(STRING_USERS, results.getResults());
         return mav;
