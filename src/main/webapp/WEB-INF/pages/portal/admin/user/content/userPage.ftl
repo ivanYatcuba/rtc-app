@@ -32,7 +32,7 @@
         <label><@spring.message "user.surname"/></label>
         <div>
             <p class="form-control-static">
-            <#if user.surname != "">${user.surname}<#else>&nbsp</#if></p>
+            <#if user.surname??>${user.surname}<#else>&nbsp</#if></p>
         </div>
     </div>
 
@@ -40,7 +40,7 @@
         <label><@spring.message "user.name"/></label>
         <div>
             <p class="form-control-static">
-            <#if user.name != "">${user.name}<#else>&nbsp</#if></p>
+            <#if user.name??>${user.name}<#else>&nbsp</#if></p>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
         <label><@spring.message "user.middleName"/></label>
         <div>
             <p class="form-control-static">
-                <#if user.middleName != "">${user.middleName}<#else>&nbsp</#if></p>
+                <#if user.middleName??>${user.middleName}<#else>&nbsp</#if></p>
         </div>
     </div>
 
@@ -74,7 +74,7 @@
             <label><@spring.message "user.email"/></label>
             <div>
                 <p class="form-control-static">
-                    <#if user.email != "">${user.email}<#else>&nbsp</#if></p>
+                    <#if user.email??>${user.email}<#else>&nbsp</#if></p>
             </div>
         </div>
 
@@ -98,7 +98,7 @@
             <label><@spring.message "user.city"/></label>
             <div>
                 <p class="form-control-static">
-                <#if user.city != "">${user.city}<#else>&nbsp</#if></p>
+                <#if user.city??>${user.city}<#else>&nbsp</#if></p>
             </div>
         </div>
     </div>
@@ -108,7 +108,7 @@
             <label><@spring.message "user.phone"/></label>
             <div>
                 <p class="form-control-static">
-                <#if user.phone != "">${user.phone}<#else>&nbsp</#if></p>
+                <#if user.phone??>${user.phone}<#else>&nbsp</#if></p>
             </div>
         </div>
     </div>
@@ -122,7 +122,7 @@
             <label><@spring.message "user.university"/></label>
             <div>
                 <p class="form-control-static">
-                <#if user.university != "">${user.university}<#else>&nbsp</#if></p>
+                <#if user.university??>${user.university}<#else>&nbsp</#if></p>
             </div>
         </div>
 
@@ -130,7 +130,7 @@
             <label><@spring.message "user.faculty"/></label>
             <div>
                 <p class="form-control-static">
-                <#if user.faculty != "">${user.faculty}<#else>&nbsp</#if></p>
+                <#if user.faculty??>${user.faculty}<#else>&nbsp</#if></p>
             </div>
         </div>
     </div>
@@ -140,7 +140,7 @@
             <label><@spring.message "user.speciality"/></label>
             <div>
                 <p class="form-control-static">
-                <#if user.speciality != "">${user.speciality}<#else>&nbsp</#if></p>
+                <#if user.speciality??>${user.speciality}<#else>&nbsp</#if></p>
             </div>
         </div>
     </div>
@@ -166,7 +166,7 @@
             <label><@spring.message "user.english"/></label>
             <div>
                 <p class="form-control-static">
-                <#if user.english != "">${user.english}<#else>&nbsp</#if></p>
+                <#if user.english??>${user.english}<#else>&nbsp</#if></p>
             </div>
         </div>
     </div>
@@ -180,7 +180,7 @@
             <label><@spring.message "user.note"/></label>
             <div>
                 <p class="form-control-static">
-                <#if user.note != "">${user.note}<#else>&nbsp</#if></p>
+                <#if user.note??>${user.note}<#else>&nbsp</#if></p>
             </div>
         </div>
     </div>
@@ -224,5 +224,4 @@
         </a> or
         <a href="<@spring.url "/admin/user/viewAll" />"><@spring.message "coursesPage.action.cancel"/></a>
     </div>
-</div>
 </div>
