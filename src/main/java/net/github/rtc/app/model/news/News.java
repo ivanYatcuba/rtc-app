@@ -2,9 +2,11 @@ package net.github.rtc.app.model.news;
 
 
 import net.github.rtc.app.model.AbstractPersistenceObject;
+import net.github.rtc.app.model.user.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class News extends AbstractPersistenceObject implements Serializable {
@@ -16,15 +18,23 @@ public class News extends AbstractPersistenceObject implements Serializable {
     @Column
     private String title;
 
-    /*@OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
-    private User author;*/
+    @OneToOne
+//    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "author_id")
+    private User author;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date createDate;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private NewsStatus status = NewsStatus.DRAFT;
 
     @Column
     private String description;
 
     public News() {
-
     }
 
     public News(String title, String description) {
@@ -56,11 +66,27 @@ public class News extends AbstractPersistenceObject implements Serializable {
         this.description = description;
     }
 
-    /*public User getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
     public void setAuthor(User author) {
         this.author = author;
-    }*/
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public NewsStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(NewsStatus status) {
+        this.status = status;
+    }
 }

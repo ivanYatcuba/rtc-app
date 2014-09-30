@@ -28,15 +28,10 @@ public class NewsController {
         return mav;
     }
 
-    @RequestMapping(value = "/createNews", method = RequestMethod.GET)
+    @RequestMapping(value = "/news/create", method = RequestMethod.GET)
     public ModelAndView create() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/pageCreateNews");
         return mav;
     }
-
-    public void setNewsService(NewsService newsService) {
-        this.newsService = newsService;
-    }
-
 
 }
