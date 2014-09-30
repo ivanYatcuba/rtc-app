@@ -27,7 +27,7 @@
 
             <div class="btn btn-success" id="${course.code}"
                  style="margin-bottom: 5px "
-                 onClick="setCode(this.id);javascript:PopUpShow()"> Apply
+                 onClick='setCode(this.id);javascript:PopUpShow("${course.types?join(',')}")'> Apply
             </div>
         </div>
     </#list>
@@ -49,11 +49,11 @@
             <input name="selectedCode" type="hidden" id="selectedCode"
                    value="test">
 
-            <input type="radio" name="userCourses" id="optionsRadios1"
+            <input type="radio" name="userCourses" id="DEV"
                    value="<@spring.message "userCourses.developer"/>" checked>
             <@spring.message "userCourses.developer"/></label><br/>
 
-            <input type="radio" name="userCourses" id="optionsRadios2"
+            <input type="radio" name="userCourses" id="QA"
                    value="<@spring.message "userCourses.tester"/>">
             <@spring.message "userCourses.tester"/></label><br/>
 
@@ -84,7 +84,8 @@
     $(document).ready(function () {
         PopUpHide();
     });
-    function PopUpShow() {
+    function PopUpShow(types) {
+        types.split(",")//[ QA,DEV]
         $("#window-popup").show();
     }
     function PopUpHide() {
