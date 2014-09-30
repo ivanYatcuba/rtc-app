@@ -13,24 +13,18 @@
 <#list news as news>
         <tr>
             <td>
-                <p>${news.title}</p>
+                <p>${news.title!" "}</p>
             </td>
-            <#if (news.author)??>
                 <td>
-                    <p>${news.author}</p>
+                    <p>${news.author!" "}</p>
                 </td>
-            <#else>
-                <td></td>
-            </#if>
             <td>
-                <p>${news.createDate}</p>
+                <p>${news.createDate!" "}</p>
             </td>
             <td>
-                <p>${news.status}</p>
+                <p>${news.status!" "}</p>
             </td>
-            <td>
-
-            </td>
+            <td></td>
         </tr>
 </#list>
     </tbody>
