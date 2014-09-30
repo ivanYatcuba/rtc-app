@@ -39,7 +39,6 @@
                 <#else>
                     <span class="label label-danger">Deleted</span>
                 </#if>
-
             </td>
         <#else>
             <td style="vertical-align: middle">
