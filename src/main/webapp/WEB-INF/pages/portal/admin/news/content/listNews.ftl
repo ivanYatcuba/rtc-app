@@ -1,5 +1,5 @@
 <style>
-    hr{margin-top:-20px;margin-bottom:5px;border:0;border-top:2px solid #e1dede
+    hr{border-top:2px solid #e1dede
     }
 </style>
 <h4><@spring.message "news.search.result.page.header"/></h4>
@@ -50,9 +50,22 @@
     </tbody>
 </table>
 <hr>
-<div>
-    <form  class="inline-box"  name="createNews" action="<@spring.url"/admin/news/create"/>"method="get">
-        <button  class="btn btn-primary" type="submit">Create New</button>
-    </form>
-<@spring.addPagination "/admin/news/"/>
+<div class="row">
+    <div class="col-md-6" >
+        <form  class="inline-box" style="margin:20" name="createNews" action="<@spring.url"/admin/news/create"/>"method="get">
+            <button  class="btn btn-primary" type="submit">Create New</button>
+        </form>
+    </div>
+    <div class="col-md-6" >
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
 </div>
+
