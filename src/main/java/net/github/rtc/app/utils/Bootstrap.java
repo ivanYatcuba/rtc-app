@@ -66,6 +66,7 @@ public class Bootstrap implements InitializingBean {
         if (newsService.findAll().isEmpty()) {
             final int count = 5;
             final News news = new News("Test news", "Test description");
+            news.setCreateDate(new Date());
             for (int i = 0; i < count; i++) {
                 newsService.create(news);
             }
