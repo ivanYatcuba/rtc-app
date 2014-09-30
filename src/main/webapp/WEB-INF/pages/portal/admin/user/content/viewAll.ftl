@@ -1,5 +1,5 @@
 <h4><@spring.message "user.search.result.page.header"/></h4>
-
+<@spring.addPagination "/admin/user/viewAll/"/>
 <table width="100%" class="table" id="UserTable">
         <thead>
         <tr>
@@ -76,7 +76,7 @@
         <form  class="inline-box"  name="createUser" action="<@spring.url"/admin/user/createUser"/>"method="get">
             <button  class="btn btn-primary" type="submit">Create New</button>
         </form>
-        <@spring.addPagination "/admin/user/viewAll/"/>
+
 </div>
 
 <div class="popup " id="window-popup" style="display: none">

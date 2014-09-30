@@ -53,7 +53,7 @@ public class SearchResults<T> {
     }
 
     private int getCountPages(final int total, final int maxPerPage) {
-        return total / maxPerPage + ((total % MAX_PAGES_NUM == 0) ? 0 : 1);
+        return total / maxPerPage + ((total % maxPerPage == 0) ? 0 : 1);
     }
 
     private Integer getPrevResult(final int currentPage) {
