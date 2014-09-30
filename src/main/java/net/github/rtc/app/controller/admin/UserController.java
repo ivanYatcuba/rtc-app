@@ -27,7 +27,7 @@ import java.util.*;
 @RequestMapping("admin/user")
 public class UserController {
 
-    private static final int USERS_PER_PAGE = 1;
+    private static final int USERS_PER_PAGE = 5;
     private static final String ROOT = "portal/admin";
     private static final String STRING_USER = "user";
     private static final String STRING_USERS = "users";
@@ -156,10 +156,6 @@ public class UserController {
     public String getCurrentUser() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
-
-
-
-
 
 
 }

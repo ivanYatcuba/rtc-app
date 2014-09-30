@@ -1,6 +1,6 @@
 <h4><@spring.message "user.search.result.page.header"/></h4>
 <@spring.addPagination "/admin/user/viewAll/"/>
-<table width="100%"  id="UserTable">
+<table width="100%" class="table" id="UserTable">
         <thead>
         <tr>
             <th><@spring.message "user.search.result.header.user"/></th>

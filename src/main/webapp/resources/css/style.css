@@ -107,12 +107,9 @@ input:-webkit-autofill.focus {
     -webkit-box-shadow: 0 0 0px 1000px #FFFACD inset;
 }
 
-.dropdown-button {
-    height: 30px;
-}
+
 .inline-box {
     display: inline-block;
-    /*height: 40px;*/
     vertical-align: middle;
     text-align: left;
     margin: 1em;
@@ -123,11 +120,6 @@ input:-webkit-autofill.focus {
     vertical-align: middle;
     text-align: right;
     margin: 1em;
-}
-
-
-
-
 }
 
 .round-image {

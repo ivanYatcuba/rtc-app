@@ -113,71 +113,82 @@
 </script>
 </#macro>
 
+
 <#macro addPagination switchUrl>
 <div id="navigation">
     <#if startPage??>
-        <div class="row">
-            <div class="col-md-12" align="right">
-                Pages:
-                <a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a>
-                <#if prevPage??>
-                    <a href="#" onclick="switchPage(${prevPage})">&lsaquo;&nbsp</a>
-                <#else >
-                    <a href="#" onclick="switchPage(${startPage})">&lsaquo;&nbsp</a>
-                </#if>
+       <div class="row">
+           <ul class="pagination">
+                <li><a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a></li>
 
-                <#list currentPage-5..currentPage+5 as i>
-                    <#if i <= lastPage && i &gt; 0>
-                        <#if currentPage == i>
-                            <u>${i}</u>
-                        <#else >
-                            <a href="#" onclick="switchPage(${i})">${i}</a>
-                        </#if>
+               <#if currentPage &gt; startPage+1>
+               <#-- -2 -->
+                      <#if currentPage < lastPage-1 && currentPage &gt; 0>
+                       <#-- -2 +2 -->
+                        <#list currentPage-2..currentPage+2 as i>
+                            <#if currentPage == i>
+                              <li class="active"><a href="#">${i}</a></li>
+                            <#else>
+                                <#if i<=lastPage && i &gt; startPage || i==startPage>
+                                <li><a href="#" onclick="switchPage(${i})">${i}</a></li>
+                                </#if>
+                            </#if>
+                        </#list>
+                      <#else>
+                           <#if currentPage < lastPage <#-- currentPage &gt; 0 --> >
+                           <#-- -3 +1 -->
+                               <#list currentPage-3..currentPage+1 as i>
+                                   <#if currentPage == i>
+                                       <li class="active"><a href="#">${i}</a></li>
+                                   <#else>
+                                       <#if i<=lastPage && i &gt; startPage || i==startPage>
+                                       <li><a href="#" onclick="switchPage(${i})">${i}</a></li>
+                                       </#if>
+                                   </#if>
+                               </#list>
+                           <#else>
+                           <#-- -4 0 -->
+                               <#list currentPage-4..currentPage as i>
+                                   <#if currentPage == i>
+                                       <li class="active"><a href="#">${i}</a></li>
+                                   <#else>
+                                       <#if i<=lastPage && i &gt; startPage || i==startPage>
+                                       <li><a href="#" onclick="switchPage(${i})">${i}</a></li>
+                                       </#if>
+                                   </#if>
+                               </#list>
+                           </#if>
+                      </#if>
+               <#else>
+                    <#if currentPage &gt; startPage>
+                    <#-- -1 +3 -->
+                        <#list currentPage-1..currentPage+3 as i>
+                            <#if currentPage == i>
+                                <li class="active"><a href="#">${i}</a></li>
+                            <#else>
+                                <#if i<=lastPage && i &gt; startPage || i==startPage>
+                                <li><a href="#" onclick="switchPage(${i})">${i}</a></li>
+                                </#if>
+                            </#if>
+                        </#list>
+                    <#else>
+                    <#-- 0 +4-->
+                        <#list currentPage..currentPage+4 as i>
+                            <#if currentPage == i>
+                                <li class="active"><a href="#">${i}</a></li>
+                            <#else>
+                                <#if i<=lastPage && i &gt; startPage || i==startPage>
+                                <li><a href="#" onclick="switchPage(${i})">${i}</a></li>
+                                </#if>
+                            </#if>
+                        </#list>
                     </#if>
-                </#list>
-
-                <#if nextPage??>
-                    <a href="#" onclick="switchPage(${nextPage})">&nbsp&rsaquo;</a>
-                <#else >
-                    <a href="#" onclick="switchPage(${lastPage})
-                            ">&nbsp&rsaquo;</a>
-                </#if>
-                <a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a>
-
-            </div>
+               </#if>
+              <li><a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a></li>
+            </ul>
         </div>
     </#if>
 </div>
-
-  <#--mine try-->
-        <#--<ul class="pagination inline-box">-->
-        <#--<li><a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a></li>-->
-        <#--<#if prevPage??>-->
-        <#--<li><a href="#" onclick="switchPage(${prevPage})">&lsaquo;&nbsp</a></li>-->
-        <#--<#else >-->
-        <#--<li><a href="#" onclick="switchPage(${startPage})">&lsaquo;&nbsp</a></li>-->
-        <#--</#if>-->
-
-        <#--<#list currentPage-5..currentPage+5 as i>-->
-        <#--<#if i <= lastPage && i &gt; 0>-->
-        <#--<#if currentPage == i>-->
-        <#--<#--<u>${i}</u>-->
-        <#--<#else >-->
-        <#--<li><a href="#" onclick="switchPage(${i})">${i}</a></li>-->
-        <#--</#if>-->
-        <#--</#if>-->
-        <#--</#list>-->
-        <#--<#if nextPage??>-->
-        <#--<li><a href="#" onclick="switchPage(${nextPage})">&nbsp&rsaquo;</a></li>-->
-        <#--<#else>-->
-        <#--<li><a href="#" onclick="switchPage(${lastPage})">&nbsp&rsaquo;</a></li>-->
-        <#--</#if>-->
-        <#--<li><a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a></li>-->
-
-        <#--</ul>-->
-
-<#--</div>-->
-<#--</#if>-->
 
 <script>
     function switchPage(page) {
@@ -200,3 +211,7 @@
     }
 </script>
 </#macro>
+
+
+
+
