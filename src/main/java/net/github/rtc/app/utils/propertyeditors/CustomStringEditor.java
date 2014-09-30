@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Custom tags editor for tag collection
@@ -32,7 +34,7 @@ public class CustomStringEditor extends PropertyEditorSupport {
     @Override
     public void setAsText(final String text) {
         final List<String> strsSplit = Arrays.asList(text.split(STRING_COMMA));
-        final Collection<String> strs = new ArrayList<>();
+        final Set<String> strs = new HashSet<>();
         for (final String str : strsSplit) {
             strs.add(str);
         }
