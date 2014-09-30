@@ -5,6 +5,7 @@ import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.course.Tag;
 import net.github.rtc.app.model.user.User;
+import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
@@ -19,6 +20,7 @@ public class CourseSearchFilter {
 
     private static final String STRING_PROCENT = "%";
     private static final String STRING_TAGS = "tags";
+    private static final String STRING_TYPES = "types";
 
     private String name;
 
@@ -101,6 +103,14 @@ public class CourseSearchFilter {
                 tagDis.add(Restrictions.eq("tags.value", tag.getValue()));
             }
             criteria.add(tagDis);
+        }
+        if (types != null) {
+            criteria.createAlias(STRING_TYPES, "t");
+            final Conjunction typesCon = Restrictions.conjunction();
+            for (final CourseType type: types) {
+                typesCon.add(Restrictions.eq("t.elements", type));
+            }
+            criteria.add(typesCon);
         }
         return criteria;
     }
