@@ -18,7 +18,6 @@ import java.util.List;
 @Entity
 @Validatable
 public class ReportDetails {
-
     private static final int PRIMARY_LENGTH = 50;
 
     @Id

@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Created by Ivan Yatcuba on 8/16/14.
  */
+
 public interface ReportService {
     void insert(ReportDetails report);
 
@@ -20,8 +21,7 @@ public interface ReportService {
 
     void delete(ReportDetails report);
 
-    SearchResults<ReportDetails> search(
-      DetachedCriteria criteria,
-      int start,
-      int max);
+    SearchResults<ReportDetails> search(DetachedCriteria criteria, int start, int max);
+
+    void compileReport(ReportDetails report);
 }

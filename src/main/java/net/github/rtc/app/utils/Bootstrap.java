@@ -28,10 +28,8 @@ public class Bootstrap implements InitializingBean {
     private UserService userService;
     @Autowired
     private ReportService reportService;
-    @Autowired
-    private JobManager jobManager;
-    @Autowired
-    private NewsService newsService;
+    /*@Autowired
+    private ReportJob reportJob;*/
 
 
     public void loadTestUsers() {
@@ -53,13 +51,13 @@ public class Bootstrap implements InitializingBean {
             admin.setRegisterDate(new Date());
             userService.create(admin);
         }
-        for (final ReportDetails reportDetails : reportService.getAll()) {
+        /*for (final ReportDetails reportDetails : reportService.getAll()) {
             try {
                 jobManager.manageJob(reportDetails, JobManagerAction.CREATE);
             } catch (final Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
     public void loadTestNews() {
