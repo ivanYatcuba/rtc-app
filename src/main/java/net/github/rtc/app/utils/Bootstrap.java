@@ -1,7 +1,7 @@
 package net.github.rtc.app.utils;
 
-import net.github.rtc.app.export.JobManager;
 import net.github.rtc.app.export.JobManagerAction;
+import net.github.rtc.app.export.ReportJob;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
@@ -26,8 +26,8 @@ public class Bootstrap implements InitializingBean {
     private UserService userService;
     @Autowired
     private ReportService reportService;
-    @Autowired
-    private JobManager jobManager;
+    /*@Autowired
+    private ReportJob reportJob;*/
 
 
     public void loadTestUsers() {
@@ -49,13 +49,13 @@ public class Bootstrap implements InitializingBean {
             admin.setRegisterDate(new Date());
             userService.create(admin);
         }
-        for (final ReportDetails reportDetails : reportService.getAll()) {
+        /*for (final ReportDetails reportDetails : reportService.getAll()) {
             try {
                 jobManager.manageJob(reportDetails, JobManagerAction.CREATE);
             } catch (final Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
     @Override

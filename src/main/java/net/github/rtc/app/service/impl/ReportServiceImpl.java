@@ -35,12 +35,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Autowired
     private ReportDao reportResource;
-    @Autowired
-    private ReportJob reportJob;
 
     @Resource(name = "serviceHolder")
     private Map<Class, ? extends ModelService> serviceHolder;
-
 
     @Value("${report.export.path}")
     private String exportPath;

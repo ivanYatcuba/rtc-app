@@ -25,12 +25,10 @@ import java.util.Map;
  */
 @Component
 public class ReportJob {
-    public static final int TIMER = 5000 ;//cron
-//9000000
     @Autowired
     public ReportService reportService;
 
-    @Scheduled(fixedDelay = TIMER)
+    @Scheduled(cron="0 0/15 * * * ?")
     public void reportUpdate(){
         List<ReportDetails> myList = reportService.getAll();
         for (ReportDetails report : myList){
