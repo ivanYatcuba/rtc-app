@@ -19,7 +19,10 @@ import java.util.List;
  * This class helps to create xlsx report file of some model class
  * collection on disk
  */
-public class ReportBuilder {
+public final class ReportBuilder {
+    private ReportBuilder() {
+    }
+
     public static <T> void build(ReportDetails report, List<T> objectsList, String exportPath) throws NoSuchFieldException {
         build(report.getFieldsFromClass(), objectsList, report.getName(), exportPath, report.getExportFormat());
     }
