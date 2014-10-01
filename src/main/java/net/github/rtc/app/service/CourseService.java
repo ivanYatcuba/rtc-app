@@ -1,6 +1,7 @@
 package net.github.rtc.app.service;
 
 import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 
@@ -70,6 +71,8 @@ public interface CourseService {
     void publish(Course course);
 
     SearchResults<Course> search(DetachedCriteria criteria, int start, int max);
+
+    SearchResults<Course> search(AbstractSearchCommand searchCommand);
 
     List<Course> startingSoonCourses();
 

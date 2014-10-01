@@ -1,6 +1,7 @@
 package net.github.rtc.app.dao.impl;
 
 import net.github.rtc.app.dao.GenericDao;
+import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -20,6 +21,8 @@ import java.util.List;
  */
 @Component
 public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
+
+    private static final int ENTITIES_PER_PAGE = 5;
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -60,7 +63,7 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
     @Override
     public T findByCode(final String code) {
         return (T) getCurrentSession().createCriteria(type).add(
-          Restrictions.eq("code", code)).uniqueResult();
+                Restrictions.eq("code", code)).uniqueResult();
     }
 
     @Override
@@ -72,23 +75,33 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
     @Override
     public List<T> findAll() {
         return getCurrentSession().createCriteria(type).setResultTransformer(
-          Criteria.DISTINCT_ROOT_ENTITY).list();
+                Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
     @Override
-    public SearchResults<T> search(
-      final DetachedCriteria dCriteria, final int start, final int max) {
-        final Criteria criteria = dCriteria.getExecutableCriteria(
-          getCurrentSession());
+    public SearchResults<T> search(final DetachedCriteria dCriteria, final int start, final int max) {
+        final Criteria criteria = dCriteria.getExecutableCriteria(getCurrentSession());
         final SearchResults<T> results = new SearchResults<>();
-        results.setTotalResults(((Long) criteria.setProjection(
-          Projections.rowCount()).uniqueResult()).intValue());
+
+        results.setPage(start);
+        results.setPerPage(max);
+        results.setTotalResults(((Long) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue());
+
         criteria.setProjection(null);
         criteria.setResultTransformer(Criteria.ROOT_ENTITY);
         criteria.setFirstResult((start - 1) * max);
         criteria.setMaxResults(max);
-        results.setResults(criteria.setResultTransformer(
-          Criteria.DISTINCT_ROOT_ENTITY).list());
+
+        results.setResults(criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
         return results;
+    }
+
+    @Override
+    public SearchResults<T> search(AbstractSearchCommand searchCommand) {
+        return search(searchCommand.getCriteria(), searchCommand.getPage(), getPerPage());
+    }
+
+    protected int getPerPage() {
+        return ENTITIES_PER_PAGE;
     }
 }

@@ -64,10 +64,10 @@ public class Bootstrap implements InitializingBean {
 
     public void loadTestNews() {
         if (newsService.findAll().isEmpty()) {
-            final int count = 5;
+            final int count = 6;
             final News news = new News("Test news", "Test description");
             news.setCreateDate(new Date());
-            news.setAuthor(userService.loadUserByUsername("admin"));
+            news.setAuthor(userService.loadUserByUsername(STRING_ADMIN));
             for (int i = 0; i < count; i++) {
                 newsService.create(news);
             }

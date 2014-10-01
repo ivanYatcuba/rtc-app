@@ -1,5 +1,6 @@
 package net.github.rtc.app.dao;
 
+import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 
@@ -24,7 +25,8 @@ public interface GenericDao<T> {
 
     T findByCode(String code);
 
-    SearchResults<T> search(
-      DetachedCriteria criteria, int start, int max);
+    SearchResults<T> search(DetachedCriteria criteria, int start, int max);
+
+    SearchResults<T> search(AbstractSearchCommand searchCommand);
 
 }

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class CourseSearchFilter {
+public class CourseSearchFilter extends AbstractSearchCommand {
 
     private static final String STRING_PROCENT = "%";
     private static final String STRING_TAGS = "tags";

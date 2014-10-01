@@ -5,6 +5,7 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.ModelService;
+import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
@@ -35,7 +36,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     private static final String COURSE_CANNOT_BE_NULL = "course cannot be null";
     private static final int STARTING_SOON_COURSE_COUNT = 3;
     private static Logger log = LoggerFactory.getLogger(CourseServiceImpl
-      .class.getName());
+            .class.getName());
 
     @Autowired
     private CoursesDao coursesDao;
@@ -107,9 +108,16 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Override
     @Transactional
     public SearchResults<Course> search(
-      final DetachedCriteria criteria, final int start, final int max) {
-        log.debug("Searching courses///");
+            final DetachedCriteria criteria, final int start, final int max) {
+        log.debug("Searching courses");
         return coursesDao.search(criteria, start, max);
+    }
+
+    @Override
+    @Transactional
+    public SearchResults<Course> search(AbstractSearchCommand searchCommand) {
+        log.debug("Searching courses///");
+        return coursesDao.search(searchCommand);
     }
 
     @Override
@@ -117,9 +125,9 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
         final CourseSearchFilter searchFilter = new CourseSearchFilter();
         searchFilter.setStartDate(new Date());
         searchFilter.setStatus(CourseStatus.PUBLISHED);
-        return coursesDao.search(
-          searchFilter.getCriteria().addOrder(Order.asc("startDate")), 1,
-          STARTING_SOON_COURSE_COUNT).getResults();
+        searchFilter.setPage(1);
+        return coursesDao.search(searchFilter.getCriteria().addOrder(Order.asc("startDate")), 1, STARTING_SOON_COURSE_COUNT)
+                .getResults();
     }
 
 }

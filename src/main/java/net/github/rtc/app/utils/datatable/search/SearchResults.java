@@ -15,29 +15,44 @@ public class SearchResults<T> {
     private List<T> results = null;
 
     private int first = 1;
-    private int last;
+    private int page;
+    private int perPage;
 
 
-    public Map<String, Object> getPageModel(final int maxPerPage,
-      final int currentPage) {
-        final int countPages = getCountPages(totalResults, maxPerPage);
-        final int newCurrentPage = checkCurrentPage(currentPage);
+    public Map<String, Object> getPageModel() {
+        final int countPages = getCountPages(totalResults, perPage);
+        final int newCurrentPage = checkCurrentPage(page);
         final Map<String, Object> map = new HashMap<>();
         map.put("currentPage", newCurrentPage);
         map.put("prevPage", getPrevResult(newCurrentPage));
         map.put("nextPage", getNextResult(newCurrentPage, countPages));
         map.put("startPage", getFirst());
         map.put("lastPage", countPages);
-        return  map;
+        return map;
     }
 
+    public Map<String, ?> getPageModel(int i, int k) {
+        return new HashMap<>(0);
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPerPage() {
+        return perPage;
+    }
+
+    public void setPerPage(int perPage) {
+        this.perPage = perPage;
+    }
 
     public int getFirst() {
         return first;
-    }
-
-    public int getLast() {
-        return last;
     }
 
     public int getTotalResults() {

@@ -1,5 +1,5 @@
 <ul class="nav nav-sidebar">
-    <li id="news"><a href="<@spring.url'/admin/news/'/>">News</a></li>
+    <li id="news"><a href="<@spring.url'/admin/news/list'/>">News</a></li>
     <li id="course"><a href="<@spring.url'/admin/course/'/>">Courses</a></li>
     <li id="user"><a href="<@spring.url'/admin/user/viewAll'/>">Users</a></li>
     <li id="export"><a href="<@spring.url'/admin/export/viewAll'/>">Reports</a></li>

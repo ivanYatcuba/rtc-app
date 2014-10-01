@@ -57,25 +57,23 @@ public class CoursesController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
-        return switchPage(1, getFilterCourse());
+        final CourseSearchFilter filter = getFilterCourse();
+        filter.setPage(1);
+        return switchPage(filter);
     }
 
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     public ModelAndView filter(@ModelAttribute(STRING_FILTER_COURSE) final
                                CourseSearchFilter filterCourse) {
-        return switchPage(1, filterCourse);
+        return switchPage(/*1, */filterCourse);
     }
 
 
-    @RequestMapping(value = "/{page}", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ModelAndView switchPage(@PathVariable final int page,
-                            @ModelAttribute(STRING_FILTER_COURSE) final
-                            CourseSearchFilter filterCourse) {
+    @RequestMapping(value = "/switch", method = RequestMethod.POST)
+    public @ResponseBody ModelAndView switchPage(@ModelAttribute(STRING_FILTER_COURSE) final CourseSearchFilter filterCourse) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_LISTCONTENT);
-        final SearchResults<Course> results = courseService.search(filterCourse.getCriteria(), page, COURSES_PER_PAGE);
-        mav.addAllObjects(results.getPageModel(COURSES_PER_PAGE, page));
+        final SearchResults<Course> results = courseService.search(filterCourse);
+        mav.addAllObjects(results.getPageModel());
         mav.addObject("courses", results.getResults());
         mav.addObject(STRING_TYPES, CourseType.findAll());
         mav.addObject(STRING_STATUSES, getStatuses());

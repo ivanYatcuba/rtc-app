@@ -194,7 +194,8 @@
     function switchPage(page) {
         $.ajax({
             type: "POST",
-            url: "<@spring.url "${switchUrl}" />" + page + "/",
+            url: "<@spring.url "${switchUrl}" />",
+            data: {page: page},
             success: function (result) {
                 var str = result;
                 var live_str = $('<div>', {html: str});
