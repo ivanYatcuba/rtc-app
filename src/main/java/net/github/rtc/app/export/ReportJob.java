@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Created by Ivan Yatcuba on 8/5/14.
+ * Refactored by Vasiliy Sobol on 1/10/14
  */
 @Component
 public class ReportJob {
