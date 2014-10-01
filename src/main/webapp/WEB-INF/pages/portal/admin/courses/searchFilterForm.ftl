@@ -7,7 +7,7 @@
         <@spring.bind "filterCourse.types"/>
             <div class="form-group">
                 <label class="control-label col-md-2"
-                       for="types"><@spring.message "filterCourse.type"/></label>
+                       for="types"><@spring.message "filterCourse.types"/></label>
 
                 <div class="col-md-4">
                     <@spring.formMultiSelect "filterCourse.types", categories/>
