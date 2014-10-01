@@ -25,10 +25,12 @@
             <p>${news.createDate!" "}</p>
         </td>
         <td style="vertical-align: middle">
-            <#if (news.status)=="DRAFT">
-                <span class="label label-warning">Draft</span>
-            <#else>
-                <span class="label label-success">Published</span>
+            <#if(news.status)??>
+                <#if (news.status)=="DRAFT">
+                    <span class="label label-warning">Draft</span>
+                <#else>
+                    <span class="label label-success">Published</span>
+                </#if>
             </#if>
         </td>
         <td>
