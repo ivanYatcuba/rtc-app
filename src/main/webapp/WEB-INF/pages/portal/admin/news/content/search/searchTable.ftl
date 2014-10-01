@@ -17,7 +17,9 @@
             <p>${news.title!" "}</p>
         </td>
         <td>
-            <p>${news.author.name!" "} ${news.author.surname!" "}</p>
+            <#if (news.author??)>
+                <p>${news.author.name!" "} ${news.author.surname!" "}</p>
+            </#if>
         </td>
         <td>
             <p>${news.createDate!" "}</p>
