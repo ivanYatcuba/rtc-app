@@ -1,9 +1,6 @@
 package net.github.rtc.app.utils;
 
-import net.github.rtc.app.export.JobManager;
-import net.github.rtc.app.export.JobManagerAction;
 import net.github.rtc.app.model.news.News;
-import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.NewsService;
@@ -28,6 +25,9 @@ public class Bootstrap implements InitializingBean {
     private UserService userService;
     @Autowired
     private ReportService reportService;
+    @Autowired
+    private NewsService newsService;
+
     /*@Autowired
     private ReportJob reportJob;*/
 
