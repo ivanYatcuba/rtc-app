@@ -1,35 +1,49 @@
 package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.dao.impl.ReportDao;
-import net.github.rtc.app.export.JobManager;
-import net.github.rtc.app.export.JobManagerAction;
+import net.github.rtc.app.export.ReportBuilder;
+import net.github.rtc.app.export.ReportJob;
+import net.github.rtc.app.export.table.ReportTable;
 import net.github.rtc.app.model.report.ReportDetails;
+import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
  * Created by Ivan Yatcuba on 8/16/14.
  */
+
 @Service
 public class ReportServiceImpl implements ReportService {
 
     private static final String STRING_REPORT = "Report: ";
     private static Logger log = LoggerFactory.getLogger(ReportServiceImpl
-      .class.getName());
+            .class.getName());
+
     @Autowired
     private ReportDao reportResource;
     @Autowired
-    private JobManager jobManager;
+    private ReportJob reportJob;
+
+    @Resource(name = "serviceHolder")
+    private Map<Class, ? extends ModelService> serviceHolder;
+
+
+    @Value("${report.export.path}")
+    private String exportPath;
 
     @Override
     @Transactional
@@ -37,11 +51,12 @@ public class ReportServiceImpl implements ReportService {
         log.info("Creating report: " + report);
         report.setCode(UUID.randomUUID().toString());
         report.setCreatedDate(new Date());
+
         try {
-            jobManager.manageJob(report, JobManagerAction.CREATE);
+            compileReport(report);
             reportResource.create(report);
             log.info(
-              STRING_REPORT + report.getCode() + " created successfully!");
+                    STRING_REPORT + report.getCode() + " created successfully!");
         } catch (final Exception e) {
             log.info("Report creation failed: " + report.getCode());
             e.printStackTrace();
@@ -67,10 +82,10 @@ public class ReportServiceImpl implements ReportService {
     public void update(final ReportDetails report) {
         log.info("Updating report: " + report);
         try {
-            jobManager.manageJob(report, JobManagerAction.UPDATE);
             reportResource.update(report);
+            compileReport(report);
             log.info(
-              STRING_REPORT + report.getCode() + " updated successfully!");
+                    STRING_REPORT + report.getCode() + " updated successfully!");
         } catch (final Exception e) {
             log.info("Report update failed: " + report.getCode());
             e.printStackTrace();
@@ -82,10 +97,9 @@ public class ReportServiceImpl implements ReportService {
     public void delete(final ReportDetails report) {
         log.info("Removing report: " + report);
         try {
-            jobManager.manageJob(report, JobManagerAction.DELETE);
             reportResource.deleteByCode(report.getCode());
             log.info(
-              STRING_REPORT + report.getCode() + " removed successfully!");
+                    STRING_REPORT + report.getCode() + " removed successfully!");
         } catch (final Exception e) {
             log.info("Report removal failed: " + report.getCode());
             e.printStackTrace();
@@ -93,10 +107,21 @@ public class ReportServiceImpl implements ReportService {
 
     }
 
+    public void compileReport(ReportDetails report){
+        final String filePath = exportPath + report.getCode() + "." + report.getExportFormat().toString().toLowerCase();
+        final ModelService service = serviceHolder.get(report.getExportClass());
+        List<?> objects = service.findAll();
+        try{
+            ReportBuilder.build(report, objects, filePath);
+        }
+        catch (final NoSuchFieldException e){
+        }
+    }
+
     @Override
     @Transactional
     public SearchResults<ReportDetails> search(
-      final DetachedCriteria criteria, final int start, final int max) {
+            final DetachedCriteria criteria, final int start, final int max) {
         return reportResource.search(criteria, start, max);
     }
 }

@@ -1,10 +1,13 @@
 package net.github.rtc.app.model.report;
 
 
+import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.util.annotation.validation.Maxlength;
 import net.github.rtc.util.annotation.validation.Required;
 import net.github.rtc.util.annotation.validation.Validatable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,7 +21,6 @@ import java.util.List;
 @Entity
 @Validatable
 public class ReportDetails {
-
     private static final int PRIMARY_LENGTH = 50;
 
     @Id

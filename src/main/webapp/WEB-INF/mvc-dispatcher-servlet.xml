@@ -1,6 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -8,6 +9,8 @@
         http://www.springframework.org/schema/context/spring-context-3.2.xsd
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.2.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
         >
@@ -90,4 +93,19 @@
                          value="net.github.rtc.app.model"/>
     </bean>
 
+    <util:map id="serviceHolder" map-class="java.util.HashMap">
+        <entry>
+            <key>
+                <value type="java.lang.Class">net.github.rtc.app.model.user.User</value>
+            </key>
+            <ref bean="userService"/>
+        </entry>
+
+        <entry>
+            <key>
+                <value type="java.lang.Class">net.github.rtc.app.model.course.Course</value>
+            </key>
+            <ref bean="coursesService"/>
+        </entry>
+    </util:map>
 </beans>

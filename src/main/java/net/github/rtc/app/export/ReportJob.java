@@ -3,56 +3,38 @@ package net.github.rtc.app.export;
 
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.service.ModelService;
+import net.github.rtc.app.service.ReportService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Ivan Yatcuba on 8/5/14.
  */
-public class ReportJob implements Job {
+@Component
+public class ReportJob {
+    public static final int TIMER = 5000 ;//cron
+//9000000
+    @Autowired
+    public ReportService reportService;
 
-    private static final String STRING_REPORT_JOB = "Job for report: ";
-
-    private static final Logger LOG = LoggerFactory.getLogger(
-      ReportJob.class.getName());
-
-    @Override
-    public void execute(final JobExecutionContext context) throws
-      JobExecutionException {
-        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        final ReportDetails reportDetails
-          = (ReportDetails) context.getMergedJobDataMap().get("report");
-        final ModelService modelService
-          = (ModelService) context.getMergedJobDataMap().get("modelService");
-        final String filePath = (String) context.getMergedJobDataMap().get(
-          "filePath");
-        actualExecute(reportDetails, modelService, filePath);
-    }
-
-    public void runOutOfContext(
-      final ReportDetails reportDetails,
-      final ModelService modelService,
-      final String filePath) {
-        actualExecute(reportDetails, modelService, filePath);
-    }
-
-    private void actualExecute(
-      final ReportDetails reportDetails,
-      final ModelService modelService,
-      final String filePath) {
-        final ReportBuilder reportBuilder = new ReportBuilder();
-        try {
-            reportBuilder.build(reportDetails.getFieldsFromClass(),
-              modelService.findAll(), reportDetails.getName(), filePath,
-              reportDetails.getExportFormat());
-            LOG.info(STRING_REPORT_JOB + reportDetails.getCode() + " "
-              + "completed!");
-        } catch (final NoSuchFieldException e) {
-            LOG.info(STRING_REPORT_JOB + reportDetails.getCode() + " failed!");
+    @Scheduled(fixedDelay = TIMER)
+    public void reportUpdate(){
+        List<ReportDetails> myList = reportService.getAll();
+        for (ReportDetails report : myList){
+            reportService.compileReport(report);
         }
     }
 }

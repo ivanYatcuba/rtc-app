@@ -4,6 +4,7 @@ import net.github.rtc.app.export.table.CSVTable;
 import net.github.rtc.app.export.table.ReportTable;
 import net.github.rtc.app.export.table.XLSNXTable;
 import net.github.rtc.app.model.report.ExportFormat;
+import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.util.annotation.ForExport;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -20,6 +21,10 @@ import java.util.List;
  */
 public class ReportBuilder {
 
+    public static <T> void build(ReportDetails report, List<T> objectsList, String exportPath) throws NoSuchFieldException{
+        build(report.getFieldsFromClass(), objectsList, report.getName(), exportPath, report.getExportFormat());
+    }
+
     /**
      * Create xlsx report file
      *
@@ -30,12 +35,12 @@ public class ReportBuilder {
      * @param sheetName    name of sheet in xlsx file.
      * @param filePath     path where report file will be stored
      */
-    public <T> void build(
-      final List<Field> reportFields,
-      final List<T> objectsList,
-      final String sheetName,
-      final String filePath,
-      final ExportFormat exportFormat) {
+    public static <T> void build(
+            final List<Field> reportFields,
+            final List<T> objectsList,
+            final String sheetName,
+            final String filePath,
+            final ExportFormat exportFormat) {
 
         ReportTable reportTable = null;
         if (exportFormat.equals(ExportFormat.XLSX)) {
@@ -52,7 +57,7 @@ public class ReportBuilder {
         reportTable.createRow(currentRow);
         for (final Field field : reportFields) {
             reportTable.createCell(currentRow, currentCol,
-              field.getAnnotation(ForExport.class).value());
+                    field.getAnnotation(ForExport.class).value());
             currentCol++;
         }
         //Getting info from list
@@ -63,21 +68,21 @@ public class ReportBuilder {
                 reportFields.get(j).setAccessible(true);
                 try {
                     if (reportFields.get(
-                      j).getDeclaringClass() != object.getClass()) {
+                            j).getDeclaringClass() != object.getClass()) {
                         for (final Field f : object.getClass()
-                          .getDeclaredFields()) {
+                                .getDeclaredFields()) {
                             if (f.getType() == reportFields.get(
-                              j).getDeclaringClass()) {
+                                    j).getDeclaringClass()) {
                                 f.setAccessible(true);
                                 reportTable.createCell(currentRow, j,
-                                  reportFields.get(j).get(f.get(object)));
+                                        reportFields.get(j).get(f.get(object)));
                                 f.setAccessible(false);
                                 break;
                             }
                         }
                     } else {
                         reportTable.createCell(currentRow, j,
-                          reportFields.get(j).get(object));
+                                reportFields.get(j).get(object));
                     }
                 } catch (IllegalAccessException | NullPointerException e) {
                     reportTable.createCell(currentRow, j, "");
