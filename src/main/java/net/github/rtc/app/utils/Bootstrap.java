@@ -1,8 +1,5 @@
 package net.github.rtc.app.utils;
 
-import net.github.rtc.app.export.JobManagerAction;
-import net.github.rtc.app.export.ReportJob;
-import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ReportService;

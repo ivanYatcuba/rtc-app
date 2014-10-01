@@ -3,7 +3,6 @@ package net.github.rtc.app.service;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -24,5 +23,5 @@ public interface ReportService {
 
     SearchResults<ReportDetails> search(DetachedCriteria criteria, int start, int max);
 
-    public void compileReport(ReportDetails report);
+    void compileReport(ReportDetails report);
 }

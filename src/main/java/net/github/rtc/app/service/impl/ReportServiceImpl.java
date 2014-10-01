@@ -2,8 +2,6 @@ package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.dao.impl.ReportDao;
 import net.github.rtc.app.export.ReportBuilder;
-import net.github.rtc.app.export.ReportJob;
-import net.github.rtc.app.export.table.ReportTable;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.ReportService;
@@ -104,14 +102,14 @@ public class ReportServiceImpl implements ReportService {
 
     }
 
-    public void compileReport(ReportDetails report){
+    public void compileReport(ReportDetails report) {
         final String filePath = exportPath + report.getCode() + "." + report.getExportFormat().toString().toLowerCase();
         final ModelService service = serviceHolder.get(report.getExportClass());
-        List<?> objects = service.findAll();
-        try{
+        final List<?> objects = service.findAll();
+        try {
             ReportBuilder.build(report, objects, filePath);
-        }
-        catch (final NoSuchFieldException e){
+        } catch (final NoSuchFieldException e) {
+            log.info("Report building failed: " + report.getCode());
         }
     }
 
