@@ -1,4 +1,5 @@
 <#import "../../../../../datatables.ftl" as datatables/>
+<h3><@spring.message "news.search.result.page.header"/></h3>
 <div>
 <table class="table" id="UserTable">
     <thead>

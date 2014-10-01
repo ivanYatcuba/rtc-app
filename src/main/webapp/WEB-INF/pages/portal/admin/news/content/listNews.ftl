@@ -5,7 +5,7 @@
         border-top:2px solid #e1dede
     }
 </style>
-<h4><@spring.message "news.search.result.page.header"/></h4>
+
 
 <@datatables.datatable "/portal/admin/news/content/search/filterForm.ftl" "/portal/admin/news/content/search/searchTable.ftl" "/admin/news/search"/>
 
