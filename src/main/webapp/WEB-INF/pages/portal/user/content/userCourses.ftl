@@ -36,7 +36,7 @@
 </div>
 
 
-<div class="popup" id="window-popup">
+<div class="popup" id="window-popup" style="display: none">
     <div class="popup-content">
         <center>
             <h2><@spring.message "userCourses"/></h2>
@@ -49,17 +49,23 @@
             <input name="selectedCode" type="hidden" id="selectedCode"
                    value="test">
 
+            <div id="DEV" style="display: none;">
             <input type="radio" name="userCourses" id="DEV"
-                   value="<@spring.message "userCourses.developer"/>" checked>
+                   value="<@spring.message "userCourses.developer"/>"  />
             <@spring.message "userCourses.developer"/></label><br/>
+            </div>
 
+            <div id="QA" style="display: none;">
             <input type="radio" name="userCourses" id="QA"
-                   value="<@spring.message "userCourses.tester"/>">
+                   value="<@spring.message "userCourses.tester"/>"/>
             <@spring.message "userCourses.tester"/></label><br/>
+            </div>
 
-            <input type="radio" name="userCourses" id="optionsRadios2"
-                   value="<@spring.message "userCourses.Business_Analyst"/>">
+            <div id="BA" style="display: none;">
+            <input type="radio" name="userCourses" id="BA"
+                   value="<@spring.message "userCourses.Business_Analyst"/>"/>
             <@spring.message "userCourses.Business_Analyst"/></label><br/>
+            </div>
 
             <strong><@spring.message "userCourses.because"/></strong><br/>
 
@@ -81,11 +87,10 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        PopUpHide();
-    });
     function PopUpShow(types) {
-        types.split(",")//[ QA,DEV]
+        types.split(",").forEach(function(type){
+            $("#"+type).show()
+        })
         $("#window-popup").show();
     }
     function PopUpHide() {
