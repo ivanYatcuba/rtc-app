@@ -55,16 +55,15 @@
         </table>
     </div>
 </div>
-
 <div class="row">
-    <div class="col-md-6"
+    <div class="col-md-6">
     <a  href="<@spring.url "/admin/course/create" />">
         <button class="btn btn-primary">Create New</button>
     </a>
-</div>
-<div class="col-md-6" style="text-align: right">
-<@spring.addPagination "/admin/course/switch/" />
-</div>
+    </div>
+    <div class="col-md-6" style="text-align: right">
+        <@spring.addPagination "/admin/course/switch/" />
+    </div>
 </div>
 
 
