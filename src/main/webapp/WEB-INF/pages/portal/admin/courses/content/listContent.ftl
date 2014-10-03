@@ -2,7 +2,7 @@
 
 <#include "searchPanel.ftl">
 <h3>Search Results</h3>
-<@spring.addPagination "/admin/course/switch" />
+<@spring.addPagination "/admin/course/switch/" />
 <div id="data" class="row">
     <div class="col-md-12">
         <table width="100%" class="table-bordered table">
