@@ -3,8 +3,6 @@
       <#--action="<@spring.url "/admin/user/filter"/>" method="get">-->
 <div class="row">
     <div class="col-md-6">
-        <#--<@spring.formItem "filterCourse.name"/>-->
-        <#--<@spring.bind "filterCourse.name"/>-->
     </div>
     <div class="col-md-6">
     </div>
@@ -68,7 +66,7 @@
         <#if (user.status)??>
             <td style="vertical-align: middle">
                 <#if (user.status)=="ACTIVE">
-                    <span class="label label-success">Active</span>
+                    <span class="label label-success" style="width: 90px; height: 20px">Active</span>
                 <#else>
                     <span class="label label-danger">Deleted</span>
                 </#if>
@@ -117,38 +115,37 @@
     </div>
 </div>
 
-<div class="popup " id="window-popup" style="display: none">
-    <div class="popup-content">
-        <center>
-            <h2>Remove</h2>
-        </center>
-        <center>
-            <lable>Do you realy want to remove specified user?</lable>
-        </center>
-        <br>
-        <center>
-            <form name="deleteUser" action="<@spring.url"/admin/user/remove/"/>" method="post">
-                <input type="hidden" id="userCode" name="userCode"/>
-                <button class="btn" type="submit">Ok</button>
-                <button class="btn" type="button" onClick="javascript:PopUpHide()">Cancel</button>
-            </form>
-        </center>
+<!-- Modal -->
+<div class="modal" style="top: 15%; left: 1%" id="removeUserModal" tabindex="-1" role="dialog" aria-labelledby="removeUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="removeUserModalLabel">Remove User</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to remove User?
+            </div>
+            <div class="modal-footer">
+                <form name="deleteUser" action="<@spring.url"/admin/user/remove/"/>" method="post">
+                    <input type="hidden" id="userCode" name="userCode"/>
+                    <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" onClick="javascript:PopUpHide()">Remove</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
-<br><br><br>
 
 
 
 <script type="text/javascript">
-//	$(document).ready(function () {
-//		PopUpHide();
-//	});
     function PopUpShow(userCode) {
         $("#userCode").val(userCode);
-        $("#window-popup").show();
+        $('#removeUserModal').modal('show')
     }
     function PopUpHide() {
-        $("#window-popup").hide();
+        $('#removeUserModal').modal('hide');
     }
 </script>
