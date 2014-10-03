@@ -107,8 +107,8 @@
 </table>
 <hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
 <div class="row">
-    <div class="col-md-6"
-    <form  class="inline-box"  name="createUser" action="<@spring.url"/admin/user/createUser"/>"method="get">
+    <div class="col-md-6">
+    <form  class="inline-box" style="margin: 0px"  name="createUser" action="<@spring.url"/admin/user/createUser"/>"method="get">
         <button  class="btn btn-primary" type="submit">Create New</button>
     </form>
     </div>

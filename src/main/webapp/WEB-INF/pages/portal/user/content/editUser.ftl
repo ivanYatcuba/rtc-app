@@ -9,7 +9,7 @@
 
         <div class="span2" style="text-align: right">
 
-            <input type="submit" class="btn" value="Save"/> or <a
+            <input type="submit" class="btn btn-primary" value="Save"/> or <a
                 href="<@spring.url "/user/view/" />">Cancel</a>
 
         </div>
