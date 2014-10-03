@@ -36,7 +36,7 @@
 <#list users as user>
     <tr style="vertical-align: middle">
         <#if (user.name) ?? && (user.surname) ?? >
-            <td style="vertical-align: middle">
+            <td style="width: 30%; vertical-align: middle">
                 <div class="row">
                    <div class="col-md-2">
                        <img src = "<@spring.url'/resources/images/errorCat.jpg'/>" alt="..." class="avatar">
@@ -52,7 +52,11 @@
         </#if>
 
         <#if (user.email)??>
-            <td style="vertical-align: middle">${user.email}</td>
+        <div class="row">
+           <div class="col-md-6">
+                <td style="vertical-align: middle">${user.email}</td>
+           </div>
+        </div>
         <#else>
             <td style="vertical-align: middle">None</td>
         </#if>
@@ -66,24 +70,34 @@
         <#if (user.status)??>
             <td style="vertical-align: middle">
                 <#if (user.status)=="ACTIVE">
-                    <span class="label label-success" style="width: 90px; height: 20px">Active</span>
+                    <span class="label label-success" style="width: 90px; height: 34px">Active</span>
                 <#else>
-                    <span class="label label-danger">Deleted</span>
+                    <span class="label label-danger" style="width: 90px; height: 34px">Deleted</span>
                 </#if>
             </td>
         <#else>
             <td style="vertical-align: middle">
-                <span class="label label-default">None</span>
+                <span class="label label-default" style="width: 90px; height: 34px">None</span>
             </td>
         </#if>
-        <td style="vertical-align: middle">
+        <td style="width: 15%; vertical-align: middle">
             <#if user.isForRemoval() >
                 <form style="margin: 0 0 0" name="deleteUser" action="<@spring.url"/admin/user/restore/"/>" method="post">
                     <input type="hidden" name="userCode" value="${user.code}"/>
-                    <button class="btn btn-default" type="submit">Restore</button>
+                    <button class="btn btn-default" style="width: 112px " type="submit">Restore</button>
                 </form>
             <#else>
-                <button class="btn btn-default" onclick="javascript:PopUpShow('${user.code}')">Remove</button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">Inactivate</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" onclick="javascript:PopUpShow('${user.code}')">Remove</a></li>
+                     </ul>
+                </div>
+                <#--<button class="btn btn-default" onclick="javascript:PopUpShow('${user.code}')">Remove</button>-->
             </#if>
                 <#--<div class="btn-group">-->
                     <#--<button type="button" class="btn btn-default">Action</button>-->
