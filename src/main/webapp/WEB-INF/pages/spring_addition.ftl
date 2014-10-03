@@ -3,8 +3,6 @@
 <
 
 <#macro includeLink>
-<#--<link href="<@spring.url'/resources/css/bootstrap.css'/>" rel="stylesheet"/>-->
-<#--<link href="<@spring.url'/resources/css/dashboard.css'/>" rel="stylesheet" type="text/css"-->
 <link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
 <link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
 <link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
@@ -118,7 +116,7 @@
 <div id="navigation">
     <#if startPage??>
        <div class="row">
-           <ul class="pagination">
+           <ul class="pagination" style="margin: 0px;">
                 <li><a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a></li>
 
                <#if currentPage &gt; startPage+1>
@@ -195,7 +193,7 @@
         $.ajax({
             type: "POST",
             url: "<@spring.url "${switchUrl}" />",
-            data: {page: page},
+            data: {   page: page},
             success: function (result) {
                 var str = result;
                 var live_str = $('<div>', {html: str});

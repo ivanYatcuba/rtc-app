@@ -35,23 +35,36 @@ public class UserController {
     private static final String PATH_PAGE_USER_PAGE = "/page/userPagea";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_VIEW_ALL = "redirect:/admin/user/viewAll";
+    private static final String STRING_FILTER_USER = "filterUser";
 
     @Autowired
     private ValidationContext validationContext;
     @Autowired
     private UserService userService;
 
+    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    public ModelAndView filter(){
+//            @ModelAttribute(STRING_FILTER_USER) final
+//                               CourseSearchFilter filterCourse){
+        //return viewall(/*1, */filterCourse);
+        return new ModelAndView();
+    }
+
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView viewAll() {
-        return viewAll(1);
+            return viewAll(1);
     }
 
     @RequestMapping(value = "/viewAll/{numberOfPage}", method = RequestMethod.POST)
     public ModelAndView viewAll(@PathVariable final int numberOfPage) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
         final SearchResults<User> results = userService.search(DetachedCriteria.forClass(User.class), numberOfPage, USERS_PER_PAGE);
-        mav.addAllObjects(results.getPageModel(USERS_PER_PAGE, numberOfPage));
+        results.setPage(numberOfPage);
+        results.setPerPage(5);
+        mav.addAllObjects(results.getPageModel(/*USERS_PER_PAGE, numberOfPage)*/));
         mav.addObject(STRING_USERS, results.getResults());
+       // mav.addObject(STRING_FILTER_USER, filterUser);
+//        mav.addObject("startPage", 1);
         return mav;
     }
 

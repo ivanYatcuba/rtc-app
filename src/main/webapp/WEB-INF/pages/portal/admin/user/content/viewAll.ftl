@@ -1,35 +1,68 @@
-<h4><@spring.message "user.search.result.page.header"/></h4>
-<@spring.addPagination "/admin/user/viewAll/"/>
-<table width="100%" class="table" id="UserTable">
+<h4><@spring.message "user.search.result.page.header.criteria"/></h4>
+<form class="form-horizontal" name="userFilter" role="form">
+      <#--action="<@spring.url "/admin/user/filter"/>" method="get">-->
+<div class="row">
+    <div class="col-md-6">
+        <#--<@spring.formItem "filterCourse.name"/>-->
+        <#--<@spring.bind "filterCourse.name"/>-->
+    </div>
+    <div class="col-md-6">
+    </div>
+</div>
+</form>
+
+<div class="row">
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6" style="text-align: right">
+        <input type="submit" class="btn btn-primary" style="width: 90px" value="Search"/>
+        <#--<a href="<@spring.url "/admin/course" />">Reset</a>-->
+        <input type="button" class="btn btn-default" style="width: 90px" onClick="<@spring.url "/admin/course" />" value='Reset'>
+    </div>
+</div>
+<hr style="height: 6px; border-top: 2px solid #ddd;">
+
+
+<h4><@spring.message "user.search.result.page.header.search"/></h4>
+<table width="100%" class="table" style="margin-bottom: 5px" id="UserTable">
         <thead>
         <tr>
             <th><@spring.message "user.search.result.header.user"/></th>
             <th><@spring.message "user.search.result.header.email"/></th>
             <th><@spring.message "user.search.result.header.created.date"/></th>
             <th><@spring.message "user.search.result.header.status"/></th>
+            <th></th>
         </tr>
         </thead>
 
 <#list users as user>
-    <tr>
+    <tr style="vertical-align: middle">
         <#if (user.name) ?? && (user.surname) ?? >
-            <td>
-                <a href="<@spring.url"/admin/user/userPage/${user.code}"/>">  ${user.surname + " " + user.name } </a>
+            <td style="vertical-align: middle">
+                <div class="row">
+                   <div class="col-md-2">
+                       <img src = "<@spring.url'/resources/images/errorCat.jpg'/>" alt="..." class="avatar">
+                   </div>
+                   <div class="col-md-10">
+                       <a href="<@spring.url"/admin/user/userPage/${user.code}"/>">  ${user.surname + " " + user.name } </a>
+                       <br>User
+                    </div>
+                </div>
             </td>
         <#else>
-            <td>None</td>
+            <td style="vertical-align: middle">None</td>
         </#if>
 
         <#if (user.email)??>
-            <td>${user.email}</td>
+            <td style="vertical-align: middle">${user.email}</td>
         <#else>
-            <td>None</td>
+            <td style="vertical-align: middle">None</td>
         </#if>
 
         <#if (user.registerDate)??>
-            <td>${user.registerDate?datetime?string("dd-MM-yyyy")}</td>
+            <td style="vertical-align: middle">${user.registerDate?datetime?string("dd-MM-yyyy")}</td>
         <#else>
-            <td>None</td>
+            <td style="vertical-align: middle">None</td>
         </#if>
 
         <#if (user.status)??>
@@ -45,7 +78,7 @@
                 <span class="label label-default">None</span>
             </td>
         </#if>
-        <td>
+        <td style="vertical-align: middle">
             <#if user.isForRemoval() >
                 <form style="margin: 0 0 0" name="deleteUser" action="<@spring.url"/admin/user/restore/"/>" method="post">
                     <input type="hidden" name="userCode" value="${user.code}"/>
@@ -72,11 +105,16 @@
     </tr>
 </#list>
 </table>
-<div>
-        <form  class="inline-box"  name="createUser" action="<@spring.url"/admin/user/createUser"/>"method="get">
-            <button  class="btn btn-primary" type="submit">Create New</button>
-        </form>
-
+<hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
+<div class="row">
+    <div class="col-md-6"
+    <form  class="inline-box"  name="createUser" action="<@spring.url"/admin/user/createUser"/>"method="get">
+        <button  class="btn btn-primary" type="submit">Create New</button>
+    </form>
+    </div>
+    <div class="col-md-6" style="text-align: right">
+        <@spring.addPagination "/admin/user/viewAll"/>
+    </div>
 </div>
 
 <div class="popup " id="window-popup" style="display: none">
