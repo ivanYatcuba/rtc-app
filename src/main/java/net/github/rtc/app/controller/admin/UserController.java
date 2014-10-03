@@ -43,7 +43,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public ModelAndView filter(){
+    public ModelAndView filter() {
 //            @ModelAttribute(STRING_FILTER_USER) final
 //                               CourseSearchFilter filterCourse){
         //return viewall(/*1, */filterCourse);
@@ -60,7 +60,7 @@ public class UserController {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
         final SearchResults<User> results = userService.search(DetachedCriteria.forClass(User.class), numberOfPage, USERS_PER_PAGE);
         results.setPage(numberOfPage);
-        results.setPerPage(5);
+        results.setPerPage(USERS_PER_PAGE);
         mav.addAllObjects(results.getPageModel(/*USERS_PER_PAGE, numberOfPage)*/));
         mav.addObject(STRING_USERS, results.getResults());
        // mav.addObject(STRING_FILTER_USER, filterUser);
