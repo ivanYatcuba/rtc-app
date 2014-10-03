@@ -2,7 +2,7 @@
 
 <#include "searchPanel.ftl">
 <h3>Search Results</h3>
-<@spring.addPagination "/admin/course/switch/" />
+
 <div id="data" class="row">
     <div class="col-md-12">
         <table width="100%" class="table-bordered table">
@@ -56,9 +56,19 @@
     </div>
 </div>
 
-<br>
-<a style="float: right" href="<@spring.url "/admin/course/create" />">
-    <button class="btn">Create New</button>
-</a>
+<div class="row">
+    <div class="col-md-6"
+    <a  href="<@spring.url "/admin/course/create" />">
+        <button class="btn btn-primary">Create New</button>
+    </a>
+</div>
+<div class="col-md-6" style="text-align: right">
+<@spring.addPagination "/admin/course/switch/" />
+</div>
+</div>
+
+
+
+
 
 
