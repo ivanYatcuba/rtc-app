@@ -15,9 +15,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
-import javax.ws.rs.Path;
 import java.text.SimpleDateFormat;
 import java.util.*;
 

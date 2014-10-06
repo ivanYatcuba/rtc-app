@@ -9,6 +9,7 @@ package net.github.rtc.app.service;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
+//import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 
@@ -38,6 +39,8 @@ public interface UserService {
     List<User> getUserByRole(RoleType type);
 
     SearchResults<User> search(DetachedCriteria criteria, int start, int max);
+
+//    SearchResults<User> search(AbstractSearchCommand);
 
     User loadUserByUsername(String email);
 
