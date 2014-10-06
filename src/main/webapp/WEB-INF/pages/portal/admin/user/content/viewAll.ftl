@@ -41,9 +41,9 @@
                    <div class="col-md-2">
                        <img src = "<@spring.url'/resources/images/errorCat.jpg'/>" alt="..." class="avatar">
                    </div>
-                   <div class="col-md-10">
+                   <div class="col-md-10" style="padding-left: 22px; vertical-align: middle ">
                        <a href="<@spring.url"/admin/user/userPage/${user.code}"/>">  ${user.surname + " " + user.name } </a>
-                       <br>User
+                       <br><font face="Aerial"><em>Admin</em></font>
                     </div>
                 </div>
             </td>
@@ -81,38 +81,33 @@
             </td>
         </#if>
         <td style="width: 15%; vertical-align: middle">
-            <#if user.isForRemoval() >
-                <form style="margin: 0 0 0" name="deleteUser" action="<@spring.url"/admin/user/restore/"/>" method="post">
-                    <input type="hidden" name="userCode" value="${user.code}"/>
-                    <button class="btn btn-default" style="width: 112px " type="submit">Restore</button>
-                </form>
+            <#if user.isForRemoval()>
+                <div class="btn-group">
+                    <button class="btn btn-default dropdown-toggle" style="width: 112px" type="button" data-toggle="dropdown">
+                        Action
+                    </button>
+                    <ul class="dropdown-menu" style="width: 112px" role="menu">
+                      <li>
+                          <a href="<@spring.url"/admin/user/restore/${user.code}"/>">Restore</a>
+                      </li>
+                    </ul>
+                </div>
+
             <#else>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default">Inactivate</button>
-                    <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
+                    <button class="btn btn-default dropdown-toggle" style="width: 112px" type="button" data-toggle="dropdown">
+                        Action
                     </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#" onclick="javascript:PopUpShow('${user.code}')">Remove</a></li>
-                     </ul>
+                    <ul class="dropdown-menu" style="width: 112px role="menu">
+                        <li>
+                            <a href="#" onclick="javascript:PopUpShow('${user.code}')">Remove</a>
+                        </li>
+                        <li>
+                            <a href="#">Inactivate</a>
+                        </li>
+                    </ul>
                 </div>
-                <#--<button class="btn btn-default" onclick="javascript:PopUpShow('${user.code}')">Remove</button>-->
             </#if>
-                <#--<div class="btn-group">-->
-                    <#--<button type="button" class="btn btn-default">Action</button>-->
-                    <#--<button type="button" class="btn btn-default dropdown-toggle dropdown-button" data-toggle="dropdown">-->
-                        <#--<span class="caret"></span>-->
-                        <#--<span class="sr-only">Toggle Dropdown</span>-->
-                    <#--</button>-->
-                    <#--<ul class="dropdown-menu" role="menu">-->
-                        <#--<li><a href="#">Action</a></li>-->
-                        <#--<li><a href="#">Another action</a></li>-->
-                        <#--<li><a href="#">Something else here</a></li>-->
-                        <#--<li class="divider"></li>-->
-                        <#--<li><a href="#">Separated link</a></li>-->
-                    <#--</ul>-->
-                <#--</div>-->
         </td>
     </tr>
 </#list>

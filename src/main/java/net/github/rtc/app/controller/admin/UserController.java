@@ -17,6 +17,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import javax.ws.rs.Path;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -90,8 +91,8 @@ public class UserController {
         return REDIRECT_VIEW_ALL;
     }
 
-    @RequestMapping(value = "/restore", method = RequestMethod.POST)
-    public String setStatusActive(@RequestParam final String userCode) {
+    @RequestMapping(value = "/restore/{userCode}", method = RequestMethod.GET)
+    public String setStatusActive(@PathVariable final String userCode) {
         userService.setUserStatusActive(userCode);
         return REDIRECT_VIEW_ALL;
     }

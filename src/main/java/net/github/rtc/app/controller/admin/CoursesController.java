@@ -65,7 +65,7 @@ public class CoursesController {
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     public ModelAndView filter(@ModelAttribute(STRING_FILTER_COURSE) final
                                CourseSearchFilter filterCourse) {
-        return switchPage(/*1, */filterCourse);
+        return switchPage(filterCourse);
     }
 
 
