@@ -26,7 +26,6 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     @Override
     public Authentication authenticate(final Authentication authentication) {
         final String username = authentication.getName();

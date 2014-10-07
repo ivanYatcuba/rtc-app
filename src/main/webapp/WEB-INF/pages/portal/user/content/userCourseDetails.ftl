@@ -1,4 +1,14 @@
-<h3 class="page-header"><@spring.message "course.details"/></h3>
+<style>
+    label {
+        float: left;
+        width: 13em;
+        margin-right: 1em;
+        text-align: right;
+        font-size: 10pt;
+        margin-bottom: 10px;
+    }
+</style>
+<h3 class="page-header"><@spring.message "course.details"/></h3><br>
 <div class="row-fluid span12" style="margin-left: 1px">
     <div class="span6">
         <label><@spring.message "course.name"/></label>
@@ -32,20 +42,17 @@
 
 &NonBreakingSpace;
 <hr>
-<div class="row-fluid span12" style="margin-left: 1px; ">
-    <div class="span6">
-        <label><@spring.message "course.author.lastName"/></label>
+<div class="row">
+    <div class="col-md-6">
+        <label><@spring.message "course.experts"/></label>
 
-        <p>&nbsp${course.author.lastName}</p>
-        <label><@spring.message  "course.author.firstName"/></label>
+        <div id="experts">
+        <#list course.experts as expert>
+            <label></label>
 
-        <p>&nbsp${course.author.firstName}</p>
-    </div>
-
-    <div class="span5">
-        <label><@spring.message  "course.author.email"/></label>
-
-        <p>&nbsp${course.author.email}</p>
+            <p>&nbsp${expert.name}&nbsp${expert.surname}&nbsp${expert.email}</p>
+        </#list>
+        </div>
     </div>
 </div>
 
@@ -76,8 +83,10 @@
 <hr>
 <div class="row">
     <div class="span12" align="right">
-        <a href="<@spring.url "/user/userCourses" />">
-            <button class="btn"><@spring.message "action.back"/></button>
+        <a href="<@spring.url "/admin/course/${course.getCode()}/update" />">
+            <button class="btn"><@spring.message "coursesPage.action.edit"/></button>
+        </a> or
+        <a href="<@spring.url "/admin/course" />"><@spring.message "coursesPage.action.cancel"/></a>
     </div>
 </div>
 
