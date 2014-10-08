@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.user;
 
+import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,13 @@ public class RegisterController {
         final User u = new User();
         mav.getModelMap().addAttribute("user", u);
         mav.addObject("validationRules", validationContext.get(User.class));
+        try {
+            Object ob = null;
+            ob.hashCode();
+        }
+        catch (Exception e) {
+            throw new ServiceProcessingException(e.toString()+" "+e.getMessage());
+        }
         return mav;
     }
 }
