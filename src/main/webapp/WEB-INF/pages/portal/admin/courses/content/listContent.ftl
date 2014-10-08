@@ -1,4 +1,4 @@
-<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
+Create New<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
 
 <#include "searchPanel.ftl">
 <h3>Search Results</h3>

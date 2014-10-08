@@ -18,4 +18,12 @@ public class NewsSearchFilter extends AbstractSearchCommand {
     public DetachedCriteria getCriteria() {
         return DetachedCriteria.forClass(News.class);
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
