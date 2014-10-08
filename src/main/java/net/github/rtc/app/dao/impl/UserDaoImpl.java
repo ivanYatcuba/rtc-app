@@ -50,7 +50,7 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao
     public List<User> getUsersByType(final RoleType type) {
         return getCurrentSession().createCriteria(
           User.class).createAlias("authorities", "a").
-          add(Restrictions.eq("a.name", type.name())).list();
+          add(Restrictions.eq("a.name", type)).list();
     }
 
     @Override
