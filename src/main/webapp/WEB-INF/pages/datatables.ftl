@@ -1,4 +1,4 @@
-<#include "/spring.ftl"/>
+<#import "spring_addition.ftl" as spring/>
 
 <#macro datatable filterForm searchTable searchUrl>
 <div id="filterForm">
