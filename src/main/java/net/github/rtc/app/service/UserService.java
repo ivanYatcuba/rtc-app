@@ -12,25 +12,24 @@ import net.github.rtc.app.model.user.User;
 //import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
 /**
  * @author Саша
  */
-public interface UserService {
+public interface UserService extends ModelService<User>, UserDetailsService {
 
-    List<User> findAll();
-
+    /**
+     *
+     * @param user
+     */
     void delete(User user);
 
     void deleteByCode(String code);
 
     User findByCode(String code);
-
-    User create(User user);
-
-    void update(User user);
 
     void createRole(RoleType type);
 
@@ -44,9 +43,9 @@ public interface UserService {
 
     User loadUserByUsername(String email);
 
-    void setUserStatusForRemoval(String userCode);
+    void markUserForRemoval(String userCode);
 
-    void setUserStatusActive(String userCode);
+    void activateUser(String userCode);
 
-    void deletingUserWithRemovalDate();
+    void deleteUsersMarkedForRemoval();
 }
