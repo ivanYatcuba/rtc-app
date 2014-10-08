@@ -1,6 +1,5 @@
 package net.github.rtc.app.controller.admin;
 
-
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.service.NewsService;
