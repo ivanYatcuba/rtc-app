@@ -69,7 +69,7 @@ public class UserServiceImpl implements  UserService {
     @Transactional
     public User create(final User user) {
         log.debug("Creating user");
-        if(user.getRegisterDate()==null) {
+        if (user.getRegisterDate() == null) {
             user.setRegisterDate(new Date()); //new Date() - bad bad bad
         }
 //        if (loadUserByUsername(user.getEmail()) != null) {

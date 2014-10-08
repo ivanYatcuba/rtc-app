@@ -18,19 +18,22 @@ import java.util.Collection;
 import java.util.List;
 
 
+
 /**
  * @author Саша
  */
 @Repository
 public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao {
 
+    public static final String EMAIL_STRING = "email";
+
     @Override
     public User findByEmail(final String email) {
-        getCurrentSession().createCriteria(User.class).
-                add(Restrictions.eq("email", email)).list().size();
+        int num = getCurrentSession().createCriteria(User.class).
+                add(Restrictions.eq(EMAIL_STRING, email)).list().size();
         return (User) getCurrentSession().createCriteria(User
           .class).
-          add(Restrictions.eq("email", email)).list().get(0);
+          add(Restrictions.eq(EMAIL_STRING, email)).list().get(num);
     }
 
     @Override
