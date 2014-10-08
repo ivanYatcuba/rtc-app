@@ -19,8 +19,7 @@
     </servlet-mapping>
 
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener
-        </listener-class>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
     <filter-mapping>
