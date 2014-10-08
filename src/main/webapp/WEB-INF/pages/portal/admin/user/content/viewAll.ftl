@@ -1,24 +1,25 @@
-<h4><@spring.message "user.search.result.page.header.criteria"/></h4>
-<form class="form-horizontal" name="userFilter" role="form">
-      <#--action="<@spring.url "/admin/user/filter"/>" method="get">-->
-<div class="row">
-    <div class="col-md-6">
-    </div>
-    <div class="col-md-6">
-    </div>
-</div>
-</form>
+<form role="form">
+    <div class="row">
+       <div class="col-md-6">
+           <label for="Name">Last Name:</label>
+           <input id="Name" class="" placeholder="">
+       </div>
+       <div class="col-md-2">
 
-<div class="row">
-    <div class="col-md-6">
+       </div>
     </div>
-    <div class="col-md-6" style="text-align: right">
-        <input type="submit" class="btn btn-primary" style="width: 90px" value="Search"/>
-        <#--<a href="<@spring.url "/admin/course" />">Reset</a>-->
-        <input type="button" class="btn btn-default" style="width: 90px" onClick="<@spring.url "/admin/course" />" value='Reset'>
+    <div class="row">
+       <div class="col-md-4">
+            <label for="role">Role:</label>
+           <input id="role" placeholder="">
+       </div>
+
+       <div class="col-md-2">
+
+       </div>
     </div>
-</div>
-<hr style="height: 6px; border-top: 2px solid #ddd;">
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
 
 
 <h4><@spring.message "user.search.result.page.header.search"/></h4>
@@ -43,7 +44,11 @@
                    </div>
                    <div class="col-md-10" style="padding-left: 22px; vertical-align: middle ">
                        <a href="<@spring.url"/admin/user/userPage/${user.code}"/>">  ${user.surname + " " + user.name } </a>
-                       <br><font face="Aerial"><em>Admin</em></font>
+                       <br><font face="Aerial"><em>
+                        <#list user.authorities as role>
+                        ${role.name.roleViewName}
+                        </#list>
+                        </em></font>
                     </div>
                 </div>
             </td>
@@ -72,7 +77,11 @@
                 <#if (user.status)=="ACTIVE">
                     <span class="label label-success" style="width: 90px; height: 34px">Active</span>
                 <#else>
+                    <#if (user.status)=="FOR_REMOVAL">
                     <span class="label label-danger" style="width: 90px; height: 34px">Deleted</span>
+                    <#else>
+                    <span class="label label-danger" style="width: 90px; height: 34px">Inactive</span>
+                    </#if>
                 </#if>
             </td>
         <#else>

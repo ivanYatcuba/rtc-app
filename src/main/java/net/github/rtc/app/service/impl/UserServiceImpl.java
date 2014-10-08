@@ -53,7 +53,7 @@ public class UserServiceImpl implements  UserService {
     @Override
     @Transactional
     public void deleteByCode(final String code) {
-        log.debug("Removing user by code: {}", code);
+        log.debug("Removing user by code:  {}", code);
         userDao.deleteByCode(code);
     }
 

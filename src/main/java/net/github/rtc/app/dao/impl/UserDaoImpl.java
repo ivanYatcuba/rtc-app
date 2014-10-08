@@ -29,11 +29,11 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao
 
     @Override
     public User findByEmail(final String email) {
-        int num = getCurrentSession().createCriteria(User.class).
+        final int num = getCurrentSession().createCriteria(User.class).
                 add(Restrictions.eq(EMAIL_STRING, email)).list().size();
         return (User) getCurrentSession().createCriteria(User
           .class).
-          add(Restrictions.eq(EMAIL_STRING, email)).list().get(num);
+          add(Restrictions.eq(EMAIL_STRING, email)).list().get(0);
     }
 
     @Override
