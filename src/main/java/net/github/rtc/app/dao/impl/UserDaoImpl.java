@@ -31,14 +31,14 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao
     public User findByEmail(final String email) {
         return (User) getCurrentSession().createCriteria(User
           .class).
-          add(Restrictions.eq("email", email)).uniqueResult();
+          add(Restrictions.eq(EMAIL_STRING, email)).uniqueResult();
     }
 
     @Override
     public Role getRoleByType(final RoleType type) {
         return (Role) getCurrentSession().createCriteria(Role
           .class).
-          add(Restrictions.eq("name", type.name())).uniqueResult();
+          add(Restrictions.eq(EMAIL_STRING, type.name())).uniqueResult();
     }
 
     @Override
