@@ -10,7 +10,7 @@
 
     <div class="col-md-6">
         <!--Password-->
-    <@spring.formItem "user.password" "id=pas   sword class=required" "password"/>
+    <@spring.formItem "user.password" "id=password class=required" "password"/>
         <div class="controls">
             <label for="check"></label>
             <input id="check"
