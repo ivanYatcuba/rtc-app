@@ -21,7 +21,7 @@ public class JobRemovingUser {
     @Scheduled(fixedDelay = JOB_DELAY)
     public void deletingUser() {
                 log.debug("JobRemovingUser started");
-                userService.deletingUserWithRemovalDate();
+                userService.deleteUsersMarkedForRemoval();
     }
 
 }

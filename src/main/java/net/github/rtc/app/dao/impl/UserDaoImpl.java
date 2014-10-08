@@ -30,7 +30,7 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao
                 add(Restrictions.eq("email", email)).list().size();
         return (User) getCurrentSession().createCriteria(User
           .class).
-          add(Restrictions.eq("email", email)).list().
+          add(Restrictions.eq("email", email)).list().get(0);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao
     }
 
     @Override
-    public List<User> getUserByType(final RoleType type) {
+    public List<User> getUsersByType(final RoleType type) {
         return getCurrentSession().createCriteria(
           User.class).createAlias("authorities", "a").
           add(Restrictions.eq("a.name", type.name())).list();

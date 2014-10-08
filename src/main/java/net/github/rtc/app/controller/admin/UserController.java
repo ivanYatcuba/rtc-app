@@ -85,13 +85,13 @@ public class UserController {
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String setStatusForRemoval(@RequestParam final String userCode) {
-        userService.setUserStatusForRemoval(userCode);
+        userService.markUserForRemoval(userCode);
         return REDIRECT_VIEW_ALL;
     }
 
     @RequestMapping(value = "/restore/{userCode}", method = RequestMethod.GET)
     public String setStatusActive(@PathVariable final String userCode) {
-        userService.setUserStatusActive(userCode);
+        userService.activateUser(userCode);
         return REDIRECT_VIEW_ALL;
     }
 
@@ -117,7 +117,7 @@ public class UserController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session, @RequestParam final RoleType selectedRole) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
-        user.setRegisterDate(new Date());
+//      user.setRegisterDate(new Date());
         userService.create(user);
         session.setComplete();
         return REDIRECT_VIEW_ALL;

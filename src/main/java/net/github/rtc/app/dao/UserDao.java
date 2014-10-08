@@ -23,7 +23,7 @@ public interface UserDao extends GenericDao<User> {
 
     void createRole(RoleType type);
 
-    List<User> getUserByType(RoleType type);
+    List<User> getUsersByType(RoleType type);
 
     void deletingUser();
 
