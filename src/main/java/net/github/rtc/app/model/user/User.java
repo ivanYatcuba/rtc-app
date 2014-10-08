@@ -101,6 +101,12 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     @ForExport("Gender")
     private String gender;
 
+    @Required
+    @Maxlength(PRIMARY_LENGTH)
+    @Column
+    @ForExport("AdrPhoto")
+    private String adrphoto;
+
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "UserProgLanguages",
@@ -170,6 +176,13 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     public String getGender() {
         return this.gender;
     }
+
+    public void setAdrphoto(final String adrphoto) {
+        this.adrphoto = adrphoto;
+    }
+
+    public String getAdrphoto() { return  this.adrphoto; }
+
 
     @Override
     public String getUsername() {

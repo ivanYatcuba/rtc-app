@@ -1,11 +1,13 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
+import org.apache.commons.io.FileUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -14,8 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -115,12 +119,31 @@ public class UserController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session, @RequestParam final RoleType selectedRole) {
+    public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session, @RequestParam final RoleType selectedRole){
+                     /*    @RequestParam(value="photo", required=false) MultipartFile img) {*/
         user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
 //      user.setRegisterDate(new Date());
         userService.create(user);
+        ///// upload file to directory
+            /*if (!img.isEmpty()) {
+                user.setAdrphoto(saveImage(user.getId() + ".jpg", img));
+            }*/
+
         session.setComplete();
         return REDIRECT_VIEW_ALL;
+    }
+
+    private String saveImage(String filename, MultipartFile image) {
+        String adr = "D:/Work/PhotoDir/"  + filename;
+        try {
+            File file = new File(adr);
+            FileUtils.writeByteArrayToFile(file, image.getBytes());
+        } catch (Exception e) {
+            throw new ServiceProcessingException("Unable to save image: " + e.getMessage());
+        }
+
+        return adr;
+
     }
 
     @RequestMapping(value = "/update/{code}", method = RequestMethod.POST)

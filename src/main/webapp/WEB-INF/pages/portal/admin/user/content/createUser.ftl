@@ -32,12 +32,9 @@
     </div>
 
     <div class="col-md-6">
-        <img src = "<@spring.url'/resources/images/errorCat.jpg'/>" alt="..." class="round-image">
 
         <div class ="row">
-        <#--<div class="col-md-2">-->
-            <button type="button" class="btn btn-link">Upload</button>
-        <#--</div>-->
+            File to upload: <input type="file" name="photo" id="photo"><br />
         </div>
 
     </div>
