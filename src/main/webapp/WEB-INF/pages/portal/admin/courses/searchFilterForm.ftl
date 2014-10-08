@@ -47,7 +47,7 @@
 <script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
 <script>
     $(function () {
-        $("#course").validate();
+        $("#courseFilter").validate();
         prepareCourseFormPage("<@spring.url "/admin/user/expertUsers"/>");
     <#if filterCourse.experts??>
         <#assign i = 0>

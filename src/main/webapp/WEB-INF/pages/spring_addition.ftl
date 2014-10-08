@@ -15,7 +15,7 @@
 <script src="<@spring.url'/resources/js/jquery/jquery-1.11.1.min.js'/>"></script>
 <script src="<@spring.url'/resources/js/bootstrap.min.js'/>" type="text/javascript"></script>
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
-<script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
+<#--<script src="<@spring.url'/reso/urces/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>-->
 <script src="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.js'/>" type="text/javascript" charset="utf-8"></script>
 <script src="<@spring.url'/resources/js/tag-it.js'/>" type="text/javascript" charset="utf-8"></script>
 </#macro>
@@ -91,7 +91,7 @@
 <#macro formValidation formName jsonRules >
 <#--<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>"></script>-->
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
-<script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
+<#--<script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>-->
 <script>
     $(document).ready(function () {
         $("#${formName}").validate({
