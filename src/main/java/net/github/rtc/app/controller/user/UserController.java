@@ -154,15 +154,11 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/courseDetails/{courseCode}",
-            method = RequestMethod.GET)
+    @RequestMapping(value = "/courseDetails/{courseCode}", method = RequestMethod.GET)
     public ModelAndView courseDetails(@PathVariable final String courseCode) {
-        final ModelAndView mav
-                = new ModelAndView("portal/user/page/courseDetail");
-        mav.addObject(STRING_COURSE, courseService.findByCode(courseCode));
-        mav.addObject(STRING_USER, userService
-                .loadUserByUsername(SecurityContextHolder.getContext()
-                        .getAuthentication().getName()));
+        final ModelAndView mav = new ModelAndView("portal/user/page/courseDetail");
+            mav.addObject(STRING_COURSE, courseService.findByCode(courseCode));
+            mav.addObject(STRING_USER, userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
         return mav;
     }
 
