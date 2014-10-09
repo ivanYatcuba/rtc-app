@@ -26,13 +26,13 @@ public class RegisterController {
         final User u = new User();
         mav.getModelMap().addAttribute("user", u);
         mav.addObject("validationRules", validationContext.get(User.class));
-        try {
-            Object ob = null;
-            ob.hashCode();
-        }
-        catch (Exception e) {
-            throw new ServiceProcessingException(e.toString()+" "+e.getMessage());
-        }
+//        try {
+//            Object ob = null;
+//            ob.hashCode();
+//        }
+//        catch (Exception e) {
+//            throw new ServiceProcessingException(e.toString()+" "+e.getMessage());
+//        }
         return mav;
     }
 }

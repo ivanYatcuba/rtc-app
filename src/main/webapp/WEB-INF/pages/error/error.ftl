@@ -8,5 +8,5 @@
     <h2>${errorMessage}</h2>
     <h2>Someone Is Working To Resolve It</h2>
     <img src="<@spring.url'/resources/images/errorCat.jpg'/>">
+    <p>${errorAdvancedMessage}</p>
 </div>
-<#--${errorMessage}-->

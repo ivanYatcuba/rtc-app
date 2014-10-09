@@ -16,6 +16,7 @@ public class ExceptionController {
     public ModelAndView handleCustomException(ServiceProcessingException e) {
         final ModelAndView mnv = new ModelAndView("error/error");
         mnv.addObject("errorMessage", e.getMessage());
+        mnv.addObject("errorAdvancedMessage", getErrorAdvancedMessage(e));
         return mnv;
     }
 
@@ -23,7 +24,15 @@ public class ExceptionController {
     public ModelAndView handleAllExceptions(Exception e) {
         final ModelAndView mnv = new ModelAndView("error/error");
         mnv.addObject("errorMessage", e.getMessage());
+        mnv.addObject("errorAdvancedMessage", getErrorAdvancedMessage(e));
         return mnv;
     }
 
+    private String getErrorAdvancedMessage(Exception e) {
+        StringBuilder st = new StringBuilder();
+        st.append("\nERROR DETAILS\n");
+        st.append("\nWHERE:   "+e.getStackTrace()[0]);
+        st.append("\nTHROWN:  "+e.getClass().getName());
+        return st.toString();
+    }
 }

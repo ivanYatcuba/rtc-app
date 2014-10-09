@@ -31,14 +31,13 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(final ModelMap model) throws Exception {
-        try {
-            Object ob = null;
-            ob.hashCode();
-        }
-        catch (Exception e) {
-            throw new NullPointerException(e.toString()+" "+e.getMessage());
-        }
-
+//        try {
+//            Object ob = null;
+//            ob.hashCode();
+//        }
+//        catch (Exception e) {
+//            throw new NullPointerException(e.toString()+" "+e.getMessage());
+//        }
         return buildLoginMav(model);
     }
 
