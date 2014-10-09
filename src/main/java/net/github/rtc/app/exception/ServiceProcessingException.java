@@ -7,9 +7,7 @@ package net.github.rtc.app.exception;
  */
 public class ServiceProcessingException extends RuntimeException {
 
-    public ServiceProcessingException() { }
+    public ServiceProcessingException() {}
 
-    public ServiceProcessingException(final String message){
-        super(message);
-    }
+    public ServiceProcessingException(final String message){ super(message); }
 }

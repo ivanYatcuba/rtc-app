@@ -12,27 +12,30 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class ExceptionController {
 
+    private static final String ERROR_PAGE = "error/error";
+    private static final String ERROR_MSG = "errorMessage";
+    private static final String ERROR_ADV_MSG = "errorAdvancedMessage";
+
     @ExceptionHandler(ServiceProcessingException.class)
     public ModelAndView handleCustomException(ServiceProcessingException e) {
-        final ModelAndView mnv = new ModelAndView("error/error");
-        mnv.addObject("errorMessage", e.getMessage());
-        mnv.addObject("errorAdvancedMessage", getErrorAdvancedMessage(e));
+        final ModelAndView mnv = new ModelAndView(ERROR_PAGE);
+        mnv.addObject(ERROR_MSG, e.getMessage());
+        mnv.addObject(ERROR_ADV_MSG, getErrorAdvancedMessage(e));
         return mnv;
     }
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handleAllExceptions(Exception e) {
-        final ModelAndView mnv = new ModelAndView("error/error");
-        mnv.addObject("errorMessage", e.getMessage());
-        mnv.addObject("errorAdvancedMessage", getErrorAdvancedMessage(e));
+        final ModelAndView mnv = new ModelAndView(ERROR_PAGE);
+        mnv.addObject(ERROR_MSG, e.getMessage());
+        mnv.addObject(ERROR_ADV_MSG, getErrorAdvancedMessage(e));
         return mnv;
     }
 
     private String getErrorAdvancedMessage(Exception e) {
-        StringBuilder st = new StringBuilder();
-        st.append("\nERROR DETAILS\n");
-        st.append("\nWHERE:   "+e.getStackTrace()[0]);
-        st.append("\nTHROWN:  "+e.getClass().getName());
-        return st.toString();
+        String st = "\nERROR DETAILS\n";
+        st += "\nWHERE:   " + e.getStackTrace()[0];
+        st += "\nTHROWN:  " + e.getClass().getName();
+        return st;
     }
 }

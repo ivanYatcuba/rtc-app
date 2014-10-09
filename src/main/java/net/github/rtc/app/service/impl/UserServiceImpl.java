@@ -1,7 +1,6 @@
 package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.dao.UserDao;
-import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
