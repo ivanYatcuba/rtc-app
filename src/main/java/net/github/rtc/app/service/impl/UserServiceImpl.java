@@ -6,6 +6,7 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 import org.joda.time.DateTime;
@@ -125,6 +126,13 @@ public class UserServiceImpl implements  UserService {
             final DetachedCriteria criteria, final int start, final int max) {
         return userDao.search(criteria, start, max);
     }
+
+    @Override
+    @Transactional
+    public SearchResults<User> search(AbstractSearchCommand searchCommand) {
+        log.debug("Searching users");
+        return userDao.search(searchCommand);
+    };
 
     @Override
     @Transactional
