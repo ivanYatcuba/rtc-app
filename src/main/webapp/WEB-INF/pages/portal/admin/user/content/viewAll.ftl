@@ -1,6 +1,6 @@
     <#--<#include "/spring.ftl"/>-->
 <div id="searcher">
- <form class="form-horizontal" name="userFilter" role="form" action="<@spring.url "/admin/user/viewAll"/>" method="get">
+ <form class="form-horizontal" name="userFilter" role="form" action="<@spring.url "/admin/user/filter"/>" method="get">
     <div class="row">
         <@spring.formItem "userFilter.surname"/>
             <#--<div>-->
