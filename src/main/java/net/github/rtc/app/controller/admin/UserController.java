@@ -1,12 +1,10 @@
 package net.github.rtc.app.controller.admin;
 
-import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
-import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
