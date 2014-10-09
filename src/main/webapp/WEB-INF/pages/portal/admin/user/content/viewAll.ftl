@@ -1,28 +1,35 @@
-<form role="form">
+    <#--<#include "/spring.ftl"/>-->
+<div id="searcher">
+ <form class="form-horizontal" name="userFilter" role="form" action="<@spring.url "/admin/user/viewAll"/>" method="get">
     <div class="row">
-       <div class="col-md-6">
-           <label for="Name">Last Name:</label>
-           <input id="Name" class="" placeholder="">
-       </div>
-       <div class="col-md-2">
+        <@spring.formItem "userFilter.surname"/>
+            <div>
+                    <label class="control-label col-md-2"
+                       for="types"><@spring.message "userFilter.authorities"/></label>
+                <div class="col-md-4">
+                    <@spring.formSingleSelect "userFilter.authorities", ["", "ROLE_USER", "ROLE_ADMIN", "ROLE_EXPERT"], 'style="background-color: #FFFACD;"'/>
+                </div>
+            </div>
+            <div>
 
-       </div>
+
+                <@spring.formItem "userFilter.registerDate" 'class="input-small"' "datepiker" />
+                <@spring.formSingleSelect "userFilter.authorities", ["=", "<", ">"], 'style="background-color: #FFFACD;"'/>
+
+            </div>
+
     </div>
-    <div class="row">
-       <div class="col-md-4">
-            <label for="role">Role:</label>
-           <input id="role" placeholder="">
-       </div>
-
-       <div class="col-md-2">
-
-       </div>
+    <div class="row" style="text-align: right">
+            <input type="submit" class="btn btn-primary" value="Search"/> or <a class="btn-default"
+                href="<@spring.url "/admin/user/viewAll" />">Reset</a>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
 </form>
+</div>
+
 
 
 <h4><@spring.message "user.search.result.page.header.search"/></h4>
+<div id="data">
 <table width="100%" class="table" style="margin-bottom: 5px" id="UserTable">
         <thead>
         <tr>
@@ -121,6 +128,7 @@
     </tr>
 </#list>
 </table>
+</div>
 <hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
 <div class="row">
     <div class="col-md-6">

@@ -4,9 +4,9 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
+import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
-import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,37 +34,36 @@ public class UserController {
     private static final String PATH_PAGE_USER_PAGE = "/page/userPagea";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_VIEW_ALL = "redirect:/admin/user/viewAll";
-    private static final String STRING_FILTER_USER = "filterUser";
+    private static final String STRING_USER_FILTER = "userFilter";
+    private static final String STRING_AUTHORITIES = "authorities";
 
     @Autowired
     private ValidationContext validationContext;
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public ModelAndView filter() {
-//            @ModelAttribute(STRING_FILTER_USER) final
-//                               CourseSearchFilter filterCourse){
-        //return viewall(/*1, */filterCourse);
-        return new ModelAndView();
-    }
-
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
-    public ModelAndView viewAll() {
-            return viewAll(1);
+    public ModelAndView index() {
+        final UserSearchFilter filter = getFilterUser();
+        filter.setPage(1);
+        return switchPage(filter);
     }
 
-    @RequestMapping(value = "/viewAll/{numberOfPage}", method = RequestMethod.POST)
-    public ModelAndView viewAll(@PathVariable final int numberOfPage) {
+    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    public ModelAndView filter(@ModelAttribute(STRING_USER_FILTER) final
+                               UserSearchFilter userFilter) {
+        return switchPage(userFilter);
+    }
+
+    @RequestMapping(value = "/viewAll", method = RequestMethod.POST)
+    public @ResponseBody ModelAndView switchPage(@ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
-        final SearchResults<User> results = userService.search(DetachedCriteria.forClass(User.class), numberOfPage, USERS_PER_PAGE);
-        results.setPage(numberOfPage);
-        results.setPerPage(USERS_PER_PAGE);
-        mav.addAllObjects(results.getPageModel(/*USERS_PER_PAGE, numberOfPage)*/));
+        final SearchResults<User> results = userService.search(userFilter);
+        mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_USERS, results.getResults());
-       // mav.addObject(STRING_FILTER_USER, filterUser);
-//        mav.addObject("startPage", 1);
-        return mav;
+        mav.addObject(STRING_AUTHORITIES, getAuthorities());
+        mav.addObject(STRING_USER_FILTER, userFilter);
+        return mav; //maybe switch url??
     }
 
     @RequestMapping(value = "userPage/editPage/{code}", method = RequestMethod.GET)
@@ -144,6 +143,16 @@ public class UserController {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomStringEditor());
+    }
+
+    @ModelAttribute(STRING_USER_FILTER)
+    public UserSearchFilter getFilterUser() {
+        return new UserSearchFilter();
+    }
+
+    @ModelAttribute(STRING_AUTHORITIES)
+    public Collection<String> getAuthorities() {
+        return RoleType.findAll();
     }
 
     @ModelAttribute("roles")

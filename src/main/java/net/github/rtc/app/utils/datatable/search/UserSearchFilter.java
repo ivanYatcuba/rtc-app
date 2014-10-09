@@ -16,8 +16,9 @@ import java.util.List;
 public class UserSearchFilter extends AbstractSearchCommand {
     private static final String STRING_PROCENT = "%";
     private static final String STRING_AUTHORITIES = "authorities";
+    private static final String STRING_REDISTER_DATE = "registerDate"; //ok
 
-    private String surname; //ok
+    private String surname;
 
     private Date registerDate; //ok
 
@@ -25,9 +26,9 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
     private UserStatus status; //almost ok
 
-    private int dateMoreLessEq; //
+    private char dateMoreLessEq; //
 
-    public void setDateMoreLessEq(int dateMoreLessEq) {
+    public void setDateMoreLessEq(char dateMoreLessEq) {
         this.dateMoreLessEq = dateMoreLessEq;
     }
 
@@ -35,6 +36,21 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
         return dateMoreLessEq;
     }
+
+    public void setAuthorities(List<Role> authorities) {
+        this.authorities = authorities;
+    }
+
+    public UserStatus getStatus() {
+
+        return status;
+    }
+
+    public List<Role> getAuthorities() {
+
+        return authorities;
+    }
+
     public void setStatus(UserStatus status) {
         this.status = status;
     }
@@ -66,15 +82,18 @@ public class UserSearchFilter extends AbstractSearchCommand {
             criteria.add(Restrictions.eq("status", status));
         }
         if (registerDate != null) {
-            if (dateMoreLessEq > 0) {
-                criteria.add(Restrictions.gt("registerDate", registerDate)); }
-            else
-                if (dateMoreLessEq == 0) {
-                criteria.add(Restrictions.eq("registerDate", registerDate));
-                 }
-                 else {
-                   criteria.add(Restrictions.lt("registerDate", registerDate));
-                 }
+            switch (dateMoreLessEq) {
+            case '>':
+                criteria.add(Restrictions.gt(STRING_REDISTER_DATE, registerDate));
+                break;
+            case '=':
+                criteria.add(Restrictions.eq(STRING_REDISTER_DATE, registerDate));
+                break;
+            case '<':
+                criteria.add(Restrictions.lt(STRING_REDISTER_DATE, registerDate));
+                break;
+            default: break;
+            }
 
         }
 
@@ -87,7 +106,7 @@ public class UserSearchFilter extends AbstractSearchCommand {
             criteria.add(authoritiesDis);
         }
 
-          return criteria;
+        return criteria;
     }
 }
 
