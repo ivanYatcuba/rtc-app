@@ -115,9 +115,6 @@
 <#macro addPagination switchUrl>
 <div id="navigation">
     <#if startPage??>
-        <#if startPage == 0>
-            <#assign startPage=1>
-        </#if>
         <div class="row" style="margin-right: 0px">
            <ul class="pagination" style="margin: 0px;">
                 <li><a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a></li>
