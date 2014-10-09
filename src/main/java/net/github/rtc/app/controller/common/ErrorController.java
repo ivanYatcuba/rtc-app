@@ -68,14 +68,13 @@ public class ErrorController {
 
     private String formatErrorMessage(
       final Integer statusCode, final String requestUri, final String message) {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("<!--");
-        sb.append("\nERROR DETAILS");
-        sb.append("\nError code:    ").append(statusCode);
-        sb.append("\nReturned for:  ").append(requestUri);
-        sb.append("\nError message: ").append(message);
-        sb.append("\n-->");
-        return sb.toString();
+        String sb = "<!--";
+        sb+="\nERROR DETAILS";
+        sb+="\nError code:    "+statusCode;
+        sb+="\nReturned for:  "+requestUri;
+        sb+="\nError message: "+message;
+        sb+="\n-->";
+        return sb;
     }
 
 }
