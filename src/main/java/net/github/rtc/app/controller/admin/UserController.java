@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
@@ -142,7 +143,13 @@ public class UserController {
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-        binder.registerCustomEditor(Collection.class, new CustomStringEditor());
+        //binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
+       // binder.registerCustomEditor(List.class, STRING_TYPES, new CustomStringEditor());
+    }
+
+    @InitBinder(STRING_USER_FILTER)
+    public void initFilterBinder(final WebDataBinder binder) {
+        initBinder(binder);
     }
 
     @ModelAttribute(STRING_USER_FILTER)

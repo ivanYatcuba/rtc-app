@@ -3,20 +3,17 @@
  <form class="form-horizontal" name="userFilter" role="form" action="<@spring.url "/admin/user/viewAll"/>" method="get">
     <div class="row">
         <@spring.formItem "userFilter.surname"/>
-            <div>
-                    <label class="control-label col-md-2"
-                       for="types"><@spring.message "userFilter.authorities"/></label>
-                <div class="col-md-4">
-                    <@spring.formSingleSelect "userFilter.authorities", ["", "ROLE_USER", "ROLE_ADMIN", "ROLE_EXPERT"], 'style="background-color: #FFFACD;"'/>
-                </div>
-            </div>
-            <div>
-
-
-                <@spring.formItem "userFilter.registerDate" 'class="input-small"' "datepiker" />
-                <@spring.formSingleSelect "userFilter.authorities", ["=", "<", ">"], 'style="background-color: #FFFACD;"'/>
-
-            </div>
+            <#--<div>-->
+                    <#--<label class="control-label col-md-2"-->
+                       <#--for="types"><@spring.message "userFilter.authorities"/></label>-->
+                <#--<div class="col-md-4">-->
+                    <#--<@spring.formSingleSelect "userFilter.authorities", ["", "ROLE_USER", "ROLE_ADMIN", "ROLE_EXPERT"], 'style="background-color: #FFFACD;"'/>-->
+                <#--</div>-->
+            <#--</div>-->
+            <#--<div>-->
+                <#--<@spring.formItem "userFilter.registerDate" 'class="input-small"' "datepiker" />-->
+                <#--<@spring.formSingleSelect "userFilter.authorities", ["=", "<", ">"], 'style="background-color: #FFFACD;"'/>-->
+            <#--</div>-->
 
     </div>
     <div class="row" style="text-align: right">
