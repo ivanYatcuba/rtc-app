@@ -2,7 +2,7 @@
 <@spring.formHiddenInput "user.registerDate" />
 <div class="row" xmlns="http://www.w3.org/1999/html">
 
-    <div class="col-md-6">
+    <div class="col-md-6">Email
         <!--Email-->
     <@spring.formItem  "user.email" "class=required"/>
     </div>

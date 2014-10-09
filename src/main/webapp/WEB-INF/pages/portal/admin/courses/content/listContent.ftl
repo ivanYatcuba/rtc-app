@@ -1,4 +1,4 @@
-<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
+Create New<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
 
 <#include "searchPanel.ftl">
 <h3>Search Results</h3>
@@ -21,6 +21,7 @@
                         <a href="<@spring.url "/admin/course/view/${course.code}" />">${course.name}</a>
                     </td>
                     <td>${course.types?join(", ")}</td>
+
                     <td>${course.startDate?datetime?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
                     <td> <#list course.experts as expert>
                         <p>&nbsp${expert.name}&nbsp${expert.surname}

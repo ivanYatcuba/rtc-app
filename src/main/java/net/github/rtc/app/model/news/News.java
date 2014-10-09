@@ -2,11 +2,17 @@ package net.github.rtc.app.model.news;
 
 
 import net.github.rtc.app.model.AbstractPersistenceObject;
+import net.github.rtc.app.model.course.Tag;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.util.annotation.ForExport;
+import net.github.rtc.util.annotation.validation.Required;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class News extends AbstractPersistenceObject implements Serializable {
@@ -15,7 +21,9 @@ public class News extends AbstractPersistenceObject implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Required
     @Column
+    @ForExport("Title")
     private String title;
 
     @OneToOne
@@ -33,6 +41,14 @@ public class News extends AbstractPersistenceObject implements Serializable {
 
     @Column
     private String description;
+
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(name = "courses_tags",
+            joinColumns = { @JoinColumn(name = "tagId") },
+            inverseJoinColumns = { @JoinColumn(name = "id") })
+    @ForExport("Tags")
+    private List<Tag> tags;
 
     public News() {
     }
@@ -88,5 +104,13 @@ public class News extends AbstractPersistenceObject implements Serializable {
 
     public void setStatus(NewsStatus status) {
         this.status = status;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(final List<Tag> tags) {
+        this.tags = tags;
     }
 }

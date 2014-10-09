@@ -26,4 +26,20 @@ public class NewsSearchFilter extends AbstractSearchCommand {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public NewsStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(NewsStatus status) {
+        this.status = status;
+    }
 }

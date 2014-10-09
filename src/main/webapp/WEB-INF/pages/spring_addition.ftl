@@ -204,7 +204,7 @@
                 $('#navigation').html(nav);
                 $('#data').html(data);
             }, error: function (xhr, status, error) {
-                alert("error")
+                console.error()
                 var err = eval("(" + xhr.responseText + ")");
                 alert(err.Message);
             }
@@ -212,6 +212,7 @@
     }
 </script>
 </#macro>
+
 
 
 
