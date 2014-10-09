@@ -23,6 +23,6 @@
     </div>
     <div class="col-md-5" style="text-align: right">
         <input type="submit" class="btn btn-primary" value="Search"/> or <a
-            href="<@spring.url "/admin/course" />">Reset</a>
+            href="<@spring.url "/admin/news/list" />">Reset</a>
     </div>
 </div>
