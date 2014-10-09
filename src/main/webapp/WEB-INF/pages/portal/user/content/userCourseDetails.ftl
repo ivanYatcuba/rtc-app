@@ -78,15 +78,3 @@
     <#if course.publishDate??><p>${course.publishDate?date}</p></#if>
     </div>
 </div>
-
-&NonBreakingSpace;
-<hr>
-<div class="row">
-    <div class="span12" align="right">
-        <a href="<@spring.url "/admin/course/${course.getCode()}/update" />">
-            <button class="btn"><@spring.message "coursesPage.action.edit"/></button>
-        </a> or
-        <a href="<@spring.url "/admin/course" />"><@spring.message "coursesPage.action.cancel"/></a>
-    </div>
-</div>
-
