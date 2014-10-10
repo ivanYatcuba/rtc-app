@@ -25,10 +25,9 @@
 <div class="form-group">
     <label class="control-label col-md-2"
            for="${status.expression?replace('[','')?replace(']','')}"><@message path/></label>
-
     <div class="col-md-4">
 		<#if type == "text"><@formInput path attributes/>
-                <#elseif type == "textArea"><@formTextarea path attributes/>
+        <#elseif type == "textArea"><@formTextarea path attributes/>
 		<#elseif type == "multiSelect"><@formMultiSelect path collectionAttribute attributes/>
 		<#elseif type == "password"><@formPasswordInput path attributes/>
 		<#elseif type == "singleSelect"><@formSingleSelect path collectionAttribute attributes/>
