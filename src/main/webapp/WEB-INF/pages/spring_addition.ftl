@@ -26,14 +26,14 @@
     <label class="control-label col-md-2"
            for="${status.expression?replace('[','')?replace(']','')}"><@message path/></label>
     <div class="col-md-4">
-		<#if type == "text"><@formInput path attributes/>
+        <#if type == "text"><@formInput path attributes/>
         <#elseif type == "textArea"><@formTextarea path attributes/>
-		<#elseif type == "multiSelect"><@formMultiSelect path collectionAttribute attributes/>
-		<#elseif type == "password"><@formPasswordInput path attributes/>
-		<#elseif type == "singleSelect"><@formSingleSelect path collectionAttribute attributes/>
-		<#elseif type == "datepiker"><@formDatepicker path attributes/>
-		<#elseif type == "tag"><@formTagsInput path attributes/>
-		</#if>
+        <#elseif type == "multiSelect"><@formMultiSelect path collectionAttribute attributes/>
+        <#elseif type == "password"><@formPasswordInput path attributes/>
+        <#elseif type == "singleSelect"><@formSingleSelect path collectionAttribute attributes/>
+        <#elseif type == "datepiker"><@formDatepicker path attributes/>
+        <#elseif type == "tag"><@formTagsInput path attributes/>
+        </#if>
     </div>
 </div>
 </#macro>
@@ -49,6 +49,17 @@
                 selected="selected"</#if>>${value}</option>
     </#list>
 </select>
+</#macro>
+
+<#macro formDateSearch path attributes="">
+    <@bind path/>
+    <div class="form-group">
+        <label class="control-label col-md-2"
+               for="${status.expression?replace('[','')?replace(']','')}"><@message path/></label>
+        <#assign seq = ["=", "<", ">"]>
+        <@formSingleSelect path seq attributes/>
+        <@formDatepicker path attributes/>
+    </div>
 </#macro>
 
 

@@ -4,7 +4,7 @@
     <@spring.formItem "filterNews.title"/>
     </div>
     <div class="col-md-6">
-
+        <@spring.formDateSearch "filterNews.createDate"/>
     </div>
 </div>
 
@@ -26,3 +26,4 @@
             href="<@spring.url "/admin/news/list" />">Reset</a>
     </div>
 </div>
+

@@ -5,6 +5,8 @@ import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.model.user.User;
 import org.hibernate.criterion.DetachedCriteria;
 
+import java.util.Date;
+
 
 public class NewsSearchFilter extends AbstractSearchCommand {
 
@@ -13,6 +15,8 @@ public class NewsSearchFilter extends AbstractSearchCommand {
     private User author;
 
     private NewsStatus status;
+
+    private Date createDate;
 
     @Override
     public DetachedCriteria getCriteria() {
@@ -41,5 +45,13 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     public void setStatus(NewsStatus status) {
         this.status = status;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }
