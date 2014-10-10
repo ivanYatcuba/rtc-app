@@ -6,7 +6,7 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-5" style="text-align: right">
-            <input type="submit" class="btn" value="Create"/> or
+            <input type="submit" class="btn btn-primary" value="Create"/> or
             <a href="<@spring.url "/admin/course" />">Cancel</a>
         </div>
     </div>
