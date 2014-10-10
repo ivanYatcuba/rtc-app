@@ -10,6 +10,7 @@ import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 //import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
+import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -39,7 +40,7 @@ public interface UserService extends ModelService<User>, UserDetailsService {
 
     SearchResults<User> search(DetachedCriteria criteria, int start, int max);
 
-//    SearchResults<User> search(AbstractSearchCommand);
+    SearchResults<User> search(AbstractSearchCommand searchCommand);
 
     User loadUserByUsername(String email);
 
