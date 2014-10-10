@@ -18,6 +18,8 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     private Date createDate;
 
+    private char dateMoreLessEq;
+
     @Override
     public DetachedCriteria getCriteria() {
         return DetachedCriteria.forClass(News.class);
@@ -53,5 +55,13 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public char getDateMoreLessEq() {
+        return dateMoreLessEq;
+    }
+
+    public void setDateMoreLessEq(char dateMoreLessEq) {
+        this.dateMoreLessEq = dateMoreLessEq;
     }
 }

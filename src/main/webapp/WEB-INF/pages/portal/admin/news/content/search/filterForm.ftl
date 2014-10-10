@@ -4,7 +4,11 @@
     <@spring.formItem "filterNews.title"/>
     </div>
     <div class="col-md-6">
-        <@spring.formDateSearch "filterNews.createDate"/>
+        <div class="form-group">
+            <@spring.message "news.filterNews.message.created"/>
+            <@spring.formSingleSelect "filterNews.dateMoreLessEq",["=", "<", ">"]/>
+            <@spring.formDatepicker "filterNews.createDate"/>
+        </div>
     </div>
 </div>
 

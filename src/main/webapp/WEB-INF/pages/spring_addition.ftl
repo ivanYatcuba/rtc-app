@@ -51,17 +51,16 @@
 </select>
 </#macro>
 
-<#macro formDateSearch path attributes="">
-    <@bind path/>
-    <div class="form-group">
-        <label class="control-label col-md-2"
-               for="${status.expression?replace('[','')?replace(']','')}"><@message path/></label>
-        <#assign seq = ["=", "<", ">"]>
-        <@formSingleSelect path seq attributes/>
-        <@formDatepicker path attributes/>
-    </div>
+<#macro formDateSearch pathSingleSelect pathDatepicker attributes="">
+    <@bind pathSingleSelect/>
+<div class="form-group">
+    <label class="control-label col-md-2"
+           for="${status.expression?replace('[','')?replace(']','')}"><@message pathDatepicker/></label>
+    <#assign seq = ["=", "<", ">"]>
+    <@formSingleSelect pathSingleSelect seq attributes/>
+    <@formDatepicker pathDatepicker attributes/>
+</div>
 </#macro>
-
 
 <#macro formDatepicker path attributes="">
 	<@formInput path attributes/>
