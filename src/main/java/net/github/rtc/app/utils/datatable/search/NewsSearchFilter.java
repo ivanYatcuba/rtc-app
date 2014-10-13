@@ -32,7 +32,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         }
 
         if (author != null) {
-            criteria.add(Restrictions.eq("author",author));
+            criteria.add(Restrictions.eq("author", author));
         }
 
         if (createDate != null) {
@@ -46,14 +46,15 @@ public class NewsSearchFilter extends AbstractSearchCommand {
                 case '<':
                     criteria.add(Restrictions.lt(STRING_CREATE_DATE, createDate));
                     break;
-                default: break;
+                default:
+                    break;
             }
         }
 
         /*if (status != null && status != )*/
 
 
-            return DetachedCriteria.forClass(News.class);
+        return DetachedCriteria.forClass(News.class);
     }
 
     public String getTitle() {
