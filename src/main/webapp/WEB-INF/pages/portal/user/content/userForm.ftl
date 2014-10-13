@@ -124,7 +124,7 @@
     </div>
 </div>
 
-<@rtcmacros.formValidation formName="user" jsonRules="${validationRules}"/>
+<@rtcmacros.formValidation formName="userForm" jsonRules="${validationRules}"/>
 <script type="text/javascript" charset="utf8"
         src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
 <script>

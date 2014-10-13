@@ -46,7 +46,7 @@
         </div>
     </div>
 </div>
-<@rtcmacros.formValidation formName="course" jsonRules="${validationRules}"/>
+<@rtcmacros.formValidation formName="courseForm" jsonRules="${validationRules}"/>
 <script type="text/javascript"
         src="<@spring.url'/resources/js/pages/courseForm.js'/>"></script>
 <script>
