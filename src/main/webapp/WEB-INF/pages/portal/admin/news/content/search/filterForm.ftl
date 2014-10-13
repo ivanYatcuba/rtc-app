@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <@spring.message "news.filterNews.message.created"/>
+            <label class="control-label col-md-2"><@spring.message "news.filterNews.message.created"/></label>
             <@spring.formSingleSelect "filterNews.dateMoreLessEq",["=", "<", ">"]/>
             <@spring.formDatepicker "filterNews.createDate"/>
         </div>
