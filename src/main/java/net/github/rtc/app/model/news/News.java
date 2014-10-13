@@ -44,10 +44,9 @@ public class News extends AbstractPersistenceObject implements Serializable {
 
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    @JoinTable(name = "courses_tags",
+    @JoinTable(name = "news_tags",
             joinColumns = { @JoinColumn(name = "tagId") },
             inverseJoinColumns = { @JoinColumn(name = "id") })
-    @ForExport("Tags")
     private List<Tag> tags;
 
     public News() {
