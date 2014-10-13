@@ -5,6 +5,7 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.model.user.UserRequestStatus;
 import net.github.rtc.app.service.CourseService;
+import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller("expertController")
@@ -34,6 +34,8 @@ public class ExpertController {
     private UserCourseOrderService userCourseOrderService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private DateService dateService;
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public ModelAndView expertCourses() {
@@ -90,7 +92,7 @@ public class ExpertController {
             final UserRequestStatus userRequestStatus, final Integer orderId) {
         final UserCourseOrder order
                 = userCourseOrderService.getUserOrder(orderId.longValue());
-        order.setResponseDate(new Date());
+        order.setResponseDate(dateService.getCurrentDate());
         order.setStatus(userRequestStatus);
         userCourseOrderService.update(order);
     }

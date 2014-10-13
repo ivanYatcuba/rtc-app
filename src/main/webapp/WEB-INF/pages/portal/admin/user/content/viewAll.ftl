@@ -12,7 +12,7 @@
             <#--</div>-->
             <#--<div>-->
                 <#--<@spring.formItem "userFilter.registerDate" 'class="input-small"' "datepiker" />-->
-                <#--<@spring.formSingleSelect "userFilter.authorities", ["=", "<", ">"], 'style="background-color: #FFFACD;"'/>-->
+                <#--<@spring.formSingleSelect "userFilter.dateMoreLessEq", ["=", "<", ">"], 'style="background-color: #FFFACD;"'/>-->
             <#--</div>-->
 
     </div>

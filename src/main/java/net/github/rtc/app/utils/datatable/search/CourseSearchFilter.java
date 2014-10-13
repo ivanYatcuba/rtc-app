@@ -104,7 +104,7 @@ public class CourseSearchFilter extends AbstractSearchCommand {
             }
             criteria.add(tagDis);
         }
-        if (types != null) {
+        if (types != null && types.size() > 0) {
             criteria.createAlias(STRING_TYPES, "t");
             final Conjunction typesCon = Restrictions.conjunction();
             for (final CourseType type: types) {

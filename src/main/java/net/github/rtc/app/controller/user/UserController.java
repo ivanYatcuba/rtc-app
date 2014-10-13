@@ -4,6 +4,7 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.*;
 import net.github.rtc.app.service.CourseService;
+import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
@@ -36,6 +37,7 @@ public class UserController {
     private static final String STRING_COURSE = "course";
     private static final String STRING_USER_COURSES = "userCourses";
 
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -44,6 +46,8 @@ public class UserController {
     private UserCourseOrderService userCourseOrderService;
     @Autowired
     private ValidationContext validationContext;
+    @Autowired
+    private DateService dateService;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView user() {
@@ -116,7 +120,7 @@ public class UserController {
         }
         user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType
                 .ROLE_USER)));
-        user.setRegisterDate(new Date());
+        user.setRegisterDate(dateService.getCurrentDate());
         userService.create(user);
         session.setComplete();
         return new ModelAndView("redirect:/login/");
@@ -193,7 +197,7 @@ public class UserController {
         }
         userCourseOrder.setReason(orderParamsMap.get("userTextArea"));
         userCourseOrder.setStatus(UserRequestStatus.PENDING);
-        userCourseOrder.setRequestDate(new Date());
+        userCourseOrder.setRequestDate(dateService.getCurrentDate());
         return userCourseOrder;
     }
 

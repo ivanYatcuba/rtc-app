@@ -7,9 +7,17 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-5" style="text-align: right">
-            <button type="submit" class="btn">Create</button>
+            <button type="submit" class="btn" onclick="javascript:CheckNullReportFields()">Create</button>
             or
             <a href="<@spring.url "/admin/export/viewAll" />">Cancel</a>
         </div>
     </div>
 </form>
+
+
+<script type="text/javascript">
+    function CheckNullReportFields(userCode) {
+        $("#userCode").val(userCode);
+        $('#removeUserModal').modal('show')
+    }
+</script

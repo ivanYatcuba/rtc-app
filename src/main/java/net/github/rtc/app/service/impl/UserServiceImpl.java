@@ -9,16 +9,12 @@ import net.github.rtc.app.service.*;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
-
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,6 +32,9 @@ public class UserServiceImpl implements  UserService {
 
     @Autowired
     private EncoderService encoderService;
+
+    @Autowired
+    private DateService dateService;
 
     @Override
     @Transactional
@@ -72,7 +71,7 @@ public class UserServiceImpl implements  UserService {
     public User create(final User user) {
         log.debug("Creating user");
         if (user.getRegisterDate() == null) {
-            user.setRegisterDate(new Date()); //new Date() - bad bad bad
+            user.setRegisterDate(dateService.getCurrentDate());
         }
 //        if (loadUserByUsername(user.getEmail()) != null) {
 //            throw new ServiceProcessingException("user already exists");
@@ -145,7 +144,7 @@ public class UserServiceImpl implements  UserService {
     public void markUserForRemoval(String userCode) {
         final User user = findByCode(userCode);
         user.setStatus(UserStatus.FOR_REMOVAL);
-        user.setRemovalDate(new DateTime(new Date()).plusDays(USER_REMOVAL_DELAY).toDate());
+        user.setRemovalDate(dateService.addDays(dateService.getCurrentDate(), USER_REMOVAL_DELAY));
         update(user);
     }
 

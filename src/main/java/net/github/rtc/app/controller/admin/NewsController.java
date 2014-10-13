@@ -2,6 +2,7 @@ package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.news.News;
+import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.NewsService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @Controller("newsController")
@@ -32,6 +32,8 @@ public class NewsController {
     private NewsService newsService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private DateService dateService;
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public @ResponseBody ModelAndView viewAll(@ModelAttribute("filterNews") final NewsSearchFilter filterNews) {
@@ -103,7 +105,7 @@ public class NewsController {
             @ModelAttribute(STRING_NEWS) final News news,
             @RequestParam(value = "expertList",
                     required = false) final List<String> expertList) {
-        news.setCreateDate(new Date());
+        news.setCreateDate(dateService.getCurrentDate());
         news.setAuthor(userService.loadUserByUsername("admin"));
         newsService.create(news);
         return "redirect:/admin/news/list";
