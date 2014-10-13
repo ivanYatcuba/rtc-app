@@ -1,7 +1,7 @@
 <h3><@spring.message "news.filter.form.header"/></h3>
 <div class="row">
     <div class="col-md-6 form-group">
-    <@spring.formItem "filterNews.title"/>
+    <@rtcmacros.formItem "filterNews.title"/>
     </div>
     <div class="col-md-6">
 
@@ -10,10 +10,10 @@
 
 <div class="row">
     <div class="col-md-6">
-    <@spring.formItem "filterNews.author"/>
+    <@rtcmacros.formItem "filterNews.author"/>
     </div>
     <div class="col-md-6">
-    <@spring.formItem "filterNews.status" 'class="input-medium"' "singleSelect" statuses/>
+    <@rtcmacros.formItem "filterNews.status" 'class="input-medium"' "singleSelect" statuses/>
     </div>
 </div>
 

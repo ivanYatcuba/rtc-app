@@ -1,14 +1,14 @@
 <div class="row">
     <div class="col-md-6">
-    <@spring.formItem "course.name", 'class="required" maxlength="50"'/>
+    <@rtcmacros.formItem "course.name", 'class="required" maxlength="50"'/>
         <label for="types"><@spring.message "course.category" /></label>
-    <@spring.formMultiSelect "course.types", categories/>
-    <@spring.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
+    <@rtcmacros.formMultiSelect "course.types", categories/>
+    <@rtcmacros.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
     </div>
     <div class="col-md-6">
-    <@spring.formItem "course.startDate" 'class="input-medium required"' />
-        <@spring.formItem "course.endDate" 'class="input-medium required"' />
-        <@spring.formItem "course.tags" "" "tag"/>
+    <@rtcmacros.formItem "course.startDate" 'class="input-medium required"' />
+        <@rtcmacros.formItem "course.endDate" 'class="input-medium required"' />
+        <@rtcmacros.formItem "course.tags" "" "tag"/>
     </div>
 </div>
 <hr>
@@ -46,7 +46,7 @@
         </div>
     </div>
 </div>
-<@spring.formValidation formName="courseForm" jsonRules="${validationRules}"/>
+<@rtcmacros.formValidation formName="course" jsonRules="${validationRules}"/>
 <script type="text/javascript"
         src="<@spring.url'/resources/js/pages/courseForm.js'/>"></script>
 <script>
@@ -62,4 +62,3 @@
     </#if>
     });
 </script>
-
