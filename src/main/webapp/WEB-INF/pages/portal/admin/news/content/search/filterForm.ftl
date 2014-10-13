@@ -17,7 +17,7 @@
     <@spring.formItem "filterNews.author"/>
     </div>
     <div class="col-md-6">
-    <@spring.formItem "filterNews.status" 'class="input-medium"' "singleSelect" statuses/>
+    <@spring.formItem "filterNews.status" 'class="input-medium"' "singleSelectLocalized" statuses "NewsStatus."/>
     </div>
 </div>
 

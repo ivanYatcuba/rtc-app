@@ -20,7 +20,7 @@
 <script src="<@spring.url'/resources/js/tag-it.js'/>" type="text/javascript" charset="utf-8"></script>
 </#macro>
 
-<#macro formItem path attributes="" type="text" collectionAttribute="">
+<#macro formItem path attributes="" type="text" collectionAttribute="" messagePrefix="">
 	<@bind path/>
 <div class="form-group">
     <label class="control-label col-md-2"
@@ -30,12 +30,28 @@
         <#elseif type == "textArea"><@formTextarea path attributes/>
         <#elseif type == "multiSelect"><@formMultiSelect path collectionAttribute attributes/>
         <#elseif type == "password"><@formPasswordInput path attributes/>
-        <#elseif type == "singleSelect"><@formSingleSelect path collectionAttribute attributes/>
+        <#elseif type == "singleSelect"><@formSingleSelect path collectionAttribute attributes />
+        <#elseif type == "singleSelectLocalized"><@formSingleSelectLocalized path collectionAttribute attributes messagePrefix/>
         <#elseif type == "datepiker"><@formDatepicker path attributes/>
         <#elseif type == "tag"><@formTagsInput path attributes/>
         </#if>
     </div>
 </div>
+</#macro>
+
+<#macro formSingleSelectLocalized path options attributes="" messagePrefix="">
+    <@bind path/>
+<select id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" ${attributes}>
+    <#if options?is_hash>
+        <#list options?keys as value>
+            <option value="${value?html}"<@checkSelected value/>><@message "${messagePrefix + options[value]?html}"/></option>
+        </#list>
+    <#else>
+        <#list options as value>
+            <option value="${value?html}"<@checkSelected value/>><@message "${messagePrefix + value?html}"/></option>
+        </#list>
+    </#if>
+</select>
 </#macro>
 
 <#macro formMultiSelect path options attributes="">

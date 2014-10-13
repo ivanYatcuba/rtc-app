@@ -87,8 +87,7 @@ public class CourseSearchFilter extends AbstractSearchCommand {
           .class);
 
         if (name != null && !("").equals(name)) {
-            criteria.add(Restrictions.like("name",
-              STRING_PROCENT + name + STRING_PROCENT));
+            criteria.add(Restrictions.like("name",STRING_PROCENT + name + STRING_PROCENT));
         }
         if (status != null && status != CourseStatus.ALL) {
             criteria.add(Restrictions.eq("status", status));
