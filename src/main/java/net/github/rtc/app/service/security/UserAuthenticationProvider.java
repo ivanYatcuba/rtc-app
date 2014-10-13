@@ -2,7 +2,7 @@ package net.github.rtc.app.service.security;
 
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
-import net.github.rtc.app.service.RtcPasswordEncoder;
+import net.github.rtc.app.service.EncoderService;
 import net.github.rtc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -23,7 +23,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private UserService userService;
     @Autowired
-    private RtcPasswordEncoder rtcPasswordEncoder;
+    private EncoderService encoderService;
 
     @Override
     public Authentication authenticate(final Authentication authentication) {
@@ -49,7 +49,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
                     + "tatyana.bulanaya@gmail.com");
         }
 
-        if (!rtcPasswordEncoder.matches(password, user.getPassword())) {
+        if (!encoderService.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Wrong password.");
         }
 

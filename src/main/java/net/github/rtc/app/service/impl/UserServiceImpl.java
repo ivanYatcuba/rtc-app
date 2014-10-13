@@ -5,8 +5,7 @@ import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
-import net.github.rtc.app.service.RtcPasswordEncoder;
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.*;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
@@ -34,8 +33,9 @@ public class UserServiceImpl implements  UserService {
     private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class.getName());
     @Autowired
     private UserDao userDao;
+
     @Autowired
-    private RtcPasswordEncoder rtcPasswordEncoder;
+    private EncoderService encoderService;
 
     @Override
     @Transactional
@@ -78,7 +78,7 @@ public class UserServiceImpl implements  UserService {
 //            throw new ServiceProcessingException("user already exists");
 //        }
         user.setCode(UUID.randomUUID().toString());
-        user.setPassword(rtcPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(encoderService.encode(user.getPassword()));
         return userDao.create(user);
     }
 
@@ -88,7 +88,7 @@ public class UserServiceImpl implements  UserService {
         log.debug("Updating user: {}", user.getCode());
         final User userToUpdate = userDao.findByCode(user.getCode());
         if (!user.getPassword().equals(userToUpdate.getPassword())) {
-            user.setPassword(rtcPasswordEncoder.encode(user.getPassword()));
+            user.setPassword(encoderService.encode(user.getPassword()));
         }
         userDao.update(user);
     }

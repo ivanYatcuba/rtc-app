@@ -3,7 +3,7 @@ package net.github.rtc.app.service;
 /**
  * Created by denis on 13.10.14.
  */
-public interface RtcPasswordEncoder {
+public interface EncoderService {
     /**
      * this method should use a good encoding algorithm like SHA-1 or greater
      * @param rawPassword encode and return given password (char[] or String)
