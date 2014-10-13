@@ -5,6 +5,7 @@ import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
+import net.github.rtc.app.service.RtcPasswordEncoder;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
@@ -13,8 +14,6 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -35,6 +34,8 @@ public class UserServiceImpl implements  UserService {
     private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class.getName());
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private RtcPasswordEncoder rtcPasswordEncoder;
 
     @Override
     @Transactional
@@ -77,8 +78,7 @@ public class UserServiceImpl implements  UserService {
 //            throw new ServiceProcessingException("user already exists");
 //        }
         user.setCode(UUID.randomUUID().toString());
-        final PasswordEncoder encoder = new StandardPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
+        user.setPassword(rtcPasswordEncoder.encode(user.getPassword()));
         return userDao.create(user);
     }
 
@@ -86,10 +86,9 @@ public class UserServiceImpl implements  UserService {
     @Transactional
     public void update(final User user) {
         log.debug("Updating user: {}", user.getCode());
-        final PasswordEncoder encoder = new StandardPasswordEncoder();
         final User userToUpdate = userDao.findByCode(user.getCode());
         if (!user.getPassword().equals(userToUpdate.getPassword())) {
-            user.setPassword(encoder.encode(user.getPassword()));
+            user.setPassword(rtcPasswordEncoder.encode(user.getPassword()));
         }
         userDao.update(user);
     }

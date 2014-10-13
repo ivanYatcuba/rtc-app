@@ -2,15 +2,14 @@ package net.github.rtc.app.service.security;
 
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
+import net.github.rtc.app.service.RtcPasswordEncoder;
 import net.github.rtc.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication
-        .UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -24,7 +23,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private UserService userService;
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private RtcPasswordEncoder rtcPasswordEncoder;
 
     @Override
     public Authentication authenticate(final Authentication authentication) {
@@ -50,7 +49,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
                     + "tatyana.bulanaya@gmail.com");
         }
 
-        if (!passwordEncoder.matches(password, user.getPassword())) {
+        if (!rtcPasswordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Wrong password.");
         }
 
