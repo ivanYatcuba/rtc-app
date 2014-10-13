@@ -2,11 +2,11 @@
 <html>
 
     <#import "/spring.ftl" as spring/>
-    <#import "../../spring_addition.ftl" as spring/>
+    <#import "../../rtcmacroses.ftl" as rtcmacros/>
 <head>
 
-    <@spring.includeLink />
-    <@spring.includeScript/>
+    <@rtcmacros.includeLink />
+    <@rtcmacros.includeScript/>
 </head>
 
 <body>

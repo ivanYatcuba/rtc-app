@@ -49,20 +49,20 @@
             <input name="selectedCode" type="hidden" id="selectedCode"
                    value="test">
 
-            <div id="DEV" style="display: none;">
-            <input type="radio" name="userCourses" id="DEV"
+            <div id="Development" style="display: none;">
+            <input type="radio" name="userCourses" id="Development"
                    value="<@spring.message "userCourses.developer"/>"  />
             <@spring.message "userCourses.developer"/></label><br/>
             </div>
 
-            <div id="QA" style="display: none;">
-            <input type="radio" name="userCourses" id="QA"
+            <div id="Quality Assurance" style="display: none;">
+            <input type="radio" name="userCourses" id="Quality Assurance"
                    value="<@spring.message "userCourses.tester"/>"/>
             <@spring.message "userCourses.tester"/></label><br/>
             </div>
 
-            <div id="BA" style="display: none;">
-            <input type="radio" name="userCourses" id="BA"
+            <div id="Business Analysis" style="display: none;">
+            <input type="radio" name="userCourses" id="Business Analysiss"
                    value="<@spring.message "userCourses.Business_Analyst"/>"/>
             <@spring.message "userCourses.Business_Analyst"/></label><br/>
             </div>

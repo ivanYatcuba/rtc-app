@@ -1,4 +1,4 @@
-<#import "spring_addition.ftl" as spring/>
+<#import "rtcmacroses.ftl" as rtcmacros/>
 
 <#macro datatable filterForm searchTable searchUrl>
 <div id="filterForm">

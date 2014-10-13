@@ -5,10 +5,10 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <@spring.formItem "news.title" 'id="title" class="required"' />
+            <@rtcmacros.formItem "news.title" 'id="title" class="required"' />
             </div>
         <div class="col-md-3">
-            <@spring.formItem "news.tags" 'id="tags"' />
+            <@rtcmacros.formItem "news.tags" 'id="tags"' />
             </div>
         </div>
     <div class="row">

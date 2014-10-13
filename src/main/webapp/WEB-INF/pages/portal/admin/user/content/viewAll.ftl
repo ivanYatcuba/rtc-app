@@ -2,7 +2,7 @@
 <div id="searcher">
  <form class="form-horizontal" name="userFilter" role="form" action="<@spring.url "/admin/user/filter"/>" method="get">
     <div class="row">
-        <@spring.formItem "userFilter.surname"/>
+        <@rtcmacros.formItem "userFilter.surname"/>
             <#--<div>-->
                     <#--<label class="control-label col-md-2"-->
                        <#--for="types"><@spring.message "userFilter.authorities"/></label>-->
@@ -134,7 +134,7 @@
     </form>
     </div>
     <div class="col-md-6" style="text-align: right">
-        <@spring.addPagination "/admin/user/viewAll"/>
+        <@rtcmacros.addPagination "/admin/user/viewAll"/>
     </div>
 </div>
 
