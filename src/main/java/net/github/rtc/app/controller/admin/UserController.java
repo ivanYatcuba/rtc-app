@@ -31,6 +31,7 @@ public class UserController {
     private static final String STRING_USERS = "users";
     private static final String PATH_PAGE_VIEW_ALL_USERS = "/page/viewAllusers";
     private static final String PATH_PAGE_USER_PAGE = "/page/userPagea";
+    private static final String REDIRECT_USER_PAGE = "redirect:/admin/user/userPage/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_VIEW_ALL = "redirect:/admin/user/viewAll";
     private static final String STRING_USER_FILTER = "userFilter";
@@ -51,7 +52,7 @@ public class UserController {
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     public ModelAndView filter(@ModelAttribute(STRING_USER_FILTER) final
                                UserSearchFilter userFilter) {
-        return switchPage(userFilter);
+                return switchPage(userFilter);
     }
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.POST)
@@ -118,7 +119,7 @@ public class UserController {
 //      user.setRegisterDate(new Date());
         userService.create(user);
         session.setComplete();
-        return REDIRECT_VIEW_ALL;
+        return REDIRECT_USER_PAGE + user.getCode();
     }
 
     @RequestMapping(value = "/update/{code}", method = RequestMethod.POST)
@@ -129,7 +130,7 @@ public class UserController {
         user.setId(userService.findByCode(user.getCode()).getId());
         userService.update(user);
         session.setComplete();
-        return "redirect:/admin/user/userPage/" + user.getCode();
+        return REDIRECT_USER_PAGE + user.getCode();
     }
 
     @ModelAttribute(value = STRING_USER)
