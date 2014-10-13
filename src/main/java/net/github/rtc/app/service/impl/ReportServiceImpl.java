@@ -3,6 +3,7 @@ package net.github.rtc.app.service.impl;
 import net.github.rtc.app.dao.impl.ReportDao;
 import net.github.rtc.app.export.ReportBuilder;
 import net.github.rtc.app.model.report.ReportDetails;
+import net.github.rtc.app.service.CodeGenService;
 import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.ReportService;
@@ -17,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by Ivan Yatcuba on 8/16/14.
@@ -35,6 +35,8 @@ public class ReportServiceImpl implements ReportService {
     private ReportDao reportResource;
     @Autowired
     private DateService dateService;
+    @Autowired
+    private CodeGenService codeGenService;
 
     @Resource(name = "serviceHolder")
     private Map<Class, ? extends ModelService> serviceHolder;
@@ -46,7 +48,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public void insert(final ReportDetails report) {
         log.info("Creating report: " + report);
-        report.setCode(UUID.randomUUID().toString());
+        report.setCode(codeGenService.generateCode());
         report.setCreatedDate(dateService.getCurrentDate());
 
         try {

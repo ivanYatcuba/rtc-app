@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Sasha
@@ -35,6 +34,9 @@ public class UserServiceImpl implements  UserService {
 
     @Autowired
     private DateService dateService;
+
+    @Autowired
+    private CodeGenService codeGenService;
 
     @Override
     @Transactional
@@ -76,7 +78,7 @@ public class UserServiceImpl implements  UserService {
 //        if (loadUserByUsername(user.getEmail()) != null) {
 //            throw new ServiceProcessingException("user already exists");
 //        }
-        user.setCode(UUID.randomUUID().toString());
+        user.setCode(codeGenService.generateCode());
         user.setPassword(encoderService.encode(user.getPassword()));
         return userDao.create(user);
     }

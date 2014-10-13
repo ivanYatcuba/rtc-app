@@ -3,6 +3,7 @@ package net.github.rtc.app.service.impl;
 import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
+import net.github.rtc.app.service.CodeGenService;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.ModelService;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Service Implementation
@@ -42,6 +42,9 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
 
     @Autowired
     private DateService dateService;
+
+    @Autowired
+    private CodeGenService codeGenService;
 
     /**
      * @see net.github.rtc.app.service.CourseService#delete(String)
@@ -70,7 +73,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     public Course create(final Course course) {
         log.debug("Creating course {} ", course);
         Assert.notNull(course, COURSE_CANNOT_BE_NULL);
-        course.setCode(UUID.randomUUID().toString());
+        course.setCode(codeGenService.generateCode());
         return coursesDao.create(course);
     }
 
