@@ -28,6 +28,6 @@
         <a href="<@spring.url "/admin/news/${news.code}/edit" />">
             <button class="btn btn-primary"><@spring.message "action.edit"/></button>
         </a>
-        <button type="button" onclick="location.href='/admin/news/list'" class="btn btn-default">Cancel</button>
+        <button type="button" onclick="location.href='<@spring.url '/admin/news/list'/>'" class="btn btn-default">Cancel</button>
     </div>
 </div>
