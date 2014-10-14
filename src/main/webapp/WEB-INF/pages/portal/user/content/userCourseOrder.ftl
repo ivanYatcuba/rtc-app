@@ -12,5 +12,5 @@
     <div class="userCourses">${course.description}</div>
     <br>
 
-    <div>${orderStatus}</div>
+    <div><#noescape>${orderStatus}</#noescape></div>
 </div>

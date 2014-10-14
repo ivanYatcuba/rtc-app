@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -138,7 +137,7 @@ public class UserController {
                 == null) {
             final ModelAndView mav = new ModelAndView(ROOT
                     + "/page/usercours");
-
+            mav.addObject("validationRules", validationContext.get(UserCourseOrder.class));
             final CourseSearchFilter courseSearchFilter
                     = new CourseSearchFilter();
             courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
@@ -168,17 +167,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/sendOrder", method = RequestMethod.POST)
-    public ModelAndView sendCourseOrder(@RequestBody @Valid final String orderData) {
+    public ModelAndView sendCourseOrder(@ModelAttribute("order") final UserCourseOrder myCourse) {
         final ModelAndView mav = new ModelAndView("redirect:/user/userCourses");
         //I'm sorry for this...
-        final Map<String, String> orderParamsMap
-                = getUserCourseOrderParams(orderData);
         final User user
                 = userService.loadUserByUsername(SecurityContextHolder
                 .getContext().getAuthentication().getName());
-        final UserCourseOrder userCourseOrder
-                = buildUserCourseOrder(orderParamsMap, user.getCode());
-        userCourseOrderService.insert(userCourseOrder);
+        myCourse.setUserCode(user.getCode());
+        userCourseOrderService.insert(myCourse);
         return mav;
     }
 
@@ -241,5 +237,13 @@ public class UserController {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
+    @ModelAttribute("order")
+    public UserCourseOrder getObject() {
+        return new UserCourseOrder();
+    }
 
+    @ModelAttribute("positions")
+    public List<String> getPositions() {
+        return TraineePosition.findAll();
+    }
 }
