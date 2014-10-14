@@ -36,6 +36,7 @@ public class UserController {
     private static final int START_SEARCH = 3;
     private static final String STRING_COURSE = "course";
     private static final String STRING_USER_COURSES = "userCourses";
+    //s
 
 
     @Autowired
