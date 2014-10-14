@@ -24,7 +24,6 @@
 
             <div class="userCourses"> ${course.description}</div>
             <br>
-
             <div class="btn btn-success" id="${course.code}"
                  style="margin-bottom: 5px "
                  onClick='setCode(this.id);javascript:PopUpShow("${course.types?join(',')}")'> Apply
@@ -49,19 +48,19 @@
             <input name="selectedCode" type="hidden" id="selectedCode"
                    value="test">
 
-            <div id="Development" style="display: none;">
+            <div id="Development">
             <input type="radio" name="userCourses" id="Development"
                    value="<@spring.message "userCourses.developer"/>"  />
             <@spring.message "userCourses.developer"/></label><br/>
             </div>
 
-            <div id="Quality Assurance" style="display: none;">
+            <div id="Quality Assurance">
             <input type="radio" name="userCourses" id="Quality Assurance"
                    value="<@spring.message "userCourses.tester"/>"/>
             <@spring.message "userCourses.tester"/></label><br/>
             </div>
 
-            <div id="Business Analysis" style="display: none;">
+            <div id="Business Analysis">
             <input type="radio" name="userCourses" id="Business Analysiss"
                    value="<@spring.message "userCourses.Business_Analyst"/>"/>
             <@spring.message "userCourses.Business_Analyst"/></label><br/>
@@ -70,7 +69,7 @@
             <strong><@spring.message "userCourses.because"/></strong><br/>
 
             <textarea class="input-block-level" name="userTextArea" id="redex"
-                      rows="10"></textarea>
+                      rows="10" cols="55"></textarea><br>
             <style type="text/css">#redex {
                 resize: none;
             }</style>
