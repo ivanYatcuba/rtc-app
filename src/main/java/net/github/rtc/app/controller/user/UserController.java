@@ -10,10 +10,10 @@ import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.security.authentication
-        .UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -167,7 +168,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/sendOrder", method = RequestMethod.POST)
-    public ModelAndView sendCourseOrder(@RequestBody final String orderData) {
+    public ModelAndView sendCourseOrder(@RequestBody @Valid final String orderData) {
         final ModelAndView mav = new ModelAndView("redirect:/user/userCourses");
         //I'm sorry for this...
         final Map<String, String> orderParamsMap
@@ -201,7 +202,7 @@ public class UserController {
         return userCourseOrder;
     }
 
-    private Map<String, String> getUserCourseOrderParams(
+    private Map<String, String> getUserCourseOrderParams(@NotEmpty(message = "Please enter your email addresss.")
             final String orderData) {
         final Map<String, String> orderParamsMap = new HashMap<>();
         final String[] orderParams = orderData.split("&");
