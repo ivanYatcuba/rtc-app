@@ -5,24 +5,17 @@ import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.*;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
-
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Sasha
@@ -35,6 +28,15 @@ public class UserServiceImpl implements  UserService {
     private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class.getName());
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private EncoderService encoderService;
+
+    @Autowired
+    private DateService dateService;
+
+    @Autowired
+    private CodeGenService codeGenService;
 
     @Override
     @Transactional
@@ -71,14 +73,13 @@ public class UserServiceImpl implements  UserService {
     public User create(final User user) {
         log.debug("Creating user");
         if (user.getRegisterDate() == null) {
-            user.setRegisterDate(new Date()); //new Date() - bad bad bad
+            user.setRegisterDate(dateService.getCurrentDate());
         }
 //        if (loadUserByUsername(user.getEmail()) != null) {
 //            throw new ServiceProcessingException("user already exists");
 //        }
-        user.setCode(UUID.randomUUID().toString());
-        final PasswordEncoder encoder = new StandardPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
+        user.setCode(codeGenService.generateCode());
+        user.setPassword(encoderService.encode(user.getPassword()));
         return userDao.create(user);
     }
 
@@ -86,10 +87,9 @@ public class UserServiceImpl implements  UserService {
     @Transactional
     public void update(final User user) {
         log.debug("Updating user: {}", user.getCode());
-        final PasswordEncoder encoder = new StandardPasswordEncoder();
         final User userToUpdate = userDao.findByCode(user.getCode());
         if (!user.getPassword().equals(userToUpdate.getPassword())) {
-            user.setPassword(encoder.encode(user.getPassword()));
+            user.setPassword(encoderService.encode(user.getPassword()));
         }
         userDao.update(user);
     }
@@ -146,7 +146,7 @@ public class UserServiceImpl implements  UserService {
     public void markUserForRemoval(String userCode) {
         final User user = findByCode(userCode);
         user.setStatus(UserStatus.FOR_REMOVAL);
-        user.setRemovalDate(new DateTime(new Date()).plusDays(USER_REMOVAL_DELAY).toDate());
+        user.setRemovalDate(dateService.addDays(dateService.getCurrentDate(), USER_REMOVAL_DELAY));
         update(user);
     }
 

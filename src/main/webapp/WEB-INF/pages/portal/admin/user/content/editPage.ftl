@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-4" style="text-align: right">
             <br>
-            <input type="submit" class="btn" value="Save"/> or
+            <input type="submit" class="btn btn-primary" value="Save"/> or
             <a href="<@spring.url "/admin/user/userPage/${user.code}" />">Cancel</a>
         </div>
     </div>

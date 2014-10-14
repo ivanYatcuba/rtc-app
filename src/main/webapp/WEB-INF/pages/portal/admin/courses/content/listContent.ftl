@@ -63,7 +63,7 @@ Create New<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.j
     </a>
     </div>
     <div class="col-md-6" style="text-align: right">
-        <@spring.addPagination "/admin/course/switch/" />
+        <@rtcmacros.addPagination "/admin/course/switch/" />
     </div>
 </div>
 

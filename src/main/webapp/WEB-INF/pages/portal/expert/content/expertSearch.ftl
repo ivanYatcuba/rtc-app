@@ -4,13 +4,13 @@
       action="<@spring.url '/expert/search'/>" method="post">
     <div class="row">
         <div class="span6">
-        <@spring.formItem "expert.name"/>
-            <@spring.formItem "expert.category"/>
-            <@spring.formItem "expert.author"/>
+        <@rtcmacros.formItem "expert.name"/>
+            <@rtcmacros.formItem "expert.category"/>
+            <@rtcmacros.formItem "expert.author"/>
         </div>
         <div class="span6">
-        <@spring.formItem "expert.startDate" "datepiker" 'class="input-medium"'/>
-            <@spring.formItem "expert.tags" "tag"/>
+        <@rtcmacros.formItem "expert.startDate" "datepiker" 'class="input-medium"'/>
+            <@rtcmacros.formItem "expert.tags" "tag"/>
         </div>
     </div>
 </form>

@@ -3,6 +3,8 @@ package net.github.rtc.app.service.impl;
 import net.github.rtc.app.dao.impl.ReportDao;
 import net.github.rtc.app.export.ReportBuilder;
 import net.github.rtc.app.model.report.ReportDetails;
+import net.github.rtc.app.service.CodeGenService;
+import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
@@ -14,14 +16,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by Ivan Yatcuba on 8/16/14.
- * Refactored by Vasiliy Sobol on 1/10/14
+ * Refactored by Vasiliy Sobol on 10/1/14
  */
 
 @Service
@@ -33,6 +33,10 @@ public class ReportServiceImpl implements ReportService {
 
     @Autowired
     private ReportDao reportResource;
+    @Autowired
+    private DateService dateService;
+    @Autowired
+    private CodeGenService codeGenService;
 
     @Resource(name = "serviceHolder")
     private Map<Class, ? extends ModelService> serviceHolder;
@@ -44,8 +48,8 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public void insert(final ReportDetails report) {
         log.info("Creating report: " + report);
-        report.setCode(UUID.randomUUID().toString());
-        report.setCreatedDate(new Date());
+        report.setCode(codeGenService.generateCode());
+        report.setCreatedDate(dateService.getCurrentDate());
 
         try {
             compileReport(report);

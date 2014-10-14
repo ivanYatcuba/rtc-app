@@ -4,13 +4,13 @@
 
     <div class="col-md-6">Email
         <!--Email-->
-    <@spring.formItem  "user.email" "class=required"/>
+    <@rtcmacros.formItem  "user.email" "class=required"/>
     </div>
 
 
     <div class="col-md-6">
         <!--Password-->
-    <@spring.formItem "user.password" "id=password class=required" "password"/>
+    <@rtcmacros.formItem "user.password" "id=password class=required" "password"/>
         <div class="controls">
             <label for="check"></label>
             <input id="check"
@@ -39,9 +39,9 @@
             </div>
         </div>
         <!--Last Name-->
-    <@spring.formItem  "user.surname" "class=\"required\""/>
+    <@rtcmacros.formItem  "user.surname" "class=\"required\""/>
         <!--Middle Name -->
-    <@spring.formItem  "user.middleName" />
+    <@rtcmacros.formItem  "user.middleName" />
     </div>
 
 
@@ -52,9 +52,9 @@
         </div>
         <!--First Name-->
         <div class="row"></div>
-    <@spring.formItem  "user.name" "class=\"required\""/>
+    <@rtcmacros.formItem  "user.name" "class=\"required\""/>
         <!--Birth Date-->
-    <@spring.formItem "user.birthDate"  'class="input-medium required"' "datepiker"/>
+    <@rtcmacros.formItem "user.birthDate"  'class="input-medium required"' "datepiker"/>
     </div>
 </div>
 
@@ -63,11 +63,11 @@
 <div class="row">
     <div class="col-md-6">
         <!--City-->
-    <@spring.formItem  "user.city" />
+    <@rtcmacros.formItem  "user.city" />
     </div>
     <div class="col-md-6">
         <!--Phone-->
-    <@spring.formItem  "user.phone" "class=\"required\""/>
+    <@rtcmacros.formItem  "user.phone" "class=\"required\""/>
     </div>
 </div>
 
@@ -76,15 +76,15 @@
 <div class="row">
     <div class="col-md-6">
         <!--University-->
-    <@spring.formItem  "user.university" />
+    <@rtcmacros.formItem  "user.university" />
         <!--Speciality-->
-    <@spring.formItem  "user.faculty" />
+    <@rtcmacros.formItem  "user.faculty" />
 
     </div>
 
     <div class="col-md-6">
         <!--Faculty-->
-    <@spring.formItem  "user.speciality" />
+    <@rtcmacros.formItem  "user.speciality" />
     </div>
 </div>
 
@@ -93,7 +93,7 @@
 <div class="row">
     <div class="col-md-6">
         <!--Languages-->
-    <@spring.formItem "user.programmingLanguages" />
+    <@rtcmacros.formItem "user.programmingLanguages" />
     </div>
 
     <div class="col-md-6">
@@ -124,7 +124,7 @@
     </div>
 </div>
 
-<@spring.formValidation formName="userForm" jsonRules="${validationRules}"/>
+<@rtcmacros.formValidation formName="userForm" jsonRules="${validationRules}"/>
 <script type="text/javascript" charset="utf8"
         src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
 <script>

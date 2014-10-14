@@ -116,7 +116,6 @@ public class UserController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session, @RequestParam final RoleType selectedRole) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
-//      user.setRegisterDate(new Date());
         userService.create(user);
         session.setComplete();
         return REDIRECT_USER_PAGE + user.getCode();
