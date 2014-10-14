@@ -1,4 +1,4 @@
-<form class="form-horizontal" id="news" name="news"
+<form class="form-horizontal" id="newsForm" name="news"
     action="<@spring.url '/admin/news/save'/>" method="post">
     <div>
         <h4 class="page-header"><@spring.message "news.create"/></h4>
