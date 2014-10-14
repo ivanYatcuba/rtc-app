@@ -2,7 +2,6 @@ package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.news.News;
-import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.NewsService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
@@ -10,12 +9,15 @@ import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Controller("newsController")
@@ -27,16 +29,17 @@ public class NewsController {
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_NEWS = "filterNews";
     private static final String STRING_NEWS = "news";
+    private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/";
 
     @Autowired
     private NewsService newsService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private DateService dateService;
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView viewAll(@ModelAttribute("filterNews") final NewsSearchFilter filterNews) {
+    public
+    @ResponseBody
+    ModelAndView viewAll(@ModelAttribute("filterNews") final NewsSearchFilter filterNews) {
         final ModelAndView mav = new ModelAndView(ROOT + "/news/content/search/searchTable");
         final SearchResults results = newsService.search(filterNews);
         mav.addAllObjects(results.getPageModel());
@@ -64,6 +67,49 @@ public class NewsController {
     public ModelAndView create() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/pageCreateNews");
         return mav;
+    }
+
+    /**
+     * Process the request to get details about news by selected code
+     * URL example: "/1". Parse by pattern: "/{code}"
+     * if success go to view "admin/news/view")
+     *
+     * @param newsCode news code
+     * @return modelAndView("admin/news/")
+     */
+    @RequestMapping(value = "/{newsCode}", method = RequestMethod.GET)
+    public ModelAndView single(@PathVariable final String newsCode) {
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/newsContent");
+        final News news = newsService.findByCode(newsCode);
+        mav.addObject(STRING_NEWS, news);
+        return mav;
+    }
+
+    /**
+     * Process the request to get edit news form
+     *
+     * @return modelAndView("admin/news/layout")
+     */
+    @RequestMapping(value = "/{newsCode}/edit", method = RequestMethod.GET)
+    public ModelAndView update(@PathVariable final String newsCode) {
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/updateNews");
+        mav.getModelMap().addAttribute(STRING_NEWS, newsService.findByCode(newsCode));
+        return mav;
+    }
+
+    /**
+     * Process the request to post entered news in the form
+     *
+     * @param news news object
+     * @return the redirect to view news
+     */
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String update(@ModelAttribute(STRING_NEWS) final News news) {
+        final News newsTmp = newsService.findByCode(news.getCode());
+        news.setCreateDate(newsTmp.getCreateDate());
+        news.setAuthor(newsTmp.getAuthor());
+        newsService.update(news);
+        return STRING_REDIRECT_VIEW + news.getCode();
     }
 
     /**
@@ -101,14 +147,13 @@ public class NewsController {
      * course
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(
-            @ModelAttribute(STRING_NEWS) final News news,
-            @RequestParam(value = "expertList",
-                    required = false) final List<String> expertList) {
-        news.setCreateDate(dateService.getCurrentDate());
-        news.setAuthor(userService.loadUserByUsername("admin"));
+    public String save(@ModelAttribute(STRING_NEWS) final News news) {
+        news.setCreateDate(new GregorianCalendar().getTime());
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        final String name = auth.getName(); //get logged in username
+        news.setAuthor(userService.loadUserByUsername(name));
         newsService.create(news);
-        return "redirect:/admin/news/list";
+        return STRING_REDIRECT_VIEW + news.getCode();
     }
 
 }
