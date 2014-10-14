@@ -1,7 +1,7 @@
 package net.github.rtc.app.controller.admin;
 
-import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.news.News;
+import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.service.NewsService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
@@ -45,7 +45,7 @@ public class NewsController {
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_NEWS, results.getResults());
         mav.addObject(STRING_STATUSES, getStatuses());
-//        mav.addObject(STRING_FILTER_NEWS, filterNews);
+        mav.addObject(STRING_FILTER_NEWS, filterNews);
         return mav;
     }
 
@@ -130,7 +130,7 @@ public class NewsController {
 
     @ModelAttribute(STRING_STATUSES)
     public Collection<String> getStatuses() {
-        return CourseStatus.findAll();
+        return NewsStatus.findAll();
     }
 
     @ModelAttribute("news")
