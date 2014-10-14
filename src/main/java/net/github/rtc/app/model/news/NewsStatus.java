@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum NewsStatus {
-    ALL, DRAFT, PUBLISHED;
+    DRAFT, PUBLISHED, ALL;
 
     public static List<String> findAll() {
         final List<String> res = new ArrayList<>();

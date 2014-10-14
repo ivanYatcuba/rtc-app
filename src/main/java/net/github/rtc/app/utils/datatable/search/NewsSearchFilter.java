@@ -18,7 +18,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     private User author;
 
-    private NewsStatus status;
+    private NewsStatus status = NewsStatus.ALL;
 
     private Date createDate;
 
