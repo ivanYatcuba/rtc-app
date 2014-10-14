@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-12" style="text-align: right">
             <input type="submit" class="btn btn-primary" value="Create" />
-            <button type="button" onclick="location.href='/admin/news/list'" class="btn btn-default">Cancel</button>
+            <button type="button" onclick="location.href='<@spring.url '/admin/news/list'/>'" class="btn btn-default">Cancel</button>
         </div>
     </div>
 </form>

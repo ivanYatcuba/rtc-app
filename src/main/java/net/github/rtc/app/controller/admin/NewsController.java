@@ -29,7 +29,7 @@ public class NewsController {
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_NEWS = "filterNews";
     private static final String STRING_NEWS = "news";
-    private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/view/";
+    private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/";
 
     @Autowired
     private NewsService newsService;
@@ -75,9 +75,9 @@ public class NewsController {
      * if success go to view "admin/news/view")
      *
      * @param newsCode news code
-     * @return modelAndView("admin/news/view")
+     * @return modelAndView("admin/news/")
      */
-    @RequestMapping(value = "/view/{newsCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{newsCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable final String newsCode) {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/newsContent");
         final News news = newsService.findByCode(newsCode);
