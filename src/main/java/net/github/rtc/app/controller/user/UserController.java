@@ -73,7 +73,7 @@ public class UserController {
         final ModelAndView mav = new ModelAndView(ROOT
                 + "/page/edituser");
         mav.getModelMap().addAttribute(STRING_USER, user);
-        //mav.addObject("validationRules", validationContext.get(User.class));
+        mav.addObject("validationRules", validationContext.get(User.class));
         return mav;
     }
 
