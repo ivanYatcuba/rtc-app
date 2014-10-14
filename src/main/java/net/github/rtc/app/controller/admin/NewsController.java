@@ -29,6 +29,7 @@ public class NewsController {
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_NEWS = "filterNews";
     private static final String STRING_NEWS = "news";
+    private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/view/";
 
     @Autowired
     private NewsService newsService;
@@ -36,7 +37,9 @@ public class NewsController {
     private UserService userService;
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView viewAll(@ModelAttribute("filterNews") final NewsSearchFilter filterNews) {
+    public
+    @ResponseBody
+    ModelAndView viewAll(@ModelAttribute("filterNews") final NewsSearchFilter filterNews) {
         final ModelAndView mav = new ModelAndView(ROOT + "/news/content/search/searchTable");
         final SearchResults results = newsService.search(filterNews);
         mav.addAllObjects(results.getPageModel());
@@ -76,7 +79,7 @@ public class NewsController {
      */
     @RequestMapping(value = "/view/{newsCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable final String newsCode) {
-        final ModelAndView mav = new ModelAndView(ROOT+"/page/newsContent");
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/newsContent");
         final News news = newsService.findByCode(newsCode);
         mav.addObject(STRING_NEWS, news);
         return mav;
@@ -102,11 +105,11 @@ public class NewsController {
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String update(@ModelAttribute(STRING_NEWS) final News news) {
-        News news_tmp = newsService.findByCode(news.getCode());
-        news.setCreateDate(news_tmp.getCreateDate());
-        news.setAuthor(news_tmp.getAuthor());
+        final News newsTmp = newsService.findByCode(news.getCode());
+        news.setCreateDate(newsTmp.getCreateDate());
+        news.setAuthor(newsTmp.getAuthor());
         newsService.update(news);
-        return "redirect:/admin/news/view/"+news.getCode();
+        return STRING_REDIRECT_VIEW + news.getCode();
     }
 
     /**
@@ -146,11 +149,11 @@ public class NewsController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute(STRING_NEWS) final News news) {
         news.setCreateDate(new GregorianCalendar().getTime());
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName(); //get logged in username
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        final String name = auth.getName(); //get logged in username
         news.setAuthor(userService.loadUserByUsername(name));
         newsService.create(news);
-        return "redirect:/admin/news/view/"+news.getCode();
+        return STRING_REDIRECT_VIEW + news.getCode();
     }
 
 }
