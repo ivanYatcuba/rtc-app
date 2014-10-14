@@ -36,7 +36,7 @@ public class UserController {
     private static final int START_SEARCH = 3;
     private static final String STRING_COURSE = "course";
     private static final String STRING_USER_COURSES = "userCourses";
-    //s
+    private static final String STRING_VALIDATION_RULES = "validationRules";
 
 
     @Autowired
@@ -74,7 +74,7 @@ public class UserController {
         final ModelAndView mav = new ModelAndView(ROOT
                 + "/page/edituser");
         mav.getModelMap().addAttribute(STRING_USER, user);
-        mav.addObject("validationRules", validationContext.get(User.class));
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         return mav;
     }
 
@@ -138,7 +138,7 @@ public class UserController {
                 == null) {
             final ModelAndView mav = new ModelAndView(ROOT
                     + "/page/usercours");
-            mav.addObject("validationRules", validationContext.get(UserCourseOrder.class));
+            mav.addObject(STRING_VALIDATION_RULES, validationContext.get(UserCourseOrder.class));
             final CourseSearchFilter courseSearchFilter
                     = new CourseSearchFilter();
             courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
