@@ -1,47 +1,31 @@
 <@spring.formHiddenInput "user.code" />
 <@spring.formHiddenInput "user.registerDate" />
-<div class="row" xmlns="http://www.w3.org/1999/html">
-
-    <div class="col-md-6">Email
-        <!--Email-->
-    <@rtcmacros.formItem  "user.email" "class=required"/>
+<div class="row">
+    <div class="col-md-6">
+        <@formMacro.rtcFormUserEmailInput  "user.email" "user.email" "required"/>
     </div>
 
-
     <div class="col-md-6">
-        <!--Password-->
-    <@rtcmacros.formItem "user.password" "id=password class=required" "password"/>
-        <div class="controls">
-            <label for="check"></label>
-            <input id="check"
-                   onchange="if ($('#password').get(0).type=='password') $('#password').get(0).type='text'; else $('#password').get(0).type='password';"
-                   name="fff" type="checkbox" value="false"
-                   style="margin: 0px 0px 0px;">  <@spring.message "user.showPassword"/>
-        </div>
+        <@formMacro.rtcFormPasswordInputWithCheckbox   "user.password" "user.password" "required"/>
     </div>
 </div>
 <hr/>
 <div class="row">
     <div class="col-md-6">
-        <!--Gender-->
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="user.gender"><@spring.message "user.gender"/></label>
-
-            <div class="col-md-4" style="padding-top: 5px">
+    <@formMacro.rtcFormCustomInput   "user.gender" "user.gender">
+        <div style="padding-top: 5px">
             <@spring.bind "user.gender"/>
-                <input type="radio" name="gender" id="optionsRadios1"
-                       value="Male" checked
-                       style="margin: -3px 0px 0px;"> <@spring.message "user.genderM"/>
-                <input type="radio" name="gender" id="optionsRadios2"
-                       value="Female"
-                       style="margin: -3px 0px 0px;"> <@spring.message "user.genderF"/>
-            </div>
+            <input type="radio" name="gender" id="optionsRadios1"
+                   value="Male" checked
+                   style="margin: -3px 0px 0px;"> <@spring.message "user.genderM"/>
+            <input type="radio" name="gender" id="optionsRadios2"
+                   value="Female"
+                   style="margin: -3px 0px 0px;"> <@spring.message "user.genderF"/>
         </div>
-        <!--Last Name-->
-    <@rtcmacros.formItem  "user.surname" "class=\"required\""/>
-        <!--Middle Name -->
-    <@rtcmacros.formItem  "user.middleName" />
+     </@formMacro.rtcFormCustomInput >
+
+    <@formMacro.rtcFormTextInput  "user.surname" "user.surname" "required" />
+    <@formMacro.rtcFormTextInput  "user.middleName" "user.middleName" />
     </div>
 
 
@@ -50,11 +34,9 @@
             <div class="col-md-6" style="padding-top: 25px">
             </div>
         </div>
-        <!--First Name-->
         <div class="row"></div>
-    <@rtcmacros.formItem  "user.name" "class=\"required\""/>
-        <!--Birth Date-->
-    <@rtcmacros.formItem "user.birthDate"  'class="input-medium required"' "datepiker"/>
+    <@formMacro.rtcFormTextInput  "user.name" "user.name" "required" />
+    <@formMacro.rtcFormDatePicker  "user.birthDate" "user.birthDate" "input-medium required" />
     </div>
 </div>
 
@@ -62,12 +44,10 @@
 
 <div class="row">
     <div class="col-md-6">
-        <!--City-->
-    <@rtcmacros.formItem  "user.city" />
+    <@formMacro.rtcFormTextInput  "user.city" "user.city"/>
     </div>
     <div class="col-md-6">
-        <!--Phone-->
-    <@rtcmacros.formItem  "user.phone" "class=\"required\""/>
+    <@formMacro.rtcFormTextInput  "user.phone" "user.phone" "required"/>
     </div>
 </div>
 
@@ -75,16 +55,12 @@
 
 <div class="row">
     <div class="col-md-6">
-        <!--University-->
-    <@rtcmacros.formItem  "user.university" />
-        <!--Speciality-->
-    <@rtcmacros.formItem  "user.faculty" />
-
+    <@formMacro.rtcFormTextInput  "user.university" "user.university"/>
+    <@formMacro.rtcFormTextInput  "user.faculty" "user.faculty"/>
     </div>
 
     <div class="col-md-6">
-        <!--Faculty-->
-    <@rtcmacros.formItem  "user.speciality" />
+    <@formMacro.rtcFormTextInput  "user.speciality" "user.speciality"/>
     </div>
 </div>
 
@@ -92,20 +68,15 @@
 
 <div class="row">
     <div class="col-md-6">
-        <!--Languages-->
-    <@rtcmacros.formItem "user.programmingLanguages" />
+    <@formMacro.rtcFormTextInput  "user.programmingLanguages" "user.programmingLanguages"/>
     </div>
 
     <div class="col-md-6">
-        <!--English-->
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="english"><@spring.message "user.english"/></label>
-
-            <div class="col-md-4">
+    <@formMacro.rtcFormCustomInput   "user.english" "user.english">
+        <div class="col-md-4">
             <@spring.formSingleSelect "user.english", ["Basic", "Intermediate", "Advanced"], 'style="background-color: #FFFACD;" class=\"required\"'/>
-            </div>
         </div>
+    </@formMacro.rtcFormCustomInput >
     </div>
 </div>
 
@@ -114,12 +85,7 @@
 <!--Note-->
 <div class="row">
     <div class="col-md-12">
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="note"><@spring.message "user.note"/></label>
-
-            <div class="col-md-9">    <@spring.formTextarea "user.note"
-            'style="width:100%;" rows="3" maxlength="255" id=\"note\" class=\"required\"' /> </div>
-        </div>
+    <@formMacro.rtcFormTextarea  "user.note" "user.note" "required" "style=\"width:60%;\" rows=\"3\"
+    maxlength=\"255\""/>
     </div>
 </div>
