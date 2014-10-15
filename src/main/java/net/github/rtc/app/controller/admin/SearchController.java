@@ -1,7 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.model.report.ReportDetails;
@@ -43,7 +42,6 @@ public class SearchController {
     private static final String STRING_REPORTS = "reports";
 
 
-
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -59,7 +57,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/newsTable", method = RequestMethod.POST)
-    public ModelAndView getNewsTable (@ModelAttribute("newsFilter") final NewsSearchFilter newsFilter) {
+    public ModelAndView getNewsTable(@ModelAttribute("newsFilter") final NewsSearchFilter newsFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/newsSearchTable");
         final SearchResults<News> results = newsService.search(newsFilter);
         mav.addAllObjects(results.getPageModel());

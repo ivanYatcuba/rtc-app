@@ -1,6 +1,5 @@
 package net.github.rtc.app.service;
 
-import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
