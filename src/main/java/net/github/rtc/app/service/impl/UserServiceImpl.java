@@ -75,10 +75,6 @@ public class UserServiceImpl implements  UserService {
         if (user.getRegisterDate() == null) {
             user.setRegisterDate(dateService.getCurrentDate());
         }
-        /*TODO: check or remove*/
-//        if (loadUserByUsername(user.getEmail()) != null) {
-//            throw new ServiceProcessingException("user already exists");
-//        }
         user.setCode(codeGenerationService.generate());
         user.setPassword(encoderService.encode(user.getPassword()));
         return userDao.create(user);
