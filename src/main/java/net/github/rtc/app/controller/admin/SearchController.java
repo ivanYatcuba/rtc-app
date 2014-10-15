@@ -1,6 +1,8 @@
 package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseStatus;
+import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.model.report.ReportDetails;
@@ -34,9 +36,11 @@ public class SearchController {
     private static final String STRING_NEWS = "news";
     private static final String STRING_NEWS_STATUSES = "newsStatuses";
     private static final String STRING_USER_STATUSES = "userStatuses";
+    private static final String STRING_COURSE_STATUSES = "courseStatuses";
     private static final String STRING_NEWS_FILTER = "newsFilter";
     private static final String STRING_TYPES = "types";
     private static final String STRING_COURSE_FILTER = "courseFilter";
+    private static final String STRING_COURSE_TYPES = "categories";
     private static final String STRING_USERS = "users";
     private static final String STRING_AUTHORITIES = "authorities";
     private static final String STRING_USER_FILTER = "userFilter";
@@ -118,14 +122,24 @@ public class SearchController {
     public Collection<String> getNewsStatuses() {
         return NewsStatus.findAll();
     }
+
     @ModelAttribute(STRING_USER_STATUSES)
     public Collection<String> getUserStatuses() {
         return UserStatus.findAll();
+    }
+
+    @ModelAttribute(STRING_COURSE_STATUSES)
+    public Collection<String> getCourseStatuses() {
+        return CourseStatus.findAll();
     }
 
     @ModelAttribute(STRING_AUTHORITIES)
     public Collection<String> getAuthorities() {
         return RoleType.findAll();
     }
+
+    @ModelAttribute(STRING_COURSE_TYPES)
+    public Collection<String> getCategories() {
+        return CourseType.findAll(); }
 
 }
