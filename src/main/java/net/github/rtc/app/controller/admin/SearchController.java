@@ -4,10 +4,12 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
+import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.NewsService;
+import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,10 @@ public class SearchController {
     private static final String STRING_USERS = "users";
     private static final String STRING_AUTHORITIES = "authorities";
     private static final String STRING_USER_FILTER = "userFilter";
+    private static final String STRING_COURSES = "courses";
+    private static final String STRING_REPORTS = "reports";
+
+
 
     @Autowired
     private NewsService newsService;
@@ -44,6 +50,8 @@ public class SearchController {
     private CourseService courseService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ReportService reportService;
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchPage() {
@@ -56,8 +64,6 @@ public class SearchController {
         final SearchResults<News> results = newsService.search(newsFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_NEWS, results.getResults());
-        mav.addObject(STRING_STATUSES, getStatuses());
-        mav.addObject(STRING_NEWS_FILTER, newsFilter);
         return mav;
     }
 
@@ -66,10 +72,7 @@ public class SearchController {
         final ModelAndView mav = new ModelAndView();
         final SearchResults<Course> results = courseService.search(courseFilter);
         mav.addAllObjects(results.getPageModel());
-        mav.addObject("courses", results.getResults());
-        mav.addObject(STRING_TYPES, CourseType.findAll());
-        mav.addObject(STRING_STATUSES, getStatuses());
-        mav.addObject(STRING_COURSE_FILTER, courseFilter);
+        mav.addObject(STRING_COURSES, results.getResults());
         return mav;
     }
 
@@ -79,14 +82,15 @@ public class SearchController {
         final SearchResults<User> results = userService.search(userFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_USERS, results.getResults());
-        mav.addObject(STRING_AUTHORITIES, getAuthorities());
-        mav.addObject(STRING_USER_FILTER, userFilter);
         return mav;
     }
 
     @RequestMapping(value = "/reportTable", method = RequestMethod.POST)
-    public ModelAndView getReportTable() {
+    public ModelAndView getReportTable(@ModelAttribute("reportFilter") final ReportSearchFilter reportFilter) {
         final ModelAndView mav = new ModelAndView();
+        final SearchResults<ReportDetails> results = reportService.search(reportFilter);
+        mav.addAllObjects(results.getPageModel());
+        mav.addObject(STRING_REPORTS, results.getResults());
         return mav;
     }
 
