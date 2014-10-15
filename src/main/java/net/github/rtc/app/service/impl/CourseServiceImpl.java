@@ -3,7 +3,7 @@ package net.github.rtc.app.service.impl;
 import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
-import net.github.rtc.app.service.CodeGenService;
+import net.github.rtc.app.service.CodeGenerationService;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.ModelService;
@@ -44,7 +44,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     private DateService dateService;
 
     @Autowired
-    private CodeGenService codeGenService;
+    private CodeGenerationService codeGenerationService;
 
     /**
      * @see net.github.rtc.app.service.CourseService#delete(String)
@@ -73,7 +73,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     public Course create(final Course course) {
         log.debug("Creating course {} ", course);
         Assert.notNull(course, COURSE_CANNOT_BE_NULL);
-        course.setCode(codeGenService.generateCode());
+        course.setCode(codeGenerationService.generate());
         return coursesDao.create(course);
     }
 

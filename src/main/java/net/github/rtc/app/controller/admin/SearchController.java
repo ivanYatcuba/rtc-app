@@ -6,6 +6,7 @@ import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.NewsService;
 import net.github.rtc.app.service.ReportService;
@@ -31,7 +32,8 @@ public class SearchController {
     private static final String ROOT = "portal/admin";
     private static final String STRING_SEARCH_PAGE = "/search/tables";
     private static final String STRING_NEWS = "news";
-    private static final String STRING_STATUSES = "statuses";
+    private static final String STRING_NEWS_STATUSES = "newsStatuses";
+    private static final String STRING_USER_STATUSES = "userStatuses";
     private static final String STRING_NEWS_FILTER = "newsFilter";
     private static final String STRING_TYPES = "types";
     private static final String STRING_COURSE_FILTER = "courseFilter";
@@ -53,7 +55,7 @@ public class SearchController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchPage() {
-        return ROOT + "/search/searchPage";
+        return ROOT + "/page/adminSearchPage";
     }
 
     @RequestMapping(value = "/newsTable", method = RequestMethod.POST)
@@ -112,9 +114,13 @@ public class SearchController {
         return new ReportSearchFilter();
     }
 
-    @ModelAttribute(STRING_STATUSES)
-    public Collection<String> getStatuses() {
+    @ModelAttribute(STRING_NEWS_STATUSES)
+    public Collection<String> getNewsStatuses() {
         return NewsStatus.findAll();
+    }
+    @ModelAttribute(STRING_USER_STATUSES)
+    public Collection<String> getUserStatuses() {
+        return UserStatus.findAll();
     }
 
     @ModelAttribute(STRING_AUTHORITIES)

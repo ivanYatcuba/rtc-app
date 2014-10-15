@@ -1,6 +1,7 @@
 package net.github.rtc.app.utils.datatable.search;
 
 import net.github.rtc.app.model.user.Role;
+import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import org.hibernate.criterion.DetachedCriteria;
@@ -16,7 +17,7 @@ import java.util.List;
 public class UserSearchFilter extends AbstractSearchCommand {
     private static final String STRING_PROCENT = "%";
     private static final String STRING_AUTHORITIES = "authorities";
-    private static final String STRING_REDISTER_DATE = "registerDate"; //ok
+    private static final String STRING_REGISTER_DATE = "registerDate"; //ok
 
     private String surname;
 
@@ -32,7 +33,7 @@ public class UserSearchFilter extends AbstractSearchCommand {
         this.dateMoreLessEq = dateMoreLessEq;
     }
 
-    public int getDateMoreLessEq() {
+    public char getDateMoreLessEq() {
 
         return dateMoreLessEq;
     }
@@ -84,13 +85,13 @@ public class UserSearchFilter extends AbstractSearchCommand {
         if (registerDate != null) {
             switch (dateMoreLessEq) {
             case '>':
-                criteria.add(Restrictions.gt(STRING_REDISTER_DATE, registerDate));
+                criteria.add(Restrictions.gt(STRING_REGISTER_DATE, registerDate));
                 break;
             case '=':
-                criteria.add(Restrictions.eq(STRING_REDISTER_DATE, registerDate));
+                criteria.add(Restrictions.eq(STRING_REGISTER_DATE, registerDate));
                 break;
             case '<':
-                criteria.add(Restrictions.lt(STRING_REDISTER_DATE, registerDate));
+                criteria.add(Restrictions.lt(STRING_REGISTER_DATE, registerDate));
                 break;
             default: break;
             }
@@ -98,12 +99,13 @@ public class UserSearchFilter extends AbstractSearchCommand {
         }
 
         if (authorities != null && authorities.size() > 0) {
-            criteria.createAlias(STRING_AUTHORITIES, "aut");
-            final Disjunction authoritiesDis = Restrictions.disjunction();
-            for (final Role role : authorities) {
-                authoritiesDis.add(Restrictions.eq("authorities.name", role.getName()));
+            if (authorities.get(0).getName() != RoleType.ALL) {
+                final Disjunction authoritiesDis = Restrictions.disjunction();
+                for (final Role role : authorities) {
+                    authoritiesDis.add(Restrictions.eq("authorities.name", role.getName()));
+                }
+                criteria.add(authoritiesDis);
             }
-            criteria.add(authoritiesDis);
         }
 
         return criteria;

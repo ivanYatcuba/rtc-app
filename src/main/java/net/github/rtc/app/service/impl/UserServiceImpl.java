@@ -36,7 +36,7 @@ public class UserServiceImpl implements  UserService {
     private DateService dateService;
 
     @Autowired
-    private CodeGenService codeGenService;
+    private CodeGenerationService codeGenerationService;
 
     @Override
     @Transactional
@@ -75,10 +75,11 @@ public class UserServiceImpl implements  UserService {
         if (user.getRegisterDate() == null) {
             user.setRegisterDate(dateService.getCurrentDate());
         }
+        /*TODO: check or remove*/
 //        if (loadUserByUsername(user.getEmail()) != null) {
 //            throw new ServiceProcessingException("user already exists");
 //        }
-        user.setCode(codeGenService.generateCode());
+        user.setCode(codeGenerationService.generate());
         user.setPassword(encoderService.encode(user.getPassword()));
         return userDao.create(user);
     }
