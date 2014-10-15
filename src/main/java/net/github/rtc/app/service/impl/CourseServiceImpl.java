@@ -110,8 +110,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
 
     @Override
     @Transactional
-    public SearchResults<Course> search(
-            final DetachedCriteria criteria, final int start, final int max) {
+    public SearchResults<Course> search(final DetachedCriteria criteria, final int start, final int max) {
         log.debug("Searching courses");
         return coursesDao.search(criteria, start, max);
     }

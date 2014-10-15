@@ -48,8 +48,8 @@ public class NewsController {
         final SearchResults results = newsService.search(filterNews);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_NEWS, results.getResults());
-        mav.addObject(STRING_STATUSES, getStatuses());
-        mav.addObject(STRING_FILTER_NEWS, filterNews);
+//        mav.addObject(STRING_STATUSES, getStatuses());
+//        mav.addObject(STRING_FILTER_NEWS, filterNews);
         return mav;
     }
 
