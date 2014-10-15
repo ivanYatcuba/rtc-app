@@ -27,8 +27,18 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
 
     @Override
     public T create(T t) {
-        t.setCode(codeGenerationService.generate());
+        t.setCode(getCode());
         return getDao().create(t);
+    }
+
+    protected String getCode() {
+        String code = codeGenerationService.generate();
+        while (true) {
+            if (findByCode(code) == null) {
+                return code;
+            }
+            code = codeGenerationService.generate();
+        }
     }
 
     @Override
