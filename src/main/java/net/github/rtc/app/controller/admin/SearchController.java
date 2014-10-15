@@ -31,12 +31,12 @@ public class SearchController {
     private static final String STRING_SEARCH_PAGE = "/search/tables";
     private static final String STRING_NEWS = "news";
     private static final String STRING_STATUSES = "statuses";
-    private static final String STRING_FILTER_NEWS = "filterNews";
+    private static final String STRING_NEWS_FILTER = "newsFilter";
     private static final String STRING_TYPES = "types";
-    private static final String STRING_FILTER_COURSE = "filterCourse";
+    private static final String STRING_COURSE_FILTER = "courseFilter";
     private static final String STRING_USERS = "users";
     private static final String STRING_AUTHORITIES = "authorities";
-    private static final String STRING_FILTER_USER = "filterUser";
+    private static final String STRING_USER_FILTER = "userFilter";
 
     @Autowired
     private NewsService newsService;
@@ -51,36 +51,36 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/newsTable", method = RequestMethod.POST)
-    public ModelAndView getNewsTable (@ModelAttribute("filterNews") final NewsSearchFilter filterNews) {
+    public ModelAndView getNewsTable (@ModelAttribute("newsFilter") final NewsSearchFilter newsFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/newsSearchTable");
-        final SearchResults<News> results = newsService.search(filterNews);
+        final SearchResults<News> results = newsService.search(newsFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_NEWS, results.getResults());
         mav.addObject(STRING_STATUSES, getStatuses());
-        mav.addObject(STRING_FILTER_NEWS, filterNews);
+        mav.addObject(STRING_NEWS_FILTER, newsFilter);
         return mav;
     }
 
     @RequestMapping(value = "/courseTable", method = RequestMethod.POST)
-    public ModelAndView getCourseTable(@ModelAttribute("filterCourse") final CourseSearchFilter filterCourse) {
+    public ModelAndView getCourseTable(@ModelAttribute("courseFilter") final CourseSearchFilter courseFilter) {
         final ModelAndView mav = new ModelAndView();
-        final SearchResults<Course> results = courseService.search(filterCourse);
+        final SearchResults<Course> results = courseService.search(courseFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject("courses", results.getResults());
         mav.addObject(STRING_TYPES, CourseType.findAll());
         mav.addObject(STRING_STATUSES, getStatuses());
-        mav.addObject(STRING_FILTER_COURSE, filterCourse);
+        mav.addObject(STRING_COURSE_FILTER, courseFilter);
         return mav;
     }
 
     @RequestMapping(value = "/userTable", method = RequestMethod.POST)
-    public ModelAndView getUserTable(@ModelAttribute("filterUser") final UserSearchFilter userFilter) {
+    public ModelAndView getUserTable(@ModelAttribute("userFilter") final UserSearchFilter userFilter) {
         final ModelAndView mav = new ModelAndView();
         final SearchResults<User> results = userService.search(userFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_USERS, results.getResults());
         mav.addObject(STRING_AUTHORITIES, getAuthorities());
-        mav.addObject(STRING_FILTER_USER, userFilter);
+        mav.addObject(STRING_USER_FILTER, userFilter);
         return mav;
     }
 
