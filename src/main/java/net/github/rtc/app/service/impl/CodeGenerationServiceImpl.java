@@ -1,7 +1,6 @@
 package net.github.rtc.app.service.impl;
 
-import net.github.rtc.app.service.CodeGenService;
-import org.springframework.stereotype.Repository;
+import net.github.rtc.app.service.CodeGenerationService;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -10,8 +9,8 @@ import java.util.UUID;
  * Created by denis on 13.10.14.
  */
 @Service("CodeGenerator")
-public class CodeGenServiceImpl implements CodeGenService {
-    public String generateCode() {
+public class CodeGenerationServiceImpl implements CodeGenerationService {
+    public String generate() {
         return UUID.randomUUID().toString();
     }
 }

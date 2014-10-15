@@ -3,7 +3,7 @@ package net.github.rtc.app.service.impl;
 import net.github.rtc.app.dao.impl.ReportDao;
 import net.github.rtc.app.export.ReportBuilder;
 import net.github.rtc.app.model.report.ReportDetails;
-import net.github.rtc.app.service.CodeGenService;
+import net.github.rtc.app.service.CodeGenerationService;
 import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.ReportService;
@@ -36,7 +36,7 @@ public class ReportServiceImpl implements ReportService {
     @Autowired
     private DateService dateService;
     @Autowired
-    private CodeGenService codeGenService;
+    private CodeGenerationService codeGenerationService;
 
     @Resource(name = "serviceHolder")
     private Map<Class, ? extends ModelService> serviceHolder;
@@ -48,7 +48,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public void insert(final ReportDetails report) {
         log.info("Creating report: " + report);
-        report.setCode(codeGenService.generateCode());
+        report.setCode(codeGenerationService.generate());
         report.setCreatedDate(dateService.getCurrentDate());
 
         try {
