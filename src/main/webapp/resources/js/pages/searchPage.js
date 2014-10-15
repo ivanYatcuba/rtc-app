@@ -16,4 +16,7 @@ function SearchPage(settings) {
 
     };
 
+    self.emptyTable = function () {
+
+    };
 }
