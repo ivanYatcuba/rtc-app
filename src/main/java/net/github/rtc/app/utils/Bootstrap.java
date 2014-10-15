@@ -1,6 +1,7 @@
 package net.github.rtc.app.utils;
 
 import net.github.rtc.app.model.news.News;
+import net.github.rtc.app.model.user.FileUpload;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.NewsService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -27,6 +29,8 @@ public class Bootstrap implements InitializingBean {
     private ReportService reportService;
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private FileUpload upload;
 
     /*@Autowired
     private ReportJob reportJob;*/
@@ -69,7 +73,6 @@ public class Bootstrap implements InitializingBean {
             for (int i = 0; i < count; i++) {
                 newsService.create(news);
             }
-
         }
     }
 
@@ -77,5 +80,6 @@ public class Bootstrap implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         loadTestUsers();
         loadTestNews();
+        upload.folderPhoto();
     }
 }

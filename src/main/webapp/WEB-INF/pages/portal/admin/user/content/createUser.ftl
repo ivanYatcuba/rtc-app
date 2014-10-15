@@ -20,6 +20,7 @@
 
         <!--Last Name-->
     <@spring.formItem  "user.surname" "class=\"required\""/>
+
         <!--Middle Name -->
     <@spring.formItem  "user.middleName" />
 
@@ -31,11 +32,21 @@
 
     </div>
 
-    <div class="col-md-6">
 
-        <div class ="row">
-            File to upload: <input type="file" name="photo" id="photo"><br />
+    <div class="row">
+        <div class="col-md-6">
+            <img src = "<@spring.url'/resources/images/errorCat.jpg'/>" alt="..." class="round-image">
+        <div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div style="margin-left: 10px" class ="fileUpload btn-link">
+                <span><u>Upload</u></span>
+                <input type="file" name="photo" id="photo" class="upload"><br />
+            </div>
         </div>
+    </div>
 
     </div>
 
