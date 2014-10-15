@@ -207,8 +207,7 @@ public class CoursesController {
     @InitBinder(STRING_COURSE)
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class,
-                new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
         binder.registerCustomEditor(List.class, STRING_TYPES, new CustomStringEditor());
     }

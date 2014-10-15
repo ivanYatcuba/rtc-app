@@ -4,9 +4,8 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
-import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
+import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import net.github.rtc.util.converter.ValidationContext;
-import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,9 +34,11 @@ public class UserController {
     private static final String STRING_USERS = "users";
     private static final String PATH_PAGE_VIEW_ALL_USERS = "/page/viewAllusers";
     private static final String PATH_PAGE_USER_PAGE = "/page/userPagea";
+    private static final String REDIRECT_USER_PAGE = "redirect:/admin/user/userPage/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_VIEW_ALL = "redirect:/admin/user/viewAll";
-    private static final String STRING_FILTER_USER = "filterUser";
+    private static final String STRING_USER_FILTER = "userFilter";
+    private static final String STRING_AUTHORITIES = "authorities";
 
     @Autowired
     private ValidationContext validationContext;
@@ -46,30 +47,28 @@ public class UserController {
     @Autowired
     private FileUpload upload;
 
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public ModelAndView filter() {
-//            @ModelAttribute(STRING_FILTER_USER) final
-//                               CourseSearchFilter filterCourse){
-        //return viewall(/*1, */filterCourse);
-        return new ModelAndView();
-    }
-
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
-    public ModelAndView viewAll() {
-            return viewAll(1);
+    public ModelAndView index() {
+        final UserSearchFilter filter = getFilterUser();
+        filter.setPage(1);
+        return switchPage(filter);
     }
 
-    @RequestMapping(value = "/viewAll/{numberOfPage}", method = RequestMethod.POST)
-    public ModelAndView viewAll(@PathVariable final int numberOfPage) {
+    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    public ModelAndView filter(@ModelAttribute(STRING_USER_FILTER) final
+                               UserSearchFilter userFilter) {
+                return switchPage(userFilter);
+    }
+
+    @RequestMapping(value = "/viewAll", method = RequestMethod.POST)
+    public @ResponseBody ModelAndView switchPage(@ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
-        final SearchResults<User> results = userService.search(DetachedCriteria.forClass(User.class), numberOfPage, USERS_PER_PAGE);
-        results.setPage(numberOfPage);
-        results.setPerPage(USERS_PER_PAGE);
-        mav.addAllObjects(results.getPageModel(/*USERS_PER_PAGE, numberOfPage)*/));
+        final SearchResults<User> results = userService.search(userFilter);
+        mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_USERS, results.getResults());
-       // mav.addObject(STRING_FILTER_USER, filterUser);
-//        mav.addObject("startPage", 1);
-        return mav;
+        mav.addObject(STRING_AUTHORITIES, getAuthorities());
+        mav.addObject(STRING_USER_FILTER, userFilter);
+        return mav; //maybe switch url??
     }
 
     @RequestMapping(value = "userPage/editPage/{code}", method = RequestMethod.GET)
@@ -123,14 +122,13 @@ public class UserController {
     public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session, @RequestParam final RoleType selectedRole,
                          @RequestParam(value = "photo", required = false) MultipartFile img) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
-//      user.setRegisterDate(new Date());
         userService.create(user);
             if (!img.isEmpty()) {
                 user.setAdrphoto(upload.saveImage(user.getId(), img));
             }
         userService.update(user);
         session.setComplete();
-        return REDIRECT_VIEW_ALL;
+        return REDIRECT_USER_PAGE + user.getCode();
     }
 
     @RequestMapping(value = "/update/{code}", headers = "content-type=multipart/*", method = RequestMethod.POST)
@@ -144,7 +142,7 @@ public class UserController {
         }
         userService.update(user);
         session.setComplete();
-        return "redirect:/admin/user/userPage/" + user.getCode();
+        return REDIRECT_USER_PAGE + user.getCode();
     }
 
     @ModelAttribute(value = STRING_USER)
@@ -156,7 +154,23 @@ public class UserController {
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-        binder.registerCustomEditor(Collection.class, new CustomStringEditor());
+        //binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
+       // binder.registerCustomEditor(List.class, STRING_TYPES, new CustomStringEditor());
+    }
+
+    @InitBinder(STRING_USER_FILTER)
+    public void initFilterBinder(final WebDataBinder binder) {
+        initBinder(binder);
+    }
+
+    @ModelAttribute(STRING_USER_FILTER)
+    public UserSearchFilter getFilterUser() {
+        return new UserSearchFilter();
+    }
+
+    @ModelAttribute(STRING_AUTHORITIES)
+    public Collection<String> getAuthorities() {
+        return RoleType.findAll();
     }
 
     @ModelAttribute("roles")

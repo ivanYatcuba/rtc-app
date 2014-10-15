@@ -1,5 +1,8 @@
 package net.github.rtc.app.model.user;
 
+import net.github.rtc.util.annotation.validation.Required;
+import net.github.rtc.util.annotation.validation.Validatable;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -7,6 +10,7 @@ import java.util.Date;
  * Created by ivan on 15.04.14.
  */
 @Entity
+@Validatable
 public class UserCourseOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,14 +30,16 @@ public class UserCourseOrder {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private TraineePosition position;
+    @Required
+    /**/private TraineePosition position;
 
     @Column
     @Enumerated(EnumType.STRING)
-    private UserRequestStatus status;
+    private UserRequestStatus status = UserRequestStatus.PENDING;
 
     @Column
-    private String reason;
+    @Required
+    /**/private String reason;
 
     public UserCourseOrder(
       final String userCode,

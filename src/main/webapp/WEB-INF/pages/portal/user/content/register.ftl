@@ -1,4 +1,4 @@
-<form class="form-horizontal" name="user" id="user"
+<form class="form-horizontal" name="user" id="userForm"
       action="<@spring.url "/user/save" />" method="post">
     <h3 class="page-header"><@spring.message "user.registrationTitle"/></h3>
     <br/>

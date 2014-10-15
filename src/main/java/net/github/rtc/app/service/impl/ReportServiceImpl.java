@@ -3,8 +3,11 @@ package net.github.rtc.app.service.impl;
 import net.github.rtc.app.dao.impl.ReportDao;
 import net.github.rtc.app.export.ReportBuilder;
 import net.github.rtc.app.model.report.ReportDetails;
+import net.github.rtc.app.service.CodeGenerationService;
+import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.ReportService;
+import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
@@ -14,25 +17,26 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by Ivan Yatcuba on 8/16/14.
- * Refactored by Vasiliy Sobol on 1/10/14
+ * Refactored by Vasiliy Sobol on 10/1/14
  */
 
 @Service
 public class ReportServiceImpl implements ReportService {
 
     private static final String STRING_REPORT = "Report: ";
-    private static Logger log = LoggerFactory.getLogger(ReportServiceImpl
-            .class.getName());
+    private static Logger log = LoggerFactory.getLogger(ReportServiceImpl.class.getName());
 
     @Autowired
     private ReportDao reportResource;
+    @Autowired
+    private DateService dateService;
+    @Autowired
+    private CodeGenerationService codeGenerationService;
 
     @Resource(name = "serviceHolder")
     private Map<Class, ? extends ModelService> serviceHolder;
@@ -44,8 +48,8 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public void insert(final ReportDetails report) {
         log.info("Creating report: " + report);
-        report.setCode(UUID.randomUUID().toString());
-        report.setCreatedDate(new Date());
+        report.setCode(codeGenerationService.generate());
+        report.setCreatedDate(dateService.getCurrentDate());
 
         try {
             compileReport(report);
@@ -118,5 +122,12 @@ public class ReportServiceImpl implements ReportService {
     public SearchResults<ReportDetails> search(
             final DetachedCriteria criteria, final int start, final int max) {
         return reportResource.search(criteria, start, max);
+    }
+
+    @Override
+    @Transactional
+    public SearchResults<ReportDetails> search(AbstractSearchCommand searchCommand) {
+        log.debug("Searching courses///");
+        return reportResource.search(searchCommand);
     }
 }

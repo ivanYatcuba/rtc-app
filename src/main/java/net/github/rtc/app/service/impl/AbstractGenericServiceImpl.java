@@ -2,14 +2,19 @@ package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.model.AbstractPersistenceObject;
+import net.github.rtc.app.service.CodeGenerationService;
 import net.github.rtc.app.service.GenericService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 @Transactional
 public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceObject> implements GenericService<T> {
+
+    @Autowired
+    private CodeGenerationService codeGenerationService;
+
     @Override
     public void deleteByCode(String code) {
         getDao().deleteByCode(code);
@@ -22,8 +27,18 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
 
     @Override
     public T create(T t) {
-        t.setCode(UUID.randomUUID().toString());
+        t.setCode(getCode());
         return getDao().create(t);
+    }
+
+    protected String getCode() {
+        String code = codeGenerationService.generate();
+        while (true) {
+            if (findByCode(code) == null) {
+                return code;
+            }
+            code = codeGenerationService.generate();
+        }
     }
 
     @Override

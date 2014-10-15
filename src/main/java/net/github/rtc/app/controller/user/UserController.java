@@ -4,15 +4,16 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.*;
 import net.github.rtc.app.service.CourseService;
+import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.security.authentication
-        .UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,8 @@ public class UserController {
     private static final int START_SEARCH = 3;
     private static final String STRING_COURSE = "course";
     private static final String STRING_USER_COURSES = "userCourses";
+    private static final String STRING_VALIDATION_RULES = "validationRules";
+
 
     @Autowired
     private UserService userService;
@@ -44,6 +47,8 @@ public class UserController {
     private UserCourseOrderService userCourseOrderService;
     @Autowired
     private ValidationContext validationContext;
+    @Autowired
+    private DateService dateService;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView user() {
@@ -69,7 +74,7 @@ public class UserController {
         final ModelAndView mav = new ModelAndView(ROOT
                 + "/page/edituser");
         mav.getModelMap().addAttribute(STRING_USER, user);
-        mav.addObject("validationRules", validationContext.get(User.class));
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         return mav;
     }
 
@@ -116,7 +121,7 @@ public class UserController {
         }
         user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType
                 .ROLE_USER)));
-        user.setRegisterDate(new Date());
+        user.setRegisterDate(dateService.getCurrentDate());
         userService.create(user);
         session.setComplete();
         return new ModelAndView("redirect:/login/");
@@ -133,7 +138,7 @@ public class UserController {
                 == null) {
             final ModelAndView mav = new ModelAndView(ROOT
                     + "/page/usercours");
-
+            mav.addObject(STRING_VALIDATION_RULES, validationContext.get(UserCourseOrder.class));
             final CourseSearchFilter courseSearchFilter
                     = new CourseSearchFilter();
             courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
@@ -163,17 +168,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/sendOrder", method = RequestMethod.POST)
-    public ModelAndView sendCourseOrder(@RequestBody final String orderData) {
+    public ModelAndView sendCourseOrder(@ModelAttribute("order") final UserCourseOrder myCourse) {
         final ModelAndView mav = new ModelAndView("redirect:/user/userCourses");
         //I'm sorry for this...
-        final Map<String, String> orderParamsMap
-                = getUserCourseOrderParams(orderData);
         final User user
                 = userService.loadUserByUsername(SecurityContextHolder
                 .getContext().getAuthentication().getName());
-        final UserCourseOrder userCourseOrder
-                = buildUserCourseOrder(orderParamsMap, user.getCode());
-        userCourseOrderService.insert(userCourseOrder);
+        myCourse.setUserCode(user.getCode());
+        userCourseOrderService.insert(myCourse);
         return mav;
     }
 
@@ -193,11 +195,11 @@ public class UserController {
         }
         userCourseOrder.setReason(orderParamsMap.get("userTextArea"));
         userCourseOrder.setStatus(UserRequestStatus.PENDING);
-        userCourseOrder.setRequestDate(new Date());
+        userCourseOrder.setRequestDate(dateService.getCurrentDate());
         return userCourseOrder;
     }
 
-    private Map<String, String> getUserCourseOrderParams(
+    private Map<String, String> getUserCourseOrderParams(@NotEmpty(message = "Please enter your email addresss.")
             final String orderData) {
         final Map<String, String> orderParamsMap = new HashMap<>();
         final String[] orderParams = orderData.split("&");
@@ -236,5 +238,13 @@ public class UserController {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
+    @ModelAttribute("order")
+    public UserCourseOrder getObject() {
+        return new UserCourseOrder();
+    }
 
+    @ModelAttribute("positions")
+    public List<String> getPositions() {
+        return TraineePosition.findAll();
+    }
 }

@@ -30,7 +30,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login(final ModelMap model) {
+    public ModelAndView login(final ModelMap model) throws Exception {
         return buildLoginMav(model);
     }
 

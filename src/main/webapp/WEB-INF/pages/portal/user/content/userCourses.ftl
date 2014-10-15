@@ -1,3 +1,5 @@
+<#import "/spring.ftl" as spring/>
+
 <div class="row-fluid 12">
     <div class="span2">
         <label>My courses</label>
@@ -24,7 +26,6 @@
 
             <div class="userCourses"> ${course.description}</div>
             <br>
-
             <div class="btn btn-success" id="${course.code}"
                  style="margin-bottom: 5px "
                  onClick='setCode(this.id);javascript:PopUpShow("${course.types?join(',')}")'> Apply
@@ -45,32 +46,26 @@
         <@spring.message "userCourses.IHave"/>  <@spring.message "userCourses.IHave2"/>
         </strong>
 
-        <form name="modal" action="sendOrder" method="post">
+        <form name="modal" id="modal" action="sendOrder" method="post">
             <input name="selectedCode" type="hidden" id="selectedCode"
                    value="test">
 
-            <div id="DEV" style="display: none;">
-            <input type="radio" name="userCourses" id="DEV"
-                   value="<@spring.message "userCourses.developer"/>"  />
-            <@spring.message "userCourses.developer"/></label><br/>
-            </div>
+            <@spring.formHiddenInput "order.courseCode"/>
 
-            <div id="QA" style="display: none;">
-            <input type="radio" name="userCourses" id="QA"
-                   value="<@spring.message "userCourses.tester"/>"/>
-            <@spring.message "userCourses.tester"/></label><br/>
-            </div>
-
-            <div id="BA" style="display: none;">
-            <input type="radio" name="userCourses" id="BA"
-                   value="<@spring.message "userCourses.Business_Analyst"/>"/>
-            <@spring.message "userCourses.Business_Analyst"/></label><br/>
-            </div>
+            <#list positions as position>
+                <div id="position.name">
+                    <@spring.bind "order.position"/>
+                    <input type="radio" name="position"
+                           value="${position}"/>
+                        <#noescape>${position}</#noescape><br/>
+                </div>
+            </#list>
 
             <strong><@spring.message "userCourses.because"/></strong><br/>
 
-            <textarea class="input-block-level" name="userTextArea" id="redex"
-                      rows="10"></textarea>
+            <@spring.bind "order.reason"/>
+            <textarea class="input-block-level" name="reason" id="redex"
+                      rows="10" cols="55"></textarea><br>
             <style type="text/css">#redex {
                 resize: none;
             }</style>
@@ -82,9 +77,9 @@
                 </button>
             </center>
         </form>
-
     </div>
 </div>
+<@rtcmacros.formValidation formName="modal" jsonRules="${validationRules}"/>
 
 <script type="text/javascript">
     function PopUpShow(types) {
@@ -102,13 +97,12 @@
 <script type="text/javascript">
     var selectedCourseCode
     function setCode(courseCode) {
-        document.getElementById("selectedCode").value = courseCode
+        document.getElementById("courseCode").value = courseCode
     }
     function pushData() {
         $.ajax({
             type: 'POST',
             url: "/sendOrder",
-            data: selectedCourseCode
         });
     }
 </script>

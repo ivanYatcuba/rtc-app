@@ -3,7 +3,9 @@ package net.github.rtc.app.service.impl;
 import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
+import net.github.rtc.app.service.CodeGenerationService;
 import net.github.rtc.app.service.CourseService;
+import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
@@ -16,10 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Service Implementation
@@ -40,6 +39,12 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
 
     @Autowired
     private CoursesDao coursesDao;
+
+    @Autowired
+    private DateService dateService;
+
+    @Autowired
+    private CodeGenerationService codeGenerationService;
 
     /**
      * @see net.github.rtc.app.service.CourseService#delete(String)
@@ -62,20 +67,18 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     }
 
     /**
-     * @see net.github.rtc.app.service.CourseService#create(net.github.rtc
-     * .app.model.course.Course)
+     * @see net.github.rtc.app.service.CourseService#create(net.github.rtc.app.model.course.Course)
      */
     @Override
     public Course create(final Course course) {
         log.debug("Creating course {} ", course);
         Assert.notNull(course, COURSE_CANNOT_BE_NULL);
-        course.setCode(UUID.randomUUID().toString());
+        course.setCode(codeGenerationService.generate());
         return coursesDao.create(course);
     }
 
     /**
-     * @see net.github.rtc.app.service.CourseService#update(net.github.rtc
-     * .app.model.course.Course)
+     * @see net.github.rtc.app.service.CourseService#update(net.github.rtc.app.model.course.Course)
      */
     @Override
     public void update(final Course course) {
@@ -101,14 +104,13 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
         log.debug("Publishing course: {}  ", course);
         Assert.notNull(course, COURSE_CANNOT_BE_NULL);
         course.setStatus(CourseStatus.PUBLISHED);
-        course.setPublishDate(new Date());
+        course.setPublishDate(dateService.getCurrentDate());
         coursesDao.update(course);
     }
 
     @Override
     @Transactional
-    public SearchResults<Course> search(
-            final DetachedCriteria criteria, final int start, final int max) {
+    public SearchResults<Course> search(final DetachedCriteria criteria, final int start, final int max) {
         log.debug("Searching courses");
         return coursesDao.search(criteria, start, max);
     }
@@ -123,7 +125,7 @@ public class CourseServiceImpl implements ModelService<Course>, CourseService {
     @Override
     public List<Course> startingSoonCourses() {
         final CourseSearchFilter searchFilter = new CourseSearchFilter();
-        searchFilter.setStartDate(new Date());
+        searchFilter.setStartDate(dateService.getCurrentDate());
         searchFilter.setStatus(CourseStatus.PUBLISHED);
         searchFilter.setPage(1);
         return coursesDao.search(searchFilter.getCriteria().addOrder(Order.asc("startDate")), 1, STARTING_SOON_COURSE_COUNT)

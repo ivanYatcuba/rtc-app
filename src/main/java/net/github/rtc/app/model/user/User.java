@@ -147,7 +147,6 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     public User() {
     }
 
-
     public User(
       final String name,
       final String surname,

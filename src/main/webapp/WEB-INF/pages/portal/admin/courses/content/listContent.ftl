@@ -21,6 +21,7 @@ Create New<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.j
                         <a href="<@spring.url "/admin/course/view/${course.code}" />">${course.name}</a>
                     </td>
                     <td>${course.types?join(", ")}</td>
+
                     <td>${course.startDate?datetime?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
                     <td> <#list course.experts as expert>
                         <p>&nbsp${expert.name}&nbsp${expert.surname}
@@ -62,7 +63,7 @@ Create New<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.j
     </a>
     </div>
     <div class="col-md-6" style="text-align: right">
-        <@spring.addPagination "/admin/course/switch/" />
+        <@rtcmacros.addPagination "/admin/course/switch/" />
     </div>
 </div>
 

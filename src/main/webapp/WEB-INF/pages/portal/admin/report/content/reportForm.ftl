@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-6">
         <!--Report Name-->
-    <@spring.formItem "report.name" "class=\"required\""/>
+    <@rtcmacros.formItem "report.name" "class=\"required\""/>
         <!--Report Class-->
         <div class="form-group">
             <label class="control-label col-md-2">*<@spring.message "report.exportClass"/></label>
@@ -109,4 +109,4 @@
         });
     });
 </script>
-<@spring.formValidation formName="report" jsonRules="${validationRules}"/>
+<@rtcmacros.formValidation formName="report" jsonRules="${validationRules}"/>

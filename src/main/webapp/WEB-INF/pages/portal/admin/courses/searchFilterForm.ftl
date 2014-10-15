@@ -2,7 +2,7 @@
       action="<@spring.url "/admin/course/filter"/>" method="get">
     <div class="row">
         <div class="col-md-6">
-        <@spring.formItem "filterCourse.name"/>
+        <@rtcmacros.formItem "filterCourse.name"/>
 
         <@spring.bind "filterCourse.types"/>
             <div class="form-group">
@@ -10,7 +10,7 @@
                        for="types"><@spring.message "filterCourse.types"/></label>
 
                 <div class="col-md-4">
-                    <@spring.formMultiSelect "filterCourse.types", categories/>
+                    <@rtcmacros.formMultiSelect "filterCourse.types", categories/>
                 </div>
             </div>
 
@@ -26,9 +26,9 @@
             </div>
         </div>
         <div class="col-md-6">
-        <@spring.formItem "filterCourse.startDate" 'class="input-small"' "datepiker" />
-            <@spring.formItem "filterCourse.status" 'class="input-medium"' "singleSelect" statuses/>
-            <@spring.formItem "filterCourse.tags" "" "tag" />
+        <@rtcmacros.formItem "filterCourse.startDate" 'class="input-small"' "datepiker" />
+            <@rtcmacros.formItem "filterCourse.status" 'class="input-medium"' "singleSelect" statuses/>
+            <@rtcmacros.formItem "filterCourse.tags" "" "tag" />
         </div>
     </div>
     <hr/>
