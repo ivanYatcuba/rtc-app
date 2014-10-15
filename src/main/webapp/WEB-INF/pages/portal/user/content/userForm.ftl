@@ -36,7 +36,7 @@
         </div>
         <div class="row"></div>
     <@formMacro.rtcFormTextInput  "user.name" "user.name" "required" />
-    <@formMacro.rtcFormDatePicker  "user.birthDate" "user.birthDate" "input-medium required" />
+    <@formMacro.rtcFormDateField  "user.birthDate" "input-medium required" />
     </div>
 </div>
 
