@@ -3,10 +3,11 @@ package net.github.rtc.app.service.impl;
 import net.github.rtc.app.dao.impl.ReportDao;
 import net.github.rtc.app.export.ReportBuilder;
 import net.github.rtc.app.model.report.ReportDetails;
-import net.github.rtc.app.service.CodeGenService;
+import net.github.rtc.app.service.CodeGenerationService;
 import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.ReportService;
+import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
@@ -28,15 +29,14 @@ import java.util.Map;
 public class ReportServiceImpl implements ReportService {
 
     private static final String STRING_REPORT = "Report: ";
-    private static Logger log = LoggerFactory.getLogger(ReportServiceImpl
-            .class.getName());
+    private static Logger log = LoggerFactory.getLogger(ReportServiceImpl.class.getName());
 
     @Autowired
     private ReportDao reportResource;
     @Autowired
     private DateService dateService;
     @Autowired
-    private CodeGenService codeGenService;
+    private CodeGenerationService codeGenerationService;
 
     @Resource(name = "serviceHolder")
     private Map<Class, ? extends ModelService> serviceHolder;
@@ -48,7 +48,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public void insert(final ReportDetails report) {
         log.info("Creating report: " + report);
-        report.setCode(codeGenService.generateCode());
+        report.setCode(codeGenerationService.generate());
         report.setCreatedDate(dateService.getCurrentDate());
 
         try {
@@ -122,5 +122,12 @@ public class ReportServiceImpl implements ReportService {
     public SearchResults<ReportDetails> search(
             final DetachedCriteria criteria, final int start, final int max) {
         return reportResource.search(criteria, start, max);
+    }
+
+    @Override
+    @Transactional
+    public SearchResults<ReportDetails> search(AbstractSearchCommand searchCommand) {
+        log.debug("Searching courses///");
+        return reportResource.search(searchCommand);
     }
 }

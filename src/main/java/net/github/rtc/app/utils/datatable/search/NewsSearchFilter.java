@@ -15,7 +15,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     private String author;                    //todo: use Long authorId
 
-    private NewsStatus status;
+    private NewsStatus status = NewsStatus.ALL;
 
     private String createDate;                  //todo: add binder for this
 
