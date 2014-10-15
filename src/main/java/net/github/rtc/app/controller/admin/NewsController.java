@@ -8,6 +8,7 @@ import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
+import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,12 +30,15 @@ public class NewsController {
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_NEWS = "filterNews";
     private static final String STRING_NEWS = "news";
-    private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/view/";
+    private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/";
+    private static final String STRING_VALIDATION_RULES = "validationRules";
 
     @Autowired
     private NewsService newsService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ValidationContext validationContext;
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public
@@ -66,6 +70,7 @@ public class NewsController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/pageCreateNews");
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(News.class));
         return mav;
     }
 
@@ -75,9 +80,9 @@ public class NewsController {
      * if success go to view "admin/news/view")
      *
      * @param newsCode news code
-     * @return modelAndView("admin/news/view")
+     * @return modelAndView("admin/news/")
      */
-    @RequestMapping(value = "/view/{newsCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{newsCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable final String newsCode) {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/newsContent");
         final News news = newsService.findByCode(newsCode);
@@ -94,6 +99,7 @@ public class NewsController {
     public ModelAndView update(@PathVariable final String newsCode) {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/updateNews");
         mav.getModelMap().addAttribute(STRING_NEWS, newsService.findByCode(newsCode));
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(News.class));
         return mav;
     }
 
@@ -104,10 +110,12 @@ public class NewsController {
      * @return the redirect to view news
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String update(@ModelAttribute(STRING_NEWS) final News news) {
+    public String update(@ModelAttribute(STRING_NEWS) final News news,
+                         @RequestParam(required = false) final boolean publish) {
         final News newsTmp = newsService.findByCode(news.getCode());
         news.setCreateDate(newsTmp.getCreateDate());
         news.setAuthor(newsTmp.getAuthor());
+        news.setStatus(publish ? NewsStatus.PUBLISHED : newsTmp.getStatus());
         newsService.update(news);
         return STRING_REDIRECT_VIEW + news.getCode();
     }
@@ -147,11 +155,13 @@ public class NewsController {
      * course
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute(STRING_NEWS) final News news) {
-        news.setCreateDate(new GregorianCalendar().getTime());
+    public String save(@ModelAttribute(STRING_NEWS) final News news,
+                       @RequestParam(required = false) final boolean publish) {
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         final String name = auth.getName(); //get logged in username
+        news.setCreateDate(new GregorianCalendar().getTime());
         news.setAuthor(userService.loadUserByUsername(name));
+        if (publish) { news.setStatus(NewsStatus.PUBLISHED); }
         newsService.create(news);
         return STRING_REDIRECT_VIEW + news.getCode();
     }

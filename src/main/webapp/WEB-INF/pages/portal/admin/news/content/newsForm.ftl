@@ -14,10 +14,20 @@
         <@rtcmacros.formTextarea "news.description"
         'rows="3" maxlength="255" class=\"required field col-md-9\"'/>
         </div>
-        <div class="checkbox">
-            <label><input id="publish" type="checkbox"><@spring.message "news.publish"/></label>
-        </div>
+        <#if news.status=='DRAFT'>
+            <input id="publish" name="publish" onclick="published()" type="checkbox"><@spring.message "news.publish"/>
+        </#if>
     </div>
 </div>
 
 <hr/>
+<@rtcmacros.formValidation formName="newsForm" jsonRules="${validationRules}"/>
+<script>
+    function published(){
+        if(document.getElementById("publish").checked == true) {
+            document.getElementById("publish").value = true;
+        }else{
+            document.getElementById("publish").value = false;
+        }
+    }
+</script>

@@ -30,11 +30,12 @@ public class UserCourseOrder {
 
     @Column
     @Enumerated(EnumType.STRING)
+    @Required
     /**/private TraineePosition position;
 
     @Column
     @Enumerated(EnumType.STRING)
-    private UserRequestStatus status;
+    private UserRequestStatus status = UserRequestStatus.PENDING;
 
     @Column
     @Required

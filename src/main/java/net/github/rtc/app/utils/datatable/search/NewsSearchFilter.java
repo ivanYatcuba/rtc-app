@@ -2,11 +2,8 @@ package net.github.rtc.app.utils.datatable.search;
 
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
-import net.github.rtc.app.model.user.User;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
-
-import java.util.Date;
 
 
 public class NewsSearchFilter extends AbstractSearchCommand {
@@ -16,11 +13,11 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     private String title;
 
-    private User author;
+    private String author;                    //todo: use Long authorId
 
     private NewsStatus status = NewsStatus.ALL;
 
-    private Date createDate;
+    private String createDate;                  //todo: add binder for this
 
     private char dateMoreLessEq;
 
@@ -31,7 +28,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
             criteria.add(Restrictions.like("title", STRING_PERCENT + title + STRING_PERCENT));
         }
 
-        if (author != null) {
+        /*if (author != null) {
             criteria.add(Restrictions.eq("author", author));
         }
 
@@ -49,12 +46,12 @@ public class NewsSearchFilter extends AbstractSearchCommand {
                 default:
                     break;
             }
-        }
+        }*/
 
         /*if (status != null && status != )*/
 
 
-        return DetachedCriteria.forClass(News.class);
+        return criteria;
     }
 
     public String getTitle() {
@@ -65,11 +62,11 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         this.title = title;
     }
 
-    public User getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -81,11 +78,11 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         this.status = status;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
