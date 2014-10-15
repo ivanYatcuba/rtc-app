@@ -1,6 +1,11 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
+import net.github.rtc.app.utils.datatable.search.ReportSearchFilter;
+import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,6 +48,26 @@ public class SearchController {
     public ModelAndView getReportTable() {
         final ModelAndView mav = new ModelAndView();
         return mav;
+    }
+
+    @ModelAttribute("newsFilter")
+    public NewsSearchFilter getNewsSearchFilter() {
+        return new NewsSearchFilter();
+    }
+
+    @ModelAttribute("courseFilter")
+    public CourseSearchFilter getCourseSearchFilter() {
+        return new CourseSearchFilter();
+    }
+
+    @ModelAttribute("userFilter")
+    public UserSearchFilter getUserSearchFilter() {
+        return new UserSearchFilter();
+    }
+
+    @ModelAttribute("reportFilter")
+    public ReportSearchFilter getReportSearchFilter() {
+        return new ReportSearchFilter();
     }
 
 }
