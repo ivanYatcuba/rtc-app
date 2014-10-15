@@ -1,4 +1,4 @@
-<form class="form-horizontal" name="news" id="news"
+<form class="form-horizontal" id="newsForm" name="news"
       action="<@spring.url '/admin/news/edit' />" method="post">
 <@spring.formHiddenInput "news.code" />
 <@spring.formHiddenInput "news.id" />
