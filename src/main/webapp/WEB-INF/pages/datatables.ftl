@@ -10,24 +10,24 @@
 </div>
 
 <script>
-    $("#searchTable").on('click', ".navButton", function(event) {
+    $("#searchTable").on('click', ".navButton", function (event) {
         event.preventDefault();
-        var page = this.getAttribute("page")
+        var page = this.getAttribute("page");
         switchPage(page)
-    })
+    });
+
+    $("#searchButton").on('click', function(event) {
+        event.preventDefault();
+        switchPage();
+    });
 
     function switchPage(page) {
+        page = page || 1;
         $.ajax({
             type: "POST",
             url: "<@spring.url "${searchUrl}" />",
-            data: $("#searchTable :input").serialize()+"&page="+page,//{page: page},
+            data: $("#filterForm :input").serialize()+"&page="+page,//{page: page},
             success: function (result) {
-                /*var str = result;
-                var live_str = $('<div>', {html: str});
-                var nav = live_str.find('#navigation').html();
-                var data = live_str.find('#data').html();
-                $('#navigation').html(nav);
-                $('#data').html(data);*/
                 $("#searchTable").html(result)
             }, error: function (xhr, status, error) {
                 alert("error")
@@ -42,75 +42,32 @@
 
 <#macro addPagination>
 <div id="navigation">
-    <#if startPage??>
+    <#if currentPage??>
         <div class="row">
             <ul class="pagination">
-                <li><a href="#" class="navButton" page="${startPage}">&laquo;&nbsp</a></li>
+                     <#if currentPage &gt; 1>
+                         <li><a href="#" class="navButton" page="1">&laquo;&nbsp</a></li>
+                     </#if>
 
-                <#if currentPage &gt; startPage+1>
-                <#-- -2 -->
-                    <#if currentPage < lastPage-1 && currentPage &gt; 0>
-                    <#-- -2 +2 -->
-                        <#list currentPage-2..currentPage+2 as i>
-                            <#if currentPage == i>
-                                <li class="active"><a href="#">${i}</a></li>
-                            <#else>
-                                <#if i<=lastPage && i &gt; startPage || i==startPage>
-                                    <li><a href="#" class="navButton" page="${i}">${i}</a></li>
-                                </#if>
-                            </#if>
-                        </#list>
-                    <#else>
-                        <#if currentPage < lastPage <#-- currentPage &gt; 0 --> >
-                        <#-- -3 +1 -->
-                            <#list currentPage-3..currentPage+1 as i>
-                                <#if currentPage == i>
-                                    <li class="active"><a href="#">${i}</a></li>
-                                <#else>
-                                    <#if i<=lastPage && i &gt; startPage || i==startPage>
-                                        <li><a href="#" class="navButton" page="${i}">${i}</a></li>
-                                    </#if>
-                                </#if>
-                            </#list>
-                        <#else>
-                        <#-- -4 0 -->
-                            <#list currentPage-4..currentPage as i>
-                                <#if currentPage == i>
-                                    <li class="active"><a href="#">${i}</a></li>
-                                <#else>
-                                    <#if i<=lastPage && i &gt; startPage || i==startPage>
-                                        <li><a href="#" class="navButton" page="${i}">${i}</a></li>
-                                    </#if>
-                                </#if>
-                            </#list>
-                        </#if>
+                     <#if currentPage-2 &gt; 0>
+                         <li><a href="#" class="navButton" page="${currentPage-2}")">${currentPage-2}</a></li>
+                     </#if>
+                     <#if currentPage-1 &gt; 0>
+                         <li><a href="#" class="navButton" page="${currentPage-1}")">${currentPage-1}</a></li>
+                     </#if>
+
+                     <li class="active"><a href="#" class="navButton" page="${currentPage}")">${currentPage}</a></li>
+
+                     <#if currentPage+1 <= lastPage>
+                         <li><a href="#" class="navButton" page="${currentPage+1}")">${currentPage+1}</a></li>
+                     </#if>
+                     <#if currentPage+2 <= lastPage>
+                         <li><a href="#" class="navButton" page="${currentPage+2}")">${currentPage+2}</a></li>
+                     </#if>
+
+                     <#if lastPage != currentPage>
+                         <li><a href="#" class="navButton" page="${lastPage}">&nbsp&raquo;</a></li>
                     </#if>
-                <#else>
-                    <#if currentPage &gt; startPage>
-                    <#-- -1 +3 -->
-                        <#list currentPage-1..currentPage+3 as i>
-                            <#if currentPage == i>
-                                <li class="active"><a href="#">${i}</a></li>
-                            <#else>
-                                <#if i<=lastPage && i &gt; startPage || i==startPage>
-                                    <li><a href="#" class="navButton" page="${i}">${i}</a></li>
-                                </#if>
-                            </#if>
-                        </#list>
-                    <#else>
-                    <#-- 0 +4-->
-                        <#list currentPage..currentPage+4 as i>
-                            <#if currentPage == i>
-                                <li class="active"><a href="#">${i}</a></li>
-                            <#else>
-                                <#if i<=lastPage && i &gt; startPage || i==startPage>
-                                    <li><a href="#" class="navButton" page="${i}">${i}</a></li>
-                                </#if>
-                            </#if>
-                        </#list>
-                    </#if>
-                </#if>
-                <li><a href="#" class="navButton" page="${lastPage}">&nbsp&raquo;</a></li>
             </ul>
         </div>
     </#if>

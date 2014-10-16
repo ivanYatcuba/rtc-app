@@ -1,17 +1,7 @@
-<form class="form-horizontal" name="user" id="userForm"
-      action="<@spring.url "/user/update" />" method="post">
-    <h3 class="page-header"><@spring.message "user.editTitle"/></h3><br/>
-<#include "userForm.ftl" />
+<#import "../../../fieldMacro.ftl" as formMacro />
+<#import "../../../rtcmacroses.ftl" as rtcmacroses />
 
-    <div class="row-fluid span12" style="margin-left: 1px">
-        <div class="span6">
-        </div>
-
-        <div class="span2" style="text-align: right">
-
-            <input type="submit" class="btn btn-primary" value="Save"/> or <a
-                href="<@spring.url "/user/view/" />">Cancel</a>
-
-        </div>
-    </div>
-</form>
+<@formMacro.rtcForm "user" "/user/update" "user.editTitle" "${validationRules}">
+    <#include "userForm.ftl" />
+    <@formMacro.rtcSubmit "Save" "Cancel" "/user/view/"/>
+</@formMacro.rtcForm>

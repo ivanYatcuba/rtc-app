@@ -1,4 +1,5 @@
 <#import "../../../../datatables.ftl" as datatables/>
+<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
 
 <style>
     hr {

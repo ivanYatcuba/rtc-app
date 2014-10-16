@@ -6,6 +6,7 @@ import net.github.rtc.app.model.course.Tag;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.Required;
+import net.github.rtc.util.annotation.validation.Validatable;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Validatable
 public class News extends AbstractPersistenceObject implements Serializable {
 
     @Id
@@ -39,6 +41,7 @@ public class News extends AbstractPersistenceObject implements Serializable {
     @Enumerated(EnumType.STRING)
     private NewsStatus status = NewsStatus.DRAFT;
 
+    @Required
     @Column
     private String description;
 

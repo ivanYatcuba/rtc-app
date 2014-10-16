@@ -106,6 +106,7 @@
         getFields(false);
         $('#selectedType').change(function (event) {
             getFields(true);
+
         });
     });
 </script>

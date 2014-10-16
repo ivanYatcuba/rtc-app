@@ -1,13 +1,14 @@
 package net.github.rtc.app.controller.admin;
 
-import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.news.News;
+import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.service.NewsService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
+import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,19 +30,25 @@ public class NewsController {
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_NEWS = "filterNews";
     private static final String STRING_NEWS = "news";
+    private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/";
+    private static final String STRING_VALIDATION_RULES = "validationRules";
 
     @Autowired
     private NewsService newsService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ValidationContext validationContext;
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView viewAll(@ModelAttribute("filterNews") final NewsSearchFilter filterNews) {
+    public
+    @ResponseBody
+    ModelAndView viewAll(@ModelAttribute("filterNews") final NewsSearchFilter filterNews) {
         final ModelAndView mav = new ModelAndView(ROOT + "/news/content/search/searchTable");
         final SearchResults results = newsService.search(filterNews);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_NEWS, results.getResults());
-        mav.addObject(STRING_STATUSES, getStatuses());
+//        mav.addObject(STRING_STATUSES, getStatuses());
 //        mav.addObject(STRING_FILTER_NEWS, filterNews);
         return mav;
     }
@@ -63,6 +70,7 @@ public class NewsController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/pageCreateNews");
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(News.class));
         return mav;
     }
 
@@ -72,11 +80,11 @@ public class NewsController {
      * if success go to view "admin/news/view")
      *
      * @param newsCode news code
-     * @return modelAndView("admin/news/view")
+     * @return modelAndView("admin/news/")
      */
-    @RequestMapping(value = "/view/{newsCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{newsCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable final String newsCode) {
-        final ModelAndView mav = new ModelAndView(ROOT+"/page/newsContent");
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/newsContent");
         final News news = newsService.findByCode(newsCode);
         mav.addObject(STRING_NEWS, news);
         return mav;
@@ -91,6 +99,7 @@ public class NewsController {
     public ModelAndView update(@PathVariable final String newsCode) {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/updateNews");
         mav.getModelMap().addAttribute(STRING_NEWS, newsService.findByCode(newsCode));
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(News.class));
         return mav;
     }
 
@@ -101,12 +110,14 @@ public class NewsController {
      * @return the redirect to view news
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String update(@ModelAttribute(STRING_NEWS) final News news) {
-        News news_tmp = newsService.findByCode(news.getCode());
-        news.setCreateDate(news_tmp.getCreateDate());
-        news.setAuthor(news_tmp.getAuthor());
+    public String update(@ModelAttribute(STRING_NEWS) final News news,
+                         @RequestParam(required = false) final boolean publish) {
+        final News newsTmp = newsService.findByCode(news.getCode());
+        news.setCreateDate(newsTmp.getCreateDate());
+        news.setAuthor(newsTmp.getAuthor());
+        news.setStatus(publish ? NewsStatus.PUBLISHED : newsTmp.getStatus());
         newsService.update(news);
-        return "redirect:/admin/news/view/"+news.getCode();
+        return STRING_REDIRECT_VIEW + news.getCode();
     }
 
     /**
@@ -127,7 +138,7 @@ public class NewsController {
 
     @ModelAttribute(STRING_STATUSES)
     public Collection<String> getStatuses() {
-        return CourseStatus.findAll();
+        return NewsStatus.findAll();
     }
 
     @ModelAttribute("news")
@@ -144,13 +155,15 @@ public class NewsController {
      * course
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute(STRING_NEWS) final News news) {
+    public String save(@ModelAttribute(STRING_NEWS) final News news,
+                       @RequestParam(required = false) final boolean publish) {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        final String name = auth.getName(); //get logged in username
         news.setCreateDate(new GregorianCalendar().getTime());
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName(); //get logged in username
         news.setAuthor(userService.loadUserByUsername(name));
+        if (publish) { news.setStatus(NewsStatus.PUBLISHED); }
         newsService.create(news);
-        return "redirect:/admin/news/view/"+news.getCode();
+        return STRING_REDIRECT_VIEW + news.getCode();
     }
 
 }

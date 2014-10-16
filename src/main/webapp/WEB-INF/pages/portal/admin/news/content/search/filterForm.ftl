@@ -4,7 +4,11 @@
     <@rtcmacros.formItem "filterNews.title"/>
     </div>
     <div class="col-md-6">
-
+        <div class="form-group">
+            <label class="control-label col-md-2"><@spring.message "news.filterNews.message.created"/></label>
+            <@rtcmacros.formSingleSelect "filterNews.dateMoreLessEq",["=", "<", ">"]/>
+            <@rtcmacros.formDatepicker "filterNews.createDate"/>
+        </div>
     </div>
 </div>
 
@@ -13,7 +17,7 @@
     <@rtcmacros.formItem "filterNews.author"/>
     </div>
     <div class="col-md-6">
-    <@rtcmacros.formItem "filterNews.status" 'class="input-medium"' "singleSelect" statuses/>
+    <@rtcmacros.formItem "filterNews.status" 'class="input-medium"' "singleSelect" statuses "NewsStatus."/>
     </div>
 </div>
 
@@ -22,7 +26,7 @@
     <div class="col-md-6">
     </div>
     <div class="col-md-5" style="text-align: right">
-        <input type="submit" class="btn btn-primary" value="Search"/> or <a
+        <input type="submit" class="btn btn-primary" id="searchButton" value="Search"/> or <a
             href="<@spring.url "/admin/news/list" />">Reset</a>
     </div>
 </div>
