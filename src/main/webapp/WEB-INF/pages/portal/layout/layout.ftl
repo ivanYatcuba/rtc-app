@@ -1,4 +1,4 @@
-<#macro layout menu content header>
+<#macro layout menu content="" header="">
 <html>
 
     <#import "/spring.ftl" as spring/>
@@ -21,13 +21,21 @@
             <div id="menu" class="col-sm-3 col-md-2 sidebar">
                 <#include "${menu}" />
             </div>
-            <div id="content" class="col-sm-offset-3 col-md-offset-2 main">
-                <#include "${content}">
-            </div>
+            <#if content?length!=0>
+                <div id="content" class="col-sm-offset-3 col-md-offset-2 main">
+                    <#include "${content}">
+                </div>
+            <#else>
+                <#nested>
+            </#if>
         <#else>
-            <div id="content" class="col-md-12 main">
-                <#include "${content}">
-            </div>
+            <#if content?length!=0>
+                <div id="content" class="col-md-12 main">
+                    <#include "${content}">
+                </div>
+            <#else>
+                <#nested>
+            </#if>
         </#if>
     </div>
 </div>
