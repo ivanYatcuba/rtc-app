@@ -84,11 +84,11 @@ public class CourseSearchFilter extends AbstractSearchCommand {
 
     public DetachedCriteria getCriteria() {
         final DetachedCriteria criteria = DetachedCriteria.forClass(Course
-          .class);
+                .class);
 
         if (name != null && !("").equals(name)) {
             criteria.add(Restrictions.like("name",
-              STRING_PROCENT + name + STRING_PROCENT));
+                    STRING_PROCENT + name + STRING_PROCENT));
         }
         if (status != null && status != CourseStatus.ALL) {
             criteria.add(Restrictions.eq("status", status));
@@ -106,8 +106,8 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         }
         if (types != null && types.size() > 0) {
             final Conjunction typesCon = Restrictions.conjunction();
-            for (final CourseType type: types) {
-                typesCon.add(Restrictions.sqlRestriction("exists (select t.course_id from coursetypes t where t.course_id = {alias}.id and t.types = ?)",type.name(), new StringType()));
+            for (final CourseType type : types) {
+                typesCon.add(Restrictions.sqlRestriction("exists (select t.course_id from coursetypes t where t.course_id = {alias}.id and t.types = ?)", type.name(), new StringType()));
             }
             criteria.add(typesCon);
         }
