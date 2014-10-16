@@ -187,8 +187,7 @@ public class CoursesController {
     }
 
     private Set<User> bindExperts(final List<String> experts) {
-        if (experts
-                == null) {
+        if (experts == null) {
             return null;
         }
         final Set<User> courseExperts = new HashSet<>();
