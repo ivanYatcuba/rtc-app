@@ -21,7 +21,6 @@ public class CourseSearchFilter extends AbstractSearchCommand {
 
     private static final String STRING_PROCENT = "%";
     private static final String STRING_TAGS = "tags";
-    private static final String STRING_TYPES = "types";
 
     private String name;
 
