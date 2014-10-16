@@ -27,8 +27,19 @@
 </div>
 
 <script type="text/javascript">
-    var settings = {};
+    var menuMap = {"news": "newsFilter", "course":"courseFilter", "user": "userFilter", "report":"reportFilter"}
+    var urlMap = {"newsFilter": "/admin/developed","courseFilter": ,"userFilter": ,"reportFilter": }
+
+    var settings = {
+
+    };
     var searchPage = new SearchPage(settings);
+    $(function () {
+        $(".navMenuItem").on("click", function(event){
+            event.preventDefault();
+            searchPage.showFilterForm($(this).id)
+        });
+    })
    // searchPage.doSearch(2);
     //searchButtin onclick
     //resetButton onclick
