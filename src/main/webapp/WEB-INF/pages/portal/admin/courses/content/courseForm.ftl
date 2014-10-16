@@ -6,8 +6,9 @@
     <@rtcmacros.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
     </div>
     <div class="col-md-6">
-    <@rtcmacros.formItem "course.startDate" 'class="input-medium required"' />
-        <@rtcmacros.formItem "course.endDate" 'class="input-medium required"' />
+    <@formMacro.rtcFormTextInput  "course.startDate" "course.startDate" "input-medium required" />
+    <@formMacro.rtcFormTextInput "course.endDate" "course.endDate" "input-medium required" />
+
         <@rtcmacros.formItem "course.tags" "" "tag"/>
     </div>
 </div>
