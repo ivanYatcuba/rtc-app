@@ -4,4 +4,3 @@
     <li id="user" class="navMenuItem"><a href="#">Users</a></li>
     <li id="report" class="navMenuItem"><a href="#">Reports</a></li>
 </ul>
-
