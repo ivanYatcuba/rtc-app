@@ -1,12 +1,12 @@
-<#ftl strip_whitespace=true>
-<div style=" position: fixed;
-      top: 50%;
-      left: 50%;
-      margin-top: -300px;
-      margin-left: -300px;">
-    <h1>Whoops, Technical Error</h1>
-    <h2>${errorMessage}</h2>
-    <h2>Someone Is Working To Resolve It</h2>
-    <img src="<@spring.url'/resources/images/errorCat.jpg'/>">
-    <p>${errorAdvancedMessage}</p>
+<#if errorTitle == 'Critical Error'>
+    <div class="panel panel-danger">
+<#else>
+    <div class="panel panel-warning">
+</#if>
+    <div class="panel-heading">
+        <h3 class="panel-title">${errorTitle}</h3>
+    </div>
+    <div class="panel-body">
+        ${errorMessage}
+    </div>
 </div>
