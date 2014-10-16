@@ -5,6 +5,7 @@ import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.course.Tag;
 import net.github.rtc.app.model.user.User;
+import org.hibernate.type.StringType;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
@@ -105,10 +106,9 @@ public class CourseSearchFilter extends AbstractSearchCommand {
             criteria.add(tagDis);
         }
         if (types != null && types.size() > 0) {
-            criteria.createAlias(STRING_TYPES, "t");
             final Conjunction typesCon = Restrictions.conjunction();
             for (final CourseType type: types) {
-                typesCon.add(Restrictions.eq("t.elements", type));
+                typesCon.add(Restrictions.sqlRestriction("exists (select t.course_id from coursetypes t where t.course_id = {alias}.id and t.types = ?)",type.name(), new StringType()));
             }
             criteria.add(typesCon);
         }
