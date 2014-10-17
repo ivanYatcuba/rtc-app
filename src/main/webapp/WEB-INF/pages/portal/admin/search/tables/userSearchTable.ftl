@@ -107,7 +107,7 @@
         </form>
     </div>
     <div class="col-md-6" style="text-align: right">
-    <@rtcmacros.addPagination "/admin/user/viewAll"/>
+    <@datatables.addPagination/>
     </div>
 </div>
 
