@@ -1,3 +1,4 @@
+<#import "../../../../fieldMacro.ftl" as formMacro />
 <form class="form-horizontal" id="courseForm" name="course"
       action="<@spring.url "/admin/course/save" />" method="POST">
     <h3 class="page-header"><@spring.message "create.message"/></h3><br/>

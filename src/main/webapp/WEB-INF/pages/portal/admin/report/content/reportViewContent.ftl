@@ -29,11 +29,13 @@
 <div class="row">
     <div class="col-md-6">
         <p style="margin-left: 6em"><@spring.message "report.fields"/></p>
-    <#list report.fields as field>
-        <label></label>
+        <#if report.fields??>
+            <#list report.fields as field>
+                <label></label>
 
-        <p>&nbsp${field}</p>
-    </#list>
+                <p>&nbsp${field}</p>
+            </#list>
+        </#if>
     </div>
 </div>
 <hr>

@@ -10,7 +10,6 @@ import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
 import net.github.rtc.util.converter.ValidationContext;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -170,44 +169,12 @@ public class UserController {
     @RequestMapping(value = "/sendOrder", method = RequestMethod.POST)
     public ModelAndView sendCourseOrder(@ModelAttribute("order") final UserCourseOrder myCourse) {
         final ModelAndView mav = new ModelAndView("redirect:/user/userCourses");
-        //I'm sorry for this...
         final User user
                 = userService.loadUserByUsername(SecurityContextHolder
                 .getContext().getAuthentication().getName());
         myCourse.setUserCode(user.getCode());
         userCourseOrderService.insert(myCourse);
         return mav;
-    }
-
-    private UserCourseOrder buildUserCourseOrder(
-            final Map<String, String> orderParamsMap, final String userCode) {
-        final UserCourseOrder userCourseOrder = new UserCourseOrder();
-        userCourseOrder.setUserCode(userCode);
-        userCourseOrder.setCourseCode(orderParamsMap.get("selectedCode"));
-
-        if ("Developer".equals(orderParamsMap.get(STRING_USER_COURSES))) {
-            userCourseOrder.setPosition(TraineePosition.DEVELOPER);
-        } else if ("Tester".equals(orderParamsMap.get(STRING_USER_COURSES))) {
-            userCourseOrder.setPosition(TraineePosition.TESTER);
-        } else if ("Business Analyst".equals(
-          orderParamsMap.get(STRING_USER_COURSES))) {
-            userCourseOrder.setPosition(TraineePosition.BUSINESS_ANALYST);
-        }
-        userCourseOrder.setReason(orderParamsMap.get("userTextArea"));
-        userCourseOrder.setStatus(UserRequestStatus.PENDING);
-        userCourseOrder.setRequestDate(dateService.getCurrentDate());
-        return userCourseOrder;
-    }
-
-    private Map<String, String> getUserCourseOrderParams(@NotEmpty(message = "Please enter your email addresss.")
-            final String orderData) {
-        final Map<String, String> orderParamsMap = new HashMap<>();
-        final String[] orderParams = orderData.split("&");
-        for (final String param : orderParams) {
-            final String[] value = param.split("=");
-            orderParamsMap.put(value[0], value[1]);
-        }
-        return orderParamsMap;
     }
 
     /**
@@ -218,8 +185,7 @@ public class UserController {
     @InitBinder(STRING_USER)
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class,
-                new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomStringEditor());
     }
 

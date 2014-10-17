@@ -4,6 +4,7 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,11 +21,13 @@ public class RegisterController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView openRegisterPage() {
-        final ModelAndView mav = new ModelAndView(
-          "portal/user/page/registration");
-        final User u = new User();
-        mav.getModelMap().addAttribute("user", u);
+        final ModelAndView mav = new ModelAndView("portal/user/page/registration");
         mav.addObject("validationRules", validationContext.get(User.class));
         return mav;
+    }
+
+    @ModelAttribute("user")
+    public User getCommandObject() {
+        return new User();
     }
 }

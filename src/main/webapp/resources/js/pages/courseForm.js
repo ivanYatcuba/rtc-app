@@ -68,6 +68,7 @@ function prepareCourseFormPage(resourceUrl) {
     $("#endDate").datepicker({
         dateFormat: "dd.mm.yy", minDate: 0
     });
+    $("#endDate").attr('readonly', 'readonly');
     $("#startDate").datepicker({
         dateFormat: "dd.mm.yy", minDate: 0,
         onSelect: function (date) {
@@ -78,6 +79,7 @@ function prepareCourseFormPage(resourceUrl) {
             newDate = new Date(Date.parse(newDate));
             $('#endDate').datepicker("option", "minDate", newDate);
         }});
+        $("#startDate").attr('readonly', 'readonly');
 
 }
 
