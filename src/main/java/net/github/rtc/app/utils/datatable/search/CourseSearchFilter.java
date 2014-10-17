@@ -107,7 +107,9 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         if (types != null && types.size() > 0) {
             final Conjunction typesCon = Restrictions.conjunction();
             for (final CourseType type : types) {
-                typesCon.add(Restrictions.sqlRestriction("exists (select t.course_id from coursetypes t where t.course_id = {alias}.id and t.types = ?)", type.name(), new StringType()));
+                typesCon.add(Restrictions.sqlRestriction(
+                        "exists (select t.course_id from CourseTypes t where t.course_id = {alias}.id and t.types = ?)",
+                        type.name(), new StringType()));
             }
             criteria.add(typesCon);
         }

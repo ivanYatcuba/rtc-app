@@ -17,31 +17,23 @@ public class ErrorController {
     private static final String STRING_JAVAX = "javax";
     private static final String STRING_DOT_SERVLET = ".servlet";
 
-    private static final String ERROR_PAGE = "error/error";
+    private static final String ERROR_PAGE = "portal/admin/page/error";
+    private static final String ERROR_TTL = "errorTitle";
     private static final String ERROR_MSG = "errorMessage";
-    private static final String ERROR_ADV_MSG = "errorAdvancedMessage";
 
     @RequestMapping("error500")
     public ModelAndView redirectToErrorPage500(final HttpServletRequest request) {
         final ModelAndView mnv = new ModelAndView(ERROR_PAGE);
-        mnv.addObject(ERROR_MSG, "500 Internal Server Error");
-        mnv.addObject(ERROR_ADV_MSG, getFullMessage(request));
+        mnv.addObject(ERROR_TTL, "Critical Error");
+        mnv.addObject(ERROR_MSG, "Error content");
         return mnv;
     }
 
     @RequestMapping("error404")
     public ModelAndView redirectToErrorPage404(final HttpServletRequest request) {
         final ModelAndView mnv = new ModelAndView(ERROR_PAGE);
-        mnv.addObject(ERROR_MSG, "404 Not Found Error");
-        mnv.addObject(ERROR_ADV_MSG, getFullMessage(request));
-        return mnv;
-    }
-
-    @RequestMapping("error400")
-    public ModelAndView redirectToErrorPage400(final HttpServletRequest request) {
-        final ModelAndView mnv = new ModelAndView(ERROR_PAGE);
-        mnv.addObject(ERROR_MSG, "400 Bad Request Error");
-        mnv.addObject(ERROR_ADV_MSG, getFullMessage(request));
+        mnv.addObject(ERROR_TTL, "404 Error: Page not found");
+        mnv.addObject(ERROR_MSG, "Please use menu from the left side bar or contact to administrator.");
         return mnv;
     }
 
