@@ -7,12 +7,14 @@
                     <#--<label class="control-label col-md-2"-->
                        <#--for="types"><@spring.message "userFilter.authorities"/></label>-->
                 <#--<div class="col-md-4">-->
-                    <#--<@spring.formSingleSelect "userFilter.authorities", ["", "ROLE_USER", "ROLE_ADMIN", "ROLE_EXPERT"], 'style="background-color: #FFFACD;"'/>-->
+                    <#--<@spring.formSingleSelect "userFilter.authorities", ["ALL", "ROLE_USER", "ROLE_ADMIN", "ROLE_EXPERT"], 'style="background-color: #FFFACD;"'/>-->
                 <#--</div>-->
             <#--</div>-->
             <#--<div>-->
-                <#--<@spring.formItem "userFilter.registerDate" 'class="input-small"' "datepiker" />-->
-                <#--<@spring.formSingleSelect "userFilter.dateMoreLessEq", ["=", "<", ">"], 'style="background-color: #FFFACD;"'/>-->
+            <#--<label class="control-label col-md-2"><@spring.message "userFilter.registerDate"/></label>-->
+            <#--<@rtcmacros.formSingleSelect "userFilter.dateMoreLessEq", ["=", "<", ">"], 'style="background-color: #FFFACD;"'/>-->
+                <#--<@rtcmacros.formDatepicker "userFilter.registerDate"/>-->
+
             <#--</div>-->
 
     </div>
