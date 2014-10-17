@@ -14,7 +14,6 @@ function SearchPage(settings) {
 
     self.showFilterForm = function (formId) {
 
-
     };
 
     self.emptyTable = function () {
