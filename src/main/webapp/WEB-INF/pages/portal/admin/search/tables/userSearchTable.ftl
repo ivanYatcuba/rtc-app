@@ -1,3 +1,4 @@
+<#import "../../../../datatables.ftl" as datatables/>
 <h4><@spring.message "user.search.result.page.header.search"/></h4>
 <div id="data">
     <table width="100%" class="table" style="margin-bottom: 5px" id="UserTable">
