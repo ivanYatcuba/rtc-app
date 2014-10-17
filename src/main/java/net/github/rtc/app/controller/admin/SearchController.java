@@ -73,7 +73,7 @@ public class SearchController {
 
     @RequestMapping(value = "/courseTable", method = RequestMethod.POST)
     public ModelAndView getCourseTable(@ModelAttribute("courseFilter") final CourseSearchFilter courseFilter) {
-        final ModelAndView mav = new ModelAndView();
+        final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/courseSearchTable");
         final SearchResults<Course> results = courseService.search(courseFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_COURSES, results.getResults());
@@ -82,7 +82,7 @@ public class SearchController {
 
     @RequestMapping(value = "/userTable", method = RequestMethod.POST)
     public ModelAndView getUserTable(@ModelAttribute("userFilter") final UserSearchFilter userFilter) {
-        final ModelAndView mav = new ModelAndView();
+        final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/userSearchTable");
         final SearchResults<User> results = userService.search(userFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_USERS, results.getResults());
@@ -91,7 +91,7 @@ public class SearchController {
 
     @RequestMapping(value = "/reportTable", method = RequestMethod.POST)
     public ModelAndView getReportTable(@ModelAttribute("reportFilter") final ReportSearchFilter reportFilter) {
-        final ModelAndView mav = new ModelAndView();
+        final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/reportSearchTable");
         final SearchResults<ReportDetails> results = reportService.search(reportFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_REPORTS, results.getResults());
