@@ -27,11 +27,22 @@ function SearchPage(settings) {
 //                var err = eval("(" + xhr.responseText + ")");
 //                alert(err.Message);
             }
-        });;
+        });
     };
 
     self.doReset = function () {
-        $(":input").val('');
+        var qwe =
+        self.emptyTable();
+        $(".activeForm input[type=text], textarea").val("");
+
+        $(".activeForm select ").not('[multiple = multiple]').each(function () {
+            $(this).find("option:first").attr("selected", "selected")
+        });
+
+        /*$(".activeForm select")[multiple].each(function () {
+            $(this).removeAttribute("selected");
+        });*/
+
     };
 
     self.showFilterForm = function (menuId) {
