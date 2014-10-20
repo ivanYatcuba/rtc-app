@@ -1,3 +1,4 @@
+<#import "../../../../datatables.ftl" as datatables/>
 <h3>Search Results</h3>
 
 <div id="data" class="row">
@@ -60,6 +61,6 @@
         </a>
     </div>
     <div class="col-md-6" style="text-align: right">
-    <@rtcmacros.addPagination "/admin/course/switch/" />
+    <@datatables.addPagination/>
     </div>
 </div>
