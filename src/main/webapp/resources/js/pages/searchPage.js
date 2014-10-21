@@ -6,7 +6,7 @@ function SearchPage(settings) {
 
     self.doSearch = function (page) {
         var activeForm = $(".activeForm");
-        var activeFormId=activeForm.attr('id');
+        var activeFormId = activeForm.attr('id');
         var gourl = self.urlMap[activeFormId];
 //        alert(gourl);
         if(!activeForm || activeForm.size() > 1 ) {
