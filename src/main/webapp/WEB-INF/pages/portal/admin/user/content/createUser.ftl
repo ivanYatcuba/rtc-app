@@ -1,3 +1,4 @@
+
 <div class= "row">
     <div class="col-md-6">
         <!--Gender-->
@@ -22,26 +23,38 @@
     <@rtcmacros.formItem  "user.surname" "class=\"required\""/>
         <!--Middle Name -->
     <@rtcmacros.formItem  "user.middleName" />
-
         <!--First Name-->
     <@rtcmacros.formItem  "user.name" "class=\"required\""/>
-
         <!--Birth Date-->
     <@rtcmacros.formItem "user.birthDate"  'class="input-medium required"' "datepiker"/>
 
     </div>
 
-    <div class="col-md-6">
-        <img src = "<@spring.url'/resources/images/errorCat.jpg'/>" alt="..." class="round-image">
+    <#--<input type="file" accept="image/*" name="uploadPhoto" id="uploadPhoto"  onchange="showMyImage(this)" />-->
+    <#--<br/>-->
+    <#--<img id="Mphoto"  src="/PathToPhotos/${user.photo}"  class="round-image" alt="image"/>-->
 
-        <div class ="row">
-        <#--<div class="col-md-2">-->
-            <button type="button" class="btn btn-link">Upload</button>
-        <#--</div>-->
+
+<div class="col-md-6">
+        <div>
+            <#if user.photo??>
+                <img id="Img" src="/PathToPhotos/${user.photo}"  class="round-image"/>
+            <#else>
+                  <img src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="round-image">
+            </#if>
         </div>
 
+
+    <div class="row">
+        <div class="col-md-6">
+            <div style="margin-left: 10px" class ="fileUpload btn-link">
+                <span><u>Upload</u></span>
+                <input type="file" name="uploadPhoto" id="uploadPhoto" class="upload"><br />
+            </div>
+        </div>
     </div>
 
+    </div>
 
 </div>
 
@@ -164,10 +177,15 @@
 <hr/>
 
 <@rtcmacros.formValidation formName="userForm" jsonRules="${validationRules}"/>
+
 <script type="text/javascript" charset="utf8"
         src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
 <script>
     $(function () {
         addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")
     });
+</script>
+
+<script type="text/javascript">
+    
 </script>
