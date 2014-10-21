@@ -37,7 +37,7 @@ function SearchPage(settings) {
 
         $(".activeForm ul#tagsTag li.tagit-choice").remove();
 
-        $(".activeForm select option:selected").removeAttr("selected")
+        $(".activeForm select option:selected").removeAttr("selected");
 
     };
 
@@ -55,4 +55,6 @@ function SearchPage(settings) {
     self.emptyTable = function () {
         $("#searchTable").empty();
     };
+
+
 }
