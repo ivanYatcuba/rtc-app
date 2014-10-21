@@ -20,8 +20,7 @@
 
                 <div class="col-md-8">
                     <div id="experts"></div>
-                    <a id="addExpertH" href="#" onclick="addExpert()">Add
-                        Expert</a>
+                    <a id="addExpertH" href="#" onclick="addExpert()">Add Expert</a>
                 </div>
             </div>
         </div>
