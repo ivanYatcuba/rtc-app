@@ -151,22 +151,23 @@ public class UserController {
         return REDIRECT_USER_PAGE + user.getCode();
     }
 
-    @ModelAttribute(value = STRING_USER)
-    public User getCommandObject() {
-        return new User();
-    }
 
     @InitBinder(STRING_USER)
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-        //binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
+       // binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
        // binder.registerCustomEditor(List.class, STRING_TYPES, new CustomStringEditor());
     }
 
     @InitBinder(STRING_USER_FILTER)
     public void initFilterBinder(final WebDataBinder binder) {
         initBinder(binder);
+    }
+
+    @ModelAttribute(value = STRING_USER)
+    public User getCommandObject() {
+        return new User();
     }
 
     @ModelAttribute(STRING_USER_FILTER)
