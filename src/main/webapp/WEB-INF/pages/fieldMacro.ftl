@@ -43,8 +43,8 @@
 * @param !!!!title !111 here title is not a plain text but a key from bundle message
 * @param validationRules json for jquery validate plugin
 -->
-<#macro rtcForm name action title validationRules="">
-<form class="form-horizontal" name="${name}" id="${name}" action="<@spring.url "${action}" />" method="post">
+<#macro rtcForm name action title validationRules="" enctype="">
+<form class="form-horizontal" name="${name}" id="${name}" action="<@spring.url "${action}" />" method="post" enctype="${enctype}">
     <@rtcFormValidation formName="${name}" jsonRules="${validationRules}"/>
     <h3 class="page-header"><@spring.message "${title}"/></h3><br/>
     <#nested>
