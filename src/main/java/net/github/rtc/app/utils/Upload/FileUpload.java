@@ -16,12 +16,13 @@ import java.io.File;
 @org.springframework.stereotype.Component
 public class FileUpload implements java.io.Serializable {
 
+    private static final String EXTENTION = ".jpg";
+
     @Value("${img.save.folder}")
     private String imgfold;
 
-
     public String saveImage(String filename, MultipartFile image) {
-        final String adr = filename + ".jpg";
+        final String adr = filename + EXTENTION;
         try {
             final File file = new File(imgfold + adr);
             if (file.exists()) {
@@ -44,7 +45,7 @@ public class FileUpload implements java.io.Serializable {
     }
 
     public void deletePhoto(String code) throws Exception {
-        final String adr =  code + ".jpg";
+        final String adr =  code + EXTENTION;
 
         final File file = new File(imgfold + adr);
         if (file.exists()) {
