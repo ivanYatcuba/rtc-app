@@ -7,16 +7,18 @@
 package net.github.rtc.app.dao.impl;
 
 import net.github.rtc.app.dao.UserDao;
+import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.utils.Upload.FileUpload;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
-
 
 
 /**
@@ -26,6 +28,8 @@ import java.util.List;
 public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao {
 
     public static final String EMAIL_STRING = "email";
+    @Autowired
+    private FileUpload upload;
 
     @Override
     public User findByEmail(final String email) {
@@ -57,7 +61,12 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao
         final Session session = getCurrentSession();
         final Collection<User> listUser = session.createQuery("from User u where u.removalDate is not null").list();
         for (final User user : listUser) {
-            session.delete(user);
+            try {
+                upload.deletePhoto(user.getCode());
+            } catch (Exception e) {
+                throw new ServiceProcessingException("Unable to save image: " + e.getMessage());
+            }
+        session.delete(user);
         }
     }
 

@@ -7,6 +7,7 @@ import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import net.github.rtc.app.model.user.FileUpload;
+import net.github.rtc.app.utils.Upload.FileUpload;
 
 /**
  * @author Lapshin Ugene
@@ -46,6 +46,11 @@ public class UserController {
     private UserService userService;
     @Autowired
     private FileUpload upload;
+
+    @Value("${img.save.folder}")
+    private String imgfold;
+
+
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView index() {
@@ -77,6 +82,7 @@ public class UserController {
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         final User us = userService.findByCode(code);
         mav.addObject(STRING_USER, us);
+       // mav.addObject("path", imgfold);
         return mav;
     }
 
@@ -88,7 +94,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
-    public String setStatusForRemoval(@RequestParam final String userCode) {
+    public String setStatusForRemoval(@RequestParam final String userCode) throws Exception {
         userService.markUserForRemoval(userCode);
         return REDIRECT_VIEW_ALL;
     }
@@ -120,11 +126,11 @@ public class UserController {
 
     @RequestMapping(value = "/save", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session, @RequestParam final RoleType selectedRole,
-                         @RequestParam(value = "photo", required = false) MultipartFile img) {
+                         @RequestParam(value = "uploadPhoto", required = false) MultipartFile img) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
         userService.create(user);
             if (!img.isEmpty()) {
-                user.setAdrphoto(upload.saveImage(user.getId(), img));
+                user.setPhoto(upload.saveImage(user.getCode(), img));
             }
         userService.update(user);
         session.setComplete();
@@ -133,12 +139,12 @@ public class UserController {
 
     @RequestMapping(value = "/update/{code}", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public String update(@PathVariable final String code, @ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session,
-                         @RequestParam final RoleType selectedRole, @RequestParam(value = "photo", required = false) MultipartFile img) {
+                         @RequestParam final RoleType selectedRole, @RequestParam(value = "uploadPhoto", required = false) MultipartFile img) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
         user.setCode(code);
         user.setId(userService.findByCode(user.getCode()).getId());
         if (!img.isEmpty()) {
-            user.setAdrphoto(upload.saveImage(user.getId(), img));
+            user.setPhoto(upload.saveImage(user.getCode(), img));
         }
         userService.update(user);
         session.setComplete();

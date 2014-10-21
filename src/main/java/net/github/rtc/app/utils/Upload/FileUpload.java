@@ -1,9 +1,12 @@
-package net.github.rtc.app.model.user;
+package net.github.rtc.app.utils.Upload;
 
 
 import net.github.rtc.app.exception.ServiceProcessingException;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.PostConstruct;
 import java.io.File;
 
 /**
@@ -13,12 +16,14 @@ import java.io.File;
 @org.springframework.stereotype.Component
 public class FileUpload implements java.io.Serializable {
 
-    private static final String PATH_TO_PHOTO = System.getProperty("catalina.home") + "/images";
+    @Value("${img.save.folder}")
+    private String imgfold;
 
-    public String saveImage(Long filename, MultipartFile image) {
-        final String adr = PATH_TO_PHOTO + "/" + filename + ".jpg";
+
+    public String saveImage(String filename, MultipartFile image) {
+        final String adr = filename + ".jpg";
         try {
-            final File file = new File(adr);
+            final File file = new File(imgfold + adr);
             if (file.exists()) {
                 file.delete();
             }
@@ -30,11 +35,20 @@ public class FileUpload implements java.io.Serializable {
         return adr;
     }
 
-
+    @PostConstruct
     public void folderPhoto() {
-        final File f = new File(PATH_TO_PHOTO);
+        final File f = new File(imgfold);
         if (!f.exists()) {
             f.mkdir();
+        }
+    }
+
+    public void deletePhoto(String code) throws Exception {
+        final String adr =  code + ".jpg";
+
+        final File file = new File(imgfold + adr);
+        if (file.exists()) {
+            file.delete();
         }
     }
 }
