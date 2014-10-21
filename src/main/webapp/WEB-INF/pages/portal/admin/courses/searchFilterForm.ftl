@@ -26,9 +26,14 @@
             </div>
         </div>
         <div class="col-md-6">
-        <@rtcmacros.formItem "filterCourse.startDate" 'class="input-small"' "datepiker" />
-            <@rtcmacros.formItem "filterCourse.status" 'class="input-medium"' "singleSelect" statuses/>
-            <@rtcmacros.formItem "filterCourse.tags" "" "tag" />
+            <div class="form-group">
+        <#--<@rtcmacros.formItem "filterCourse.startDate" 'class="input-small"' "datepiker" />-->
+            <label class="control-label col-md-2"><@spring.message "filterCourse.startDate"/></label>
+            <@rtcmacros.formSingleSelect "filterCourse.dateMoreLessEq", ["=", "<", ">"], 'style="background-color: #FFFACD;"'/>
+            <@rtcmacros.formDatepicker "filterCourse.startDate"/>
+           </div>
+        <@rtcmacros.formItem "filterCourse.status" 'class="input-medium"' "singleSelect" statuses/>
+        <@rtcmacros.formItem "filterCourse.tags" "" "tag" />
         </div>
     </div>
     <hr/>
