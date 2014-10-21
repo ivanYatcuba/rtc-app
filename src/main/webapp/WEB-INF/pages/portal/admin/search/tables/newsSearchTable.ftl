@@ -43,16 +43,14 @@
 
             <td>
                 <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
-                            data-toggle="dropdown">
-                        Action
-                        <span class="caret"></span>
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu"
+                            data-toggle="dropdown">Action<span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Regular link</a></li>
-                        <li role="presentation" class="disabled"><a role="menuitem" tabindex="-1" href="#">Disabled
-                            link</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another link</a></li>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                        <#if (news.status) == "DRAFT">
+                            <li id = "" role="presentation"><a role="menuitem" tabindex="-1" href="#">Publish</a></li>
+                        </#if>
+                        <li id = "" role="presentation"><a role="menuitem" tabindex="-1" href="#">Delete</a></li>
                     </ul>
                 </div>
             </td>
