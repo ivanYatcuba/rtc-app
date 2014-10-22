@@ -38,7 +38,6 @@
             url: "<@spring.url "/admin/user/getAdmins"/>",
             success: function(response){
                 autoCompleteAuthors = response;
-                alert(autoCompleteAuthors);
                 $("#author").autocomplete({source: autoCompleteAuthors});
             }
         });
