@@ -4,6 +4,7 @@ import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
+import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
@@ -25,26 +26,26 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
     private List<Role> authorities;
 
-    private UserStatus status; //almost ok
+    private String status; //almost ok
 
     private char dateMoreLessEq; //
-
-    public void setDateMoreLessEq(char dateMoreLessEq) {
-        this.dateMoreLessEq = dateMoreLessEq;
-    }
 
     public char getDateMoreLessEq() {
 
         return dateMoreLessEq;
     }
 
-    public void setAuthorities(List<Role> authorities) {
-        this.authorities = authorities;
+    public void setDateMoreLessEq(char dateMoreLessEq) {
+        this.dateMoreLessEq = dateMoreLessEq;
     }
 
-    public UserStatus getStatus() {
+    public String getStatus() {
 
         return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public List<Role> getAuthorities() {
@@ -52,8 +53,8 @@ public class UserSearchFilter extends AbstractSearchCommand {
         return authorities;
     }
 
-    public void setStatus(UserStatus status) {
-        this.status = status;
+    public void setAuthorities(List<Role> authorities) {
+        this.authorities = authorities;
     }
 
     public String getSurname() {
@@ -64,13 +65,13 @@ public class UserSearchFilter extends AbstractSearchCommand {
         this.surname = surname;
     }
 
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
-
     public Date getRegisterDate() {
 
         return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 
     public DetachedCriteria getCriteria() {
@@ -79,9 +80,7 @@ public class UserSearchFilter extends AbstractSearchCommand {
         if (surname != null && !("").equals(surname)) {
             criteria.add(Restrictions.ilike("surname", STRING_PROCENT + surname + STRING_PROCENT));
         }
-        if (status != null) {
-            criteria.add(Restrictions.eq("status", status));
-        }
+
         if (registerDate != null) {
             switch (dateMoreLessEq) {
             case '>':
@@ -98,11 +97,22 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
         }
 
+        if (status != null && !status.equals("") && !status.equals("ALL")) {
+            for (UserStatus userStatus : UserStatus.values()) {
+                if (userStatus.name().equals(status)) {
+                    criteria.add(Restrictions.eq("status", userStatus));
+                    break;
+                }
+            }
+
+        }
+
         if (authorities != null && authorities.size() > 0) {
             if (authorities.get(0).getName() != RoleType.ALL) {
-                final Disjunction authoritiesDis = Restrictions.disjunction();
+                final Disjunction authoritiesDis = Restrictions.disjunction(); //change back to disjunction
                 for (final Role role : authorities) {
                     authoritiesDis.add(Restrictions.eq("authorities.name", role.getName()));
+//                    authoritiesDis.add(Restrictions.sqlRestriction("select * from User u where u.id in (select USER_ID from User_Role t where t.id = (select id from Role r where r.name = \""+role.getAuthority()+"\"))"));
                 }
                 criteria.add(authoritiesDis);
             }
