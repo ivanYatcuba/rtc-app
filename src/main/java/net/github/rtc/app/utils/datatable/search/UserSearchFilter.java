@@ -4,7 +4,6 @@ import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
-import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
@@ -97,7 +96,7 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
         }
 
-        if (status != null && !status.equals("") && !status.equals("ALL")) {
+        if (status != null && !"".equals(status) && !"ALL".equals(status)) {
             for (UserStatus userStatus : UserStatus.values()) {
                 if (userStatus.name().equals(status)) {
                     criteria.add(Restrictions.eq("status", userStatus));

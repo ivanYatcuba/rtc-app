@@ -1,6 +1,5 @@
 package net.github.rtc.app.utils.propertyeditors;
 
-import net.github.rtc.app.model.course.Tag;
 import net.github.rtc.app.model.user.Role;
 
 import java.beans.PropertyEditorSupport;
@@ -16,10 +15,9 @@ public class CustomRoleEditor extends PropertyEditorSupport {
 
         private static final String STRING_COMMA = ",";
 
-        @Override public void setAsText(final String text) throws IllegalArgumentException
-        {
+        @Override public void setAsText(final String text) {
             final List<String> rolesSplit = Arrays.asList(text.split(STRING_COMMA));
-            Collection<Role> roles = new ArrayList<>();
+            final Collection<Role> roles = new ArrayList<>();
             if (!rolesSplit.get(0).isEmpty()) {
                 for (final String roleName : rolesSplit) {
                     roles.add(new Role(roleName));
