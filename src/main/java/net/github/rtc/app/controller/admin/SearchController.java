@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
@@ -46,7 +47,7 @@ public class SearchController {
     private static final String STRING_USER_FILTER = "userFilter";
     private static final String STRING_COURSES = "courses";
     private static final String STRING_REPORTS = "reports";
-
+    private static final String STRING_REPORT_FILTER = "reportFilter";
 
     @Autowired
     private NewsService newsService;
@@ -63,7 +64,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/newsTable", method = RequestMethod.POST)
-    public ModelAndView getNewsTable(@ModelAttribute("newsFilter") final NewsSearchFilter newsFilter) {
+    public @ResponseBody ModelAndView getNewsTable(@ModelAttribute(STRING_NEWS_FILTER) final NewsSearchFilter newsFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/newsSearchTable");
         final SearchResults<News> results = newsService.search(newsFilter);
         mav.addAllObjects(results.getPageModel());
@@ -72,16 +73,19 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/courseTable", method = RequestMethod.POST)
-    public ModelAndView getCourseTable(@ModelAttribute("courseFilter") final CourseSearchFilter courseFilter) {
+    public @ResponseBody ModelAndView getCourseTable(@ModelAttribute(STRING_COURSE_FILTER) final CourseSearchFilter courseFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/courseSearchTable");
         final SearchResults<Course> results = courseService.search(courseFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_COURSES, results.getResults());
+        mav.addObject(STRING_TYPES, CourseType.findAll());
+        mav.addObject(STRING_COURSE_STATUSES, getCourseStatuses());
+        mav.addObject(STRING_COURSE_FILTER, courseFilter);
         return mav;
     }
 
     @RequestMapping(value = "/userTable", method = RequestMethod.POST)
-    public ModelAndView getUserTable(@ModelAttribute("userFilter") final UserSearchFilter userFilter) {
+    public @ResponseBody ModelAndView getUserTable(@ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/userSearchTable");
         final SearchResults<User> results = userService.search(userFilter);
         mav.addAllObjects(results.getPageModel());
@@ -90,7 +94,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/reportTable", method = RequestMethod.POST)
-    public ModelAndView getReportTable(@ModelAttribute("reportFilter") final ReportSearchFilter reportFilter) {
+    public @ResponseBody ModelAndView getReportTable(@ModelAttribute(STRING_REPORT_FILTER) final ReportSearchFilter reportFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/reportSearchTable");
         final SearchResults<ReportDetails> results = reportService.search(reportFilter);
         mav.addAllObjects(results.getPageModel());
@@ -98,22 +102,22 @@ public class SearchController {
         return mav;
     }
 
-    @ModelAttribute("newsFilter")
+    @ModelAttribute(STRING_NEWS_FILTER)
     public NewsSearchFilter getNewsSearchFilter() {
         return new NewsSearchFilter();
     }
 
-    @ModelAttribute("courseFilter")
+    @ModelAttribute(STRING_COURSE_FILTER)
     public CourseSearchFilter getCourseSearchFilter() {
         return new CourseSearchFilter();
     }
 
-    @ModelAttribute("userFilter")
+    @ModelAttribute(STRING_USER_FILTER)
     public UserSearchFilter getUserSearchFilter() {
         return new UserSearchFilter();
     }
 
-    @ModelAttribute("reportFilter")
+    @ModelAttribute(STRING_REPORT_FILTER)
     public ReportSearchFilter getReportSearchFilter() {
         return new ReportSearchFilter();
     }
