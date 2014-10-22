@@ -152,10 +152,24 @@ public class UserServiceImpl implements  UserService {
     public void activateUser(String userCode) {
         final User user = findByCode(userCode);
         user.setStatus(UserStatus.ACTIVE);
-        user.setRemovalDate(null);
         update(user);
     }
 
+    @Override
+    @Transactional
+    public void inactivateUser(String userCode) {
+        final User user = findByCode(userCode);
+        user.setStatus(UserStatus.INACTIVE);
+        update(user);
+    }
+
+    @Override
+    @Transactional
+    public void restoreUser(String userCode) {
+        final User user = findByCode(userCode);
+        user.setRemovalDate(null);
+        update(user);
+    }
     @Override
     @Transactional
     public void deleteUsersMarkedForRemoval() {
