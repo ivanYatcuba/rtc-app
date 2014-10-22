@@ -1,15 +1,18 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
+import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
@@ -56,7 +59,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView switchPage(@ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
+    public @ResponseBody ModelAndView switchPage(@Validated @ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
         final SearchResults<User> results = userService.search(userFilter);
         mav.addAllObjects(results.getPageModel());
@@ -132,24 +135,19 @@ public class UserController {
         return REDIRECT_USER_PAGE + user.getCode();
     }
 
-
-    @InitBinder(STRING_USER)
-    public void initBinder(final WebDataBinder binder) {
+    @InitBinder
+    public void initFilterBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-       // binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
-       // binder.registerCustomEditor(List.class, STRING_TYPES, new CustomStringEditor());
+        binder.registerCustomEditor(List.class, "authorities", new CustomRoleEditor());
     }
 
-    @InitBinder(STRING_USER_FILTER)
-    public void initFilterBinder(final WebDataBinder binder) {
-        initBinder(binder);
-    }
 
     @ModelAttribute(value = STRING_USER)
     public User getCommandObject() {
         return new User();
     }
+
 
     @ModelAttribute(STRING_USER_FILTER)
     public UserSearchFilter getFilterUser() {
