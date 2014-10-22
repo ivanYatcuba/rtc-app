@@ -19,10 +19,10 @@
             <div  style="padding-top: 5px">
                 <@spring.bind "user.gender"/>
                 <input type="radio" name="gender" id="optionsRadios1"
-                       value="Male" checked
+                       value="Male" <#if user.gender == springMacroRequestContext.getMessage('user.genderM')>checked</#if>
                        style="margin: -3px 0px 0px;" disabled> <@spring.message "user.genderM"/>
                 <input type="radio" name="gender" id="optionsRadios2"
-                       value="Female"
+                       value="Female" <#if user.gender == springMacroRequestContext.getMessage('user.genderF')>checked</#if>
                        style="margin: -3px 0px 0px;" disabled> <@spring.message "user.genderF"/>
             </div>
         </div>

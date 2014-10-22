@@ -46,7 +46,11 @@ public interface UserService extends ModelService<User>, UserDetailsService {
 
     void markUserForRemoval(String userCode);
 
+    void restoreUser(String userCode);
+
     void activateUser(String userCode);
+
+    void inactivateUser(String userCode);
 
     void deleteUsersMarkedForRemoval();
 }

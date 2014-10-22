@@ -111,6 +111,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/restore/{userCode}", method = RequestMethod.GET)
+    public String setStatusActiveAndRestore(@PathVariable final String userCode) {
+        userService.restoreUser(userCode);
+        userService.activateUser(userCode);
+        return REDIRECT_VIEW_ALL;
+    }
+
+    @RequestMapping(value = "/inactivate/{userCode}", method = RequestMethod.GET)
+    public String setStatusInactive(@PathVariable final String userCode) {
+        userService.inactivateUser(userCode);
+        return REDIRECT_VIEW_ALL;
+    }
+
+    @RequestMapping(value = "/activate/{userCode}", method = RequestMethod.GET)
     public String setStatusActive(@PathVariable final String userCode) {
         userService.activateUser(userCode);
         return REDIRECT_VIEW_ALL;

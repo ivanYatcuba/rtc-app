@@ -2,12 +2,32 @@
     <div class="col-md-6">
     <@rtcmacros.formItem "course.name", 'class="required" maxlength="50"'/>
         <label for="types"><@spring.message "course.category" /></label>
-    <@rtcmacros.formMultiSelect "course.types", categories/>-->
-    <@rtcmacros.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />-->
+    <@rtcmacros.formMultiSelect "course.types", categories/>
+    <@rtcmacros.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
     </div>
     <div class="col-md-6">
-    <@formMacro.rtcFormTextInput  "course.startDate" "course.startDate" "input-medium required" />
-    <@formMacro.rtcFormTextInput "course.endDate" "course.endDate" "input-medium required" />
+
+    <#--<@formMacro.rtcFormTextInput  "course.startDate" "course.startDate!" "input-medium required" />-->
+    <@spring.bind "course.startDate"/>
+        <div class="form-group">
+            <label  class="control-label col-md-3">
+                <@spring.message "course.startDate"/>
+            </label>
+            <div class="col-md-5">
+                <@spring.formInput "course.startDate" "input-medium required"/>
+            </div>
+        </div>
+
+    <#--<@formMacro.rtcFormTextInput "course.endDate" "course.endDate??" "input-medium required" />-->
+    <@spring.bind "course.endDate"/>
+        <div class="form-group">
+            <label  class="control-label col-md-3">
+            <@spring.message "course.endDate"/>
+            </label>
+            <div class="col-md-5">
+            <@spring.formInput "course.endDate" "input-medium required"/>
+            </div>
+        </div>
 
         <@rtcmacros.formItem "course.tags" "" "tag"/>
     </div>

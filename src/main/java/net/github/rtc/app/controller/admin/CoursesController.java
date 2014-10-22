@@ -160,12 +160,10 @@ public class CoursesController {
      */
     @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable final String courseCode) {
-        final ModelAndView mav = new ModelAndView(ROOT
-                + "/page/updateContent");
-        mav.getModelMap().addAttribute(STRING_COURSE,
-                courseService.findByCode(courseCode));
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course
-                .class));
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/updateContent");
+        final Course returnCourse = courseService.findByCode(courseCode);
+        mav.getModelMap().addAttribute(STRING_COURSE, returnCourse);
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course.class));
         return mav;
     }
 

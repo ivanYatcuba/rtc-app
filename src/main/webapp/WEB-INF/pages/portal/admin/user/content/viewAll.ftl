@@ -125,7 +125,6 @@
                       </li>
                     </ul>
                 </div>
-
             <#else>
                 <div class="btn-group">
                     <button class="btn btn-default dropdown-toggle" style="width: 112px" type="button" data-toggle="dropdown">
@@ -136,7 +135,11 @@
                             <a href="#" onclick="javascript:PopUpShow('${user.code}')">Remove</a>
                         </li>
                         <li>
-                            <a href="#">Inactivate</a>
+                            <#if user.isActive()>
+                                <a href="<@spring.url"/admin/user/inactivate/${user.code}"/>">Inactivate</a>
+                            <#else>
+                                <a href="<@spring.url"/admin/user/activate/${user.code}"/>">Activate</a>
+                            </#if>
                         </li>
                     </ul>
                 </div>

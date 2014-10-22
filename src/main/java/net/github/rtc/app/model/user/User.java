@@ -392,6 +392,11 @@ public class User extends AbstractPersistenceObject implements UserDetails {
         return this.status == UserStatus.FOR_REMOVAL;
     }
 
+    public boolean isActive() {
+        return this.status == UserStatus.ACTIVE;
+    }
+
+
     public String shortString() {
         return new StringBuilder(this.name).append(STRING_SPACE).append(
           this.surname).append(STRING_SPACE).append(this.email).toString();
