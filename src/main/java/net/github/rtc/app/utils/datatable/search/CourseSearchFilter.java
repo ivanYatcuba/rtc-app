@@ -21,18 +21,23 @@ public class CourseSearchFilter extends AbstractSearchCommand {
 
     private static final String STRING_PROCENT = "%";
     private static final String STRING_TAGS = "tags";
-
+    private static final String STRING_START_DATE = "startDate";
     private String name;
-
+    private char dateMoreLessEq;
     private Set<CourseType> types;
-
     private Date startDate;
-
     private CourseStatus status = CourseStatus.ALL;
-
     private List<Tag> tags;
-
     private Set<User> experts;
+
+    public char getDateMoreLessEq() {
+
+        return dateMoreLessEq;
+    }
+
+    public void setDateMoreLessEq(char dateMoreLessEq) {
+        this.dateMoreLessEq = dateMoreLessEq;
+    }
 
     public String getName() {
         return name;
@@ -93,7 +98,19 @@ public class CourseSearchFilter extends AbstractSearchCommand {
             criteria.add(Restrictions.eq("status", status));
         }
         if (startDate != null) {
-            criteria.add(Restrictions.ge("startDate", startDate));
+            switch (dateMoreLessEq) {
+                case '>':
+                    criteria.add(Restrictions.gt(STRING_START_DATE, startDate));
+                    break;
+                case '=':
+                    criteria.add(Restrictions.eq(STRING_START_DATE, startDate));
+                    break;
+                case '<':
+                    criteria.add(Restrictions.lt(STRING_START_DATE, startDate));
+                    break;
+                default:
+                    break;
+            }
         }
         if (tags != null && tags.size() > 0) {
             criteria.createAlias(STRING_TAGS, STRING_TAGS);

@@ -21,6 +21,16 @@ public class Role implements GrantedAuthority {
     public Role() {
     }
 
+    public Role(final String strName) {
+       for (RoleType role : RoleType.values()) {
+           if (role.getRoleViewName().equals(strName) | role.name().equals(strName)) {
+               this.name = role;
+               break;
+           }
+       }
+
+    }
+
     public Role(final RoleType name) {
         this.name = name;
     }

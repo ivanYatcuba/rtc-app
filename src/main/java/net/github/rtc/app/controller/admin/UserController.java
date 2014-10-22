@@ -5,18 +5,23 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
+import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import net.github.rtc.app.utils.Upload.FileUpload;
 
 /**
  * @author Lapshin Ugene
@@ -41,6 +46,13 @@ public class UserController {
     private ValidationContext validationContext;
     @Autowired
     private UserService userService;
+    @Autowired
+    private FileUpload upload;
+
+    @Value("${img.save.folder}")
+    private String imgfold;
+
+
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView index() {
@@ -56,7 +68,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView switchPage(@ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
+    public @ResponseBody ModelAndView switchPage(@Validated @ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
         final SearchResults<User> results = userService.search(userFilter);
         mav.addAllObjects(results.getPageModel());
@@ -72,6 +84,7 @@ public class UserController {
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         final User us = userService.findByCode(code);
         mav.addObject(STRING_USER, us);
+       // mav.addObject("path", imgfold);
         return mav;
     }
 
@@ -83,7 +96,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
-    public String setStatusForRemoval(@RequestParam final String userCode) {
+    public String setStatusForRemoval(@RequestParam final String userCode) throws Exception {
         userService.markUserForRemoval(userCode);
         return REDIRECT_VIEW_ALL;
     }
@@ -113,43 +126,46 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session, @RequestParam final RoleType selectedRole) {
+    @RequestMapping(value = "/save", headers = "content-type=multipart/*", method = RequestMethod.POST)
+    public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session, @RequestParam final RoleType selectedRole,
+                         @RequestParam(value = "uploadPhoto", required = false) MultipartFile img) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
         userService.create(user);
-        session.setComplete();
-        return REDIRECT_USER_PAGE + user.getCode();
-    }
-
-    @RequestMapping(value = "/update/{code}", method = RequestMethod.POST)
-    public String update(@PathVariable final String code, @ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session,
-                         @RequestParam final RoleType selectedRole) {
-        user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
-        user.setCode(code);
-        user.setId(userService.findByCode(user.getCode()).getId());
+            if (!img.isEmpty()) {
+                user.setPhoto(upload.saveImage(user.getCode(), img));
+            }
         userService.update(user);
         session.setComplete();
         return REDIRECT_USER_PAGE + user.getCode();
     }
 
+    @RequestMapping(value = "/update/{code}", headers = "content-type=multipart/*", method = RequestMethod.POST)
+    public String update(@PathVariable final String code, @ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session,
+                         @RequestParam final RoleType selectedRole, @RequestParam(value = "uploadPhoto", required = false) MultipartFile img) {
+        user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
+        user.setCode(code);
+        user.setId(userService.findByCode(user.getCode()).getId());
+        if (!img.isEmpty()) {
+            user.setPhoto(upload.saveImage(user.getCode(), img));
+        }
+        userService.update(user);
+        session.setComplete();
+        return REDIRECT_USER_PAGE + user.getCode();
+    }
 
-    @InitBinder(STRING_USER)
-    public void initBinder(final WebDataBinder binder) {
+    @InitBinder
+    public void initFilterBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-       // binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
-       // binder.registerCustomEditor(List.class, STRING_TYPES, new CustomStringEditor());
+        binder.registerCustomEditor(List.class, STRING_AUTHORITIES, new CustomRoleEditor());
     }
 
-    @InitBinder(STRING_USER_FILTER)
-    public void initFilterBinder(final WebDataBinder binder) {
-        initBinder(binder);
-    }
 
     @ModelAttribute(value = STRING_USER)
     public User getCommandObject() {
         return new User();
     }
+
 
     @ModelAttribute(STRING_USER_FILTER)
     public UserSearchFilter getFilterUser() {
