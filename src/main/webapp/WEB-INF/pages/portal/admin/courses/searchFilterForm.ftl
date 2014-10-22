@@ -1,48 +1,34 @@
+<#import "../../../fieldMacro.ftl" as formMacro/>
 <form class="form-horizontal" name="courseFilter" role="form"
       action="<@spring.url "/admin/course/filter"/>" method="get">
     <div class="row">
         <div class="col-md-6">
-        <@rtcmacros.formItem "filterCourse.name"/>
-
-        <@spring.bind "filterCourse.types"/>
-            <div class="form-group">
-                <label class="control-label col-md-2"
-                       for="types"><@spring.message "filterCourse.types"/></label>
-
-                <div class="col-md-4">
-                    <@rtcmacros.formMultiSelect "filterCourse.types", categories/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2"
-                       for="addExpertH"><@spring.message "filterCourse.experts"/></label>
-
-                <div class="col-md-8">
-                    <div id="experts"></div>
-                    <a id="addExpertH" href="#" onclick="addExpert()">Add
-                        Expert</a>
-                </div>
-            </div>
+        <@formMacro.rtcFormTextInput "filterCourse.name" "filterCourse.name"/>
+        <@formMacro.rtcFormMultiSelect "filterCourse.types" "filterCourse.types" categories/>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-        <#--<@rtcmacros.formItem "filterCourse.startDate" 'class="input-small"' "datepiker" />-->
-            <label class="control-label col-md-2"><@spring.message "filterCourse.startDate"/></label>
-            <@rtcmacros.formSingleSelect "filterCourse.dateMoreLessEq", ["=", "<", ">"], 'style="background-color: #FFFACD;"'/>
+        <div class="form-group">
+            <label class="control-label col-md-3"><@spring.message "filterCourse.startDate"/></label>
+            <@rtcmacros.formSingleSelect "filterCourse.dateMoreLessEq", ["=", "<", ">"]/>
             <@rtcmacros.formDatepicker "filterCourse.startDate"/>
-           </div>
-        <@rtcmacros.formItem "filterCourse.status" 'class="input-medium"' "singleSelect" statuses/>
-        <@rtcmacros.formItem "filterCourse.tags" "" "tag" />
-        </div>
+            </div>
+            <@formMacro.rtcFormSingleSelect "filterCourse.status" "filterCourse.status" statuses/>
+             <div class="form-group">
+                <label class="control-label col-md-3" for="addExpertH">
+                <@spring.message "filterCourse.experts"/></label>
+                <div class="col-md-8">
+                    <div id="experts">
+                    </div>
+                   <a id="addExpertH" href="#" onclick="addExpert()">Add Expert</a>
+                </div>
+            </div>
     </div>
-    <hr/>
     <div class="row">
         <div class="col-md-6">
         </div>
         <div class="col-md-5" style="text-align: right">
-            <input type="submit" class="btn btn-primary" value="Search"/> or <a
-                href="<@spring.url "/admin/course" />">Reset</a>
+            <input type="submit" class="btn btn-primary" value="Search"/>
+            <a href="<@spring.url "/admin/course" />" class="btn btn-default">Reset</a>
         </div>
     </div>
 </form>
@@ -59,7 +45,7 @@
         <#list  filterCourse.experts as f>
             addExpert();
             setFieldSelection(${i}, "${f.name}" + " " + "${f.surname}" + " " + "${f.email}");
-            <#assign i = i+1>
+            #assign i = i+1>
         </#list>
     </#if>
     });

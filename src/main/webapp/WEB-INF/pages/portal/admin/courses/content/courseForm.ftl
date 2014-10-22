@@ -2,8 +2,8 @@
     <div class="col-md-6">
     <@rtcmacros.formItem "course.name", 'class="required" maxlength="50"'/>
         <label for="types"><@spring.message "course.category" /></label>
-    <@rtcmacros.formMultiSelect "course.types", categories/>
-    <@rtcmacros.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
+    <@rtcmacros.formMultiSelect "course.types", categories/>-->
+    <@rtcmacros.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />-->
     </div>
     <div class="col-md-6">
     <@formMacro.rtcFormTextInput  "course.startDate" "course.startDate" "input-medium required" />

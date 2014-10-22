@@ -1,38 +1,43 @@
-Create New<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
+<#--<#import "../../../../fieldMacro.ftl" as formMacro/>-->
+<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
 
 <#include "searchPanel.ftl">
-<h3>Search Results</h3>
+<h4><b>Search Results</b></h4>
 
 <div id="data" class="row">
     <div class="col-md-12">
-        <table width="100%" class="table-bordered table">
-            <tr bgcolor="#d3d3d3" style="font-weight:bold">
-                <td>Name</td>
-                <td>Category</td>
-                <td>Dates</td>
-                <td>Author</td>
-                <td>Status</td>
-                <td>&nbsp;</td>
+        <table width="100%" class="table" style="margin-bottom: 5px">
+            <tr>
+                <td><b>NAME</b></td>
+                <td><b>EXPERT</b></td>
+                <td><b>TERM</b></td>
+                <td><b>STATUS</b></td>
+                <td><b>&nbsp</b></td>
             </tr>
         <#if courses??>
             <#list courses as course>
                 <tr>
-                    <td>
+                    <td style="vertical-align: middle">
                         <a href="<@spring.url "/admin/course/view/${course.code}" />">${course.name}</a>
+                        <p style="font-family: 'Times New Roman', Times, serif; font-style: italic">${course.types?join(", ")}</p>
                     </td>
-                    <td>${course.types?join(", ")}</td>
-
-                    <td>${course.startDate?datetime?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
-                    <td> <#list course.experts as expert>
+                    <td style="vertical-align: middle">
+                        <#list course.experts as expert>
                         <p>&nbsp${expert.name}&nbsp${expert.surname}
                             &nbsp${expert.email}</p>
-                    </#list></td>
-                    <td>${course.status}</td>
-                    <td>
+                    </#list>
+                    </td>
+                    <td style="vertical-align: middle">${course.startDate?datetime?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
+                    <td style="vertical-align: middle">
+                        <#if "${course.status}" == "DRAFT"> <span class="label label-warning">${course.status}</span> </#if>
+                        <#if "${course.status}" == "PUBLISHED"> <span class="label label-success">${course.status}</span> </#if>
+                        <#if "${course.status}" == "ARCHIVED"> <span class="label label-default">${course.status}</span> </#if>
+                    </td>
+                    <td style="vertical-align: middle">
                         <ul class="nav" role="navigation">
                             <li class="dropdown">
                                 <#if "${course.status}" == "DRAFT">
-                                <a href="#" class="btn dropdown-toggle"
+                                <a href="#" class="btn btn-default dropdown-toggle"
                                    data-toggle="dropdown">Action <span
                                         class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu"
@@ -66,7 +71,8 @@ Create New<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.j
     </a>
     </div>
     <div class="col-md-6" style="text-align: right">
-        <@rtcmacros.addPagination "/admin/course/switch/" />
+        <#--<@rtcmacros.addPagination "/admin/course/switch/" />-->
+        <@formMacro.rtcFormPagination "/admin/course/switch/" />
     </div>
 </div>
 

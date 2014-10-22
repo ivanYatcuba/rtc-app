@@ -8,7 +8,6 @@ import java.util.List;
  */
 public enum CourseStatus {
     ALL, DRAFT, PUBLISHED;
-
     public static List<String> findAll() {
         final List<String> res = new ArrayList<>();
         for (final CourseStatus status : CourseStatus.values()) {
