@@ -3,6 +3,7 @@ package net.github.rtc.app.controller.admin;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.utils.Upload.FileUpload;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
@@ -22,8 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import net.github.rtc.app.utils.Upload.FileUpload;
 
 /**
  * @author Lapshin Ugene

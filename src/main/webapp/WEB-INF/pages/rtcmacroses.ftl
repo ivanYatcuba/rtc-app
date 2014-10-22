@@ -40,7 +40,7 @@
 </#macro>
 
 <#macro formSingleSelect path options attributes="" messagePrefix="">
-    <@bind path/>
+   <@bind path/>
 <select id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" ${attributes}>
     <#if options?is_hash>
         <#list options?keys as value>

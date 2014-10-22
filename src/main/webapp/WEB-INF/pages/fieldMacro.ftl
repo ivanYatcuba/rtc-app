@@ -1,5 +1,7 @@
 <#ftl strip_whitespace=true>
 <#import "/spring.ftl" as spring/>
+<#--<#include "/spring.ftl"/>-->
+<#include "rtcmacroses.ftl"/>
 
 <#macro rtcIncludeLink>
 <link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
@@ -20,6 +22,7 @@
 
 <#--
 * rtcFieldWrapper
+
 *Just a wrapper for inputs
 -->
 <#macro rtcFieldWrapper label path>
@@ -378,4 +381,8 @@
     }
 </script>
 </#macro>
+
+
+
+
 
