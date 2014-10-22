@@ -119,6 +119,18 @@ public class UserController {
         return results;
     }
 
+    @RequestMapping(value = "/getAdmins", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    List<String> getAllAdmins () {
+        final List<String> results = new ArrayList<>();
+        final List<User> admins = userService.getUserByRole(RoleType.ROLE_ADMIN);
+        for (final User admin : admins) {
+            results.add(admin.shortString());
+        }
+        return results;
+    }
+
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/createuser");
