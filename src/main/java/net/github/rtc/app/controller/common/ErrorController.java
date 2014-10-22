@@ -20,12 +20,14 @@ public class ErrorController {
     private static final String ERROR_PAGE = "portal/admin/page/error";
     private static final String ERROR_TTL = "errorTitle";
     private static final String ERROR_MSG = "errorMessage";
+    private static final String ERROR_CAS = "errorCause";
 
     @RequestMapping("error500")
     public ModelAndView redirectToErrorPage500(final HttpServletRequest request) {
         final ModelAndView mnv = new ModelAndView(ERROR_PAGE);
         mnv.addObject(ERROR_TTL, "Critical Error");
         mnv.addObject(ERROR_MSG, "Error content");
+        mnv.addObject(ERROR_CAS, getFullMessage(request));
         return mnv;
     }
 
@@ -34,6 +36,7 @@ public class ErrorController {
         final ModelAndView mnv = new ModelAndView(ERROR_PAGE);
         mnv.addObject(ERROR_TTL, "404 Error: Page not found");
         mnv.addObject(ERROR_MSG, "Please use menu from the left side bar or contact to administrator.");
+        mnv.addObject(ERROR_CAS, getFullMessage(request));
         return mnv;
     }
 
@@ -64,13 +67,13 @@ public class ErrorController {
 
     private String formatErrorMessage(
             final Integer statusCode, final String requestUri, final String message) {
-        String sb = "<!--";
-        sb += "\nERROR DETAILS";
-        sb += "\nError code:    " + statusCode;
-        sb += "\nReturned for:  " + requestUri;
-        sb += "\nError message: " + message;
-        sb += "\n-->";
-        return sb;
+        final StringBuilder sb = new StringBuilder();
+        sb.append("<!--");
+        sb.append("\nERROR DETAILS");
+        sb.append("\nError code:    ").append(statusCode);
+        sb.append("\nReturned for:  ").append(requestUri);
+        sb.append("\nError message: ").append(message);
+        sb.append("\n-->");
+        return sb.toString();
     }
-
 }

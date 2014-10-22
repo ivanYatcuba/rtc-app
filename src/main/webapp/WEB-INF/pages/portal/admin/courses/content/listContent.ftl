@@ -31,22 +31,25 @@ Create New<script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.j
                     <td>
                         <ul class="nav" role="navigation">
                             <li class="dropdown">
+                                <#if "${course.status}" == "DRAFT">
                                 <a href="#" class="btn dropdown-toggle"
                                    data-toggle="dropdown">Action <span
                                         class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu"
                                     aria-labelledby="drop1">
-                                    <#if "${course.status}" == "DRAFT">
+
                                         <li role="presentation"><a
                                                 role="menuitem" tabindex="-1"
                                                 href="<@spring.url "/admin/course/publish/${course.code}"/>">Publish!</a>
                                         </li>
-                                    </#if>
-                                    <li role="presentation"><a role="menuitem"
-                                                               tabindex="-1"
-                                                               href="<@spring.url "/admin/course/delete/${course.code}"/>">Delete</a>
-                                    </li>
+                                        <li role="presentation"><a role="menuitem"
+                                                                   tabindex="-1"
+                                                                   href="<@spring.url "/admin/course/delete/${course.code}"/>">Delete</a>
+                                        </li>
+
+
                                 </ul>
+                                    </#if>
                             </li>
                         </ul>
                     </td>

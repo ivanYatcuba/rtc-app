@@ -74,7 +74,7 @@
 
     <!-- Exception -->
     <error-page>
-        <exception-type>java.lang.IllegalArgumentException</exception-type>
+        <exception-type>java.lang.Exception</exception-type>
         <location>/error500</location>
     </error-page>
 

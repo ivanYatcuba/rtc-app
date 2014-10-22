@@ -33,13 +33,12 @@
 <#--<br/>-->
 <#--<img id="Mphoto"  src="/PathToPhotos/${user.photo}"  class="round-image" alt="image"/>-->
 
-
     <div class="col-md-6">
         <div>
         <#if user.photo??>
-            <img id="Img" src="/PathToPhotos/${user.photo}" class="round-image"/>
+            <img id="photo" src="/PathToPhotos/${user.photo}"  alt="image" class="round-image"/>
         <#else>
-            <img src="<@spring.url '/resources/images/errorCat.jpg'/>" class="round-image">
+            <img id="photo"  src="<@spring.url '/resources/images/errorCat.jpg'/>" alt="image" class="round-image"/>
         </#if>
         </div>
 
@@ -48,7 +47,7 @@
             <div class="col-md-6">
                 <div style="margin-left: 10px" class="fileUpload btn-link">
                     <span><u>Upload</u></span>
-                    <input type="file" name="uploadPhoto" id="uploadPhoto" class="upload"><br/>
+                    <input type="file" accept="image/*"  onchange="showMyImage(this)" name="uploadPhoto" id="uploadPhoto" class="upload" accept="image/*"  onchange="showMyImage(this)"  ><br/>
                 </div>
             </div>
         </div>
@@ -184,5 +183,34 @@
     $(function () {
         addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")
     });
+</script>
+
+<script type="text/javascript">
+
+    function showMyImage(fileInput) {
+        var files = fileInput.files;
+
+        var url = fileInput.value;
+        var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+
+        if ((ext != "jpg")) {return;}
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageType = /image.*/;
+            if (!file.type.match(imageType)) {
+                continue;
+            }
+            var img=document.getElementById("photo");
+            img.file = file;
+            var reader = new FileReader();
+            reader.onload = (function(aImg) {
+                return function(e) {
+                    aImg.src = e.target.result;
+                };
+            })(img);
+            reader.readAsDataURL(file);
+        }
+    }
 </script>
 
