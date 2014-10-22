@@ -30,3 +30,18 @@
             href="<@spring.url "/admin/news/list" />">Reset</a>
     </div>
 </div>
+<script>
+    $(function() {
+        var autoCompleteAuthors;
+        $.ajax({
+            type: "POST",
+            url: "<@spring.url "/admin/user/getAdmins"/>",
+            success: function(response){
+                autoCompleteAuthors = response;
+                alert(autoCompleteAuthors);
+                $("#author").autocomplete({source: autoCompleteAuthors});
+            }
+        });
+
+    });
+</script>

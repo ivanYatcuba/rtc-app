@@ -15,8 +15,7 @@ function isNumber(event) {
 }
 
 function addExpert() {
-    var div = $("#experts");
-    div.append(getInput());
+    $("#experts").append(getInput());
     $("#expert" + fieldsCount).autocomplete({
         source: availableExperts
     });
