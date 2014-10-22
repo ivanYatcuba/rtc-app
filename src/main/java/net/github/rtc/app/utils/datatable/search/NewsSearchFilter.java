@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import java.util.Date;
 
 
+
 public class NewsSearchFilter extends AbstractSearchCommand {
 
     private static final String STRING_PERCENT = "%";
