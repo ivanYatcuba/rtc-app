@@ -24,11 +24,18 @@ function SearchPage(settings) {
 //                var err = eval("(" + xhr.responseText + ")");
 //                alert(err.Message);
             }
-        });;
+        });
     };
 
     self.doReset = function () {
-        $(":input").val('');
+        self.emptyTable();
+
+        $(".activeForm input, textarea").val("");
+
+        $(".activeForm ul#tagsTag li.tagit-choice").remove();
+
+        $(".activeForm select option:selected").removeAttr("selected")
+
     };
 
     self.showFilterForm = function (menuId) {

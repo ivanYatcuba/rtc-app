@@ -62,7 +62,15 @@
     </div>
 
     <div class="col-md-6" style="padding-top: 10px">
-        <img src="<@spring.url'/resources/images/errorCat.jpg'/>" class="round-image">
+
+        <div>
+        <#if user.photo??>
+            <img id="Img" src="/PathToPhotos/${user.photo}"  class="round-image"/>
+        <#else>
+            <img src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="round-image">
+        </#if>
+        </div>
+
     </div>
 </div>
 
