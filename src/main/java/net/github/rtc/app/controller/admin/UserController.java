@@ -36,6 +36,7 @@ public class UserController {
     private static final String STRING_USER = "user";
     private static final String STRING_USERS = "users";
     private static final String PATH_PAGE_VIEW_ALL_USERS = "/page/viewAllusers";
+    private static final String PATH_PAGE_USER_TABLE = "/user/content/userTable";
     private static final String PATH_PAGE_USER_PAGE = "/page/userPagea";
     private static final String REDIRECT_USER_PAGE = "redirect:/admin/user/userPage/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
@@ -58,26 +59,32 @@ public class UserController {
     public ModelAndView index() {
         final UserSearchFilter filter = getFilterUser();
         filter.setPage(1);
-        return switchPage(filter);
+        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
+        final SearchResults<User> results = userService.search(filter);
+        mav.addAllObjects(results.getPageModel());
+        mav.addObject(STRING_USERS, results.getResults());
+        mav.addObject(STRING_AUTHORITIES, getAuthorities());
+        mav.addObject(STRING_USER_FILTER, filter);
+        return mav;
     }
-
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public ModelAndView filter(@ModelAttribute(STRING_USER_FILTER) final
-                               UserSearchFilter userFilter) {
-        return switchPage(userFilter);
-    }
+//
+//    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+//    public ModelAndView filter(@ModelAttribute(STRING_USER_FILTER) final
+//                               UserSearchFilter userFilter) {
+//        return switchPage(userFilter);
+//    }
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.POST)
     public
     @ResponseBody
     ModelAndView switchPage(@Validated @ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
-        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
+        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_USER_TABLE);
         final SearchResults<User> results = userService.search(userFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_USERS, results.getResults());
         mav.addObject(STRING_AUTHORITIES, getAuthorities());
         mav.addObject(STRING_USER_FILTER, userFilter);
-        return mav; //maybe switch url??
+        return mav;
     }
 
     @RequestMapping(value = "userPage/editPage/{code}", method = RequestMethod.GET)
