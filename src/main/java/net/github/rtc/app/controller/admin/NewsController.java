@@ -6,10 +6,9 @@ import net.github.rtc.app.service.NewsService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
-import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
-import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,9 +16,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 @Controller("newsController")
 @RequestMapping(value = "/admin/news")
@@ -43,7 +43,7 @@ public class NewsController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public
     @ResponseBody
-    ModelAndView viewAll(@ModelAttribute("filterNews") final NewsSearchFilter filterNews) {
+    ModelAndView viewAll(@ModelAttribute(STRING_FILTER_NEWS) final NewsSearchFilter filterNews) {
         final ModelAndView mav = new ModelAndView(ROOT + "/news/content/search/searchTable");
         final SearchResults results = newsService.search(filterNews);
         mav.addAllObjects(results.getPageModel());
@@ -125,15 +125,11 @@ public class NewsController {
      *
      * @param binder
      */
-    @InitBinder(STRING_NEWS)
-    public void initBinder(final WebDataBinder binder) {
-        binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
-        binder.registerCustomEditor(List.class, STRING_TYPES, new CustomStringEditor());
-    }
-
     @InitBinder(STRING_FILTER_NEWS)
-    public void initFilterBinder(final WebDataBinder binder) {
-        initBinder(binder);
+    public void initBinder(final WebDataBinder binder) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+
     }
 
     @ModelAttribute(STRING_STATUSES)
@@ -141,7 +137,7 @@ public class NewsController {
         return NewsStatus.findAll();
     }
 
-    @ModelAttribute("news")
+    @ModelAttribute(STRING_NEWS)
     public News getNews() {
 
         return new News();
@@ -161,7 +157,9 @@ public class NewsController {
         final String name = auth.getName(); //get logged in username
         news.setCreateDate(new GregorianCalendar().getTime());
         news.setAuthor(userService.loadUserByUsername(name));
-        if (publish) { news.setStatus(NewsStatus.PUBLISHED); }
+        if (publish) {
+            news.setStatus(NewsStatus.PUBLISHED);
+        }
         newsService.create(news);
         return STRING_REDIRECT_VIEW + news.getCode();
     }

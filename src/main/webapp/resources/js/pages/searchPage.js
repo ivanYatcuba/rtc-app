@@ -6,7 +6,7 @@ function SearchPage(settings) {
 
     self.doSearch = function (page) {
         var activeForm = $(".activeForm");
-        var activeFormId=activeForm.attr('id');
+        var activeFormId = activeForm.attr('id');
         var gourl = self.urlMap[activeFormId];
         if(!activeForm || activeForm.size() > 1 ) {
             return;
@@ -34,7 +34,7 @@ function SearchPage(settings) {
 
         $(".activeForm ul#tagsTag li.tagit-choice").remove();
 
-        $(".activeForm select option:selected").removeAttr("selected")
+        $(".activeForm select option:selected").removeAttr("selected");
 
     };
 
@@ -52,4 +52,6 @@ function SearchPage(settings) {
     self.emptyTable = function () {
         $("#searchTable").empty();
     };
+
+
 }

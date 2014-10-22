@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
 import net.github.rtc.app.utils.Upload.FileUpload;
 
 /**
@@ -53,7 +55,6 @@ public class UserController {
     private String imgfold;
 
 
-
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView index() {
         final UserSearchFilter filter = getFilterUser();
@@ -64,11 +65,13 @@ public class UserController {
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     public ModelAndView filter(@ModelAttribute(STRING_USER_FILTER) final
                                UserSearchFilter userFilter) {
-                return switchPage(userFilter);
+        return switchPage(userFilter);
     }
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView switchPage(@Validated @ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
+    public
+    @ResponseBody
+    ModelAndView switchPage(@Validated @ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
         final SearchResults<User> results = userService.search(userFilter);
         mav.addAllObjects(results.getPageModel());
@@ -84,7 +87,7 @@ public class UserController {
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         final User us = userService.findByCode(code);
         mav.addObject(STRING_USER, us);
-       // mav.addObject("path", imgfold);
+        // mav.addObject("path", imgfold);
         return mav;
     }
 
@@ -119,6 +122,18 @@ public class UserController {
         return results;
     }
 
+    @RequestMapping(value = "/getAdmins", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    List<String> getAllAdmins() {
+        final List<String> results = new ArrayList<>();
+        final List<User> admins = userService.getUserByRole(RoleType.ROLE_ADMIN);
+        for (final User admin : admins) {
+            results.add(admin.shortString());
+        }
+        return results;
+    }
+
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/createuser");
@@ -128,12 +143,12 @@ public class UserController {
 
     @RequestMapping(value = "/save", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session, @RequestParam final RoleType selectedRole,
-                         @RequestParam(value = "uploadPhoto", required = false) MultipartFile img) {
+                       @RequestParam(value = "uploadPhoto", required = false) MultipartFile img) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
         userService.create(user);
-            if (!img.isEmpty()) {
-                user.setPhoto(upload.saveImage(user.getCode(), img));
-            }
+        if (!img.isEmpty()) {
+            user.setPhoto(upload.saveImage(user.getCode(), img));
+        }
         userService.update(user);
         session.setComplete();
         return REDIRECT_USER_PAGE + user.getCode();

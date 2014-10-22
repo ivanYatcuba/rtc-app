@@ -5,6 +5,8 @@ import net.github.rtc.app.model.news.NewsStatus;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.Date;
+
 
 public class NewsSearchFilter extends AbstractSearchCommand {
 
@@ -17,7 +19,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     private NewsStatus status = NewsStatus.ALL;
 
-    private String createDate;                  //todo: add binder for this
+    private Date createDate;                  //todo: add binder for this
 
     private char dateMoreLessEq;
 
@@ -27,11 +29,6 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         if (title != null && !("").equals(title)) {
             criteria.add(Restrictions.like("title", STRING_PERCENT + title + STRING_PERCENT));
         }
-
-        /*if (author != null) {
-            criteria.add(Restrictions.eq("author", author));
-        }
-
         if (createDate != null) {
             switch (dateMoreLessEq) {
                 case '>':
@@ -46,10 +43,11 @@ public class NewsSearchFilter extends AbstractSearchCommand {
                 default:
                     break;
             }
-        }*/
+        }
 
-        /*if (status != null && status != )*/
-
+        if (status != null && status != NewsStatus.ALL) {
+            criteria.add(Restrictions.eq("status", status));
+        }
 
         return criteria;
     }
@@ -78,11 +76,11 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         this.status = status;
     }
 
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
