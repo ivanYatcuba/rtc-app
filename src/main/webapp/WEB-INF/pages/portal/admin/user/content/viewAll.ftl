@@ -1,25 +1,42 @@
-    <#--<#include "/spring.ftl"/>-->
+<#import "../../../../datatables.ftl" as datatables/>
+<h4><strong><@spring.message "userFilter.criteria"/></strong></h4>
 <div id="searcher">
- <form class="form-horizontal" name="userFilter" role="form" action="<@spring.url "/admin/user/filter"/>" method="get">
+ <form name="userFilter" role="form" action="<@spring.url "/admin/user/filter"/>" method="get">
     <div class="row">
+        <div class="col-md-6">
+
         <@rtcmacros.formItem "userFilter.surname"/>
-            <#--<div>-->
-                    <#--<label class="control-label col-md-2"-->
-                       <#--for="types"><@spring.message "userFilter.authorities"/></label>-->
-                <#--<div class="col-md-4">-->
-                    <#--<@spring.formSingleSelect "userFilter.authorities", ["ALL", "ROLE_USER", "ROLE_ADMIN", "ROLE_EXPERT"], 'style="background-color: #FFFACD;"'/>-->
-                <#--</div>-->
-            <#--</div>-->
-            <#--<div>-->
-            <#--<label class="control-label col-md-2"><@spring.message "userFilter.registerDate"/></label>-->
-            <#--<@rtcmacros.formSingleSelect "userFilter.dateMoreLessEq", ["=", "<", ">"], 'style="background-color: #FFFACD;"'/>-->
-                <#--<@rtcmacros.formDatepicker "userFilter.registerDate"/>-->
 
-            <#--</div>-->
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+            <label class="control-label col-md-4"><@spring.message "userFilter.registerDate"/></label>
+            <@rtcmacros.formSingleSelect "userFilter.dateMoreLessEq", ["=", "<", ">"], ''/>
+            <@rtcmacros.formDatepicker "userFilter.registerDate", ''/>
+            </div>
+        </div>
+   </div>
+   <div class="row">
+     <div class="col-md-6">
+        <div >
+            <label class="control-label col-md-4"><@spring.message "userFilter.authorities"/></label>
+            <@spring.formSingleSelect "userFilter.authorities", ["ALL", "User", "Administrator", "Expert"], ''/>
+        </div>
+     </div>
+       <div class="col-md-6">
+        <label class="control-label col-md-4"><@spring.message "userFilter.status"/></label>
+       <@spring.formSingleSelect "userFilter.status", ["ALL", "ACTIVE", "INACTIVE", "FOR_REMOVAL"], ''/>
+        <#--<@rtcmacros.formItem "userFilter.status" 'class="input-medium"' "singleSelect" userStatuses/>-->
+       <#--<@rtcmacros.formItem "newsFilter.status" 'class="input-medium"' "singleSelect" newsStatuses "NewsStatus."/>-->
+       </div>
+   </div>
+                <#--<select id="selectedRole" name="selectedRole" class="required">-->
+                <#--<#list roles as role>-->
+                    <#--<option value="${role}">${role.roleViewName}</option>-->
+                <#--</#list>-->
 
-    </div>
     <div class="row" style="text-align: right">
-            <input type="submit" class="btn btn-primary" value="Search"/> or <a class="btn-default"
+            <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/> or <a class="btn-default"
                 href="<@spring.url "/admin/user/viewAll" />">Reset</a>
     </div>
 </form>
@@ -27,7 +44,7 @@
 
 
 
-<h4><@spring.message "user.search.result.page.header.search"/></h4>
+<h4><strong><@spring.message "user.search.result.page.header.search"/></strong></h4>
 <div id="data">
 <table width="100%" class="table" style="margin-bottom: 5px" id="UserTable">
         <thead>

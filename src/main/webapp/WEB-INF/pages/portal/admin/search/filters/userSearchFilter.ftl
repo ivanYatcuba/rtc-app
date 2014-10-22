@@ -12,12 +12,12 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            <#--<label class="control-label col-md-2"><@spring.message "news.filterNews.message.created"/></label>-->
-        <#--<@rtcmacros.formSingleSelect "newsFilter.dateMoreLessEq",["=", "<", ">"]/>-->
-        <#--<@rtcmacros.formDatepicker "newsFilter.createDate"/>-->
+            <label class="control-label col-md-2"><@spring.message "news.filterNews.message.created"/></label>
+        <@rtcmacros.formSingleSelect "newsFilter.dateMoreLessEq",["=", "<", ">"]/>
+        <@rtcmacros.formDatepicker "newsFilter.createDate"/>
         <#--</div>-->
         <label class="control-label col-md-2"><@spring.message "userFilter.authorities"/></label>
-        <@rtcmacros.formSingleSelect "userFilter.authorities", ["ALL", "ROLE_USER", "ROLE_ADMIN", "ROLE_EXPERT"], 'style="background-color: #FFFACD;"'/>
+        <#--<@rtcmacros.formSingleSelect "userFilter.authorities", ["ALL", "ROLE_USER", "ROLE_ADMIN", "ROLE_EXPERT"], 'style="background-color: #FFFACD;"'/>-->
          </div>
     </div>
 

@@ -8,19 +8,16 @@ function SearchPage(settings) {
         var activeForm = $(".activeForm");
         var activeFormId=activeForm.attr('id');
         var gourl = self.urlMap[activeFormId];
-//        alert(gourl);
         if(!activeForm || activeForm.size() > 1 ) {
             return;
-        }
-//
+        }//
         page = page || 1;
         $.ajax({
             type: "POST",
-//            url: "<@spring.url "+self.urlMap[activeFormId]+"/>",
             url: gourl,
-            data: $("#activeFormId :input").serialize()+"&page="+page,//{page: page}, //Id -??
+            data: $("#" + activeFormId + " input" + ", #" + activeFormId + " select").serialize()+"&page="+page,
             success: function (result) {
-                $("#searchTable").html(result)
+               $("#searchTable").html(result)
             }, error: function (xhr, status, error) {
                 alert(self.urlMap[activeFormId]);
                 alert("error");

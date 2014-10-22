@@ -7,7 +7,7 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-5" style="text-align: right">
-            <button type="submit" class="btn" onclick="javascript:CheckNullReportFields()">Create</button>
+            <input type="submit" class="btn" value="Create">
             or
             <a href="<@spring.url "/admin/export/viewAll" />">Cancel</a>
         </div>

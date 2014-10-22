@@ -45,30 +45,33 @@
     </div>
 </div>
 
+<input type="hidden" id="reportCount" name="reportCount" value="">
 <script>
     var fields;
+    var currentFieldId = 0;
     var fieldsCount = 0;
     function addField() {
-        var div = $("#fields");
-        div.append(getFieldsSelect(fields));
+        $("#fields").append(getFieldsSelect(fields));
+        fieldsCount++;
     }
 
     function removeField(field) {
         $("#" + field).remove();
+        fieldsCount--;
     }
     function setFieldSelection(field, selection) {
         $("#" + field + " select").val(selection);
     }
 
     function getFieldsSelect(list) {
-        var fieldsSelect = "<div id=\"" + fieldsCount + "\"><label for=\"fieldsCount\"></label><select name=\"reportFields\">";
+        var fieldsSelect = "<div id=\"" + currentFieldId + "\"><label for=\"fieldsCount\"></label><select name=\"reportFields\">";
         for (var i = 0; i < list.length; i++) {
             fieldsSelect += "<option>" + list[i] + "</option>";
         }
         fieldsSelect += "</select>" +
-                "<button onclick='removeField(" + fieldsCount + ")' >-</button>"
+                "<button onclick='removeField(" + currentFieldId + ")' >-</button>"
                 + "<br/></div>";
-        fieldsCount++;
+        currentFieldId++;
         return fieldsSelect;
     }
 
@@ -106,8 +109,17 @@
         getFields(false);
         $('#selectedType').change(function (event) {
             getFields(true);
-
         });
+
+        $("form input[type=submit]").click(function(event){
+            if(fieldsCount == 0){
+                event.preventDefault();
+                alert("Add fields!");
+            }
+        });
+
     });
+
+
 </script>
 <@rtcmacros.formValidation formName="report" jsonRules="${validationRules}"/>

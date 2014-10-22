@@ -1,25 +1,50 @@
+<style>
+    label {
+        float: left;
+        width: 13em;
+        /*margin-right: 1em;*/
+        text-align: right;
+        /*font-size: 10pt;*/
+        margin-bottom: 0px;
+    }
+</style>
+<div style="width: 85%; padding-top: 0px">
 <div>
     <h4 class="page-header"><@spring.message "news.details"/></h4>
 </div>
-<div>
+<div class="row">
     <div class="col-md-6">
-        <label><@spring.message "news.title"/></label>&nbsp${news.title}
+        <label><@spring.message "news.title"/></label>
+        &nbsp${news.title}
     </div>
     <div class="col-md-6">
-        <label><@spring.message "news.tags"/></label>&nbsp${news.tags?join(", ")}
+        <label><@spring.message "news.tags"/></label>
+        <p>&nbsp${news.tags?join(", ")}</p>
     </div>
 </div>
-<div>
-    <label><@spring.message "news.description"/></label>&nbsp${news.description}
+<div class="row">
+    <div class="col-md-12">
+        <label><@spring.message "news.description"/></label>
+        &nbsp${news.description}
+    </div>
 </div>
 <hr/>
-<div>
-    <#if news.status=='DRAFT'>
-        <label><@spring.message "news.status"/></label><span class="label label-warning">Draft</span><br>
-        <label><@spring.message "news.creationDate"/></label>&nbsp${news.createDate}
+<div class="row">
+<#if news.status=='DRAFT'>
+<div class="col-md-12">
+        <label><@spring.message "news.status"/></label>
+        <span class="label label-warning">Draft</span>
+    <br>
+        <label><@spring.message "news.creationDate"/></label>${news.createDate}
+</div>
     <#else>
-        <label><@spring.message "news.status"/></label><span class="label label-success">Published</span><br>
-        <label><@spring.message "news.publishDate"/></label>&nbsp${news.createDate}
+    <div class="col-md-12">
+            <label><@spring.message "news.status"/></label>
+            <span class="label label-success">Published</span>
+        <br>
+            <label><@spring.message "news.publishDate"/></label>
+            &nbsp${news.createDate}
+    </div>
     </#if>
 </div>
 <hr/>
@@ -30,4 +55,5 @@
         </a>
         <button type="button" onclick="location.href='<@spring.url '/admin/news/list'/>'" class="btn btn-default">Cancel</button>
     </div>
+</div>
 </div>
