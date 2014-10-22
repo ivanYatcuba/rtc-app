@@ -6,8 +6,6 @@ import net.github.rtc.app.service.NewsService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
-import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
-import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -22,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 @Controller("newsController")
 @RequestMapping(value = "/admin/news")
@@ -160,7 +157,9 @@ public class NewsController {
         final String name = auth.getName(); //get logged in username
         news.setCreateDate(new GregorianCalendar().getTime());
         news.setAuthor(userService.loadUserByUsername(name));
-        if (publish) { news.setStatus(NewsStatus.PUBLISHED); }
+        if (publish) {
+            news.setStatus(NewsStatus.PUBLISHED);
+        }
         newsService.create(news);
         return STRING_REDIRECT_VIEW + news.getCode();
     }
