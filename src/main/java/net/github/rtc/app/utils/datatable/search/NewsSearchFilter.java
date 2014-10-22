@@ -45,28 +45,9 @@ public class NewsSearchFilter extends AbstractSearchCommand {
             }
         }
 
-        /*if (author != null) {
-            criteria.add(Restrictions.eq("author", author));
+        if (status != null && status != NewsStatus.ALL) {
+            criteria.add(Restrictions.eq("status",status));
         }
-
-        if (createDate != null) {
-            switch (dateMoreLessEq) {
-                case '>':
-                    criteria.add(Restrictions.gt(STRING_CREATE_DATE, createDate));
-                    break;
-                case '=':
-                    criteria.add(Restrictions.eq(STRING_CREATE_DATE, createDate));
-                    break;
-                case '<':
-                    criteria.add(Restrictions.lt(STRING_CREATE_DATE, createDate));
-                    break;
-                default:
-                    break;
-            }
-        }*/
-
-        /*if (status != null && status != )*/
-
 
         return criteria;
     }
