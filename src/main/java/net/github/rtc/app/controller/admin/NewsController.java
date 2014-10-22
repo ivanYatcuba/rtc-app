@@ -128,17 +128,11 @@ public class NewsController {
      *
      * @param binder
      */
-    @InitBinder(STRING_NEWS)
+    @InitBinder(STRING_FILTER_NEWS)
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-        binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
-        binder.registerCustomEditor(List.class, STRING_TYPES, new CustomStringEditor());
-    }
 
-    @InitBinder(STRING_FILTER_NEWS)
-    public void initFilterBinder(final WebDataBinder binder) {
-        initBinder(binder);
     }
 
     @ModelAttribute(STRING_STATUSES)
