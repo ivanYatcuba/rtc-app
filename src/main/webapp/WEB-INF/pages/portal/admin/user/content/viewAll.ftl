@@ -4,9 +4,7 @@
  <form name="userFilter" role="form" action="<@spring.url "/admin/user/filter"/>" method="get">
     <div class="row">
         <div class="col-md-6">
-
         <@rtcmacros.formItem "userFilter.surname"/>
-
         </div>
         <div class="col-md-6">
             <div class="form-group">
@@ -23,17 +21,12 @@
             <@spring.formSingleSelect "userFilter.authorities", ["ALL", "User", "Administrator", "Expert"], ''/>
         </div>
      </div>
+
        <div class="col-md-6">
-        <label class="control-label col-md-4"><@spring.message "userFilter.status"/></label>
-       <@spring.formSingleSelect "userFilter.status", ["ALL", "ACTIVE", "INACTIVE", "FOR_REMOVAL"], ''/>
-        <#--<@rtcmacros.formItem "userFilter.status" 'class="input-medium"' "singleSelect" userStatuses/>-->
-       <#--<@rtcmacros.formItem "newsFilter.status" 'class="input-medium"' "singleSelect" newsStatuses "NewsStatus."/>-->
-       </div>
+           <label class="control-label col-md-4"><@spring.message "userFilter.status"/></label>
+           <@spring.formSingleSelect "userFilter.status", ["ALL", "ACTIVE", "INACTIVE", "FOR_REMOVAL"], ''/>
+      </div>
    </div>
-                <#--<select id="selectedRole" name="selectedRole" class="required">-->
-                <#--<#list roles as role>-->
-                    <#--<option value="${role}">${role.roleViewName}</option>-->
-                <#--</#list>-->
 
     <div class="row" style="text-align: right">
             <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/> or <a class="btn-default"
