@@ -1,5 +1,6 @@
 <form class="form-horizontal" id="newsForm" name="news"
     action="<@spring.url '/admin/news/save'/>" method="post">
+    <div style="width: 85%">
     <div>
         <h4 class="page-header"><@spring.message "news.create"/></h4>
     </div>
@@ -9,5 +10,6 @@
             <input type="submit" class="btn btn-primary" value="Create" />
             <button type="button" onclick="location.href='<@spring.url '/admin/news/list'/>'" class="btn btn-default">Cancel</button>
         </div>
+    </div>
     </div>
 </form>

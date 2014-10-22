@@ -2,13 +2,11 @@
     label {
         float: left;
         width: 13em;
-        /*margin-right: 1em;*/
         text-align: right;
-        /*font-size: 10pt;*/
         margin-bottom: 0px;
     }
 </style>
-<div style="width: 85%; padding-top: 0px">
+<div style="width: 85%">
 <div>
     <h4 class="page-header"><@spring.message "news.details"/></h4>
 </div>
