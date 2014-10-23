@@ -35,6 +35,7 @@ public class CoursesController {
     private static final String ROOT = "portal/admin";
     private static final String STRING_COURSE = "course";
     private static final String PATH_PAGE_LISTCONTENT = "/page/listcontent";
+    private static final String PATH_PAGE_COURSE_TABLE = "/courses/content/courseTable";
     private static final String STRING_TYPES = "types";
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_COURSE = "filterCourse";
@@ -55,23 +56,30 @@ public class CoursesController {
      *
      * @return modelAndView("admin/courses/courses")
      */
+//    @RequestMapping(method = RequestMethod.GET)
+//    public ModelAndView index() {
+//        final CourseSearchFilter filter = getFilterCourse();
+//        filter.setPage(1);
+//        return switchPage(filter);
+//    }
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView index() {
+    public ModelAndView viewAll() {
         final CourseSearchFilter filter = getFilterCourse();
         filter.setPage(1);
-        return switchPage(filter);
-    }
-
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public ModelAndView filter(@ModelAttribute(STRING_FILTER_COURSE) final
-                               CourseSearchFilter filterCourse) {
-        return switchPage(filterCourse);
-    }
-
-
-    @RequestMapping(value = "/switch", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView switchPage(@ModelAttribute(STRING_FILTER_COURSE) final CourseSearchFilter filterCourse) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_LISTCONTENT);
+        final SearchResults<Course> results = courseService.search(filter);
+        mav.addObject("courses", results.getResults());
+        mav.addAllObjects(results.getPageModel());
+        mav.addObject(STRING_TYPES, CourseType.findAll());
+        mav.addObject(STRING_STATUSES, getStatuses());
+        mav.addObject(STRING_FILTER_COURSE, filter);
+        return mav;
+    }
+
+
+    @RequestMapping(value = "/filter", method = RequestMethod.POST)
+    public @ResponseBody ModelAndView switchPage(@ModelAttribute(STRING_FILTER_COURSE) final CourseSearchFilter filterCourse) {
+        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_COURSE_TABLE);
         final SearchResults<Course> results = courseService.search(filterCourse);
         mav.addAllObjects(results.getPageModel());
         mav.addObject("courses", results.getResults());

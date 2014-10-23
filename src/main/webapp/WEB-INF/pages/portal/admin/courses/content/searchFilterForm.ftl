@@ -1,4 +1,4 @@
-<#import "../../../fieldMacro.ftl" as formMacro/>
+<#import "../../../../fieldMacro.ftl" as formMacro/>
 <form class="form-horizontal" name="courseFilter" role="form"
       action="<@spring.url "/admin/course/filter"/>" method="get">
     <div class="row">
@@ -27,7 +27,7 @@
             <div class="col-md-6">
             </div>
             <div class="col-md-5" style="text-align: right">
-                <input type="submit" class="btn btn-primary" value="Search"/>
+                <input id="searchButton" type="submit" class="btn btn-primary" value="Search"/>
                 <a href="<@spring.url "/admin/course" />" class="btn btn-default">Reset</a>
             </div>
         </div>
