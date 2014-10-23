@@ -44,7 +44,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Username not found.");
         }
 
-        if (user.getStatus() == UserStatus.FOR_REMOVAL) {
+        if (user.getStatus() != UserStatus.ACTIVE) {
             throw new BadCredentialsException("Contact the administrator "
                     + "tatyana.bulanaya@gmail.com");
         }
