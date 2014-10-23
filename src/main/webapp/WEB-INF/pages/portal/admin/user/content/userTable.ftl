@@ -14,7 +14,7 @@
 
     <#list users as user>
         <tr style="vertical-align: middle">
-            <#if (user.name) ?? && (user.surname) ?? >
+            <#if (user.name??) && (user.surname??) >
                 <td style="width: 30%; vertical-align: middle">
                     <div class="row">
                         <div class="col-md-2">
