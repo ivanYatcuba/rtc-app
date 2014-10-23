@@ -12,7 +12,7 @@
         <div class="span6">
         </div>
         <div class="span5" style="text-align: right">
-            <button type="submit" class="btn">Update</button>
+            <input type="submit" class="btn" value="Update">
             or
             <a href="<@spring.url "/admin/export/${report.code}" />">Cancel</a>
         </div>
