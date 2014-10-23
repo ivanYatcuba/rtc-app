@@ -92,7 +92,8 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
         criteria.setFirstResult((start - 1) * max);
         criteria.setMaxResults(max);
 
-        results.setResults(criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
+        results.setResults(criteria.setResultTransformer(Criteria.PROJECTION).list());
+//        results.setResults(criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
         return results;
     }
 
