@@ -11,7 +11,7 @@ import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.utils.Upload.FileUpload;
+import net.github.rtc.app.utils.upload.FileUpload;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
