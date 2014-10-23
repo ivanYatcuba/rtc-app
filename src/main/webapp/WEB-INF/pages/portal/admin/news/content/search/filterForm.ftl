@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-md-6">
-    <@rtcmacros.formItem "filterNews.authorCode"/>
+    <@rtcmacros.formItem "filterNews.authorInf"/>
     </div>
     <div class="col-md-6">
     <@rtcmacros.formItem "filterNews.status" 'class="input-medium"' "singleSelect" statuses "NewsStatus."/>
@@ -38,7 +38,7 @@
             url: "<@spring.url "/admin/user/getAdmins"/>",
             success: function(response){
                 autoCompleteAuthors = response;
-                $("#authorCode").autocomplete({source: autoCompleteAuthors});
+                $("#authorInf").autocomplete({source: autoCompleteAuthors});
             }
         });
     });

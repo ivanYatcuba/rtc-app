@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-md-6">
-    <@rtcmacros.formItem "newsFilter.authorCode"/>
+    <@rtcmacros.formItem "newsFilter.authorInf"/>
     </div>
     <div class="col-md-6">
     <@rtcmacros.formItem "newsFilter.status" 'class="input-medium"' "singleSelect" newsStatuses "NewsStatus."/>

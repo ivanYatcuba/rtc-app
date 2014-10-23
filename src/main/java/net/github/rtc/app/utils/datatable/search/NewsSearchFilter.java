@@ -16,7 +16,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     private String title;
 
-    private String authorCode;
+    private String authorInf;
 
     private NewsStatus status = NewsStatus.ALL;
 
@@ -61,12 +61,12 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         this.title = title;
     }
 
-    public String getAuthorCode() {
-        return authorCode;
+    public String getAuthorInf() {
+        return authorInf;
     }
 
-    public void setAuthorCode(String authorCode) {
-        this.authorCode = authorCode;
+    public void setAuthorInf(String authorInf) {
+        this.authorInf = authorInf;
     }
 
     public NewsStatus getStatus() {
