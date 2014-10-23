@@ -58,7 +58,7 @@
                         <#if (user.status)=="FOR_REMOVAL">
                             <span class="label label-danger" style="width: 90px; height: 34px">Deleted</span>
                         <#else>
-                            <span class="label label-danger" style="width: 90px; height: 34px">Inactive</span>
+                            <span class="label label-default" style="width: 90px; height: 34px">Inactive</span>
                         </#if>
                     </#if>
                 </td>
@@ -90,7 +90,11 @@
                             <a href="#" onclick="javascript:PopUpShow('${user.code}')">Remove</a>
                         </li>
                         <li>
-                            <a href="#">Inactivate</a>
+                            <#if user.isActive()>
+                                <a href="<@spring.url"/admin/user/inactivate/${user.code}"/>">Inactivate</a>
+                            <#else>
+                                <a href="<@spring.url"/admin/user/activate/${user.code}"/>">Activate</a>
+                            </#if>
                         </li>
                         </ul>
                     </div>
