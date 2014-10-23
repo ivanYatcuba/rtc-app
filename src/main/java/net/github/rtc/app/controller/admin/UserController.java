@@ -67,12 +67,6 @@ public class UserController {
         mav.addObject(STRING_USER_FILTER, filter);
         return mav;
     }
-//
-//    @RequestMapping(value = "/filter", method = RequestMethod.GET)
-//    public ModelAndView filter(@ModelAttribute(STRING_USER_FILTER) final
-//                               UserSearchFilter userFilter) {
-//        return switchPage(userFilter);
-//    }
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.POST)
     public

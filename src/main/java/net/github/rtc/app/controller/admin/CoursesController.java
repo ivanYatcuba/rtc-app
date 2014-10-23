@@ -34,6 +34,7 @@ public class CoursesController {
     private static final int COURSES_PER_PAGE = 5;
     private static final String ROOT = "portal/admin";
     private static final String STRING_COURSE = "course";
+    private static final String STRING_COURSES = "courses";
     private static final String PATH_PAGE_LISTCONTENT = "/page/listcontent";
     private static final String PATH_PAGE_COURSE_TABLE = "/courses/content/courseTable";
     private static final String STRING_TYPES = "types";
@@ -68,7 +69,7 @@ public class CoursesController {
         filter.setPage(1);
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_LISTCONTENT);
         final SearchResults<Course> results = courseService.search(filter);
-        mav.addObject("courses", results.getResults());
+        mav.addObject(STRING_COURSES, results.getResults());
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_TYPES, CourseType.findAll());
         mav.addObject(STRING_STATUSES, getStatuses());
@@ -78,11 +79,13 @@ public class CoursesController {
 
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView switchPage(@ModelAttribute(STRING_FILTER_COURSE) final CourseSearchFilter filterCourse) {
+    public
+    @ResponseBody
+    ModelAndView switchPage(@ModelAttribute(STRING_FILTER_COURSE) final CourseSearchFilter filterCourse) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_COURSE_TABLE);
         final SearchResults<Course> results = courseService.search(filterCourse);
         mav.addAllObjects(results.getPageModel());
-        mav.addObject("courses", results.getResults());
+        mav.addObject(STRING_COURSES, results.getResults());
         mav.addObject(STRING_TYPES, CourseType.findAll());
         mav.addObject(STRING_STATUSES, getStatuses());
         mav.addObject(STRING_FILTER_COURSE, filterCourse);
