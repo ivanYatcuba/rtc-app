@@ -17,9 +17,9 @@
             <td>
                 <p>${news.title!" "}</p>
             </td>
-            <#if (news.author)??>
+            <#if (news.authorCode)??>
                 <td>
-                    <p>${news.author.name!" "} ${news.author.surname!" "}</p>
+                    <p>${news.authorCode.name!" "} ${news.authorCode.surname!" "}</p>
                 </td>
             <#else>
                 <td></td>

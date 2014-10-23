@@ -16,11 +16,11 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     private String title;
 
-    private String author;                    //todo: use Long authorId
+    private String authorCode;
 
     private NewsStatus status = NewsStatus.ALL;
 
-    private Date createDate;                  //todo: add binder for this
+    private Date createDate;
 
     private char dateMoreLessEq;
 
@@ -61,12 +61,12 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorCode() {
+        return authorCode;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorCode(String authorCode) {
+        this.authorCode = authorCode;
     }
 
     public NewsStatus getStatus() {

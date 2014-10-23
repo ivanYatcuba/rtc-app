@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-md-6">
-    <@rtcmacros.formItem "filterNews.author"/>
+    <@rtcmacros.formItem "filterNews.authorCode"/>
     </div>
     <div class="col-md-6">
     <@rtcmacros.formItem "filterNews.status" 'class="input-medium"' "singleSelect" statuses "NewsStatus."/>
@@ -38,21 +38,7 @@
             url: "<@spring.url "/admin/user/getAdmins"/>",
             success: function(response){
                 autoCompleteAuthors = response;
-                $("#author").autocomplete({source: autoCompleteAuthors});
-            }
-        });
-
-    });
-</script>
-<script>
-    $(function() {
-        var autoCompleteAuthors;
-        $.ajax({
-            type: "POST",
-            url: "<@spring.url "/admin/user/getAdmins"/>",
-            success: function(response){
-                autoCompleteAuthors = response;
-                $("#author").autocomplete({source: autoCompleteAuthors});
+                $("#authorCode").autocomplete({source: autoCompleteAuthors});
             }
         });
     });
