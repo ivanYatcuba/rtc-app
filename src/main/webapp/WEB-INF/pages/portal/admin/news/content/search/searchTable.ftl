@@ -62,4 +62,14 @@
     </table>
 </div>
 <hr>
-<@datatables.addPagination/>
+
+<div class="row">
+    <div class="col-md-6">
+        <form  class="inline-box" style="margin: 0px"  name="createNews" action="<@spring.url"/admin/news/create"/>"method="get">
+            <button  class="btn btn-primary" type="submit">Create New</button>
+        </form>
+    </div>
+    <div class="col-md-6" style="text-align: right">
+    <@datatables.addPagination/>
+    </div>
+</div>
