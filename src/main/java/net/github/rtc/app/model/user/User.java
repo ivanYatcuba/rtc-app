@@ -114,6 +114,7 @@ public class User extends AbstractPersistenceObject implements UserDetails {
 
     @Required
     @Column
+    @Temporal(TemporalType.DATE)
     @ForExport("Register Date")
     private Date registerDate;
 
@@ -158,40 +159,39 @@ public class User extends AbstractPersistenceObject implements UserDetails {
         this.password = password;
     }
 
-    public void setEnglish(final String english) {
-        this.english = english;
-    }
-
     public String getEnglish() {
         return this.english;
     }
 
-    public void setGender(final String gender) {
-        this.gender = gender;
+    public void setEnglish(final String english) {
+        this.english = english;
     }
 
     public String getGender() {
         return this.gender;
     }
 
-    public void setPhoto(final String photo) {
-        this.photo = photo;
+    public void setGender(final String gender) {
+        this.gender = gender;
     }
 
     public String getPhoto() { return  this.photo; }
 
+    public void setPhoto(final String photo) {
+        this.photo = photo;
+    }
 
     @Override
     public String getUsername() {
         return email;
     }
 
-    public void setProgrammingLanguages(final Set<String> progrLanguage) {
-        this.programmingLanguages = progrLanguage;
-    }
-
     public Set<String> getProgrammingLanguages() {
         return this.programmingLanguages;
+    }
+
+    public void setProgrammingLanguages(final Set<String> progrLanguage) {
+        this.programmingLanguages = progrLanguage;
     }
 
     @Override
