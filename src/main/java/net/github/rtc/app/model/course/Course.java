@@ -21,16 +21,17 @@ import java.util.Set;
 @Validatable
 public class Course extends AbstractPersistenceObject implements Serializable {
 
-    public static final int HASH_CODE_CONSTANT = 31;
-    public static final int PRIMARY_LENGTH = 50;
-    public static final int DEFAULT_CAPACITY = 10;
+    private static final int HASH_CODE_CONSTANT = 31;
+    private static final int DESCRIPTION_LENGTH = 255;
+    private static final int PRIMARY_LENGTH = 50;
+    private static final int DEFAULT_CAPACITY = 10;
     @Required
     @Number
     @Min(1)
     @Column
     @ForExport("Capacity")
     private Integer capacity = DEFAULT_CAPACITY;
-    public static final int DESCRIPTION_LENGTH = 255;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @ForExport("Id")
