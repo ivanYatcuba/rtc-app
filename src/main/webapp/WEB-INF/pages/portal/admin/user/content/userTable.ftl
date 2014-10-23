@@ -45,7 +45,7 @@
             </#if>
 
             <#if (user.registerDate)??>
-                <td style="vertical-align: middle">${user.registerDate?datetime?string("dd-MM-yyyy")}</td>
+                <td style="vertical-align: middle">${user.registerDate?date?string("dd-MM-yyyy")}</td>
             <#else>
                 <td style="vertical-align: middle">None</td>
             </#if>
@@ -64,7 +64,7 @@
                 </td>
             <#else>
                 <td style="vertical-align: middle">
-                    <span class="label label-default" style="width: 90px; height: 34px">None</span>
+                        <span class="label label-default" style="width: 90px; height: 34px">None</span>
                 </td>
             </#if>
             <td style="width: 15%; vertical-align: middle">
