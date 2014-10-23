@@ -91,9 +91,11 @@ public class CoursesController {
      */
     @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
     public String delete(@PathVariable final String courseCode) {
-        courseService.delete(courseCode);
-        return REDIRECT
-                + STRING_ADMIN;
+        final Course course = courseService.findByCode(courseCode);
+        if (course.getStatus() != CourseStatus.PUBLISHED) {
+            courseService.delete(courseCode);
+        }
+        return REDIRECT + STRING_ADMIN;
     }
 
     @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
