@@ -37,7 +37,7 @@ public class UserController {
     private static final String STRING_USERS = "users";
     private static final String PATH_PAGE_VIEW_ALL_USERS = "/page/viewAllusers";
     private static final String PATH_PAGE_USER_TABLE = "/user/content/userTable";
-    private static final String PATH_PAGE_USER_PAGE = "/page/userPagea";
+    private static final String PATH_PAGE_USER_PAGE = "/page/userPage";
     private static final String REDIRECT_USER_PAGE = "redirect:/admin/user/userPage/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_VIEW_ALL = "redirect:/admin/user/viewAll";
