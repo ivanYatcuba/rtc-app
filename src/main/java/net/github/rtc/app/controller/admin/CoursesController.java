@@ -3,12 +3,14 @@ package net.github.rtc.app.controller.admin;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
+import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
-import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
+import net.github.rtc.app.utils.propertyeditors.CustomExpertsEditor;
+import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +45,7 @@ public class CoursesController {
     private static final String REDIRECT = "redirect:/";
     private static final String STRING_ADMIN = "admin";
     private static final String STRING_VALIDATION_RULES = "validationRules";
-
+    private static final String STRING_EXPERTS = "experts";
 
     @Autowired
     private CourseService courseService;
@@ -63,6 +65,7 @@ public class CoursesController {
 //        filter.setPage(1);
 //        return switchPage(filter);
 //    }
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView viewAll() {
         final CourseSearchFilter filter = getFilterCourse();
@@ -144,6 +147,8 @@ public class CoursesController {
                 + "/page/createContent");
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course
                 .class));
+        final List<User> experts = userService.getUserByRole(RoleType.ROLE_EXPERT);
+        mav.addObject(STRING_EXPERTS, experts);
         return mav;
     }
 
@@ -159,7 +164,7 @@ public class CoursesController {
             @ModelAttribute(STRING_COURSE) final Course course,
             @RequestParam(value = "expertList",
                     required = false) final List<String> expertList) {
-        course.setExperts(bindExperts(expertList));
+//        course.setExperts(bindExperts(expertList));
         courseService.create(course);
         return "redirect:/admin/course/";
     }
@@ -219,7 +224,8 @@ public class CoursesController {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
-        binder.registerCustomEditor(List.class, STRING_TYPES, new CustomStringEditor());
+        binder.registerCustomEditor(List.class, STRING_TYPES, new CustomTypeEditor());
+        binder.registerCustomEditor(Set.class, STRING_EXPERTS, new CustomExpertsEditor(userService));
     }
 
     @InitBinder(STRING_FILTER_COURSE)
@@ -233,7 +239,7 @@ public class CoursesController {
      * @return collection categories
      */
     @ModelAttribute("categories")
-    public Collection<String> getCategories() {
+    public Collection<CourseType> getCategories() {
         return CourseType.findAll();
     }
 
@@ -241,7 +247,6 @@ public class CoursesController {
     public Collection<String> getStatuses() {
         return CourseStatus.findAll();
     }
-
 
     @ModelAttribute("currentUser")
     public String getCurrentUser() {

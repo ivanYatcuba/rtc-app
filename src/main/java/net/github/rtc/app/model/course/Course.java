@@ -178,6 +178,10 @@ public class Course extends AbstractPersistenceObject implements Serializable {
         this.id = id;
     }
 
+    public boolean isPublished() {
+        return this.status == CourseStatus.PUBLISHED;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Course{");

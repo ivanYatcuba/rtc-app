@@ -1,73 +1,84 @@
+<style>
+    hr {
+        float:left;
+        width:91%;
+        margin-bottom: 20px;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-6">
-    <@rtcmacros.formItem "course.name", 'class="required" maxlength="50"'/>
-        <label for="types"><@spring.message "course.category" /></label>
-    <@rtcmacros.formMultiSelect "course.types", categories/>
-    <@rtcmacros.formItem "course.capacity", 'onkeydown="return isNumber(event);" class="input-small required" size="2" maxlength="2" ' />
+        <@formMacro.rtcFormTextInput "course.name" "course.name" "required" 'maxlength="50"'/>
+        <@formMacro.rtcFormMultiSelect "course.category" "course.types" categories/>
+        <@formMacro.rtcFormTextInput "course.capacity" "course.capacity"  "input-small required" 'style="width:50px;" onkeydown="return isNumber(event);" size="2" maxlength="2"' />
     </div>
     <div class="col-md-6">
-
-    <#--<@formMacro.rtcFormTextInput  "course.startDate" "course.startDate!" "input-medium required" />-->
-    <@spring.bind "course.startDate"/>
-        <div class="form-group">
-            <label  class="control-label col-md-3">
+        <#--<@formMacro.rtcFormTextInput "course.startDate" "course.startDate" "input-medium required" />-->
+        <#--<@formMacro.rtcFormTextInput "course.endDate" "course.endDate" "input-medium required" />-->
+        <@spring.bind "course.startDate"/>
+            <div class="form-group">
+                <label class="control-label col-md-3">
                 <@spring.message "course.startDate"/>
-            </label>
-            <div class="col-md-5">
+                </label>
+                <div class="col-md-5">
                 <@spring.formInput "course.startDate" "input-medium required"/>
+                </div>
             </div>
-        </div>
-
-    <#--<@formMacro.rtcFormTextInput "course.endDate" "course.endDate??" "input-medium required" />-->
-    <@spring.bind "course.endDate"/>
-        <div class="form-group">
-            <label  class="control-label col-md-3">
-            <@spring.message "course.endDate"/>
-            </label>
-            <div class="col-md-5">
-            <@spring.formInput "course.endDate" "input-medium required"/>
+        <@spring.bind "course.endDate"/>
+            <div class="form-group">
+                <label class="control-label col-md-3">
+                <@spring.message "course.endDate"/>
+                </label>
+                <div class="col-md-5">
+                <@spring.formInput "course.endDate" "input-medium required"/>
+                </div>
             </div>
-        </div>
-
-        <@rtcmacros.formItem "course.tags" "" "tag"/>
+        <@formMacro.rtcFormTagsInput "course.tags" "course.tags"/>
     </div>
 </div>
 <hr>
 <div class="row">
     <div class="col-md-6">
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="addExpertH">*<@spring.message "filterCourse.experts"/></label>
+        <#--<@expertMultiSelect/>-->
+        <@formMacro.rtcFormMultiSelect "course.experts" "course.experts" experts 'style="width:100%;"'/>
+    </div>
+</div>
+<hr>
 
-            <div class="col-md-6">
-                <div id="experts"></div>
-                <a id="addExpertH" href="#" onclick="addExpert()">Add Expert</a>
+<div class="row">
+    <div class="col-md-6">
+       <@formMacro.rtcFormTextarea "course.description" "course.description" "required" 'style="width:425%;" rows="3" maxlength="255"'/>
+    </div>
+</div>
+<#if !course.isPublished()>
+    <hr>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group checkbox">
+                <label class="control-label col-md-2"></label>
+                <label class = "col-md-10 style="padding-top: 7px">
+                    <input type="checkbox">Publish as news
+                </label>
             </div>
         </div>
     </div>
-</div>
-<hr>
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="description"><@spring.message "course.description"/></label>
+</#if>
 
-            <div class="col-md-9"><@spring.formTextarea "course.description"
-            'style="width:100%;" rows="3" maxlength="255" class=\"required\"'/> </div>
-        </div>
-    </div>
-</div>
+<#--<#macro expertMultiSelect>-->
+    <#--<#assign exp = []>-->
+    <#--<#if experts??>-->
+        <#--<#list experts as expert>-->
+            <#--<#if !expert.isForRemoval()>-->
+                <#--<#assign exp = exp + [ expert ] />-->
+            <#--</#if>-->
+        <#--</#list>-->
+        <#--<@formMacro.rtcFormMultiSelect "filterCourse.experts" "filterCourse.experts" exp 'style="width:100%;"'/>-->
+    <#--</#if>-->
+<#--</#macro>-->
 <hr>
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <label class="control-label col-md-2"><@spring.message "course.status"/></label>
-            <label style="padding-top: 5px">&nbsp;${course.status}</label>
-        </div>
-    </div>
-</div>
-<@rtcmacros.formValidation formName="courseForm" jsonRules="${validationRules}"/>
+&nbsp;
+<#--<@formMacro.rtcFormValidation formName="courseForm" jsonRules="${validationRules}" />-->
+<@formMacro.rtcFormValidation formName="courseForm" jsonRules="${validationRules}" />
 <script type="text/javascript"
         src="<@spring.url'/resources/js/pages/courseForm.js'/>"></script>
 <script>
