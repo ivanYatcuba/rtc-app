@@ -1,7 +1,8 @@
 <#ftl strip_whitespace=true>
-<#import "/spring.ftl" as spring/>
-<#--<#include "/spring.ftl"/>-->
+<#--<#import "/spring.ftl" as spring/>-->
 <#include "rtcmacroses.ftl"/>
+<#--<#include "/spring.ftl"/>-->
+
 
 <#macro rtcIncludeLink>
 <link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
@@ -224,7 +225,7 @@
                 name="${status.expression}" ${attributes}>
             <#list options as value>
                 <#assign isSelected = contains(status.actualValue?default([""]), value)>
-                <option value="${value}"<#if isSelected>selected="selected"</#if>>${value}</option>
+                <option value="${value.code}"<#if isSelected>selected="selected"</#if>>${value}</option>
             </#list>
         </select>
     </@rtcFieldWrapper>

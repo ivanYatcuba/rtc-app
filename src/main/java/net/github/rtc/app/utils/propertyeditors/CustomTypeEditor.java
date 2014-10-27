@@ -12,7 +12,7 @@ import java.util.Set;
  *
  * @author Vladislav Pikus
  */
-public class CustomStringEditor extends PropertyEditorSupport {
+public class CustomTypeEditor extends PropertyEditorSupport {
 
     private static final String STRING_COMMA = ",";
 

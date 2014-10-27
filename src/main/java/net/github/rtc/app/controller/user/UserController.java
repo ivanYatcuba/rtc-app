@@ -8,7 +8,7 @@ import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
-import net.github.rtc.app.utils.propertyeditors.CustomStringEditor;
+import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -186,7 +186,7 @@ public class UserController {
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-        binder.registerCustomEditor(Collection.class, new CustomStringEditor());
+        binder.registerCustomEditor(Collection.class, new CustomTypeEditor());
     }
 
     /**

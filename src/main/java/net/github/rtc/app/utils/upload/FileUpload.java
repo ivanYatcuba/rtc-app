@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.Upload;
+package net.github.rtc.app.utils.upload;
 
 
 import net.github.rtc.app.exception.ServiceProcessingException;

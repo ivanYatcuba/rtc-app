@@ -14,11 +14,15 @@
 
     <#list users as user>
         <tr style="vertical-align: middle">
-            <#if (user.name) ?? && (user.surname) ?? >
+            <#if (user.name??) && (user.surname??) >
                 <td style="width: 30%; vertical-align: middle">
                     <div class="row">
                         <div class="col-md-2">
-                            <img src = "<@spring.url'/resources/images/errorCat.jpg'/>" alt="..." class="avatar">
+                         <#if user.photo??>
+                            <img id="Img" src="/PathToPhotos/${user.photo}"  class="avatar"/>
+                        <#else>
+                            <img src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="avatar">
+                        </#if>
                         </div>
                         <div class="col-md-10" style="padding-left: 22px; vertical-align: middle ">
                             <a href="<@spring.url"/admin/user/userPage/${user.code}"/>">  ${user.surname + " " + user.name } </a>
@@ -45,7 +49,7 @@
             </#if>
 
             <#if (user.registerDate)??>
-                <td style="vertical-align: middle">${user.registerDate?datetime?string("dd-MM-yyyy")}</td>
+                <td style="vertical-align: middle">${user.registerDate?date?string("dd-MM-yyyy")}</td>
             <#else>
                 <td style="vertical-align: middle">None</td>
             </#if>
@@ -64,7 +68,7 @@
                 </td>
             <#else>
                 <td style="vertical-align: middle">
-                    <span class="label label-default" style="width: 90px; height: 34px">None</span>
+                        <span class="label label-default" style="width: 90px; height: 34px">None</span>
                 </td>
             </#if>
             <td style="width: 15%; vertical-align: middle">

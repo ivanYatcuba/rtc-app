@@ -21,22 +21,27 @@ import java.util.Set;
 @Validatable
 public class Course extends AbstractPersistenceObject implements Serializable {
 
-    public static final int HASH_CODE_CONSTANT = 31;
-    public static final int PRIMARY_LENGTH = 50;
-    public static final int DEFAULT_CAPACITY = 10;
-    public static final int DESCRIPTION_LENGTH = 255;
+    private static final int HASH_CODE_CONSTANT = 31;
+    private static final int DESCRIPTION_LENGTH = 255;
+    private static final int PRIMARY_LENGTH = 50;
+    private static final int DEFAULT_CAPACITY = 10;
+    @Required
+    @Number
+    @Min(1)
+    @Column
+    @ForExport("Capacity")
+    private Integer capacity = DEFAULT_CAPACITY;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @ForExport("Id")
     private long id;
-
     @Required
     @Minlength(2)
     @Maxlength(PRIMARY_LENGTH)
     @Column
     @ForExport("Name")
     private String name;
-
     @Required
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -45,38 +50,25 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     @Enumerated(EnumType.STRING)
     @ForExport("Category")
     private Set<CourseType> types;
-
     @Required
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @ForExport("Start date")
     private Date startDate;
-
     @Required
     @Temporal(TemporalType.TIMESTAMP)
     @ForExport("End date")
     private Date endDate;
-
     @Column
     @ForExport("Status")
     @Enumerated(EnumType.STRING)
     private CourseStatus status = CourseStatus.DRAFT;
-
     @Column
     @ForExport("Publish date")
     private Date publishDate;
-
     @Maxlength(DESCRIPTION_LENGTH)
     @Column
     @ForExport("Description")
     private String description;
-
-    @Required
-    @Number
-    @Min(1)
-    @Column
-    @ForExport("Capacity")
-    private Integer capacity = DEFAULT_CAPACITY;
-
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "courses_tags",
@@ -184,6 +176,10 @@ public class Course extends AbstractPersistenceObject implements Serializable {
 
     public void setId(final long id) {
         this.id = id;
+    }
+
+    public boolean isPublished() {
+        return this.status == CourseStatus.PUBLISHED;
     }
 
     @Override

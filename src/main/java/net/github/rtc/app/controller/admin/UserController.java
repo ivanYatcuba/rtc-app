@@ -3,7 +3,7 @@ package net.github.rtc.app.controller.admin;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.Upload.FileUpload;
+import net.github.rtc.app.utils.upload.FileUpload;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
@@ -52,7 +52,7 @@ public class UserController {
     private FileUpload upload;
 
     @Value("${img.save.folder}")
-    private String imgfold;
+    private String imgFold;
 
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)

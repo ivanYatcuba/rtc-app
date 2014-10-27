@@ -56,7 +56,7 @@
         <label><@spring.message "user.birthDate"/></label>
         <div>
             <p class="form-control-static">
-                <#if user.birthDate??>${user.birthDate ? datetime ? string("dd-MMM-yyyy")}</#if></p>
+                <#if user.birthDate??>${user.birthDate ? date ? string("dd-MMM-yyyy")}</#if></p>
         </div>
     </div>
     </div>
@@ -217,7 +217,7 @@
             <label><@spring.message "user.registerDate"/></label>
             <div>
                 <p class="form-control-static">
-                <#if user.registerDate??>${user.registerDate ? datetime ? string("dd-MMM-yyyy")}</#if></p>
+                <#if user.registerDate??>${user.registerDate ? date ? string("dd-MMM-yyyy")}</#if></p>
             </div>
         </div>
     </div>
