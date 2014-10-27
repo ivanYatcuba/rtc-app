@@ -41,9 +41,7 @@ public class NewsController {
     private ValidationContext validationContext;
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ModelAndView viewAll(@ModelAttribute(STRING_FILTER_NEWS) final NewsSearchFilter filterNews) {
+    public ModelAndView viewAll(@ModelAttribute(STRING_FILTER_NEWS) final NewsSearchFilter filterNews) {
         final ModelAndView mav = new ModelAndView(ROOT + "/news/content/search/searchTable");
         final SearchResults results = newsService.search(filterNews);
         mav.addAllObjects(results.getPageModel());
