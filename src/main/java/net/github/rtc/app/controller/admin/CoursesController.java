@@ -33,7 +33,6 @@ import java.util.*;
 @RequestMapping("admin/course")
 public class CoursesController {
 
-    private static final int COURSES_PER_PAGE = 5;
     private static final String ROOT = "portal/admin";
     private static final String STRING_COURSE = "course";
     private static final String STRING_COURSES = "courses";
@@ -115,8 +114,7 @@ public class CoursesController {
     @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
     public String publish(@PathVariable final String courseCode) {
         courseService.publish(courseService.findByCode(courseCode));
-        return REDIRECT
-                + STRING_ADMIN;
+        return REDIRECT + STRING_ADMIN;
     }
 
     /**
@@ -129,8 +127,7 @@ public class CoursesController {
      */
     @RequestMapping(value = "view/{courseCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable final String courseCode) {
-        final ModelAndView mav = new ModelAndView(ROOT
-                + "/page/courseContent");
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/courseContent");
         final Course course = courseService.findByCode(courseCode);
         mav.addObject(STRING_COURSE, course);
         return mav;
@@ -143,11 +140,9 @@ public class CoursesController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
-        final ModelAndView mav = new ModelAndView(ROOT
-                + "/page/createContent");
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course
-                .class));
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/createContent");
         final List<User> experts = userService.getUserByRole(RoleType.ROLE_EXPERT);
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course.class));
         mav.addObject(STRING_EXPERTS, experts);
         return mav;
     }
@@ -160,11 +155,7 @@ public class CoursesController {
      * course
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(
-            @ModelAttribute(STRING_COURSE) final Course course,
-            @RequestParam(value = "expertList",
-                    required = false) final List<String> expertList) {
-//        course.setExperts(bindExperts(expertList));
+    public String save(@ModelAttribute(STRING_COURSE) final Course course) {
         courseService.create(course);
         return "redirect:/admin/course/";
     }
@@ -180,6 +171,7 @@ public class CoursesController {
         final Course returnCourse = courseService.findByCode(courseCode);
         mav.getModelMap().addAttribute(STRING_COURSE, returnCourse);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course.class));
+        mav.addObject(STRING_EXPERTS, userService.getUserByRole(RoleType.ROLE_EXPERT));
         return mav;
     }
 
@@ -190,29 +182,11 @@ public class CoursesController {
      * @return if all is OK the redirect to view course or return to edit course
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(
-            @ModelAttribute(STRING_COURSE) final Course course,
-            @RequestParam(value = "expertList",
-                    required = false) final List<String> expertList) {
-        course.setId(courseService.findByCode(course.getCode()).getId());
-        // TO DO: id must be already present
-        course.setExperts(bindExperts(expertList));
+    public String update(@ModelAttribute(STRING_COURSE) final Course course) {
         courseService.update(course);
-        return "redirect: view/"
-                + course.getCode();
+        return "redirect: view/" + course.getCode();
     }
 
-    private Set<User> bindExperts(final List<String> experts) {
-        if (experts == null) {
-            return null;
-        }
-        final Set<User> courseExperts = new HashSet<>();
-        for (final String expert : experts) {
-            final String[] params = expert.split(" ");
-            courseExperts.add(userService.loadUserByUsername(params[2]));
-        }
-        return courseExperts;
-    }
 
     /**
      * Binding course conditions for entry into the form conclusions

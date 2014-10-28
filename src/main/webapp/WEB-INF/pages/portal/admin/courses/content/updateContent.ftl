@@ -1,6 +1,7 @@
 <#import "../../../../fieldMacro.ftl" as formMacro />
 <form class="form-horizontal" name="course" id="courseForm"
       action="<@spring.url "/admin/course/update" />" method="POST">
+<@spring.formHiddenInput "course.id" />
 <@spring.formHiddenInput "course.code" />
 <@spring.formHiddenInput "course.status" />
 <@spring.formHiddenInput "course.publishDate" />
