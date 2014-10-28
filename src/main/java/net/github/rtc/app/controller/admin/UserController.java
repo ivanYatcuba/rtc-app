@@ -54,6 +54,7 @@ public class UserController {
     @Value("${img.save.folder}")
     private String imgFold;
 
+    private String photo;
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView index() {
@@ -87,6 +88,7 @@ public class UserController {
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         final User us = userService.findByCode(code);
         mav.addObject(STRING_USER, us);
+        photo = userService.findByCode(us.getCode()).getPhoto();
         // mav.addObject("path", imgfold);
         return mav;
     }
@@ -175,6 +177,8 @@ public class UserController {
         user.setId(userService.findByCode(user.getCode()).getId());
         if (!img.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), img));
+        } else {
+            user.setPhoto(photo);
         }
         userService.update(user);
         session.setComplete();
@@ -193,7 +197,6 @@ public class UserController {
     public User getCommandObject() {
         return new User();
     }
-
 
     @ModelAttribute(STRING_USER_FILTER)
     public UserSearchFilter getFilterUser() {
