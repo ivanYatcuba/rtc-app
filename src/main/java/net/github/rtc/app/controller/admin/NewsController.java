@@ -32,6 +32,8 @@ public class NewsController {
     private static final String STRING_NEWS = "news";
     private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
+    private static final String STRING_REDIRECT = "redirect:";
+    private static final String STRING_ADMIN_NEWS_LIST = "/admin/news/list";
 
     @Autowired
     private NewsService newsService;
@@ -117,6 +119,21 @@ public class NewsController {
         newsService.update(news);
         return STRING_REDIRECT_VIEW + news.getCode();
     }
+
+    @RequestMapping(value = "/delete/{newsCode}", method = RequestMethod.GET)
+    public String deleteByCode(@PathVariable final String newsCode) {
+        newsService.deleteByCode(newsCode);
+        return STRING_REDIRECT + STRING_ADMIN_NEWS_LIST;
+    }
+
+    @RequestMapping(value = "/publish/{newsCode}", method = RequestMethod.GET)
+    public String publishByCode(@PathVariable final String newsCode) {
+        final News news = newsService.findByCode(newsCode);
+        news.setStatus(NewsStatus.PUBLISHED);
+        newsService.update(news);
+        return STRING_REDIRECT + STRING_ADMIN_NEWS_LIST;
+    }
+
 
     /**
      * Binding course conditions for entry into the form conclusions
