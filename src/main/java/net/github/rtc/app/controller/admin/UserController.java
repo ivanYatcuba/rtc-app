@@ -2,6 +2,7 @@ package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.upload.FileUpload;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
@@ -43,6 +44,7 @@ public class UserController {
     private static final String REDIRECT_VIEW_ALL = "redirect:/admin/user/viewAll";
     private static final String STRING_USER_FILTER = "userFilter";
     private static final String STRING_AUTHORITIES = "authorities";
+    private static final String STRING_STATUSES = "statuses";
 
     @Autowired
     private ValidationContext validationContext;
@@ -77,6 +79,7 @@ public class UserController {
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_USERS, results.getResults());
         mav.addObject(STRING_AUTHORITIES, getAuthorities());
+        mav.addObject(STRING_STATUSES, getStatuses());
         mav.addObject(STRING_USER_FILTER, userFilter);
         return mav;
     }
@@ -198,6 +201,11 @@ public class UserController {
     @ModelAttribute(STRING_USER_FILTER)
     public UserSearchFilter getFilterUser() {
         return new UserSearchFilter();
+    }
+
+    @ModelAttribute(STRING_STATUSES)
+    public Collection<String> getStatuses() {
+        return UserStatus.findAll();
     }
 
     @ModelAttribute(STRING_AUTHORITIES)
