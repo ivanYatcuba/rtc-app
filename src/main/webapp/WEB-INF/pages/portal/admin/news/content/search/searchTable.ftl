@@ -15,7 +15,7 @@
         <#list news as news>
         <tr>
             <td>
-                <p>${news.title!" "}</p>
+                <a href="<@spring.url "/admin/news/${news.code}" />">${news.title}</a>
             </td>
             <#if (news.author)??>
                 <td>
