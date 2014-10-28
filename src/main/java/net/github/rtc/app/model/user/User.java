@@ -21,10 +21,6 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     public static final int SECONDARY_LENGTH = 30;
     public static final String STRING_SPACE = " ";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @ForExport("Id")
-    private long id;
 
    /* @Column
     private String code;*/
@@ -343,14 +339,6 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     public void setCode(final String code) {
         this.code = code;
     }*/
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
-    }
 
     public Date getRegisterDate() {
         return registerDate;

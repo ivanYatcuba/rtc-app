@@ -33,10 +33,7 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     @ForExport("Capacity")
     private Integer capacity = DEFAULT_CAPACITY;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @ForExport("Id")
-    private long id;
+
     @Required
     @Minlength(2)
     @Maxlength(PRIMARY_LENGTH)
@@ -171,14 +168,6 @@ public class Course extends AbstractPersistenceObject implements Serializable {
 
     public void setPublishDate(final Date publishDate) {
         this.publishDate = publishDate;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
     }
 
     public boolean isPublished() {

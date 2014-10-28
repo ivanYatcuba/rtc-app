@@ -1,5 +1,6 @@
 package net.github.rtc.app.model.user;
 
+import net.github.rtc.app.model.AbstractPersistenceObject;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -8,11 +9,7 @@ import javax.persistence.*;
  * @author Vladislav Pikus
  */
 @Entity
-public class Role implements GrantedAuthority {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Role extends AbstractPersistenceObject implements GrantedAuthority  {
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -33,14 +30,6 @@ public class Role implements GrantedAuthority {
 
     public Role(final RoleType name) {
         this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
     }
 
     public RoleType getName() {

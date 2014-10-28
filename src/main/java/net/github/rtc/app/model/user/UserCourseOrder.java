@@ -1,5 +1,6 @@
 package net.github.rtc.app.model.user;
 
+import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.util.annotation.validation.Required;
 import net.github.rtc.util.annotation.validation.Validatable;
 
@@ -11,10 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Validatable
-public class UserCourseOrder {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class UserCourseOrder extends AbstractPersistenceObject {
 
     @Column
     private String userCode;
@@ -57,14 +55,6 @@ public class UserCourseOrder {
     }
 
     public UserCourseOrder() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
     }
 
     public String getUserCode() {
