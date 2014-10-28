@@ -27,7 +27,7 @@ public class News extends AbstractPersistenceObject implements Serializable {
 
     @OneToOne
 //    @PrimaryKeyJoinColumn
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "email")
     private User author;
 
     @Column

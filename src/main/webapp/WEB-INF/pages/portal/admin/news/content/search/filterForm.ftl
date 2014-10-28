@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-md-6">
-    <@rtcmacros.formItem "filterNews.author"/>
+    <@rtcmacros.formItem "filterNews.authorData"/>
     </div>
     <div class="col-md-6">
     <@rtcmacros.formItem "filterNews.status" 'class="input-medium"' "singleSelect" statuses "NewsStatus."/>
@@ -27,7 +27,7 @@
     </div>
     <div class="col-md-5" style="text-align: right">
         <input type="submit" class="btn btn-primary" id="searchButton" value="Search"/> or <a
-            href="<@spring.url "/admin/news/list" />">Reset</a>
+            href="<@spring.url "/admin/news" />">Reset</a>
     </div>
 </div>
 <script>
@@ -38,21 +38,7 @@
             url: "<@spring.url "/admin/user/getAdmins"/>",
             success: function(response){
                 autoCompleteAuthors = response;
-                $("#author").autocomplete({source: autoCompleteAuthors});
-            }
-        });
-
-    });
-</script>
-<script>
-    $(function() {
-        var autoCompleteAuthors;
-        $.ajax({
-            type: "POST",
-            url: "<@spring.url "/admin/user/getAdmins"/>",
-            success: function(response){
-                autoCompleteAuthors = response;
-                $("#author").autocomplete({source: autoCompleteAuthors});
+                $("#authorData").autocomplete({source: autoCompleteAuthors});
             }
         });
     });

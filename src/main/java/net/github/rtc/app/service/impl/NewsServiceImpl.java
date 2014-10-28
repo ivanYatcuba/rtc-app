@@ -19,7 +19,6 @@ public class NewsServiceImpl extends AbstractGenericServiceImpl<News> implements
     @Transactional
     public SearchResults<News> search(
             final DetachedCriteria criteria, final int start, final int max) {
-        /*log.debug("Searching courses///");*/
         return newsDao.search(criteria, start, max);
     }
 

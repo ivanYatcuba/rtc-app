@@ -32,6 +32,8 @@ public class NewsController {
     private static final String STRING_NEWS = "news";
     private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
+    private static final String STRING_REDIRECT = "redirect:";
+    private static final String STRING_ADMIN_NEWS_LIST = "/admin/news";
 
     @Autowired
     private NewsService newsService;
@@ -41,9 +43,7 @@ public class NewsController {
     private ValidationContext validationContext;
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ModelAndView viewAll(@ModelAttribute(STRING_FILTER_NEWS) final NewsSearchFilter filterNews) {
+    public ModelAndView viewAll(@ModelAttribute(STRING_FILTER_NEWS) final NewsSearchFilter filterNews) {
         final ModelAndView mav = new ModelAndView(ROOT + "/news/content/search/searchTable");
         final SearchResults results = newsService.search(filterNews);
         mav.addAllObjects(results.getPageModel());
@@ -53,7 +53,7 @@ public class NewsController {
         return mav;
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView viewAll() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/pageListNews");
         final NewsSearchFilter newsFilter = new NewsSearchFilter();
@@ -119,6 +119,21 @@ public class NewsController {
         newsService.update(news);
         return STRING_REDIRECT_VIEW + news.getCode();
     }
+
+    @RequestMapping(value = "/delete/{newsCode}", method = RequestMethod.GET)
+    public String deleteByCode(@PathVariable final String newsCode) {
+        newsService.deleteByCode(newsCode);
+        return STRING_REDIRECT + STRING_ADMIN_NEWS_LIST;
+    }
+
+    @RequestMapping(value = "/publish/{newsCode}", method = RequestMethod.GET)
+    public String publishByCode(@PathVariable final String newsCode) {
+        final News news = newsService.findByCode(newsCode);
+        news.setStatus(NewsStatus.PUBLISHED);
+        newsService.update(news);
+        return STRING_REDIRECT + STRING_ADMIN_NEWS_LIST;
+    }
+
 
     /**
      * Binding course conditions for entry into the form conclusions
