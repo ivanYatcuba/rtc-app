@@ -7,13 +7,10 @@
         <@formMacro.rtcFormMultiSelect "filterCourse.types" "filterCourse.types" categories/>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-                <label class="control-label col-md-3"><@spring.message "filterCourse.startDate"/></label>
-            <@rtcmacros.formSingleSelect "filterCourse.dateMoreLessEq", ["=", "<", ">"]/>
-            <@rtcmacros.formDatepicker "filterCourse.startDate"/>
-            </div>
-        <@formMacro.rtcFormSingleSelect "filterCourse.status" "filterCourse.status" statuses/>
-            <div class="form-group">
+            <@formMacro.formDateSearch  "filterCourse.dateMoreLessEq" "filterCourse.startDate" />
+
+            <@formMacro.rtcFormSingleSelect "filterCourse.status" "filterCourse.status" statuses "", "", "", {"" : "All"}/>
+                <div class="form-group">
                 <label class="control-label col-md-3" for="addExpertH">
                 <@spring.message "filterCourse.experts"/></label>
                 <div class="col-md-8">
