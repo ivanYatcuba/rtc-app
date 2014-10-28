@@ -33,7 +33,7 @@ public class NewsController {
     private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_REDIRECT = "redirect:";
-    private static final String STRING_ADMIN_NEWS_LIST = "/admin/news/list";
+    private static final String STRING_ADMIN_NEWS_LIST = "/admin/news";
 
     @Autowired
     private NewsService newsService;
@@ -53,7 +53,7 @@ public class NewsController {
         return mav;
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView viewAll() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/pageListNews");
         final NewsSearchFilter newsFilter = new NewsSearchFilter();

@@ -27,7 +27,7 @@
     </div>
     <div class="col-md-5" style="text-align: right">
         <input type="submit" class="btn btn-primary" id="searchButton" value="Search"/> or <a
-            href="<@spring.url "/admin/news/list" />">Reset</a>
+            href="<@spring.url "/admin/news" />">Reset</a>
     </div>
 </div>
 <script>
