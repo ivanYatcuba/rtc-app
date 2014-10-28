@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-md-6">
         <div>
-        <@formMacro.rtcFormSingleSelect "userFilter.authorities", "userFilter.authorities", authorities, "", "", "", {"" : "All"}/>
+        <@formMacro.rtcFormSingleSelect "userFilter.authorities", "userFilter.authorities", authorities, "", "", "", {"" : ""}/>
         </div>
     </div>
 
@@ -20,8 +20,10 @@
         <@formMacro.rtcFormSingleSelect "userFilter.status", "userFilter.status", statuses, "", "", "", {"" : "All"}/>
     </div>
 </div>
-        <div class="row" style="text-align: right">
-            <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/> or <a class="btn-default"
-         href="<@spring.url "/admin/user/viewAll" />">Reset</a>
-        </div>
 </div>
+        <div class="row" style="text-align: right">
+            <div class="col-md-5">
+            </div>
+            <div class="col-md-5" style="text-align: right"> <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/> or <a class="btn-default"
+         href="<@spring.url "/admin/user/viewAll" />">Reset</a> </div>
+        </div>
