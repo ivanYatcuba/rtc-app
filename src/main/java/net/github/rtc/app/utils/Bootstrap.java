@@ -1,6 +1,5 @@
 package net.github.rtc.app.utils;
 
-import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.DateService;
@@ -62,22 +61,8 @@ public class Bootstrap implements InitializingBean {
         }*/
     }
 
-    public void loadTestNews() {
-        if (newsService.findAll().isEmpty()) {
-            final int count = 6;
-            final News news = new News("Test news", "Test description");
-            news.setCreateDate(dateService.getCurrentDate());
-            news.setAuthor(userService.loadUserByUsername(STRING_ADMIN));
-            for (int i = 0; i < count; i++) {
-                newsService.create(news);
-            }
-
-        }
-    }
-
     @Override
     public void afterPropertiesSet() throws Exception {
         loadTestUsers();
-        loadTestNews();
     }
 }

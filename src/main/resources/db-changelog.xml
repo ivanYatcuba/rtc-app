@@ -5,7 +5,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 
-    <!--<changeSet id="initRoles" author="aninimDeveloper">
+    <!--<changeSet id="initRoles" authorCode="aninimDeveloper">
         <insert tableName="Role" dbms="mysql">
             <column name="name" value="ROLE_ADMIN"/>
             <column name="name" value="ROLE_USER"/>
