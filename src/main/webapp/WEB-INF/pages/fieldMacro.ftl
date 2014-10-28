@@ -109,18 +109,75 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormSingleSelect label path options class="" style="">
+<#macro rtcFormSingleSelect label path options class="" style="" messagePrefix="" noSelection={"" : ""} >
     <@rtcFieldWrapper label path>
-        <@spring.formSingleSelect path options "class = \"form-control "+"${class}"+"\" "+"${style}" />
+    <select id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" class = "form-control ${class}" style="${style}">
+        <#if options?is_hash>
+            <#if noSelection[""] != "">
+                <#--<#assign options = [noSelection] + options />-->
+                <option value=""<@checkSelected noSelection[""]/>>
+                    <#if messagePrefix == "">
+                    ${noSelection[""]?html}
+                    <#else>
+                           <@message "${messagePrefix?html}"/> noSelection[""]?html
+                    </#if>
+                </option>
+            </#if>
+            <#list options?keys as value>
+                <option value=""<@checkSelected value/>>
+                <#-- value="" means that you will receive in controller empty string instead of
+                role, status, author e.t.c. so you should provide in search class chech if (myproperty!= null && !"".equals(myproperty) -->
+                    <#if messagePrefix == "">
+                        ${options[value]?html}
+                    <#else>
+                        <@message "${messagePrefix + options[value]?html}"/>
+                    </#if>
+                </option>
+            </#list>
+        <#else>
+            <#if noSelection[""] != "">
+                <#--if you can - change followind to assignment like /* options = noSelection[""] + options */-->
+                <option value="${noSelection[""]?html}"<@checkSelected noSelection[""]/>>
+                    <#if messagePrefix == "">
+                    ${noSelection[""]?html}
+                    <#else>
+                          <@message "${messagePrefix?html}"/> noSelection[""]?html
+                    </#if>
+                </option>
+                 <#--<#assign options = [noSelection[""]] + options>-->
+            </#if>
+            <#list options as value>
+                <option value="${value?html}"<@checkSelected value/>>
+                    <#if messagePrefix == "">
+                    ${value?html}
+                    <#else>
+                        <@message "${messagePrefix + value?html}"/>
+                    </#if>
+                </option>
+            </#list>
+        </#if>
+    </select>
     </@rtcFieldWrapper>
 </#macro>
 
-
-
-<#macro rtcFormMultiSelect label path options class="" style="">
-    <@rtcFieldWrapper label path>
-        <@spring.formMultiSelect path options "class = \"form-control "+"${class}"+"\" "+"${style}" />
-    </@rtcFieldWrapper>
+<#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="">
+        <@rtcFieldWrapper label path>
+        <select multiple="multiple"
+                id="${status.expression?replace('[','')?replace(']','')}"
+                name="${status.expression}"
+                class = "form-control ${class}"  style = "${style}">
+            <#list options as value>
+                <#assign isSelected = contains(status.actualValue?default([""]), value)>
+                <option value="${value}"<#if isSelected>selected="selected"</#if>>
+                    <#if messagePrefix == "">
+                        ${value?html}
+                    <#else>
+                        <@message "${messagePrefix + value?html}"/>
+                    </#if>
+                </option>
+            </#list>
+        </select>
+        </@rtcFieldWrapper>
 </#macro>
 
 <#macro rtcFormTextarea label path class="" style="">
@@ -188,48 +245,6 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormSingleSelect label path options attributes="" messagePrefix="">
-<@rtcFieldWrapper label path>
-    <select id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" ${attributes}>
-        <#if options?is_hash>
-            <#list options?keys as value>
-                <option value="${value?html}"<@checkSelected value/>>
-                    <#if messagePrefix == "">
-                        ${options[value]?html}
-                    <#else>
-                        <@message "${messagePrefix + options[value]?html}"/>
-                    </#if>
-                </option>
-            </#list>
-        <#else>
-            <#list options as value>
-                <option value="${value?html}"<@checkSelected value/>>
-                    <#if messagePrefix == "">
-                    ${value?html}
-                    <#else>
-                        <@message "${messagePrefix + value?html}"/>
-                    </#if>
-                </option>
-            </#list>
-        </#if>
-    </select>
-</@rtcFieldWrapper>
-</#macro>
-
-
-<#macro rtcFormMultiSelect label path options attributes="">
-    <@rtcFieldWrapper label path>
-        <select multiple="multiple"
-                id="${status.expression?replace('[','')?replace(']','')}"
-                name="${status.expression}" ${attributes}>
-            <#list options as value>
-                <#assign isSelected = contains(status.actualValue?default([""]), value)>
-                <option value="${value}"<#if isSelected>selected="selected"</#if>>${value}</option>
-            </#list>
-        </select>
-    </@rtcFieldWrapper>
-</#macro>
-
 <#macro rtcFormTagsInput label path attributes="">
     <@rtcFieldWrapper label path>
         <@formHiddenInput path attributes/>
@@ -246,11 +261,12 @@
 </#macro>
 
 
-<#macro formDateSearch pathSingleSelect pathDatepicker attributes="">
-    <@rtcFieldWrapper pathDatepicker pathSingleSelect/>
-    <#assign seq = ["=", "<", ">"]>
-    <@rtcFormSingleSelect pathDatepicker pathDatepicker seq attributes/>
-    <@rtcFormDateField pathDatepicker attributes/>
+<#macro formDateSearch pathSingleSelect pathDatepicker class="" style="">
+<div class="form-group">
+<label for="compare" class="control-label col-md-3" ><@spring.message pathDatepicker/></label>
+  <div id="compare"class="col-md-2"><@formSingleSelect pathSingleSelect, ["=", "<", ">"], 'class=form-control'/></div>
+    <div class="col-md-3"><@formDatepicker pathDatepicker 'class=form-control'/></div>
+</div>
 </#macro>
 
 
@@ -282,107 +298,4 @@
     });
 </script>
 </#macro>
-
-
-<#macro rtcFormPagination switchUrl>
-<div id="navigation">
-    <#if startPage??>
-        <div class="row" style="margin-right: 0px">
-            <ul class="pagination" style="margin: 0px;">
-                <li><a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a></li>
-                <#if currentPage &gt; startPage+1>
-                <#-- -2 -->
-                    <#if currentPage < lastPage-1 && currentPage &gt; 0>
-                    <#-- -2 +2 -->
-                        <#list currentPage-2..currentPage+2 as i>
-                            <#if currentPage == i>
-                                <li class="active"><a href="#">${i}</a></li>
-                            <#else>
-                                <#if i<=lastPage && i &gt; startPage || i==startPage>
-                                    <li><a href="#" onclick="switchPage(${i})">${i}</a></li>
-                                </#if>
-                            </#if>
-                        </#list>
-                    <#else>
-                        <#if currentPage < lastPage <#-- currentPage &gt; 0 --> >
-                        <#-- -3 +1 -->
-                            <#list currentPage-3..currentPage+1 as i>
-                                <#if currentPage == i>
-                                    <li class="active"><a href="#">${i}</a></li>
-                                <#else>
-                                    <#if i<=lastPage && i &gt; startPage || i==startPage>
-                                        <li><a href="#" onclick="switchPage(${i})">${i}</a></li>
-                                    </#if>
-                                </#if>
-                            </#list>
-                        <#else>
-                        <#-- -4 0 -->
-                            <#list currentPage-4..currentPage as i>
-                                <#if currentPage == i>
-                                    <li class="active"><a href="#">${i}</a></li>
-                                <#else>
-                                    <#if i<=lastPage && i &gt; startPage || i==startPage>
-                                        <li><a href="#" onclick="switchPage(${i})">${i}</a></li>
-                                    </#if>
-                                </#if>
-                            </#list>
-                        </#if>
-                    </#if>
-                <#else>
-                    <#if currentPage &gt; startPage>
-                    <#-- -1 +3 -->
-                        <#list currentPage-1..currentPage+3 as i>
-                            <#if currentPage == i>
-                                <li class="active"><a href="#">${i}</a></li>
-                            <#else>
-                                <#if i<=lastPage && i &gt; startPage || i==startPage>
-                                    <li><a href="#" onclick="switchPage(${i})">${i}</a></li>
-                                </#if>
-                            </#if>
-                        </#list>
-                    <#else>
-                    <#-- 0 +4-->
-                        <#list currentPage..currentPage+4 as i>
-                            <#if currentPage == i>
-                                <li class="active"><a href="#">${i}</a></li>
-                            <#else>
-                                <#if i<=lastPage && i &gt; startPage || i==startPage>
-                                    <li><a href="#" onclick="switchPage(${i})">${i}</a></li>
-                                </#if>
-                            </#if>
-                        </#list>
-                    </#if>
-                </#if>
-                <li><a href="#" onclick="switchPage(${lastPage})">&nbsp&raquo;</a></li>
-            </ul>
-        </div>
-    </#if>
-</div>
-
-<script>
-    function switchPage(page) {
-        $.ajax({
-            type: "POST",
-            url: "<@spring.url "${switchUrl}" />",
-            data: {   page: page},
-            success: function (result) {
-                var str = result;
-                var live_str = $('<div>', {html: str});
-                var nav = live_str.find('#navigation').html();
-                var data = live_str.find('#data').html();
-                $('#navigation').html(nav);
-                $('#data').html(data);
-            }, error: function (xhr, status, error) {
-                console.error()
-                var err = eval("(" + xhr.responseText + ")");
-                alert(err.Message);
-            }
-        });
-    }
-</script>
-</#macro>
-
-
-
-
 
