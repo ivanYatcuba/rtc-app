@@ -1,13 +1,19 @@
 package net.github.rtc.app.model.course;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by dell on 7/22/14.
  */
 public enum CourseType {
-    QA, DEV, BA;
+    QA("QA"), DEV("DEV"), BA("BA");
+
+    private String code;
+
+    CourseType(String code) {
+        this.code = code;
+    }
 
     @Override
     public String toString() {
@@ -29,11 +35,12 @@ public enum CourseType {
         return name;
     }
 
-    public static List<String> findAll() {
-        final List<String> res = new ArrayList<>();
-        for (final CourseType type : CourseType.values()) {
-            res.add(type.name());
-        } return res;
+    public static List findAll() {
+        return Arrays.asList(CourseType.values());
+    }
+
+    public String getCode() {
+        return this.code;
     }
 }
 

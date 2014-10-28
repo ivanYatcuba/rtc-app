@@ -102,7 +102,6 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     private String gender;
 
     @Column
-    @ForExport("Photo")
     private String photo;
 
     @Column
@@ -400,5 +399,11 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     public String shortString() {
         return new StringBuilder(this.name).append(STRING_SPACE).append(
           this.surname).append(STRING_SPACE).append(this.email).toString();
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder(this.name).append(STRING_SPACE).append(
+                this.surname).toString();
     }
 }

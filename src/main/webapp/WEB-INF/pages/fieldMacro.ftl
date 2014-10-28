@@ -245,6 +245,48 @@
     </@rtcFieldWrapper>
 </#macro>
 
+<#macro rtcFormSingleSelect label path options attributes="" messagePrefix="">
+<@rtcFieldWrapper label path>
+    <select id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" ${attributes}>
+        <#if options?is_hash>
+            <#list options?keys as value>
+                <option value="${value?html}"<@checkSelected value/>>
+                    <#if messagePrefix == "">
+                        ${options[value]?html}
+                    <#else>
+                        <@message "${messagePrefix + options[value]?html}"/>
+                    </#if>
+                </option>
+            </#list>
+        <#else>
+            <#list options as value>
+                <option value="${value?html}"<@checkSelected value/>>
+                    <#if messagePrefix == "">
+                    ${value?html}
+                    <#else>
+                        <@message "${messagePrefix + value?html}"/>
+                    </#if>
+                </option>
+            </#list>
+        </#if>
+    </select>
+</@rtcFieldWrapper>
+</#macro>
+
+
+<#macro rtcFormMultiSelect label path options attributes="">
+    <@rtcFieldWrapper label path>
+        <select multiple="multiple"
+                id="${status.expression?replace('[','')?replace(']','')}"
+                name="${status.expression}" ${attributes}>
+            <#list options as value>
+                <#assign isSelected = contains(status.actualValue?default([""]), value)>
+                <option value="${value}"<#if isSelected>selected="selected"</#if>>${value}</option>
+            </#list>
+        </select>
+    </@rtcFieldWrapper>
+</#macro>
+
 <#macro rtcFormTagsInput label path attributes="">
     <@rtcFieldWrapper label path>
         <@formHiddenInput path attributes/>

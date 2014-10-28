@@ -15,7 +15,7 @@
         <#list news as news>
         <tr>
             <td>
-                <p>${news.title!" "}</p>
+                <a href="<@spring.url "/admin/news/${news.code}" />">${news.title}</a>
             </td>
             <#if (news.author)??>
                 <td>
@@ -49,10 +49,10 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Regular link</a></li>
-                        <li role="presentation" class="disabled"><a role="menuitem" tabindex="-1" href="#">Disabled
-                            link</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another link</a></li>
+                        <#if news.status == "DRAFT" >
+                            <li id="publicationLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/news/publish/${news.code}'/>">Publish</a></li>
+                        </#if>
+                        <li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/news/delete/${news.code}'/>">Delete</a></li>
                     </ul>
                 </div>
             </td>
@@ -73,3 +73,4 @@
     <@datatables.addPagination/>
     </div>
 </div>
+

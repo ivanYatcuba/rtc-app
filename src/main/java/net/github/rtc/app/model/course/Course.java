@@ -5,6 +5,7 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.*;
 import net.github.rtc.util.annotation.validation.Number;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -49,6 +50,8 @@ public class Course extends AbstractPersistenceObject implements Serializable {
             joinColumns = @JoinColumn(name = "course_id"))
     @Enumerated(EnumType.STRING)
     @ForExport("Category")
+    @Fetch(FetchMode.SELECT)
+    @BatchSize(size = 1)
     private Set<CourseType> types;
     @Required
     @Temporal(TemporalType.DATE)
@@ -176,6 +179,10 @@ public class Course extends AbstractPersistenceObject implements Serializable {
 
     public void setId(final long id) {
         this.id = id;
+    }
+
+    public boolean isPublished() {
+        return this.status == CourseStatus.PUBLISHED;
     }
 
     @Override
