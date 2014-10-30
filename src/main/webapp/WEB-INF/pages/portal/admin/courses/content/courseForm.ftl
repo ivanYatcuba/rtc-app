@@ -13,26 +13,8 @@
         <@formMacro.rtcFormTextInput "course.capacity" "course.capacity"  "input-small required" 'style="width:50px;" onkeydown="return isNumber(event);" size="2" maxlength="2"' />
     </div>
     <div class="col-md-6">
-        <#--<@formMacro.rtcFormTextInput "course.startDate" "course.startDate" "input-medium required" />-->
-        <#--<@formMacro.rtcFormTextInput "course.endDate" "course.endDate" "input-medium required" />-->
-        <@spring.bind "course.startDate"/>
-            <div class="form-group">
-                <label class="control-label col-md-3">
-                <@spring.message "course.startDate"/>
-                </label>
-                <div class="col-md-5">
-                <@spring.formInput "course.startDate" "input-medium required"/>
-                </div>
-            </div>
-        <@spring.bind "course.endDate"/>
-            <div class="form-group">
-                <label class="control-label col-md-3">
-                <@spring.message "course.endDate"/>
-                </label>
-                <div class="col-md-5">
-                <@spring.formInput "course.endDate" "input-medium required"/>
-                </div>
-            </div>
+        <@formMacro.rtcFormTextInput "course.startDate" "course.startDate" "input-medium required"  />
+        <@formMacro.rtcFormTextInput  "course.endDate" "course.endDate" "input-medium required" />
         <@formMacro.rtcFormTagsInput "course.tags" "course.tags"/>
     </div>
 </div>
@@ -56,41 +38,38 @@
         <div class="col-md-10">
             <div class="form-group checkbox">
                 <label class="control-label col-md-2"></label>
-                <label class = "col-md-10 style="padding-top: 7px">
-                    <input type="checkbox">Publish as news
+                <label class = "col-md-10" style="padding-top: 7px">
+                    Publish as news
                 </label>
+                <input type="checkbox">
             </div>
         </div>
     </div>
 </#if>
 
-<#--<#macro expertMultiSelect>-->
-    <#--<#assign exp = []>-->
-    <#--<#if experts??>-->
-        <#--<#list experts as expert>-->
-            <#--<#if !expert.isForRemoval()>-->
-                <#--<#assign exp = exp + [ expert ] />-->
-            <#--</#if>-->
-        <#--</#list>-->
-        <#--<@formMacro.rtcFormMultiSelect "filterCourse.experts" "filterCourse.experts" exp 'style="width:100%;"'/>-->
-    <#--</#if>-->
-<#--</#macro>-->
+
 <hr>
 &nbsp;
-<#--<@formMacro.rtcFormValidation formName="courseForm" jsonRules="${validationRules}" />-->
-<@formMacro.rtcFormValidation formName="courseForm" jsonRules="${validationRules}" />
 <script type="text/javascript"
         src="<@spring.url'/resources/js/pages/courseForm.js'/>"></script>
 <script>
     $(function () {
-        prepareCourseFormPage("<@spring.url "/admin/user/expertUsers"/>");
-    <#if course.experts??>
-        <#assign i = 0>
-        <#list course.experts as f>
-            addExpert();
-            setFieldSelection(${i}, "${f.name}" + " " + "${f.surname}" + " " + "${f.email}");
-            <#assign i = i+1>
-        </#list>
-    </#if>
+
+        $("#endDate").datepicker({
+            dateFormat: "dd.mm.yy", minDate: 0
+        });
+        $("#endDate").attr('readonly', 'readonly');
+        $("#startDate").datepicker({
+            dateFormat: "dd.mm.yy", minDate: 0,
+            onSelect: function (date) {
+                var date1 = $('#startDate').datepicker('getDate');
+                var date = new Date(Date.parse(date1));
+                date.setDate(date.getDate() + 1);
+                var newDate = date.toDateString();
+                newDate = new Date(Date.parse(newDate));
+                $('#endDate').datepicker("option", "minDate", newDate);
+            }});
+        $("#startDate").attr('readonly', 'readonly');
+
     });
 </script>

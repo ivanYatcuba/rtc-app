@@ -162,10 +162,23 @@
 
 <#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="">
         <@rtcFieldWrapper label path>
+
         <select multiple="multiple"
                 id="${status.expression?replace('[','')?replace(']','')}"
                 name="${status.expression}"
                 class = "form-control ${class}"  style = "${style}">
+            <#if options?is_hash>
+                <#list options?keys as value>
+                    <option value="${value?html}"<@checkSelected value/>>
+                        <#if messagePrefix == "">
+                            ${options[value]?html}
+                        <#else>
+                            <@message "${messagePrefix + options[value]?html}"/>
+                        </#if>
+                    </option>
+                </#list>
+            <#else>
+
             <#list options as value>
                 <#assign isSelected = contains(status.actualValue?default([""]), value)>
                 <option value="${value}"<#if isSelected>selected="selected"</#if>>
@@ -176,6 +189,7 @@
                     </#if>
                 </option>
             </#list>
+            </#if>
         </select>
         </@rtcFieldWrapper>
 </#macro>

@@ -26,6 +26,7 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     private static final int DESCRIPTION_LENGTH = 255;
     private static final int PRIMARY_LENGTH = 50;
     private static final int DEFAULT_CAPACITY = 10;
+
     @Required
     @Number
     @Min(1)
@@ -82,8 +83,8 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "courses_experts",
       joinColumns = { @JoinColumn(name = "expertId") },
-      inverseJoinColumns = { @JoinColumn(name = "courseId") })
-    @ForExport(value = "Experts")//, inculdeField = {"Author Email"})
+      inverseJoinColumns = { @JoinColumn(name = "id") })
+    @ForExport(value = "Experts")
     private Set<User> experts;
 
     public Course() {
