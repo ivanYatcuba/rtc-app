@@ -153,7 +153,7 @@ public class CoursesController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute(STRING_COURSE) final Course course) {
         courseService.create(course);
-        return "redirect:/admin/course/";
+        return "redirect: view/"+course.getCode();
     }
 
     /**

@@ -6,6 +6,9 @@ import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.util.annotation.validation.Maxlength;
 import net.github.rtc.util.annotation.validation.Required;
 import net.github.rtc.util.annotation.validation.Validatable;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -39,6 +42,8 @@ public class ReportDetails extends AbstractPersistenceObject {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "ReportField",
       joinColumns = @JoinColumn(name = "report_id"))
+    @Fetch(FetchMode.SELECT)
+    @BatchSize(size = 1)
     private List<String> fields;
 
     @Temporal(TemporalType.TIMESTAMP)
