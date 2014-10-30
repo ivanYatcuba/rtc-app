@@ -25,5 +25,5 @@
             <div class="col-md-5">
             </div>
             <div class="col-md-5" style="text-align: right"> <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/> or <a class="btn-default"
-         href="<@spring.url "/admin/user/viewAll" />">Reset</a> </div>
+         href="<@spring.url "/admin/user/filter" />">Reset</a> </div>
         </div>
