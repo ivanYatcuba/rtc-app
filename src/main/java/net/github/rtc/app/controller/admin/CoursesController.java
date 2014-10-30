@@ -45,6 +45,8 @@ public class CoursesController {
     private static final String STRING_ADMIN = "admin";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_EXPERTS = "experts";
+    private static final String VIEW = "view/";
+    private static final String REDIRECT1 = "redirect: ";
     @Autowired
     private CourseService courseService;
     @Autowired
@@ -122,7 +124,7 @@ public class CoursesController {
      * @param courseCode course code
      * @return modelAndView("admin/courses/course")
      */
-    @RequestMapping(value = "view/{courseCode}", method = RequestMethod.GET)
+    @RequestMapping(value = VIEW + "{courseCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable final String courseCode) {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/courseContent");
         final Course course = courseService.findByCode(courseCode);
@@ -153,7 +155,7 @@ public class CoursesController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute(STRING_COURSE) final Course course) {
         courseService.create(course);
-        return "redirect: view/"+course.getCode();
+        return REDIRECT1 + VIEW + course.getCode();
     }
 
     /**
@@ -180,7 +182,7 @@ public class CoursesController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@ModelAttribute(STRING_COURSE) final Course course) {
         courseService.update(course);
-        return "redirect: view/" + course.getCode();
+        return REDIRECT1 + VIEW + course.getCode();
     }
 
     /**
