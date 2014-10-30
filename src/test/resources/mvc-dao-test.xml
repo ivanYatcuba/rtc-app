@@ -13,7 +13,11 @@
         >
 
     <context:component-scan
-            base-package=" net.github.rtc.app.dao, net.github.rtc.app.utils.upload"/>
+            base-package=" net.github.rtc.app, net.github.rtc.util"/>
+
+    <!--Import spring settings from util-->
+    <import resource="classpath:spring-config.xml"/>
+    <import resource="classpath:/beans.xml"/>
 
     <!--Data source config-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -44,11 +48,4 @@
 
     <!-- Activates annotation based transaction management -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
-
-    <!--<bean id="flyway" class="com.googlecode.flyway.core.Flyway" init-method="migrate">
-        <property name="dataSource" ref="dataSource" />
-        <property name="cleanOnValidationError" value="false" />
-        <property name="initOnMigrate" value="true" />
-        <property name="sqlMigrationSuffix" value=".ddl" />
-    </bean>-->
 </beans>

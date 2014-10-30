@@ -253,12 +253,6 @@
             <artifactId>h2</artifactId>
             <version>1.4.182</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.flyway</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>2.3.1</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -303,9 +297,20 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.7</version>
                 <configuration>
-                    <target name="copy findbugs report to webapp dir">
+                    <target name="copy findbugs and cobertura reports">
                         <copy file="${project.build.directory}/findbugs/findbugsXml.html"
                               tofile="${project.basedir}/src/main/webapp/WEB-INF/pages/findbugsXml.ftl"/>
+
+                        <copy todir="${project.basedir}/src/main/webapp/resources/pages/cobertura">
+                            <fileset dir="${project.build.directory}/site/cobertura">
+                                <include name="*.html"/>
+                            </fileset>
+                        </copy>
+                        <copy todir="${project.basedir}/src/main/webapp/resources/pages/cobertura/css">
+                            <fileset dir="${project.build.directory}/site/cobertura/css">
+                                <include name="*.css"/>
+                            </fileset>
+                        </copy>
                     </target>
                 </configuration>
             </plugin>
@@ -373,6 +378,16 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.6</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.6</version>
                 <configuration>
                     <formats>
                         <format>html</format>
@@ -381,5 +396,5 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
+    </reporting>
 </project>
