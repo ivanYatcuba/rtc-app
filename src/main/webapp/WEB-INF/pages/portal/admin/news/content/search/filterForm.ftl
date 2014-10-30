@@ -52,5 +52,8 @@
             var authorId = mapAdminDataId[selectedValue];
             $("#authorId").attr("value",authorId);
         })
+        $("#autoSelectInput").on("change", function(){
+                $("#authorId").attr("value",null);
+        })
     });
 </script>
