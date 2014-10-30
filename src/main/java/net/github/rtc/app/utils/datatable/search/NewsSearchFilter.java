@@ -4,9 +4,6 @@ import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 import java.util.Date;
 
@@ -15,11 +12,10 @@ public class NewsSearchFilter extends AbstractSearchCommand {
     private static final String STRING_PERCENT = "%";
     private static final String STRING_CREATE_DATE = "createDate";
     private static final String STRING_AUTHOR = "author";
-    private static Logger log = LoggerFactory.getLogger(NewsSearchFilter.class.getName());
 
     private String title;
 
-    private String authorData;
+    private Long authorId;
 
     private NewsStatus status = NewsStatus.ALL;
 
@@ -53,11 +49,9 @@ public class NewsSearchFilter extends AbstractSearchCommand {
             criteria.add(Restrictions.eq("status", status));
         }
 
-        if (authorData != null && !("").equals(authorData)) {
-            final String[] authorDataList  = authorData.split(" ");
-            final String email = authorDataList[2];
+        if (authorId != null) {
             criteria.createAlias(STRING_AUTHOR, STRING_AUTHOR);
-            criteria.add(Restrictions.eq("author.email", email));
+            criteria.add(Restrictions.eq("author.id", authorId));
         }
         return criteria;
     }
@@ -70,12 +64,12 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         this.title = title;
     }
 
-    public String getAuthorData() {
-        return authorData;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthorData(String authorData) {
-        this.authorData = authorData;
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
     public NewsStatus getStatus() {
