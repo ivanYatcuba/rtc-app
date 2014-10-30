@@ -83,7 +83,7 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "courses_experts",
       joinColumns = { @JoinColumn(name = "expertId") },
-      inverseJoinColumns = { @JoinColumn(name = "id") })
+      inverseJoinColumns = { @JoinColumn(name = "courseId") })
     @ForExport(value = "Experts")
     private Set<User> experts;
 
