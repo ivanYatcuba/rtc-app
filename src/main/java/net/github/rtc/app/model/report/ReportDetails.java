@@ -1,6 +1,7 @@
 package net.github.rtc.app.model.report;
 
 
+import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.util.annotation.validation.Maxlength;
 import net.github.rtc.util.annotation.validation.Required;
@@ -17,20 +18,13 @@ import java.util.List;
  */
 @Entity
 @Validatable
-public class ReportDetails {
+public class ReportDetails extends AbstractPersistenceObject {
     private static final int PRIMARY_LENGTH = 50;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
 
     @Column
     @Required
     @Maxlength(PRIMARY_LENGTH)
     private String name;
-
-    @Column
-    private String code;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -49,22 +43,6 @@ public class ReportDetails {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(final String code) {
-        this.code = code;
-    }
 
     public String getName() {
         return name;

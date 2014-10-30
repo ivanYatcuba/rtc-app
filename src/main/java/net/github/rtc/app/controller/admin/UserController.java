@@ -4,7 +4,7 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.upload.FileUpload;
+import net.github.rtc.app.utils.files.upload.FileUpload;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
@@ -143,11 +143,11 @@ public class UserController {
     @RequestMapping(value = "/getAdmins", method = RequestMethod.POST)
     public
     @ResponseBody
-    List<String> getAllAdmins() {
-        final List<String> results = new ArrayList<>();
+    Map<String, Long> getAdminMapDataId() {
+        final Map<String, Long> results = new HashMap<>();
         final List<User> admins = userService.getUserByRole(RoleType.ROLE_ADMIN);
         for (final User admin : admins) {
-            results.add(admin.shortString());
+            results.put(admin.shortString(), admin.getId());
         }
         return results;
     }
