@@ -1,13 +1,10 @@
 <html>
-<#import "../spring.ftl" as spring/>
+<#import 'spring.ftl' as spring/>
 <head>
-    <#--<link href="<@spring.url'/resources/css/bootstrap.css'/>"-->
-          <#--rel="stylesheet"/>-->
     <link href="<@spring.url'/resources/css/bootstrap.min.css'/>"
           rel="stylesheet"/>
-    <link href="<@spring.url'/resources/css/welcomePage.css'/>"
+    <link href="<@spring.url'/resources/css/application.css'/>"
           rel="stylesheet"/>
-    <link href="<@spring.url'/resources/css/carousel.css'/>" rel="stylesheet"/>
 </head>
 
 <body>

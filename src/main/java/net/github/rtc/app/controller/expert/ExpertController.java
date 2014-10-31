@@ -60,9 +60,10 @@ public class ExpertController {
                 }
             }
         }
+        final String name = SecurityContextHolder
+                .getContext().getAuthentication().getName();
         final User user
-                = userService.loadUserByUsername(SecurityContextHolder
-                .getContext().getAuthentication().getName());
+                = userService.loadUserByUsername(name);
         mav.addObject(STRING_USER, user);
         mav.addObject("requests", requestsList);
         return mav;
