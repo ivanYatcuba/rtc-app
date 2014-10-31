@@ -29,10 +29,6 @@
 
     </div>
 
-<#--<input type="file" accept="image/*" name="uploadPhoto" id="uploadPhoto"  onchange="showMyImage(this)" />-->
-<#--<br/>-->
-<#--<img id="Mphoto"  src="/PathToPhotos/${user.photo}"  class="round-image" alt="image"/>-->
-
     <div class="col-md-6">
         <div>
         <#if user.photo??>
@@ -47,7 +43,8 @@
             <div class="col-md-6">
                 <div style="margin-left: 10px" class="fileUpload btn-link">
                     <span><u>Upload</u></span>
-                    <input type="file" accept="image/*"  onchange="showMyImage(this)" name="uploadPhoto" id="uploadPhoto" class="upload" accept="image/*"  onchange="showMyImage(this)"  ><br/>
+                    <input type="file" accept="image/*"  onchange="showMyImage(this)"
+                           name="uploadPhoto" id="uploadPhoto" class="upload"><br/>
                 </div>
             </div>
         </div>
@@ -166,11 +163,11 @@
 
 <hr/>
 
-<div class="controls">
-    <label for="check"></label>
-    <input id="check"
-           name="fff" type="checkbox" value="false"
-           style="margin: 0px 0px 0px;">  <@spring.message "user.active"/>
+<div class="row">
+<div class="col-md-6">
+        <input id="ifActive" name="ifActive" type="checkbox" <#if user.isActive()> checked = "checked" </#if>>
+            <@spring.message "user.active"/>
+</div>
 </div>
 
 <hr/>
@@ -179,11 +176,13 @@
 
 <script type="text/javascript" charset="utf8"
         src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
+
 <script>
     $(function () {
         addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")
     });
 </script>
+
 
 <script type="text/javascript">
 
@@ -193,7 +192,7 @@
         var url = fileInput.value;
         var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
 
-        if ((ext != "jpg")) {return;}
+        if ((ext != "jpg")) {fileInput.empty; return;}
 
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
