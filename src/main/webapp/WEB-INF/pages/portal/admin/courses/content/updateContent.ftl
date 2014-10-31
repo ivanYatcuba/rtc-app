@@ -6,5 +6,5 @@
     <@spring.formHiddenInput "course.status" />
     <@spring.formHiddenInput "course.publishDate" />
     <#include "courseForm.ftl" />
-    <@formMacro.rtcSubmit "Save" "Cancel" "/admin/course/viewAll"/>
+    <@formMacro.rtcSubmit "Save" "Cancel" "/admin/course/view/${course.code}"/>
 </@formMacro.rtcForm>
