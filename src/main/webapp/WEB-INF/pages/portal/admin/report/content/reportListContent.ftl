@@ -1,7 +1,6 @@
 <script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
 <h3 class="page-header"><@spring.message "report.list"/></h3><br/>
 
-<@rtcmacros.addPagination "/admin/export/viewAll/" />
 <table id="data" width="100%" class="table-bordered table">
     <tr bgcolor="#d3d3d3" style="font-weight:bold">
         <td>Name</td>
