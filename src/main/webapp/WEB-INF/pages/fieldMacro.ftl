@@ -1,7 +1,7 @@
 <#ftl strip_whitespace=true>
 <#import "/spring.ftl" as spring/>
-<#--<#include "/spring.ftl"/>-->
-<#include "rtcmacroses.ftl"/>
+<#include "/spring.ftl"/>
+<#--<#include "rtcmacroses.ftl"/>-->
 
 <#macro rtcIncludeLink>
 <link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
@@ -147,7 +147,6 @@
 
 <#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="">
         <@rtcFieldWrapper label path>
-
         <select multiple="multiple"
                 <#if status.expression??>id="${status.expression?replace('[','')?replace(']','')}"</#if>
                 name="${status.expression!""}"
@@ -244,18 +243,35 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#--<#macro rtcFormMultiSelect label path options attributes="">-->
-    <#--<@rtcFieldWrapper label path>-->
-        <#--<select multiple="multiple"-->
-                <#--id="${status.expression?replace('[','')?replace(']','')}"-->
-                <#--name="${status.expression}" ${attributes}>-->
-            <#--<#list options as value>-->
-                <#--<#assign isSelected = contains(status.actualValue?default([""]), value)>-->
-                <#--<option value="${value}"<#if isSelected>selected="selected"</#if>>${value}</option>-->
-            <#--</#list>-->
-        <#--</select>-->
-    <#--</@rtcFieldWrapper>-->
-<#--</#macro>-->
+<#macro rtcDateInput path attributes="">
+    <@formInput path attributes/>
+<script type="text/javascript">
+
+    $(function () {
+        $("#${status.expression?replace('[','')?replace(']','')}").datepicker(
+                {
+                    dateFormat: "dd.mm.yy"
+
+                    <#if "${status.expression?replace('[','')?replace(']','')}"=="birthDate">
+                        , changeMonth: true,
+                        changeYear: true,
+                        yearRange: "-100:+0",
+                        maxDate: '-1d'
+                    </#if>
+                }
+        );
+        $("#${status.expression?replace('[','')?replace(']','')}").attr('readonly', 'readonly');
+    });
+</script>
+</#macro>
+
+<#macro formDateSearch pathSingleSelect pathDatepicker class="" style="">
+<div class="form-group">
+    <label for="compare" class="control-label col-md-3" ><@spring.message pathDatepicker/></label>
+    <div id="compare"class="col-md-2"><@formSingleSelect pathSingleSelect, ["=", "<", ">"], 'class=form-control'/></div>
+    <div class="col-md-3"><@rtcDateInput pathDatepicker 'class=form-control'/></div>
+</div>
+</#macro>
 
 <#macro rtcFormTagsInput label path attributes="">
     <@rtcFieldWrapper label path>
@@ -271,16 +287,6 @@
         </script>
     </@rtcFieldWrapper>
 </#macro>
-
-
-<#macro formDateSearch pathSingleSelect pathDatepicker class="" style="">
-<div class="form-group">
-<label for="compare" class="control-label col-md-3" ><@spring.message pathDatepicker/></label>
-  <div id="compare"class="col-md-2"><@formSingleSelect pathSingleSelect, ["=", "<", ">"], 'class=form-control'/></div>
-    <div class="col-md-3"><@formDatepicker pathDatepicker 'class=form-control'/></div>
-</div>
-</#macro>
-
 
 <#macro rtcFormValidation formName jsonRules >
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
