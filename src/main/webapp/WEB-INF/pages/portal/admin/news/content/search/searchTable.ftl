@@ -12,6 +12,7 @@
         </tr>
         </thead>
         <tbody>
+        <#if news??>
         <#list news as news>
         <tr>
             <td>
@@ -58,6 +59,7 @@
             </td>
         </tr>
         </#list>
+        </#if>
         </tbody>
     </table>
 </div>
