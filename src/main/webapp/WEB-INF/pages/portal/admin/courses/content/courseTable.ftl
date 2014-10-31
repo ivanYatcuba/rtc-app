@@ -27,9 +27,9 @@
                     </td>
                     <td style="vertical-align: middle">${course.startDate?date?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
                     <td style="vertical-align: middle">
-                        <#if "${course.status}" == "DRAFT"> <span class="label label-warning">${course.status}</span> </#if>
-                        <#if "${course.status}" == "PUBLISHED"> <span class="label label-success">${course.status}</span> </#if>
-                        <#if "${course.status}" == "ARCHIVED"> <span class="label label-default">${course.status}</span> </#if>
+                        <#if "${course.status}" == "DRAFT"> <span style="display: block" class="label label-warning">${course.status}</span> </#if>
+                        <#if "${course.status}" == "PUBLISHED"> <span style="display: block" class="label label-success">${course.status}</span> </#if>
+                        <#if "${course.status}" == "ARCHIVED"> <span style="display: block" class="label label-default">${course.status}</span> </#if>
                     </td>
                     <td style="vertical-align: middle">
                        <div class="btn-group">

@@ -178,7 +178,7 @@
 <#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="">
         <@rtcFieldWrapper label path>
 
-        <select multiple="multiple"
+        <select multiple="multiple" size="3"
                 <#if status.expression??>id="${status.expression?replace('[','')?replace(']','')}"</#if>
                 name="${status.expression!""}"
                 class = "form-control ${class}"  style = "${style}">
