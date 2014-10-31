@@ -1,4 +1,3 @@
-<#import "../../../rtcmacroses.ftl" as rtcmacros/>
 <script src="<@spring.url'/resources/js/pages/searchPage.js'/>"></script>
 
 <div id="newsFilter" class="filterForm  activeForm" style="width: 100%; float: left;">
