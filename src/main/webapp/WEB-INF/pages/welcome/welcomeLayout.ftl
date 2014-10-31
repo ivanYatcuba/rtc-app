@@ -1,5 +1,5 @@
 <html>
-<#import 'spring.ftl' as spring/>
+<#import "../spring.ftl" as spring/>
 <head>
     <link href="<@spring.url'/resources/css/bootstrap.min.css'/>"
           rel="stylesheet"/>
