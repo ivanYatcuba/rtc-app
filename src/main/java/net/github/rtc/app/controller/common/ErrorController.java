@@ -13,15 +13,14 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class ErrorController {
-
+    public static final String ERROR = "error";
     private static final String STRING_JAVAX = "javax";
     private static final String STRING_DOT_SERVLET = ".servlet";
-
     private static final String ERROR_PAGE = "portal/admin/page/error";
     private static final String ERROR_TTL = "errorTitle";
     private static final String ERROR_MSG = "errorMessage";
     private static final String ERROR_CAS = "errorCause";
-    public static final String ERROR = "error";
+
 
     @RequestMapping("error500")
     public ModelAndView redirectToErrorPage500(final HttpServletRequest request) {
