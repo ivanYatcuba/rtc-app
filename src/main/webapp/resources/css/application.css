@@ -173,13 +173,6 @@ body {
     padding: 0 0 50px;
 }
 
-/* Set the fixed height of the footer here */
-/*#footer {*/
-/*height: 70px;*/
-/*padding-bottom: 10px;*/
-/*background-color: #f5f5f5;*/
-/*}*/
-
 .footerButtons {
     color: inherit;
     text-decoration: inherit;
@@ -226,7 +219,3 @@ body {
 .carousel-control {
     margin-top: 10px;
 }
-
-
-
-
