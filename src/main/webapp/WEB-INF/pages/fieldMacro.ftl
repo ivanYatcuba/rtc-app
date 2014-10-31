@@ -62,13 +62,30 @@
 * @param urlText a text used on link  button
 * @param urlAdress href param for a link
 -->
-<#macro rtcSubmit buttonText urlText urlAdress>
+<#macro rtcSubmit buttonText urlText urlAddress>
     <div class="span2" style="text-align: right">
         <input type="submit" class="btn btn-primary" value="${buttonText}"/> or
-        <a href="<@spring.url "${urlAdress}" />">${urlText}</a>
+        <a href="<@spring.url "${urlAddress}" />">${urlText}</a>
     </div>
 </#macro>
 
+<#macro rtcSubmitDoOrCancel doText doAddress cancelText cancelAddress>
+<div class="span2" style="text-align: right">
+    <a href="<@spring.url "${doAddress}" />">
+        <input type="submit" class="btn btn-primary"
+            <#if doText??>
+                value="<@spring.message "${doText}"/>"
+            <#else>
+                value="Do"
+            </#if>/>
+    </a> or
+    <a href="<@spring.url "${cancelAddress}" />">
+        <#if anotherText??>
+            <@spring.message "${cancelText}"/>
+        <#else>Cancel</#if>
+    </a>
+</div>
+</#macro>
 <#--
 * rtcFormCustomInput
 *
