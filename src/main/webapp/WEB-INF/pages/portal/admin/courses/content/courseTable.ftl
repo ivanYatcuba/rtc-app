@@ -60,6 +60,7 @@
         </table>
     <#--</div>-->
 </div>
+<hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
 <div class="row">
     <div class="col-md-6">
         <a  href="<@spring.url "/admin/course/create" />">
