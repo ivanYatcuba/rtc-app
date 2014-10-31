@@ -1,14 +1,12 @@
 package net.github.rtc.app.utils.datatable.search;
 
 import net.github.rtc.app.model.user.Role;
-import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
 import java.util.List;
 
