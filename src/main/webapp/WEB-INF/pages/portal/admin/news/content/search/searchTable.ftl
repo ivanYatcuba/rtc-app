@@ -15,9 +15,9 @@
         <#if news??>
         <#list news as news>
             <tr style="vertical-align: middle">
-                <td style="vertical-align: middle">
+                <td style="vertical-align: middle; width: 25%">
                 <a href="<@spring.url "/admin/news/${news.code}" />">${news.title}</a>
-            </td>
+                </td>
             <#if (news.author)??>
                 <td style="vertical-align: middle">
                     <p>${news.author.name!" "} ${news.author.surname!" "}</p>
@@ -42,7 +42,7 @@
                 <td style="vertical-align: middle"></td>
             </#if>
 
-                <td style="vertical-align: middle">
+                <td style="width: 15%;vertical-align: middle">
                 <div class="btn-group">
                     <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenu1"
                             data-toggle="dropdown">

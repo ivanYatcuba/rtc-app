@@ -16,23 +16,23 @@
         <#if courses??>
             <#list courses as course>
                 <tr style="vertical-align: middle">
-                    <td style="vertical-align: middle">
+                    <td style="vertical-align: middle; width: 25%">
                         <a href="<@spring.url "/admin/course/view/${course.code}" />">${course.name}</a>
                         <p style="font-family: 'Times New Roman', Times, serif; font-style: italic">${course.types?join(", ")}</p>
                     </td>
-                    <td style="vertical-align: middle">
+                    <td style="vertical-align: middle;">
                         <#list course.experts as expert>
                             <p>&nbsp${expert.name}&nbsp${expert.surname}
                                 &nbsp${expert.email}</p>
                         </#list>
                     </td>
-                    <td style="vertical-align: middle">${course.startDate?date?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
-                    <td style="vertical-align: middle">
+                    <td style="vertical-align: middle; width: 25%">${course.startDate?date?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
+                    <td style="vertical-align: middle; width: 15%">
                         <#if "${course.status}" == "DRAFT"> <@formMacro.rtcColorLabel "${course.status}" "label-warning" "course.status."/></#if>
                         <#if "${course.status}" == "PUBLISHED"><@formMacro.rtcColorLabel "${course.status}" "label-success" "course.status."/> </#if>
                         <#if "${course.status}" == "ARCHIVED"> <@formMacro.rtcColorLabel "${course.status}" "label-default" "course.status."/> </#if>
                     </td>
-                    <td style="vertical-align: middle">
+                    <td style="vertical-align: middle; width: 15%">
                        <div class="btn-group">
                          <#if "${course.status}" == "DRAFT">
                          <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
