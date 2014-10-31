@@ -5,7 +5,8 @@
 
 <#macro rtcIncludeLink>
 <link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
-<link href="<@spring.url '/resources/css/application.css'/>" rel="stylesheet" type="text/css"/>
+<link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
+<link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
 <link href="<@spring.url'/resources/css/jquery.tagit.css'/>" rel="stylesheet" type="text/css">
 <link href="<@spring.url'/resources/css/tagit.ui-zendesk.css'/>" rel="stylesheet" type="text/css">
 <link href="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.css'/>" rel="stylesheet" type="text/css">
@@ -63,12 +64,31 @@
 * @param urlAdress href param for a link
 -->
 <#macro rtcSubmit buttonText urlText urlAdress>
-    <div class="span2" style="text-align: right">
+<div class="row">
+    <div class="col-md-offset-8 col-md-3" style="margin-left: 7px">
         <input type="submit" class="btn btn-primary" value="${buttonText}"/> or
-        <a href="<@spring.url "${urlAdress}" />">${urlText}</a>
+        <a href="<@spring.url "${urlAddress}" />">${urlText}</a>
     </div>
+</div>
 </#macro>
 
+<#macro rtcSubmitDoOrCancel doText doAddress cancelText cancelAddress>
+<div class="span2" style="text-align: right">
+    <a href="<@spring.url "${doAddress}" />">
+        <input type="submit" class="btn btn-primary"
+            <#if doText??>
+                value="<@spring.message "${doText}"/>"
+            <#else>
+                value="Do"
+            </#if>/>
+    </a> or
+    <a href="<@spring.url "${cancelAddress}" />">
+        <#if anotherText??>
+            <@spring.message "${cancelText}"/>
+        <#else>Cancel</#if>
+    </a>
+</div>
+</#macro>
 <#--
 * rtcFormCustomInput
 *
@@ -108,17 +128,31 @@
     </@rtcFieldWrapper>
 </#macro>
 
+<#macro rtcFormRadioButtons label path options class="" style="">
+    <@rtcFieldWrapper label path>
+        <@bind path/>
+        <#list options as value>
+            <input type="radio" class="${class}" style="${style}" name="${status.expression}" value="${value}"
+            <@closeTag/>
+            ${value}
+        </#list>
+    </@rtcFieldWrapper>
+</#macro>
+
 <#macro rtcFormSingleSelect label path options class="" style="" messagePrefix="" noSelection={"" : ""} >
     <@rtcFieldWrapper label path>
     <select id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" class = "form-control ${class}" style="${style}">
-        <#if noSelection?is_hash>
-            <#list noSelection?keys as noSelectionKey>
-                <option value="${noSelectionKey}">
-                    ${noSelection[noSelectionKey]}
-                </option>
-            </#list>
-        </#if>
         <#if options?is_hash>
+            <#if noSelection[""] != "">
+                <#--<#assign options = [noSelection] + options />-->
+                <option value=""<@checkSelected noSelection[""]/>>
+                    <#if messagePrefix == "">
+                    ${noSelection[""]?html}
+                    <#else>
+                           <@message "${messagePrefix?html}"/> noSelection[""]?html
+                    </#if>
+                </option>
+            </#if>
             <#list options?keys as value>
                 <option value=""<@checkSelected value/>>
                 <#-- value="" means that you will receive in controller empty string instead of
@@ -131,6 +165,17 @@
                 </option>
             </#list>
         <#else>
+            <#if noSelection[""] != "">
+                <#--if you can - change followind to assignment like /* options = noSelection[""] + options */-->
+                <option value="${noSelection[""]?html}"<@checkSelected noSelection[""]/>>
+                    <#if messagePrefix == "">
+                    ${noSelection[""]?html}
+                    <#else>
+                          <@message "${messagePrefix?html}"/> noSelection[""]?html
+                    </#if>
+                </option>
+                 <#--<#assign options = [noSelection[""]] + options>-->
+            </#if>
             <#list options as value>
                 <option value="${value?html}"<@checkSelected value/>>
                     <#if messagePrefix == "">
@@ -147,6 +192,7 @@
 
 <#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="">
         <@rtcFieldWrapper label path>
+
         <select multiple="multiple"
                 <#if status.expression??>id="${status.expression?replace('[','')?replace(']','')}"</#if>
                 name="${status.expression!""}"
@@ -177,6 +223,28 @@
         </select>
         </@rtcFieldWrapper>
 </#macro>
+
+<#macro rtcFormLabelTextOut label path messagePrefix="">
+<div class="form-group">
+    <label class="control-label col-md-3" >  <@spring.message label /> </label>
+    <#if path??>
+    <#if path? is_sequence>
+
+        <#list path as tmp>
+            <#if  messagePrefix == ""> ${tmp}
+            <#else>  <@spring.message "${messagePrefix}.${tmp}"/>
+            </#if>
+            <#if tmp_has_next>,</#if>
+        </#list>
+
+    <#else>
+    <p class="form-control-static">
+           <#if "${path}"??>${path}<#else>&nbsp</#if>
+    </p>
+    </#if>
+    </#if>
+</div>
+ </#macro>
 
 <#macro rtcFormTextarea label path class="" style="">
     <@rtcFieldWrapper label path>
@@ -269,7 +337,7 @@
 <div class="form-group">
     <label for="compare" class="control-label col-md-3" ><@spring.message pathDatepicker/></label>
     <div id="compare"class="col-md-2"><@formSingleSelect pathSingleSelect, ["=", "<", ">"], 'class=form-control'/></div>
-    <div class="col-md-3"><@rtcDateInput pathDatepicker 'class=form-control'/></div>
+    <div class="col-md-3"><@rtcDateInput  pathDatepicker 'class=form-control'/></div>
 </div>
 </#macro>
 
@@ -287,6 +355,16 @@
         </script>
     </@rtcFieldWrapper>
 </#macro>
+
+
+<#macro formDateSearch pathSingleSelect pathDatepicker class="" style="">
+<div class="form-group">
+<label for="compare" class="control-label col-md-3" ><@spring.message pathDatepicker/></label>
+  <div id="compare"class="col-md-2"><@formSingleSelect pathSingleSelect, ["=", "<", ">"], 'class=form-control'/></div>
+    <div class="col-md-3"><@rtcDateInput pathDatepicker 'class=form-control'/></div>
+</div>
+</#macro>
+
 
 <#macro rtcFormValidation formName jsonRules >
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>

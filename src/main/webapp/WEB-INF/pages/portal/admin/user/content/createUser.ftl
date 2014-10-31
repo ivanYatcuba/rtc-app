@@ -1,24 +1,10 @@
 <div class="row">
     <div class="col-md-6">
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="user.gender"><@spring.message "user.gender"/></label>
-
-            <div class="col-md-4" style="padding-top: 5px">
-            <@spring.bind "user.gender"/>
-                <input type="radio" name="gender" id="optionsRadios1"
-                       value="Male" checked
-                       style="margin: -3px 0px 0px;"> <@spring.message "user.genderM"/>
-                <input type="radio" name="gender" id="optionsRadios2"
-                       value="Female"
-                       style="margin: -3px 0px 0px;"> <@spring.message "user.genderF"/>
-            </div>
-
-        </div>
+    <@formMacro.rtcFormRadioButtons "user.gender" "user.gender", ["Male", "Female"] "required" />
     <@formMacro.rtcFormTextInput  "user.surname" "user.surname" "required" />
     <@formMacro.rtcFormTextInput  "user.name" "user.name" "required" />
     <@formMacro.rtcFormTextInput  "user.middleName" "user.middleName" />
-    <@formMacro.rtcFormDateField  "user.birthDate" "user.birthDate" "input-medium required" />
+    <@formMacro.rtcFormDateField  "user.birthDate" "user.birthDate" "input-normal required" "style='width: 60%'"/>
     </div>
 
     <div class="col-md-6">
@@ -48,7 +34,14 @@
         <@formMacro.rtcFormSingleSelect "user.role" "user.authorities" roles "required" "" "user.role."/>
     </div>
     <div class="col-md-6">
-        <@formMacro.rtcFormPasswordInputWithCheckbox   "user.password" "user.password" "required"/>
+        <@formMacro.rtcFormPasswordInput  "user.password" "user.password" "required"/>
+        <div class="controls">
+            <label class="col-md-3" style="margin-left: 8px" for="showPassword"></label>
+            <input id="showPassword"
+                   onchange="if ($('#password').get(0).type=='password') $('#password').get(0).type='text'; else $('#password').get(0).type='password';"
+                   name="showPassword" type="checkbox" value="false"
+                   style="margin: 0px 0px 0px;">  <@spring.message "user.showPassword"/>
+        </div>
     </div>
 </div>
 <hr/>
@@ -86,20 +79,21 @@
 <hr/>
 
 <div class="row">
-    <div class="col-md-12">
-        <@formMacro.rtcFormTextarea  "user.note" "user.note" "required field input-xlarge field col-lg-12" "rows=\"3\"
-        maxlength=\"255\"
-        width='100%'"/>
+    <div class="col-md-6">
+        <@formMacro.rtcFormTextarea  "user.note" "user.note" "required" "rows='3'
+        maxlength='255'
+        style='width: 370%'"/>
     </div>
 </div>
 
 <hr/>
 
 <div class="row">
-<div class="col-md-6">
+    <div class="col-md-6">
+        <label  class="control-label col-md-3"></label>
         <input id="ifActive" name="ifActive" type="checkbox" <#if user.isActive()> checked = "checked" </#if>>
-            <@spring.message "user.active"/>
-</div>
+        <@spring.message "user.active"/>
+    </div>
 </div>
 
 <hr/>
