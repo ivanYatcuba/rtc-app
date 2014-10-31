@@ -8,7 +8,7 @@ import java.util.List;
  * @author Vladislav Pikus
  */
 public enum RoleType {
-    ROLE_USER("User"), ROLE_ADMIN("Administrator"), ROLE_EXPERT("Expert"), ALL("ALL");
+    ALL("ALL"), ROLE_USER("User"), ROLE_ADMIN("Administrator"), ROLE_EXPERT("Expert");
     private final String roleViewName;
 
     RoleType(final String s) {

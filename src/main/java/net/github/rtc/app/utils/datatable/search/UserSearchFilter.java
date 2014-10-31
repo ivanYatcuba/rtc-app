@@ -96,7 +96,7 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
         }
 
-        if (status != null && !"".equals(status) && !"ALL".equals(status)) {
+        if (status != null && !"".equals(status) && !"All".equals(status)) {
             for (UserStatus userStatus : UserStatus.values()) {
                 if (userStatus.name().equals(status)) {
                     criteria.add(Restrictions.eq("status", userStatus));

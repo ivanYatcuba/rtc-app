@@ -50,6 +50,7 @@ public class Bootstrap implements InitializingBean {
             admin.setAuthorities(
               Arrays.asList(userService.getRoleByType(RoleType.ROLE_ADMIN)));
             admin.setRegisterDate(dateService.getCurrentDate());
+            admin.setGender("Male");
             userService.create(admin);
         }
         /*for (final ReportDetails reportDetails : reportService.getAll()) {

@@ -14,3 +14,4 @@
 **/.settings/
 /target/
 /src/main/webapp/WEB-INF/pages/findbugsXml.ftl
+src/main/webapp/resources/pages

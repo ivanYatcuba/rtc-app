@@ -10,8 +10,8 @@ import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomExpertsEditor;
-import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
+import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -45,7 +45,8 @@ public class CoursesController {
     private static final String STRING_ADMIN = "admin";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_EXPERTS = "experts";
-
+    private static final String VIEW = "view/";
+    private static final String REDIRECT1 = "redirect: ";
     @Autowired
     private CourseService courseService;
     @Autowired
@@ -58,13 +59,12 @@ public class CoursesController {
      *
      * @return modelAndView("admin/courses/courses")
      */
-//    @RequestMapping(method = RequestMethod.GET)
-//    public ModelAndView index() {
-//        final CourseSearchFilter filter = getFilterCourse();
-//        filter.setPage(1);
-//        return switchPage(filter);
-//    }
-
+    //    @RequestMapping(method = RequestMethod.GET)
+    //    public ModelAndView index() {
+    //        final CourseSearchFilter filter = getFilterCourse();
+    //        filter.setPage(1);
+    //        return switchPage(filter);
+    //    }
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView viewAll() {
         final CourseSearchFilter filter = getFilterCourse();
@@ -78,7 +78,6 @@ public class CoursesController {
         mav.addObject(STRING_FILTER_COURSE, filter);
         return mav;
     }
-
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST)
     public
@@ -125,7 +124,7 @@ public class CoursesController {
      * @param courseCode course code
      * @return modelAndView("admin/courses/course")
      */
-    @RequestMapping(value = "view/{courseCode}", method = RequestMethod.GET)
+    @RequestMapping(value = VIEW + "{courseCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable final String courseCode) {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/courseContent");
         final Course course = courseService.findByCode(courseCode);
@@ -141,9 +140,8 @@ public class CoursesController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/createContent");
-        final List<User> experts = userService.getUserByRole(RoleType.ROLE_EXPERT);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course.class));
-        mav.addObject(STRING_EXPERTS, experts);
+        mav.addObject(STRING_EXPERTS, getExpertUsers());
         return mav;
     }
 
@@ -157,7 +155,7 @@ public class CoursesController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute(STRING_COURSE) final Course course) {
         courseService.create(course);
-        return "redirect:/admin/course/";
+        return REDIRECT1 + VIEW + course.getCode();
     }
 
     /**
@@ -171,7 +169,7 @@ public class CoursesController {
         final Course returnCourse = courseService.findByCode(courseCode);
         mav.getModelMap().addAttribute(STRING_COURSE, returnCourse);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course.class));
-        mav.addObject(STRING_EXPERTS, userService.getUserByRole(RoleType.ROLE_EXPERT));
+        mav.addObject(STRING_EXPERTS, getExpertUsers());
         return mav;
     }
 
@@ -184,9 +182,8 @@ public class CoursesController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@ModelAttribute(STRING_COURSE) final Course course) {
         courseService.update(course);
-        return "redirect: view/" + course.getCode();
+        return REDIRECT1 + VIEW + course.getCode();
     }
-
 
     /**
      * Binding course conditions for entry into the form conclusions
@@ -213,8 +210,12 @@ public class CoursesController {
      * @return collection categories
      */
     @ModelAttribute("categories")
-    public Collection<CourseType> getCategories() {
-        return CourseType.findAll();
+    public Map<String, String> getCategories() {
+        final Map<String, String> categories = new HashMap<>();
+        for (CourseType type : CourseType.findAll()) {
+            categories.put(type.name(), type.toString());
+        }
+        return categories;
     }
 
     @ModelAttribute(STRING_STATUSES)
@@ -225,6 +226,14 @@ public class CoursesController {
     @ModelAttribute("currentUser")
     public String getCurrentUser() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    public Map<String, String> getExpertUsers() {
+        final Map<String, String> expertMap = new HashMap<>();
+        for (User u : userService.getUserByRole(RoleType.ROLE_EXPERT)) {
+            expertMap.put(u.getCode(), u.toString());
+        }
+        return expertMap;
     }
 
     @ModelAttribute(STRING_FILTER_COURSE)

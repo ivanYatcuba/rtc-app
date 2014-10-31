@@ -32,11 +32,6 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     @Column
     @ForExport("Capacity")
     private Integer capacity = DEFAULT_CAPACITY;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @ForExport("Id")
-    private long id;
     @Required
     @Minlength(2)
     @Maxlength(PRIMARY_LENGTH)
@@ -44,10 +39,9 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     @ForExport("Name")
     private String name;
     @Required
-
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "CourseTypes",
-            joinColumns = @JoinColumn(name = "course_id"))
+      joinColumns = @JoinColumn(name = "course_id"))
     @Enumerated(EnumType.STRING)
     @ForExport("Category")
     @Fetch(FetchMode.SELECT)
@@ -79,14 +73,13 @@ public class Course extends AbstractPersistenceObject implements Serializable {
       inverseJoinColumns = { @JoinColumn(name = "id") })
     @ForExport("Tags")
     private List<Tag> tags;
-
     @Required
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "courses_experts",
       joinColumns = { @JoinColumn(name = "expertId") },
       inverseJoinColumns = { @JoinColumn(name = "courseId") })
-    @ForExport(value = "Experts")//, inculdeField = {"Author Email"})
+    @ForExport(value = "Experts")
     private Set<User> experts;
 
     public Course() {
@@ -173,14 +166,6 @@ public class Course extends AbstractPersistenceObject implements Serializable {
         this.publishDate = publishDate;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
-    }
-
     public boolean isPublished() {
         return this.status == CourseStatus.PUBLISHED;
     }
@@ -214,22 +199,19 @@ public class Course extends AbstractPersistenceObject implements Serializable {
 
         final Course course = (Course) o;
 
-        if (experts != null ? !experts.equals(
-          course.experts) : course.experts != null) {
+        if (experts != null ? !experts.equals(course.experts) : course.experts != null) {
             return false;
         }
         if (getCode() != null ? !getCode().equals(course.getCode()) : course.getCode() != null) {
             return false;
         }
-        if (endDate != null ? !endDate.equals(
-          course.endDate) : course.endDate != null) {
+        if (endDate != null ? !endDate.equals(course.endDate) : course.endDate != null) {
             return false;
         }
         if (name != null ? !name.equals(course.name) : course.name != null) {
             return false;
         }
-        if (startDate != null ? !startDate.equals(
-          course.startDate) : course.startDate != null) {
+        if (startDate != null ? !startDate.equals(course.startDate) : course.startDate != null) {
             return false;
         }
         if (tags != null ? !tags.equals(course.tags) : course.tags != null) {
@@ -245,33 +227,16 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     @Override
     public int hashCode() {
         int result = getCode() != null ? getCode().hashCode() : 0;
-        result
-          = HASH_CODE_CONSTANT * result + (name != null ? name.hashCode() : 0);
-        result
-          = HASH_CODE_CONSTANT * result + (types != null ? types.hashCode() : 0);
-        result
-          = HASH_CODE_CONSTANT * result + (experts != null ? experts.hashCode(
-        ) : 0);
-        result
-          = HASH_CODE_CONSTANT * result + (startDate != null ? startDate
-          .hashCode() : 0);
-        result
-          = HASH_CODE_CONSTANT * result + (endDate != null ? endDate.hashCode(
-        ) : 0);
-        result
-          = HASH_CODE_CONSTANT * result + (tags != null ? tags.hashCode() : 0);
-        result
-          = HASH_CODE_CONSTANT * result + (status != null ? status.hashCode()
-          : 0);
-        result
-          = HASH_CODE_CONSTANT * result + (description != null ? description
-          .hashCode() : 0);
-        result
-          = HASH_CODE_CONSTANT * result + (publishDate != null ? publishDate
-          .hashCode() : 0);
-        result
-          = HASH_CODE_CONSTANT * result + (capacity != null ? capacity
-          .hashCode() : 0);
+        result = HASH_CODE_CONSTANT * result + (name != null ? name.hashCode() : 0);
+        result = HASH_CODE_CONSTANT * result + (types != null ? types.hashCode() : 0);
+        result = HASH_CODE_CONSTANT * result + (experts != null ? experts.hashCode() : 0);
+        result = HASH_CODE_CONSTANT * result + (startDate != null ? startDate.hashCode() : 0);
+        result = HASH_CODE_CONSTANT * result + (endDate != null ? endDate.hashCode() : 0);
+        result = HASH_CODE_CONSTANT * result + (tags != null ? tags.hashCode() : 0);
+        result = HASH_CODE_CONSTANT * result + (status != null ? status.hashCode() : 0);
+        result = HASH_CODE_CONSTANT * result + (description != null ? description.hashCode() : 0);
+        result = HASH_CODE_CONSTANT * result + (publishDate != null ? publishDate.hashCode() : 0);
+        result = HASH_CODE_CONSTANT * result + (capacity != null ? capacity.hashCode() : 0);
         return result;
     }
 }

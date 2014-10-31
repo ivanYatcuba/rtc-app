@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("tests")
 public class TestCoveregeController {
+
     @RequestMapping(method = RequestMethod.GET)
     String index() {
-        return "findbugsXml";
+        return "redirect:/resources/pages/cobertura/index.html";
     }
 }

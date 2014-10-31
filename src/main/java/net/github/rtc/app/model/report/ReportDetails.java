@@ -1,10 +1,14 @@
 package net.github.rtc.app.model.report;
 
 
+import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.util.annotation.validation.Maxlength;
 import net.github.rtc.util.annotation.validation.Required;
 import net.github.rtc.util.annotation.validation.Validatable;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,20 +21,13 @@ import java.util.List;
  */
 @Entity
 @Validatable
-public class ReportDetails {
+public class ReportDetails extends AbstractPersistenceObject {
     private static final int PRIMARY_LENGTH = 50;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
 
     @Column
     @Required
     @Maxlength(PRIMARY_LENGTH)
     private String name;
-
-    @Column
-    private String code;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -45,26 +42,12 @@ public class ReportDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "ReportField",
       joinColumns = @JoinColumn(name = "report_id"))
+    @Fetch(FetchMode.SELECT)
+    @BatchSize(size = 1)
     private List<String> fields;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(final String code) {
-        this.code = code;
-    }
 
     public String getName() {
         return name;

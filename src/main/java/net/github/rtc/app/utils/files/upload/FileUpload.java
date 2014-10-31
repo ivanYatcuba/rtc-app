@@ -1,9 +1,10 @@
-package net.github.rtc.app.utils.upload;
+package net.github.rtc.app.utils.files.upload;
 
 
 import net.github.rtc.app.exception.ServiceProcessingException;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
@@ -13,7 +14,7 @@ import java.io.File;
  * Created by Daria on 9.10.2014.
  */
 
-@org.springframework.stereotype.Component
+@Component
 public class FileUpload implements java.io.Serializable {
 
     private static final String EXTENTION = ".jpg";

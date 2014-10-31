@@ -26,7 +26,7 @@
         $.ajax({
             type: "POST",
             url: "<@spring.url "${searchUrl}" />",
-            data: $("#filterForm :input").serialize()+"&page="+page,//{page: page},
+            data: $("#filterForm :input ").not("#autoSelectInput").serialize()+"&page="+page,//{page: page},
             success: function (result) {
                 $("#searchTable").html(result)
             }, error: function (xhr, status, error) {

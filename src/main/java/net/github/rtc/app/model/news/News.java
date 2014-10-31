@@ -19,9 +19,6 @@ import java.util.List;
 @Validatable
 public class News extends AbstractPersistenceObject implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
 
     @Required
     @Column
@@ -30,7 +27,7 @@ public class News extends AbstractPersistenceObject implements Serializable {
 
     @OneToOne
 //    @PrimaryKeyJoinColumn
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "author_id")
     private User author;
 
     @Column
@@ -58,14 +55,6 @@ public class News extends AbstractPersistenceObject implements Serializable {
     public News(String title, String description) {
         this.title = title;
         this.description = description;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getTitle() {

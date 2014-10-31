@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Berdniky on 15.10.2014.
@@ -48,7 +50,6 @@ public class SearchController {
     private static final String STRING_COURSES = "courses";
     private static final String STRING_REPORTS = "reports";
     private static final String STRING_REPORT_FILTER = "reportFilter";
-
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -64,7 +65,9 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/newsTable", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView getNewsTable(@ModelAttribute(STRING_NEWS_FILTER) final NewsSearchFilter newsFilter) {
+    public
+    @ResponseBody
+    ModelAndView getNewsTable(@ModelAttribute(STRING_NEWS_FILTER) final NewsSearchFilter newsFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/newsSearchTable");
         final SearchResults<News> results = newsService.search(newsFilter);
         mav.addAllObjects(results.getPageModel());
@@ -73,7 +76,9 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/courseTable", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView getCourseTable(@ModelAttribute(STRING_COURSE_FILTER) final CourseSearchFilter courseFilter) {
+    public
+    @ResponseBody
+    ModelAndView getCourseTable(@ModelAttribute(STRING_COURSE_FILTER) final CourseSearchFilter courseFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/courseSearchTable");
         final SearchResults<Course> results = courseService.search(courseFilter);
         mav.addAllObjects(results.getPageModel());
@@ -85,7 +90,9 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/userTable", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView getUserTable(@ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
+    public
+    @ResponseBody
+    ModelAndView getUserTable(@ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/userSearchTable");
         final SearchResults<User> results = userService.search(userFilter);
         mav.addAllObjects(results.getPageModel());
@@ -94,7 +101,9 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/reportTable", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView getReportTable(@ModelAttribute(STRING_REPORT_FILTER) final ReportSearchFilter reportFilter) {
+    public
+    @ResponseBody
+    ModelAndView getReportTable(@ModelAttribute(STRING_REPORT_FILTER) final ReportSearchFilter reportFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/reportSearchTable");
         final SearchResults<ReportDetails> results = reportService.search(reportFilter);
         mav.addAllObjects(results.getPageModel());
@@ -144,6 +153,11 @@ public class SearchController {
 
     @ModelAttribute(STRING_COURSE_TYPES)
     public Collection<String> getCategories() {
-        return CourseType.findAll(); }
+        final List<String> types = new ArrayList<>();
+        for (CourseType type : CourseType.findAll()) {
+            types.add(type.toString());
+        }
+        return types;
+    }
 
 }

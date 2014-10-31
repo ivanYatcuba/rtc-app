@@ -13,33 +13,47 @@
 </div>
 
 <div class="row">
+    <div class="col-md-6 form-group">
+        <div class="form-group">
+            <label class="control-label col-md-2"><@spring.message "filterNews.newsAuthor"/></label>
+            <div class="col-md-4">
+                <input type="text" id="autoSelectInput"/>
+            </div>
+        </div>
+            <@spring.formHiddenInput "filterNews.authorId" />
+   </div>
+
     <div class="col-md-6">
-    <@rtcmacros.formItem "filterNews.authorData"/>
-    </div>
-    <div class="col-md-6">
-    <@rtcmacros.formItem "filterNews.status" 'class="input-medium"' "singleSelect" statuses "NewsStatus."/>
+        <@rtcmacros.formItem "filterNews.status" 'class="input-medium"' "singleSelect" statuses "NewsStatus."/>
     </div>
 </div>
-
 <hr/>
 <div class="row">
-    <div class="col-md-6">
-    </div>
-    <div class="col-md-5" style="text-align: right">
+    <div class="col-md-5 col-md-offset-6" style="text-align: right">
         <input type="submit" class="btn btn-primary" id="searchButton" value="Search"/> or <a
             href="<@spring.url "/admin/news" />">Reset</a>
     </div>
 </div>
 <script>
     $(function() {
+        var mapAdminDataId;
         var autoCompleteAuthors;
         $.ajax({
             type: "POST",
             url: "<@spring.url "/admin/user/getAdmins"/>",
             success: function(response){
-                autoCompleteAuthors = response;
-                $("#authorData").autocomplete({source: autoCompleteAuthors});
+                mapAdminDataId = response;
+                autoCompleteAuthors = Object.keys(mapAdminDataId);
+                $("#autoSelectInput").autocomplete({source: autoCompleteAuthors});
             }
         });
+        $("#autoSelectInput").on("autocompleteselect", function(event,ui){
+            var selectedValue = (ui.item.label);
+            var authorId = mapAdminDataId[selectedValue];
+            $("#authorId").attr("value",authorId);
+        })
+        $("#autoSelectInput").on("change", function(){
+                $("#authorId").attr("value",null);
+        })
     });
 </script>

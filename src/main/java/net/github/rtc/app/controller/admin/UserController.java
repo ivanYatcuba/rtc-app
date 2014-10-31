@@ -2,8 +2,9 @@ package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.upload.FileUpload;
+import net.github.rtc.app.utils.files.upload.FileUpload;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
@@ -37,12 +38,13 @@ public class UserController {
     private static final String STRING_USERS = "users";
     private static final String PATH_PAGE_VIEW_ALL_USERS = "/page/viewAllusers";
     private static final String PATH_PAGE_USER_TABLE = "/user/content/userTable";
-    private static final String PATH_PAGE_USER_PAGE = "/page/userPagea";
+    private static final String PATH_PAGE_USER_PAGE = "/page/userPage";
     private static final String REDIRECT_USER_PAGE = "redirect:/admin/user/userPage/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_VIEW_ALL = "redirect:/admin/user/viewAll";
     private static final String STRING_USER_FILTER = "userFilter";
     private static final String STRING_AUTHORITIES = "authorities";
+    private static final String STRING_STATUSES = "statuses";
 
     @Autowired
     private ValidationContext validationContext;
@@ -54,6 +56,7 @@ public class UserController {
     @Value("${img.save.folder}")
     private String imgFold;
 
+    private String photo;
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView index() {
@@ -68,7 +71,7 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/viewAll", method = RequestMethod.POST)
+    @RequestMapping(value = "/filter", method = RequestMethod.POST)
     public
     @ResponseBody
     ModelAndView switchPage(@Validated @ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
@@ -77,6 +80,7 @@ public class UserController {
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_USERS, results.getResults());
         mav.addObject(STRING_AUTHORITIES, getAuthorities());
+        mav.addObject(STRING_STATUSES, getStatuses());
         mav.addObject(STRING_USER_FILTER, userFilter);
         return mav;
     }
@@ -87,6 +91,7 @@ public class UserController {
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         final User us = userService.findByCode(code);
         mav.addObject(STRING_USER, us);
+        photo = userService.findByCode(us.getCode()).getPhoto();
         // mav.addObject("path", imgfold);
         return mav;
     }
@@ -138,11 +143,11 @@ public class UserController {
     @RequestMapping(value = "/getAdmins", method = RequestMethod.POST)
     public
     @ResponseBody
-    List<String> getAllAdmins() {
-        final List<String> results = new ArrayList<>();
+    Map<String, Long> getAdminMapDataId() {
+        final Map<String, Long> results = new HashMap<>();
         final List<User> admins = userService.getUserByRole(RoleType.ROLE_ADMIN);
         for (final User admin : admins) {
-            results.add(admin.shortString());
+            results.put(admin.shortString(), admin.getId());
         }
         return results;
     }
@@ -175,6 +180,8 @@ public class UserController {
         user.setId(userService.findByCode(user.getCode()).getId());
         if (!img.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), img));
+        } else {
+            user.setPhoto(photo);
         }
         userService.update(user);
         session.setComplete();
@@ -194,10 +201,14 @@ public class UserController {
         return new User();
     }
 
-
     @ModelAttribute(STRING_USER_FILTER)
     public UserSearchFilter getFilterUser() {
         return new UserSearchFilter();
+    }
+
+    @ModelAttribute(STRING_STATUSES)
+    public Collection<String> getStatuses() {
+        return UserStatus.findAll();
     }
 
     @ModelAttribute(STRING_AUTHORITIES)
