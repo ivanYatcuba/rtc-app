@@ -91,8 +91,7 @@ public class UserController {
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         final User us = userService.findByCode(code);
         mav.addObject(STRING_USER, us);
-        photo = userService.findByCode(us.getCode()).getPhoto();
-        // mav.addObject("path", imgfold);
+        photo = us.getPhoto();
         return mav;
     }
 
@@ -174,7 +173,8 @@ public class UserController {
 
     @RequestMapping(value = "/update/{code}", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public String update(@PathVariable final String code, @ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session,
-                         @RequestParam final RoleType selectedRole, @RequestParam(value = "uploadPhoto", required = false) MultipartFile img) {
+                         @RequestParam final RoleType selectedRole, @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
+                         @RequestParam(required = false) final boolean ifActive) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
         user.setCode(code);
         user.setId(userService.findByCode(user.getCode()).getId());
@@ -183,6 +183,7 @@ public class UserController {
         } else {
             user.setPhoto(photo);
         }
+        user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
         userService.update(user);
         session.setComplete();
         return REDIRECT_USER_PAGE + user.getCode();

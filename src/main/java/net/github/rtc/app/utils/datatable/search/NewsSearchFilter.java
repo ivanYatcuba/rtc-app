@@ -17,7 +17,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     private Long authorId;
 
-    private NewsStatus status = NewsStatus.ALL;
+    private NewsStatus status;
 
     private Date createDate;
 
@@ -45,7 +45,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
             }
         }
 
-        if (status != null && status != NewsStatus.ALL) {
+        if (status != null && "".equals(status)) {
             criteria.add(Restrictions.eq("status", status));
         }
 

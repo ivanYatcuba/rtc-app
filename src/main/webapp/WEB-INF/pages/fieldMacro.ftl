@@ -5,8 +5,7 @@
 
 <#macro rtcIncludeLink>
 <link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
-<link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
-<link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
+<link href="<@spring.url '/resources/css/application.css'/>" rel="stylesheet" type="text/css"/>
 <link href="<@spring.url'/resources/css/jquery.tagit.css'/>" rel="stylesheet" type="text/css">
 <link href="<@spring.url'/resources/css/tagit.ui-zendesk.css'/>" rel="stylesheet" type="text/css">
 <link href="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.css'/>" rel="stylesheet" type="text/css">
@@ -112,17 +111,14 @@
 <#macro rtcFormSingleSelect label path options class="" style="" messagePrefix="" noSelection={"" : ""} >
     <@rtcFieldWrapper label path>
     <select id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" class = "form-control ${class}" style="${style}">
-        <#if options?is_hash>
-            <#if noSelection[""] != "">
-                <#--<#assign options = [noSelection] + options />-->
-                <option value=""<@checkSelected noSelection[""]/>>
-                    <#if messagePrefix == "">
-                    ${noSelection[""]?html}
-                    <#else>
-                           <@message "${messagePrefix?html}"/> noSelection[""]?html
-                    </#if>
+        <#if noSelection?is_hash>
+            <#list noSelection?keys as noSelectionKey>
+                <option value="${noSelectionKey}">
+                    ${noSelection[noSelectionKey]}
                 </option>
-            </#if>
+            </#list>
+        </#if>
+        <#if options?is_hash>
             <#list options?keys as value>
                 <option value=""<@checkSelected value/>>
                 <#-- value="" means that you will receive in controller empty string instead of
@@ -135,17 +131,6 @@
                 </option>
             </#list>
         <#else>
-            <#if noSelection[""] != "">
-                <#--if you can - change followind to assignment like /* options = noSelection[""] + options */-->
-                <option value="${noSelection[""]?html}"<@checkSelected noSelection[""]/>>
-                    <#if messagePrefix == "">
-                    ${noSelection[""]?html}
-                    <#else>
-                          <@message "${messagePrefix?html}"/> noSelection[""]?html
-                    </#if>
-                </option>
-                 <#--<#assign options = [noSelection[""]] + options>-->
-            </#if>
             <#list options as value>
                 <option value="${value?html}"<@checkSelected value/>>
                     <#if messagePrefix == "">

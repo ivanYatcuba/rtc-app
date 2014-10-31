@@ -152,4 +152,70 @@ input:-webkit-autofill.focus {
 }
 
 
+/* Styles go here */
 
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto;
+    /* Negative indent footer by its height */
+    margin: 20px auto -20px;
+    /* Pad bottom by footer height */
+    padding: 0 0 50px;
+}
+
+.footerButtons {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.navbar .nav > li > a {
+    float: none;
+    line-height: 23px;
+    padding: 9px 10px 11px;
+    text-shadow: none;
+    text-decoration: underline;
+    color: #ffffff;
+}
+
+.navbar .nav > li > a.loginButton {
+    float: none;
+    line-height: 23px;
+    padding: 9px 10px 11px;
+    text-shadow: none;
+    text-decoration: underline;
+    color: #0044cc;
+}
+
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+    z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+    height: 330px;
+    width: 940px;
+    background-color: #777;
+}
+
+.carousel-inner > .item > img {
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 330px;
+    width: 940px;
+}
+
+.carousel-control {
+    margin-top: 10px;
+}

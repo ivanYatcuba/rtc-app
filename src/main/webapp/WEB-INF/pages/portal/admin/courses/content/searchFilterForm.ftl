@@ -10,7 +10,7 @@
         <div class="col-md-6">
             <@formMacro.formDateSearch  "filterCourse.dateMoreLessEq" "filterCourse.startDate" />
 
-            <@formMacro.rtcFormSingleSelect "filterCourse.status" "filterCourse.status" statuses, "", "", "",  {"" : ""}/>
+            <@formMacro.rtcFormSingleSelect "filterCourse.status" "filterCourse.status" statuses, "", "", "",  {"" : "All"}/>
                 <div class="form-group">
                 <label class="control-label col-md-3" for="addExpertH">
                 <@spring.message "filterCourse.experts"/></label>
