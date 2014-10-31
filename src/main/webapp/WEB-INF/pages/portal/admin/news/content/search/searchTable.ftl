@@ -1,7 +1,7 @@
 <#import "../../../../../datatables.ftl" as datatables/>
-<h3><@spring.message "news.search.result.page.header"/></h3>
+<h4><strong><@spring.message "news.search.result.page.header"/></strong></h4>
 <div>
-    <table class="table" id="UserTable">
+    <table width="100%" class="table" style="margin-bottom: 5px" id="NewsTable">
         <thead>
         <tr>
             <th><@spring.message "news.search.result.header.title"/></th>
@@ -11,21 +11,20 @@
             <th></th>
         </tr>
         </thead>
-        <tbody>
         <#if news??>
         <#list news as news>
-        <tr>
-            <td>
+            <tr style="vertical-align: middle">
+                <td style="vertical-align: middle">
                 <a href="<@spring.url "/admin/news/${news.code}" />">${news.title}</a>
             </td>
             <#if (news.author)??>
-                <td>
+                <td style="vertical-align: middle">
                     <p>${news.author.name!" "} ${news.author.surname!" "}</p>
                 </td>
             <#else>
-                <td></td>
+                <td style="vertical-align: middle"></td>
             </#if>
-            <td>
+                <td style="vertical-align: middle">
                 <p>${news.createDate!" "}</p>
             </td>
             <#if (news.status)??>
@@ -39,15 +38,17 @@
                     </td>
                 </#if>
             <#else>
-                <td></td>
+                <td style="vertical-align: middle"></td>
             </#if>
 
-            <td>
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                <td style="vertical-align: middle">
+                <div class="btn-group">
+                    <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenu1"
                             data-toggle="dropdown">
-                        Action
+                        Action</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
                         <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         <#if (news.status??) && (news.status == "DRAFT") >
@@ -60,7 +61,6 @@
         </tr>
         </#list>
         </#if>
-        </tbody>
     </table>
 </div>
 <hr>

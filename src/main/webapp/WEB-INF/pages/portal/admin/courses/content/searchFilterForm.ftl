@@ -1,14 +1,13 @@
 <#import "../../../../fieldMacro.ftl" as formMacro/>
-<#--<form class="form-horizontal" name="courseFilter" role="form"-->
-      <#--action="<@spring.url "/admin/course/filter"/>" method="get">-->
-<div class="form-horizontal"
+<h4><strong><@spring.message "course.search.result.page.criteria"/></strong></h4>
+<div class="form-horizontal">
     <div class="row">
         <div class="col-md-6">
         <@formMacro.rtcFormTextInput "filterCourse.name" "filterCourse.name"/>
-        <@formMacro.rtcFormMultiSelect "filterCourse.types" "filterCourse.types" categories/>
+        <@formMacro.rtcFormMultiSelect "filterCourse.types" "filterCourse.types" categories "" "height: 65;"/>
         </div>
         <div class="col-md-6">
-            <@formMacro.formDateSearch  "filterCourse.dateMoreLessEq" "filterCourse.startDate" />
+            <@formMacro.formDateSearch  "filterCourse.dateMoreLessEq" "filterCourse.startDate"/>
 
             <@formMacro.rtcFormSingleSelect "filterCourse.status" "filterCourse.status" statuses, "", "", "course.status.",  {"" : "All"}/>
                 <div class="form-group">
@@ -19,17 +18,19 @@
                     </div>
                     <a id="addExpertH" href="#" onclick="addExpert()">Add Expert</a>
                 </div>
-            </div>
+                 </div>
         </div>
+    </div>
 </div>
-        <div class="row" style="text-align: right">
-            <div class="col-md-5">
-            </div>
-            <div class="col-md-5" style="text-align: right">
-                <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/> or
-                <a class="btn-default" href="<@spring.url "/admin/course" />">Reset</a>
-            </div>
-        </div>
+<hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
+
+<div class="row" style="text-align: right">
+    <div class="col-md-5">
+    </div>
+    <div class="col-md-5" style="text-align: right"> <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/>
+        <a class="btn btn-default" href="<@spring.url "/admin/course" />">Reset</a>
+    </div>
+</div>
 
     <#--</form>-->
 

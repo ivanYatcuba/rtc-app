@@ -1,5 +1,5 @@
 <#import "../../../../../fieldMacro.ftl" as formMacro />
-<h3><@spring.message "news.filter.form.header"/></h3>
+<h4><strong><@spring.message "news.filter.form.header"/></strong></h4>
 <div class="form-horizontal">
 <div class="row">
     <div class="col-md-6">
@@ -27,7 +27,8 @@
     </div>
 </div>
 </div>
-<hr/>
+<hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
+
 <div class="row" style="text-align: right">
     <div class="col-md-5">
     </div>
@@ -35,6 +36,7 @@
         <a class="btn btn-default" href="<@spring.url "/admin/news" />">Reset</a>
     </div>
 </div>
+
 <script>
     $(function() {
         var mapAdminDataId;

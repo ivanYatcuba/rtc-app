@@ -11,7 +11,6 @@
             <th></th>
         </tr>
         </thead>
-
     <#list users as user>
         <tr style="vertical-align: middle">
             <#if (user.name??) && (user.surname??) >
@@ -74,8 +73,12 @@
             <td style="width: 15%; vertical-align: middle">
                 <#if user.isForRemoval()>
                     <div class="btn-group">
-                        <button class="btn btn-default dropdown-toggle" style="width: 112px" type="button" data-toggle="dropdown">
+                        <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
                             Action
+                        </button>
+                        <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" style="width: 112px" role="menu">
                             <li>
@@ -86,9 +89,14 @@
 
                 <#else>
                     <div class="btn-group">
-                        <button class="btn btn-default dropdown-toggle" style="width: 112px" type="button" data-toggle="dropdown">
+                        <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
                             Action
                         </button>
+                        <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+
                         <ul class="dropdown-menu" style="width: 112px role="menu">
                         <li>
                             <a href="#" onclick="javascript:PopUpShow('${user.code}')">Remove</a>
