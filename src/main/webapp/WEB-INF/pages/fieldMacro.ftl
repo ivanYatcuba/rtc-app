@@ -146,11 +146,7 @@
             <#if noSelection[""] != "">
                 <#--<#assign options = [noSelection] + options />-->
                 <option value=""<@checkSelected noSelection[""]/>>
-                    <#if messagePrefix == "">
-                    ${noSelection[""]?html}
-                    <#else>
-                           <@message "${messagePrefix?html}"/> noSelection[""]?html
-                    </#if>
+                     noSelection[""]?html
                 </option>
             </#if>
             <#list options?keys as value>
@@ -168,11 +164,7 @@
             <#if noSelection[""] != "">
                 <#--if you can - change followind to assignment like /* options = noSelection[""] + options */-->
                 <option value="${noSelection[""]?html}"<@checkSelected noSelection[""]/>>
-                    <#if messagePrefix == "">
-                    ${noSelection[""]?html}
-                    <#else>
-                          <@message "${messagePrefix?html}"/> noSelection[""]?html
-                    </#if>
+                    noSelection[""]?html
                 </option>
                  <#--<#assign options = [noSelection[""]] + options>-->
             </#if>
