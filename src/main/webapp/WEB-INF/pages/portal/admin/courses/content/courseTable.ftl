@@ -1,15 +1,17 @@
 <#import "../../../../datatables.ftl" as datatables/>
 <h4><b>Search Results</b></h4>
-<div class="row">
+<div id="data">
     <div class="col-md-12">
         <table width="100%" class="table" style="margin-bottom: 5px">
+            <thead>
             <tr>
-                <td><b>NAME</b></td>
-                <td><b>EXPERT</b></td>
-                <td><b>TERM</b></td>
-                <td><b>STATUS</b></td>
-                <td><b>&nbsp</b></td>
+                <th>NAME</th>
+                <th>EXPERT</th>
+                <th>TERM</th>
+                <th>STATUS</th>
+                <th></th>
             </tr>
+            </thead>
         <#if courses??>
             <#list courses as course>
                 <tr>
