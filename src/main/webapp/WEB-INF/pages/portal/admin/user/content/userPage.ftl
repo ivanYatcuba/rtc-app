@@ -203,11 +203,11 @@
             <div>
                 <p class="form-control-static">
                 <#if user.status=="ACTIVE">
-                    <span class="label label-success">${user.status}</span>
+                    <@formMacro.rtcColorLabel "${user.status}" "label-success" "user.status."/>
                 <#elseif user.status=="FOR_REMOVAL">
-                    <span class="label label-danger">${user.status}</span>
+                    <@formMacro.rtcColorLabel "${user.status}" "label-danger" "user.status."/>
                 <#elseif user.status=="INACTIVE">
-                    <span class="label label-warning">${user.status}</span>
+                    <@formMacro.rtcColorLabel "${user.status}" "label-warning" "user.status."/>
                 </#if>
                 </p>
             </div>

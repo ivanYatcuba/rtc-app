@@ -42,7 +42,7 @@
 <div id="navigation">
     <#if currentPage??>
         <div class="row">
-            <ul class="pagination">
+            <ul class="pagination" style="margin: 0px">
                      <#if currentPage &gt; 1>
                          <li><a href="#" class="navButton" page="1">&laquo;&nbsp</a></li>
                      </#if>

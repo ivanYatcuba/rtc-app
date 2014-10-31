@@ -66,8 +66,13 @@
 <div class="row-fluid span12" style="margin-left: 1px">
     <div class="span6">
         <label><@spring.message  "course.status"/></label>
-        <p>&nbsp${course.status}
+        <p>&nbsp
+        <#if "${course.status}" == "DRAFT"> <@formMacro.rtcColorLabel "${course.status}" "label-warning" "course.status."/></#if>
+        <#if "${course.status}" == "PUBLISHED"><@formMacro.rtcColorLabel "${course.status}" "label-success" "course.status."/> </#if>
+        <#if "${course.status}" == "ARCHIVED"> <@formMacro.rtcColorLabel "${course.status}" "label-default" "course.status."/> </#if>
+
     </div>
+
 
     <div class="span5">
         <label><@spring.message "course.pudlishDate"/>&nbsp</label>

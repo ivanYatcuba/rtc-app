@@ -100,6 +100,16 @@
     </@rtcFieldWrapper>
 </#macro>
 
+<#macro rtcColorLabel name class="" messagePrefix="">
+     <span class="label ${class}" style="width: 80px; vertical-align: middle; height: 20px;display:inline-block;">
+            <#if messagePrefix == "">
+            ${name?html}
+            <#else>
+                <@message "${messagePrefix + name?html}"/>
+            </#if>
+     </span>
+</#macro>
+
 
 <#--
 * rtcForm...

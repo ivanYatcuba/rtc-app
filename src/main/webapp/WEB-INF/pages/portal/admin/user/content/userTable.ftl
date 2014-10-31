@@ -1,3 +1,4 @@
+<#import "../../../../fieldMacro.ftl" as formMacro/>
 <#import "../../../../datatables.ftl" as datatables/>
 <h4><strong><@spring.message "user.search.result.page.header.search"/></strong></h4>
 <div id="data">
@@ -56,18 +57,18 @@
             <#if (user.status)??>
                 <td style="vertical-align: middle">
                     <#if (user.status)=="ACTIVE">
-                        <span class="label label-success" style="width: 90px; height: 34px">Active</span>
+                        <@formMacro.rtcColorLabel "Active" "label-success"/>
                     <#else>
                         <#if (user.status)=="FOR_REMOVAL">
-                            <span class="label label-danger" style="width: 90px; height: 34px">Deleted</span>
+                           <@formMacro.rtcColorLabel "Deleted" "label-danger"/>
                         <#else>
-                            <span class="label label-default" style="width: 90px; height: 34px">Inactive</span>
+                            <@formMacro.rtcColorLabel "Inactive" "label-default"/>
                         </#if>
                     </#if>
                 </td>
             <#else>
                 <td style="vertical-align: middle">
-                        <span class="label label-default" style="width: 90px; height: 34px">None</span>
+                    <@rtcColorLabel "None" "label-default"/>
                 </td>
             </#if>
             <td style="width: 15%; vertical-align: middle">

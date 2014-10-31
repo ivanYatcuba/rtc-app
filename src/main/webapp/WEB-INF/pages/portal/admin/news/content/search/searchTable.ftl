@@ -1,4 +1,5 @@
 <#import "../../../../../datatables.ftl" as datatables/>
+<#import "../../../../../fieldMacro.ftl" as formMacro/>
 <h4><strong><@spring.message "news.search.result.page.header"/></strong></h4>
 <div>
     <table width="100%" class="table" style="margin-bottom: 5px" id="NewsTable">
@@ -30,11 +31,11 @@
             <#if (news.status)??>
                 <#if (news.status)=="DRAFT">
                     <td style="vertical-align: middle">
-                        <span class="label label-warning">Draft</span>
+                        <@formMacro.rtcColorLabel "Draft" "label-warning"/>
                     </td>
                 <#else>
                     <td style="vertical-align: middle">
-                        <span class="label label-success">Published</span>
+                        <@formMacro.rtcColorLabel "Published" "label-success"/>
                     </td>
                 </#if>
             <#else>

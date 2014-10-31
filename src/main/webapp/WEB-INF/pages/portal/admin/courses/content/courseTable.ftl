@@ -1,3 +1,4 @@
+<#import "../../../../fieldMacro.ftl" as formMacro />
 <#import "../../../../datatables.ftl" as datatables/>
 <h4><strong><@spring.message "course.search.result.page.search"/></strong></h4>
 <div id="data">
@@ -27,9 +28,9 @@
                     </td>
                     <td style="vertical-align: middle">${course.startDate?date?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
                     <td style="vertical-align: middle">
-                        <#if "${course.status}" == "DRAFT"> <span class="label label-warning">${course.status}</span> </#if>
-                        <#if "${course.status}" == "PUBLISHED"> <span class="label label-success">${course.status}</span> </#if>
-                        <#if "${course.status}" == "ARCHIVED"> <span class="label label-default">${course.status}</span> </#if>
+                        <#if "${course.status}" == "DRAFT"> <@formMacro.rtcColorLabel "${course.status}" "label-warning" "course.status."/></#if>
+                        <#if "${course.status}" == "PUBLISHED"><@formMacro.rtcColorLabel "${course.status}" "label-success" "course.status."/> </#if>
+                        <#if "${course.status}" == "ARCHIVED"> <@formMacro.rtcColorLabel "${course.status}" "label-default" "course.status."/> </#if>
                     </td>
                     <td style="vertical-align: middle">
                        <div class="btn-group">
@@ -69,6 +70,7 @@
         </table>
     <#--</div>-->
 </div>
+<hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
 <div class="row">
     <div class="col-md-6">
         <a  href="<@spring.url "/admin/course/create" />">

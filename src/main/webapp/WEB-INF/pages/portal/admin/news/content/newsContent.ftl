@@ -1,3 +1,4 @@
+<#import "../../../../fieldMacro.ftl" as formMacro />
 <style>
     label {
         float: left;
@@ -31,14 +32,14 @@
 <#if news.status=='DRAFT'>
 <div class="col-md-12">
         <label><@spring.message "news.status"/></label>
-        <span class="label label-warning">Draft</span>
-    <br>
+        <@formMacro.rtcColorLabel "Draft" "label-warning"/>
+        <br>
         <label><@spring.message "news.creationDate"/></label>${news.createDate}
 </div>
     <#else>
     <div class="col-md-12">
             <label><@spring.message "news.status"/></label>
-            <span class="label label-success">Published</span>
+        <@formMacro.rtcColorLabel "Published" "label-success"/>
         <br>
             <label><@spring.message "news.publishDate"/></label>
             &nbsp${news.createDate}
