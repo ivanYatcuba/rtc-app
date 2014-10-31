@@ -71,7 +71,7 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/viewAll", method = RequestMethod.POST)
+    @RequestMapping(value = "/filter", method = RequestMethod.POST)
     public
     @ResponseBody
     ModelAndView switchPage(@Validated @ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {

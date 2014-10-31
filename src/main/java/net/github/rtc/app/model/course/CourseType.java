@@ -35,7 +35,7 @@ public enum CourseType {
         return name;
     }
 
-    public static List findAll() {
+    public static List<CourseType> findAll() {
         return Arrays.asList(CourseType.values());
     }
 

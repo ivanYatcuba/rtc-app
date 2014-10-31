@@ -4,6 +4,9 @@ import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.*;
 import net.github.rtc.util.annotation.validation.Number;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -105,6 +108,8 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     @CollectionTable(name = "UserProgLanguages",
       joinColumns = @JoinColumn(name = "user_id"))
     @ForExport("Programming Languages")
+    @Fetch(FetchMode.SELECT)
+    @BatchSize(size = 1)
     private Set<String> programmingLanguages;
 
     @Required
