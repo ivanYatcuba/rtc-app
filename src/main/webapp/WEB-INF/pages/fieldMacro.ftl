@@ -62,7 +62,7 @@
 * @param urlText a text used on link  button
 * @param urlAdress href param for a link
 -->
-<#macro rtcSubmit buttonText urlText urlAdress>
+<#macro rtcSubmit buttonText urlText urlAddress>
 <div class="row">
     <div class="col-md-offset-8 col-md-3" style="margin-left: 7px">
         <input type="submit" class="btn btn-primary" value="${buttonText}"/> or
