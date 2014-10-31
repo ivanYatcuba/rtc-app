@@ -1,7 +1,7 @@
 <#ftl strip_whitespace=true>
 <#import "/spring.ftl" as spring/>
-<#--<#include "/spring.ftl"/>-->
-<#include "rtcmacroses.ftl"/>
+<#include "/spring.ftl"/>
+<#--<#include "rtcmacroses.ftl"/>-->
 
 <#macro rtcIncludeLink>
 <link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
@@ -64,13 +64,30 @@
 -->
 <#macro rtcSubmit buttonText urlText urlAdress>
 <div class="row">
-    <div class="col-md-offset-8 col-md-3" style="margin-left: px">
+    <div class="col-md-offset-8 col-md-3" style="margin-left: 7px">
         <input type="submit" class="btn btn-primary" value="${buttonText}"/> or
-        <a href="<@spring.url "${urlAdress}" />">${urlText}</a>
+        <a href="<@spring.url "${urlAddress}" />">${urlText}</a>
     </div>
 </div>
 </#macro>
 
+<#macro rtcSubmitDoOrCancel doText doAddress cancelText cancelAddress>
+<div class="span2" style="text-align: right">
+    <a href="<@spring.url "${doAddress}" />">
+        <input type="submit" class="btn btn-primary"
+            <#if doText??>
+                value="<@spring.message "${doText}"/>"
+            <#else>
+                value="Do"
+            </#if>/>
+    </a> or
+    <a href="<@spring.url "${cancelAddress}" />">
+        <#if anotherText??>
+            <@spring.message "${cancelText}"/>
+        <#else>Cancel</#if>
+    </a>
+</div>
+</#macro>
 <#--
 * rtcFormCustomInput
 *
@@ -257,18 +274,35 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#--<#macro rtcFormMultiSelect label path options attributes="">-->
-    <#--<@rtcFieldWrapper label path>-->
-        <#--<select multiple="multiple"-->
-                <#--id="${status.expression?replace('[','')?replace(']','')}"-->
-                <#--name="${status.expression}" ${attributes}>-->
-            <#--<#list options as value>-->
-                <#--<#assign isSelected = contains(status.actualValue?default([""]), value)>-->
-                <#--<option value="${value}"<#if isSelected>selected="selected"</#if>>${value}</option>-->
-            <#--</#list>-->
-        <#--</select>-->
-    <#--</@rtcFieldWrapper>-->
-<#--</#macro>-->
+<#macro rtcDateInput path attributes="">
+    <@formInput path attributes/>
+<script type="text/javascript">
+
+    $(function () {
+        $("#${status.expression?replace('[','')?replace(']','')}").datepicker(
+                {
+                    dateFormat: "dd.mm.yy"
+
+                    <#if "${status.expression?replace('[','')?replace(']','')}"=="birthDate">
+                        , changeMonth: true,
+                        changeYear: true,
+                        yearRange: "-100:+0",
+                        maxDate: '-1d'
+                    </#if>
+                }
+        );
+        $("#${status.expression?replace('[','')?replace(']','')}").attr('readonly', 'readonly');
+    });
+</script>
+</#macro>
+
+<#macro formDateSearch pathSingleSelect pathDatepicker class="" style="">
+<div class="form-group">
+    <label for="compare" class="control-label col-md-3" ><@spring.message pathDatepicker/></label>
+    <div id="compare"class="col-md-2"><@formSingleSelect pathSingleSelect, ["=", "<", ">"], 'class=form-control'/></div>
+    <div class="col-md-3"><@rtcDateInput pathDatepicker 'class=form-control'/></div>
+</div>
+</#macro>
 
 <#macro rtcFormTagsInput label path attributes="">
     <@rtcFieldWrapper label path>

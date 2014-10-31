@@ -1,3 +1,4 @@
+<#--
 <#ftl strip_whitespace=true>
 <#include "/spring.ftl"/>
 
@@ -14,7 +15,7 @@
 <script src="<@spring.url'/resources/js/jquery/jquery-1.11.1.min.js'/>"></script>
 <script src="<@spring.url'/resources/js/bootstrap.min.js'/>" type="text/javascript"></script>
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
-<#--<script src="<@spring.url'/reso/urces/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>-->
+&lt;#&ndash;<script src="<@spring.url'/reso/urces/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>&ndash;&gt;
 <script src="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.js'/>" type="text/javascript" charset="utf-8"></script>
 <script src="<@spring.url'/resources/js/tag-it.js'/>" type="text/javascript" charset="utf-8"></script>
 </#macro>
@@ -125,9 +126,9 @@
 </#macro>
 
 <#macro formValidation formName jsonRules >
-<#--<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>"></script>-->
+&lt;#&ndash;<script src="<@spring.url'/resources/Bootstrap/js/bootstrap.min.js'/>"></script>&ndash;&gt;
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
-<#--<script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>-->
+&lt;#&ndash;<script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>&ndash;&gt;
 <script>
     $(document).ready(function () {
         $("#${formName}").validate({
@@ -166,9 +167,9 @@
             <ul class="pagination" style="margin: 0px;">
                 <li><a href="#" onclick="switchPage(${startPage})">&laquo;&nbsp</a></li>
                 <#if currentPage &gt; startPage+1>
-                <#-- -2 -->
+                &lt;#&ndash; -2 &ndash;&gt;
                     <#if currentPage < lastPage-1 && currentPage &gt; 0>
-                    <#-- -2 +2 -->
+                    &lt;#&ndash; -2 +2 &ndash;&gt;
                         <#list currentPage-2..currentPage+2 as i>
                             <#if currentPage == i>
                                 <li class="active"><a href="#">${i}</a></li>
@@ -179,8 +180,8 @@
                             </#if>
                         </#list>
                     <#else>
-                        <#if currentPage < lastPage <#-- currentPage &gt; 0 --> >
-                        <#-- -3 +1 -->
+                        <#if currentPage < lastPage &lt;#&ndash; currentPage &gt; 0 &ndash;&gt; >
+                        &lt;#&ndash; -3 +1 &ndash;&gt;
                             <#list currentPage-3..currentPage+1 as i>
                                 <#if currentPage == i>
                                     <li class="active"><a href="#">${i}</a></li>
@@ -191,7 +192,7 @@
                                 </#if>
                             </#list>
                         <#else>
-                        <#-- -4 0 -->
+                        &lt;#&ndash; -4 0 &ndash;&gt;
                             <#list currentPage-4..currentPage as i>
                                 <#if currentPage == i>
                                     <li class="active"><a href="#">${i}</a></li>
@@ -205,7 +206,7 @@
                     </#if>
                 <#else>
                     <#if currentPage &gt; startPage>
-                    <#-- -1 +3 -->
+                    &lt;#&ndash; -1 +3 &ndash;&gt;
                         <#list currentPage-1..currentPage+3 as i>
                             <#if currentPage == i>
                                 <li class="active"><a href="#">${i}</a></li>
@@ -216,7 +217,7 @@
                             </#if>
                         </#list>
                     <#else>
-                    <#-- 0 +4-->
+                    &lt;#&ndash; 0 +4&ndash;&gt;
                         <#list currentPage..currentPage+4 as i>
                             <#if currentPage == i>
                                 <li class="active"><a href="#">${i}</a></li>
@@ -261,3 +262,4 @@
 
 
 
+-->
