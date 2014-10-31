@@ -220,7 +220,7 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormDateField path class="" style="">
+<#macro rtcFormDateField label path class="" style="">
     <@rtcFieldWrapper path path>
         <@spring.formInput path "class = \"form-control "+"${class}"+"\" "+"${style}"/>
         <script type="text/javascript">
