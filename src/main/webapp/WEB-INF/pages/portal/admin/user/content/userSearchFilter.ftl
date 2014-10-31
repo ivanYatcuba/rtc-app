@@ -12,12 +12,12 @@
 <div class="row">
     <div class="col-md-6">
         <div>
-        <@formMacro.rtcFormSingleSelect "userFilter.authorities", "userFilter.authorities", authorities, "", "", "", {"" : "All"}/>
+        <@formMacro.rtcFormSingleSelect "userFilter.authorities", "userFilter.authorities", authorities, "", "", "user.role.", {"" : "All"}/>
         </div>
     </div>
 
     <div class="col-md-6">
-        <@formMacro.rtcFormSingleSelect "userFilter.status", "userFilter.status", statuses, "", "", "", {"" : "All"}/>
+        <@formMacro.rtcFormSingleSelect "userFilter.status", "userFilter.status", statuses, "", "", "user.status.", {"" : "All"}/>
     </div>
 </div>
 </div>
