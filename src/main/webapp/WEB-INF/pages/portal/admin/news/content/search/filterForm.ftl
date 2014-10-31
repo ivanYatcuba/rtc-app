@@ -23,7 +23,7 @@
     </div>
 
     <div class="col-md-6">
-    <@formMacro.rtcFormSingleSelect "filterNews.status", "filterNews.status", statuses, "", "", "", {"" : "All"}/>
+    <@formMacro.rtcFormSingleSelect "filterNews.status", "filterNews.status", statuses, "", "", "news.status.", {"" : "All"}/>
     </div>
 </div>
 </div>
