@@ -5,8 +5,7 @@
 
 <#macro rtcIncludeLink>
 <link href="<@spring.url'/resources/css/bootstrap.min.css'/>" rel="stylesheet"/>
-<link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
-<link href="<@spring.url '/resources/css/style.css'/>" rel="stylesheet" type="text/css"/>
+<link href="<@spring.url '/resources/css/application.css'/>" rel="stylesheet" type="text/css"/>
 <link href="<@spring.url'/resources/css/jquery.tagit.css'/>" rel="stylesheet" type="text/css">
 <link href="<@spring.url'/resources/css/tagit.ui-zendesk.css'/>" rel="stylesheet" type="text/css">
 <link href="<@spring.url'/resources/js/jquery-ui/jquery-ui.min.css'/>" rel="stylesheet" type="text/css">
@@ -145,8 +144,7 @@
         <#if options?is_hash>
             <#if noSelection[""] != "">
                 <#--<#assign options = [noSelection] + options />-->
-                <option value=""<@checkSelected noSelection[""]/>>
-                     noSelection[""]?html
+                <option value=""<@checkSelected noSelection[""]/>
                 </option>
             </#if>
             <#list options?keys as value>
@@ -164,7 +162,6 @@
             <#if noSelection[""] != "">
                 <#--if you can - change followind to assignment like /* options = noSelection[""] + options */-->
                 <option value="${noSelection[""]?html}"<@checkSelected noSelection[""]/>>
-                    noSelection[""]?html
                 </option>
                  <#--<#assign options = [noSelection[""]] + options>-->
             </#if>

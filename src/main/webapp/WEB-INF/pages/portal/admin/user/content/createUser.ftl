@@ -10,9 +10,9 @@
     <div class="col-md-6">
         <div>
         <#if user.photo??>
-            <img id="photo" src="/PathToPhotos/${user.photo}"  alt="image" class="round-image"/>
+            <img id="photo" src="/PathToPhotos/${user.photo}"  alt="image" class="img-circle"/>
         <#else>
-            <img id="photo"  src="<@spring.url '/resources/images/errorCat.jpg'/>" alt="image" class="round-image"/>
+            <img id="photo"  src="<@spring.url '/resources/images/errorCat.jpg'/>" alt="image" class="img-circle"/>
         </#if>
         </div>
         <div class="row">
