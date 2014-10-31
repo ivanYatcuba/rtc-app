@@ -300,7 +300,7 @@
 <div class="form-group">
     <label for="compare" class="control-label col-md-3" ><@spring.message pathDatepicker/></label>
     <div id="compare"class="col-md-2"><@formSingleSelect pathSingleSelect, ["=", "<", ">"], 'class=form-control'/></div>
-    <div class="col-md-3"><@rtcDateInput pathDatepicker 'class=form-control'/></div>
+    <div class="col-md-3"><@rtcDateInput  pathDatepicker 'class=form-control'/></div>
 </div>
 </#macro>
 
@@ -324,7 +324,7 @@
 <div class="form-group">
 <label for="compare" class="control-label col-md-3" ><@spring.message pathDatepicker/></label>
   <div id="compare"class="col-md-2"><@formSingleSelect pathSingleSelect, ["=", "<", ">"], 'class=form-control'/></div>
-    <div class="col-md-3"><@formDatepicker pathDatepicker 'class=form-control'/></div>
+    <div class="col-md-3"><@rtcDateInput pathDatepicker 'class=form-control'/></div>
 </div>
 </#macro>
 
