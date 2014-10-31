@@ -44,19 +44,9 @@
                              </button>
                         <ul class="dropdown-menu" style="width: 112px" role="menu">
                             <li class="dropdown">
-                                  <ul class="dropdown-menu" role="menu"
-                                        aria-labelledby="drop1">
-
-                                        <li role="presentation"><a
-                                                role="menuitem" tabindex="-1"
-                                                href="<@spring.url "/admin/course/publish/${course.code}"/>">Publish!</a>
-                                        </li>
-                                        <li role="presentation"><a role="menuitem"
-                                                                   tabindex="-1"
-                                                                   href="<@spring.url "/admin/course/delete/${course.code}"/>">Delete</a>
-                                        </li>
-
-
+                                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/publish/${course.code}"/>">Publish!</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/delete/${course.code}"/>">Delete</a></li>
                                     </ul>
                                 </#if>
                             </li>
@@ -70,7 +60,6 @@
         </table>
     <#--</div>-->
 </div>
-<hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
 <div class="row">
     <div class="col-md-6">
         <a  href="<@spring.url "/admin/course/create" />">
