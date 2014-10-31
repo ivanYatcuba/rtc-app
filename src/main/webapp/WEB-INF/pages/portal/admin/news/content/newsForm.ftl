@@ -1,3 +1,4 @@
+<#import "../../../../fieldMacro.ftl" as formMacro />
 <style>
     .control-label {
         float: left;
@@ -8,28 +9,21 @@
 </style>
 <div class="row">
     <div class="col-md-6">
-    <@rtcmacros.formItem "news.title" 'id="title" class="required"' />
+        <@formMacro.rtcFormTextInput "news.title" "news.title" "required" ""/>
     </div>
     <div class="col-md-6">
-    <@rtcmacros.formItem "news.tags" "" "tag" />
+        <@formMacro.rtcFormTagsInput "news.tags" "news.tags" "" />
     </div>
 </div>
 <div class="row">
     <div class="col-md-12" >
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="description"><@spring.message "news.description"/></label>
-        <@rtcmacros.formTextarea "news.description"
-        'rows="3" maxlength="255" class=\"required field col-md-9\"'/>
-        </div>
+        <@formMacro.rtcFormTextarea "news.description" "news.description" " required field col-md-9" "style='width:186%' rows='3' maxlength='255'"/>
     </div>
-    </div>
+</div>
     <div class="row" style="padding-left: 13em">
     <#if news.status=='DRAFT'>
         <input id="publish" name="publish" type="checkbox"><@spring.message "news.publish"/>
     </#if>
     </div>
-
-
 <hr/>
 <@rtcmacros.formValidation formName="newsForm" jsonRules="${validationRules}"/>
