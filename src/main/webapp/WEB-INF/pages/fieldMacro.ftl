@@ -149,8 +149,8 @@
         <@rtcFieldWrapper label path>
 
         <select multiple="multiple"
-                id="${status.expression?replace('[','')?replace(']','')}"
-                name="${status.expression}"
+                <#if status.expression??>id="${status.expression?replace('[','')?replace(']','')}"</#if>
+                name="${status.expression!""}"
                 class = "form-control ${class}"  style = "${style}">
             <#if options?is_hash>
                 <#list options?keys as value>
@@ -220,7 +220,7 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormDateField path class="" style="">
+<#macro rtcFormDateField label path class="" style="">
     <@rtcFieldWrapper path path>
         <@spring.formInput path "class = \"form-control "+"${class}"+"\" "+"${style}"/>
         <script type="text/javascript">

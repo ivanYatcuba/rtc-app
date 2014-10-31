@@ -1,6 +1,5 @@
 <div class="row">
     <div class="col-md-6">
-        <!--Gender-->
         <div class="form-group">
             <label class="control-label col-md-2"
                    for="user.gender"><@spring.message "user.gender"/></label>
@@ -16,12 +15,10 @@
             </div>
 
         </div>
-
-        <!--Last Name-->
     <@formMacro.rtcFormTextInput  "user.surname" "user.surname" "required" />
-    <@formMacro.rtcFormTextInput  "user.middleName" "user.middleName" "required" />
     <@formMacro.rtcFormTextInput  "user.name" "user.name" "required" />
-    <@formMacro.rtcFormTextInput  "user.birthDate" "user.birthDate" "input-medium required" />
+    <@formMacro.rtcFormTextInput  "user.middleName" "user.middleName" />
+    <@formMacro.rtcFormDateField  "user.birthDate" "user.birthDate" "input-medium required" />
     </div>
 
     <div class="col-md-6">
@@ -32,8 +29,6 @@
             <img id="photo"  src="<@spring.url '/resources/images/errorCat.jpg'/>" alt="image" class="round-image"/>
         </#if>
         </div>
-
-
         <div class="row">
             <div class="col-md-6">
                 <div style="margin-left: 10px" class="fileUpload btn-link">
@@ -43,50 +38,38 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
-
 <hr/>
 
 <div class="row">
-
     <div class="col-md-6">
-        <!--Email-->
-    <@formMacro.rtcFormTextInput  "user.email" "user.email" "required" />
-
-        <!--Authorities-->
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="selectedRole"><@spring.message "user.role"/></label>
-
-            <div class="col-md-4">
-                <select id="selectedRole" name="selectedRole" class="required">
-                <#list roles as role>
-                    <option value="${role}">${role.roleViewName}</option>
-                </#list>
-                </select>
-            </div>
-        </div>
+        <@formMacro.rtcFormTextInput  "user.email" "user.email" />
+        <@formMacro.rtcFormSingleSelect "user.role" "user.authorities" roles "required" "" "user.role."/>
     </div>
-
-
     <div class="col-md-6">
         <@formMacro.rtcFormPasswordInputWithCheckbox   "user.password" "user.password" "required"/>
     </div>
 </div>
-
 <hr/>
 
 <div class="row">
     <div class="col-md-6">
-        <!--City-->
-    <@rtcmacros.formItem  "user.city" />
+        <@formMacro.rtcFormTextInput  "user.city" "user.city" />
     </div>
     <div class="col-md-6">
-        <!--Phone-->
-    <@rtcmacros.formItem  "user.phone" "class=\"required\""/>
+        <@formMacro.rtcFormTextInput  "user.phone" "user.phone" "required" />
+    </div>
+</div>
+<hr/>
+
+<div class="row">
+    <div class="col-md-6">
+        <@formMacro.rtcFormTextInput  "user.university" "user.university"/>
+        <@formMacro.rtcFormTextInput  "user.faculty" "user.faculty"/>
+    </div>
+    <div class="col-md-6">
+        <@formMacro.rtcFormTextInput  "user.speciality" "user.speciality"/>
     </div>
 </div>
 
@@ -94,56 +77,19 @@
 
 <div class="row">
     <div class="col-md-6">
-        <!--University-->
-    <@rtcmacros.formItem  "user.university" />
-        <!--Speciality-->
-    <@rtcmacros.formItem  "user.faculty" />
-
+        <@formMacro.rtcFormTextInput  "user.programmingLanguages" "user.programmingLanguages"/>
     </div>
-
     <div class="col-md-6">
-        <!--Faculty-->
-    <@rtcmacros.formItem  "user.speciality" />
+        <@formMacro.rtcFormSingleSelect "user.english" "user.english",  ["Basic", "Intermediate", "Advanced"] "required" "" />
     </div>
 </div>
-
 <hr/>
 
-<div class="row">
-    <div class="col-md-6">
-        <!--Languages-->
-    <@rtcmacros.formItem "user.programmingLanguages" />
-    </div>
-
-    <div class="col-md-6">
-        <!--English-->
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="english"><@spring.message "user.english"/></label>
-
-            <div class="col-md-4">
-            <@spring.formSingleSelect "user.english", ["Basic", "Intermediate", "Advanced"], 'style="background-color: #FFFACD;" class=\"required\"'/>
-            </div>
-        </div>
-    </div>
-</div>
-
-<hr/>
-
-<!--Note-->
 <div class="row">
     <div class="col-md-12">
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="note"><@spring.message "user.note"/></label>
-
-            <div class="col-md-10">
-            <@spring.formTextarea
-            "user.note" 'rows="3" maxlength="255"
-            id=\"note\"
-            class=\"required field col-md-10\"' />
-            </div>
-        </div>
+        <@formMacro.rtcFormTextarea  "user.note" "user.note" "required field input-xlarge field col-lg-12" "rows=\"3\"
+        maxlength=\"255\"
+        width='100%'"/>
     </div>
 </div>
 
@@ -157,9 +103,6 @@
 </div>
 
 <hr/>
-
-<@rtcmacros.formValidation formName="userForm" jsonRules="${validationRules}"/>
-
 <script type="text/javascript" charset="utf8"
         src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
 
