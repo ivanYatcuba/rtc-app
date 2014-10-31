@@ -26,4 +26,4 @@
     </#if>
     </div>
 <hr/>
-<@rtcmacros.formValidation formName="newsForm" jsonRules="${validationRules}"/>
+<@formMacro.rtcFormValidation "newsForm" "${validationRules}"/>
