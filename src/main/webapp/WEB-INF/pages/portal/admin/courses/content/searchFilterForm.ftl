@@ -3,51 +3,34 @@
 <div class="form-horizontal">
     <div class="row">
         <div class="col-md-6">
-        <@formMacro.rtcFormTextInput "filterCourse.name" "filterCourse.name"/>
-        <@formMacro.rtcFormMultiSelect "filterCourse.types" "filterCourse.types" categories "" "height: 65;"/>
+            <@formMacro.rtcFormTextInput "filterCourse.name" "filterCourse.name"/>
+            <@formMacro.rtcFormMultiSelect "filterCourse.types" "filterCourse.types" categories "" "height: 65;"/>
         </div>
         <div class="col-md-6">
-            <@formMacro.formDateSearch  "filterCourse.dateMoreLessEq" "filterCourse.startDate"/>
-
+        <@formMacro.formDateSearch  "filterCourse.dateMoreLessEq" "filterCourse.startDate"/>
             <@formMacro.rtcFormSingleSelect "filterCourse.status" "filterCourse.status" statuses, "", "", "course.status.",  {"" : "All"}/>
-                <div class="form-group">
-                <label class="control-label col-md-3" for="addExpertH">
-                <@spring.message "filterCourse.experts"/></label>
-                <div class="col-md-8">
-                    <div id="experts">
-                    </div>
-                    <a id="addExpertH" href="#" onclick="addExpert()">Add Expert</a>
-                </div>
-                 </div>
+            <@formMacro.rtcFormTextInput "filterCourse.experts" "filterCourse.experts"/>
+        </div>
+    </div>
+    <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
+    <div class="row" style="text-align: right">
+        <div class="col-md-11" style="text-align: right">
+            <input id="searchButton" type="submit" class="btn btn-primary" value="Search"/>
+            <a style="margin: 10px" href="<@spring.url "/admin/course"/>" class="btn btn-default">Reset</a>
         </div>
     </div>
 </div>
-<hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
 
-<div class="row" style="text-align: right">
-    <div class="col-md-5">
-    </div>
-    <div class="col-md-5" style="text-align: right"> <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/>
-        <a class="btn btn-default" href="<@spring.url "/admin/course" />">Reset</a>
-    </div>
-</div>
-
-    <#--</form>-->
-
-<script src="<@spring.url'/resources/js/pages/courseForm.js'/>"></script>
-<script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
-<script src="<@spring.url'/resources/js/jquery/jquery-validate.bootstrap-tooltip.min.js'/>"></script>
 <script>
-    $(function () {
-        $("#courseFilter").validate();
-        prepareCourseFormPage("<@spring.url "/admin/user/expertUsers"/>");
-    <#if filterCourse.experts??>
-        <#assign i = 0>
-        <#list  filterCourse.experts as f>
-            addExpert();
-            setFieldSelection(${i}, "${f.name}" + " " + "${f.surname}" + " " + "${f.email}");
-            #assign i = i+1>
-        </#list>
-    </#if>
+    $(function() {
+        var autoCompleteExperts;
+        $.ajax({
+            type: "POST",
+            url: "<@spring.url "/admin/user/expertUsers"/>",
+            success: function(response){
+                autoCompleteExperts = response;
+                $("#experts").autocomplete({source: autoCompleteExperts});
+            }
+        });
     });
 </script>
