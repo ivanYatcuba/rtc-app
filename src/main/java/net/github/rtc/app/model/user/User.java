@@ -98,7 +98,7 @@ public class User extends AbstractPersistenceObject implements UserDetails {
 
     @Column
     @ForExport("Gender")
-    private String gender;
+    private String gender = "Male";
 
     @Column
     private String photo;

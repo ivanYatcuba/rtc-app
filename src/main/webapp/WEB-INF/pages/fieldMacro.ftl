@@ -63,10 +63,12 @@
 * @param urlAdress href param for a link
 -->
 <#macro rtcSubmit buttonText urlText urlAdress>
-    <div class="span2" style="text-align: right">
+<div class="row">
+    <div class="col-md-offset-8 col-md-3" style="margin-left: px">
         <input type="submit" class="btn btn-primary" value="${buttonText}"/> or
         <a href="<@spring.url "${urlAdress}" />">${urlText}</a>
     </div>
+</div>
 </#macro>
 
 <#--
@@ -105,6 +107,17 @@
 <#macro rtcFormPasswordInput label path class="" style="">
     <@rtcFieldWrapper label path>
         <@spring.formPasswordInput path "class = \"form-control "+"${class}"+"\" "+"${style}" />
+    </@rtcFieldWrapper>
+</#macro>
+
+<#macro rtcFormRadioButtons label path options class="" style="">
+    <@rtcFieldWrapper label path>
+        <@bind path/>
+        <#list options as value>
+            <input type="radio" class="${class}" style="${style}" name="${status.expression}" value="${value}"
+            <@closeTag/>
+            ${value}
+        </#list>
     </@rtcFieldWrapper>
 </#macro>
 
