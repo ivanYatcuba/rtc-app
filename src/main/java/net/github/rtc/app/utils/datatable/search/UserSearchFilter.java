@@ -107,7 +107,7 @@ public class UserSearchFilter extends AbstractSearchCommand {
         }
 
         if (authorities != null && authorities.size() > 0) {
-            if (authorities.get(0).getName() != RoleType.ALL) {
+            if (!"".equals(authorities.get(0).getName())) {
                 criteria.createAlias(STRING_AUTHORITIES, STRING_AUTHORITIES);
                 final Disjunction authoritiesDis = Restrictions.disjunction(); //change back to disjunction
                 for (final Role role : authorities) {

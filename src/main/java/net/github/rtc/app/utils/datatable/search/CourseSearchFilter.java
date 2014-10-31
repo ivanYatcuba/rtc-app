@@ -26,7 +26,7 @@ public class CourseSearchFilter extends AbstractSearchCommand {
     private char dateMoreLessEq;
     private Set<CourseType> types;
     private Date startDate;
-    private CourseStatus status = CourseStatus.ALL;
+    private CourseStatus status;
     private List<Tag> tags;
     private Set<User> experts;
 
@@ -94,7 +94,7 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         if (name != null && !("").equals(name)) {
             criteria.add(Restrictions.like("name", STRING_PROCENT + name + STRING_PROCENT));
         }
-        if (status != CourseStatus.ALL && status != null && !"".equals(status)) {
+        if (status != null && !"".equals(status)) {
             criteria.add(Restrictions.eq("status", status));
         }
         if (startDate != null) {
