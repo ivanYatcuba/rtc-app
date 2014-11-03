@@ -3,10 +3,10 @@
 <div class="form-horizontal">
 <div class="row">
     <div class="col-md-6">
-    <@formMacro.rtcFormTextInput "filterNews.title" "filterNews.title"/>
+        <@formMacro.rtcFormTextInput "filterNews.title" "filterNews.title"/>
     </div>
     <div class="col-md-6">
-    <@formMacro.formDateSearch "filterNews.dateMoreLessEq", "filterNews.createDate"/>
+        <@formMacro.formDateSearch "filterNews.dateMoreLessEq", "filterNews.createDate"/>
     </div>
 </div>
 <div class="row">
@@ -19,23 +19,16 @@
                 <input type="text" class="form-control" id="autoSelectInput"/>
             </div>
         </div>
-        <@spring.formHiddenInput "filterNews.authorId" />
+            <@spring.formHiddenInput "filterNews.authorId" />
     </div>
 
     <div class="col-md-6">
-    <@formMacro.rtcFormSingleSelect "filterNews.status", "filterNews.status", statuses, "", "", "news.status.", {"" : "All"}/>
+        <@formMacro.rtcFormSingleSelect "filterNews.status", "filterNews.status", statuses, "", "", "news.status.", {"" : "All"}/>
     </div>
 </div>
 </div>
 <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
-
-<div class="row" style="text-align: right">
-    <div class="col-md-5">
-    </div>
-    <div class="col-md-5" style="text-align: right"> <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/>
-        <a class="btn btn-default" href="<@spring.url "/admin/news" />">Reset</a>
-    </div>
-</div>
+<@formMacro.rtcSearchButtons "/admin/news"/>
 
 <script>
     $(function() {

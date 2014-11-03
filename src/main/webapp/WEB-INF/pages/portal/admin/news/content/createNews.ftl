@@ -1,3 +1,4 @@
+<#--<#import "../../../../fieldMacro.ftl" as formMacro/>-->
 <form class="form-horizontal" id="newsForm" name="news"
     action="<@spring.url '/admin/news/save'/>" method="post">
     <div style="width: 85%">
@@ -5,11 +6,6 @@
         <h4 class="page-header"><@spring.message "news.create"/></h4>
     </div>
 <#include "newsForm.ftl" />
-    <div class="row">
-        <div class="col-md-12" style="text-align: right">
-            <input type="submit" class="btn btn-primary" value="Create" />
-            <button type="button" onclick="location.href='<@spring.url '/admin/news'/>'" class="btn btn-default">Cancel</button>
-        </div>
-    </div>
+    <@formMacro.rtcSubmit "Create" "Cancel" "/admin/news"/>
     </div>
 </form>
