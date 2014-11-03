@@ -33,7 +33,7 @@
                         <#if "${course.status}" == "ARCHIVED"> <@formMacro.rtcColorLabel "${course.status}" "label-default" "course.status."/> </#if>
                     </td>
 
-                    <#if (course.status??) && (course.status != "PUBLISHED") >
+                    <#--<#if (course.status??) && (course.status != "PUBLISHED") >-->
                     <td style="width: 15%;vertical-align: middle">
                         <#if (course.status??) && (course.status == "DRAFT") >
                         <div class="btn-group">
@@ -49,9 +49,10 @@
                                 <li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/delete/${course.code}"/>">Remove</a></li>
                             </ul>
                         </div>
+                        <#else >
                         </#if>
                     </td>
-                    </#if>
+                    <#--</#if>-->
                 </tr>
             </#list>
         </#if>
