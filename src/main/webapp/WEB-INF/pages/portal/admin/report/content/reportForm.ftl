@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-6">
         <!--Report Name-->
-    <@rtcmacros.formItem "report.name" "class=\"required\""/>
+    <@formMacro.rtcFormTextInput "report.name" "report.name" "required" ""/>
         <!--Report Class-->
         <div class="form-group">
             <label class="control-label col-md-2">*<@spring.message "report.exportClass"/></label>
@@ -122,4 +122,3 @@
 
 
 </script>
-<@rtcmacros.formValidation formName="report" jsonRules="${validationRules}"/>
