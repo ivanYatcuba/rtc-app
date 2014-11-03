@@ -34,17 +34,13 @@
 </div>
 <#if !course.isPublished()>
     <hr>
-    <div class="row">
-        <div class="col-md-10">
-            <div class="form-group checkbox">
-                <label class="control-label col-md-2"></label>
-                <label class = "col-md-10" style="padding-top: 7px">
-                    Publish as news
-                </label>
-                <input type="checkbox">
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-6">
+        <label  class="control-label col-md-3"></label>
+        <input id="ifPublish" name="ifPublish" type="checkbox" >
+        <@spring.message "coursesPage.action.publishAsNews"/>
     </div>
+</div>
 </#if>
 
 

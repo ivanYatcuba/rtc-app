@@ -4,9 +4,9 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.files.upload.FileUpload;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
+import net.github.rtc.app.utils.files.upload.FileUpload;
 import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,7 +32,6 @@ import java.util.*;
 @RequestMapping("admin/user")
 public class UserController {
 
-    private static final int USERS_PER_PAGE = 5;
     private static final String ROOT = "portal/admin";
     private static final String STRING_USER = "user";
     private static final String STRING_USERS = "users";
@@ -47,17 +45,14 @@ public class UserController {
     private static final String STRING_AUTHORITIES = "authorities";
     private static final String STRING_STATUSES = "statuses";
     private static final String PROGRAMMING_LANGUAGES = "programmingLanguages";
-
     @Autowired
     private ValidationContext validationContext;
     @Autowired
     private UserService userService;
     @Autowired
     private FileUpload upload;
-
     @Value("${img.save.folder}")
     private String imgFold;
-
     private String photo;
 
     @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
@@ -161,20 +156,23 @@ public class UserController {
     }
 
     @RequestMapping(value = "/save", headers = "content-type=multipart/*", method = RequestMethod.POST)
-    public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session,
-      @RequestParam(value = "uploadPhoto", required = false) MultipartFile img) {
-        userService.create(user);
+    public String save(
+      @ModelAttribute(STRING_USER) @Valid final User user,
+      @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
+      @RequestParam(required = false) final boolean ifActive) {
         if (!img.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), img));
         }
-        userService.update(user);
-        session.setComplete();
+        user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
+        userService.create(user);
         return REDIRECT_USER_PAGE + user.getCode();
     }
 
     @RequestMapping(value = "/update/{code}", headers = "content-type=multipart/*", method = RequestMethod.POST)
-    public String update(@ModelAttribute(STRING_USER) @Valid final User user, @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
-                         @RequestParam(required = false) final boolean ifActive) {
+    public String update(
+      @ModelAttribute(STRING_USER) @Valid final User user,
+      @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
+      @RequestParam(required = false) final boolean ifActive) {
         if (!img.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), img));
         } else {
@@ -192,7 +190,6 @@ public class UserController {
         binder.registerCustomEditor(List.class, PROGRAMMING_LANGUAGES, new CustomTypeEditor());
         binder.registerCustomEditor(List.class, STRING_AUTHORITIES, new CustomRoleEditor(userService));
     }
-
 
     @ModelAttribute(value = STRING_USER)
     public User getCommandObject() {

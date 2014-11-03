@@ -59,12 +59,6 @@ public class CoursesController {
      *
      * @return modelAndView("admin/courses/courses")
      */
-    //    @RequestMapping(method = RequestMethod.GET)
-    //    public ModelAndView index() {
-    //        final CourseSearchFilter filter = getFilterCourse();
-    //        filter.setPage(1);
-    //        return switchPage(filter);
-    //    }
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView viewAll() {
         final CourseSearchFilter filter = getFilterCourse();
@@ -153,7 +147,9 @@ public class CoursesController {
      * course
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute(STRING_COURSE) final Course course) {
+    public String save(
+      @ModelAttribute(STRING_COURSE) final Course course, @RequestParam(required = false) final boolean ifPublish) {
+        course.setStatus(ifPublish ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
         courseService.create(course);
         return REDIRECT1 + VIEW + course.getCode();
     }
@@ -180,7 +176,9 @@ public class CoursesController {
      * @return if all is OK the redirect to view course or return to edit course
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute(STRING_COURSE) final Course course) {
+    public String update(
+      @ModelAttribute(STRING_COURSE) final Course course, @RequestParam(required = false) final boolean ifPublish) {
+        course.setStatus(ifPublish ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
         courseService.update(course);
         return REDIRECT1 + VIEW + course.getCode();
     }
