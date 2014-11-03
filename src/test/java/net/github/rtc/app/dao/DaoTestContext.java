@@ -3,7 +3,10 @@ package net.github.rtc.app.dao;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseType;
+import net.github.rtc.app.model.user.TraineePosition;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.user.UserCourseOrder;
+import net.github.rtc.app.model.user.UserRequestStatus;
 import net.github.rtc.app.service.CodeGenerationService;
 import net.github.rtc.app.service.impl.CodeGenerationServiceImpl;
 import org.springframework.beans.factory.InitializingBean;
@@ -59,6 +62,20 @@ public class DaoTestContext implements InitializingBean {
                 return user;
             }
         });
+
+        modelBuilder.put(UserCourseOrder.class,  new ModelBuilder() {
+            @Override
+            public UserCourseOrder build() {
+                final UserCourseOrder userCourseOrder = new UserCourseOrder();
+                userCourseOrder.setCode(codeGenerationService.generate());
+                userCourseOrder.setCourseCode(codeGenerationService.generate());
+                userCourseOrder.setPosition(TraineePosition.BUSINESS_ANALYST);
+                userCourseOrder.setReason("bla bla");
+                userCourseOrder.setStatus(UserRequestStatus.PENDING);
+                userCourseOrder.setUserCode(codeGenerationService.generate());
+                return userCourseOrder;
+            }
+        });
     }
 
     private void initEqualityChecker() {
@@ -79,10 +96,22 @@ public class DaoTestContext implements InitializingBean {
         equalityChecker.put(User.class,  new EqualityChecker() {
             @Override
             public void check(final AbstractPersistenceObject sample, final AbstractPersistenceObject another) {
-                final User courseSample = (User)sample;
-                final User courseAnother = (User)another;
-                assertEquals(courseSample.getEmail(), courseAnother.getEmail());
-                assertEquals(courseSample.getPassword(), courseAnother.getPassword());
+                final User userSample = (User)sample;
+                final User userAnother = (User)another;
+                assertEquals(userSample.getEmail(), userAnother.getEmail());
+                assertEquals(userSample.getPassword(), userAnother.getPassword());
+            }});
+        equalityChecker.put(UserCourseOrder.class,  new EqualityChecker() {
+            @Override
+            public void check(final AbstractPersistenceObject sample, final AbstractPersistenceObject another) {
+                final UserCourseOrder courseOrderSample = (UserCourseOrder)sample;
+                final UserCourseOrder courseOrderAnother = (UserCourseOrder)another;
+                assertEquals(courseOrderSample.getCode(), courseOrderAnother.getCode());
+                assertEquals(courseOrderSample.getCourseCode(), courseOrderAnother.getCourseCode());
+                assertEquals(courseOrderSample.getPosition(), courseOrderAnother.getPosition());
+                assertEquals(courseOrderSample.getReason(), courseOrderAnother.getReason());
+                assertEquals(courseOrderSample.getStatus(), courseOrderAnother.getStatus());
+                assertEquals(courseOrderSample.getUserCode(), courseOrderAnother.getUserCode());
             }});
     }
 }
