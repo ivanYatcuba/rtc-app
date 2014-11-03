@@ -22,10 +22,4 @@
 </div>
 </div>
 <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
-        <div class="row" style="text-align: right">
-            <div class="col-md-5">
-            </div>
-            <div class="col-md-5" style="text-align: right"> <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/>
-              <a class="btn btn-default" href="<@spring.url "/admin/user/viewAll" />">Reset</a>
-            </div>
-        </div>
+      <@formMacro.rtcSearchButtons "/admin/user/viewAll"/>

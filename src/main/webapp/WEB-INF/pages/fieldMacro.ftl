@@ -62,12 +62,17 @@
 -->
 <#macro rtcSubmit buttonText urlText urlAddress>
 <div class="row">
-    <div class="col-md-6">
-
-    </div>
-    <div class="col-md-4" style="text-align: right">
+    <div class="col-md-11" style="text-align: right">
         <input type="submit" class="btn btn-primary" value="${buttonText}"/> or
         <a href="<@spring.url "${urlAddress}" />">${urlText}</a>
+    </div>
+</div>
+</#macro>
+
+<#macro rtcSearchButtons pageUrl>
+<div class="row" style="text-align: right">
+    <div class="col-md-10" style="text-align: right"> <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/>
+        <a class="btn btn-default" href="<@spring.url "${pageUrl}" />">Reset</a>
     </div>
 </div>
 </#macro>
@@ -82,7 +87,7 @@
                 value="Do"
             </#if>/>
     </a> or
-    <a href="<@spring.url "${cancelAddress}" />">
+    <a class="btn btn-default" href="<@spring.url "${cancelAddress}" />">
         <#if anotherText??>
             <@spring.message "${cancelText}"/>
         <#else>Cancel</#if>
@@ -242,6 +247,25 @@
     </#if>
 </div>
  </#macro>
+<#macro rtcFormLabelOut label path messagePrefix="">
+<#--<div class="form-group">-->
+    <label><@spring.message label/>&nbsp</label>
+    <#if path??>
+        <#if path? is_sequence>
+
+            <#list path as tmp>
+                <#if  messagePrefix == ""> ${tmp}
+                <#else>  <@spring.message "${messagePrefix} ${tmp}"/>
+                </#if>
+                <#if tmp_has_next>,</#if>
+            </#list>
+
+        <#else>
+               <#if "${path}"??>${path}<#else>&nbsp</#if>
+        </#if>
+    </#if>
+<#--</div>-->
+</#macro>
 
 <#macro rtcFormTextarea label path class="" style="">
     <@rtcFieldWrapper label path>
@@ -352,16 +376,6 @@
         </script>
     </@rtcFieldWrapper>
 </#macro>
-
-
-<#macro formDateSearch pathSingleSelect pathDatepicker class="" style="">
-<div class="form-group">
-<label for="compare" class="control-label col-md-3" ><@spring.message pathDatepicker/></label>
-  <div id="compare"class="col-md-2"><@formSingleSelect pathSingleSelect, ["=", "<", ">"], 'class=form-control'/></div>
-    <div class="col-md-3"><@rtcDateInput pathDatepicker 'class=form-control'/></div>
-</div>
-</#macro>
-
 
 <#macro rtcFormValidation formName jsonRules >
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>

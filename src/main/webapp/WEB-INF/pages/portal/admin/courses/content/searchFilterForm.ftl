@@ -13,12 +13,7 @@
         </div>
     </div>
     <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
-    <div class="row" style="text-align: right">
-        <div class="col-md-11" style="text-align: right">
-            <input id="searchButton" type="submit" class="btn btn-primary" value="Search"/>
-            <a style="margin: 10px" href="<@spring.url "/admin/course"/>" class="btn btn-default">Reset</a>
-        </div>
-    </div>
+    <@formMacro.rtcSearchButtons "/admin/course"/>
 </div>
 
 <script>
