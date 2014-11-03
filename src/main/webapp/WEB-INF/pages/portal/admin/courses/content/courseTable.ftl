@@ -33,6 +33,7 @@
                         <#if "${course.status}" == "ARCHIVED"> <@formMacro.rtcColorLabel "${course.status}" "label-default" "course.status."/> </#if>
                     </td>
 
+                    <#if (course.status??) && (course.status != "PUBLISHED") >
                     <td style="width: 15%;vertical-align: middle">
                         <#if (course.status??) && (course.status == "DRAFT") >
                         <div class="btn-group">
@@ -50,6 +51,7 @@
                         </div>
                         </#if>
                     </td>
+                    </#if>
                 </tr>
             </#list>
         </#if>
