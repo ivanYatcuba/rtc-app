@@ -42,7 +42,6 @@ public class CourseDaoTest extends AbstractGenericDaoTest {
     }
 
     @Test
-    @Ignore
     @Transactional
     public void testSearch(){
         for(int i=0; i<5; i++) {

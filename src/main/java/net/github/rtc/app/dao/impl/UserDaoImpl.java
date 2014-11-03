@@ -45,8 +45,10 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao
     }
 
     @Override
-    public void createRole(final RoleType type) {
-        getCurrentSession().save(new Role(type));
+    public Role createRole(final RoleType type) {
+        Role newRole = new Role(type);
+        getCurrentSession().save(newRole);
+        return newRole;
     }
 
     @Override

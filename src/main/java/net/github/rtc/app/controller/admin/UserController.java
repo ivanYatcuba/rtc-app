@@ -46,7 +46,7 @@ public class UserController {
     private static final String STRING_USER_FILTER = "userFilter";
     private static final String STRING_AUTHORITIES = "authorities";
     private static final String STRING_STATUSES = "statuses";
-    public static final String PROGRAMMING_LANGUAGES = "programmingLanguages";
+    private static final String PROGRAMMING_LANGUAGES = "programmingLanguages";
 
     @Autowired
     private ValidationContext validationContext;
