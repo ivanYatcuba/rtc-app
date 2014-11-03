@@ -16,7 +16,8 @@
         <@formMacro.rtcFormLabelOut "news.title" "${news.title}"/>
     </div>
     <div class="col-md-6">
-        <@formMacro.rtcFormLabelTextOut "news.tags" "${news.tags?join(",  ")}"/>
+        <label><@spring.message "news.tags"/></label>
+        <p>&nbsp${news.tags?join(", ")}</p>
     </div>
 </div>
 <div class="row">
