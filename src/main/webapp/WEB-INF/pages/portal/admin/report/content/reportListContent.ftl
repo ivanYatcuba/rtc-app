@@ -21,21 +21,6 @@
             <td style="vertical-align: middle">${report.exportFormat}</td>
             <td style="vertical-align: middle">${report.createdDate?datetime?string("dd-MM-yyyy")}</td>
             <td style="vertical-align: middle">
-                <#--<ul class="nav" role="navigation">
-                    <li class="dropdown">
-                        <a href="#" class="btn dropdown-toggle"
-                           data-toggle="dropdown">Action <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu"
-                            aria-labelledby="drop1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                       href="<@spring.url "/admin/export/download/${report.code}"/>">Download!</a>
-                            </li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                       href="<@spring.url "/admin/export/delete/${report.code}"/>">Delete</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>-->
                 <div class="btn-group">
                     <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenuReport" data-toggle="dropdown">Action</button>
                     <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
@@ -54,10 +39,18 @@
         </#if>
     </table>
 </div>
-
-
-<br/>
-<a style="float: right" href="<@spring.url "/admin/export/create" />">
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <form  class="inline-box" style="margin: 0px"  name="createNews" action="<@spring.url"/admin/export/create"/>"method="get">
+            <button  class="btn btn-primary" type="submit">Create New</button>
+        </form>
+    </div>
+    <div class="col-md-6" style="text-align: right">
+    <#--<@datatables.addPagination/>-->
+    </div>
+</div>
+<#--<a style="float: right" href="<@spring.url "/admin/export/create" />">
     <button class="btn">Create New</button>
-</a>
+</a>-->
 
