@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6">
-    <@formMacro.rtcFormRadioButtons "user.gender" "user.gender", ["Male", "Female"] "required" />
+    <@formMacro.rtcFormRadioButtons "user.gender" "user.gender", ["Male", "Female"] "required", "", "${user.gender}" />
     <@formMacro.rtcFormTextInput  "user.surname" "user.surname" "required" />
     <@formMacro.rtcFormTextInput  "user.name" "user.name" "required" />
     <@formMacro.rtcFormTextInput  "user.middleName" "user.middleName" />
@@ -26,12 +26,17 @@
         </div>
     </div>
 </div>
-<hr/>
+<div class="row"><div class="col-md-10"><hr/></div></div>
 
 <div class="row">
     <div class="col-md-6">
-        <@formMacro.rtcFormTextInput  "user.email" "user.email" />
-        <@formMacro.rtcFormSingleSelect "user.role" "user.authorities" roles "required" "" "user.role."/>
+        <@formMacro.rtcFormTextInput  "user.email" "user.email" "required"  />
+        <#if user.authorities??>
+            <@formMacro.rtcFormSingleSelect "user.role" "user.authorities" roles "required" "" "user.role." "" "${user.authorities[0]}"/>
+
+        <#else>
+            <@formMacro.rtcFormSingleSelect "user.role" "user.authorities" roles "required" "" "user.role." "" />
+        </#if>
     </div>
     <div class="col-md-6">
         <@formMacro.rtcFormPasswordInput  "user.password" "user.password" "required"/>
@@ -44,7 +49,7 @@
         </div>
     </div>
 </div>
-<hr/>
+<div class="row"><div class="col-md-10"><hr/></div></div>
 
 <div class="row">
     <div class="col-md-6">
@@ -54,7 +59,7 @@
         <@formMacro.rtcFormTextInput  "user.phone" "user.phone" "required" />
     </div>
 </div>
-<hr/>
+<div class="row"><div class="col-md-10"><hr/></div></div>
 
 <div class="row">
     <div class="col-md-6">
@@ -66,7 +71,7 @@
     </div>
 </div>
 
-<hr/>
+<div class="row"><div class="col-md-10"><hr/></div></div>
 
 <div class="row">
     <div class="col-md-6">
@@ -76,7 +81,7 @@
         <@formMacro.rtcFormSingleSelect "user.english" "user.english",  ["Basic", "Intermediate", "Advanced"] "required" "" />
     </div>
 </div>
-<hr/>
+<div class="row"><div class="col-md-10"><hr/></div></div>
 
 <div class="row">
     <div class="col-md-6">
@@ -86,8 +91,8 @@
     </div>
 </div>
 
-<hr/>
-
+<div class="row"><div class="col-md-10"><hr/></div></div>
+<#if !user.status?? || user.status != "ACTIVE">
 <div class="row">
     <div class="col-md-6">
         <label  class="control-label col-md-3"></label>
@@ -95,8 +100,9 @@
         <@spring.message "user.active"/>
     </div>
 </div>
+<div class="row"><div class="col-md-10"><hr/></div></div>
 
-<hr/>
+</#if>
 <script type="text/javascript" charset="utf8"
         src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
 

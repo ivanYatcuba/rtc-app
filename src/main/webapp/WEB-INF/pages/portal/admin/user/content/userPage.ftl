@@ -91,7 +91,7 @@
             <div>
                 <p class="form-control-static">
                 <#list user.authorities as role>
-                <@spring.message "${role}"/><#if role_has_next>,</#if>
+                <@spring.message "user.role.${role}"/><#if role_has_next>,</#if>
                 </#list>
             </div>
         </div>

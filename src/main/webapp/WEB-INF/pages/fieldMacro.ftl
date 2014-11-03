@@ -46,7 +46,7 @@
 <#macro rtcForm name action title validationRules="" enctype="">
 <form class="form-horizontal" name="${name}" id="${name}" action="<@spring.url "${action}" />" method="post" enctype="${enctype}">
     <@rtcFormValidation formName="${name}" jsonRules="${validationRules}"/>
-    <h3 class="page-header"><@spring.message "${title}"/></h3><br/>
+    <h4 class="page-header"><@spring.message "${title}"/></h4><br/>
     <#nested>
 </form>
 </#macro>
@@ -62,7 +62,10 @@
 -->
 <#macro rtcSubmit buttonText urlText urlAddress>
 <div class="row">
-    <div class="col-md-offset-8 col-md-3" style="margin-left: 7px">
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-4" style="text-align: right">
         <input type="submit" class="btn btn-primary" value="${buttonText}"/> or
         <a href="<@spring.url "${urlAddress}" />">${urlText}</a>
     </div>
@@ -135,30 +138,31 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormRadioButtons label path options class="" style="">
+<#macro rtcFormRadioButtons label path options class="" style="" default="">
     <@rtcFieldWrapper label path>
         <@bind path/>
         <#list options as value>
             <input type="radio" class="${class}" style="${style}" name="${status.expression}" value="${value}"
+                <#if value == default> checked </#if>
             <@closeTag/>
             ${value}
         </#list>
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormSingleSelect label path options class="" style="" messagePrefix="" noSelection={"" : ""} >
+<#macro rtcFormSingleSelect label path options class="" style="" messagePrefix="" noSelection={"" : ""} default="">
     <@rtcFieldWrapper label path>
     <select id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" class = "form-control ${class}" style="${style}">
         <#if noSelection?is_hash>
             <#list noSelection?keys as noSelectionKey>
-                <option value="${noSelectionKey}">
+                <option value="${noSelectionKey}"   <#if noSelectionKey == default> selected </#if>>
                     ${noSelection[noSelectionKey]}
                 </option>
             </#list>
         </#if>
         <#if options?is_hash>
             <#list options?keys as value>
-                <option value=""<@checkSelected value/>>
+                <option value=""<@checkSelected value/> <#if value == default> selected </#if>>
                 <#-- value="" means that you will receive in controller empty string instead of
                 role, status, author e.t.c. so you should provide in search class chech if (myproperty!= null && !"".equals(myproperty) -->
                     <#if messagePrefix == "">
@@ -170,7 +174,7 @@
             </#list>
         <#else>
             <#list options as value>
-                <option value="${value?html}"<@checkSelected value/>>
+                <option value="${value?html}"<@checkSelected value/> <#if value == default> selected </#if>>
                     <#if messagePrefix == "">
                     ${value?html}
                     <#else>

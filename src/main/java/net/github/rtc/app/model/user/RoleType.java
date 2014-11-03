@@ -26,4 +26,13 @@ public enum RoleType {
     public String getRoleViewName() {
         return roleViewName;
     }
+
+    public static RoleType getTypeByString(String roleName){
+        for(RoleType type: values()){
+            if(type.name().equals(roleName)){
+                return type;
+            }
+        }
+        return null;
+    }
 }

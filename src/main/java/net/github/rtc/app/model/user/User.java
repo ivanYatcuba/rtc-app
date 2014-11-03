@@ -125,7 +125,7 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     @Column
     @ForExport("Status")
     @Enumerated(EnumType.STRING)
-    private UserStatus status = UserStatus.ACTIVE;
+    private UserStatus status = UserStatus.INACTIVE;
 
     /* Spring Security fields*/
     @ManyToMany(fetch = FetchType.EAGER)

@@ -8,6 +8,7 @@ import net.github.rtc.app.utils.files.upload.FileUpload;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
+import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,6 +46,7 @@ public class UserController {
     private static final String STRING_USER_FILTER = "userFilter";
     private static final String STRING_AUTHORITIES = "authorities";
     private static final String STRING_STATUSES = "statuses";
+    public static final String PROGRAMMING_LANGUAGES = "programmingLanguages";
 
     @Autowired
     private ValidationContext validationContext;
@@ -159,9 +161,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/save", headers = "content-type=multipart/*", method = RequestMethod.POST)
-    public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session, @RequestParam final RoleType selectedRole,
-                       @RequestParam(value = "uploadPhoto", required = false) MultipartFile img) {
-        user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
+    public String save(@ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session,
+      @RequestParam(value = "uploadPhoto", required = false) MultipartFile img) {
         userService.create(user);
         if (!img.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), img));
@@ -172,12 +173,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update/{code}", headers = "content-type=multipart/*", method = RequestMethod.POST)
-    public String update(@PathVariable final String code, @ModelAttribute(STRING_USER) @Valid final User user, final SessionStatus session,
-                         @RequestParam final RoleType selectedRole, @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
+    public String update(@ModelAttribute(STRING_USER) @Valid final User user, @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
                          @RequestParam(required = false) final boolean ifActive) {
-        user.setAuthorities(Arrays.asList(userService.getRoleByType(selectedRole)));
-        user.setCode(code);
-        user.setId(userService.findByCode(user.getCode()).getId());
         if (!img.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), img));
         } else {
@@ -185,7 +182,6 @@ public class UserController {
         }
         user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
         userService.update(user);
-        session.setComplete();
         return REDIRECT_USER_PAGE + user.getCode();
     }
 
@@ -193,7 +189,8 @@ public class UserController {
     public void initFilterBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-        binder.registerCustomEditor(List.class, STRING_AUTHORITIES, new CustomRoleEditor());
+        binder.registerCustomEditor(List.class, PROGRAMMING_LANGUAGES, new CustomTypeEditor());
+        binder.registerCustomEditor(List.class, STRING_AUTHORITIES, new CustomRoleEditor(userService));
     }
 
 
