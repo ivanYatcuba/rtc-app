@@ -8,9 +8,11 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 @RunWith(JUnit4ClassRunner.class)
 public class CustomTagsEditorTest {
@@ -33,6 +35,6 @@ public class CustomTagsEditorTest {
     public void setAsTextTest() {
         customTagsEditor.setAsText(TEST_STRING);
         List<Tag> tags =  Arrays.asList(new Tag("X"), new Tag("Y"), new Tag("Z"));
-        assertEquals(tags, customTagsEditor.getValue());
+        assertTrue(tags.containsAll((Collection) customTagsEditor.getValue()));
     }
 }

@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.*;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 public class CustomTypeEditorTest {
     private static final String TEST_STRING = "X,Y,Z,";
@@ -26,9 +27,6 @@ public class CustomTypeEditorTest {
     @Test
     public void setAsTextTest() {
         customTagsEditor.setAsText(TEST_STRING);
-        Iterator<String> iterator = ((Set<String>)customTagsEditor.getValue()).iterator();
-        assertEquals("Y", iterator.next());
-        assertEquals("X", iterator.next());
-        assertEquals("Z", iterator.next());
+        assertTrue(((Set<String>)customTagsEditor.getValue()).containsAll(Arrays.asList("X", "Y", "Z")));
     }
 }

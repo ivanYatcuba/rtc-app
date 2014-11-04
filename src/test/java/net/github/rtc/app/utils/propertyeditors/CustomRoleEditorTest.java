@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(JUnit4ClassRunner.class)
@@ -41,9 +42,9 @@ public class CustomRoleEditorTest {
         when(userService.getRoleByType(RoleType.ROLE_ADMIN)).thenReturn(role1);
         when(userService.getRoleByType(RoleType.ROLE_EXPERT)).thenReturn(role2);
         customRoleEditor.setAsText(testString);
-        List<Role> roles = (List<Role>)customRoleEditor.getValue();
+        List<Role> roles = (List<Role>) customRoleEditor.getValue();
         assertEquals(2, roles.size());
-        assertEquals(RoleType.ROLE_ADMIN, roles.get(0).getName());
-        assertEquals(RoleType.ROLE_EXPERT, roles.get(1).getName());
+        assertTrue(roles.contains(role1));
+        assertTrue(roles.contains(role2));
     }
 }

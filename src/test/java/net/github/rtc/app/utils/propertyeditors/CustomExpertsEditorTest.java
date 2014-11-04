@@ -3,19 +3,16 @@ package net.github.rtc.app.utils.propertyeditors;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.internal.runners.JUnit4ClassRunner;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(JUnit4ClassRunner.class)
@@ -40,15 +37,13 @@ public class CustomExpertsEditorTest {
     }
 
     @Test
-    @Ignore
     public void testSetAsText() {
         when(userService.findByCode("X")).thenReturn(user1);
         when(userService.findByCode("Y")).thenReturn(user2);
         customExpertsEditor.setAsText(testString);
-        Set<User> users = (Set<User>)customExpertsEditor.getValue();
+        Set<User> users = (Set<User>) customExpertsEditor.getValue();
         assertEquals(2, users.size());
-        Iterator<User> iterator = users.iterator();
-        assertEquals("X", iterator.next().getCode());
-        assertEquals("Y", iterator.next().getCode());
+        assertTrue(users.contains(user1));
+        assertTrue(users.contains(user2));
     }
 }
