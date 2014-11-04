@@ -41,15 +41,19 @@
                 mapAdminDataId = response;
                 autoCompleteAuthors = Object.keys(mapAdminDataId);
                 $("#autoSelectInput").autocomplete({source: autoCompleteAuthors});
+
+                $("#autoSelectInput").on("autocompleteselect", function(event,ui){
+                    var selectedValue = (ui.item.label);
+                    var authorId = mapAdminDataId[selectedValue];
+                    $("#authorId").attr("value",authorId);
+                })
+                $("#autoSelectInput").on("keyup", function(){
+                    if(!mapAdminDataId.hasOwnProperty($("#expertCode").value)){
+                        $("#authorId").attr("value",null);
+                    }
+                })
             }
         });
-        $("#autoSelectInput").on("autocompleteselect", function(event,ui){
-            var selectedValue = (ui.item.label);
-            var authorId = mapAdminDataId[selectedValue];
-            $("#authorId").attr("value",authorId);
-        })
-        $("#autoSelectInput").on("change", function(){
-                $("#authorId").attr("value",null);
-        })
+
     });
 </script>

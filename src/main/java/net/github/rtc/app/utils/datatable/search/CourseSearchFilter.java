@@ -4,12 +4,11 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.course.Tag;
-import net.github.rtc.app.model.user.User;
-import org.hibernate.type.StringType;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.StringType;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -22,13 +21,14 @@ public class CourseSearchFilter extends AbstractSearchCommand {
     private static final String STRING_PROCENT = "%";
     private static final String STRING_TAGS = "tags";
     private static final String STRING_START_DATE = "startDate";
+    private static final String EXPERTS = "experts";
     private String name;
     private char dateMoreLessEq;
     private Set<CourseType> types;
     private Date startDate;
     private CourseStatus status;
     private List<Tag> tags;
-    private Set<User> experts;
+    private String expertCode;
 
     public char getDateMoreLessEq() {
 
@@ -79,17 +79,16 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         this.tags = tags;
     }
 
-    public Set<User> getExperts() {
-        return experts;
+    public String getExpertCode() {
+        return expertCode;
     }
 
-    public void setExperts(final Set<User> experts) {
-        this.experts = experts;
+    public void setExpertCode(final String expertCode) {
+        this.expertCode = expertCode;
     }
 
     public DetachedCriteria getCriteria() {
-        final DetachedCriteria criteria = DetachedCriteria.forClass(Course
-                .class);
+        final DetachedCriteria criteria = DetachedCriteria.forClass(Course.class);
 
         if (name != null && !("").equals(name)) {
             criteria.add(Restrictions.like("name", STRING_PROCENT + name + STRING_PROCENT));
@@ -99,17 +98,17 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         }
         if (startDate != null) {
             switch (dateMoreLessEq) {
-                case '>':
-                    criteria.add(Restrictions.gt(STRING_START_DATE, startDate));
-                    break;
-                case '=':
-                    criteria.add(Restrictions.eq(STRING_START_DATE, startDate));
-                    break;
-                case '<':
-                    criteria.add(Restrictions.lt(STRING_START_DATE, startDate));
-                    break;
-                default:
-                    break;
+            case '>':
+                criteria.add(Restrictions.gt(STRING_START_DATE, startDate));
+                break;
+            case '=':
+                criteria.add(Restrictions.eq(STRING_START_DATE, startDate));
+                break;
+            case '<':
+                criteria.add(Restrictions.lt(STRING_START_DATE, startDate));
+                break;
+            default:
+                break;
             }
         }
         if (tags != null && tags.size() > 0) {
@@ -124,10 +123,16 @@ public class CourseSearchFilter extends AbstractSearchCommand {
             final Conjunction typesCon = Restrictions.conjunction();
             for (final CourseType type : types) {
                 typesCon.add(Restrictions.sqlRestriction(
-                        "exists (select t.course_id from CourseTypes t where t.course_id = {alias}.id and t.types = ?)",
-                        type.name(), new StringType()));
+                  "exists (select t.course_id from CourseTypes t where t.course_id = {alias}.id and t.types = ?)",
+                  type.name(), new StringType()));
             }
             criteria.add(typesCon);
+        }
+        if (expertCode != null && !("").equals(expertCode)) {
+            criteria.createAlias(EXPERTS, EXPERTS);
+            final Conjunction experts = Restrictions.conjunction();
+            experts.add(Restrictions.eq("experts.code", expertCode));
+            criteria.add(experts);
         }
         return criteria;
     }

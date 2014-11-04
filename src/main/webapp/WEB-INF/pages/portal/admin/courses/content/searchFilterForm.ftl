@@ -9,7 +9,15 @@
         <div class="col-md-6">
         <@formMacro.formDateSearch  "filterCourse.dateMoreLessEq" "filterCourse.startDate"/>
             <@formMacro.rtcFormSingleSelect "filterCourse.status" "filterCourse.status" statuses, "", "", "course.status.",  {"" : "All"}/>
-            <@formMacro.rtcFormTextInput "filterCourse.experts" "filterCourse.experts"/>
+            <div class="form-group">
+                <label class="control-label col-md-3" for="autoSelectInput">
+                <@spring.message"filterCourse.experts"/>
+                </label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" id="autoSelectInput"/>
+                </div>
+            </div>
+        <@spring.formHiddenInput "filterCourse.expertCode" />
         </div>
     </div>
     <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
@@ -18,13 +26,26 @@
 
 <script>
     $(function() {
-        var autoCompleteExperts;
+        var mapAdminDataId;
+        var autoCompleteAuthors;
         $.ajax({
             type: "POST",
-            url: "<@spring.url "/admin/user/expertUsers"/>",
+            url: "<@spring.url "/admin/user/getExperts"/>",
             success: function(response){
-                autoCompleteExperts = response;
-                $("#experts").autocomplete({source: autoCompleteExperts});
+                mapAdminDataId = response;
+                autoCompleteAuthors = Object.keys(mapAdminDataId);
+                $("#autoSelectInput").autocomplete({source: autoCompleteAuthors});
+
+                $("#autoSelectInput").on("autocompleteselect", function(event,ui){
+                    var selectedValue = (ui.item.label);
+                    var authorId = mapAdminDataId[selectedValue];
+                    $("#expertCode").attr("value",authorId);
+                });
+                $("#autoSelectInput").on("keyup", function(){
+                    if(!mapAdminDataId.hasOwnProperty($("#expertCode").value)){
+                        $("#expertCode").attr("value",null);
+                    }
+                });
             }
         });
     });

@@ -124,14 +124,14 @@ public class UserController {
         return REDIRECT_VIEW_ALL;
     }
 
-    @RequestMapping(value = "/expertUsers", method = RequestMethod.POST)
+    @RequestMapping(value = "/getExperts", method = RequestMethod.POST)
     public
     @ResponseBody
-    List<String> getExpertUsers() {
-        final List<String> results = new ArrayList<>();
-        final List<User> users = userService.getUserByRole(RoleType.ROLE_EXPERT);
-        for (final User user : users) {
-            results.add(user.shortString());
+    Map<String, String> getExpertUsers() {
+        final Map<String, String> results = new HashMap<>();
+        final List<User> admins = userService.getUserByRole(RoleType.ROLE_EXPERT);
+        for (final User admin : admins) {
+            results.put(admin.shortString(), admin.getCode());
         }
         return results;
     }
