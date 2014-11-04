@@ -29,7 +29,6 @@ public class FileUpload implements java.io.Serializable {
             if (file.exists()) {
                 file.delete();
             }
-         //   file= new File(adr);
             FileUtils.writeByteArrayToFile(file, image.getBytes());
         } catch (Exception e) {
             throw new ServiceProcessingException("Unable to save image: " + e.getMessage());
