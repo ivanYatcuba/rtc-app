@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -42,9 +43,10 @@ public class CustomExpertsEditorTest {
         when(userService.findByCode("X")).thenReturn(user1);
         when(userService.findByCode("Y")).thenReturn(user2);
         customExpertsEditor.setAsText(testString);
-        List<User> users = new ArrayList<>((Set<User>) customExpertsEditor.getValue());
+        Set<User> users = (Set<User>)customExpertsEditor.getValue();
         assertEquals(2, users.size());
-        assertEquals("Y", users.get(0).getCode());
-        assertEquals("X", users.get(1).getCode());
+        Iterator<User> iterator = users.iterator();
+        assertEquals("X", iterator.next().getCode());
+        assertEquals("Y", iterator.next().getCode());
     }
 }

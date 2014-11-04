@@ -4,10 +4,7 @@ package net.github.rtc.app.utils.propertyeditors;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -29,7 +26,9 @@ public class CustomTypeEditorTest {
     @Test
     public void setAsTextTest() {
         customTagsEditor.setAsText(TEST_STRING);
-        List<String> strings = Arrays.asList( "Y", "X", "Z");
-        assertEquals(strings, new ArrayList<String>((Set)customTagsEditor.getValue()));
+        Iterator<String> iterator = ((Set<String>)customTagsEditor.getValue()).iterator();
+        assertEquals("Y", iterator.next());
+        assertEquals("X", iterator.next());
+        assertEquals("Z", iterator.next());
     }
 }
