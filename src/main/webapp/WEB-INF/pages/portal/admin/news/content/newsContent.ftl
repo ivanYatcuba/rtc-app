@@ -13,8 +13,7 @@
 </div>
 <div class="row">
     <div class="col-md-6">
-        <label><@spring.message "news.title"/></label>
-        &nbsp${news.title}
+        <@formMacro.rtcFormLabelOut "news.title" "${news.title}"/>
     </div>
     <div class="col-md-6">
         <label><@spring.message "news.tags"/></label>
@@ -23,36 +22,25 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <label><@spring.message "news.description"/></label>
-        &nbsp${news.description}
+        <@formMacro.rtcFormLabelOut "news.description" "${news.description}"/>
     </div>
 </div>
 <hr/>
 <div class="row">
-<#if news.status=='DRAFT'>
 <div class="col-md-12">
-        <label><@spring.message "news.status"/></label>
-        <@formMacro.rtcColorLabel "Draft" "label-warning"/>
-        <br>
-        <label><@spring.message "news.creationDate"/></label>${news.createDate}
-</div>
-    <#else>
-    <div class="col-md-12">
-            <label><@spring.message "news.status"/></label>
-        <@formMacro.rtcColorLabel "Published" "label-success"/>
-        <br>
-            <label><@spring.message "news.publishDate"/></label>
-            &nbsp${news.createDate}
+    <div>
+        <label><@spring.message "news.status"/></label>&nbsp
+        <#if news.status=='DRAFT'>
+            <@formMacro.rtcColorLabel "Draft" "label-warning"/>
+        <#else>
+            <@formMacro.rtcColorLabel "Published" "label-success"/>
+        </#if>
     </div>
-    </#if>
+    <div>
+        <@formMacro.rtcFormLabelOut "news.creationDate" "${news.createDate}"/>
+    </div>
+</div>
 </div>
 <hr/>
-<div class="row">
-    <div class="col-md-12" style="text-align: right">
-        <a href="<@spring.url "/admin/news/${news.code}/edit" />">
-            <button class="btn btn-primary"><@spring.message "action.edit"/></button>
-        </a>
-        <button type="button" onclick="location.href='<@spring.url '/admin/news'/>'" class="btn btn-default">Cancel</button>
-    </div>
-</div>
+<@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/news/${news.code}/edit" "Cancel" "/admin/news"/>
 </div>

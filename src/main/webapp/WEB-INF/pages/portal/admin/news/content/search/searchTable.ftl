@@ -16,7 +16,7 @@
         <#list news as news>
             <tr style="vertical-align: middle">
                 <td style="vertical-align: middle; width: 25%">
-                <a href="<@spring.url "/admin/news/${news.code}" />">${news.title}</a>
+                    <a href="<@spring.url "/admin/news/${news.code}" />">${news.title}</a>
                 </td>
             <#if (news.author)??>
                 <td style="vertical-align: middle">
@@ -73,7 +73,7 @@
         </form>
     </div>
     <div class="col-md-6" style="text-align: right">
-    <@datatables.addPagination/>
+        <@datatables.addPagination/>
     </div>
 </div>
 

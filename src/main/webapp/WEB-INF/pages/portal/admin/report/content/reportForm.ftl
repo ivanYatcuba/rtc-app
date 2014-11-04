@@ -1,34 +1,30 @@
 <div class="row">
     <div class="col-md-6">
-        <!--Report Name-->
-    <@rtcmacros.formItem "report.name" "class=\"required\""/>
-        <!--Report Class-->
-        <div class="form-group">
-            <label class="control-label col-md-2">*<@spring.message "report.exportClass"/></label>
-
-            <div class="col-md-4">
-            <@spring.bind "types" />
-                <select id="selectedType" name="selectedType" class="required">
-                <#list types as type>
-                    <option value="${type}"
-                            <#if report.exportClass?? && type == report.exportClass.simpleName>selected</#if>>${type}</option>
-                </#list>
-                </select>
-            </div>
-        </div>
-
+        <@formMacro.rtcFormTextInput "report.name" "report.name" "required" ""/>
     </div>
-    <div class="span5">
-        <!--Report Format-->
-        <div class="form-group">
-            <label class="control-label col-md-2">*<@spring.message "report.exportFormat"/></label>
-
-            <div class="col-md-4">
-            <@spring.bind "formats" />
-                <@spring.formSingleSelect "report.exportFormat", formats, "class=\"required\""/>
-            </div>
-        </div>
+    <div class="col-md-6" >
+            <@formMacro.rtcFormSingleSelect "report.lable.exportFormate" "report.exportFormat" formats "required" "" "report.exportFormat." ""/>
     </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <#--<@formMacro.rtcFormSingleSelect "report.lable.exportClass" "report.exportFormat" types "required" "" "report.exportClass." ""/>-->
+    </div>
+
+
+    <#--<div class="form-group">
+        <label class="control-label col-md-2">*<@spring.message "report.exportClass"/></label>
+
+        <div class="col-md-4">
+        <@spring.bind "types" />
+            <select id="selectedType" name="selectedType" class="required">
+            <#list types as type>
+                <option value="${type}"
+                        <#if report.exportClass?? && type == report.exportClass.simpleName>selected</#if>>${type}</option>
+            </#list>
+            </select>
+        </div>
+    </div>-->
 </div>
 &NonBreakingSpace;
 <hr>
@@ -122,4 +118,3 @@
 
 
 </script>
-<@rtcmacros.formValidation formName="report" jsonRules="${validationRules}"/>

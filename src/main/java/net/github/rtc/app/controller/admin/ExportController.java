@@ -155,8 +155,7 @@ public class ExportController {
     }
 
 
-    @RequestMapping(value = "/download/{reportCode}",
-      method = RequestMethod.GET)
+    @RequestMapping(value = "/download/{reportCode}", method = RequestMethod.GET)
     public void downloadUserExport(
       final HttpServletResponse response,
       @PathVariable final String reportCode) {
@@ -181,7 +180,6 @@ public class ExportController {
             int bytesRead = -1;
             while ((bytesRead = inputStream.read(buffer)) != -1) {
                 outStream.write(buffer, 0, bytesRead);
-
             }
             inputStream.close();
             outStream.close();

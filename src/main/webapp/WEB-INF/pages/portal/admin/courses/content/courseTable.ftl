@@ -32,27 +32,23 @@
                         <#if "${course.status}" == "PUBLISHED"><@formMacro.rtcColorLabel "${course.status}" "label-success" "course.status."/> </#if>
                         <#if "${course.status}" == "ARCHIVED"> <@formMacro.rtcColorLabel "${course.status}" "label-default" "course.status."/> </#if>
                     </td>
-                    <td style="vertical-align: middle; width: 15%">
-                       <div class="btn-group">
-                         <#if "${course.status}" == "DRAFT">
-                         <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
-                                Action
-                          </button>
-                             <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
-                                 <span class="caret"></span>
-                                 <span class="sr-only">Toggle Dropdown</span>
-                             </button>
-                        <ul class="dropdown-menu" style="width: 112px" role="menu">
-                            <li class="dropdown">
-                                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/publish/${course.code}"/>">Publish!</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/delete/${course.code}"/>">Delete</a></li>
-                                    </ul>
-                                </#if>
-                            </li>
-                        </ul>
+
+                    <td style="width: 15%;vertical-align: middle">
+                        <#if (course.status??) && (course.status == "DRAFT") >
+                        <div class="btn-group">
+                            <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenu1"
+                                    data-toggle="dropdown">
+                                Action</button>
+                            <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li id="publicationLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/publish/${course.code}"/>">Publish</a></li>
+                                <li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/delete/${course.code}"/>">Remove</a></li>
+                            </ul>
                         </div>
-                        </div>
+                        </#if>
                     </td>
                 </tr>
             </#list>
