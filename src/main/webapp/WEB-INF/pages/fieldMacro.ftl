@@ -77,16 +77,17 @@
 </div>
 </#macro>
 
-<#macro rtcSubmitDoOrCancel doText doAddress cancelText cancelAddress>
+<#macro rtcSubmitDoOrCancel doText doAddress cancelText cancelAddress disabled="">
 <div class="span2" style="text-align: right">
+   <#if disabled != "disabled">
     <a href="<@spring.url "${doAddress}" />">
-        <input type="submit" class="btn btn-primary"
+        <input type="submit" class="btn btn-primary" ${disabled}
             <#if doText??>
                 value="<@spring.message "${doText}"/>"
             <#else>
                 value="Do"
-            </#if>/>
-    </a> or
+            </#if> />
+    </a> or </#if>
     <a class="btn btn-default" href="<@spring.url "${cancelAddress}" />">
         <#if anotherText??>
             <@spring.message "${cancelText}"/>

@@ -136,9 +136,9 @@
 </div>
 
 <hr>
-
-<@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/user/${user.code}/edit" "Cancel" "/admin/user"/>
-
-
-
+<#if user.status == "FOR_REMOVAL">
+    <@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/user/${user.code}/edit" "Cancel" "/admin/user" "disabled"/>
+<#else>
+    <@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/user/${user.code}/edit" "Cancel" "/admin/user"/>
+</#if>
 </div>
