@@ -57,12 +57,12 @@
             <#if (user.status)??>
                 <td style="vertical-align: middle">
                     <#if (user.status)=="ACTIVE">
-                        <@formMacro.rtcColorLabel "Active" "label-success"/>
+                        <@formMacro.rtcColorLabel "${user.status}" "label-success"  "user.status."/>
                     <#else>
                         <#if (user.status)=="FOR_REMOVAL">
-                           <@formMacro.rtcColorLabel "Deleted" "label-danger"/>
+                           <@formMacro.rtcColorLabel "${user.status}" "label-danger"  "user.status."/>
                         <#else>
-                            <@formMacro.rtcColorLabel "Inactive" "label-default"/>
+                            <@formMacro.rtcColorLabel "${user.status}" "label-default"  "user.status."/>
                         </#if>
                     </#if>
                 </td>
