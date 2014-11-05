@@ -9,6 +9,7 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
+import net.github.rtc.app.utils.propertyeditors.CustomClassEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
@@ -123,11 +124,9 @@ public class ExportController {
     public
     @ResponseBody
     ModelAndView createHandler(
-      @ModelAttribute("report") final ReportDetails report,
-      @RequestParam final String selectedType,
-      @RequestParam(value = "reportFields",
+      @ModelAttribute("report") final ReportDetails report,/*@RequestParam final String selectedType,*/@RequestParam(value = "reportFields",
         required = false) final List<String> reportFields) {
-        report.setExportClass(getTypes().get(selectedType));
+//        report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.insert(report);
         return new ModelAndView(REDIRECT_EXPORT + report.getCode());
@@ -227,8 +226,8 @@ public class ExportController {
     @InitBinder("report")
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class,
-          new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Class.class, new CustomClassEditor());
     }
 
 }
