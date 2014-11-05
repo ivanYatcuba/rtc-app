@@ -16,17 +16,12 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-/**
- * Created by Ivan Yatcuba on 8/12/14.
- */
 @Component
 public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
 
     private static final int ENTITIES_PER_PAGE = 5;
-
     @Autowired
     private SessionFactory sessionFactory;
-
     private Class<T> type;
 
     public AbstractGenericDaoImpl() {
@@ -62,8 +57,7 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
 
     @Override
     public T findByCode(final String code) {
-        return (T) getCurrentSession().createCriteria(type).add(
-                Restrictions.eq("code", code)).uniqueResult();
+        return (T) getCurrentSession().createCriteria(type).add(Restrictions.eq("code", code)).uniqueResult();
     }
 
     @Override
@@ -74,8 +68,7 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
 
     @Override
     public List<T> findAll() {
-        return getCurrentSession().createCriteria(type).setResultTransformer(
-                Criteria.DISTINCT_ROOT_ENTITY).list();
+        return getCurrentSession().createCriteria(type).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
     @Override
@@ -93,7 +86,6 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
         criteria.setMaxResults(max);
 
         results.setResults(criteria.list());
-//        results.setResults(criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
         return results;
     }
 

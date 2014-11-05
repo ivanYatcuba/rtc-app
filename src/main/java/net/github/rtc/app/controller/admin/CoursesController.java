@@ -99,7 +99,7 @@ public class CoursesController {
     public String delete(@PathVariable final String courseCode) {
         final Course course = courseService.findByCode(courseCode);
         if (course.getStatus() != CourseStatus.PUBLISHED) {
-            courseService.delete(courseCode);
+            courseService.deleteByCode(courseCode);
         }
         return REDIRECT + STRING_ADMIN;
     }

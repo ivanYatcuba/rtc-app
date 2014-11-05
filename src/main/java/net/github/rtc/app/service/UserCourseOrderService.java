@@ -5,19 +5,17 @@ import net.github.rtc.app.model.user.UserRequestStatus;
 
 import java.util.List;
 
-/**
- * Created by ivan on 18.04.14.
- */
 public interface UserCourseOrderService {
-    void insert(UserCourseOrder request);
 
-    UserCourseOrder getUserOrder(long id);
+    UserCourseOrder create(UserCourseOrder request);
 
-    List<UserCourseOrder> getAll();
+    UserCourseOrder findByCode(String code);
+
+    List<UserCourseOrder> findAll();
 
     void update(UserCourseOrder request);
 
-    void delete(UserCourseOrder request);
+    void deleteByCode(String code);
 
     UserCourseOrder getUserOrderByUserCode(String userCode);
 

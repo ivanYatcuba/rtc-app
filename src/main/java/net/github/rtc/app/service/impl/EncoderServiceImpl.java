@@ -4,9 +4,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by denis on 13.10.14.
- */
 @Component("EncoderService")
 public class EncoderServiceImpl implements net.github.rtc.app.service.EncoderService {
     public String encode(CharSequence rawPassword) {

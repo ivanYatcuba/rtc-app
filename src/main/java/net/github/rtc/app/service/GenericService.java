@@ -1,5 +1,8 @@
 package net.github.rtc.app.service;
 
+import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
+
 import java.util.List;
 
 public interface GenericService<T> {
@@ -13,4 +16,6 @@ public interface GenericService<T> {
     void update(T type);
 
     List<T> findAll();
+
+    SearchResults<T> search(AbstractSearchCommand searchCommand);
 }

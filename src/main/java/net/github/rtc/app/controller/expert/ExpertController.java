@@ -27,7 +27,6 @@ public class ExpertController {
     private static final String ROOT = "portal/expert";
     private static final String STRING_USER = "user";
     private static final String REDIRECT_REQUESTS = "redirect:/expert/requests";
-
     @Autowired
     private CourseService courseService;
     @Autowired
@@ -39,31 +38,23 @@ public class ExpertController {
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public ModelAndView expertCourses() {
-        final ModelAndView mav = new ModelAndView(ROOT
-                + "/page/Coursesexpert");
-        final List<UserCourseOrder> orderList
-                = userCourseOrderService.getOrderByStatus(UserRequestStatus
-                .PENDING);
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/Coursesexpert");
+        final List<UserCourseOrder> orderList = userCourseOrderService.getOrderByStatus(UserRequestStatus.PENDING);
         final List<Request> requestsList = new ArrayList<>();
         if (!orderList.isEmpty()) {
             for (final UserCourseOrder order : orderList) {
                 try {
-                    final Request request
-                            = new Request((int) order.getId(),
-                            userService.findByCode(order.getUserCode())
-                                    .getName(), order.getReason(),
-                            courseService.findByCode(order.getCourseCode())
-                                    .getName(), order.getPosition().toString());
+                    final Request request = new Request((int) order.getId(),
+                      userService.findByCode(order.getUserCode()).getName(), order.getReason(),
+                      courseService.findByCode(order.getCourseCode()).getName(), order.getPosition().toString());
                     requestsList.add(request);
                 } catch (final Throwable t) {
                     System.out.print("error");
                 }
             }
         }
-        final String name = SecurityContextHolder
-                .getContext().getAuthentication().getName();
-        final User user
-                = userService.loadUserByUsername(name);
+        final String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        final User user = userService.loadUserByUsername(name);
         mav.addObject(STRING_USER, user);
         mav.addObject("requests", requestsList);
         return mav;
@@ -71,28 +62,26 @@ public class ExpertController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ModelAndView userCourses() {
-        final ModelAndView mav = new ModelAndView(ROOT
-                + "/page/expertAllcourse");
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/expertAllcourse");
         mav.addObject("courses", courseService.findAll());
         return mav;
     }
 
-    @RequestMapping(value = "/accept/{orderId}", method = RequestMethod.GET)
-    public String acceptRequest(@PathVariable final Integer orderId) {
-        changeOrderStatus(UserRequestStatus.ACCEPTED, orderId);
+    @RequestMapping(value = "/accept/{orderCode}", method = RequestMethod.GET)
+    public String acceptRequest(@PathVariable final String orderCode) {
+        changeOrderStatus(UserRequestStatus.ACCEPTED, orderCode);
         return REDIRECT_REQUESTS;
     }
 
-    @RequestMapping(value = "/decline/{orderId}", method = RequestMethod.GET)
-    public String declineRequest(@PathVariable final Integer orderId) {
-        changeOrderStatus(UserRequestStatus.REJECTED, orderId);
+    @RequestMapping(value = "/decline/{orderCode}", method = RequestMethod.GET)
+    public String declineRequest(@PathVariable final String orderCode) {
+        changeOrderStatus(UserRequestStatus.REJECTED, orderCode);
         return REDIRECT_REQUESTS;
     }
 
     private void changeOrderStatus(
-            final UserRequestStatus userRequestStatus, final Integer orderId) {
-        final UserCourseOrder order
-                = userCourseOrderService.getUserOrder(orderId.longValue());
+      final UserRequestStatus userRequestStatus, final String orderCode) {
+        final UserCourseOrder order = userCourseOrderService.findByCode(orderCode);
         order.setResponseDate(dateService.getCurrentDate());
         order.setStatus(userRequestStatus);
         userCourseOrderService.update(order);
