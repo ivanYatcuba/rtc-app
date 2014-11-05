@@ -143,11 +143,11 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormRadioButtons label path options class="" style="" default="">
+<#macro rtcFormRadioButtons label path options class="" style="" default="" disabled="">
     <@rtcFieldWrapper label path>
-        <@bind path/>
+        <#--<@bind path/>-->
         <#list options as value>
-            <input type="radio" class="${class}" style="${style}" name="${status.expression}" value="${value}"
+            <input type="radio" class="${class}" style="${style}" name="${status.expression}" ${disabled} value="${value}"
                 <#if value == default> checked </#if>
             <@closeTag/>
             ${value}
@@ -226,35 +226,13 @@
         </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormLabelTextOut label path messagePrefix="">
-<div class="form-group">
-    <label class="control-label col-md-3" >  <@spring.message label /> </label>
-    <#if path??>
-    <#if path? is_sequence>
-
-        <#list path as tmp>
-            <#if  messagePrefix == ""> ${tmp}
-            <#else>  <@spring.message "${messagePrefix}.${tmp}"/>
-            </#if>
-            <#if tmp_has_next>,</#if>
-        </#list>
-
-    <#else>
-    <p class="form-control-static">
-           <#if "${path}"??>${path}<#else>&nbsp</#if>
-    </p>
-    </#if>
-    </#if>
-</div>
- </#macro>
-<#macro rtcFormLabelOut label path messagePrefix="">
-<#--<div class="form-group">-->
-    <label><@spring.message label/>&nbsp</label>
+<#macro rtcFormLabelOut label path messagePrefix="" class="col-md-4">
+    <label class="${class}" ><@spring.message label/>&nbsp</label>
     <#if path??>
         <#if path? is_sequence>
             <#list path as tmp>
                 <#if  messagePrefix == ""> ${tmp}
-                <#else>  <@spring.message "${messagePrefix} ${tmp}"/>
+                <#else>  <@spring.message "${messagePrefix}.${tmp}"/>
                 </#if>
                 <#if tmp_has_next>,</#if>
             </#list>
@@ -263,7 +241,6 @@
                <#if "${path}"??>${path}<#else>&nbsp</#if>
         </#if>
     </#if>
-<#--</div>-->
 </#macro>
 
 <#macro rtcFormTextarea label path class="" style="">
