@@ -11,22 +11,28 @@ import static junit.framework.Assert.assertTrue;
 
 public class CustomTypeEditorTest {
     private static final String TEST_STRING = "X,Y,Z,";
-    private CustomTypeEditor customTagsEditor;
+    private CustomTypeEditor customTypeEditor;
 
     @Before
     public void setUp() {
-        customTagsEditor = new CustomTypeEditor();
+        customTypeEditor = new CustomTypeEditor();
     }
 
     @Test
     public void getAsTextTest() {
-        customTagsEditor.setValue(Arrays.asList("X", "Y", "Z"));
-        assertEquals(TEST_STRING, customTagsEditor.getAsText());
+        customTypeEditor.setValue(Arrays.asList("X", "Y", "Z"));
+        assertEquals(TEST_STRING, customTypeEditor.getAsText());
     }
 
     @Test
     public void setAsTextTest() {
-        customTagsEditor.setAsText(TEST_STRING);
-        assertTrue(((Set<String>)customTagsEditor.getValue()).containsAll(Arrays.asList("X", "Y", "Z")));
+        customTypeEditor.setAsText(TEST_STRING);
+        assertTrue(((Set<String>) customTypeEditor.getValue()).containsAll(Arrays.asList("X", "Y", "Z")));
+    }
+
+    @Test
+    public void getAsTextNullObj(){
+        customTypeEditor.setValue(null);
+        assertEquals("", customTypeEditor.getAsText());
     }
 }
