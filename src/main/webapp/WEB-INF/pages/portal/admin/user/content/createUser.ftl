@@ -39,14 +39,7 @@
         </#if>
     </div>
     <div class="col-md-6">
-        <@formMacro.rtcFormPasswordInput  "user.password" "user.password" "required"/>
-        <div class="controls">
-            <label class="col-md-3" style="margin-left: 8px" for="showPassword"></label>
-            <input id="showPassword"
-                   onchange="if ($('#password').get(0).type=='password') $('#password').get(0).type='text'; else $('#password').get(0).type='password';"
-                   name="showPassword" type="checkbox" value="false"
-                   style="margin: 0px 0px 0px;">  <@spring.message "user.showPassword"/>
-        </div>
+        <@formMacro.rtcFormPasswordInputWithCheckbox  "user.password" "user.password" "required"/>
     </div>
 </div>
 <div class="row"><div class="col-md-10"><hr/></div></div>
@@ -103,14 +96,14 @@
 <div class="row"><div class="col-md-10"><hr/></div></div>
 
 </#if>
-<script type="text/javascript" charset="utf8"
-        src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
+<#--<script type="text/javascript" charset="utf8"-->
+        <#--src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>-->
 
-<script>
-    $(function () {
-        addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")
-    });
-</script>
+<#--<script>-->
+    <#--$(function () {-->
+        <#--addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")-->
+    <#--});-->
+<#--</script>-->
 
 
 <script type="text/javascript">

@@ -36,7 +36,7 @@
         </div>
         <div class="row"></div>
     <@formMacro.rtcFormTextInput  "user.name" "user.name" "required" />
-    <@formMacro.rtcFormDateField  "user.birthDate" "input-medium required" />
+    <@formMacro.rtcFormDateField  "user.birthDate" "user.birthDate" />
     </div>
 </div>
 
@@ -85,7 +85,7 @@
 <!--Note-->
 <div class="row">
     <div class="col-md-12">
-    <@formMacro.rtcFormTextarea  "user.note" "user.note" "required" "style=\"width:60%;\" rows=\"3\"
+    <@formMacro.rtcFormTextarea  "user.note" "user.note" "required" "style=\"width:140%;\" rows=\"3\"
     maxlength=\"255\""/>
     </div>
 </div>

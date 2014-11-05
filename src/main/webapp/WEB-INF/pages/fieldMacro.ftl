@@ -252,7 +252,6 @@
     <label><@spring.message label/>&nbsp</label>
     <#if path??>
         <#if path? is_sequence>
-
             <#list path as tmp>
                 <#if  messagePrefix == ""> ${tmp}
                 <#else>  <@spring.message "${messagePrefix} ${tmp}"/>
@@ -312,7 +311,6 @@
     <@rtcFieldWrapper path path>
         <@spring.formInput path "class = \"form-control "+"${class}"+"\" "+"${style}"/>
         <script type="text/javascript">
-
             $(document).ready(function () {
                 var selector = "${path?substring(path?index_of(".")+1,path?length)}";
                 $("#"+selector).datepicker(
@@ -335,7 +333,6 @@
 <#macro rtcDateInput path attributes="">
     <@formInput path attributes/>
 <script type="text/javascript">
-
     $(function () {
         $("#${status.expression?replace('[','')?replace(']','')}").datepicker(
                 {
@@ -383,7 +380,6 @@
     $(document).ready(function () {
         $("#${formName}").validate({
         ${jsonRules}
-
             submitHandler: function (form) {
                 if (!this.wasSent) {
                     this.wasSent = true;
