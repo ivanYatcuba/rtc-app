@@ -12,9 +12,9 @@ public class CustomClassEditor extends PropertyEditorSupport {
 
     @Override
     public void setAsText(final String text) {
-        if (text.equals("User")){
+        if (("User").equals(text)) {
             this.setValue(User.class);
-        }else {
+        } else {
             this.setValue(Course.class);
         }
 
