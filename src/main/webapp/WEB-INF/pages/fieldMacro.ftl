@@ -227,8 +227,11 @@
         </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormLabelOut label path messagePrefix="" class="col-md-4">
-    <label class="${class}" ><@spring.message label/>&nbsp</label>
+<#macro rtcFormLabelOut label path messagePrefix="" class="">
+    <label style="float: left;
+        width: 13em;
+        text-align: right;
+        margin-bottom: 10px;" class="${class}" ><@spring.message label/>&nbsp</label>
     <#if path??>
         <#if path? is_sequence>
             <#list path as tmp>

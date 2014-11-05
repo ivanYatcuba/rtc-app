@@ -16,24 +16,27 @@
     <br>
 
     <div class="row">
-        <div class="col-md-12">
-              <@formMacro.rtcFormLabelOut "course.name" "${course.name}"/>
-        </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
+            <div class="col-md-12">
+            <@formMacro.rtcFormLabelOut "course.name" "${course.name}"/>
+            </div>
+            <div class="col-md-12">
             <@formMacro.rtcFormLabelOut "course.category" course.types/>
-        </div>
-        <div class="col-md-12">
+            </div>
+            <div class="col-md-12">
             <@formMacro.rtcFormLabelOut "course.capacity" "${course.capacity}"/>
+            </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
+            <div class="col-md-12">
             <@formMacro.rtcFormLabelOut "course.startDate" "${course.startDate?date?string('dd-MMM-yyyy')}"/>
-        </div>
-        <div class="col-md-12">
+            </div>
+            <div class="col-md-12">
             <@formMacro.rtcFormLabelOut "course.endDate" "${course.endDate?date?string('dd-MMM-yyyy')}"/>
-        </div>
-        <div class="col-md-12">
+            </div>
+            <div class="col-md-12">
             <@formMacro.rtcFormLabelOut "course.tags" course.tags/>
-        </div>
+            </div></div>
     </div>
 
     &NonBreakingSpace;

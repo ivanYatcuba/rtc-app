@@ -1,4 +1,5 @@
-<#import "../../../../fieldMacro.ftl" as FormMacro />
+<#import "../../../../fieldMacro.ftl" as formMacro />
+
 
 <style>
     label {
@@ -8,14 +9,21 @@
         margin-bottom: 10px;
     }
 </style>
-
 <h4 class="page-header"><@spring.message "user.details"/></h4>
 <div style="width: 85%">
 <div class="row">
     <div class="col-md-6">
 
-    <div class="col-md-12">
-    <@formMacro.rtcFormRadioButtons "user.gender" "user.gender", ["Male", "Female"] "required",  "", "${user.gender}"  "disabled"/>
+    <div class="col-md-12" >
+        <label style="float: left;
+        width: 11.9em;
+        text-align: right;
+        margin-bottom: 10px;" class=""><@spring.message "user.gender"/></label>&nbsp&nbsp&nbsp
+        <#list ["Male", "Female"] as value>
+            <input type="radio" name="gender" disabled value="${value}"
+            <#if value == user.gender> checked </#if>>
+            ${value}
+        </#list>
     </div>
 
     <div class="col-md-12">
@@ -53,11 +61,11 @@
 <div class="row">
 
     <div class="col-md-6">
-     <@FormMacro.rtcFormLabelOut "user.email" "${user.email}" "" "col-md-5"/>
+     <@formMacro.rtcFormLabelOut "user.email" "${user.email}" "" "col-md-5"/>
     </div>
 
     <div class="col-md-6">
-        <@FormMacro.rtcFormLabelOut "user.role" user.authorities "user.role" "col-md-5"/>
+        <@formMacro.rtcFormLabelOut "user.role" user.authorities "user.role" "col-md-5"/>
     </div>
 </div>
 
@@ -65,11 +73,11 @@
 
 <div class="row">
     <div class="col-md-6">
-        <@FormMacro.rtcFormLabelOut "user.city" "${user.city}" "" "col-md-5"/>
+        <@formMacro.rtcFormLabelOut "user.city" "${user.city}" "" "col-md-5"/>
     </div>
 
     <div class="col-md-6">
-        <@FormMacro.rtcFormLabelOut "user.phone" "${user.phone}" "" "col-md-5"/>
+        <@formMacro.rtcFormLabelOut "user.phone" "${user.phone}" "" "col-md-5"/>
     </div>
 </div>
 <hr>
@@ -78,18 +86,18 @@
     <div class="col-md-6">
 
         <div class="col-md-12">
-        <@FormMacro.rtcFormLabelOut "user.university" "${user.university}" "" "col-md-5"/>
+        <@formMacro.rtcFormLabelOut "user.university" "${user.university}" "" "col-md-5"/>
         </div>
 
 
         <div class="col-md-12">
-        <@FormMacro.rtcFormLabelOut "user.faculty" "${user.faculty}" "" "col-md-5"/>
+        <@formMacro.rtcFormLabelOut "user.faculty" "${user.faculty}" "" "col-md-5"/>
          </div>
 
    </div>
 
     <div class="col-md-6">
-    <@FormMacro.rtcFormLabelOut "user.speciality" "${user.speciality}" "" "col-md-5"/>
+    <@formMacro.rtcFormLabelOut "user.speciality" "${user.speciality}" "" "col-md-5"/>
     </div>
 </div>
 
@@ -98,18 +106,18 @@
 <div class="row">
 
     <div class="col-md-6">
-            <@FormMacro.rtcFormLabelOut "user.programmingLanguages" user.programmingLanguages  "" "col-md-5"/>
+            <@formMacro.rtcFormLabelOut "user.programmingLanguages" user.programmingLanguages  "" "col-md-5"/>
     </div>
 
     <div class="col-md-6">
-      <@FormMacro.rtcFormLabelOut "user.english" "${user.english}" "" "col-md-5"/>
+      <@formMacro.rtcFormLabelOut "user.english" "${user.english}" "" "col-md-5"/>
     </div>
 </div>
 <hr>
 
 <div class="row">
     <div class="col-md-6">
-    <@FormMacro.rtcFormLabelOut "user.note" "${user.note}" "" "col-md-5"/>
+    <@formMacro.rtcFormLabelOut "user.note" "${user.note}" "" "col-md-5"/>
     </div>
 </div>
 <hr>
@@ -130,7 +138,8 @@
                 </p>
             </div>
         </div>
-             <@FormMacro.rtcFormLabelOut "user.registerDate" "${user.registerDate? string['dd-MMM-yyyy']}" "" "col-md-5" />
+             <@formMacro.rtcFormLabelOut "user.registerDate" "${user.registerDate? string['dd-MMM-yyyy']}" ""
+             "col-md-5" />
     </div>
 
 </div>
