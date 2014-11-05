@@ -16,7 +16,7 @@ public final class ExportFieldExtractor {
     }
 
     public static List<Field> getFieldsFromClass(
-      final Class exportClass, final List<String> fields) throws NoSuchFieldException {
+      final Class exportClass, final List<String> fields){
         final List<Field> classFields = new ArrayList<>();
         for (final Field f : exportClass.getDeclaredFields()) {
             if (f.isAnnotationPresent(ForExport.class) && fields.contains(f.getAnnotation(ForExport.class).value())) {
