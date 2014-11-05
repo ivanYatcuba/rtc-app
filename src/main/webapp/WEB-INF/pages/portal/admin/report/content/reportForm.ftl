@@ -3,41 +3,24 @@
         <@formMacro.rtcFormTextInput "report.name" "report.name" "required" ""/>
     </div>
     <div class="col-md-6" >
-            <@formMacro.rtcFormSingleSelect "report.lable.exportFormate" "report.exportFormat" formats "required" "" "report.exportFormat." ""/>
+        <@formMacro.rtcFormSingleSelect "report.lable.exportFormate" "report.exportFormat" formats "required" "" "report.exportFormat." ""/>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6">
-        <#--<@formMacro.rtcFormSingleSelect "report.lable.exportClass" "report.exportFormat" types "required" "" "report.exportClass." ""/>-->
+        <@formMacro.rtcFormSingleSelect "report.lable.exportClass" "report.exportClass" types "required" "" "report.exportClass." ""/>
     </div>
-
-
-    <#--<div class="form-group">
-        <label class="control-label col-md-2">*<@spring.message "report.exportClass"/></label>
-
-        <div class="col-md-4">
-        <@spring.bind "types" />
-            <select id="selectedType" name="selectedType" class="required">
-            <#list types as type>
-                <option value="${type}"
-                        <#if report.exportClass?? && type == report.exportClass.simpleName>selected</#if>>${type}</option>
-            </#list>
-            </select>
-        </div>
-    </div>-->
 </div>
-&NonBreakingSpace;
 <hr>
 <div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <div class="col-md-4"
-                 for="addFieldH"><@spring.message "report.fields"/></div>
-            <div class="col-md-6" style="text-align: left; margin-left: -170px">
-                <div id="fields"></div>
-                <a id="addFieldH" href="#" onclick="addField()">Add Field</a>
-            </div>
-        </div>
+    <@spring.message "report.fields"/>
+</div>
+<div class="row">
+    <div id="fields" class="col-md-2 col-md-offset-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-2">
+        <a id="addFieldH" href="#">Add Field</a>
     </div>
 </div>
 
@@ -46,10 +29,17 @@
     var fields;
     var currentFieldId = 0;
     var fieldsCount = 0;
-    function addField() {
-        $("#fields").append(getFieldsSelect(fields));
-        fieldsCount++;
-    }
+    $(function() {
+        $("#addFieldH").on("click", function (event) {
+            event.preventDefault();
+            $("#fields").append(getFieldsSelect(fields));
+            fieldsCount++;
+        });
+        $("#exportClass").on("change", function (event) {
+            event.preventDefault();
+            getFields(true);
+        });
+    });
 
     function removeField(field) {
         $("#" + field).remove();
@@ -59,20 +49,18 @@
         $("#" + field + " select").val(selection);
     }
 
-    function getFieldsSelect(list) {
-        var fieldsSelect = "<div id=\"" + currentFieldId + "\"><label for=\"fieldsCount\"></label><select name=\"reportFields\">";
-        for (var i = 0; i < list.length; i++) {
-            fieldsSelect += "<option>" + list[i] + "</option>";
+    function getFieldsSelect(fields) {
+        var fieldsSelect = "<div class='form-group' id='" + currentFieldId + "'><label for=\"fieldsCount\"></label><select name='reportFields' class='form-control'>";
+        for (var i = 0; i < fields.length; i++) {
+            fieldsSelect += "<option>" + fields[i] + "</option>";
         }
-        fieldsSelect += "</select>" +
-                "<button onclick='removeField(" + currentFieldId + ")' >-</button>"
-                + "<br/></div>";
+        fieldsSelect += "</select><button onclick='removeField(" + currentFieldId + ")' >-</button><br/></div>";
         currentFieldId++;
         return fieldsSelect;
     }
 
     function getFields(clean) {
-        var selectedType = $('#selectedType').val();
+        var selectedType = $('#exportClass').val();
         var data = 'selectedType=' + encodeURIComponent(selectedType);
         $.ajax({
             url: '<@spring.url "/admin/export/getFields" />',
@@ -101,20 +89,16 @@
         return false;
     }
 
-    $(document).ready(function () {
+    $(function () {
         getFields(false);
         $('#selectedType').change(function (event) {
             getFields(true);
         });
-
         $("form input[type=submit]").click(function(event){
             if(fieldsCount == 0){
                 event.preventDefault();
                 alert("Add fields!");
             }
         });
-
     });
-
-
 </script>

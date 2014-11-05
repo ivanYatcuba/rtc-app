@@ -6,12 +6,12 @@ import org.junit.Test;
 import org.junit.internal.runners.JUnit4ClassRunner;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(JUnit4ClassRunner.class)
@@ -36,5 +36,17 @@ public class CustomTagsEditorTest {
         customTagsEditor.setAsText(TEST_STRING);
         List<Tag> tags =  Arrays.asList(new Tag("X"), new Tag("Y"), new Tag("Z"));
         assertTrue(tags.containsAll((Collection) customTagsEditor.getValue()));
+    }
+
+    @Test
+    public void setAsTextIfIsEmptyTest(){
+        customTagsEditor.setAsText("");
+        assertNull(customTagsEditor.getValue());
+    }
+
+    @Test
+    public void getAsTextNullObj(){
+        customTagsEditor.setValue(null);
+        assertEquals("", customTagsEditor.getAsText());
     }
 }

@@ -23,15 +23,16 @@ public class CustomRoleEditor extends PropertyEditorSupport {
        this.userService = userService;
     }
 
-    @Override public void setAsText(final String text) {
-            final List<String> rolesSplit = Arrays.asList(text.split(STRING_COMMA));
-            final Collection<Role> roles = new ArrayList<>();
-            if (!rolesSplit.get(0).isEmpty()) {
-                for (final String roleName : rolesSplit) {
-                    roles.add(userService.getRoleByType(RoleType.getTypeByString(roleName)));
-                }
+    @Override
+    public void setAsText(final String text) {
+        final List<String> rolesSplit = Arrays.asList(text.split(STRING_COMMA));
+        final Collection<Role> roles = new ArrayList<>();
+        if (!rolesSplit.get(0).isEmpty()) {
+            for (final String roleName : rolesSplit) {
+               roles.add(userService.getRoleByType(RoleType.getTypeByString(roleName)));
             }
-            this.setValue(roles);
         }
+        this.setValue(roles);
+    }
 
 }
