@@ -8,7 +8,7 @@
 </div>
 <div class="row">
     <div class="col-md-6">
-        <#--<@formMacro.rtcFormSingleSelect "report.lable.exportClass" "report.exportFormat" types "required" "" "report.exportClass." ""/>-->
+        <@formMacro.rtcFormSingleSelect "report.lable.exportClass" "report.exportFormat" types "required" "" "report.exportClass." ""/>
     </div>
 
 
@@ -26,7 +26,6 @@
         </div>
     </div>-->
 </div>
-&NonBreakingSpace;
 <hr>
 <div class="row">
     <div class="col-md-12">
@@ -35,7 +34,7 @@
                  for="addFieldH"><@spring.message "report.fields"/></div>
             <div class="col-md-6" style="text-align: left; margin-left: -170px">
                 <div id="fields"></div>
-                <a id="addFieldH" href="#" onclick="addField()">Add Field</a>
+                <a id="addFieldH" href="#" ">Add Field</a>
             </div>
         </div>
     </div>
@@ -46,10 +45,14 @@
     var fields;
     var currentFieldId = 0;
     var fieldsCount = 0;
-    function addField() {
-        $("#fields").append(getFieldsSelect(fields));
-        fieldsCount++;
-    }
+    $(function() {
+        $("#addFieldH").on("click", function (event) {
+            event.preventDefault();
+            $("<div><@formMacro.rtcFormTextInput 'report.name' 'report.name' 'required' ''/></div>").appendTo("#fields");
+        });
+    })
+       /* $("#fields").append(getFieldsSelect(fields));
+        fieldsCount++;*/
 
     function removeField(field) {
         $("#" + field).remove();
@@ -101,7 +104,7 @@
         return false;
     }
 
-    $(document).ready(function () {
+    $(function () {
         getFields(false);
         $('#selectedType').change(function (event) {
             getFields(true);
