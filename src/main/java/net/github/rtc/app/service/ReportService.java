@@ -3,26 +3,19 @@ package net.github.rtc.app.service;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
-import org.hibernate.criterion.DetachedCriteria;
 
 import java.util.List;
 
-/**
- * Created by Ivan Yatcuba on 8/16/14.
- */
-
 public interface ReportService {
-    void insert(ReportDetails report);
+    ReportDetails create(ReportDetails report);
 
-    ReportDetails findReportByCode(String code);
+    ReportDetails findByCode(String code);
 
-    List<ReportDetails> getAll();
+    List<ReportDetails> findAll();
 
     void update(ReportDetails report);
 
-    void delete(ReportDetails report);
-
-    SearchResults<ReportDetails> search(DetachedCriteria criteria, int start, int max);
+    void deleteByCode(String code);
 
     SearchResults<ReportDetails> search(AbstractSearchCommand searchCommand);
 

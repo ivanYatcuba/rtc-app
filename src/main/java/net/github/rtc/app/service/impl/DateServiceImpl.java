@@ -7,9 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-/**
- * Created by denis on 13.10.14.
- */
 @Component("DateService")
 public class DateServiceImpl implements DateService {
     public Date getCurrentDate() {

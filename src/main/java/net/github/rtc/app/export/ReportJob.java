@@ -9,10 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * Created by Ivan Yatcuba on 8/5/14.
- * Refactored by Vasiliy Sobol on 1/10/14
- */
 @Component
 public class ReportJob {
     @Autowired
@@ -20,7 +16,7 @@ public class ReportJob {
 
     @Scheduled(cron = "0 0/15 * * * ?")
     public void reportUpdate() {
-        final List<ReportDetails> myList = reportService.getAll();
+        final List<ReportDetails> myList = reportService.findAll();
         for (ReportDetails report : myList) {
             reportService.compileReport(report);
         }

@@ -8,10 +8,8 @@ import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
-import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomClassEditor;
 import net.github.rtc.util.converter.ValidationContext;
-import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,12 +47,10 @@ public class ExportController {
     private static final String REDIRECT_EXPORT = "redirect:/admin/export/";
     private static final String PAGE_REPORT_LIST = "/page/reportList";
     private static Logger log = LoggerFactory.getLogger(ExportController.class.getName());
-
     @Autowired
     private ReportService reportService;
     @Autowired
     private ValidationContext validationContext;
-
     @Value("${report.export.path}")
     private String exportPath;
 
@@ -63,60 +59,48 @@ public class ExportController {
         return viewAll(1);
     }
 
-
     @RequestMapping(value = "/viewAll/{numberOfPage}",
-            method = RequestMethod.POST)
+      method = RequestMethod.POST)
     public ModelAndView viewAll(@PathVariable final int numberOfPage) {
 
-        final ModelAndView mav = new ModelAndView(ROOT
-                + PAGE_REPORT_LIST);
-        final SearchResults<ReportDetails> results
-                = reportService.search(DetachedCriteria.forClass(ReportDetails.class),
-                numberOfPage, REPORTS_PER_PAGE);
-        mav.addAllObjects(results.getPageModel(REPORTS_PER_PAGE, numberOfPage));
+        final ModelAndView mav = new ModelAndView(ROOT + PAGE_REPORT_LIST);
+        final List<ReportDetails> results = reportService.findAll();
 
-        mav.addObject("reports", results.getResults());
+        mav.addObject("reports", results);
         return mav;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView openCreatePage() {
         final Set<String> formatLables = getTypes().keySet();
-        final ModelAndView mav = new ModelAndView(
-                "portal/admin/page/reportCreate");
+        final ModelAndView mav = new ModelAndView("portal/admin/page/reportCreate");
         mav.addObject(STRING_TYPES, formatLables);
-        mav.addObject(STRING_VALIDATION_RULES,
-                validationContext.get(ReportDetails.class));
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(ReportDetails.class));
         return mav;
     }
 
     @RequestMapping(value = "/update/{reportCode}", method = RequestMethod.GET)
     public ModelAndView openUpdatePage(@PathVariable final String reportCode) {
-        final ModelAndView mav = new ModelAndView(
-                "portal/admin/page/reportEdit");
+        final ModelAndView mav = new ModelAndView("portal/admin/page/reportEdit");
         final Set<String> formatLables = getTypes().keySet();
-        final ReportDetails reportDetails = reportService.findReportByCode(
-                reportCode);
+        final ReportDetails reportDetails = reportService.findByCode(reportCode);
         mav.addObject(STRING_REPORT, reportDetails);
         mav.addObject(STRING_TYPES, formatLables);
-        mav.addObject(STRING_VALIDATION_RULES,
-                validationContext.get(ReportDetails
-                        .class));
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(ReportDetails
+          .class));
         return mav;
     }
 
     @RequestMapping(value = "/{reportCode}", method = RequestMethod.GET)
     public ModelAndView viewReport(@PathVariable final String reportCode) {
-        final ModelAndView mav = new ModelAndView(
-                "portal/admin/page/reportDetails");
-        mav.addObject(STRING_REPORT,
-                reportService.findReportByCode(reportCode));
+        final ModelAndView mav = new ModelAndView("portal/admin/page/reportDetails");
+        mav.addObject(STRING_REPORT, reportService.findByCode(reportCode));
         return mav;
     }
 
     @RequestMapping(value = "/delete/{reportCode}", method = RequestMethod.GET)
     public String deleteReport(@PathVariable final String reportCode) {
-        reportService.delete(reportService.findReportByCode(reportCode));
+        reportService.deleteByCode(reportCode);
         return "redirect:/admin/export/viewAll";
     }
 
@@ -124,10 +108,10 @@ public class ExportController {
     public
     @ResponseBody
     ModelAndView createHandler(
-            @ModelAttribute("report") final ReportDetails report, @RequestParam(value = "reportFields",
-            required = false) final List<String> reportFields) {
+      @ModelAttribute("report") final ReportDetails report, @RequestParam(value = "reportFields",
+      required = false) final List<String> reportFields) {
         report.setFields(reportFields);
-        reportService.insert(report);
+        reportService.create(report);
         return new ModelAndView(REDIRECT_EXPORT + report.getCode());
     }
 
@@ -135,10 +119,10 @@ public class ExportController {
     public
     @ResponseBody
     ModelAndView editHandler(
-            @ModelAttribute("report") final ReportDetails report,
-            @RequestParam final String selectedType,
-            @RequestParam(value = "reportFields",
-                    required = false) final List<String> reportFields) {
+      @ModelAttribute("report") final ReportDetails report,
+      @RequestParam final String selectedType,
+      @RequestParam(value = "reportFields",
+        required = false) final List<String> reportFields) {
         report.setExportClass(getTypes().get(selectedType));
         report.setFields(reportFields);
         reportService.update(report);
@@ -152,17 +136,13 @@ public class ExportController {
         return getClassFields(getTypes().get(selectedType));
     }
 
-
     @RequestMapping(value = "/download/{reportCode}", method = RequestMethod.GET)
     public void downloadUserExport(
-            final HttpServletResponse response,
-            @PathVariable final String reportCode) {
+      final HttpServletResponse response, @PathVariable final String reportCode) {
         try {
-            final ReportDetails reportDetails = reportService.findReportByCode(
-                    reportCode);
-            final StringBuilder filePath = new StringBuilder(exportPath).append(
-                    "/").append(reportCode).append(".").
-                    append(reportDetails.getExportFormat().toString().toLowerCase());
+            final ReportDetails reportDetails = reportService.findByCode(reportCode);
+            final StringBuilder filePath = new StringBuilder(exportPath).append("/").append(reportCode).append(".").
+              append(reportDetails.getExportFormat().toString().toLowerCase());
             final File downloadFile = new File(filePath.toString());
             final FileInputStream inputStream = new FileInputStream(downloadFile);
 
@@ -170,8 +150,7 @@ public class ExportController {
             response.setContentLength((int) downloadFile.length());
 
             final String headerKey = "Content-Disposition";
-            final String headerValue = String.format(
-                    "attachment; " + "filename=\"%s\"", reportDetails.getName());
+            final String headerValue = String.format("attachment; " + "filename=\"%s\"", reportDetails.getName());
             response.setHeader(headerKey, headerValue);
             final OutputStream outStream = response.getOutputStream();
             final byte[] buffer = new byte[BUFFER_SIZE];
@@ -205,7 +184,7 @@ public class ExportController {
     }
 
     public List<String> getClassFields(final Class aClass) {
-        return ExportFieldExtractor.getAviableFieldList(aClass);
+        return ExportFieldExtractor.getAvailableFieldList(aClass);
     }
 
     @ModelAttribute("stats")

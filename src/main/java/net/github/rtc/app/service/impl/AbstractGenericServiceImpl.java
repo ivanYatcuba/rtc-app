@@ -4,6 +4,8 @@ import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.service.CodeGenerationService;
 import net.github.rtc.app.service.GenericService;
+import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,18 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
 
     @Autowired
     private CodeGenerationService codeGenerationService;
+
+    abstract protected GenericDao<T> getDao();
+
+    protected String getCode() {
+        String code = codeGenerationService.generate();
+        while (true) {
+            if (findByCode(code) == null) {
+                return code;
+            }
+            code = codeGenerationService.generate();
+        }
+    }
 
     @Override
     public void deleteByCode(String code) {
@@ -31,16 +45,6 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
         return getDao().create(t);
     }
 
-    protected String getCode() {
-        String code = codeGenerationService.generate();
-        while (true) {
-            if (findByCode(code) == null) {
-                return code;
-            }
-            code = codeGenerationService.generate();
-        }
-    }
-
     @Override
     public void update(T t) {
         getDao().update(t);
@@ -51,5 +55,8 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
         return getDao().findAll();
     }
 
-    abstract protected GenericDao<T> getDao();
+    @Override
+    public SearchResults<T> search(AbstractSearchCommand searchCommand) {
+        return getDao().search(searchCommand);
+    }
 }

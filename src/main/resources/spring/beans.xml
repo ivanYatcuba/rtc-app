@@ -21,14 +21,14 @@
             <key>
                 <value type="java.lang.Class">net.github.rtc.app.model.user.User</value>
             </key>
-            <ref bean="userService"/>
+            <ref bean="userServiceImpl"/>
         </entry>
 
         <entry>
             <key>
                 <value type="java.lang.Class">net.github.rtc.app.model.course.Course</value>
             </key>
-            <ref bean="coursesService"/>
+            <ref bean="courseServiceImpl"/>
         </entry>
     </util:map>
 </beans>
