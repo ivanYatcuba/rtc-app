@@ -36,7 +36,7 @@ public class ExpertControllerTest {
 
     private static final String EMAIL = "vasya@mail.ru";
 
-    private static final Integer ORDERID = Integer.valueOf(1);
+    private static final Integer ORDER_ID = Integer.valueOf(1);
 
     private static final String CURRENT_USER = "?currentUser=vasya%40mail.ru";
 
@@ -91,16 +91,16 @@ public class ExpertControllerTest {
 
     @Test
     public void testAcceptRequest() throws Exception {
-        when(userCourseOrderService.getUserOrder(ORDERID.longValue())).thenReturn(new UserCourseOrder());
-        mockMvc.perform(get("/expert/accept/{orderId}", ORDERID))
+        when(userCourseOrderService.getUserOrder(ORDER_ID.longValue())).thenReturn(new UserCourseOrder());
+        mockMvc.perform(get("/expert/accept/{orderId}", ORDER_ID))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("/expert/requests" + CURRENT_USER));
     }
 
     @Test
     public void testDeclineRequest() throws Exception {
-        when(userCourseOrderService.getUserOrder(ORDERID.longValue())).thenReturn(new UserCourseOrder());
-        mockMvc.perform(get("/expert/decline/{orderId}", ORDERID))
+        when(userCourseOrderService.getUserOrder(ORDER_ID.longValue())).thenReturn(new UserCourseOrder());
+        mockMvc.perform(get("/expert/decline/{orderId}", ORDER_ID))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("/expert/requests" + CURRENT_USER));
     }
