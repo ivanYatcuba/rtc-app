@@ -1,6 +1,5 @@
-package net.github.rtc.app.controller;
+package net.github.rtc.app.controller.expert;
 
-import net.github.rtc.app.controller.expert.ExpertController;
 import net.github.rtc.app.model.user.Request;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserCourseOrder;
