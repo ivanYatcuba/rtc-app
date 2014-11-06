@@ -1,4 +1,5 @@
-
+<#ftl strip_whitespace=true>
+<#escape x as x?html>
 <#include "/spring.ftl"/>
 
 <#macro rtcIncludeLink>
@@ -354,7 +355,7 @@
         </script>
     </@rtcFieldWrapper>
 </#macro>
-
+</#escape>
 <#macro rtcFormValidation formName jsonRules >
 <script src="<@spring.url'/resources/js/jquery/jquery.validate.min.js'/>"></script>
 <script>
