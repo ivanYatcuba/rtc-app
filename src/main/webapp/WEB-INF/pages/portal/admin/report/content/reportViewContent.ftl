@@ -11,24 +11,24 @@
 </style>
 <div class="row">
     <div class="col-md-6">
-        <label><@spring.message "report.name"/></label>
-
-        <p>&nbsp${report.name}</p>
-        <label><@spring.message "report.exportClass"/></label>
-
-        <p>&nbsp${report.exportClass.simpleName}</p>
+        <div class="col-md-12">
+            <@formMacro.rtcFormLabelOut "report.name" "${report.name}"/>
+        </div>
+        <div class="col-md-12">
+            <@formMacro.rtcFormLabelOut "report.exportClass" "${report.exportClass.simpleName}"/>
+        </div>
     </div>
     <div class="col-md-6">
-        <label><@spring.message "report.exportFormat"/></label>
-
-        <p>&nbsp${report.exportFormat}</p>
+        <div class="col-md-12">
+            <@formMacro.rtcFormLabelOut "report.exportFormat" "${report.exportFormat}"/>
+        </div>
     </div>
 </div>
 &NonBreakingSpace;
 <hr>
 <div class="row">
     <div class="col-md-6">
-        <p style="margin-left: 6em"><@spring.message "report.fields"/></p>
+        <p style="margin-left: 6em"><b><@spring.message "report.fields"/></b></p>
         <#if report.fields??>
             <#list report.fields as field>
                 <label></label>
@@ -40,11 +40,5 @@
 </div>
 <hr>
 <div class="row">
-    <div class="col-md-6"></div>
-    <div class="col-md-5" style="text-align: right">
-        <a href="<@spring.url "/admin/export/update/${report.code}" />">
-            <button class="btn"><@spring.message "action.edit"/></button>
-        </a> or
-        <a href="<@spring.url "/admin/export/viewAll" />"><@spring.message "action.cancel"/></a>
-    </div>
+<@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/export/update/${report.code}" "action.cancel" "/admin/export/viewAll"/>
 </div>

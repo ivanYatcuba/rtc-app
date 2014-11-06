@@ -44,7 +44,7 @@ public class ExpertController {
         if (!orderList.isEmpty()) {
             for (final UserCourseOrder order : orderList) {
                 try {
-                    final Request request = new Request((int) order.getId(),
+                    final Request request = new Request(order.getCode(), (int) order.getId(),
                       userService.findByCode(order.getUserCode()).getName(), order.getReason(),
                       courseService.findByCode(order.getCourseCode()).getName(), order.getPosition().toString());
                     requestsList.add(request);

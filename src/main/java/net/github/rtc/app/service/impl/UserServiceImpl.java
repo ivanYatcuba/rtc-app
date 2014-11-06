@@ -42,6 +42,12 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     }
 
     @Override
+    public void update(final User user) {
+        user.setPassword(encoderService.encode(user.getPassword()));
+        super.update(user);
+    }
+
+    @Override
     public Class<User> getType() {
         return User.class;
     }

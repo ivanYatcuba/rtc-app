@@ -19,10 +19,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
@@ -80,37 +78,17 @@ public class UserController {
     /**
      * Process the request to post entered user in the form
      *
-     * @param user          course object
-     * @param bindingResult binding user result
-     * @param session       current session
+     * @param user course object
      * @return if all is OK the redirect to view user details
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView update(
-      @ModelAttribute(STRING_USER) final User user, final BindingResult bindingResult, final SessionStatus session) {
-        if (bindingResult.hasErrors()) {
-            return new ModelAndView(STRING_REDIRECT + ROOT + "/edit/");
-        }
+      @ModelAttribute(STRING_USER) final User user) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
-        user.setId(userService.findByCode(user.getCode()).getId());
         userService.update(user);
-        session.setComplete();
         final Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(request);
         return new ModelAndView(STRING_REDIRECT + "user/view");
-    }
-
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(
-      @ModelAttribute(STRING_USER) final User user, final BindingResult bindingResult, final SessionStatus session) {
-        if (bindingResult.hasErrors()) {
-            return new ModelAndView(STRING_REDIRECT + ROOT + "/register/");
-        }
-        user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
-        user.setRegisterDate(dateService.getCurrentDate());
-        userService.create(user);
-        session.setComplete();
-        return new ModelAndView("redirect:/login/");
     }
 
     @RequestMapping(value = "/userCourses", method = RequestMethod.GET)

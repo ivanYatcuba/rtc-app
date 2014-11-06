@@ -9,12 +9,7 @@
 
     <!--Create & Cancel-->
     <div class="row-fluid span12" style="margin-left: 1px">
-        <div class="span6">
-        </div>
-        <div class="span5" style="text-align: right">
-            <input type="submit" class="btn" value="Update">
-            or
-            <a href="<@spring.url "/admin/export/${report.code}" />">Cancel</a>
-        </div>
+    <@formMacro.rtcSubmitDoOrCancel "action.update" "/admin/export/update/${report.code}" "action.cancel"
+    "/admin/export/viewAll"/>
     </div>
 </form>

@@ -4,6 +4,7 @@ package net.github.rtc.app.model.user;
  * Created by ivan on 24.04.14.
  */
 public class Request {
+    private String orderCode;
     private long orderId;
     private String traineeName;
     private String reason;
@@ -14,11 +15,13 @@ public class Request {
     }
 
     public Request(
-      final Integer orderId,
+      final String orderCode,
+      final long orderId,
       final String traineeName,
       final String reason,
       final String courseName,
       final String speciality) {
+        this.orderCode = orderCode;
         this.orderId = orderId;
         this.traineeName = traineeName;
         this.reason = reason;
@@ -64,5 +67,13 @@ public class Request {
 
     public void setSpeciality(final String speciality) {
         this.speciality = speciality;
+    }
+
+    public String getOrderCode() {
+        return orderCode;
+    }
+
+    public void setOrderCode(final String orderCode) {
+        this.orderCode = orderCode;
     }
 }

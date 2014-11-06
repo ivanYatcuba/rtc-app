@@ -8,7 +8,7 @@
                 <li><a href="#">Courses</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><a href="<@spring.url "/user/register" />">Register</a></li>
+                <li><a href="<@spring.url "/register" />">Register</a></li>
             </ul>
 
         <#if "${content}" != "/user/login">

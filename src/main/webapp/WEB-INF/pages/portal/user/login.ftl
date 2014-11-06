@@ -7,19 +7,14 @@
     </div>
 </#if>
     <form name="f" action= <@spring.url "/j_spring_security_check"/> method= "POST">
-    <scripttype="text/javascript" src="/resources/css/js/jquery.js"></script>
-    <script src = "//code.jquery.com/jquery-1.9.1.js" ></script>
-
-    <div align="left" style="margin: 0 330 ">
-        <span class="message"><b>Please sign in</b></span>
-    </div>
 
     <div>
-        <p><input id="username" name="j_username"
+        <div class="message" style="margin-right: 140px"><h4>Please sign in</h4></div>
+        <input class="form-control" id="username" name="j_username"
                   style="width:250px;height:35px" placeholder="E-mail"
                   type="text"></p>
 
-        <p><input id="password" name="j_password"
+        <p><input class="form-control" id="password" name="j_password"
                   style="width:250px;height:35px" placeholder="Password"
                   title="password"
                   type="password"></p>
@@ -46,8 +41,8 @@
             me
         </p>
 
-        <p><input style="width:250px;height:35px" id="signin_submit"
-                  value="Sign in" type="submit" name="submit"></p>
+        <input class="btn btn-primary" style="width:250px;height:35px" id="signin_submit"
+                  value="Sign in" type="submit" name="submit">
 
 
     </div>

@@ -1,5 +1,5 @@
-<div class="span4"
-     style="word-wrap: break-word; border: solid 1px #008000;text-align: center;margin-top:10px; margin-left: 5px;">
+<div class="col-md-3" style="word-wrap: break-word; border: solid 1px #008000;text-align: center;margin-top:10px;
+margin-left: 5px;">
     <a href="<@spring.url'/user/courseDetails/${course.code}'/>">${course.name} </a>
     <br>
 
@@ -12,5 +12,5 @@
     <div class="userCourses">${course.description}</div>
     <br>
 
-    <div><#noescape>${orderStatus}</#noescape></div>
+    <div>${orderStatus}</div>
 </div>

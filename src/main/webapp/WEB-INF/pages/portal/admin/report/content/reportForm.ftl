@@ -13,10 +13,10 @@
 </div>
 <hr>
 <div class="row">
-    <@spring.message "report.fields"/>
+    <b><@spring.message "report.fields"/></b>
 </div>
 <div class="row">
-    <div id="fields" class="col-md-2 col-md-offset-2"></div>
+    <div id="fields" class="col-md-3 col-md-offset-2"></div>
 </div>
 <div class="row">
     <div class="col-md-6 col-md-offset-2">
@@ -32,7 +32,7 @@
     $(function() {
         $("#addFieldH").on("click", function (event) {
             event.preventDefault();
-            $("#fields").append(getFieldsSelect(fields));
+            $("#fields").append(getFieldsSelect(fields, ""));
             fieldsCount++;
         });
         $("#exportClass").on("change", function (event) {
@@ -46,15 +46,23 @@
         fieldsCount--;
     }
     function setFieldSelection(field, selection) {
+        alert(selection)
         $("#" + field + " select").val(selection);
     }
 
-    function getFieldsSelect(fields) {
-        var fieldsSelect = "<div class='form-group' id='" + currentFieldId + "'><label for=\"fieldsCount\"></label><select name='reportFields' class='form-control'>";
+    function getFieldsSelect(fields, checked="") {
+        var fieldsSelect = "<div class='form-group' id='" + currentFieldId + "'><div " +
+                "class='col-md-10'><label " +
+                "for=\"fieldsCount\"></label><select name='reportFields' class='form-control'>";
         for (var i = 0; i < fields.length; i++) {
-            fieldsSelect += "<option>" + fields[i] + "</option>";
+            if(fields[i] == checked){
+                fieldsSelect += "<option selected>" + fields[i] + "</option>";
+            }else{
+                fieldsSelect += "<option>" + fields[i] + "</option>";
+            }
         }
-        fieldsSelect += "</select><button onclick='removeField(" + currentFieldId + ")' >-</button><br/></div>";
+        fieldsSelect += "</select></div><button style='margin-top: 12px' onclick='removeField(" + currentFieldId + ")" +
+                "'>-</button></div>";
         currentFieldId++;
         return fieldsSelect;
     }
@@ -75,8 +83,8 @@
                 <#if report.fields??>
                     <#assign i = 0>
                     <#list report.fields as f>
-                        addField();
-                        setFieldSelection(${i}, "${f}");
+                        $("#fields").append(getFieldsSelect(fields, "${f}"));
+                        fieldsCount++;
                         <#assign i = i+1>
                     </#list>
                 </#if>

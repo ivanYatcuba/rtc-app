@@ -62,7 +62,7 @@
 -->
 <#macro rtcSubmit buttonText urlText urlAddress>
 <div class="row">
-    <div class="col-md-11" style="text-align: right">
+    <div class="col-md-10" style="text-align: right">
         <input type="submit" class="btn btn-primary" value="${buttonText}"/> or
         <a href="<@spring.url "${urlAddress}" />">${urlText}</a>
     </div>

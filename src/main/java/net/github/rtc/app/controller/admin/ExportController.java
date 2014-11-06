@@ -119,11 +119,8 @@ public class ExportController {
     public
     @ResponseBody
     ModelAndView editHandler(
-      @ModelAttribute("report") final ReportDetails report,
-      @RequestParam final String selectedType,
-      @RequestParam(value = "reportFields",
-        required = false) final List<String> reportFields) {
-        report.setExportClass(getTypes().get(selectedType));
+      @ModelAttribute("report") final ReportDetails report, @RequestParam(value = "reportFields", required = false)
+    final List<String> reportFields) {
         report.setFields(reportFields);
         reportService.update(report);
         return new ModelAndView(REDIRECT_EXPORT + report.getCode());

@@ -12,18 +12,7 @@
 <hr/>
 <div class="row">
     <div class="col-md-6">
-    <@formMacro.rtcFormCustomInput   "user.gender" "user.gender">
-        <div style="padding-top: 5px">
-            <@spring.bind "user.gender"/>
-            <input type="radio" name="gender" id="optionsRadios1"
-                   value="Male" checked
-                   style="margin: -3px 0px 0px;"> <@spring.message "user.genderM"/>
-            <input type="radio" name="gender" id="optionsRadios2"
-                   value="Female"
-                   style="margin: -3px 0px 0px;"> <@spring.message "user.genderF"/>
-        </div>
-     </@formMacro.rtcFormCustomInput >
-
+    <@formMacro.rtcFormRadioButtons "user.gender" "user.gender", ["Male", "Female"] "required", "", "${user.gender}" />
     <@formMacro.rtcFormTextInput  "user.surname" "user.surname" "required" />
     <@formMacro.rtcFormTextInput  "user.middleName" "user.middleName" />
     </div>
@@ -36,7 +25,7 @@
         </div>
         <div class="row"></div>
     <@formMacro.rtcFormTextInput  "user.name" "user.name" "required" />
-    <@formMacro.rtcFormDateField  "user.birthDate" "user.birthDate" />
+    <@formMacro.rtcFormDateField  "user.birthDate" "user.birthDate" "input-normal required" "style='width: 60%'"/>
     </div>
 </div>
 
@@ -72,11 +61,7 @@
     </div>
 
     <div class="col-md-6">
-    <@formMacro.rtcFormCustomInput   "user.english" "user.english">
-        <div class="col-md-4">
-            <@spring.formSingleSelect "user.english", ["Basic", "Intermediate", "Advanced"], 'style="background-color: #FFFACD;" class=\"required\"'/>
-        </div>
-    </@formMacro.rtcFormCustomInput >
+    <@formMacro.rtcFormSingleSelect "user.english" "user.english",  ["Basic", "Intermediate", "Advanced"] "required" "" />
     </div>
 </div>
 
@@ -84,8 +69,11 @@
 
 <!--Note-->
 <div class="row">
-    <div class="col-md-12">
-    <@formMacro.rtcFormTextarea  "user.note" "user.note" "required" "style=\"width:140%;\" rows=\"3\"
-    maxlength=\"255\""/>
+    <div class="row">
+        <div class="col-md-6">
+        <@formMacro.rtcFormTextarea  "user.note" "user.note" "required" "rows='3'
+        maxlength='255'
+        style='width: 370%'"/>
+        </div>
     </div>
 </div>

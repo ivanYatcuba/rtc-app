@@ -2,9 +2,7 @@
     label {
         float: left;
         width: 13em;
-        margin-right: 1em;
         text-align: right;
-        font-size: 10pt;
         margin-bottom: 10px;
     }
 </style>
@@ -12,9 +10,9 @@
 
 <div class="row">
     <div class="col-md-6">
-        <label><@spring.message "user.email"/></label>
-
-        <p>${user.email!" "}</p>
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.email" "${user.email}" "" />
+        </div>
     </div>
 </div>
 
@@ -22,95 +20,86 @@
 
 <div class="row">
     <div class="col-md-6">
-        <label><@spring.message "user.gender"/></label>
-
-        <p>${user.gender!" "}</p>
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.gender" "${user.gender}" "" />
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-6">
-        <label><@spring.message "user.surname"/></label>
-
-        <p>${user.surname!" "}</p>
-        <label><@spring.message "user.middleName"/></label>
-
-        <p>${user.middleName!" "}</p>
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.surname" "${user.surname}" "" />
+        </div>
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.middleName" "${user.middleName}" "" />
+        </div>
     </div>
     <div class="col-md-6">
-        <label><@spring.message "user.name"/></label>
-
-        <p>${user.name!" "}</p>
-        <label><@spring.message "user.birthDate"/></label>
-
-        <p><#if user.birthDate??>${user.birthDate ? datetime ? string("yyyy-MM-dd")}</#if></p>
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.name" "${user.name}" "" />
+        </div>
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.birthDate" "${user.birthDate}" "" />
+        </div>
     </div>
 </div>
 
 <hr>
 <div class="row">
     <div class="col-md-6">
-        <label><@spring.message "user.city"/></label>
-
-        <p>${user.city!" "}</p>
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.city" "${user.city}" "" />
+        </div>
     </div>
     <div class="col-md-6">
-        <label><@spring.message "user.phone"/></label>
-
-        <p>${user.phone!" "}</p>
-    </div>
-</div>
-
-<hr>
-<div class="row">
-    <div class="col-md-6"
-    ">
-    <label><@spring.message "user.university"/></label>
-
-    <p>${user.university!" "}</p><br/>
-    <label><@spring.message "user.faculty"/></label>
-
-    <p>${user.faculty!" "}</p>
-</div>
-<div class="col-md-6">
-    <label><@spring.message "user.speciality"/></label>
-
-    <p>${user.speciality!" "}</p>
-</div>
-</div>
-
-<hr>
-<div class="row">
-    <div class="col-md-6">
-        <label><@spring.message "user.programmingLanguages"/></label>
-
-        <p><#list user.programmingLanguages as progLang>
-        ${progLang}<#if progLang_has_next>,</#if>
-        </#list></p>
-    </div>
-    <div class="col-md-6">
-        <label><@spring.message "user.english"/></label>
-
-        <p>${user.english!" "}</p>
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.phone" "${user.phone}" "" />
+        </div>
     </div>
 </div>
 
 <hr>
 <div class="row">
     <div class="col-md-6">
-        <label><@spring.message "user.note"/></label>
-
-        <p>${user.note!" "}</p>
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.university" "${user.university}" "" />
+        </div>
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.faculty" "${user.faculty}" "" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.speciality" "${user.speciality}" "" />
+        </div>
     </div>
 </div>
 
 <hr>
 <div class="row">
-    <div class="span12" align="right">
-        <a href="<@spring.url "/user/edit" />">
-            <button class="btn"><@spring.message "coursesPage.action.edit"/></button>
-        </a> or
-        <a href="<@spring.url "/" />"><@spring.message "coursesPage.action.cancel"/></a>
+    <div class="col-md-6">
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.programmingLanguages" user.programmingLanguages "" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.english" "${user.english}" "" />
+        </div>
     </div>
 </div>
+
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <div class="col-md-12">
+        <@formMacro.rtcFormLabelOut "user.english" "${user.note}" "" />
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+<@formMacro.rtcSubmitDoOrCancel "action.edit" "/user/edit" "Cancel" "/user"/>
 </div>
