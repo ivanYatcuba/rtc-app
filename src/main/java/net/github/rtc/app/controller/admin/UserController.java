@@ -178,7 +178,9 @@ public class UserController {
         } else {
             user.setPhoto(photo);
         }
-        user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
+        if(user.getStatus() != UserStatus.ACTIVE){
+            user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
+        }
         userService.update(user);
         return REDIRECT_USER_PAGE + user.getCode();
     }
