@@ -11,6 +11,7 @@ import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,7 +103,8 @@ public class UserController {
             final CourseSearchFilter courseSearchFilter = new CourseSearchFilter();
             courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
             mav.addObject(STRING_USER, user);
-            mav.addObject("courses", courseService.search(courseSearchFilter).getResults());
+            final SearchResults<Course> searchResults = courseService.search(courseSearchFilter);
+            mav.addObject("courses", searchResults.getResults());
             return mav;
         } else {
             final ModelAndView mav = new ModelAndView(ROOT + "/page/courseorder");
