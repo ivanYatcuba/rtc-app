@@ -1,4 +1,4 @@
-<#ftl strip_whitespace=true>
+
 <#include "/spring.ftl"/>
 
 <#macro rtcIncludeLink>
