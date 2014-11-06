@@ -1,5 +1,6 @@
 <@spring.formHiddenInput "user.code" />
 <@spring.formHiddenInput "user.registerDate" />
+<@spring.formHiddenInput "user.photo" />
 <div class="row">
     <div class="col-md-6">
         <@formMacro.rtcFormUserEmailInput  "user.email" "user.email" "required"/>

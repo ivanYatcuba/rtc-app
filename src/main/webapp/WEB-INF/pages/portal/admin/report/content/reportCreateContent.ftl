@@ -10,4 +10,4 @@
         $("#userCode").val(userCode);
         $('#removeUserModal').modal('show')
     }
-</script
+</script>
