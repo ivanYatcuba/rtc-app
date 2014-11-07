@@ -1,7 +1,6 @@
 package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.TraineePosition;
 import net.github.rtc.app.model.user.User;
@@ -10,8 +9,6 @@ import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.UserCourseOrderService;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
-import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,7 +92,7 @@ public class UserController {
     @RequestMapping(value = "/userCourses", method = RequestMethod.GET)
     public ModelAndView userCourses() throws Exception {
         final User user = userService.loadUserByUsername(
-        SecurityContextHolder.getContext().getAuthentication().getName());
+          SecurityContextHolder.getContext().getAuthentication().getName());
         final UserCourseOrder currentUserCourseOrder = userCourseOrderService.getUserOrderByUserCode(user.getCode());
         if (currentUserCourseOrder == null) {
             final ModelAndView mav = new ModelAndView(ROOT + "/page/usercours");
