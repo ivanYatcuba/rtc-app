@@ -177,7 +177,7 @@ public class CoursesController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(
-      @ModelAttribute(STRING_COURSE) final Course course, @RequestParam(required = false) final boolean ifPublish) {
+      @ModelAttribute(STRING_COURSE) final Course course, @RequestParam(value = "ifPublish", required = false) final boolean ifPublish) {
         course.setStatus(ifPublish ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
         courseService.update(course);
         return REDIRECT1 + VIEW + course.getCode();

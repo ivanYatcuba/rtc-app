@@ -31,6 +31,7 @@
        <@formMacro.rtcFormTextarea "course.description" "course.description" "required" 'style="width:425%;" rows="3" maxlength="255"'/>
     </div>
 </div>
+
 <#if !course.isPublished()>
     <hr>
 <div class="row">
@@ -40,8 +41,9 @@
         <@spring.message "coursesPage.action.publishAsNews"/>
     </div>
 </div>
+<#else>
+    <input id="ifPublish" name="ifPublish" type="hidden" value="True">
 </#if>
-
 
 <hr>
 &nbsp;
