@@ -13,6 +13,7 @@ import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,7 +48,7 @@ public class UserController {
     @Autowired
     private ValidationContext validationContext;
     @Autowired
-    private DateService dateService;
+    private AuthenticationManager authenticationManager;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView user() {
@@ -83,9 +84,10 @@ public class UserController {
     public ModelAndView update(
       @ModelAttribute(STRING_USER) final User user) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
-        userService.update(user);
         final Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+        authenticationManager.authenticate(request);
         SecurityContextHolder.getContext().setAuthentication(request);
+        userService.update(user);
         return new ModelAndView(STRING_REDIRECT + "user/view");
     }
 
