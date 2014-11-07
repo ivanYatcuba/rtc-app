@@ -135,7 +135,7 @@ public class CoursesController {
     public ModelAndView create() {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/createContent");
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course.class));
-        mav.addObject(STRING_EXPERTS, getExpertUsers());
+      //  mav.addObject(STRING_EXPERTS, getExpertUsers());
         return mav;
     }
 
@@ -165,7 +165,7 @@ public class CoursesController {
         final Course returnCourse = courseService.findByCode(courseCode);
         mav.getModelMap().addAttribute(STRING_COURSE, returnCourse);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course.class));
-        mav.addObject(STRING_EXPERTS, getExpertUsers());
+     //   mav.addObject(STRING_EXPERTS, getExpertUsers());
         return mav;
     }
 
@@ -215,6 +215,14 @@ public class CoursesController {
         }
         return categories;
     }
+    @ModelAttribute(STRING_EXPERTS)
+    public Map<String, String> getExpertUsers() {
+        final Map<String, String> expertMap = new HashMap<>();
+        for (User u : userService.getUserByRole(RoleType.ROLE_EXPERT)) {
+            expertMap.put(u.getCode(), u.toString());
+        }
+        return expertMap;
+    }
 
     @ModelAttribute(STRING_STATUSES)
     public Collection<String> getStatuses() {
@@ -226,13 +234,7 @@ public class CoursesController {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
-    public Map<String, String> getExpertUsers() {
-        final Map<String, String> expertMap = new HashMap<>();
-        for (User u : userService.getUserByRole(RoleType.ROLE_EXPERT)) {
-            expertMap.put(u.getCode(), u.toString());
-        }
-        return expertMap;
-    }
+
 
     @ModelAttribute(STRING_FILTER_COURSE)
     public CourseSearchFilter getFilterCourse() {

@@ -21,7 +21,6 @@
 <hr>
 <div class="row">
     <div class="col-md-6">
-        <#--<@expertMultiSelect/>-->
         <@formMacro.rtcFormMultiSelect "course.experts" "course.experts" experts 'style="width:100%;"'/>
     </div>
 </div>

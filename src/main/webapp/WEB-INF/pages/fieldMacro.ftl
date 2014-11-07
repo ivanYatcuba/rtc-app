@@ -203,7 +203,8 @@
                 class = "form-control ${class}"  style = "${style}">
             <#if options?is_hash>
                 <#list options?keys as value>
-                    <option value="${value?html}"<@checkSelected value/>>
+                    <#assign isSelected = contains(status.actualValue?default([""]), options[value])>
+                    <option value="${value?html}"<#if isSelected>selected="selected"</#if>>
                         <#if messagePrefix == "">
                             ${options[value]?html}
                         <#else>
