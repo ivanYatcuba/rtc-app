@@ -96,17 +96,13 @@
 <div class="row"><div class="col-md-10"><hr/></div></div>
 
 </#if>
-<#--<script type="text/javascript" charset="utf8"-->
-        <#--src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>-->
+<script type="text/javascript" charset="utf8"
+        src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
 
-<#--<script>-->
-    <#--$(function () {-->
-        <#--addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")-->
-    <#--});-->
-<#--</script>-->
-
-
-<script type="text/javascript">
+<script>
+    $(function () {
+        addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")
+    });
 
     function showMyImage(fileInput) {
         var files = fileInput.files;
