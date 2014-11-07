@@ -94,7 +94,7 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     public void activateUser(String userCode) {
         final User user = findByCode(userCode);
         user.setStatus(UserStatus.ACTIVE);
-        update(user);
+        super.update(user);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     public void inactivateUser(String userCode) {
         final User user = findByCode(userCode);
         user.setStatus(UserStatus.INACTIVE);
-        update(user);
+        super.update(user);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     public void restoreUser(String userCode) {
         final User user = findByCode(userCode);
         user.setRemovalDate(null);
-        update(user);
+        super.update(user);
     }
 
     @Override
