@@ -25,6 +25,8 @@ public interface GenericDao<T> {
 
     T findByCode(String code);
 
+    List<T> findAll(DetachedCriteria criteria);
+
     SearchResults<T> search(DetachedCriteria criteria, int start, int max);
 
     SearchResults<T> search(AbstractSearchCommand searchCommand);

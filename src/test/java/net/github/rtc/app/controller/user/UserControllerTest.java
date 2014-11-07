@@ -93,6 +93,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @Ignore
     public void testUpdateUser() throws Exception {
         mockMvc.perform(post("/user/update").sessionAttr("user", user))
                 .andExpect(status().isFound())

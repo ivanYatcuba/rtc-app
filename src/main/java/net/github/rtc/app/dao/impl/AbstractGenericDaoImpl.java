@@ -72,6 +72,12 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
     }
 
     @Override
+    public List<T> findAll(DetachedCriteria dCriteria) {
+        final Criteria criteria = dCriteria.getExecutableCriteria(getCurrentSession());
+        return criteria.list();
+    }
+
+    @Override
     public SearchResults<T> search(final DetachedCriteria dCriteria, final int start, final int max) {
         final Criteria criteria = dCriteria.getExecutableCriteria(getCurrentSession());
         final SearchResults<T> results = new SearchResults<>();

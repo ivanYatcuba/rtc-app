@@ -95,16 +95,12 @@ public class UserController {
     @RequestMapping(value = "/userCourses", method = RequestMethod.GET)
     public ModelAndView userCourses() throws Exception {
         final User user = userService.loadUserByUsername(
-          SecurityContextHolder.getContext().getAuthentication().getName());
+        SecurityContextHolder.getContext().getAuthentication().getName());
         final UserCourseOrder currentUserCourseOrder = userCourseOrderService.getUserOrderByUserCode(user.getCode());
         if (currentUserCourseOrder == null) {
             final ModelAndView mav = new ModelAndView(ROOT + "/page/usercours");
             mav.addObject(STRING_VALIDATION_RULES, validationContext.get(UserCourseOrder.class));
-            final CourseSearchFilter courseSearchFilter = new CourseSearchFilter();
-            courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
-            mav.addObject(STRING_USER, user);
-            final SearchResults<Course> searchResults = courseService.search(courseSearchFilter);
-            mav.addObject("courses", searchResults.getResults());
+            mav.addObject("courses", courseService.findAllPublished());
             return mav;
         } else {
             final ModelAndView mav = new ModelAndView(ROOT + "/page/courseorder");

@@ -62,4 +62,6 @@ public interface CourseService extends ModelService<Course> {
 
     List<Course> startingSoonCourses();
 
+    List<Course> findAllPublished();
+
 }

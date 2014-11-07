@@ -58,4 +58,11 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
           STARTING_SOON_COURSE_COUNT).getResults();
     }
 
+    @Override
+    public List<Course> findAllPublished() {
+        final CourseSearchFilter courseSearchFilter = new CourseSearchFilter();
+        courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
+        return coursesDao.findAll(courseSearchFilter.getCriteria());
+    }
+
 }
