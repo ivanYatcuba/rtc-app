@@ -14,7 +14,7 @@
                             <a class="footerButtons">Courses</a> |
                             <a class="footerButtons">About</a> |
                             <a class="footerButtons">Contact</a> |
-                            <a class="footerButtons" href="<@spring.url "/user/register" />">Register</a>
+                            <a class="footerButtons" href="<@spring.url "/register" />">Register</a>
                         </p>
                     </ul>
                 </div>
