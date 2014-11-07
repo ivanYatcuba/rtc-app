@@ -3,7 +3,6 @@ package net.github.rtc.app.dao;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseType;
-import net.github.rtc.app.model.user.TraineePosition;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.model.user.UserRequestStatus;
@@ -69,7 +68,7 @@ public class DaoTestContext implements InitializingBean {
                 final UserCourseOrder userCourseOrder = new UserCourseOrder();
                 userCourseOrder.setCode(codeGenerationService.generate());
                 userCourseOrder.setCourseCode(codeGenerationService.generate());
-                userCourseOrder.setPosition(TraineePosition.BUSINESS_ANALYST);
+                userCourseOrder.setPosition(CourseType.BA);
                 userCourseOrder.setReason("bla bla");
                 userCourseOrder.setStatus(UserRequestStatus.PENDING);
                 userCourseOrder.setUserCode(codeGenerationService.generate());

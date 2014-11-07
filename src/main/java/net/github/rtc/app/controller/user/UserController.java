@@ -1,8 +1,8 @@
 package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.RoleType;
-import net.github.rtc.app.model.user.TraineePosition;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.service.CourseService;
@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Controller("userController")
 @RequestMapping("/user")
@@ -97,6 +97,7 @@ public class UserController {
         if (currentUserCourseOrder == null) {
             final ModelAndView mav = new ModelAndView(ROOT + "/page/usercours");
             mav.addObject(STRING_VALIDATION_RULES, validationContext.get(UserCourseOrder.class));
+            mav.addObject(STRING_USER, user);
             mav.addObject("courses", courseService.findAllPublished());
             return mav;
         } else {
@@ -126,6 +127,11 @@ public class UserController {
         myCourse.setUserCode(user.getCode());
         userCourseOrderService.create(myCourse);
         return mav;
+    }
+
+    @RequestMapping(value = "/position/{courseCode}", method = RequestMethod.GET)
+    public @ResponseBody Set<CourseType> getPositions(@PathVariable String courseCode) {
+        return courseService.findByCode(courseCode).getTypes();
     }
 
     /**
@@ -158,10 +164,5 @@ public class UserController {
     @ModelAttribute("order")
     public UserCourseOrder getObject() {
         return new UserCourseOrder();
-    }
-
-    @ModelAttribute("positions")
-    public List<String> getPositions() {
-        return TraineePosition.findAll();
     }
 }

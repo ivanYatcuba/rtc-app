@@ -50,14 +50,10 @@
             <input name="selectedCode" type="hidden" id="selectedCode" value="test">
             <@spring.formHiddenInput "order.courseCode"/>
 
-            <#list positions as position>
-                <div id="position.name">
-                    <@spring.bind "order.position"/>
-                    <input type="radio" name="position"
-                           value="${position}"/>
-                ${position}<br/>
-                </div>
-            </#list>
+            <div id="positions">
+
+            </div>
+
 
             <strong><@spring.message "userCourses.because"/></strong><br/>
 
@@ -76,9 +72,21 @@
 <@formMacro.rtcFormValidation formName="modal" jsonRules="${validationRules}"/>
 
 <script type="text/javascript">
-    var selectedCourseCode
     function setCode(courseCode) {
         document.getElementById("courseCode").value = courseCode
+        $.ajax({
+            url:"<@spring.url'/user/position/'/>"+courseCode,
+            success:function(result){
+                var res = ""
+                result.forEach(function(element, index, array){
+                    res += "<div id='position.name'> "+
+                            "<input type='radio' name='position' value='"+element+"'/>&nbsp;"+
+                            element+
+                            "<br/></div>"
+                });
+                $("#positions").html(res);
+            }
+        });
     }
     function pushData() {
         $.ajax({

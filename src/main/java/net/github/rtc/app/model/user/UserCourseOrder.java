@@ -1,6 +1,7 @@
 package net.github.rtc.app.model.user;
 
 import net.github.rtc.app.model.AbstractPersistenceObject;
+import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.util.annotation.validation.Required;
 import net.github.rtc.util.annotation.validation.Validatable;
 
@@ -29,7 +30,7 @@ public class UserCourseOrder extends AbstractPersistenceObject {
     @Column
     @Enumerated(EnumType.STRING)
     @Required
-    /**/private TraineePosition position;
+    private CourseType position;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -37,21 +38,23 @@ public class UserCourseOrder extends AbstractPersistenceObject {
 
     @Column
     @Required
-    /**/private String reason;
+    private String reason;
 
     public UserCourseOrder(
       final String userCode,
       final String courseCode,
       final Date requestDate,
       final Date responseDate,
+      final CourseType position,
       final UserRequestStatus status,
-      final TraineePosition position) {
+      final String reason) {
         this.userCode = userCode;
         this.courseCode = courseCode;
         this.requestDate = requestDate;
         this.responseDate = responseDate;
-        this.status = status;
         this.position = position;
+        this.status = status;
+        this.reason = reason;
     }
 
     public UserCourseOrder() {
@@ -97,11 +100,11 @@ public class UserCourseOrder extends AbstractPersistenceObject {
         this.status = status;
     }
 
-    public TraineePosition getPosition() {
+    public CourseType getPosition() {
         return position;
     }
 
-    public void setPosition(final TraineePosition position) {
+    public void setPosition(final CourseType position) {
         this.position = position;
     }
 
