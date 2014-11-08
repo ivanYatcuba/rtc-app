@@ -160,11 +160,12 @@ public class UserController {
       @ModelAttribute(STRING_USER) @Valid final User user,
       @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
       @RequestParam(required = false) final boolean ifActive) {
+        user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
+        userService.create(user);
         if (!img.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), img));
         }
-        user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
-        userService.create(user);
+        userService.update(user);
         return REDIRECT_USER_PAGE + user.getCode();
     }
 
