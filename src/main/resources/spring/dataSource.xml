@@ -48,4 +48,16 @@
         <property name="changeLog" value="classpath:db-changelog.xml"/>
     </bean>
 
+    <bean id="hibernateStringEncryptor"
+          class="org.jasypt.hibernate4.encryptor.HibernatePBEStringEncryptor">
+        <property name="registeredName">
+            <value>strongHibernateStringEncryptor</value>
+        </property>
+        <property name="algorithm">
+            <value>PBEWithMD5AndTripleDES</value>
+        </property>
+        <property name="password">
+            <value>jasypt</value>
+        </property>
+    </bean>
 </beans>

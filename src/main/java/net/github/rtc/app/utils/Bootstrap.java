@@ -5,16 +5,20 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.UserService;
+import org.jasypt.hibernate4.encryptor.HibernatePBEStringEncryptor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 
 @Component
 public class Bootstrap implements InitializingBean {
 
     private static final String STRING_ADMIN = "admin";
+    @Autowired
+    private HibernatePBEStringEncryptor hibernateStringEncryptor;
     @Autowired
     private UserService userService;
     @Autowired
@@ -43,6 +47,14 @@ public class Bootstrap implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        try {
+            final Field field = Class.forName("javax.crypto.JceSecurity").
+              getDeclaredField("isRestricted");
+            field.setAccessible(true);
+            field.set(null, java.lang.Boolean.FALSE);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         loadTestUsers();
     }
 }

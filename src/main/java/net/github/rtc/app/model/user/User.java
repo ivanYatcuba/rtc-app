@@ -4,17 +4,23 @@ import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.*;
 import net.github.rtc.util.annotation.validation.Number;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.Parameter;
+import org.jasypt.hibernate4.type.EncryptedStringType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+@TypeDef(
+  name = "encryptedString",
+  typeClass = EncryptedStringType.class,
+  parameters = { @Parameter(name = "encryptorRegisteredName", value = "strongHibernateStringEncryptor") })
 
 @Entity
 @Validatable
@@ -25,84 +31,69 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     public static final String STRING_SPACE = " ";
 
 
-   /* @Column
-    private String code;*/
-
+    /* @Column
+     private String code;*/
     @Required
     @Maxlength(PRIMARY_LENGTH)
     @Column
     @ForExport("Surname")
     private String surname;
-
     @Required
     @Maxlength(PRIMARY_LENGTH)
     @Column
     @ForExport("Name")
     private String name;
-
     @Maxlength(PRIMARY_LENGTH)
     @Column
     @ForExport("Middle name")
     private String middleName;
-
     @Required
     @Column
     @ForExport("Birthday")
     private Date birthDate;
-
     @Required
     @Number
     @Column
     @ForExport("Phone")
     private String phone;
-
     @Required
     @Email
     @Column
     @ForExport("Email")
     private String email;
-
     @Maxlength(SECONDARY_LENGTH)
     @Column
     @ForExport("City")
     private String city;
-
     @Maxlength(SECONDARY_LENGTH)
     @Column
     @ForExport("University")
     private String university;
-
     @Maxlength(SECONDARY_LENGTH)
     @Column
     @ForExport("Faculty")
     private String faculty;
-
     @Maxlength(SECONDARY_LENGTH)
     @Column
     @ForExport("Speciality")
     private String speciality;
-
     @Required
     @Column
     @ForExport("English")
     private String english;
-
     @Required
     @Column
     @ForExport("Note")
     private String note;
-
     @Required
     @Column
+    @Type(type = "encryptedString")
     private String password;
-
     @Column
     @ForExport("Gender")
     private String gender = "Male";
-
     @Column
     private String photo;
-
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "UserProgLanguages",
@@ -111,22 +102,18 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 1)
     private Set<String> programmingLanguages;
-
     @Required
     @Column
     @Temporal(TemporalType.DATE)
     @ForExport("Register Date")
     private Date registerDate;
-
     @Column
     private Date removalDate;
-
     @Required
     @Column
     @ForExport("Status")
     @Enumerated(EnumType.STRING)
     private UserStatus status = UserStatus.INACTIVE;
-
     /* Spring Security fields*/
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "User_Role",
@@ -147,11 +134,7 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     }
 
     public User(
-      final String name,
-      final String surname,
-      final String middleName,
-      final String email,
-      final String password) {
+      final String name, final String surname, final String middleName, final String email, final String password) {
         this.name = name;
         this.surname = surname;
         this.middleName = middleName;
@@ -175,7 +158,9 @@ public class User extends AbstractPersistenceObject implements UserDetails {
         this.gender = gender;
     }
 
-    public String getPhoto() { return  this.photo; }
+    public String getPhoto() {
+        return this.photo;
+    }
 
     public void setPhoto(final String photo) {
         this.photo = photo;
@@ -388,15 +373,13 @@ public class User extends AbstractPersistenceObject implements UserDetails {
         return this.status == UserStatus.ACTIVE;
     }
 
-
     public String shortString() {
-        return new StringBuilder(this.name).append(STRING_SPACE).append(
-          this.surname).append(STRING_SPACE).append(this.email).toString();
+        return new StringBuilder(this.name).append(STRING_SPACE).append(this.surname).append(STRING_SPACE).append(
+          this.email).toString();
     }
 
     @Override
     public String toString() {
-        return new StringBuilder(this.name).append(STRING_SPACE).append(
-                this.surname).toString();
+        return new StringBuilder(this.name).append(STRING_SPACE).append(this.surname).toString();
     }
 }

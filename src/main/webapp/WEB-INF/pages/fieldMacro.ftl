@@ -279,7 +279,8 @@
 
 <#macro rtcFormPasswordInputWithCheckbox label path class="" style="">
     <@rtcFieldWrapper label path>
-        <@spring.formPasswordInput path "class = \"form-control "+"${class}"+"\" "+"${style}" />
+        <input id="password" name="${status.expression}" type="password" class = "form-control ${class}" ${style}
+               value="${stringStatusValue}">
         <div class="controls">
         <label for="showPassword"></label>
         <input id="showPassword"

@@ -1,18 +1,14 @@
 package net.github.rtc.app.service.impl;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component("EncoderService")
 public class EncoderServiceImpl implements net.github.rtc.app.service.EncoderService {
     public String encode(CharSequence rawPassword) {
-        final PasswordEncoder encoder = new StandardPasswordEncoder();
-        return encoder.encode(rawPassword);
+        return rawPassword.toString();
     }
 
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
-        final PasswordEncoder encoder = new StandardPasswordEncoder();
-        return encoder.matches(rawPassword, encodedPassword);
+        return rawPassword.equals(encodedPassword);
     }
 }

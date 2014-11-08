@@ -18,6 +18,7 @@
     <!--Import spring settings from util-->
     <import resource="classpath:spring-config.xml"/>
     <import resource="classpath:/beans.xml"/>
+    <import resource="classpath:/spring-security.xml"/>
 
     <!--Data source config-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -48,4 +49,17 @@
 
     <!-- Activates annotation based transaction management -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="hibernateStringEncryptor"
+          class="org.jasypt.hibernate4.encryptor.HibernatePBEStringEncryptor">
+        <property name="registeredName">
+            <value>strongHibernateStringEncryptor</value>
+        </property>
+        <property name="algorithm">
+            <value>PBEWithMD5AndTripleDES</value>
+        </property>
+        <property name="password">
+            <value>jasypt</value>
+        </property>
+    </bean>
 </beans>
