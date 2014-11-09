@@ -163,9 +163,13 @@ public class Course extends AbstractPersistenceObject implements Serializable {
         this.status = status;
     }
 
-    public Date getCreateDate() { return createDate; }
+    public Date getCreateDate() {
+        return createDate;
+    }
 
-    public void setCreateDate(final Date createDate) { this.createDate = createDate; }
+    public void setCreateDate(final Date createDate) {
+        this.createDate = createDate;
+    }
 
     public Date getPublishDate() {
         return publishDate;
