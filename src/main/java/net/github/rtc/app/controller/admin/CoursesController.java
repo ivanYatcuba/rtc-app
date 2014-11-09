@@ -6,6 +6,7 @@ import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
+import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
@@ -53,6 +54,8 @@ public class CoursesController {
     private UserService userService;
     @Autowired
     private ValidationContext validationContext;
+    @Autowired
+    private DateService dateService;
 
     /**
      * Processes the request to view all courses page
@@ -150,6 +153,7 @@ public class CoursesController {
     public String save(
       @ModelAttribute(STRING_COURSE) final Course course, @RequestParam(required = false) final boolean ifPublish) {
         course.setStatus(ifPublish ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
+        course.setPublishDate(dateService.getCurrentDate());
         courseService.create(course);
         return REDIRECT1 + VIEW + course.getCode();
     }
