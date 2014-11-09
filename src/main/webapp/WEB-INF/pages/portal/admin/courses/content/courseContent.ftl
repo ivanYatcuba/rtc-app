@@ -55,7 +55,7 @@
                 <#if "${course.status}" == "ARCHIVED"> <@formMacro.rtcColorLabel "${course.status}" "label-default" "course.status."/> </#if>
             </div>
             <div class="col-md-12">
-                <#if course.publishDate??>
+                <#if "${course.status}" == "PUBLISHED">
                     <@formMacro.rtcFormLabelOut "course.publishDate" "${course.publishDate?date?string('dd-MMM-yyyy')}"/>
                 <#else>
                     <@formMacro.rtcFormLabelOut "course.creationDate" "${course.createDate?date?string('dd-MMM-yyyy')}"/>
