@@ -252,3 +252,4 @@ public class Course extends AbstractPersistenceObject implements Serializable {
         return result;
     }
 }
+

@@ -88,8 +88,7 @@
             <#else>
                 value="Do"
             </#if> />
-    </a>
-   </#if>
+    </a></#if>
     <a class="btn btn-default" href="<@spring.url "${cancelAddress}" />">
         <#if anotherText??>
             <@spring.message "${cancelText}"/>

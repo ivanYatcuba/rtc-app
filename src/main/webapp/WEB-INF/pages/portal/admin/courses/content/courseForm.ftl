@@ -29,7 +29,7 @@
 
 <div class="row">
     <div class="col-md-6">
-       <@formMacro.rtcFormTextarea "course.description" "course.description" "required" 'style="width:425%;" rows="3" maxlength="255"'/>
+        <@formMacro.rtcFormTextarea "course.description" "course.description" "required" 'style="width:425%;" rows="3" maxlength="255"'/>
     </div>
 </div>
 
