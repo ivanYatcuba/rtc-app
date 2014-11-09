@@ -1,6 +1,7 @@
 <@spring.formHiddenInput "course.createDate" />
 <style>
-    hr {
+    hr
+    {
         float:left;
         width:91%;
         margin-bottom: 20px;
