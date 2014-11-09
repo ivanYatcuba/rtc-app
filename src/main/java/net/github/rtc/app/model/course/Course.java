@@ -60,6 +60,10 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     @Enumerated(EnumType.STRING)
     private CourseStatus status = CourseStatus.DRAFT;
     @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    @ForExport("Create date")
+    private Date createDate = new Date();
+    @Column
     @ForExport("Publish date")
     private Date publishDate;
     @Maxlength(DESCRIPTION_LENGTH)
@@ -154,9 +158,14 @@ public class Course extends AbstractPersistenceObject implements Serializable {
         return status;
     }
 
-    public void setStatus(final CourseStatus status) {
+    public void setStatus(final CourseStatus status)
+    {
         this.status = status;
     }
+
+    public Date getCreateDate() { return createDate; }
+
+    public void setCreateDate(final Date createDate) { this.createDate = createDate; }
 
     public Date getPublishDate() {
         return publishDate;
@@ -180,6 +189,7 @@ public class Course extends AbstractPersistenceObject implements Serializable {
         sb.append(", capacity=").append(capacity);
         sb.append(", startDate=").append(startDate);
         sb.append(", endDate=").append(endDate);
+        sb.append(", createDate=").append(createDate);
         sb.append(", publishDate=").append(publishDate);
         sb.append(", tags=").append(tags);
         sb.append(", description=").append(description);
@@ -235,6 +245,7 @@ public class Course extends AbstractPersistenceObject implements Serializable {
         result = HASH_CODE_CONSTANT * result + (tags != null ? tags.hashCode() : 0);
         result = HASH_CODE_CONSTANT * result + (status != null ? status.hashCode() : 0);
         result = HASH_CODE_CONSTANT * result + (description != null ? description.hashCode() : 0);
+        result = HASH_CODE_CONSTANT * result + (createDate != null ? createDate.hashCode() : 0);
         result = HASH_CODE_CONSTANT * result + (publishDate != null ? publishDate.hashCode() : 0);
         result = HASH_CODE_CONSTANT * result + (capacity != null ? capacity.hashCode() : 0);
         return result;

@@ -1,85 +1,73 @@
-<#import "../../../../fieldMacro.ftl" as formMacro />
-
-<style>
-    label {
-        float: left;
-        width: 13em;
-        text-align: right;
-        margin-bottom: 10px;
-    }
-</style>
-
-<div style="width: 85%">
-    <div>
-        <h4 class="page-header"><@spring.message "course.details"/></h4>
-    </div>
-    <br>
-
+<#import "../../../../fieldMacro.ftl" as formMacro/>
+<h4><strong><@spring.message "course.details"/></strong></h4>
+<div class="form-horizontal">
     <div class="row">
         <div class="col-md-6">
             <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "course.name" "${course.name}"/>
+                <@formMacro.rtcFormLabelOut "course.name" "${course.name}"/>
             </div>
             <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "course.category" course.types/>
+                <@formMacro.rtcFormLabelOut "course.category" course.types/>
             </div>
             <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "course.capacity" "${course.capacity}"/>
+                <@formMacro.rtcFormLabelOut "course.capacity" "${course.capacity}"/>
             </div>
         </div>
         <div class="col-md-6">
             <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "course.startDate" "${course.startDate?date?string('dd-MMM-yyyy')}"/>
+                <@formMacro.rtcFormLabelOut "course.startDate" "${course.startDate?date?string('dd-MMM-yyyy')}"/>
             </div>
             <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "course.endDate" "${course.endDate?date?string('dd-MMM-yyyy')}"/>
+                <@formMacro.rtcFormLabelOut "course.endDate" "${course.endDate?date?string('dd-MMM-yyyy')}"/>
             </div>
             <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "course.tags" course.tags/>
-            </div></div>
-    </div>
-
-    &NonBreakingSpace;
-    <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "course.experts" course.experts/>
+                <#if course.tags?? && course.tags?size-1 != -1>
+                    <@formMacro.rtcFormLabelOut "course.tags" course.tags/>
+                <#else>
+                    <@formMacro.rtcFormLabelOut "course.tags" "This course doesn't have any tags!"/>
+                </#if>
+            </div>
         </div>
     </div>
-
-    &NonBreakingSpace;
-    <hr>
+    <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
     <div class="row">
-        <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "course.description" "${course.description}"/>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <@formMacro.rtcFormLabelOut "course.experts" course.experts/>
+            </div>
         </div>
     </div>
-
-    &NonBreakingSpace;
-    <hr>
+    <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
     <div class="row">
-        <div class="col-md-12">
-            <label><@spring.message  "course.status"/>&nbsp</label>
-            <#if "${course.status}" == "DRAFT"> <@formMacro.rtcColorLabel "${course.status}" "label-warning" "course.status."/></#if>
-            <#if "${course.status}" == "PUBLISHED"><@formMacro.rtcColorLabel "${course.status}" "label-success" "course.status."/> </#if>
-            <#if "${course.status}" == "ARCHIVED"> <@formMacro.rtcColorLabel "${course.status}" "label-default" "course.status."/> </#if>
-            <#--<@formMacro.rtcFormLabelOut "course.status" "${course.status}"/>-->
-        </div>
-
-
-        <div class="col-md-12">
-            <#if course.publishDate??>
-                <@formMacro.rtcFormLabelOut "course.publishDate" "${course.publishDate?date?string('dd-MMM-yyyy')}"/>
-            <#else>
-                <@formMacro.rtcFormLabelOut "course.publishDate" " "/>
-            </#if>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <@formMacro.rtcFormLabelOut "course.description" "${course.description}"/>
+            </div>
         </div>
     </div>
-
-    &NonBreakingSpace;
-    <hr>
+    <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
     <div class="row">
-            <@formMacro.rtcSubmitDoOrCancel "coursesPage.action.edit" "/admin/course/${course.getCode()}/update"
-                "coursesPage.action.cancel" "/admin/course"/>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <@formMacro.rtcFormLabelOut "course.status" ""/>
+                <#if "${course.status}" == "DRAFT"> <@formMacro.rtcColorLabel "${course.status}" "label-warning" "course.status."/></#if>
+                <#if "${course.status}" == "PUBLISHED"><@formMacro.rtcColorLabel "${course.status}" "label-success" "course.status."/> </#if>
+                <#if "${course.status}" == "ARCHIVED"> <@formMacro.rtcColorLabel "${course.status}" "label-default" "course.status."/> </#if>
+            </div>
+            <div class="col-md-12">
+                <#if course.publishDate??>
+                    <@formMacro.rtcFormLabelOut "course.publishDate" "${course.publishDate?date?string('dd-MMM-yyyy')}"/>
+                <#else>
+                    <@formMacro.rtcFormLabelOut "course.creationDate" "${course.createDate?date?string('dd-MMM-yyyy')}"/>
+                </#if>
+            </div>
+        </div>
     </div>
+    <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
+    <@formMacro.rtcSubmitDoOrCancel "coursesPage.action.edit" "/admin/course/${course.getCode()}/update" "coursesPage.action.cancel" "/admin/course"/>
 </div>
+
+
+
+
+

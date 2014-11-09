@@ -88,7 +88,8 @@
             <#else>
                 value="Do"
             </#if> />
-    </a> or </#if>
+    </a>
+   </#if>
     <a class="btn btn-default" href="<@spring.url "${cancelAddress}" />">
         <#if anotherText??>
             <@spring.message "${cancelText}"/>
@@ -230,10 +231,12 @@
 </#macro>
 
 <#macro rtcFormLabelOut label path messagePrefix="" class="">
-    <label style="float: left;
+    <label
+            style="float: left;
         width: 13em;
         text-align: right;
-        margin-bottom: 10px;" class="${class}" ><@spring.message label/>&nbsp</label>
+        margin-bottom: 10px;"
+           class="${class}" ><@spring.message label/>&nbsp</label>
     <#if path??>
         <#if path? is_sequence>
             <#list path as tmp>
