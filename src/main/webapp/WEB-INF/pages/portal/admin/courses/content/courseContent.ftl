@@ -58,6 +58,7 @@
                 <#if course.publishDate??>
                     <@formMacro.rtcFormLabelOut "course.publishDate" "${course.publishDate?date?string('dd-MMM-yyyy')}"/>
                 <#else>
+                
                     <@formMacro.rtcFormLabelOut "course.creationDate" "${course.createDate?date?string('dd-MMM-yyyy')}"/>
                 </#if>
             </div>
