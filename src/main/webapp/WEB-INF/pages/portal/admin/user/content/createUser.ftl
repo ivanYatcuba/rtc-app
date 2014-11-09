@@ -10,9 +10,9 @@
     <div class="col-md-6">
         <div>
         <#if user.photo??>
-            <img id="photo" src="/PathToPhotos/${user.photo}"  alt="image" class="img-circle"/>
+            <img id="photoView" src="/PathToPhotos/${user.photo}"  alt="image" class="img-circle"/>
         <#else>
-            <img id="photo"  src="<@spring.url '/resources/images/errorCat.jpg'/>" alt="image" class="img-circle"/>
+            <img id="photoView"  src="<@spring.url '/resources/images/errorCat.jpg'/>" alt="image" class="img-circle"/>
         </#if>
         </div>
         <div class="row">
@@ -118,7 +118,7 @@
             if (!file.type.match(imageType)) {
                 continue;
             }
-            var img=document.getElementById("photo");
+            var img=document.getElementById("photoView");
             img.file = file;
             var reader = new FileReader();
             reader.onload = (function(aImg) {
