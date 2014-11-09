@@ -5,6 +5,7 @@
     <@spring.formHiddenInput "user.id" />
     <@spring.formHiddenInput "user.registerDate" />
     <@spring.formHiddenInput "user.status" />
+    <@spring.formHiddenInput "user.photo" />
     <#include "userForm.ftl" />
     <@formMacro.rtcSubmit "Save" "Cancel" "/user/view/"/>
 </@formMacro.rtcForm>
