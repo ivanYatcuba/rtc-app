@@ -83,10 +83,10 @@ public class UserController {
     public ModelAndView update(
       @ModelAttribute(STRING_USER) final User user) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
+        userService.update(user);
         final Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         authenticationManager.authenticate(request);
         SecurityContextHolder.getContext().setAuthentication(request);
-        userService.update(user);
         return new ModelAndView(STRING_REDIRECT + "user/view");
     }
 
