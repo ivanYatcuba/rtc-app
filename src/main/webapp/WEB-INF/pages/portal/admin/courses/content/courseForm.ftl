@@ -11,11 +11,11 @@
 <div class="row">
     <div class="col-md-6">
         <@formMacro.rtcFormTextInput "course.name" "course.name" "required" 'maxlength="50"'/>
-        <@formMacro.rtcFormMultiSelect "course.category" "course.types" categories/>
+        <@formMacro.rtcFormMultiSelect "course.category" "course.types" categories "" "height: 65; background-color:#FFFACD"/>
         <@formMacro.rtcFormTextInput "course.capacity" "course.capacity"  "input-small required" 'style="width:50px;" onkeydown="return isNumber(event);" size="2" maxlength="2"' />
     </div>
     <div class="col-md-6">
-        <@formMacro.rtcFormTextInput "course.startDate" "course.startDate" "input-medium required"  />
+        <@formMacro.rtcFormTextInput "course.startDate" "course.startDate" "input-medium required" 'background-color: #FFFACD' />
         <@formMacro.rtcFormTextInput  "course.endDate" "course.endDate" "input-medium required" />
         <@formMacro.rtcFormTagsInput "course.tags" "course.tags"/>
     </div>
@@ -23,7 +23,7 @@
 <hr>
 <div class="row">
     <div class="col-md-6">
-        <@formMacro.rtcFormMultiSelect "course.experts" "course.experts" experts 'style="width:100%;"'/>
+        <@formMacro.rtcFormMultiSelect "course.experts" "course.experts" experts "" "width: 100%; background-color:#FFFACD"/>
     </div>
 </div>
 <hr>
@@ -69,6 +69,8 @@
                 $('#endDate').datepicker("option", "minDate", newDate);
             }});
         $("#startDate").attr('readonly', 'readonly');
+        $("#startDate").attr('style', 'background-color : #FFFACD');
+        $("#endDate").attr('style', 'background-color : #FFFACD');
 
     });
 </script>
