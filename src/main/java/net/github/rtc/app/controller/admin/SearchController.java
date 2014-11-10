@@ -15,6 +15,7 @@ import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -158,6 +159,12 @@ public class SearchController {
             types.add(type.toString());
         }
         return types;
+    }
+
+    @ModelAttribute("currentUser")
+    public User getCurrentUser() {
+        User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return user;
     }
 
 }

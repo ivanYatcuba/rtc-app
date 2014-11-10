@@ -2,6 +2,7 @@ package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
+import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.NewsService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
@@ -156,6 +157,12 @@ public class NewsController {
     public News getNews() {
 
         return new News();
+    }
+
+    @ModelAttribute("currentUser")
+    public User getCurrentUser() {
+        User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return user;
     }
 
     /**

@@ -238,7 +238,11 @@ public class CoursesController {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
-
+    @ModelAttribute("currentUser")
+    public User getCurrentUser() {
+        User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return user;
+    }
 
     @ModelAttribute(STRING_FILTER_COURSE)
     public CourseSearchFilter getFilterCourse() {

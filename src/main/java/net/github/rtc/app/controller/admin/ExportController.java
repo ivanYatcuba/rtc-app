@@ -7,6 +7,7 @@ import net.github.rtc.app.model.report.ExportFormat;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ReportService;
+import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.app.utils.propertyeditors.CustomClassEditor;
 import net.github.rtc.util.converter.ValidationContext;
@@ -49,6 +50,8 @@ public class ExportController {
     private static Logger log = LoggerFactory.getLogger(ExportController.class.getName());
     @Autowired
     private ReportService reportService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private ValidationContext validationContext;
     @Value("${report.export.path}")
@@ -196,6 +199,12 @@ public class ExportController {
     @ModelAttribute("report")
     public ReportDetails getCommandObject() {
         return new ReportDetails();
+    }
+
+    @ModelAttribute("currentUser")
+    public User getCurrentUser() {
+        User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return user;
     }
 
     @InitBinder("report")
