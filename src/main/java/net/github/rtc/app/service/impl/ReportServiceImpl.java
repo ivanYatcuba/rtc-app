@@ -36,6 +36,11 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
     private String exportPath;
 
     @Override
+    protected GenericDao<ReportDetails> getDao() {
+        return reportDao;
+    }
+
+    @Override
     @Transactional
     public ReportDetails create(final ReportDetails report) {
         log.info("Creating report: " + report);
@@ -55,31 +60,29 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
 
     @Override
     @Transactional
-    public void update(final ReportDetails report) {
+    public ReportDetails update(final ReportDetails report) {
         log.info("Updating report: " + report);
         try {
             reportDao.update(report);
-            compileReport(report);
             log.info(STRING_REPORT + report.getCode() + " updated successfully!");
+            return report;
         } catch (final Exception e) {
             log.info("Report update failed: " + report.getCode());
             e.printStackTrace();
+            return null;
         }
     }
 
-    public void compileReport(ReportDetails report) {
+    public ReportDetails compileReport(ReportDetails report) {
         final String filePath = exportPath + report.getCode() + "." + report.getExportFormat().toString().toLowerCase();
         final ModelService service = serviceHolder.get(report.getExportClass());
         final List<?> objects = service.findAll();
         try {
             ReportBuilder.build(report, objects, filePath);
+            return report;
         } catch (final NoSuchFieldException e) {
             log.info("Report building failed: " + report.getCode());
+            return null;
         }
-    }
-
-    @Override
-    protected GenericDao<ReportDetails> getDao() {
-        return reportDao;
     }
 }

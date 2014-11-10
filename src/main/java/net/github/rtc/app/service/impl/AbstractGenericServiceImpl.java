@@ -46,8 +46,8 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
     }
 
     @Override
-    public void update(T t) {
-        getDao().update(t);
+    public T update(T t) {
+        return getDao().update(t);
     }
 
     @Override

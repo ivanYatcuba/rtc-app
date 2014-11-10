@@ -13,7 +13,7 @@ public interface GenericService<T> {
 
     T create(T type);
 
-    void update(T type);
+    T update(T type);
 
     List<T> findAll();
 
