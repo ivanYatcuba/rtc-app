@@ -233,8 +233,8 @@ public class CoursesController {
         return CourseStatus.findAll();
     }
 
-    @ModelAttribute("currentUser")
-    public String getCurrentUser() {
+    @ModelAttribute("currentUserName")
+    public String getCurrentUserName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 

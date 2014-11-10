@@ -37,7 +37,7 @@ public class ExpertControllerTest {
 
     private static final String ORDER_CODE = "X";
 
-    private static final String CURRENT_USER = "?currentUser=vasya%40mail.ru";
+    private static final String CURRENT_USER = "?currentUserName=vasya%40mail.ru";
 
     private static final String NAME = "vasya";
 

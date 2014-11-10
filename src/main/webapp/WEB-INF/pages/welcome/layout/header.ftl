@@ -14,11 +14,11 @@
         <#if "${content}" != "/user/login">
             <ul class="nav navbar-nav navbar-right"
                 style="margin-right: 2.50em">
-                <#if currentUser??>
-                    <#if currentUser != "anonymousUser">
+                <#if currentUserName??>
+                    <#if currentUserName != "anonymousUser">
                         <li style="color: #ac2925"><a
                                 href="<@spring.url'/login_attempt'/>">Logged
-                            as: ${currentUser}</a></li>
+                            as: ${currentUserName}</a></li>
                         <li><a href="<@spring.url'/logout'/>">Log Out</a></li>
                     <#else>
                         <li><a href="<@spring.url'/login'/>"

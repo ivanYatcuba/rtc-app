@@ -32,8 +32,8 @@ public class WelcomeController {
         return mav;
     }
 
-    @ModelAttribute("currentUser")
-    public String getCurrentUser() {
+    @ModelAttribute("currentUserName")
+    public String getCurrentUserName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

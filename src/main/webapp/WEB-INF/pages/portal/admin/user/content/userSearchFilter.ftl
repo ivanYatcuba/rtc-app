@@ -23,3 +23,4 @@
 </div>
 <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
       <@formMacro.rtcSearchButtons "/admin/user/viewAll"/>
+<br>

@@ -13,6 +13,7 @@ import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -231,9 +232,13 @@ public class UserController {
         s.add("Advanced");
         return s;
     }
-
     @ModelAttribute("currentUser")
-    public String getCurrentUser() {
+    public User getCurrentUser() {
+        User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return user;
+    }
+    @ModelAttribute("currentUserName")
+    public String getCurrentUserName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 

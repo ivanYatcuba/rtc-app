@@ -40,7 +40,7 @@ public class UserControllerTest {
 
     private static final String SURNAME = "pupkin";
 
-    private static final String CURRENT_USER = "?currentUser=vasya%40mail.ru&positions=TESTER&" +
+    private static final String CURRENT_USER = "?currentUserName=vasya%40mail.ru&positions=TESTER&" +
             "positions=DEVELOPER&positions=BUSINESS_ANALYST";
 
     private static final String COURSE_CODE = "X";
