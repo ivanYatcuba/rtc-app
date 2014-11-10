@@ -161,8 +161,7 @@ public class NewsController {
 
     @ModelAttribute("currentUser")
     public User getCurrentUser() {
-        User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        return user;
+        return userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
     /**

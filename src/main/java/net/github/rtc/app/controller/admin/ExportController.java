@@ -203,8 +203,7 @@ public class ExportController {
 
     @ModelAttribute("currentUser")
     public User getCurrentUser() {
-        User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        return user;
+        return userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
     @InitBinder("report")
