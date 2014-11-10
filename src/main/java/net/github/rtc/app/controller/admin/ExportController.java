@@ -208,9 +208,7 @@ public class ExportController {
 
     @InitBinder("report")
     public void initBinder(final WebDataBinder binder) {
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-        binder.registerCustomEditor(Class.class, new CustomClassEditor());
+         binder.registerCustomEditor(Class.class, new CustomClassEditor());
     }
 
 }

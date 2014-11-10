@@ -188,8 +188,6 @@ public class UserController {
 
     @InitBinder
     public void initFilterBinder(final WebDataBinder binder) {
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(List.class, PROGRAMMING_LANGUAGES, new CustomTypeEditor());
         binder.registerCustomEditor(List.class, STRING_AUTHORITIES, new CustomRoleEditor(userService));
     }

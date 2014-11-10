@@ -135,19 +135,6 @@ public class NewsController {
         return STRING_REDIRECT + STRING_ADMIN_NEWS_LIST;
     }
 
-
-    /**
-     * Binding course conditions for entry into the form conclusions
-     *
-     * @param binder
-     */
-    @InitBinder(STRING_FILTER_NEWS)
-    public void initBinder(final WebDataBinder binder) {
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-
-    }
-
     @ModelAttribute(STRING_STATUSES)
     public Collection<String> getStatuses() {
         return NewsStatus.findAll();
