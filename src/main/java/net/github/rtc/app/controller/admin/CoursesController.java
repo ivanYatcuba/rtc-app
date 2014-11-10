@@ -15,14 +15,11 @@ import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**

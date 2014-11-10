@@ -12,10 +12,10 @@ public class CustomClassEditor extends PropertyEditorSupport {
 
     @Override
     public void setAsText(final String text) {
-        if (("User").equals(text)) {
-            this.setValue(User.class);
-        } else {
-            this.setValue(Course.class);
+        switch (text.toLowerCase()) {
+            case "user" : this.setValue(User.class); break;
+            case "course" :  this.setValue(Course.class); break;
+            default: break;
         }
 
     }
