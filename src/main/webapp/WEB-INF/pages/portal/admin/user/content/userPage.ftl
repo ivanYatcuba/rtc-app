@@ -50,7 +50,7 @@
         <#if user.photo??>
             <img id="Img" src="/PathToPhotos/${user.photo}"  class="img-circle"/>
         <#else>
-            <img src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="img-circle">
+            <img id="Img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="img-circle">
         </#if>
         </div>
     </div>

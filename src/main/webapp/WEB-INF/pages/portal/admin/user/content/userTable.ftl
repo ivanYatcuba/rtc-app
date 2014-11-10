@@ -21,7 +21,7 @@
                          <#if user.photo??>
                             <img id="Img" src="/PathToPhotos/${user.photo}"  class="avatar"/>
                         <#else>
-                            <img src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="avatar">
+                            <img id="Img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="avatar">
                         </#if>
                         </div>
                         <div class="col-md-10" style="padding-left: 22px; vertical-align: middle ">
