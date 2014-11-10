@@ -231,12 +231,17 @@
 </#macro>
 
 <#macro rtcFormLabelOut label path messagePrefix="" class="">
+    <div>
     <label
-            style="float: left;
+        style="float: left;
         width: 13em;
         text-align: right;
         margin-bottom: 10px;"
-           class="${class}" ><@spring.message label/>&nbsp</label>
+        class="${class}" >
+            <@spring.message label/>&nbsp
+    </label>
+    </div>
+    <div>
     <#if path??>
         <#if path? is_sequence>
             <#list path as tmp>
@@ -250,6 +255,7 @@
                <#if "${path}"??>${path}<#else>&nbsp</#if>
         </#if>
     </#if>
+    </div>
 </#macro>
 
 <#macro rtcFormTextarea label path class="" style="">
@@ -342,7 +348,7 @@
 <div class="form-group">
     <label for="compare" class="control-label col-md-3" ><@spring.message pathDatepicker/></label>
     <div id="compare"class="col-md-2"><@formSingleSelect pathSingleSelect, ["=", "<", ">"], 'class=form-control'/></div>
-    <div class="col-md-3"><@rtcDateInput  pathDatepicker 'class=form-control'/></div>
+    <div class="col-md-3"><@rtcDateInput  pathDatepicker 'class=form-control style="background-color: #fff"' /></div>
 </div>
 </#macro>
 
