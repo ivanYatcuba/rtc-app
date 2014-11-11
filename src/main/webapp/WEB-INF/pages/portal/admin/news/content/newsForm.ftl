@@ -9,7 +9,7 @@
 </style>
 <div class="row">
     <div class="col-md-6">
-        <@formMacro.rtcFormTextInput "news.title" "news.title" "required" ""/>
+        <@formMacro.rtcFormTextInput "news.title" "news.title" "required" "maxlength='255'"/>
     </div>
     <div class="col-md-6">
         <@formMacro.rtcFormTagsInput "news.tags" "news.tags" "" />
