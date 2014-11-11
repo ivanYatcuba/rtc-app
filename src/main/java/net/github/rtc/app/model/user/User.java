@@ -321,14 +321,6 @@ public class User extends AbstractPersistenceObject implements UserDetails {
         this.birthDate = birthDate;
     }
 
-/*    public String getCode() {
-        return code;
-    }
-
-    public void setCode(final String code) {
-        this.code = code;
-    }*/
-
     public Date getRegisterDate() {
         return registerDate;
     }
@@ -353,7 +345,6 @@ public class User extends AbstractPersistenceObject implements UserDetails {
         this.status = status;
     }
 
-    // for authentification
     public boolean hasRole(final String role) {
         boolean hasRole = false;
         for (final GrantedAuthority authority : this.getAuthorities()) {
