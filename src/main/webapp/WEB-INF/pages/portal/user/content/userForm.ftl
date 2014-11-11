@@ -55,7 +55,7 @@
 
 <div class="row">
     <div class="col-md-6">
-    <@formMacro.rtcFormTextInput  "user.programmingLanguages" "user.programmingLanguages"/>
+    <@formMacro.rtcFormTextInput  "user.programmingLanguages" "user.programmingLanguages" "" "maxlength='255'"/>
     </div>
 
     <div class="col-md-6">
