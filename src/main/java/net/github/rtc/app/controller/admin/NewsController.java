@@ -32,6 +32,7 @@ public class NewsController {
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_REDIRECT = "redirect:";
     private static final String STRING_ADMIN_NEWS_LIST = "/admin/news";
+    private static final String STRING_ADMIN_SEARCH = "/admin/search";
 
     @Autowired
     private NewsService newsService;
@@ -46,8 +47,6 @@ public class NewsController {
         final SearchResults results = newsService.search(filterNews);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_NEWS, results.getResults());
-//        mav.addObject(STRING_STATUSES, getStatuses());
-//        mav.addObject(STRING_FILTER_NEWS, filterNews);
         return mav;
     }
 
@@ -121,7 +120,7 @@ public class NewsController {
     @RequestMapping(value = "/delete/{newsCode}", method = RequestMethod.GET)
     public String deleteByCode(@PathVariable final String newsCode) {
         newsService.deleteByCode(newsCode);
-        return STRING_REDIRECT + STRING_ADMIN_NEWS_LIST;
+        return STRING_REDIRECT + STRING_ADMIN_SEARCH;
     }
 
     @RequestMapping(value = "/publish/{newsCode}", method = RequestMethod.GET)
@@ -129,7 +128,7 @@ public class NewsController {
         final News news = newsService.findByCode(newsCode);
         news.setStatus(NewsStatus.PUBLISHED);
         newsService.update(news);
-        return STRING_REDIRECT + STRING_ADMIN_NEWS_LIST;
+        return STRING_REDIRECT + STRING_ADMIN_SEARCH;
     }
 
     @ModelAttribute(STRING_STATUSES)

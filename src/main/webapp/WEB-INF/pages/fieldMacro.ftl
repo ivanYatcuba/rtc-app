@@ -67,7 +67,7 @@
         <input type="submit" class="btn btn-primary" value="${buttonText}"/>
         <#--or-->
         <#--<a href="<@spring.url "${urlAddress}" />">${urlText}</a>-->
-        <input type="reset" class="btn btn-default" onClick="location.href='${urlAddress}'" value="${urlText}"/>
+        <input type="reset" class="btn btn-default" onClick="location.href= '<@spring.url"${urlAddress}"/>'" value="${urlText}"/>
     </div>
     <div class="col-md-1" style="text-align: right"></div>
 </div>

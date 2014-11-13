@@ -1,9 +1,7 @@
-<#import "../../../../fieldMacro.ftl" as formMacro />
 <#import "../../../../datatables.ftl" as datatables/>
 <h4><strong><@spring.message "course.search.result.page.search"/></strong></h4>
 <div id="data">
-    <#--<div class="col-md-12">-->
-<table width="100%" class="table" style="margin-bottom: 5px" id="CourseTable">
+    <table width="100%" class="table" style="margin-bottom: 5px" id="CourseTable">
             <thead>
             <tr>
                 <th><@spring.message "course.search.result.table.name"/></th>
@@ -54,7 +52,6 @@
             </#list>
         </#if>
         </table>
-    <#--</div>-->
 </div>
 <hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
 <div class="row">

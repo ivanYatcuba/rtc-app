@@ -17,14 +17,12 @@
 </div>
 
 <div id="searchButtons" class="row" style="text-align: right;">
-    <a id="search" class="btn btn-primary" href="#"/>Search</a>
+    <a id="search" class="btn btn-primary" href="#">Search</a>
     or
     <a id="reset" class="btn-default" href="#">Reset</a>
 </div>
 
-<div id="searchTable">
-
-</div>
+<div id="searchTable"></div>
 
 <script type="text/javascript">
     var menuMap = {"news": "#newsFilter", "course": "#courseFilter", "user": "#userFilter", "report": "#reportFilter"}
