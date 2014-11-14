@@ -49,6 +49,7 @@ function SearchPage(settings) {
         $(self.menuMap[menuId]).addClass("activeForm").show();
        };
 
+
     self.emptyTable = function () {
         $("#searchTable").empty();
     };

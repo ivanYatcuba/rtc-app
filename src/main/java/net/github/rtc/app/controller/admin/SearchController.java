@@ -15,13 +15,12 @@ import net.github.rtc.app.service.NewsService;
 import net.github.rtc.app.service.ReportService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
@@ -33,6 +32,8 @@ import java.util.*;
 @Controller
 @RequestMapping(value = "/admin")
 public class SearchController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SearchController.class);
 
     private static final String ROOT = "portal/admin";
     private static final String STRING_SEARCH_PAGE = "/search/tables";
@@ -104,6 +105,7 @@ public class SearchController {
     public
     @ResponseBody
     ModelAndView getReportTable(@ModelAttribute(STRING_REPORT_FILTER) final ReportSearchFilter reportFilter) {
+        LOG.debug(reportFilter.toString());
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/reportSearchTable");
         final SearchResults<ReportDetails> results = reportService.search(reportFilter);
         mav.addAllObjects(results.getPageModel());
@@ -171,11 +173,6 @@ public class SearchController {
         types.put("User", User.class);
         types.put("Course", Course.class);
         return types.keySet();
-    }
-
-        @ModelAttribute("reportFilter")
-    public ReportDetails getCommandObject() {
-        return new ReportDetails();
     }
 
     @ModelAttribute(STRING_COURSE_CATIGORIES)
