@@ -1,1 +1,1 @@
-<h4><strong><@spring.message "reportFilter.search.result.page.criteria"/></strong></h4>
+<h4><strong><@spring.message "report.search.result.page.criteria"/></strong></h4>

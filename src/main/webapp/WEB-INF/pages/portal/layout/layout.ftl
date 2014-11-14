@@ -39,8 +39,8 @@
         </#if>
     </div>
 </div>
-
 <div id="footer" class="container">
+
     <#include "footer.ftl" />
 </div>
 </body>
