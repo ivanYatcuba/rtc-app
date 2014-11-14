@@ -18,6 +18,8 @@ import net.github.rtc.app.utils.datatable.search.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -59,9 +61,12 @@ public class SearchController {
     private UserService userService;
     @Autowired
     private ReportService reportService;
+    @Autowired
+    private ReloadableResourceBundleMessageSource messageSource;
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchPage() {
+        messageSource.clearCache();
         return ROOT + "/page/adminSearchPage";
     }
 

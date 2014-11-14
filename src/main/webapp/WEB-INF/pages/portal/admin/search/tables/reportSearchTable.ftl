@@ -1,14 +1,14 @@
 <#import "../../../../datatables.ftl" as datatables/>
 <script src="<@spring.url'/resources/Bootstrap/js/bootstrap-dropdown.js'/>"></script>
-<h4><strong><@spring.message "reportFilter.search.result.page.header"/></strong></h4>
+<h4><strong><@spring.message "report.search.result.page.header"/></strong></h4>
 <div>
     <table width="100%" class="table" style="margin-bottom: 5px" id="ReportTable">
         <thead>
         <tr>
-            <th><@spring.message "reportFilter.search.result.header.name"/></th>
-            <th><@spring.message "reportFilter.search.result.header.reportType"/></th>
-            <th><@spring.message "reportFilter.search.result.header.exportFormat"/></th>
-            <th><@spring.message "reportFilter.search.result.header.createDate"/></th>
+            <th><@spring.message "report.search.result.header.name"/></th>
+            <th><@spring.message "report.search.result.header.reportType"/></th>
+            <th><@spring.message "report.search.result.header.exportFormat"/></th>
+            <th><@spring.message "report.search.result.header.createDate"/></th>
             <th></th>
         </tr>
         </thead>
