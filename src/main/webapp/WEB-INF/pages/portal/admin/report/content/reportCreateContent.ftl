@@ -2,7 +2,7 @@
 
 <@formMacro.rtcForm "reportForm" "/admin/export/insertReport" "report.create.page.header" "${validationRules}">
     <#include "reportForm.ftl" />
-    <@formMacro.rtcSubmit "Create" "Cancel" "/admin/export/viewAll"/>
+    <@formMacro.rtcSubmit "Create" "Cancel" "/admin/search"/>
 </@formMacro.rtcForm>
 
 <script type="text/javascript">

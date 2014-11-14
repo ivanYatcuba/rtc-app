@@ -10,6 +10,6 @@
     <!--Create & Cancel-->
     <div class="row-fluid span12" style="margin-left: 1px">
     <@formMacro.rtcSubmitDoOrCancel "action.update" "/admin/export/update/${report.code}" "action.cancel"
-    "/admin/export/viewAll"/>
+    "/admin/search"/>
     </div>
 </form>

@@ -42,5 +42,5 @@
 </div>
 </div>
 <hr/>
-<@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/news/${news.code}/edit" "Cancel" "/admin/news"/>
+<@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/news/${news.code}/edit" "Cancel" "/admin/search"/>
 </div>

@@ -101,5 +101,5 @@
 
 <hr>
 <div class="row">
-<@formMacro.rtcSubmitDoOrCancel "action.edit" "/user/edit" "Cancel" "/user"/>
+<@formMacro.rtcSubmitDoOrCancel "action.edit" "/user/edit" "Cancel" "/user/search"/>
 </div>

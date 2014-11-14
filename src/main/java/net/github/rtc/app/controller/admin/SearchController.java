@@ -174,12 +174,12 @@ public class SearchController {
     }
 
     @ModelAttribute(STRING_COURSE_CATIGORIES)
-    public Collection<String> getCategories() {
-        final List<String> types = new ArrayList<>();
+    public Map<String, String> getCategories() {
+        final Map<String, String> categories = new HashMap<>();
         for (CourseType type : CourseType.findAll()) {
-            types.add(type.toString());
+            categories.put(type.name(), type.toString());
         }
-        return types;
+        return categories;
     }
 
     @ModelAttribute("currentUser")
