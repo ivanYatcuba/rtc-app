@@ -123,6 +123,12 @@ public class NewsController {
         return STRING_REDIRECT + STRING_ADMIN_SEARCH;
     }
 
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public String setStatusForRemoval(@RequestParam final String newsCode) throws Exception {
+        newsService.deleteByCode(newsCode);
+        return STRING_REDIRECT + STRING_ADMIN_SEARCH;
+    }
+
     @RequestMapping(value = "/publish/{newsCode}", method = RequestMethod.GET)
     public String publishByCode(@PathVariable final String newsCode) {
         final News news = newsService.findByCode(newsCode);

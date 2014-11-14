@@ -55,7 +55,10 @@
                             <#if (news.status??) && (news.status == "DRAFT") >
                                 <li id="publicationLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/news/publish/${news.code}'/>">Publish</a></li>
                             </#if>
-                            <li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/news/delete/${news.code}'/>">Remove</a></li>
+                            <li>
+                                <a href="#" onclick="javascript:PopUpShow('${news.code}')">Remove</a>
+                            </li>
+                            <#--<li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/news/delete/${news.code}'/>">Remove</a></li>-->
                         </ul>
                     </div>
                 </td>
@@ -76,3 +79,38 @@
     <@datatables.addPagination/>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal" style="top: 15%; left: 1%" id="removeNewsModal" tabindex="-1" role="dialog" aria-labelledby="removeNewsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="removeNewsModalLabel">Remove News</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to remove this news?
+            </div>
+            <div class="modal-footer">
+                <form name="deleteNews" action="<@spring.url"/admin/news/remove/"/>" method="post">
+                    <input type="hidden" id="newsCode" name="newsCode"/>
+                    <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" onClick="javascript:PopUpHide()">Remove</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    function PopUpShow(newsCode) {
+        $("#newsCode").val(newsCode);
+        $('#removeNewsModal').modal('show')
+    }
+    function PopUpHide() {
+        $('#removeNewsModal').modal('hide');
+    }
+</script>
