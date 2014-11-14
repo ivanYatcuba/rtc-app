@@ -61,8 +61,6 @@ public class SearchController {
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchPage(String formToShow) {
 //        messageSource.clearCache();
-        if (formToShow != null)
-                System.out.println("                         " + formToShow + "                         ");
         return ROOT + "/page/adminSearchPage";
     }
 
