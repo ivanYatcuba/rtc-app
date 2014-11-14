@@ -35,8 +35,6 @@ import java.util.*;
 @RequestMapping(value = "/admin")
 public class SearchController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SearchController.class);
-
     private static final String ROOT = "portal/admin";
     private static final String STRING_SEARCH_PAGE = "/search/tables";
     private static final String STRING_NEWS = "news";
@@ -61,12 +59,12 @@ public class SearchController {
     private UserService userService;
     @Autowired
     private ReportService reportService;
-    @Autowired
-    private ReloadableResourceBundleMessageSource messageSource;
+    /*@Autowired
+    private ReloadableResourceBundleMessageSource messageSource;*/
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchPage() {
-        messageSource.clearCache();
+//        messageSource.clearCache();
         return ROOT + "/page/adminSearchPage";
     }
 
@@ -110,7 +108,6 @@ public class SearchController {
     public
     @ResponseBody
     ModelAndView getReportTable(@ModelAttribute(STRING_REPORT_FILTER) final ReportSearchFilter reportFilter) {
-        LOG.debug(reportFilter.toString());
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/reportSearchTable");
         final SearchResults<ReportDetails> results = reportService.search(reportFilter);
         mav.addAllObjects(results.getPageModel());
