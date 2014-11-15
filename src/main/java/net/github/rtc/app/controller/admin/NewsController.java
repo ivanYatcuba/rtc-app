@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -29,16 +28,12 @@ public class NewsController {
     public static final String LAST_UPDATE_VIEW_KEY = "lastUpdate";
     public static final String STRING_NEWS = "news";
     private static final String ROOT = "portal/admin";
-    private static final String STRING_TYPES = "types";
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_NEWS = "filterNews";
-    private static final String STRING_NEWS = "news";
     private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_REDIRECT = "redirect:";
-    private static final String STRING_ADMIN_NEWS_LIST = "/admin/news";
     private static final String STRING_ADMIN_SEARCH = "/admin/search";
-
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -71,7 +66,6 @@ public class NewsController {
         mav.addObject(STRING_FILTER_NEWS, newsFilter);
         return mav;
     }
-
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
