@@ -5,6 +5,7 @@ import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
+import net.github.rtc.app.model.report.ExportFormat;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
@@ -17,22 +18,17 @@ import net.github.rtc.app.utils.datatable.search.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Berdniky on 15.10.2014.
  */
 
 @Controller
-@RequestMapping(value = "/admin/developed")
+@RequestMapping(value = "/admin")
 public class SearchController {
 
     private static final String ROOT = "portal/admin";
@@ -44,9 +40,9 @@ public class SearchController {
     private static final String STRING_NEWS_FILTER = "newsFilter";
     private static final String STRING_TYPES = "types";
     private static final String STRING_COURSE_FILTER = "courseFilter";
-    private static final String STRING_COURSE_TYPES = "categories";
+    private static final String STRING_COURSE_CATIGORIES = "courseCategories";
     private static final String STRING_USERS = "users";
-    private static final String STRING_AUTHORITIES = "authorities";
+    private static final String STRING_USER_AUTHORITIES = "userAuthorities";
     private static final String STRING_USER_FILTER = "userFilter";
     private static final String STRING_COURSES = "courses";
     private static final String STRING_REPORTS = "reports";
@@ -59,9 +55,12 @@ public class SearchController {
     private UserService userService;
     @Autowired
     private ReportService reportService;
+    /*@Autowired
+    private ReloadableResourceBundleMessageSource messageSource;*/
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String searchPage() {
+    public String searchPage(String formToShow) {
+//        messageSource.clearCache();
         return ROOT + "/page/adminSearchPage";
     }
 
@@ -147,12 +146,34 @@ public class SearchController {
         return CourseStatus.findAll();
     }
 
-    @ModelAttribute(STRING_AUTHORITIES)
+    @ModelAttribute(STRING_USER_AUTHORITIES)
     public Collection<String> getAuthorities() {
         return RoleType.findAll();
     }
 
-    @ModelAttribute(STRING_COURSE_TYPES)
+    @ModelAttribute("reportFormats")
+    public List<String> getFormats() {
+        return ExportFormat.findAll();
+    }
+
+    @ModelAttribute("reportStats")
+    public List<String> getStats() {
+
+        final List<String> stats = new ArrayList<>();
+        stats.add(CourseStatus.DRAFT.name());
+        stats.add(CourseStatus.PUBLISHED.name());
+        return stats;
+    }
+
+    @ModelAttribute("reportTypes")
+    public Set<String> getTypes() {
+        final Map<String, Class> types = new HashMap<>();
+        types.put("User", User.class);
+        types.put("Course", Course.class);
+        return types.keySet();
+    }
+
+    @ModelAttribute(STRING_COURSE_CATIGORIES)
     public Collection<String> getCategories() {
         final List<String> types = new ArrayList<>();
         for (CourseType type : CourseType.findAll()) {

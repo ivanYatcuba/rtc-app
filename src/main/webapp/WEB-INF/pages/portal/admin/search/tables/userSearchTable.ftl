@@ -1,5 +1,6 @@
 <#import "../../../../datatables.ftl" as datatables/>
-<h4><@spring.message "user.search.result.page.header.search"/></h4>
+<#import "../../../../fieldMacro.ftl" as formMacro/>
+<h4><strong><@spring.message "user.search.result.page.header.search"/></strong></h4>
 <div id="data">
     <table width="100%" class="table" style="margin-bottom: 5px" id="UserTable">
         <thead>
@@ -11,14 +12,17 @@
             <th></th>
         </tr>
         </thead>
-
     <#list users as user>
         <tr style="vertical-align: middle">
-            <#if (user.name) ?? && (user.surname) ?? >
+            <#if (user.name??) && (user.surname??) >
                 <td style="width: 30%; vertical-align: middle">
                     <div class="row">
                         <div class="col-md-2">
-                            <img src = "<@spring.url'/resources/images/errorCat.jpg'/>" alt="..." class="avatar">
+                            <#if user.photo??>
+                                <img id="Img" src="/PathToPhotos/${user.photo}"  class="avatar"/>
+                            <#else>
+                                <img id="Img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="avatar">
+                            </#if>
                         </div>
                         <div class="col-md-10" style="padding-left: 22px; vertical-align: middle ">
                             <a href="<@spring.url"/admin/user/userPage/${user.code}"/>">  ${user.surname + " " + user.name } </a>
@@ -45,7 +49,7 @@
             </#if>
 
             <#if (user.registerDate)??>
-                <td style="vertical-align: middle">${user.registerDate?datetime?string("dd-MM-yyyy")}</td>
+                <td style="vertical-align: middle">${user.registerDate?date?string("dd-MM-yyyy")}</td>
             <#else>
                 <td style="vertical-align: middle">None</td>
             </#if>
@@ -53,25 +57,29 @@
             <#if (user.status)??>
                 <td style="vertical-align: middle">
                     <#if (user.status)=="ACTIVE">
-                        <span class="label label-success" style="width: 90px; height: 34px">Active</span>
+                        <@formMacro.rtcColorLabel "${user.status}" "label-success"  "user.status."/>
                     <#else>
                         <#if (user.status)=="FOR_REMOVAL">
-                            <span class="label label-danger" style="width: 90px; height: 34px">Deleted</span>
+                            <@formMacro.rtcColorLabel "${user.status}" "label-danger"  "user.status."/>
                         <#else>
-                            <span class="label label-danger" style="width: 90px; height: 34px">Inactive</span>
+                            <@formMacro.rtcColorLabel "${user.status}" "label-default"  "user.status."/>
                         </#if>
                     </#if>
                 </td>
             <#else>
                 <td style="vertical-align: middle">
-                    <span class="label label-default" style="width: 90px; height: 34px">None</span>
+                    <@rtcColorLabel "None" "label-default"/>
                 </td>
             </#if>
             <td style="width: 15%; vertical-align: middle">
                 <#if user.isForRemoval()>
                     <div class="btn-group">
-                        <button class="btn btn-default dropdown-toggle" style="width: 112px" type="button" data-toggle="dropdown">
+                        <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
                             Action
+                        </button>
+                        <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" style="width: 112px" role="menu">
                             <li>
@@ -82,15 +90,24 @@
 
                 <#else>
                     <div class="btn-group">
-                        <button class="btn btn-default dropdown-toggle" style="width: 112px" type="button" data-toggle="dropdown">
+                        <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
                             Action
                         </button>
+                        <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+
                         <ul class="dropdown-menu" style="width: 112px role="menu">
                         <li>
                             <a href="#" onclick="javascript:PopUpShow('${user.code}')">Remove</a>
                         </li>
                         <li>
-                            <a href="#">Inactivate</a>
+                            <#if user.isActive()>
+                                <a href="<@spring.url"/admin/user/inactivate/${user.code}"/>">Inactivate</a>
+                            <#else>
+                                <a href="<@spring.url"/admin/user/activate/${user.code}"/>">Activate</a>
+                            </#if>
                         </li>
                         </ul>
                     </div>
@@ -133,3 +150,16 @@
         </div>
     </div>
 </div>
+
+
+
+
+<#--<script type="text/javascript">
+    function PopUpShow(userCode) {
+        $("#userCode").val(userCode);
+        $('#removeUserModal').modal('show')
+    }
+    function PopUpHide() {
+        $('#removeUserModal').modal('hide');
+    }
+</script>-->

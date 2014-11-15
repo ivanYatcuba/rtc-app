@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6">
-        <@formMacro.rtcFormTextInput "report.name" "report.name" "required" ""/>
+        <@formMacro.rtcFormTextInput "report.lable.name" "report.name" "required" ""/>
     </div>
     <div class="col-md-6" >
         <@formMacro.rtcFormSingleSelect "report.lable.exportFormate" "report.exportFormat" formats "required" "" "report.exportFormat." ""/>
@@ -13,7 +13,7 @@
 </div>
 <hr>
 <div class="row">
-    <b><@spring.message "report.fields"/></b>
+    <b><@spring.message "report.lable.fields"/></b>
 </div>
 <div class="row">
     <div id="fields" class="col-md-3 col-md-offset-2"></div>

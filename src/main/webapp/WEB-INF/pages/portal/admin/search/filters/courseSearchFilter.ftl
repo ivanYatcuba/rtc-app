@@ -1,31 +1,53 @@
-<div class="row">
-    <div class="col-md-6">
-    <@rtcmacros.formItem "courseFilter.name"/>
-
-    <@spring.bind "courseFilter.types"/>
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="types"><@spring.message "courseFilter.types"/></label>
-
-            <div class="col-md-4">
-            <@rtcmacros.formMultiSelect "courseFilter.types", categories/>
-            </div>
+<#import "../../../../fieldMacro.ftl" as formMacro/>
+<h4><strong><@spring.message "course.search.result.page.criteria"/></strong></h4>
+<div class="form-horizontal">
+    <div class="row">
+        <div class="col-md-6">
+        <@formMacro.rtcFormTextInput "courseFilter.name" "courseFilter.name"/>
+            <@formMacro.rtcFormMultiSelect "courseFilter.types" "courseFilter.types" courseCategories "" "height: 65;"/>
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2"
-                   for="addExpertH"><@spring.message "courseFilter.experts"/></label>
-
-            <div class="col-md-8">
-                <div id="experts"></div>
-                <a id="addExpertH" href="#" onclick="addExpert()">Add
-                    Expert</a>
+        <div class="col-md-6">
+        <@formMacro.formDateSearch  "courseFilter.dateMoreLessEq" "courseFilter.startDate"/>
+        <@formMacro.rtcFormSingleSelect "courseFilter.status" "courseFilter.status" courseStatuses, "", "", "course.status.",  {"" : "All"}/>
+            <div class="form-group">
+                <label class="control-label col-md-3" for="autoSelectInput">
+                <@spring.message"courseFilter.experts"/>
+                </label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" id="autoSelectInput"/>
+                </div>
             </div>
+        <@spring.formHiddenInput "courseFilter.expertCode" />
         </div>
     </div>
-    <div class="col-md-6">
-    <@rtcmacros.formItem "courseFilter.startDate" 'class="input-small"' "datepiker" />
-            <@rtcmacros.formItem "courseFilter.status" 'class="input-medium"' "singleSelect" courseStatuses/>
-            <@rtcmacros.formItem "courseFilter.tags" "" "tag" />
-    </div>
+    <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
+<#--<@formMacro.rtcSearchButtons "/admin/course"/>-->
 </div>
+<br>
+
+<script>
+    $(function() {
+        var mapAdminDataId;
+        var autoCompleteAuthors;
+        $.ajax({
+            type: "POST",
+            url: "<@spring.url "/admin/user/getExperts"/>",
+            success: function(response){
+                mapAdminDataId = response;
+                autoCompleteAuthors = Object.keys(mapAdminDataId);
+                $("#autoSelectInput").autocomplete({source: autoCompleteAuthors});
+
+                $("#autoSelectInput").on("autocompleteselect", function(event,ui){
+                    var selectedValue = (ui.item.label);
+                    var authorId = mapAdminDataId[selectedValue];
+                    $("#expertCode").attr("value",authorId);
+                });
+                $("#autoSelectInput").on("keyup", function(){
+                    if(!mapAdminDataId.hasOwnProperty($("#expertCode").value)){
+                        $("#expertCode").attr("value",null);
+                    }
+                });
+            }
+        });
+    });
+</script>

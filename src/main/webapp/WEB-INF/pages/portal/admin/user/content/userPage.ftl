@@ -13,7 +13,7 @@
 <div style="width: 85%">
 <div class="row">
     <div class="col-md-6">
-
+        <div class="row">
     <div class="col-md-12" >
         <label style="float: left;
         width: 11.9em;
@@ -26,6 +26,7 @@
         </#list>
     </div>
 
+
     <div class="col-md-12">
        <@formMacro.rtcFormLabelOut "user.surname" "${user.surname}" "" "col-md-5"/>
     </div>
@@ -33,6 +34,8 @@
     <div class="col-md-12">
         <@formMacro.rtcFormLabelOut "user.name" "${user.name}" "" "col-md-5"/>
     </div>
+
+
 
         <div class="col-md-12">
        <@formMacro.rtcFormLabelOut "user.middleName" "${user.middleName}" "" "col-md-5"/>
@@ -42,7 +45,7 @@
         <@formMacro.rtcFormLabelOut "user.birthDate" "${user.birthDate?string('dd-MMM-yyyy')}" "" "col-md-5"/>
         </div>
 
-
+        </div>
     </div>
     <div>
 
@@ -83,36 +86,36 @@
 <hr>
 
 <div class="row">
-    <div class="col-md-6">
 
-        <div class="col-md-12">
+
+    <div class="col-md-6">
         <@formMacro.rtcFormLabelOut "user.university" "${user.university}" "" "col-md-5"/>
-        </div>
-
-
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.faculty" "${user.faculty}" "" "col-md-5"/>
-         </div>
-
-   </div>
+    </div>
 
     <div class="col-md-6">
-    <@formMacro.rtcFormLabelOut "user.speciality" "${user.speciality}" "" "col-md-5"/>
+        <@formMacro.rtcFormLabelOut "user.speciality" "${user.speciality}" "" "col-md-5"/>
     </div>
 </div>
+
+    <div class="row">
+        <div class="col-md-6">
+        <@formMacro.rtcFormLabelOut "user.faculty" "${user.faculty}" "" "col-md-5"/>
+        </div>
+    </div>
 
 <hr>
 
 <div class="row">
 
     <div class="col-md-6">
-            <@formMacro.rtcFormLabelOut "user.programmingLanguages" user.programmingLanguages  "" "col-md-5"/>
+    <@formMacro.rtcFormLabelOut "user.programmingLanguages" user.programmingLanguages  "" "col-md-5"/>
     </div>
 
     <div class="col-md-6">
       <@formMacro.rtcFormLabelOut "user.english" "${user.english}" "" "col-md-5"/>
     </div>
 </div>
+
 <hr>
 
 <div class="row">

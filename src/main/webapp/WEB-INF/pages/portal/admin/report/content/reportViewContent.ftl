@@ -12,15 +12,15 @@
 <div class="row">
     <div class="col-md-6">
         <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "report.name" "${report.name}"/>
+            <@formMacro.rtcFormLabelOut "report.lable.name" "${report.name}"/>
         </div>
         <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "report.exportClass" "${report.exportClass.simpleName}"/>
+            <@formMacro.rtcFormLabelOut "report.lable.exportClass" "${report.exportClass.simpleName}"/>
         </div>
     </div>
     <div class="col-md-6">
         <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "report.exportFormat" "${report.exportFormat}"/>
+            <@formMacro.rtcFormLabelOut "report.lable.exportFormate" "${report.exportFormat}"/>
         </div>
     </div>
 </div>
@@ -28,7 +28,7 @@
 <hr>
 <div class="row">
     <div class="col-md-6">
-        <p style="margin-left: 6em"><b><@spring.message "report.fields"/></b></p>
+        <p style="margin-left: 6em"><b><@spring.message "report.lable.fields"/></b></p>
         <#if report.fields??>
             <#list report.fields as field>
                 <label></label>
@@ -40,5 +40,5 @@
 </div>
 <hr>
 <div class="row">
-<@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/export/update/${report.code}" "action.cancel" "/admin/export/viewAll"/>
+<@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/export/update/${report.code}" "action.cancel" "/admin/search"/>
 </div>

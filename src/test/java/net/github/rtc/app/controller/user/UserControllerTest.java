@@ -1,6 +1,7 @@
 package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.service.CourseService;
@@ -15,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +25,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -40,8 +45,7 @@ public class UserControllerTest {
 
     private static final String SURNAME = "pupkin";
 
-    private static final String CURRENT_USER = "?currentUserName=vasya%40mail.ru&positions=TESTER&" +
-            "positions=DEVELOPER&positions=BUSINESS_ANALYST";
+    private static final String CURRENT_USERNAME = "?currentUserName=vasya%40mail.ru";
 
     private static final String COURSE_CODE = "X";
 
@@ -58,6 +62,8 @@ public class UserControllerTest {
     private ValidationContext validationContext;
     @Mock
     private DateService dateService;
+    @Mock
+    private AuthenticationManager authenticationManager;
 
     private User user;
 
@@ -93,21 +99,15 @@ public class UserControllerTest {
     }
 
     @Test
-    @Ignore
     public void testUpdateUser() throws Exception {
         mockMvc.perform(post("/user/update").sessionAttr("user", user))
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/user/view" + CURRENT_USER));
+                .andExpect(redirectedUrl("/user/view" + CURRENT_USERNAME));
     }
 
-    @Ignore
     @Test
     public void testUserCoursesIfNull() throws Exception {
-//        final CourseSearchFilter courseSearchFilter = new CourseSearchFilter();
-//        courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
-//        SearchResults<Course> results = new SearchResults<>();
-//        results.setResults(new ArrayList<Course>());
-//        when(courseService.search(courseSearchFilter)).thenReturn(new SearchResults<Course>());
+        when(validationContext.get(UserCourseOrder.class)).thenReturn("validationContext");
         mockMvc.perform(get("/user/userCourses"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("user", "courses"))
@@ -125,11 +125,10 @@ public class UserControllerTest {
                 .andExpect(model().attributeExists("user", "course", "orderStatus"));
     }
 
-    @Ignore
     @Test
     public void testCourseDetails() throws Exception {
         when(courseService.findByCode(COURSE_CODE)).thenReturn(new Course());
-        mockMvc.perform(get("/courseDetails/{courseCode}", COURSE_CODE))
+        mockMvc.perform(get("/user/courseDetails/{courseCode}", COURSE_CODE))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("user", "course"));
     }
@@ -138,6 +137,13 @@ public class UserControllerTest {
     public void testSendCourseOrder() throws Exception {
         mockMvc.perform(post("/user/sendOrder").sessionAttr("order", new UserCourseOrder()))
                 .andExpect(status().isFound());
+    }
+
+    @Test
+    public void testCoursePosition() throws Exception {
+        when(courseService.findByCode(COURSE_CODE)).thenReturn(new Course());
+        mockMvc.perform(get("/user/position/{courseCode}", COURSE_CODE))
+                .andExpect(status().isOk());
     }
 }
 

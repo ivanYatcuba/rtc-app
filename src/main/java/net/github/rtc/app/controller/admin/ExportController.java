@@ -82,7 +82,7 @@ public class ExportController {
 
     @RequestMapping(value = "/update/{reportCode}", method = RequestMethod.GET)
     public ModelAndView openUpdatePage(@PathVariable final String reportCode) {
-        final ModelAndView mav = new ModelAndView("portal/admin/page/reportEdit");
+        final ModelAndView mav = new ModelAndView(ROOT + "/page/reportEdit");
         final Set<String> formatLables = getTypes().keySet();
         final ReportDetails reportDetails = reportService.findByCode(reportCode);
         mav.addObject(STRING_REPORT, reportDetails);
