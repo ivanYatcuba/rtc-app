@@ -47,6 +47,7 @@ public class SearchController {
     private static final String STRING_COURSES = "courses";
     private static final String STRING_REPORTS = "reports";
     private static final String STRING_REPORT_FILTER = "reportFilter";
+    private static final String STRING_EXPERTS = "experts";
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -180,6 +181,15 @@ public class SearchController {
             categories.put(type.name(), type.toString());
         }
         return categories;
+    }
+
+    @ModelAttribute(STRING_EXPERTS)
+    public Map<String, String> getExpertUsers() {
+        final Map<String, String> expertMap = new HashMap<>();
+        for (User u : userService.getUserByRole(RoleType.ROLE_EXPERT)) {
+            expertMap.put(u.getCode(), u.toString());
+        }
+        return expertMap;
     }
 
     @ModelAttribute("currentUser")

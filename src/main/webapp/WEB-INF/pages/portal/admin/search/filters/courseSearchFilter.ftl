@@ -10,7 +10,7 @@
         <@formMacro.formDateSearch  "courseFilter.dateMoreLessEq" "courseFilter.startDate"/>
         <@formMacro.rtcFormSingleSelect "courseFilter.status" "courseFilter.status" courseStatuses, "", "", "course.status.",  {"" : "All"}/>
             <div class="form-group">
-                <label class="control-label col-md-3" for="autoSelectInput">
+                <label class="control-label col-md-3" for="expertAutoSelectInput">
                 <@spring.message"courseFilter.experts"/>
                 </label>
                 <div class="col-md-5">
@@ -21,14 +21,13 @@
         </div>
     </div>
     <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
-<#--<@formMacro.rtcSearchButtons "/admin/course"/>-->
 </div>
 <br>
 
 <script>
     $(function() {
-        var mapAdminDataId;
-        var autoCompleteAuthors;
+        var mapExpertDataId;
+        var autoComplete;
         $.ajax({
             type: "POST",
             url: "<@spring.url "/admin/user/getExperts"/>",
