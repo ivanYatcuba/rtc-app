@@ -102,7 +102,7 @@ public class ExportController {
     @RequestMapping(value = "/delete/{reportCode}", method = RequestMethod.GET)
     public String deleteReport(@PathVariable final String reportCode) {
         reportService.deleteByCode(reportCode);
-        return "redirect:/admin/export/viewAll";
+        return "redirect:/admin/search";
     }
 
     @RequestMapping(value = "/insertReport", method = RequestMethod.POST)
