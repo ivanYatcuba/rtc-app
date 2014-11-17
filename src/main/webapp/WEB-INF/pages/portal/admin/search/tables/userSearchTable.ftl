@@ -151,10 +151,7 @@
     </div>
 </div>
 
-
-
-
-<#--<script type="text/javascript">
+<script type="text/javascript">
     function PopUpShow(userCode) {
         $("#userCode").val(userCode);
         $('#removeUserModal').modal('show')
@@ -162,4 +159,4 @@
     function PopUpHide() {
         $('#removeUserModal').modal('hide');
     }
-</script>-->
+</script>

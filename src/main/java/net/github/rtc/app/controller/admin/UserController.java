@@ -38,7 +38,7 @@ public class UserController {
     private static final String PATH_PAGE_USER_PAGE = "/page/userPage";
     private static final String REDIRECT_USER_PAGE = "redirect:/admin/user/userPage/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
-    private static final String REDIRECT_VIEW_ALL = "redirect:/admin/user/viewAll";
+    private static final String REDIRECT_ADMIN_SEARCH = "redirect:/admin/search";
     private static final String STRING_USER_FILTER = "userFilter";
     private static final String STRING_AUTHORITIES = "authorities";
     private static final String STRING_STATUSES = "statuses";
@@ -100,26 +100,26 @@ public class UserController {
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String setStatusForRemoval(@RequestParam final String userCode) throws Exception {
         userService.markUserForRemoval(userCode);
-        return REDIRECT_VIEW_ALL;
+        return REDIRECT_ADMIN_SEARCH;
     }
 
     @RequestMapping(value = "/restore/{userCode}", method = RequestMethod.GET)
     public String setStatusActiveAndRestore(@PathVariable final String userCode) {
         userService.restoreUser(userCode);
         userService.inactivateUser(userCode);
-        return REDIRECT_VIEW_ALL;
+        return REDIRECT_ADMIN_SEARCH;
     }
 
     @RequestMapping(value = "/inactivate/{userCode}", method = RequestMethod.GET)
     public String setStatusInactive(@PathVariable final String userCode) {
         userService.inactivateUser(userCode);
-        return REDIRECT_VIEW_ALL;
+        return REDIRECT_ADMIN_SEARCH;
     }
 
     @RequestMapping(value = "/activate/{userCode}", method = RequestMethod.GET)
     public String setStatusActive(@PathVariable final String userCode) {
         userService.activateUser(userCode);
-        return REDIRECT_VIEW_ALL;
+        return REDIRECT_ADMIN_SEARCH;
     }
 
     @RequestMapping(value = "/getExperts", method = RequestMethod.POST)
@@ -235,6 +235,4 @@ public class UserController {
     public String getCurrentUserName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
-
-
 }
