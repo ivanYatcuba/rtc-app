@@ -9,12 +9,12 @@
         <div class="col-md-6">
         <@formMacro.formDateSearch  "courseFilter.dateMoreLessEq" "courseFilter.startDate"/>
         <@formMacro.rtcFormSingleSelect "courseFilter.status" "courseFilter.status" courseStatuses, "", "", "course.status.",  {"" : "All"}/>
-            <div class="form-group">
+            <div class="form-group" >
                 <label class="control-label col-md-3" for="expertAutoSelectInput">
                 <@spring.message"courseFilter.experts"/>
                 </label>
                 <div class="col-md-5">
-                    <input type="text" class="form-control" id="autoSelectInput"/>
+                    <input type="text" class="form-control" id="expertAutoSelectInput"/>
                 </div>
             </div>
         <@spring.formHiddenInput "courseFilter.expertCode" />
@@ -27,22 +27,22 @@
 <script>
     $(function() {
         var mapExpertDataId;
-        var autoComplete;
+        var expertAutoComplete;
         $.ajax({
             type: "POST",
             url: "<@spring.url "/admin/user/getExperts"/>",
             success: function(response){
-                mapAdminDataId = response;
-                autoCompleteAuthors = Object.keys(mapAdminDataId);
-                $("#autoSelectInput").autocomplete({source: autoCompleteAuthors});
+                mapExpertDataId = response;
+                expertAutoComplete = Object.keys(mapExpertDataId);
+                $("#expertAutoSelectInput").autocomplete({source: expertAutoComplete});
 
-                $("#autoSelectInput").on("autocompleteselect", function(event,ui){
+                $("#expertAutoSelectInput").on("autocompleteselect", function(event,ui){
                     var selectedValue = (ui.item.label);
-                    var authorId = mapAdminDataId[selectedValue];
-                    $("#expertCode").attr("value",authorId);
+                    var expertId = mapExpertDataId[selectedValue];
+                    $("#expertCode").attr("value",expertId);
                 });
-                $("#autoSelectInput").on("keyup", function(){
-                    if(!mapAdminDataId.hasOwnProperty($("#expertCode").value)){
+                $("#expertAutoSelectInput").on("keyup", function(){
+                    if(!mapExpertDataId.hasOwnProperty($("#expertCode").value)){
                         $("#expertCode").attr("value",null);
                     }
                 });
