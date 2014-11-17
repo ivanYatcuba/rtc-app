@@ -3,8 +3,10 @@ package net.github.rtc.app.controller.admin;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.NewsService;
 import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.utils.AtomFeedView;
 import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
@@ -15,29 +17,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import java.util.Collection;
-import java.util.GregorianCalendar;
+import java.util.Date;
+import java.util.List;
 
 @Controller("newsController")
 @RequestMapping(value = "/admin/news")
 public class NewsController {
 
+    public static final String LAST_UPDATE_VIEW_KEY = "lastUpdate";
+    public static final String STRING_NEWS = "news";
     private static final String ROOT = "portal/admin";
-    private static final String STRING_TYPES = "types";
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_NEWS = "filterNews";
-    private static final String STRING_NEWS = "news";
     private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_REDIRECT = "redirect:";
-    private static final String STRING_ADMIN_NEWS_LIST = "/admin/news";
     private static final String STRING_ADMIN_SEARCH = "/admin/search";
-
     @Autowired
     private NewsService newsService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AtomFeedView atomFeedView;
+    @Autowired
+    private DateService dateService;
     @Autowired
     private ValidationContext validationContext;
 
@@ -62,7 +66,6 @@ public class NewsController {
         mav.addObject(STRING_FILTER_NEWS, newsFilter);
         return mav;
     }
-
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
@@ -107,8 +110,8 @@ public class NewsController {
      * @return the redirect to view news
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String update(@ModelAttribute(STRING_NEWS) final News news,
-                         @RequestParam(required = false) final boolean publish) {
+    public String update(
+      @ModelAttribute(STRING_NEWS) final News news, @RequestParam(required = false) final boolean publish) {
         final News newsTmp = newsService.findByCode(news.getCode());
         news.setCreateDate(newsTmp.getCreateDate());
         news.setAuthor(newsTmp.getAuthor());
@@ -137,6 +140,30 @@ public class NewsController {
         return STRING_REDIRECT + STRING_ADMIN_SEARCH;
     }
 
+    /**
+     * Redirect to atom feed view to show latest published news
+     *
+     * @return redirect to "/admin/news/feed"
+     */
+    @RequestMapping(value = "/feed", method = RequestMethod.GET)
+    public ModelAndView feed() {
+        final ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setView(atomFeedView);
+        final NewsSearchFilter newsSearchFilter = new NewsSearchFilter();
+        newsSearchFilter.setStatus(NewsStatus.PUBLISHED);
+        final List<News> news = newsService.search(newsSearchFilter).getResults();
+        modelAndView.addObject(STRING_NEWS, news);
+        modelAndView.addObject(LAST_UPDATE_VIEW_KEY, getCreationDateOfTheLast(news));
+        return modelAndView;
+    }
+
+    private Date getCreationDateOfTheLast(List<News> news) {
+        if (news.size() > 0) {
+            return news.get(0).getCreateDate();
+        }
+        return new Date(0);
+    }
+
     @ModelAttribute(STRING_STATUSES)
     public Collection<String> getStatuses() {
         return NewsStatus.findAll();
@@ -161,11 +188,11 @@ public class NewsController {
      * course
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute(STRING_NEWS) final News news,
-                       @RequestParam(required = false) final boolean publish) {
+    public String save(
+      @ModelAttribute(STRING_NEWS) final News news, @RequestParam(required = false) final boolean publish) {
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         final String name = auth.getName(); //get logged in username
-        news.setCreateDate(new GregorianCalendar().getTime());
+        news.setCreateDate(dateService.getCurrentDate());
         news.setAuthor(userService.loadUserByUsername(name));
         if (publish) {
             news.setStatus(NewsStatus.PUBLISHED);

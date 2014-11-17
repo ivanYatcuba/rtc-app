@@ -267,8 +267,11 @@
             <version>1.9.2</version>
         </dependency>
 
-
-
+        <dependency>
+            <groupId>net.java.dev.rome</groupId>
+            <artifactId>rome</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
