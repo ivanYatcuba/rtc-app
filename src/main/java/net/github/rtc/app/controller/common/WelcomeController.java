@@ -16,19 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class WelcomeController {
 
-    @Autowired
-    private CourseService courseService;
-
     /**
-     * Request to main page, get three coming soon courses
+     * Request to login page
      *
      * @return ModelAndView("welcome/welcomeLayout")
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView welcome() throws Exception {
         final ModelAndView mav = new ModelAndView("welcome/welcomeLayout");
-        mav.addObject("soonCourses", courseService.startingSoonCourses());
-        mav.addObject("content", "content/welcomeContent");
+        mav.addObject("content", "../portal/user/login");
         return mav;
     }
 
