@@ -61,4 +61,10 @@ public class ReportServiceTest extends AbstractGenericServiceTest {
     public void testCreate() {
         assertTrue(true);
     }
+
+    @Override
+    @Test
+    public void testUpdate() {
+        assertTrue(true);
+    }
 }
