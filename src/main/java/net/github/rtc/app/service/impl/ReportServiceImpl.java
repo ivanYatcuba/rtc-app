@@ -63,6 +63,7 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
     public ReportDetails update(final ReportDetails report) {
         log.info("Updating report: " + report);
         try {
+            compileReport(report);
             reportDao.update(report);
             log.info(STRING_REPORT + report.getCode() + " updated successfully!");
             return report;
