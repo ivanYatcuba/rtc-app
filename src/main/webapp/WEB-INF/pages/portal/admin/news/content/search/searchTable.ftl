@@ -26,7 +26,7 @@
                 <td style="vertical-align: middle"></td>
             </#if>
                 <td style="vertical-align: middle">
-                <p>${news.createDate!" "}</p>
+                <p>${news.createDate?string('dd-MMM-yyyy')!" "}</p>
             </td>
             <#if (news.status)??>
                 <#if (news.status)=="DRAFT">

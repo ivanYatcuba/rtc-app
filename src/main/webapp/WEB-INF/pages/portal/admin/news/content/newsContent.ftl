@@ -37,7 +37,7 @@
         </#if>
     </div>
     <div>
-        <@formMacro.rtcFormLabelOut "news.creationDate" "${news.createDate}"/>
+        <@formMacro.rtcFormLabelOut "news.creationDate" "${news.createDate?string('dd-MMM-yyyy')}"/>
     </div>
 </div>
 </div>

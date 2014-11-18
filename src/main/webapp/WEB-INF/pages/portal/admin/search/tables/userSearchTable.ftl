@@ -49,7 +49,7 @@
             </#if>
 
             <#if (user.registerDate)??>
-                <td style="vertical-align: middle">${user.registerDate?date?string("dd-MM-yyyy")}</td>
+                <td style="vertical-align: middle">${user.registerDate?string('dd-MMM-yyyy')}</td>
             <#else>
                 <td style="vertical-align: middle">None</td>
             </#if>

@@ -24,7 +24,8 @@
                                 &nbsp${expert.email}</p>
                         </#list>
                     </td>
-                    <td style="vertical-align: middle; width: 25%">${course.startDate?date?string("dd-MM-yyyy")}&nbsp;-&nbsp;${course.endDate?datetime?string("dd-MM-yyyy")}</td>
+                    <td style="vertical-align: middle; width: 25%">${course.startDate?string['dd-MMM-yyyy']}&nbsp;-&nbsp;${course.endDate?string
+                    ('dd-MMM-yyyy')}</td>
                     <td style="vertical-align: middle; width: 15%">
                         <#if "${course.status}" == "DRAFT"> <@formMacro.rtcColorLabel "${course.status}" "label-warning" "course.status."/></#if>
                         <#if "${course.status}" == "PUBLISHED"><@formMacro.rtcColorLabel "${course.status}" "label-success" "course.status."/> </#if>
