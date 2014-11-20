@@ -20,7 +20,7 @@
                 </td>
                 <td style="vertical-align: middle">${report.exportClass.simpleName}</td>
                 <td style="vertical-align: middle">${report.exportFormat}</td>
-                <td style="vertical-align: middle">${report.createdDate?datetime?string("dd-MM-yyyy")}</td>
+                <td style="vertical-align: middle">${report.createdDate?string('dd-MMM-yyyy')}</td>
                 <td style="vertical-align: middle">
                     <div class="btn-group">
                         <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenuReport" data-toggle="dropdown">Action</button>
