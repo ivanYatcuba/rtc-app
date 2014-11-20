@@ -1,6 +1,5 @@
 <#macro layout menu content="" header="">
 <html>
-
     <#import "/spring.ftl" as spring/>
     <#import "../../fieldMacro.ftl" as formMacro />
 <head>

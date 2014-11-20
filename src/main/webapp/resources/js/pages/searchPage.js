@@ -28,7 +28,7 @@ function SearchPage(settings) {
     };
 
     self.doReset = function () {
-        self.emptyTable();
+        /*self.emptyTable();*/
 
         $(".activeForm input, textarea").val("");
 

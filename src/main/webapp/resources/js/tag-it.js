@@ -125,6 +125,7 @@
             }
 
             this.tagInput = $('<input type="text" />').addClass('ui-widget-content');
+            this.tagInput.attr('maxlength', '255');
 
             if (this.options.readOnly) this.tagInput.attr('disabled', 'disabled');
 

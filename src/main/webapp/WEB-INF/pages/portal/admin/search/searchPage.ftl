@@ -21,9 +21,8 @@
 </div>
 
 <div id="searchButtons" class="row" style="text-align: right;">
-    <a id="search" class="btn btn-primary" href="#">Search</a>
-    or
-    <a id="reset" class="btn-default" href="#">Reset</a>
+    <button id="search" type="button" class="btn btn-primary">Search</button>
+    <button id="reset" type="button" class="btn btn-default">Reset</button>
 </div>
 
 <div id="searchTable"></div>
@@ -38,17 +37,17 @@
         "menuMap": menuMap,
         "urlMap": urlMap
     };
-
     var searchPage = new SearchPage(settings);
 
     $(".navMenuItem").on("click", function (event) {
         event.preventDefault();
+        searchPage.showFilterForm(this.id);
+        searchPage.doSearch(1);
 
-        searchPage.showFilterForm(this.id)
     });
-
     $("#reset").on("click", function () {
                 searchPage.doReset();
+                /*searchPage.doSearch();*/
             }
     );
 
@@ -61,10 +60,10 @@
 
     $("#search").on('click', function (event) {
         event.preventDefault();
-        searchPage.doSearch(1);
+        searchPage.doSearch();
     });
 
-    $("#newsMenuItem").click() //show news filter form on start
+    $("#newsMenuItem").click(); //show news filter form on start
 
 </script>
 </@layout.layout>
