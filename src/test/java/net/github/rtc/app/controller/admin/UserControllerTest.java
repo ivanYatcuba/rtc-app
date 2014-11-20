@@ -25,6 +25,7 @@ import java.util.List;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -64,8 +65,8 @@ public class UserControllerTest {
         userList = Arrays.asList(user1, user2);
         SearchResults<User> resultUserList = new SearchResults<>();
         resultUserList.setResults(userList);
-
-        when(userService.search((UserSearchFilter)notNull())).thenReturn(resultUserList);
+        resultUserList.setPerPage(5);
+        when(userService.search((UserSearchFilter) notNull())).thenReturn(resultUserList);
 
         mockMvc.perform(get("/admin/user/viewAll"))
                 .andExpect(status().isOk());
