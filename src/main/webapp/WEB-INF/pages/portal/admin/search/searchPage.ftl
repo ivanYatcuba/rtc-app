@@ -17,9 +17,8 @@
 </div>
 
 <div id="searchButtons" class="row" style="text-align: right;">
-    <a id="search" class="btn btn-primary" href="#">Search</a>
-    or
-    <a id="reset" class="btn-default" href="#">Reset</a>
+    <button id="search" type="button" class="btn btn-primary">Search</button>
+    <button id="reset" type="button" class="btn btn-default">Reset</button>
 </div>
 
 <div id="searchTable"></div>
