@@ -30,12 +30,10 @@ import java.util.*;
 @RequestMapping("admin/user")
 public class UserController {
 
-    private static final String ROOT = "portal/admin";
     private static final String STRING_USER = "user";
     private static final String STRING_USERS = "users";
     private static final String PATH_PAGE_VIEW_ALL_USERS = "/page/viewAllusers";
     private static final String PATH_PAGE_USER_TABLE = "/user/content/userTable";
-    private static final String PATH_PAGE_USER_PAGE = "/page/userPage";
     private static final String REDIRECT_USER_PAGE = "redirect:/admin/user/userPage/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_ADMIN_SEARCH = "redirect:/admin/search";
@@ -43,6 +41,12 @@ public class UserController {
     private static final String STRING_AUTHORITIES = "authorities";
     private static final String STRING_STATUSES = "statuses";
     private static final String PROGRAMMING_LANGUAGES = "programmingLanguages";
+
+    private static final String ROOT = "portal/admin";
+    private static final String UPDATE_VIEW = "/user/userUpdate";
+    private static final String CREATE_VIEW = "/user/userCreate";
+    private static final String DETAILS_VIEW = "/user/userDetails";
+
     @Autowired
     private ValidationContext validationContext;
     @Autowired
@@ -82,7 +86,7 @@ public class UserController {
 
     @RequestMapping(value = "userPage/editPage/{code}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable final String code) {
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/editPages");
+        final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         final User us = userService.findByCode(code);
         mav.addObject(STRING_USER, us);
@@ -92,7 +96,7 @@ public class UserController {
 
     @RequestMapping(value = "/userPage/{code}", method = RequestMethod.GET)
     public ModelAndView userPage(@PathVariable final String code) {
-        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_USER_PAGE);
+        final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         mav.addObject(STRING_USER, userService.findByCode(code));
         return mav;
     }
@@ -148,7 +152,7 @@ public class UserController {
 
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/createuser");
+        final ModelAndView mav = new ModelAndView(ROOT + CREATE_VIEW);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         return mav;
     }

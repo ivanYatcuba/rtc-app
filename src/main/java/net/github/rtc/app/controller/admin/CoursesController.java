@@ -31,7 +31,6 @@ import java.util.*;
 @RequestMapping("admin/course")
 public class CoursesController {
 
-    private static final String ROOT = "portal/admin";
     private static final String STRING_COURSE = "course";
     private static final String STRING_COURSES = "courses";
     private static final String PATH_PAGE_LISTCONTENT = "/page/listcontent";
@@ -45,6 +44,12 @@ public class CoursesController {
     private static final String STRING_EXPERTS = "experts";
     private static final String VIEW = "view/";
     private static final String REDIRECT1 = "redirect: ";
+
+    private static final String ROOT = "portal/admin";
+    private static final String UPDATE_VIEW = "/course/courseUpdate";
+    private static final String CREATE_VIEW = "/course/courseCreate";
+    private static final String DETAILS_VIEW = "/course/courseDetails";
+
     @Autowired
     private CourseService courseService;
     @Autowired
@@ -120,7 +125,7 @@ public class CoursesController {
      */
     @RequestMapping(value = VIEW + "{courseCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable final String courseCode) {
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/courseContent");
+        final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         final Course course = courseService.findByCode(courseCode);
         mav.addObject(STRING_COURSE, course);
         return mav;
@@ -133,9 +138,8 @@ public class CoursesController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/createContent");
+        final ModelAndView mav = new ModelAndView(ROOT + CREATE_VIEW);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course.class));
-      //  mav.addObject(STRING_EXPERTS, getExpertUsers());
         return mav;
     }
 
@@ -162,11 +166,10 @@ public class CoursesController {
      */
     @RequestMapping(value = "/{courseCode}/update", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable final String courseCode) {
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/updateContent");
+        final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
         final Course returnCourse = courseService.findByCode(courseCode);
         mav.getModelMap().addAttribute(STRING_COURSE, returnCourse);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course.class));
-     //   mav.addObject(STRING_EXPERTS, getExpertUsers());
         return mav;
     }
 
