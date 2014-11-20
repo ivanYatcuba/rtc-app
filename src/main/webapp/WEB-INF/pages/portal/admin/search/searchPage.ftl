@@ -35,6 +35,10 @@
         "urlMap": urlMap
     };
 
+    /*$(function() {
+        searchPage.doSearch(1);
+    });*/
+
     var searchPage = new SearchPage(settings);
 
     $(".navMenuItem").on("click", function (event) {
