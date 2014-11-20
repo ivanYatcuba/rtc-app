@@ -43,9 +43,11 @@
 
     $(".navMenuItem").on("click", function (event) {
         event.preventDefault();
+        searchPage.showFilterForm(this.id);
+        searchPage.doSearch(1);
 
-        searchPage.showFilterForm(this.id)
     });
+
 
     $("#reset").on("click", function () {
                 searchPage.doReset();
@@ -64,7 +66,7 @@
         searchPage.doSearch(1);
     });
 
-    $("#newsMenuItem").click() //show news filter form on start
+    $("#newsMenuItem").click(); //show news filter form on start
 
 </script>
 
