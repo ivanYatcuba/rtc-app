@@ -33,11 +33,6 @@
         "menuMap": menuMap,
         "urlMap": urlMap
     };
-
-    /*$(function() {
-        searchPage.doSearch(1);
-    });*/
-
     var searchPage = new SearchPage(settings);
 
     $(".navMenuItem").on("click", function (event) {
@@ -46,10 +41,9 @@
         searchPage.doSearch(1);
 
     });
-
-
     $("#reset").on("click", function () {
                 searchPage.doReset();
+                /*searchPage.doSearch();*/
             }
     );
 
@@ -62,7 +56,7 @@
 
     $("#search").on('click', function (event) {
         event.preventDefault();
-        searchPage.doSearch(1);
+        searchPage.doSearch();
     });
 
     $("#newsMenuItem").click(); //show news filter form on start
