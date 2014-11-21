@@ -19,7 +19,6 @@ import java.util.List;
 @Component
 public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
 
-    private static final int ENTITIES_PER_PAGE = 5;
     @Autowired
     private SessionFactory sessionFactory;
     private Class<T> type;
@@ -97,10 +96,6 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
 
     @Override
     public SearchResults<T> search(AbstractSearchCommand searchCommand) {
-        return search(searchCommand.getCriteria(), searchCommand.getPage(), getPerPage());
-    }
-
-    protected int getPerPage() {
-        return ENTITIES_PER_PAGE;
+        return search(searchCommand.getCriteria(), searchCommand.getPage(), searchCommand.getPerPage());
     }
 }

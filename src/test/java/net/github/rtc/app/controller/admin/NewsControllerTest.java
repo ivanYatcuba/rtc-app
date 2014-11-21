@@ -64,8 +64,10 @@ public class NewsControllerTest {
         SearchResults<News> results = new SearchResults<>();
         results.setResults(newsList);
         when(newsService.search((NewsSearchFilter)notNull())).thenReturn(results);
-        mockMvc.perform(get("/admin/news/feed")).andExpect(status().isOk()).andExpect(
-          model().attribute("news", newsList)).andExpect(model().attributeExists("lastUpdate"));
+        mockMvc.perform(get("/admin/news/feed"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("news", newsList))
+                .andExpect(model().attributeExists("lastUpdate"));
         verify(newsService, times(1)).search((NewsSearchFilter)notNull());
         verifyNoMoreInteractions(newsService);
     }
