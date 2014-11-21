@@ -60,8 +60,7 @@ public class SearchController {
     private ReloadableResourceBundleMessageSource messageSource;*/
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String searchPage(String formToShow) {
-//        messageSource.clearCache();
+    public String searchPage() {
         return ROOT + "/page/adminSearchPage";
     }
 

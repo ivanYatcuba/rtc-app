@@ -18,15 +18,11 @@ public class SearchResults<T> {
     private int page;
     private int perPage;
 
-
     public Map<String, Object> getPageModel() {
         final int countPages = getCountPages(totalResults, perPage);
         final int newCurrentPage = checkCurrentPage(page);
         final Map<String, Object> map = new HashMap<>();
         map.put("currentPage", newCurrentPage);
-        map.put("prevPage", getPrevResult(newCurrentPage));
-        map.put("nextPage", getNextResult(newCurrentPage, countPages));
-        map.put("startPage", getFirst());
         map.put("lastPage", countPages);
         return map;
     }
