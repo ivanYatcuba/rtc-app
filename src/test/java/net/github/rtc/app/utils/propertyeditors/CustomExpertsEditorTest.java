@@ -4,8 +4,8 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.internal.runners.JUnit4ClassRunner;
 import org.junit.runner.RunWith;
+import org.junit.runners.BlockJUnit4ClassRunner;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -15,7 +15,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
-@RunWith(JUnit4ClassRunner.class)
+@RunWith(BlockJUnit4ClassRunner.class)
 public class CustomExpertsEditorTest {
     @Mock
     private UserService userService;

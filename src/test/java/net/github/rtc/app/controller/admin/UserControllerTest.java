@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by Berdniky on 18.11.2014.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:mvc-test.xml"})
+@ContextConfiguration(locations = "classpath:mvc-test.xml")
 @WebAppConfiguration
 public class UserControllerTest {
 

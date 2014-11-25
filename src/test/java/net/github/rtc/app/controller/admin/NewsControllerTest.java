@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration(locations = { "classpath:mvc-test.xml" })
+@ContextConfiguration(locations = "classpath:mvc-test.xml")
 public class NewsControllerTest {
     @Mock
     private NewsService newsService;
