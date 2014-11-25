@@ -46,7 +46,7 @@ public class MailServiceImpl implements MailService {
     public void sendMail(SimpleMailMessage msg) {
         mailSender.send(msg);
     }
-    //@Async
+    @Async
     public void sendRegistrationMail(User user) {
         final Configuration config = new Configuration();
         config.setClassForTemplateLoading(MailServiceImpl.class, "/");
