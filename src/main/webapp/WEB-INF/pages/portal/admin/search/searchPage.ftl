@@ -1,3 +1,7 @@
+<#import "../layout/layout.ftl" as layout/>
+<#import "../../../fieldMacro.ftl" as formMacro />
+
+<@layout.layout>
 <script src="<@spring.url'/resources/js/pages/searchPage.js'/>"></script>
 
 <div id="newsFilter" class="filterForm" style="width: 100%; float: left;">
@@ -62,4 +66,5 @@
     $("#newsMenuItem").click(); //show news filter form on start
 
 </script>
+</@layout.layout>
 

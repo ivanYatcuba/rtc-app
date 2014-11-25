@@ -27,13 +27,18 @@ public class NewsController {
 
     public static final String LAST_UPDATE_VIEW_KEY = "lastUpdate";
     public static final String STRING_NEWS = "news";
-    private static final String ROOT = "portal/admin";
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_NEWS = "filterNews";
     private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_REDIRECT = "redirect:";
     private static final String STRING_ADMIN_SEARCH = "/admin/search";
+
+    private static final String ROOT = "portal/admin";
+    private static final String UPDATE_VIEW = "/news/newsUpdate";
+    private static final String CREATE_VIEW = "/news/newsCreate";
+    private static final String DETAILS_VIEW = "/news/newsDetails";
+
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -69,7 +74,7 @@ public class NewsController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/pageCreateNews");
+        final ModelAndView mav = new ModelAndView(ROOT + CREATE_VIEW);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(News.class));
         return mav;
     }
@@ -84,7 +89,7 @@ public class NewsController {
      */
     @RequestMapping(value = "/{newsCode}", method = RequestMethod.GET)
     public ModelAndView single(@PathVariable final String newsCode) {
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/newsContent");
+        final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         final News news = newsService.findByCode(newsCode);
         mav.addObject(STRING_NEWS, news);
         return mav;
@@ -97,7 +102,7 @@ public class NewsController {
      */
     @RequestMapping(value = "/{newsCode}/edit", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable final String newsCode) {
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/updateNews");
+        final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
         mav.getModelMap().addAttribute(STRING_NEWS, newsService.findByCode(newsCode));
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(News.class));
         return mav;
@@ -149,9 +154,7 @@ public class NewsController {
     public ModelAndView feed() {
         final ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView(atomFeedView);
-        final NewsSearchFilter newsSearchFilter = new NewsSearchFilter();
-        newsSearchFilter.setStatus(NewsStatus.PUBLISHED);
-        final List<News> news = newsService.search(newsSearchFilter).getResults();
+        final List<News> news = newsService.findPublishedNews();
         modelAndView.addObject(STRING_NEWS, news);
         modelAndView.addObject(LAST_UPDATE_VIEW_KEY, getCreationDateOfTheLast(news));
         return modelAndView;

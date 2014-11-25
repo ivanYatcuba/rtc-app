@@ -56,12 +56,10 @@ public class SearchController {
     private UserService userService;
     @Autowired
     private ReportService reportService;
-    /*@Autowired
-    private ReloadableResourceBundleMessageSource messageSource;*/
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchPage() {
-        return ROOT + "/page/adminSearchPage";
+        return ROOT + "/search/searchPage";
     }
 
     @RequestMapping(value = "/newsTable", method = RequestMethod.POST)

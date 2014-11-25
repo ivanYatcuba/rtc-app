@@ -1,2 +1,0 @@
-<#import "../../../../datatables.ftl" as datatables/>
-<@datatables.datatable "/portal/admin/courses/content/searchFilterForm.ftl" "/portal/admin/courses/content/courseTable.ftl" "/admin/course/filter"/>

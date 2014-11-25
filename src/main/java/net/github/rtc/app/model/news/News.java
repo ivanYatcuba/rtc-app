@@ -30,7 +30,7 @@ public class News extends AbstractPersistenceObject implements Serializable {
     private User author;
 
     @Column
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 
     @Column

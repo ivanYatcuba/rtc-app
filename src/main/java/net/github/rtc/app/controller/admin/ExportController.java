@@ -39,13 +39,19 @@ public class ExportController {
 
     private static final int REPORTS_PER_PAGE = 10;
     private static final int BUFFER_SIZE = 4096;
-    private static final String ROOT = "portal/admin";
+
     private static final String STRING_TYPES = "types";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_REPORT = "report";
     private static final String REDIRECT_EXPORT = "redirect:/admin/export/";
     private static final String PAGE_REPORT_LIST = "/page/reportList";
     private static Logger log = LoggerFactory.getLogger(ExportController.class.getName());
+
+    private static final String ROOT = "portal/admin";
+    private static final String UPDATE_VIEW = "/report/reportUpdate";
+    private static final String CREATE_VIEW = "/report/reportCreate";
+    private static final String DETAILS_VIEW = "/report/reportDetails";
+
     @Autowired
     private ReportService reportService;
     @Autowired
@@ -74,7 +80,7 @@ public class ExportController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView openCreatePage() {
         final Set<String> formatLables = getTypes().keySet();
-        final ModelAndView mav = new ModelAndView("portal/admin/page/reportCreate");
+        final ModelAndView mav = new ModelAndView(ROOT + CREATE_VIEW);
         mav.addObject(STRING_TYPES, formatLables);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(ReportDetails.class));
         return mav;
@@ -82,7 +88,7 @@ public class ExportController {
 
     @RequestMapping(value = "/update/{reportCode}", method = RequestMethod.GET)
     public ModelAndView openUpdatePage(@PathVariable final String reportCode) {
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/reportEdit");
+        final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
         final Set<String> formatLables = getTypes().keySet();
         final ReportDetails reportDetails = reportService.findByCode(reportCode);
         mav.addObject(STRING_REPORT, reportDetails);
@@ -94,7 +100,7 @@ public class ExportController {
 
     @RequestMapping(value = "/{reportCode}", method = RequestMethod.GET)
     public ModelAndView viewReport(@PathVariable final String reportCode) {
-        final ModelAndView mav = new ModelAndView("portal/admin/page/reportDetails");
+        final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         mav.addObject(STRING_REPORT, reportService.findByCode(reportCode));
         return mav;
     }

@@ -8,15 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Ivan Yatcuba on 7/24/14.
- */
 @Controller
 public class ErrorController {
     public static final String ERROR = "error";
     private static final String STRING_JAVAX = "javax";
     private static final String STRING_DOT_SERVLET = ".servlet";
-    private static final String ERROR_PAGE = "portal/admin/page/error";
+    private static final String ERROR_PAGE = "portal/admin/error";
     private static final String ERROR_TTL = "errorTitle";
     private static final String ERROR_MSG = "errorMessage";
     private static final String ERROR_CAS = "errorCause";
@@ -28,8 +25,6 @@ public class ErrorController {
         mnv.addObject(ERROR_TTL, "Critical Error");
         mnv.addObject(ERROR_MSG, "Error content");
         mnv.addObject(ERROR_CAS, getFullMessage(request));
-        /*mnv.addObject(ERROR, new StringBuilder(getFullMessage(request)).replace(getFullMessage(request).length(),
-          getFullMessage(request).length() - 3, "").replace(0,3, "").toString()); */
         return mnv;
     }
 
