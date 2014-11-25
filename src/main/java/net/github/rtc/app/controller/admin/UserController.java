@@ -4,7 +4,6 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import net.github.rtc.app.utils.files.upload.FileUpload;
 import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -53,7 +51,7 @@ public class UserController {
     private String imgFold;
     private String photo;
 
-    @RequestMapping(value = "/viewAll", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/viewAll", method = RequestMethod.GET)
     public ModelAndView index() {
         final UserSearchFilter filter = getFilterUser();
         filter.setPage(1);
@@ -64,9 +62,9 @@ public class UserController {
         mav.addObject(STRING_AUTHORITIES, getAuthorities());
         mav.addObject(STRING_USER_FILTER, filter);
         return mav;
-    }
+    }*/
 
-    @RequestMapping(value = "/filter", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/filter", method = RequestMethod.POST)
     public
     @ResponseBody
     ModelAndView switchPage(@Validated @ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
@@ -78,9 +76,9 @@ public class UserController {
         mav.addObject(STRING_STATUSES, getStatuses());
         mav.addObject(STRING_USER_FILTER, userFilter);
         return mav;
-    }
+    }*/
 
-    @RequestMapping(value = "userPage/editPage/{code}", method = RequestMethod.GET)
+    @RequestMapping(value = "/userPage/editPage/{code}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT + "/page/editPages");
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
@@ -93,12 +91,13 @@ public class UserController {
     @RequestMapping(value = "/userPage/{code}", method = RequestMethod.GET)
     public ModelAndView userPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_USER_PAGE);
-        mav.addObject(STRING_USER, userService.findByCode(code));
+        final User user = userService.findByCode(code);
+        mav.addObject(STRING_USER, user);
         return mav;
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
-    public String setStatusForRemoval(@RequestParam final String userCode) throws Exception {
+     public String setStatusForRemoval(@RequestParam final String userCode) throws Exception {
         userService.markUserForRemoval(userCode);
         return REDIRECT_ADMIN_SEARCH;
     }

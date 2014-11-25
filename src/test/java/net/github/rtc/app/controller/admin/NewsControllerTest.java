@@ -71,5 +71,4 @@ public class NewsControllerTest {
         verify(newsService, times(1)).search((NewsSearchFilter)notNull());
         verifyNoMoreInteractions(newsService);
     }
-
 }

@@ -2,8 +2,7 @@ package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.datatable.search.SearchResults;
-import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
+import net.github.rtc.util.converter.ValidationContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,14 +18,13 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Matchers.notNull;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Created by Berdniky on 18.11.2014.
@@ -36,13 +34,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 public class UserControllerTest {
 
+    private static final String ROOT = "portal/admin";
+    private static final String PATH_PAGE_VIEW_ALL_USERS = "/page/viewAllusers";
+    private static final String PATH_ADMIN_USER = "admin/user";
+    private static final String STRING_AUTHORITIES = "authorities";
+    private static final String STRING_USER_FILTER = "userFilter";
+    private static final String PATH_PAGE_USER_PAGE = "/page/userPage";
+    private static final String ADMIN_SEARCH = "/admin/search";
+
+    private static final String STRING_VALIDATION_RULES = "validationRules";
+    private static final String STRING_USER = "user";
+    private static final String ANY_USER_CODE = "anyCode";
+    private static final String ANY_STRING = "anyString";
+    private static final String USER_CODE = "userCode";
+
     @InjectMocks
     private UserController userController;
     private MockMvc mockMvc;
 
+    @Mock
     private List<User> userList;
     @Mock
     private UserService userService;
+    @Mock
+    private ValidationContext validationContext;
+    @Mock
+    private User user;
 
     @Before
     public void prepareUsersList(){
@@ -52,24 +69,56 @@ public class UserControllerTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
-    @Test
-    public void returnViewWithUsers() throws Exception {
-        User user1 = new User();
-            user1.setName("TestName1");
-            user1.setSurname("TestSurname1");
-            user1.setEmail("TestEmail1");
-        User user2 = new User();
-            user2.setName("TestName2");
-            user2.setSurname("TestSurname2");
-            user2.setEmail("TestEmail2");
-        userList = Arrays.asList(user1, user2);
+    /*@Test
+    public void viewAll() throws Exception {
         SearchResults<User> resultUserList = new SearchResults<>();
-        resultUserList.setResults(userList);
-        resultUserList.setPerPage(5);
+        resultUserList.setResults(Arrays.asList(new User(), new User()));
         when(userService.search((UserSearchFilter) notNull())).thenReturn(resultUserList);
-
         mockMvc.perform(get("/admin/user/viewAll"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(view().name(ROOT + PATH_PAGE_VIEW_ALL_USERS))
+                .andExpect(model().attributeExists(STRING_USERS))
+                .andExpect(model().attributeExists(STRING_AUTHORITIES))
+                .andExpect(model().attributeExists(STRING_USER_FILTER))
+                .andExpect(model().attributeExists("currentPage"))
+                .andExpect(model().attributeExists("lastPage"));
+    }*/
+    @Test
+    public void editPage () throws Exception{
+        when(userService.findByCode(ANY_USER_CODE)).thenReturn(user);
+        when(validationContext.get(User.class)).thenReturn(ANY_STRING);
+        mockMvc.perform(get("/admin/user/userPage/editPage/{code}", ANY_USER_CODE))
+                .andExpect(status().isOk())
+                .andExpect(view().name(ROOT + "/page/editPages"))
+                .andExpect(model().attributeExists(STRING_VALIDATION_RULES))
+                .andExpect(model().attributeExists(STRING_USER));
+        verify(userService, times(1)).findByCode(ANY_USER_CODE);
+        verify(validationContext, times(1)).get(User.class);
+        /*verifyNoMoreInteractions(userService);*/
     }
 
+    @Test
+    public void userPage () throws Exception{
+        when(userService.findByCode(ANY_USER_CODE)).thenReturn(user);
+        mockMvc.perform(get("/admin/user/userPage/{code}", ANY_USER_CODE))
+                .andExpect(status().isOk())
+                .andExpect(view().name(ROOT + PATH_PAGE_USER_PAGE))
+                .andExpect(model().attributeExists(STRING_USER));
+        verify(userService, times(1)).findByCode(ANY_USER_CODE);
+        /*verifyNoMoreInteractions(userService);*/
+    }
+
+    @Test
+    public void remove () throws Exception {
+        mockMvc.perform(post("/admin/user/remove").param("userCode",ANY_USER_CODE))
+                .andExpect(status().isFound())
+                /*.andExpect(redirectedUrl(ADMIN_SEARCH))*/;
+        verify(userService, times(1)).markUserForRemoval(ANY_USER_CODE);
+    }
+
+    /*@Test
+    public void setStatusActiveAndRestore () throws Exception {
+        mockMvc.perform(get("/admin/user/restore/{userCode}", ANY_USER_CODE))
+                .andExpect(status().isOk());
+    }*/
 }
