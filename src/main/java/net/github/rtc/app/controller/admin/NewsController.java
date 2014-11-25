@@ -154,9 +154,7 @@ public class NewsController {
     public ModelAndView feed() {
         final ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView(atomFeedView);
-        final NewsSearchFilter newsSearchFilter = new NewsSearchFilter();
-        newsSearchFilter.setStatus(NewsStatus.PUBLISHED);
-        final List<News> news = newsService.search(newsSearchFilter).getResults();
+        final List<News> news = newsService.findPublishedNews();
         modelAndView.addObject(STRING_NEWS, news);
         modelAndView.addObject(LAST_UPDATE_VIEW_KEY, getCreationDateOfTheLast(news));
         return modelAndView;

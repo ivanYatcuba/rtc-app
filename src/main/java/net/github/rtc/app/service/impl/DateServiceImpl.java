@@ -10,7 +10,7 @@ import java.util.Date;
 @Component("DateService")
 public class DateServiceImpl implements DateService {
     public Date getCurrentDate() {
-        return new Date();
+        return DateTime.now().toLocalDateTime().toDate();
     }
     public Date addDays(Date oldDate, final int days) {
         return new DateTime(oldDate).plusDays(days).toDate();

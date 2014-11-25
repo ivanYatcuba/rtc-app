@@ -57,6 +57,7 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
 
     @Override
     public SearchResults<T> search(AbstractSearchCommand searchCommand) {
+
         return getDao().search(searchCommand);
     }
 }

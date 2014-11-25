@@ -16,8 +16,9 @@
 
         <p><input class="form-control" id="password" name="j_password"
                   style="width:250px;height:35px" placeholder="Password"
-                  title="password"
+                  id="password"
                   type="password"></p>
+
     </div>
     <div>
 
@@ -25,26 +26,15 @@
         <td colspan="2">
         </p>
 
-        <p class="remember"><input type="checkbox" id="ch" style="vertical-align: top"> Show password
-            <script language="JavaScript" type="text/javascript">
-                $("#ch").change(function () {
-
-                    if (ch.checked) {
-                        password.type = "text"
-                    } else {
-                        password.type = "password"
-
-                    }
-                });
-            </script>
-            <input type="checkbox" name="_spring_security_remember_me" style="vertical-align: top">Remember
-            me
+        <p class="remember"><input id="showPassword"
+                                   onchange="if ($('#password').get(0).type=='password') $('#password').get(0).type='text'; else $('#password').get(0).type='password';"
+                                   name="showPassword" type="checkbox" value="false"
+                                   style="margin: 0px 0px 0px;">  <@spring.message "user.showPassword" />
+            <input type="checkbox" name="_spring_security_remember_me" style="vertical-align: top">Remember me
         </p>
 
         <input class="btn btn-primary" style="width:250px;height:35px" id="signin_submit"
                   value="Sign in" type="submit" name="submit">
-
-
     </div>
 </div>
 

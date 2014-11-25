@@ -101,7 +101,7 @@ public class AtomFeedView extends AbstractAtomFeedView {
         String uri;
         try {
             uri = ServletUriComponentsBuilder.fromCurrentContextPath().
-              path("admin/news/" + news.getCode()).build().toUriString();
+              path("/admin/news/" + news.getCode()).build().toUriString();
         } catch (IllegalStateException e) {
             uri = newsAbsoluteUrl;
         }
