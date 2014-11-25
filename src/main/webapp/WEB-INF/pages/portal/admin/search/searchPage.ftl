@@ -47,7 +47,7 @@
     });
     $("#reset").on("click", function () {
                 searchPage.doReset();
-                /*searchPage.doSearch();*/
+                searchPage.doSearch();
             }
     );
 
