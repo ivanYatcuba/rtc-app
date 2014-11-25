@@ -5,6 +5,7 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.DateService;
+import net.github.rtc.app.service.MailService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
@@ -39,6 +40,8 @@ public class RegisterController {
     private CourseService courseService;
     @Autowired
     private DateService dateService;
+    @Autowired
+    private MailService mailService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView openRegisterPage() {
@@ -54,6 +57,9 @@ public class RegisterController {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
         user.setRegisterDate(dateService.getCurrentDate());
         userService.create(user);
+       // mailService.sendMail("rtcsender@gmail.com", user.getEmail(), "Registration", "Hello, World!");
+        mailService.sendRegistrationMail(user);
+
         return new ModelAndView("redirect:/login/");
     }
 
