@@ -1,5 +1,5 @@
-package net.github.rtc.app.service;
-
+/*package net.github.rtc.app.service;
+//todo
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
@@ -101,4 +101,4 @@ public abstract class AbstractGenericServiceTest {
         when(genericDao.search(command)).thenReturn(results);
         assertEquals(results, genericService.search(command));
     }
-}
+}*/

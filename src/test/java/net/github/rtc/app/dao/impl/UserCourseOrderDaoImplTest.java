@@ -1,6 +1,6 @@
-package net.github.rtc.app.dao.impl;
+/*package net.github.rtc.app.dao.impl;
 
-
+//todo
 import net.github.rtc.app.dao.*;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.user.UserCourseOrder;
@@ -81,4 +81,4 @@ public class UserCourseOrderDaoImplTest extends AbstractGenericDaoTest {
             assertEquals(UserRequestStatus.ACCEPTED, courseOrder.getStatus());
         }
     }
-}
+}*/

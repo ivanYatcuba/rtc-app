@@ -1,6 +1,6 @@
-package net.github.rtc.app.dao;
+/*package net.github.rtc.app.dao;
 
-
+//todo
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import org.junit.After;
 import org.junit.Before;
@@ -96,4 +96,4 @@ public abstract class AbstractGenericDaoTest {
     }
 
 
-}
+}*/
