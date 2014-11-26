@@ -2,6 +2,7 @@ package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.DateService;
+import net.github.rtc.app.service.MailService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.util.converter.ValidationContext;
 import org.junit.Before;
@@ -35,6 +36,8 @@ public class RegisterControllerTest {
     private UserService userService;
     @Mock
     private DateService dateService;
+    @Mock
+    private MailService mailService;
 
     private MockMvc mockMvc;
 

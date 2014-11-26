@@ -89,7 +89,7 @@ public class UserControllerTest {
         when(validationContext.get(User.class)).thenReturn(ANY_STRING);
         mockMvc.perform(get("/admin/user/userPage/editPage/{code}", ANY_USER_CODE))
                 .andExpect(status().isOk())
-                .andExpect(view().name(ROOT + "/page/editPages"))
+                .andExpect(view().name(ROOT + "/user/userUpdate"))
                 .andExpect(model().attributeExists(STRING_VALIDATION_RULES))
                 .andExpect(model().attributeExists(STRING_USER));
         verify(userService, times(1)).findByCode(ANY_USER_CODE);
@@ -100,7 +100,7 @@ public class UserControllerTest {
     @Test
     public void userPage () throws Exception{
         when(userService.findByCode(ANY_USER_CODE)).thenReturn(user);
-        mockMvc.perform(get("/admin/user/userPage/{code}", ANY_USER_CODE))
+        mockMvc.perform(get("/admin/user/userDetails/{code}", ANY_USER_CODE))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ROOT + PATH_PAGE_USER_PAGE))
                 .andExpect(model().attributeExists(STRING_USER));
