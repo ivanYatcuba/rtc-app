@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd"
+        http://www.springframework.org/schema/tx/spring-tx.xsd" default-lazy-init="true"
         >
     <!--Data source config-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -16,7 +16,7 @@
 
     <!--Data hibernate session factory config-->
     <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" depends-on="hibernateStringEncryptor">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="net.github.rtc.app.model"/>
         <property name="hibernateProperties">
@@ -39,7 +39,7 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="hibernateStringEncryptor"
-          class="org.jasypt.hibernate4.encryptor.HibernatePBEStringEncryptor">
+          class="org.jasypt.hibernate4.encryptor.HibernatePBEStringEncryptor" depends-on="allowEncryptionWithoutJCE">
         <property name="registeredName">
             <value>strongHibernateStringEncryptor</value>
         </property>

@@ -115,7 +115,7 @@
 </#macro>
 
 <#macro rtcColorLabel name class="" messagePrefix="">
-     <span class="label ${class}" style="width: 80px; vertical-align: middle; height: 20px;display:inline-block;">
+     <span class="label ${class}" style="width: 80px; vertical-align: middle; height: 20px;display:inline-block; margin-left: 16px;">
             <#if messagePrefix == "">
             ${name?html}
             <#else>
@@ -244,8 +244,9 @@
             <@spring.message label/>&nbsp
     </label>
     </div>
-    <div>
+
     <#if path??>
+    <div class="col-md-4">
         <#if path? is_sequence>
             <#list path as tmp>
                 <#if  messagePrefix == ""> ${tmp}
@@ -253,12 +254,11 @@
                 </#if>
                 <#if tmp_has_next>,</#if>
             </#list>
-
         <#else>
                <#if "${path}"??>${path}<#else>&nbsp</#if>
         </#if>
-    </#if>
     </div>
+    </#if>
 </#macro>
 
 <#macro rtcFormTextarea label path class="" style="">

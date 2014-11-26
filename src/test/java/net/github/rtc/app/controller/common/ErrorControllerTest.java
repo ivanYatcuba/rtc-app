@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = { "classpath:mvc-test.xml" })
+@ContextConfiguration(locations = "classpath:mvc-test.xml")
 public class ErrorControllerTest {
 
     private static final String STRING_JAVAX = "javax";

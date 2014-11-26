@@ -18,7 +18,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:feed-test.xml" })
+@ContextConfiguration(locations = "classpath:feed-test.xml")
 public class AtomFeedViewTest {
 
     @Value("${feed.title}")

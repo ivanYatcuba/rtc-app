@@ -3,12 +3,12 @@ package net.github.rtc.app.utils.propertyeditors;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.user.User;
 import org.junit.Test;
-import org.junit.internal.runners.JUnit4ClassRunner;
 import org.junit.runner.RunWith;
+import org.junit.runners.BlockJUnit4ClassRunner;
 
 import static junit.framework.Assert.assertEquals;
 
-@RunWith(JUnit4ClassRunner.class)
+@RunWith(BlockJUnit4ClassRunner.class)
 public class CustomClassEditorTest {
     private CustomClassEditor customClassEditor = new CustomClassEditor();
 

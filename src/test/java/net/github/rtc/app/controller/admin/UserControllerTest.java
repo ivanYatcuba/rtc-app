@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by Berdniky on 18.11.2014.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:mvc-test.xml"})
+@ContextConfiguration(locations = "classpath:mvc-test.xml")
 @WebAppConfiguration
 public class UserControllerTest {
 
@@ -102,7 +102,7 @@ public class UserControllerTest {
         when(userService.findByCode(ANY_USER_CODE)).thenReturn(user);
         mockMvc.perform(get("/admin/user/userDetails/{code}", ANY_USER_CODE))
                 .andExpect(status().isOk())
-                .andExpect(view().name(ROOT + PATH_PAGE_USER_PAGE))
+                .andExpect(view().name(ROOT + "/user/userDetails"))
                 .andExpect(model().attributeExists(STRING_USER));
         verify(userService, times(1)).findByCode(ANY_USER_CODE);
         /*verifyNoMoreInteractions(userService);*/
