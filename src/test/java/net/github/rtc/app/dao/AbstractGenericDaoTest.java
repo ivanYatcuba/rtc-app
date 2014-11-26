@@ -14,18 +14,18 @@ import java.util.List;
 import static junit.framework.Assert.*;
 
 
-@ContextConfiguration(locations = { "classpath:mvc-dao-test.xml" })
-public abstract class AbstractGenericDaoTest {
+@ContextConfiguration(locations ="classpath:mvc-dao-test.xml")
+public abstract class AbstractGenericDaoTest<T extends AbstractPersistenceObject> {
 
     @Autowired
     protected DaoTestContext daoTestContext;
 
-    protected abstract GenericDao<AbstractPersistenceObject> getGenericDao();
-    protected abstract ModelBuilder getModelBuilder();
+    protected abstract GenericDao<T> getGenericDao();
+    protected abstract ModelBuilder<T> getModelBuilder();
     protected abstract EqualityChecker getEqualityChecker();
 
-    private AbstractPersistenceObject testEntity;
-    private GenericDao<AbstractPersistenceObject> genericDao;
+    private T testEntity;
+    private GenericDao<T> genericDao;
 
     @Before
     public void setUp(){
@@ -42,7 +42,7 @@ public abstract class AbstractGenericDaoTest {
     @Test
     @Transactional
     public void testCreate() {
-        final List<AbstractPersistenceObject> initList = genericDao.findAll();
+        final List< ? extends AbstractPersistenceObject> initList = genericDao.findAll();
         genericDao.create(testEntity);
         assertTrue(initList.size() < genericDao.findAll().size());
     }
@@ -89,8 +89,8 @@ public abstract class AbstractGenericDaoTest {
     @Test
     @Transactional
     public void testFindAll(){
-        final List<AbstractPersistenceObject> initList = genericDao.findAll();
-        final AbstractPersistenceObject  testEntity = getModelBuilder().build();
+        final List<T> initList = genericDao.findAll();
+        final T testEntity = getModelBuilder().build();
         genericDao.create(testEntity);
         assertTrue(initList.size() < genericDao.findAll().size());
     }

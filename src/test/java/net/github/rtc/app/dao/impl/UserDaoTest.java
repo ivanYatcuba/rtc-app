@@ -22,14 +22,14 @@ import static junit.framework.Assert.assertNotNull;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:mvc-dao-test.xml" })
-public class UserDaoTest extends AbstractGenericDaoTest {
+@ContextConfiguration(locations = "classpath:mvc-dao-test.xml")
+public class UserDaoTest extends AbstractGenericDaoTest<User> {
     @Autowired
     private UserDao userDao;
 
     @Override
-    protected GenericDao<AbstractPersistenceObject> getGenericDao() {
-        return (GenericDao)userDao;
+    protected GenericDao<User> getGenericDao() {
+        return userDao;
     }
 
     @Override

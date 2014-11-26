@@ -19,7 +19,7 @@ import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
-@ContextConfiguration(locations = { "classpath:mvc-dao-test.xml" })
+@ContextConfiguration(locations = "classpath:mvc-dao-test.xml")
 public abstract class AbstractGenericServiceTest {
 
     public static final String CODE = "X";

@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = { "classpath:mvc-test.xml" })
+@ContextConfiguration(locations = "classpath:mvc-test.xml")
 public class UserControllerTest {
 
     private static final String EMAIL = "vasya@mail.ru";

@@ -8,7 +8,11 @@
         </layout>
     </appender>
 
-    <root level="debug">
+    <logger name="org.springframework">
+        <level value="ERROR" />
+    </logger>
+
+    <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

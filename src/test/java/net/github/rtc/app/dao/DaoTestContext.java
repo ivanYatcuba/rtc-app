@@ -17,7 +17,7 @@ import static junit.framework.Assert.assertEquals;
 
 @Component
 public class DaoTestContext implements InitializingBean {
-    private Map<Class, ModelBuilder> modelBuilder;
+    private Map<Class, ModelBuilder<? extends AbstractPersistenceObject>> modelBuilder;
     private Map<Class, EqualityChecker> equalityChecker;
     protected final CodeGenerationService codeGenerationService = new CodeGenerationServiceImpl();
 
@@ -37,7 +37,7 @@ public class DaoTestContext implements InitializingBean {
 
     private void initModelBuilder() {
         modelBuilder = new HashMap<>();
-        modelBuilder.put(Course.class,  new ModelBuilder() {
+        modelBuilder.put(Course.class,  new ModelBuilder<Course>() {
             @Override
             public Course build() {
                 final Course course = new Course();
@@ -51,7 +51,7 @@ public class DaoTestContext implements InitializingBean {
             }
         });
 
-        modelBuilder.put(User.class,  new ModelBuilder() {
+        modelBuilder.put(User.class,  new ModelBuilder<User>() {
             @Override
             public User build() {
                 final User user = new User();
@@ -62,7 +62,7 @@ public class DaoTestContext implements InitializingBean {
             }
         });
 
-        modelBuilder.put(UserCourseOrder.class,  new ModelBuilder() {
+        modelBuilder.put(UserCourseOrder.class,  new ModelBuilder<UserCourseOrder>() {
             @Override
             public UserCourseOrder build() {
                 final UserCourseOrder userCourseOrder = new UserCourseOrder();

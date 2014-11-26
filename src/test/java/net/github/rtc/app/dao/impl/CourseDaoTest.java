@@ -22,18 +22,18 @@ import java.util.List;
 import static junit.framework.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:mvc-dao-test.xml" })
-public class CourseDaoTest extends AbstractGenericDaoTest {
+@ContextConfiguration(locations = "classpath:mvc-dao-test.xml" )
+public class CourseDaoTest extends AbstractGenericDaoTest<Course> {
 
     @Autowired
     private CoursesDao coursesDao;
     @Override
-    protected GenericDao<AbstractPersistenceObject> getGenericDao() {
-        return (GenericDao)coursesDao;
+    protected GenericDao<Course> getGenericDao() {
+        return coursesDao;
     }
 
     @Override
-    protected ModelBuilder getModelBuilder() {
+    protected ModelBuilder<Course> getModelBuilder() {
         return daoTestContext.getModelBuilder(Course.class);
     }
 
@@ -50,7 +50,7 @@ public class CourseDaoTest extends AbstractGenericDaoTest {
         }
         final CourseSearchFilter courseSearchFilter = new CourseSearchFilter();
         courseSearchFilter.setName("Test Course");
-        List<AbstractPersistenceObject> courses = getGenericDao().search(courseSearchFilter).getResults();
+        List<Course> courses = getGenericDao().search(courseSearchFilter).getResults();
         assertEquals(5, courses.size());
         for(AbstractPersistenceObject course: courses) {
             Course course1 = (Course)course;
