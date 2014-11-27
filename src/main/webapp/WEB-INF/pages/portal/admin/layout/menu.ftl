@@ -6,19 +6,10 @@
 </ul>
 
 <script type="text/javascript">
-    $(function() {
-        var pathname = window.location.pathname;
-        if(pathname.indexOf("course") > -1){
-            $("#courseMenuItem" ).addClass( "active" );
-        }
-        if(pathname.indexOf("user") > -1){
-            $( "#userMenuItem" ).addClass( "active" );
-        }
-        if(pathname.indexOf("export") > -1){
-            $( "#reportMenuItem" ).addClass( "active" );
-        }
-        if(pathname.indexOf("news") > -1){
-            $( "#newsMenuItem" ).addClass( "active" );
-        }
+    var mainMenuMap = { "news": "#newsMenuItem", "course": "#courseMenuItem",
+        "user": "#userMenuItem", "report": "#reportMenuItem", "": "#newsMenuItem"}
+
+    $(document).ready(function() {
+        $(mainMenuMap['${menuItem!""}']).addClass("active")
     });
 </script>

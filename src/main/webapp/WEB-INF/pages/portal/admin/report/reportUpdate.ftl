@@ -9,7 +9,7 @@
         <#include "reportForm.ftl" />
         <div class="row-fluid span12" style="margin-left: 1px">
             <@formMacro.rtcSubmitDoOrCancel "action.update" "/admin/export/update/${report.code}" "action.cancel"
-            "/admin/search"/>
+            "/admin/search/${menuItem}"/>
         </div>
     </@formMacro.rtcForm>
 </@layout.layout>

@@ -26,12 +26,9 @@ import java.util.*;
  */
 @Controller("adminNavigationController")
 @RequestMapping("admin/user")
-public class UserController {
+public class UserController implements MenuItem {
 
     private static final String STRING_USER = "user";
-    private static final String STRING_USERS = "users";
-    private static final String PATH_PAGE_VIEW_ALL_USERS = "/page/viewAllusers";
-    private static final String PATH_PAGE_USER_TABLE = "/user/content/userTable";
     private static final String REDIRECT_USER_PAGE = "redirect:/admin/user/userPage/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_ADMIN_SEARCH = "redirect:/admin/search";
@@ -39,12 +36,10 @@ public class UserController {
     private static final String STRING_AUTHORITIES = "authorities";
     private static final String STRING_STATUSES = "statuses";
     private static final String PROGRAMMING_LANGUAGES = "programmingLanguages";
-
     private static final String ROOT = "portal/admin";
     private static final String UPDATE_VIEW = "/user/userUpdate";
     private static final String CREATE_VIEW = "/user/userCreate";
     private static final String DETAILS_VIEW = "/user/userDetails";
-
     @Autowired
     private ValidationContext validationContext;
     @Autowired
@@ -54,33 +49,6 @@ public class UserController {
     @Value("${img.save.folder}")
     private String imgFold;
     private String photo;
-
-    /*@RequestMapping(value = "/viewAll", method = RequestMethod.GET)
-    public ModelAndView index() {
-        final UserSearchFilter filter = getFilterUser();
-        filter.setPage(1);
-        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_VIEW_ALL_USERS);
-        final SearchResults<User> results = userService.search(filter);
-        mav.addAllObjects(results.getPageModel());
-        mav.addObject(STRING_USERS, results.getResults());
-        mav.addObject(STRING_AUTHORITIES, getAuthorities());
-        mav.addObject(STRING_USER_FILTER, filter);
-        return mav;
-    }*/
-
-    /*@RequestMapping(value = "/filter", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ModelAndView switchPage(@Validated @ModelAttribute(STRING_USER_FILTER) final UserSearchFilter userFilter) {
-        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_USER_TABLE);
-        final SearchResults<User> results = userService.search(userFilter);
-        mav.addAllObjects(results.getPageModel());
-        mav.addObject(STRING_USERS, results.getResults());
-        mav.addObject(STRING_AUTHORITIES, getAuthorities());
-        mav.addObject(STRING_STATUSES, getStatuses());
-        mav.addObject(STRING_USER_FILTER, userFilter);
-        return mav;
-    }*/
 
     @RequestMapping(value = "/userPage/editPage/{code}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable final String code) {
@@ -100,7 +68,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
-     public String setStatusForRemoval(@RequestParam final String userCode) throws Exception {
+    public String setStatusForRemoval(@RequestParam final String userCode) throws Exception {
         userService.markUserForRemoval(userCode);
         return REDIRECT_ADMIN_SEARCH;
     }
@@ -229,12 +197,19 @@ public class UserController {
         s.add("Advanced");
         return s;
     }
+
     @ModelAttribute("currentUser")
     public User getCurrentUser() {
         return userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
+
     @ModelAttribute("currentUserName")
     public String getCurrentUserName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    @Override
+    public String getMenuItem() {
+        return STRING_USER;
     }
 }

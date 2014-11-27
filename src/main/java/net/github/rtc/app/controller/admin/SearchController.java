@@ -48,6 +48,7 @@ public class SearchController {
     private static final String STRING_REPORTS = "reports";
     private static final String STRING_REPORT_FILTER = "reportFilter";
     private static final String STRING_EXPERTS = "experts";
+    private static final String MENU_ITEM = "menuItem";
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -57,9 +58,18 @@ public class SearchController {
     @Autowired
     private ReportService reportService;
 
+    @RequestMapping(value = "/search/{menuItem}", method = RequestMethod.GET)
+    public ModelAndView searchPagewithParam(@PathVariable(MENU_ITEM) final String menuItem) {
+        final ModelAndView mav = new ModelAndView("redirect:" + "/admin/search");
+        mav.addObject(MENU_ITEM, menuItem);
+        return mav;
+    }
+
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String searchPage() {
-        return ROOT + "/search/searchPage";
+    public ModelAndView searchPage(@RequestParam(value = MENU_ITEM, required = false) String menuItem) {
+        final ModelAndView mav = new ModelAndView(ROOT + "/search/searchPage");
+        mav.addObject(MENU_ITEM, menuItem);
+        return mav;
     }
 
     @RequestMapping(value = "/newsTable", method = RequestMethod.POST)
