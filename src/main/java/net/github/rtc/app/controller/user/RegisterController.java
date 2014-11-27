@@ -24,9 +24,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
-/**
- * Created by ivan on 18.04.14.
- */
 @Controller("registerController")
 @RequestMapping("/register")
 public class RegisterController {
