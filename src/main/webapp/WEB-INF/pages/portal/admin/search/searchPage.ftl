@@ -42,6 +42,7 @@
     $(".navMenuItem").on("click", function (event) {
         event.preventDefault();
         searchPage.showFilterForm(this.id);
+        searchPage.doReset();
         searchPage.doSearch(1);
 
     });
