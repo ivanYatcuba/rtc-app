@@ -12,4 +12,6 @@
     $(document).ready(function() {
         $(mainMenuMap['${menuItem!""}']).addClass("active")
     });
+
+
 </script>

@@ -150,7 +150,7 @@
 
 <hr>
 <#if user.status == "FOR_REMOVAL">
-    <@formMacro.rtcSubmitDoOrCancel "coursesPage.action.edit" "/admin/user/${user.code}/edit" "Cancel" "/admin/search${menuItem}" "disabled"/>
+    <@formMacro.rtcSubmitDoOrCancel "coursesPage.action.edit" "/admin/user/${user.code}/edit" "Cancel" "/admin/search/${menuItem}" "disabled"/>
 <#else>
     <@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/user/userPage/editPage/${user.code}" "Cancel" "/admin/search/${menuItem}"/>
 </#if>
