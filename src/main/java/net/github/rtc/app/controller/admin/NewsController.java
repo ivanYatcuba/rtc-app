@@ -23,7 +23,7 @@ import java.util.List;
 
 @Controller("newsController")
 @RequestMapping(value = "/admin/news")
-public class NewsController {
+public class NewsController implements MenuItem {
 
     public static final String LAST_UPDATE_VIEW_KEY = "lastUpdate";
     public static final String STRING_NEWS = "news";
@@ -204,4 +204,8 @@ public class NewsController {
         return STRING_REDIRECT_VIEW + news.getCode();
     }
 
+    @Override
+    public String getMenuItem() {
+        return STRING_NEWS;
+    }
 }

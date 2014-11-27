@@ -5,7 +5,7 @@
 
 <@formMacro.rtcForm "reportForm" "/admin/export/insertReport" "report.create.page.header" "${validationRules}">
     <#include "reportForm.ftl" />
-    <@formMacro.rtcSubmit "Create" "Cancel" "/admin/search"/>
+    <@formMacro.rtcSubmit "Create" "Cancel" "/admin/search/${menuItem}"/>
 </@formMacro.rtcForm>
 
 </@layout.layout>

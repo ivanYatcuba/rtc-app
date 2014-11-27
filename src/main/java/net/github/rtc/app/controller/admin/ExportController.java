@@ -35,7 +35,7 @@ import java.util.*;
 
 @Controller("exportController")
 @RequestMapping("admin/export")
-public class ExportController {
+public class ExportController implements MenuItem {
 
     private static final int REPORTS_PER_PAGE = 10;
     private static final int BUFFER_SIZE = 4096;
@@ -215,4 +215,8 @@ public class ExportController {
          binder.registerCustomEditor(Class.class, new CustomClassEditor());
     }
 
+    @Override
+    public String getMenuItem() {
+        return STRING_REPORT;
+    }
 }

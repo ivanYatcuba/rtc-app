@@ -66,7 +66,7 @@
             </#if>
         </div>
     </div>
-    <@formMacro.rtcSubmitDoOrCancel "coursesPage.action.edit" "/admin/course/${course.getCode()}/update" "coursesPage.action.cancel" "/admin/search"/>
+    <@formMacro.rtcSubmitDoOrCancel "coursesPage.action.edit" "/admin/course/${course.getCode()}/update" "coursesPage.action.cancel" "/admin/search/${menuItem}"/>
 </div>
 </@layout.layout>
 

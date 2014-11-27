@@ -9,7 +9,6 @@ import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
-import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.propertyeditors.CustomExpertsEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.*;
 
 /**
@@ -29,7 +29,7 @@ import java.util.*;
  */
 @Controller("coursesController")
 @RequestMapping("admin/course")
-public class CoursesController {
+public class CoursesController implements MenuItem {
 
     private static final String STRING_COURSE = "course";
     private static final String STRING_COURSES = "courses";
@@ -44,12 +44,10 @@ public class CoursesController {
     private static final String STRING_EXPERTS = "experts";
     private static final String VIEW = "view/";
     private static final String REDIRECT1 = "redirect: ";
-
     private static final String ROOT = "portal/admin";
     private static final String UPDATE_VIEW = "/course/courseUpdate";
     private static final String CREATE_VIEW = "/course/courseCreate";
     private static final String DETAILS_VIEW = "/course/courseDetails";
-
     @Autowired
     private CourseService courseService;
     @Autowired
@@ -58,39 +56,6 @@ public class CoursesController {
     private ValidationContext validationContext;
     @Autowired
     private DateService dateService;
-
-    /**
-     * Processes the request to view all courses page
-     *
-     * @return modelAndView("admin/courses/courses")
-     */
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView viewAll() {
-        final CourseSearchFilter filter = getFilterCourse();
-        filter.setPage(1);
-        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_LISTCONTENT);
-        final SearchResults<Course> results = courseService.search(filter);
-        mav.addObject(STRING_COURSES, results.getResults());
-        mav.addAllObjects(results.getPageModel());
-        mav.addObject(STRING_TYPES, CourseType.findAll());
-        mav.addObject(STRING_STATUSES, getStatuses());
-        mav.addObject(STRING_FILTER_COURSE, filter);
-        return mav;
-    }
-
-    @RequestMapping(value = "/filter", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ModelAndView switchPage(@ModelAttribute(STRING_FILTER_COURSE) final CourseSearchFilter filterCourse) {
-        final ModelAndView mav = new ModelAndView(ROOT + PATH_PAGE_COURSE_TABLE);
-        final SearchResults<Course> results = courseService.search(filterCourse);
-        mav.addAllObjects(results.getPageModel());
-        mav.addObject(STRING_COURSES, results.getResults());
-        mav.addObject(STRING_TYPES, CourseType.findAll());
-        mav.addObject(STRING_STATUSES, getStatuses());
-        mav.addObject(STRING_FILTER_COURSE, filterCourse);
-        return mav;
-    }
 
     /**
      * Processes the request to delete by id
@@ -181,7 +146,8 @@ public class CoursesController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(
-      @ModelAttribute(STRING_COURSE) final Course course, @RequestParam(value = "ifPublish", required = false) final boolean ifPublish) {
+      @ModelAttribute(STRING_COURSE) final Course course,
+      @RequestParam(value = "ifPublish", required = false) final boolean ifPublish) {
         course.setStatus(ifPublish ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
         courseService.update(course);
         return REDIRECT1 + VIEW + course.getCode();
@@ -217,6 +183,7 @@ public class CoursesController {
         }
         return categories;
     }
+
     @ModelAttribute(STRING_EXPERTS)
     public Map<String, String> getExpertUsers() {
         final Map<String, String> expertMap = new HashMap<>();
@@ -254,6 +221,11 @@ public class CoursesController {
     @ModelAttribute(value = STRING_COURSE)
     public Course getCommandObject() {
         return new Course();
+    }
+
+    @Override
+    public String getMenuItem() {
+        return STRING_COURSE;
     }
 }
 

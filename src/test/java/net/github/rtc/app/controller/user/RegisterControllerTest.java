@@ -2,6 +2,7 @@ package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.DateService;
+import net.github.rtc.app.service.MailService;
 import net.github.rtc.app.service.UserService;
 import net.github.rtc.util.converter.ValidationContext;
 import org.junit.Before;
@@ -35,6 +36,8 @@ public class RegisterControllerTest {
     private UserService userService;
     @Mock
     private DateService dateService;
+    @Mock
+    private MailService mailService;
 
     private MockMvc mockMvc;
 
@@ -52,10 +55,10 @@ public class RegisterControllerTest {
                 .andExpect(model().attributeExists("validationRules"));
     }
 
-    /*@Test
+    @Test
     public void testSave() throws Exception {
-        mockMvc.perform(post("/register/save").sessionAttr("user", new User())) //todo
+        mockMvc.perform(post("/register/save").sessionAttr("user", new User()))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("/login/"));
-    }*/
+    }
 }

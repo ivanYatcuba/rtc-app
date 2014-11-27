@@ -63,7 +63,13 @@
         searchPage.doSearch();
     });
 
-    $("#newsMenuItem").click(); //show news filter form on start
+
+    $( document ).ready(function() {
+        $('.active').each(function(i, obj) {
+                obj.click();
+        });
+    });
+
 
 </script>
 </@layout.layout>
