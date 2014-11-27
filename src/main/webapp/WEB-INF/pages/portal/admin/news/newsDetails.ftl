@@ -19,8 +19,12 @@
         <@formMacro.rtcFormLabelOut "news.title" "${news.title}"/>
     </div>
     <div class="col-md-6">
-        <label><@spring.message "news.tags"/></label>
-        <p>&nbsp${news.tags?join(", ")}</p>
+        <div class="col-md-2">
+            <label><@spring.message "news.tags"/></label>
+        </div>
+        <div class="col-md-4">
+            <div>${news.tags?join(", ")}</div>
+        </div>
     </div>
 </div>
 <div class="row">
@@ -28,7 +32,7 @@
         <@formMacro.rtcFormLabelOut "news.description" "${news.description}"/>
     </div>
 </div>
-<hr/>
+<hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
 <div class="row">
 <div class="col-md-12">
     <div>
@@ -44,7 +48,7 @@
     </div>
 </div>
 </div>
-<hr/>
+<hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
 <@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/news/${news.code}/edit" "Cancel" "/admin/search/${menuItem}"/>
 </div>
 </@layout.layout>
