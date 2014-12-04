@@ -394,6 +394,10 @@
             var text = label.text();
             label.html('* ' + text);
         });
+        $.validator.addMethod("pattern", function(value, element, options){
+            var re = new RegExp(options);
+            return this.optional(element) || re.test(value);
+        });
     });
 </script>
 </#macro>

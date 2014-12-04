@@ -6,6 +6,8 @@ import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.util.annotation.validation.Maxlength;
 import net.github.rtc.util.annotation.validation.Required;
 import net.github.rtc.util.annotation.validation.Validatable;
+import net.github.rtc.util.annotation.validation.Pattern;
+
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -27,6 +29,7 @@ public class ReportDetails extends AbstractPersistenceObject {
     @Column
     @Required
     @Maxlength(PRIMARY_LENGTH)
+    @Pattern("[a-zA-Z0-9_]")
     private String name;
 
     @Column
