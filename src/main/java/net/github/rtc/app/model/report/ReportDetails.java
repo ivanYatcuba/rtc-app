@@ -29,7 +29,7 @@ public class ReportDetails extends AbstractPersistenceObject {
     @Column
     @Required
     @Maxlength(PRIMARY_LENGTH)
-    @Pattern("[a-zA-Z0-9_]")
+    @Pattern("^[^\\.?\\/\\\\*\\[\\]:\\<\\>\\|]*$")
     private String name;
 
     @Column
