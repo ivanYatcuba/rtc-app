@@ -1,8 +1,5 @@
 package net.github.rtc.app.model.user;
 
-/**
- * Created by ivan on 24.04.14.
- */
 public class Request {
     private String orderCode;
     private long orderId;

@@ -72,8 +72,6 @@
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
 
-    <!--Import spring settings from util-->
-    <import resource="classpath:spring-config.xml"/>
     <!-- Import spring security configurations -->
     <import resource="classpath:/spring/spring-security.xml"/>
     <!-- Import data source security configurations -->

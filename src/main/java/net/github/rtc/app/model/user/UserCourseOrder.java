@@ -2,15 +2,12 @@ package net.github.rtc.app.model.user;
 
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.course.CourseType;
-import net.github.rtc.util.annotation.validation.Required;
 import net.github.rtc.util.annotation.validation.Validatable;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by ivan on 15.04.14.
- */
 @Entity
 @Validatable
 public class UserCourseOrder extends AbstractPersistenceObject {
@@ -29,7 +26,7 @@ public class UserCourseOrder extends AbstractPersistenceObject {
 
     @Column
     @Enumerated(EnumType.STRING)
-    @Required
+    @NotEmpty
     private CourseType position;
 
     @Column
@@ -37,7 +34,7 @@ public class UserCourseOrder extends AbstractPersistenceObject {
     private UserRequestStatus status = UserRequestStatus.PENDING;
 
     @Column
-    @Required
+    @NotEmpty
     private String reason;
 
     public UserCourseOrder(

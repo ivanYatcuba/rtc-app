@@ -8,8 +8,11 @@ import net.github.rtc.util.annotation.validation.Number;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -26,19 +29,18 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     private static final int DESCRIPTION_LENGTH = 255;
     private static final int PRIMARY_LENGTH = 50;
     private static final int DEFAULT_CAPACITY = 10;
-    @Required
+    @NotEmpty
     @Number
     @Min(1)
     @Column
     @ForExport("Capacity")
     private Integer capacity = DEFAULT_CAPACITY;
-    @Required
-    @Minlength(2)
-    @Maxlength(PRIMARY_LENGTH)
+    @NotEmpty
+    @Length(min = 2, max = PRIMARY_LENGTH)
     @Column
     @ForExport("Name")
     private String name;
-    @Required
+    @NotEmpty
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "CourseTypes",
       joinColumns = @JoinColumn(name = "course_id"))
@@ -47,11 +49,11 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 1)
     private Set<CourseType> types;
-    @Required
+    @NotEmpty
     @Temporal(TemporalType.DATE)
     @ForExport("Start date")
     private Date startDate;
-    @Required
+    @NotEmpty
     @Temporal(TemporalType.TIMESTAMP)
     @ForExport("End date")
     private Date endDate;
@@ -66,7 +68,7 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     @Column
     @ForExport("Publish date")
     private Date publishDate;
-    @Maxlength(DESCRIPTION_LENGTH)
+    @Length(max = DESCRIPTION_LENGTH)
     @Column
     @ForExport("Description")
     private String description;
@@ -77,7 +79,7 @@ public class Course extends AbstractPersistenceObject implements Serializable {
       inverseJoinColumns = { @JoinColumn(name = "id") })
     @ForExport("Tags")
     private List<Tag> tags;
-    @Required
+    @NotEmpty
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "courses_experts",

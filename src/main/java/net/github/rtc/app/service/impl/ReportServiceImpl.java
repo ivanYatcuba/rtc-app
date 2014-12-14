@@ -24,6 +24,7 @@ import java.util.Map;
 public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails> implements ReportService {
 
     private static final String STRING_REPORT = "Report: ";
+    private static final String DOT = ".";
     private static Logger log = LoggerFactory.getLogger(ReportServiceImpl.class.getName());
     @Autowired
     private ReportDao reportDao;
@@ -76,7 +77,7 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
     }
 
     public ReportDetails compileReport(ReportDetails report) {
-        final String filePath = exportPath + report.getCode() + "." + report.getExportFormat().toString().toLowerCase();
+        final String filePath = exportPath + report.getCode() + DOT + report.getExportFormat().toString().toLowerCase();
         final ModelService service = serviceHolder.get(report.getExportClass());
         final List<?> objects = service.findAll();
         try {
@@ -91,7 +92,7 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
     @Override
     public File getReport(ReportDetails details) {
         final ReportDetails reportDetails = findByCode(details.getCode());
-        final String filePath = new StringBuilder(exportPath).append("/").append(details.getCode()).append(".").
+        final String filePath = new StringBuilder(exportPath).append("/").append(details.getCode()).append(DOT).
                 append(reportDetails.getExportFormat().toString().toLowerCase()).toString();
         return new File(filePath);
     }

@@ -1,8 +1,8 @@
 package net.github.rtc.app.model.course;
 
 
-import net.github.rtc.util.annotation.validation.Required;
 import net.github.rtc.util.annotation.validation.Validatable;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,7 +17,7 @@ public class Tag implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Required
+    @NotEmpty
     @Column
     private String value;
 

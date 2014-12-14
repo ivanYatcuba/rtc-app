@@ -5,10 +5,10 @@ import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.course.Tag;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.annotation.ForExport;
-import net.github.rtc.util.annotation.validation.Required;
 import net.github.rtc.util.annotation.validation.Validatable;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +20,7 @@ import java.util.List;
 public class News extends AbstractPersistenceObject implements Serializable {
 
 
-    @Required
+    @NotEmpty
     @Column
     @ForExport("Title")
     private String title;
@@ -37,7 +37,7 @@ public class News extends AbstractPersistenceObject implements Serializable {
     @Enumerated(EnumType.STRING)
     private NewsStatus status = NewsStatus.DRAFT;
 
-    @Required
+    @NotEmpty
     @Column
     private String description;
 

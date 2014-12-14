@@ -143,9 +143,10 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/download/{reportCode}", method = RequestMethod.GET)
     public void downloadUserExport(
       final HttpServletResponse response, @PathVariable final String reportCode) {
-        File downloadFile = reportService.getReport(reportService.findByCode(reportCode));
+        final File downloadFile = reportService.getReport(reportService.findByCode(reportCode));
 
-        try(FileInputStream inputStream = new FileInputStream(downloadFile); final OutputStream outStream = response.getOutputStream();) {
+        try (FileInputStream inputStream = new FileInputStream(downloadFile); final OutputStream outStream = response
+          .getOutputStream();) {
 
             response.setContentType(Files.probeContentType(downloadFile.toPath()));
             response.setContentLength((int) downloadFile.length());

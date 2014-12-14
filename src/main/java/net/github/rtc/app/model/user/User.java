@@ -6,6 +6,9 @@ import net.github.rtc.util.annotation.validation.*;
 import net.github.rtc.util.annotation.validation.Number;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.jasypt.hibernate4.type.EncryptedStringType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,64 +32,65 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     public static final int PRIMARY_LENGTH = 50;
     public static final int SECONDARY_LENGTH = 30;
     public static final String STRING_SPACE = " ";
+    public static final int LARGE_LENGTH = 255;
 
 
     /* @Column
      private String code;*/
-    @Required
-    @Maxlength(PRIMARY_LENGTH)
+    @NotEmpty
+    @Length(max = PRIMARY_LENGTH)
     @Column
     @ForExport("Surname")
     private String surname;
-    @Required
-    @Maxlength(PRIMARY_LENGTH)
+    @NotEmpty
+    @Length(max = PRIMARY_LENGTH)
     @Column
     @ForExport("Name")
     private String name;
-    @Maxlength(PRIMARY_LENGTH)
+    @Length(max = PRIMARY_LENGTH)
     @Column
     @ForExport("Middle name")
     private String middleName;
-    @Required
+    @NotEmpty
     @Column
     @ForExport("Birthday")
     private Date birthDate;
-    @Required
+    @NotEmpty
     @Number
     @Column
     @ForExport("Phone")
     private String phone;
-    @Required
+    @NotEmpty
     @Email
     @Column
     @ForExport("Email")
     private String email;
-    @Maxlength(SECONDARY_LENGTH)
+    @Length(max = SECONDARY_LENGTH)
     @Column
     @ForExport("City")
     private String city;
-    @Maxlength(SECONDARY_LENGTH)
+    @Length(max = SECONDARY_LENGTH)
     @Column
     @ForExport("University")
     private String university;
-    @Maxlength(SECONDARY_LENGTH)
+    @Length(max = SECONDARY_LENGTH)
     @Column
     @ForExport("Faculty")
     private String faculty;
-    @Maxlength(SECONDARY_LENGTH)
+    @Length(max = SECONDARY_LENGTH)
     @Column
     @ForExport("Speciality")
     private String speciality;
-    @Required
+    @NotEmpty
     @Column
     @ForExport("English")
     private String english;
-    @Required
+    @NotEmpty
     @Column
-    @Maxlength(255)
+    @Length(max = LARGE_LENGTH)
     @ForExport("Note")
     private String note;
-    @Required
+    @NotEmpty
     @Column
     @Type(type = "encryptedString")
     private String password;
@@ -103,14 +107,14 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 1)
     private Set<String> programmingLanguages;
-    @Required
+    @NotEmpty
     @Column
     @Temporal(TemporalType.DATE)
     @ForExport("Register Date")
     private Date registerDate;
     @Column
     private Date removalDate;
-    @Required
+    @NotEmpty
     @Column
     @ForExport("Status")
     @Enumerated(EnumType.STRING)
