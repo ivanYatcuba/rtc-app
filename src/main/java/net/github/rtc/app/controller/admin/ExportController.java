@@ -143,27 +143,22 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/download/{reportCode}", method = RequestMethod.GET)
     public void downloadUserExport(
       final HttpServletResponse response, @PathVariable final String reportCode) {
-        try {
-            final ReportDetails reportDetails = reportService.findByCode(reportCode);
-            final StringBuilder filePath = new StringBuilder(exportPath).append("/").append(reportCode).append(".").
-              append(reportDetails.getExportFormat().toString().toLowerCase());
-            final File downloadFile = new File(filePath.toString());
-            final FileInputStream inputStream = new FileInputStream(downloadFile);
+        File downloadFile = reportService.getReport(reportService.findByCode(reportCode));
+
+        try(FileInputStream inputStream = new FileInputStream(downloadFile); final OutputStream outStream = response.getOutputStream();) {
 
             response.setContentType(Files.probeContentType(downloadFile.toPath()));
             response.setContentLength((int) downloadFile.length());
 
             final String headerKey = "Content-Disposition";
-            final String headerValue = String.format("attachment; " + "filename=\"%s\"", reportDetails.getName());
+            final String headerValue = String.format("attachment; " + "filename=\"%s\"", /*reportDetails.getName()*/"");
             response.setHeader(headerKey, headerValue);
-            final OutputStream outStream = response.getOutputStream();
+
             final byte[] buffer = new byte[BUFFER_SIZE];
             int bytesRead = -1;
             while ((bytesRead = inputStream.read(buffer)) != -1) {
                 outStream.write(buffer, 0, bytesRead);
             }
-            inputStream.close();
-            outStream.close();
         } catch (IOException e) {
             log.error("Catching ServiceProcessingException");
             throw new ServiceProcessingException();

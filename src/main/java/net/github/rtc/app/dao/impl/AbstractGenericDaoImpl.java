@@ -17,6 +17,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 @Component
+@SuppressWarnings("unchecked")
 public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
 
     @Autowired

@@ -83,6 +83,7 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     private String english;
     @Required
     @Column
+    @Maxlength(255)
     @ForExport("Note")
     private String note;
     @Required

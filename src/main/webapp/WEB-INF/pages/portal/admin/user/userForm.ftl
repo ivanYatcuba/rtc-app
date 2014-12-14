@@ -100,6 +100,19 @@
         src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
 
 <script>
+    $(document).ready(function(){
+        function limits(obj, limit){
+            var text = $(obj).val();
+            var length = text.length;
+            if(length > limit){
+                $(obj).val(text.substr(0,limit));
+            }
+        }
+        $('textarea').keyup(function(){
+            limits($(this), 255);
+        })
+    });
+
     $(function () {
         addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")
     });

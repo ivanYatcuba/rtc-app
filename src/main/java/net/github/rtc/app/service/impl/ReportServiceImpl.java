@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -85,5 +86,13 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
             log.info("Report building failed: " + report.getCode());
             return null;
         }
+    }
+
+    @Override
+    public File getReport(ReportDetails details) {
+        final ReportDetails reportDetails = findByCode(details.getCode());
+        final String filePath = new StringBuilder(exportPath).append("/").append(details.getCode()).append(".").
+                append(reportDetails.getExportFormat().toString().toLowerCase()).toString();
+        return new File(filePath);
     }
 }
