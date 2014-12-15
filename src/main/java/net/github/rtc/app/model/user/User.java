@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +52,7 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     @Column
     @ForExport("Middle name")
     private String middleName;
-    @NotEmpty
+    @NotNull
     @Column
     @ForExport("Birthday")
     private Date birthDate;
@@ -107,14 +108,14 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 1)
     private Set<String> programmingLanguages;
-    @NotEmpty
+    @NotNull
     @Column
     @Temporal(TemporalType.DATE)
     @ForExport("Register Date")
     private Date registerDate;
     @Column
     private Date removalDate;
-    @NotEmpty
+    @NotNull
     @Column
     @ForExport("Status")
     @Enumerated(EnumType.STRING)

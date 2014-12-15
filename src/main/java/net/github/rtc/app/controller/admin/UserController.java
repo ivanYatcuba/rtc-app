@@ -125,7 +125,7 @@ public class UserController implements MenuItem {
 
     @RequestMapping(value = "/save", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public String save(
-      @ModelAttribute(STRING_USER) @Valid final User user,
+      @ModelAttribute(STRING_USER) final User user,
       @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
       @RequestParam(required = false) final boolean ifActive) {
         user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
