@@ -1,6 +1,7 @@
 package net.github.rtc.app.model.report;
 
 
+import com.sun.istack.NotNull;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.util.annotation.validation.Validatable;
@@ -32,11 +33,11 @@ public class ReportDetails extends AbstractPersistenceObject {
 
     @Column
     @Enumerated(EnumType.STRING)
-    @NotEmpty
+    @NotNull
     private ExportFormat exportFormat = ExportFormat.XLSX;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Class<? extends Serializable> exportClass;
 
     @Column
