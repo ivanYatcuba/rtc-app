@@ -62,13 +62,14 @@ public class LoginControllerTest {
                 .andExpect(model().attributeExists("error"));
     }
 
-    @Test
-    public void testLogout() throws Exception {
-        mockMvc.perform(get("/logout"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("content"));
-    }
 
+    @Test
+    public void testMailExists() throws Exception {
+        mockMvc.perform(post("/mailExist/")
+                .param("email", "mail")
+                .param("currentEmail", "mail"))
+                .andExpect(status().isOk());
+    }
 
     @Test
     public void testLoginAttempt() throws Exception {
