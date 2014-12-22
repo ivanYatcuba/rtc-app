@@ -42,13 +42,6 @@ public class LoginController {
         return mav;
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ModelAndView logout(final ModelMap model) {
-        SecurityContextHolder.clearContext();
-        return buildLoginMav(model);
-
-    }
-
     @RequestMapping(value = "/mailExist/", method = RequestMethod.POST)
     public
     @ResponseBody

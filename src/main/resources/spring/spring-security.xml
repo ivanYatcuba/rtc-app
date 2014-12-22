@@ -7,13 +7,14 @@
              http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/**/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/user/**" access="hasAnyRole('ROLE_USER', 'ROLE_EXPERT')" />
         <intercept-url pattern="/expert/**" access="hasRole('ROLE_EXPERT')" />
         <form-login login-page="/login" default-target-url="/login_attempt"
                     authentication-failure-url="/loginfailed"
                     authentication-success-handler-ref="simpleAuthenticationSuccessHandler"/>
-        <logout logout-url="/logout" delete-cookies="JSESSIONID"/>
+        <logout logout-url="/logout" logout-success-url="/"
+                delete-cookies="JSESSIONID"/>
         <remember-me key="uniqueAndSecret" token-validity-seconds="86400"/>
     </http>
 
