@@ -13,6 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +30,7 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     private static final int DESCRIPTION_LENGTH = 255;
     private static final int PRIMARY_LENGTH = 50;
     private static final int DEFAULT_CAPACITY = 10;
-    @NotEmpty
+    @NotNull
     @Number
     @Min(1)
     @Column
@@ -49,11 +50,11 @@ public class Course extends AbstractPersistenceObject implements Serializable {
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 1)
     private Set<CourseType> types;
-    @NotEmpty
+    @NotNull
     @Temporal(TemporalType.DATE)
     @ForExport("Start date")
     private Date startDate;
-    @NotEmpty
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @ForExport("End date")
     private Date endDate;
@@ -79,7 +80,7 @@ public class Course extends AbstractPersistenceObject implements Serializable {
       inverseJoinColumns = { @JoinColumn(name = "id") })
     @ForExport("Tags")
     private List<Tag> tags;
-    @NotEmpty
+    @NotNull
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "courses_experts",

@@ -351,10 +351,6 @@
                             <dir>${project.build.directory}/findbugs</dir>
                             <outputDir>${project.build.directory}/findbugs</outputDir>
                             <stylesheet>fancy-hist.xsl</stylesheet>
-                            <!--<stylesheet>default.xsl</stylesheet>-->
-                            <!--<stylesheet>plain.xsl</stylesheet>-->
-                            <!--<stylesheet>fancy.xsl</stylesheet>-->
-                            <!--<stylesheet>summary.xsl</stylesheet>-->
                             <fileMappers>
                                 <fileMapper
                                         implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">

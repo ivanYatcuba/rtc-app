@@ -47,6 +47,6 @@
         </form>
     </div>
     <div class="col-md-6" style="text-align: right">
-    <#--<@datatables.addPagination/>-->
+    <@datatables.addPagination/>
     </div>
 </div>
