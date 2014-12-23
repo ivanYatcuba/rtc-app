@@ -8,6 +8,7 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.utils.CourseNewsCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomExpertsEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
@@ -56,6 +57,8 @@ public class CoursesController implements MenuItem {
     private ValidationContext validationContext;
     @Autowired
     private DateService dateService;
+    @Autowired
+    private CourseNewsCreator courseNewsCreator;
 
     /**
      * Processes the request to delete by id
@@ -117,10 +120,14 @@ public class CoursesController implements MenuItem {
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(
-      @ModelAttribute(STRING_COURSE) final Course course, @RequestParam(required = false) final boolean ifPublish) {
+      @ModelAttribute(STRING_COURSE) final Course course, @RequestParam(required = false) final boolean ifPublish,
+        @RequestParam(required = false) final boolean ifCreateNews) {
         course.setStatus(ifPublish ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
         course.setPublishDate(dateService.getCurrentDate());
         courseService.create(course);
+        if (ifCreateNews) {
+            courseNewsCreator.createNews(course, getCurrentUser());
+        }
         return REDIRECT1 + VIEW + course.getCode();
     }
 

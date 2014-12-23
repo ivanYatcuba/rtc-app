@@ -19,4 +19,6 @@ public interface DateService {
      * @return old date with added days
      */
     Date addDays(Date oldDate, final int days);
+
+    int getMothPeriod(Date startDate, Date endDate);
 }

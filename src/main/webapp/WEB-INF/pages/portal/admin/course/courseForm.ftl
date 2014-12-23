@@ -36,16 +36,22 @@
 
 <#if !course.isPublished()>
     <hr>
-<div class="row">
-    <div class="col-md-6">
-        <label  class="control-label col-md-3"></label>
-        <input id="ifPublish" name="ifPublish" type="checkbox" >
-        <@spring.message "coursesPage.action.publishAsNews"/>
+    <div class="row">
+        <div class="col-md-6">
+            <label  class="control-label col-md-3"></label>
+            <input id="ifPublish" name="ifPublish" type="checkbox" >
+            <@spring.message "coursesPage.action.publishAsNews"/>
+        </div>
+        <div id="ifCreateNewsBlock" class="col-md-6">
+            <label  class="control-label col-md-3"></label>
+            <input id="ifCreateNews" name="ifCreateNews" type="checkbox" >
+            <@spring.message "coursesPage.action.createNews"/>
+        </div>
     </div>
-</div>
 <#else>
     <input id="ifPublish" name="ifPublish" type="hidden" value="True">
 </#if>
+
 
 <hr>
 &nbsp;
@@ -53,7 +59,7 @@
         src="<@spring.url'/resources/js/pages/courseForm.js'/>"></script>
 <script>
     $(function () {
-
+        $("#ifCreateNewsBlock").hide();
         $("#endDate").datepicker({
             dateFormat: "dd.mm.yy", minDate: 0
         });
@@ -71,6 +77,9 @@
         $("#startDate").attr('readonly', 'readonly');
         $("#startDate").attr('style', 'background-color : #FFFACD');
         $("#endDate").attr('style', 'background-color : #FFFACD');
+        $('#ifPublish').click(function() {
+            $("#ifCreateNewsBlock")[this.checked ? "show" : "hide"]();
+        });
 
     });
 </script>
