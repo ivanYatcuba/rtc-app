@@ -10,10 +10,7 @@ import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
-import net.github.rtc.app.service.CourseService;
-import net.github.rtc.app.service.NewsService;
-import net.github.rtc.app.service.ReportService;
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.*;
 import net.github.rtc.app.utils.datatable.search.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,6 +46,8 @@ public class SearchController {
     private static final String STRING_REPORT_FILTER = "reportFilter";
     private static final String STRING_EXPERTS = "experts";
     private static final String MENU_ITEM = "menuItem";
+    private static final String STRING_ACTIVITY = "activity";
+    private static final String STRING_ACTIVITY_FILTER = "activityFilter";
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -69,6 +68,14 @@ public class SearchController {
     public ModelAndView searchPage(@RequestParam(value = MENU_ITEM, required = false) String menuItem) {
         final ModelAndView mav = new ModelAndView(ROOT + "/search/searchPage");
         mav.addObject(MENU_ITEM, menuItem);
+        return mav;
+    }
+
+    @RequestMapping(value = "/activityTable", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ModelAndView getActivityTable(@ModelAttribute(STRING_ACTIVITY_FILTER) final ActivitySearchFilter activityFilter) {
+        final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/activitySearchTable");
         return mav;
     }
 
@@ -117,6 +124,11 @@ public class SearchController {
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_REPORTS, results.getResults());
         return mav;
+    }
+
+    @ModelAttribute(STRING_ACTIVITY_FILTER)
+    public ActivitySearchFilter getActivitySearchFilter() {
+        return  new ActivitySearchFilter();
     }
 
     @ModelAttribute(STRING_NEWS_FILTER)

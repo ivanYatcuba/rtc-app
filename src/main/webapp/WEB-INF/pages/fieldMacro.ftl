@@ -139,7 +139,7 @@
 
 <#macro rtcFormTextInput label path class="" style="">
     <@rtcFieldWrapper label path>
-        <@spring.formInput path "class = \"form-control "+"${class}"+"\" "+"${style}" />
+        <@spring.formInput path "class = \"form-control "+"${class}"+"\" "+"${style}"/>
     </@rtcFieldWrapper>
 </#macro>
 
@@ -198,13 +198,13 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="">
+<#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="" onclick="">
         <@rtcFieldWrapper label path>
 
         <select multiple="multiple" size="3"
                 <#if status.expression??>id="${status.expression?replace('[','')?replace(']','')}"</#if>
                 name="${status.expression!""}"
-                class = "form-control ${class}"  style = "${style}">
+                class = "form-control ${class}"  style = "${style}" onclick="${onclick}">
             <#if options?is_hash>
                 <#list options?keys as value>
                     <#assign isSelected = contains(status.actualValue?default([""]), options[value])>

@@ -4,6 +4,10 @@
 <@layout.layout>
 <script src="<@spring.url'/resources/js/pages/searchPage.js'/>"></script>
 
+<div id="activityFilter" class="filterForm" style="width: 100%; float: left;">
+    <#include "filters/activitySearchFilter.ftl"/>
+</div>
+
 <div id="newsFilter" class="filterForm" style="width: 100%; float: left;">
 <#include "filters/newsSearchFilter.ftl"/>
 </div>
@@ -28,10 +32,10 @@
 <div id="searchTable"></div>
 
 <script type="text/javascript">
-    var menuMap = { "newsMenuItem": "#newsFilter", "courseMenuItem": "#courseFilter",
+    var menuMap = { "activityMenuItem": "#activityFilter", "newsMenuItem": "#newsFilter", "courseMenuItem": "#courseFilter",
                     "userMenuItem": "#userFilter", "reportMenuItem": "#reportFilter"}
-    var urlMap = {  "newsFilter": "newsTable", "courseFilter": "courseTable",
-                    "userFilter": "userTable", "reportFilter": "reportTable"}
+    var urlMap = {  "activityFilter": "activityTable", "newsFilter": "newsTable", "courseFilter": "courseTable",
+        "userFilter": "userTable", "reportFilter": "reportTable"}
 
     var settings = {
         "menuMap": menuMap,
@@ -70,7 +74,6 @@
                 obj.click();
         });
     });
-
 
 </script>
 </@layout.layout>
