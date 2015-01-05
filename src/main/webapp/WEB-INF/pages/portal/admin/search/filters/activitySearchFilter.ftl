@@ -32,7 +32,8 @@
             ++count;
             label = label + 'News, ';
         }
-        $('label[for=object]').html(label.substring(0, label.length-2)+':');
+        if (count == 0) $('label[for=object]').html('Some Entity:');
+        else $('label[for=object]').html(label.substring(0, label.length-2)+':');
     }
 </script>
 
