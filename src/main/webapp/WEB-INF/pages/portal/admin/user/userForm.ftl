@@ -30,7 +30,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <@formMacro.rtcFormTextInput  "user.email" "user.email" "required"  />
+        <@formMacro.rtcFormTextInput  "user.email" "user.email" "required" "maxlength='64'"/>
         <#if user.authorities??>
             <@formMacro.rtcFormSingleSelect "user.role" "user.authorities" roles "required" "" "user.role." "" "${user.authorities[0]}"/>
 
@@ -39,7 +39,7 @@
         </#if>
     </div>
     <div class="col-md-6">
-        <@formMacro.rtcFormPasswordInputWithCheckbox  "user.password" "user.password" "required"/>
+        <@formMacro.rtcFormPasswordInputWithCheckbox  "user.password" "user.password" "required" "maxlength='64'"/>
     </div>
 </div>
 <div class="row"><div class="col-md-10"><hr/></div></div>
