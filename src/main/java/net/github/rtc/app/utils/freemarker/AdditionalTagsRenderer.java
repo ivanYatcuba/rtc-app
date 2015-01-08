@@ -26,7 +26,7 @@ public class AdditionalTagsRenderer {
                     attrs = "maxlength=\"" + length.max() + "\"";
                 }
             } catch (NoSuchFieldException ex) {
-                System.out.println(ex);
+                ex.printStackTrace();
             }
 
         }
