@@ -43,6 +43,13 @@
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="viewClass"
                   value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="attributesMap">
+            <map>
+                <entry key="additionalTags">
+                    <bean class="net.github.rtc.app.utils.freemarker.AdditionalTagsRenderer"/>
+                </entry>
+            </map>
+        </property>
     </bean>
 
 

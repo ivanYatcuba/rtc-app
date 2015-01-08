@@ -139,7 +139,7 @@
 
 <#macro rtcFormTextInput label path class="" style="">
     <@rtcFieldWrapper label path>
-        <@spring.formInput path "class = \"form-control "+"${class}"+"\" "+"${style}"/>
+        <@spring.formInput path "class = \"form-control "+"${class}"+"\" "+"${style} " + "${additionalTags.renderAdditionalTags(status, springMacroRequestContext.getModel())}"/>
     </@rtcFieldWrapper>
 </#macro>
 

@@ -30,7 +30,7 @@ import java.util.Set;
 @Validatable
 public class User extends AbstractPersistenceObject implements UserDetails {
 
-    public static final int PRIMARY_LENGTH = 50;
+    public static final int PRIMARY_LENGTH = 50; //FUCKING FUCK!!!FUUU11!!11!
     public static final int SECONDARY_LENGTH = 30;
     public static final String STRING_SPACE = " ";
     public static final int LARGE_LENGTH = 255;
