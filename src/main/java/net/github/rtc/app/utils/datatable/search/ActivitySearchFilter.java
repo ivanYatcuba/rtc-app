@@ -13,7 +13,7 @@ import java.util.Date;
 public class ActivitySearchFilter extends AbstractSearchCommand {
 
     //private static final String STRING_PROCENT = "%";
-    private String object;
+    private String user;
     private String entity;
     private String action;
     private Date date;
@@ -35,8 +35,8 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
         return entity;
     }
 
-    public String getObject() {
-        return object;
+    public String getUser() {
+        return user;
     }
 
     public void setDateMoreLessEq(char dateMoreLessEq) {
@@ -55,8 +55,8 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
         this.entity = entity;
     }
 
-    public void setObject(final String object) {
-        this.object = object;
+    public void setUser(final String user) {
+        this.user = user;
     }
 
     @Override

@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
     var mainMenuMap = { "activity": "#activityMenuItem", "news": "#newsMenuItem", "course": "#courseMenuItem",
-        "user": "#userMenuItem", "report": "#reportMenuItem", "": "#newsMenuItem"}
+        "user": "#userMenuItem", "report": "#reportMenuItem", "": "#activityMenuItem"}
 
     $(document).ready(function() {
         $(mainMenuMap['${menuItem!""}']).addClass("active")

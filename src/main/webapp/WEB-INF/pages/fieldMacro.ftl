@@ -198,13 +198,13 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="" onclick="">
+<#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="">
         <@rtcFieldWrapper label path>
 
         <select multiple="multiple" size="3"
                 <#if status.expression??>id="${status.expression?replace('[','')?replace(']','')}"</#if>
                 name="${status.expression!""}"
-                class = "form-control ${class}"  style = "${style}" onclick="${onclick}">
+                class = "form-control ${class}"  style = "${style}">
             <#if options?is_hash>
                 <#list options?keys as value>
                     <#assign isSelected = contains(status.actualValue?default([""]), options[value])>
