@@ -198,7 +198,7 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="">
+<#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="" >
         <@rtcFieldWrapper label path>
 
         <select multiple="multiple" size="3"

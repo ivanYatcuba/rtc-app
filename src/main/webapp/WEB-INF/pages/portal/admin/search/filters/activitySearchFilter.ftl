@@ -3,7 +3,7 @@
 <div class="form-horizontal">
     <div class="row">
         <div class="col-md-6">
-            <@formMacro.rtcFormTextInput "activity.filter.user" "activityFilter.user"/>
+            <@formMacro.rtcFormTextInput "activity.filter.user" "activityFilter.user" />
             <@formMacro.rtcFormMultiSelect "activity.filter.entity" "activityFilter.entity", ["Course", "User", "News"], "" "height: 65;"/>
         </div>
         <div class="col-md-6">

@@ -61,10 +61,6 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
 
     @Override
     public DetachedCriteria getCriteria() {
-
-//        if (object != null && ("").equals(object)) {
-//        }
-
         return null;
     }
 }
