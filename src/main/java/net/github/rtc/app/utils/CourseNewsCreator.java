@@ -17,6 +17,9 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Responsible for creation news from course
+ */
 @Component
 public class CourseNewsCreator {
 
@@ -31,6 +34,12 @@ public class CourseNewsCreator {
     @Autowired
     private NewsService newsService;
 
+    /**
+     * Create news from course
+     * @param course course create from
+     * @param author user that will be displayed as author of the new news
+     * @return
+     */
     public News createNews(final Course course, User author) {
         final News news = new News();
         final Map<String, Object> templateMap = new HashMap<>();
@@ -43,6 +52,27 @@ public class CourseNewsCreator {
         return news;
     }
 
+    /**
+     * Build course description
+     * @param course for what course
+     * @return course description
+     */
+    private String getCourseDescription(final Course course) {
+        final Map<String, Object> templateMap = new HashMap<>();
+        templateMap.put("termInMonth", dateService.getMothPeriod(course.getStartDate(), course.getEndDate()));
+        final String templatePath = getCourseDescriptionTemplatePath(course);
+        if (templatePath.equals(DEV_COURSE_TEMPLATE)) {
+            templateMap.put("tags", course.getTags());
+        }
+        return getStringFromTemplate(templatePath, templateMap);
+    }
+
+    /**
+     * Get string from freemarker template
+     * @param templatePath path to a template
+     * @param templateMap template params map
+     * @return string that was build from the template
+     */
     private String getStringFromTemplate(final String templatePath, final Map<String, Object> templateMap) {
         final Configuration config = new Configuration();
         config.setClassForTemplateLoading(CourseNewsCreator.class, "/");
@@ -56,16 +86,13 @@ public class CourseNewsCreator {
         }
     }
 
-    private String getCourseDescription(final Course course) {
-        final Map<String, Object> templateMap = new HashMap<>();
-        templateMap.put("termInMonth", dateService.getMothPeriod(course.getStartDate(), course.getEndDate()));
-        final String templatePath = getCourseDescriptionTemplatePath(course);
-        if (templatePath.equals(DEV_COURSE_TEMPLATE)) {
-            templateMap.put("tags", course.getTags());
-        }
-        return getStringFromTemplate(templatePath, templateMap);
-    }
 
+
+    /**
+     * Get path for course description template
+     * @param course what course?
+     * @return  path to template
+     */
     private String getCourseDescriptionTemplatePath(final Course course) {
         if (course.getTypes().size() == 1) {
             final CourseType type = course.getTypes().iterator().next();

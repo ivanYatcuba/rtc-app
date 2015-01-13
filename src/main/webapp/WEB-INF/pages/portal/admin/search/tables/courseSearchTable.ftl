@@ -43,7 +43,7 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li id="publicationLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/publish/${course.code}"/>">Publish</a></li>
+                                <li id="publicationLi" role="presentation"><a role="menuitem" tabindex="-1"onclick="javascript:PopUpShow('${course.code}')">Publish</a></li>
                             <#--<li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/delete/${course.code}"/>">Remove</a></li>-->
                             </ul>
                         </div>
@@ -65,3 +65,46 @@
         <@datatables.addPagination/>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal" style="top: 15%; left: 1%" id="publishCourseModal" tabindex="-1" role="dialog" aria-labelledby="publishCourseModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancel</span></button>
+                <h4 class="modal-title" id="removeUserModalLabel">Publish Course</h4>
+            </div>
+            <div class="modal-body">
+                The course will be published and visible for all users.
+            </div>
+            <div class="modal-footer">
+                <form id="publishCourseForm" name="publishCourseForm" method="post">
+                    <input type="hidden" id="courseCode" name="courseCode"/>
+                    <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-default"  onClick="return ActionDeterminator(true);">Publish and Create news</button>
+                    <button type="submit" class="btn btn-primary" onClick="return ActionDeterminator(false);
+                    ">Publish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function PopUpShow(courseCode) {
+        $("#courseCode").val(courseCode);
+        $('#publishCourseModal').modal('show')
+    }
+    function PopUpHide() {
+        $('#publishCourseModal').modal('hide');
+    }
+    function ActionDeterminator(createNews) {
+        if(createNews) {
+            $("#publishCourseForm").attr("action", "<@spring.url"/admin/course/publish/"/>" + $("#courseCode").val()
+                    + "?ifCreateNews=true");
+        } else{
+            $("#publishCourseForm").attr("action", "<@spring.url"/admin/course/publish/"/>" + $("#courseCode").val());
+        }
+        return true;
+    }
+</script>

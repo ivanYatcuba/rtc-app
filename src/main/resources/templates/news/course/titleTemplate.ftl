@@ -1,1 +1,1 @@
-The course "${courseName}”
+The course "${courseName}"

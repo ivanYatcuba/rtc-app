@@ -4,8 +4,10 @@ import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
+import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.DateService;
+import net.github.rtc.app.utils.CourseNewsCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
@@ -28,6 +30,8 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     private CoursesDao coursesDao;
     @Autowired
     private DateService dateService;
+    @Autowired
+    private CourseNewsCreator courseNewsCreator;
 
     @Override
     public Class<Course> getType() {
@@ -63,6 +67,11 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
         final CourseSearchFilter courseSearchFilter = new CourseSearchFilter();
         courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
         return coursesDao.findAll(courseSearchFilter.getCriteria());
+    }
+
+    @Override
+    public void createNews(final Course course, final User author) {
+        courseNewsCreator.createNews(course, author);
     }
 
 }

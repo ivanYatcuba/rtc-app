@@ -3,6 +3,14 @@
 
 <@layout.layout>
 <h4><strong><@spring.message "course.details"/></strong></h4>
+<#if newsInfo == true>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Information</h3>
+        </div>
+        <div class="panel-body">News about this course was successfully created. Please publish it.</div>
+    </div>
+</#if>
 <div class="form-horizontal">
     <div class="row">
         <div class="col-md-6">

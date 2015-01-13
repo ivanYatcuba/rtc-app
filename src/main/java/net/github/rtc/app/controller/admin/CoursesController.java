@@ -8,7 +8,6 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.CourseService;
 import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.CourseNewsCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomExpertsEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
@@ -57,8 +56,6 @@ public class CoursesController implements MenuItem {
     private ValidationContext validationContext;
     @Autowired
     private DateService dateService;
-    @Autowired
-    private CourseNewsCreator courseNewsCreator;
 
     /**
      * Processes the request to delete by id
@@ -77,9 +74,14 @@ public class CoursesController implements MenuItem {
         return REDIRECT + STRING_ADMIN;
     }
 
-    @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
-    public String publish(@PathVariable final String courseCode) {
+    @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.POST)
+    public String publish(@PathVariable final String courseCode, @RequestParam(required = false) final boolean
+      ifCreateNews) {
+        final Course course = courseService.findByCode(courseCode);
         courseService.publish(courseService.findByCode(courseCode));
+        if (ifCreateNews) {
+            courseService.createNews(course, getCurrentUser());
+        }
         return REDIRECT + STRING_ADMIN;
     }
 
@@ -89,13 +91,16 @@ public class CoursesController implements MenuItem {
      * if success go to view "admin/courses/course")
      *
      * @param courseCode course code
+     * @param newsJustCreated true if course published and news just created
      * @return modelAndView("admin/courses/course")
      */
     @RequestMapping(value = VIEW + "{courseCode}", method = RequestMethod.GET)
-    public ModelAndView single(@PathVariable final String courseCode) {
+    public ModelAndView single(@PathVariable final String courseCode, @RequestParam(required = false) boolean
+      newsJustCreated) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         final Course course = courseService.findByCode(courseCode);
         mav.addObject(STRING_COURSE, course);
+        mav.addObject("newsInfo", newsJustCreated);
         return mav;
     }
 
@@ -126,7 +131,8 @@ public class CoursesController implements MenuItem {
         course.setPublishDate(dateService.getCurrentDate());
         courseService.create(course);
         if (ifCreateNews) {
-            courseNewsCreator.createNews(course, getCurrentUser());
+            courseService.createNews(course, getCurrentUser());
+            return REDIRECT1 + VIEW + course.getCode() + "?newsJustCreated=true";
         }
         return REDIRECT1 + VIEW + course.getCode();
     }

@@ -1,6 +1,7 @@
 package net.github.rtc.app.service;
 
 import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.user.User;
 
 import java.util.List;
 
@@ -16,5 +17,12 @@ public interface CourseService extends ModelService<Course>, GenericService<Cour
     List<Course> startingSoonCourses();
 
     List<Course> findAllPublished();
+
+    /**
+     *
+     * @param course create news about the course
+     * @param author user that will be displayed as author of the news
+     */
+    void createNews(Course course, User author);
 
 }
