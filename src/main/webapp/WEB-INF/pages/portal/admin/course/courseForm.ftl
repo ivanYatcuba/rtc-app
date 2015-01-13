@@ -30,7 +30,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <@formMacro.rtcFormTextarea "course.description" "course.description" "required" 'style="width:425%;" rows="3" maxlength="255"'/>
+        <@formMacro.rtcFormTextarea "course.description" "course.description" "required" 'style="width:425%;" rows="3" maxlength="255" onkeyup="descriptionKeyUp()"'/>
     </div>
 </div>
 
@@ -58,6 +58,16 @@
 <script type="text/javascript"
         src="<@spring.url'/resources/js/pages/courseForm.js'/>"></script>
 <script>
+    function descriptionKeyUp()
+    {
+        var textAreaValue = document.getElementById('description').value;
+        var textAreaLength = textAreaValue.length;
+        var textAreaEnterCount = textAreaValue.substr(0, textAreaValue.selectionStart).split("\n").length-1;
+        var textAreaCharCount = textAreaLength + textAreaEnterCount;
+        var textAreaExtra = textAreaCharCount - 255;
+        document.getElementById('description').value = textAreaValue.substr(0, textAreaLength - textAreaExtra);
+    }
+
     $(function () {
         $("#ifCreateNewsBlock").hide();
         $("#endDate").datepicker({

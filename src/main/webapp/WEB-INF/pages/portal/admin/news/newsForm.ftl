@@ -16,7 +16,7 @@
 </div>
 <div class="row">
     <div class="col-md-12" >
-        <@formMacro.rtcFormTextarea "news.description" "news.description" " required field col-md-9" "style='width:186%' rows='3' maxlength='255'"/>
+        <@formMacro.rtcFormTextarea "news.description" "news.description" " required field col-md-9" "style='width:186%' rows='3' maxlength='255' onkeyup='descriptionKeyUp()'"/>
     </div>
 </div>
     <div class="row" style="padding-left: 13em">
@@ -25,3 +25,15 @@
     </#if>
     </div>
 <hr/>
+
+<script>
+    function descriptionKeyUp()
+    {
+        var textAreaValue = document.getElementById('description').value;
+        var textAreaLength = textAreaValue.length;
+        var textAreaEnterCount = textAreaValue.substr(0, textAreaValue.selectionStart).split("\n").length-1;
+        var textAreaCharCount = textAreaLength + textAreaEnterCount;
+        var textAreaExtra = textAreaCharCount - 255;
+        document.getElementById('description').value = textAreaValue.substr(0, textAreaLength - textAreaExtra);
+    }
+</script>
