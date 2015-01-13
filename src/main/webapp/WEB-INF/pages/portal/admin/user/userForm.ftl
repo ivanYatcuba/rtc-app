@@ -80,6 +80,7 @@
     <div class="col-md-6">
         <@formMacro.rtcFormTextarea  "user.note" "user.note" "required" "rows='3'
         maxlength='255'
+        onkeyup='noteKeyUp()'
         style='width: 370%'"/>
     </div>
 </div>
@@ -100,6 +101,16 @@
         src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
 
 <script>
+    function noteKeyUp()
+    {
+        var textAreaValue = document.getElementById('note').value;
+        var textAreaLength = textAreaValue.length;
+        var textAreaEnterCount = textAreaValue.substr(0, textAreaValue.selectionStart).split("\n").length-1;
+        var textAreaCharCount = textAreaLength + textAreaEnterCount;
+        var textAreaExtra = textAreaCharCount - 255;
+        document.getElementById('note').value = textAreaValue.substr(0, textAreaLength - textAreaExtra);
+    }
+
     $(document).ready(function(){
         function limits(obj, limit){
             var text = $(obj).val();
