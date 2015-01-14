@@ -74,6 +74,20 @@
                 obj.click();
         });
     });
+    function ajaxSessionTimeout()
+    {
+        window.location.replace("<@spring.url'/login'/>");
+    }
+
+    !function( $ )
+    {
+        $.ajaxSetup({
+            statusCode:
+            {
+                901: ajaxSessionTimeout
+            }
+        });
+    }(window.jQuery);
 
 </script>
 </@layout.layout>

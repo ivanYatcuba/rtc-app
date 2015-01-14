@@ -19,8 +19,8 @@ function SearchPage(settings) {
             success: function (result) {
                $("#searchTable").html(result)
             }, error: function (xhr, status, error) {
-                alert(self.urlMap[activeFormId]);
-                alert("error");
+                //alert(self.urlMap[activeFormId]);
+                //alert("error");
 //                var err = eval("(" + xhr.responseText + ")");
 //                alert(err.Message);
             }
