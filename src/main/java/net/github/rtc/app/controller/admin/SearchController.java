@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
@@ -200,6 +201,11 @@ public class SearchController {
             categories.put(type.name(), type.toString());
         }
         return categories;
+    }
+
+    @ModelAttribute("activityEntities")
+    public List<String> getEntities() {
+        return ActivityEntity.findAll();
     }
 
     @ModelAttribute(STRING_EXPERTS)

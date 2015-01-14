@@ -16,19 +16,9 @@ import java.util.Set;
 public class Activity extends AbstractPersistenceObject implements java.io.Serializable {
 
     private String username;
-    @NotEmpty
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    @Fetch(FetchMode.SELECT)
-    @BatchSize(size = 1)
-    private Set<ActivityEntity> entity;
+    private ActivityEntity entity;
     private String detail;
-    @NotEmpty
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    @Fetch(FetchMode.SELECT)
-    @BatchSize(size = 1)
-    private Set<ActivityAction> action;
+    private ActivityAction action;
     private Date actionDate;
 
     public Activity() {
@@ -42,14 +32,6 @@ public class Activity extends AbstractPersistenceObject implements java.io.Seria
         this.username = username;
     }
 
-    public Set<ActivityEntity> getEntity() {
-        return entity;
-    }
-
-    public void setEntity(Set<ActivityEntity> entity) {
-        this.entity = entity;
-    }
-
     public String getDetail() {
         return detail;
     }
@@ -58,19 +40,27 @@ public class Activity extends AbstractPersistenceObject implements java.io.Seria
         this.detail = detail;
     }
 
-    public Set<ActivityAction> getAction() {
-        return action;
-    }
-
-    public void setAction(Set<ActivityAction> action) {
-        this.action = action;
-    }
-
     public Date getActionDate() {
         return actionDate;
     }
 
     public void setActionDate(Date actionDate) {
         this.actionDate = actionDate;
+    }
+
+    public ActivityEntity getEntity() {
+        return entity;
+    }
+
+    public void setEntity(ActivityEntity entity) {
+        this.entity = entity;
+    }
+
+    public ActivityAction getAction() {
+        return action;
+    }
+
+    public void setAction(ActivityAction action) {
+        this.action = action;
     }
 }

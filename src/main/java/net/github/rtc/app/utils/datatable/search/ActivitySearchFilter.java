@@ -5,10 +5,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-/**
- * Created by Илья on 29.12.2014.
- */
-
 @Component
 public class ActivitySearchFilter extends AbstractSearchCommand {
 
