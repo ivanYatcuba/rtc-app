@@ -61,9 +61,6 @@ public class CourseNewsCreator {
         final Map<String, Object> templateMap = new HashMap<>();
         templateMap.put("termInMonth", dateService.getMothPeriod(course.getStartDate(), course.getEndDate()));
         final String templatePath = getCourseDescriptionTemplatePath(course);
-        if (templatePath.equals(DEV_COURSE_TEMPLATE)) {
-            templateMap.put("tags", course.getTags());
-        }
         return getStringFromTemplate(templatePath, templateMap);
     }
 
