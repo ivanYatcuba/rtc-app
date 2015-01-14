@@ -62,7 +62,7 @@
         </a>
     </div>
     <div class="col-md-6" style="text-align: right">
-        <@datatables.addPagination/>
+        <@datatables.addPaginationNew/>
     </div>
 </div>
 

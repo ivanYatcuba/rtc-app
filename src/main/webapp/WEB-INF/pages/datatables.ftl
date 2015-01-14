@@ -71,3 +71,32 @@
     </#if>
 </div>
 </#macro>
+
+
+<#macro addPaginationNew>
+<div class="pagination" id="navigation">
+    <div class="row">
+        <ul class="pagination" style="margin: 0px">
+            <#if currentPage == 1>
+                <li class="disabled"><a href="#">&lt;&lt;</a></li>
+                <li class="disabled"><a href="#">&lt;</a></li>
+            <#else>
+                <li><a href="#" class="navButton" page="1">&lt;&lt;</a></li>
+                <li><a  href="#" class="navButton" page="${currentPage-1}">&lt;</a></li>
+            </#if>
+
+            <#list beginIndex..endIndex as i>
+                <#if i == currentPage><li class="active"><#else><li></#if>
+                <a href="#" class="navButton" page="${i}">${i}</a></li>
+            </#list>
+
+            <#if currentPage == lastPage>
+                <li class="disabled"><a href="#">&gt;</a></li>
+                <li class="disabled"><a href="#">&gt;&gt;</a></li>
+            <#else>
+                <li><a <a href="#" class="navButton" page="${currentPage+1}">&gt;</a></li>
+                <li><a <a href="#" class="navButton" page="${lastPage}">&gt;&gt;</a></li>
+            </#if>
+        </ul>
+    </div>
+</#macro>
