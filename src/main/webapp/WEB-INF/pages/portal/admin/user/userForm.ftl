@@ -80,7 +80,7 @@
     <div class="col-md-6">
         <@formMacro.rtcFormTextarea  "user.note" "user.note" "required" "rows='3'
         maxlength='255'
-        style='width: 370%'"/>
+        style='width: 376%'"/>
     </div>
 </div>
 
@@ -100,6 +100,8 @@
         src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
 
 <script>
+    $('label[for="programmingLanguages"]').css({"padding": "0px", "padding-right": "15px"});
+
     $('#note').bind('input propertychange', function() {
         var text = document.getElementById('note').value;
         var length = text.length;

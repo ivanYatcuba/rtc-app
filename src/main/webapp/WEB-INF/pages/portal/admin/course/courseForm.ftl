@@ -86,8 +86,8 @@
         $("#startDate").attr('style', 'background-color : #FFFACD');
         $("#endDate").attr('style', 'background-color : #FFFACD');
         $('#ifPublish').click(function() {
+            if (!this.checked) $("#ifCreateNews").attr('checked', false);
             $("#ifCreateNewsBlock")[this.checked ? "show" : "hide"]();
         });
-
     });
 </script>
