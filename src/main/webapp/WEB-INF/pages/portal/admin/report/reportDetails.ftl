@@ -24,7 +24,7 @@
     </div>
     <div class="col-md-6">
         <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "report.lable.exportFormate" "${report.exportFormat}"/>
+            <@formMacro.rtcFormLabelOut "report.lable.exportFormat" "${report.exportFormat}"/>
         </div>
     </div>
 </div>

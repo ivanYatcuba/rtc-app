@@ -3,7 +3,7 @@
         <@formMacro.rtcFormTextInput "report.lable.name" "report.name" "required" ""/>
     </div>
     <div class="col-md-6" >
-        <@formMacro.rtcFormSingleSelect "report.lable.exportFormate" "report.exportFormat" formats "required" "" "report.exportFormat." ""/>
+        <@formMacro.rtcFormSingleSelect "report.lable.exportFormat" "report.exportFormat" formats "required" "" "report.exportFormat." ""/>
     </div>
 </div>
 <div class="row">

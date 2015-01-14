@@ -19,4 +19,16 @@ public class CustomClassEditor extends PropertyEditorSupport {
         }
 
     }
+
+    @Override
+    public String getAsText() {
+        if (this.getValue() == User.class) {
+            return "User";
+        }
+        if (this.getValue() == Course.class) {
+            return "Course";
+        } else {
+           return super.getAsText();
+        }
+    }
 }
