@@ -1,9 +1,11 @@
 package net.github.rtc.app.model.user;
 
 import net.github.rtc.app.model.AbstractPersistenceObject;
+import net.github.rtc.app.model.activity.IActivity;
+import net.github.rtc.app.model.entityListeners.ActivityListener;
 import net.github.rtc.util.annotation.ForExport;
-import net.github.rtc.util.annotation.validation.*;
 import net.github.rtc.util.annotation.validation.Number;
+import net.github.rtc.util.annotation.validation.Validatable;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Email;
@@ -27,8 +29,9 @@ import java.util.Set;
   parameters = { @Parameter(name = "encryptorRegisteredName", value = "strongHibernateStringEncryptor") })
 
 @Entity
+@EntityListeners(ActivityListener.class)
 @Validatable
-public class User extends AbstractPersistenceObject implements UserDetails {
+public class User extends AbstractPersistenceObject implements UserDetails, IActivity {
 
     public static final int PRIMARY_LENGTH = 50; //FUCKING FUCK!!!FUUU11!!11!
     public static final int SECONDARY_LENGTH = 30;
@@ -379,4 +382,12 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     public String toString() {
         return new StringBuilder(this.name).append(STRING_SPACE).append(this.surname).toString();
     }
+
+    @Override
+    public String getLogDetail() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("User ").append("id:" + getId()).append(" name:" + getName());
+        return builder.toString();
+    }
 }
+

@@ -3,7 +3,7 @@
 
     <appender name="FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/var/log/rtc-app/rtc.log</file>
+        <file>/rtc.log</file>
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <fileNamePattern>logs/rtc.%i.log.gz</fileNamePattern>

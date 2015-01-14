@@ -1,10 +1,12 @@
 package net.github.rtc.app.model.course;
 
 import net.github.rtc.app.model.AbstractPersistenceObject;
+import net.github.rtc.app.model.activity.IActivity;
+import net.github.rtc.app.model.entityListeners.ActivityListener;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.annotation.ForExport;
-import net.github.rtc.util.annotation.validation.*;
 import net.github.rtc.util.annotation.validation.Number;
+import net.github.rtc.util.annotation.validation.Validatable;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -23,8 +25,9 @@ import java.util.Set;
  * @author Vladislav Pikus
  */
 @Entity
+@EntityListeners(ActivityListener.class)
 @Validatable
-public class Course extends AbstractPersistenceObject implements Serializable {
+public class Course extends AbstractPersistenceObject implements Serializable, IActivity {
 
     private static final int HASH_CODE_CONSTANT = 31;
     private static final int DESCRIPTION_LENGTH = 255;
@@ -253,5 +256,12 @@ public class Course extends AbstractPersistenceObject implements Serializable {
         result = HASH_CODE_CONSTANT * result + (publishDate != null ? publishDate.hashCode() : 0);
         result = HASH_CODE_CONSTANT * result + (capacity != null ? capacity.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String getLogDetail() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Course ").append("id:" + getId()).append(" name:" + getName());
+        return builder.toString();
     }
 }
