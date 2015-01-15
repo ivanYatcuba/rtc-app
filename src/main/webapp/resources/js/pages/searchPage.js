@@ -56,3 +56,14 @@ function SearchPage(settings) {
 
 
 }
+
+var menuMap = { "activityMenuItem": "#activityFilter", "newsMenuItem": "#newsFilter", "courseMenuItem": "#courseFilter",
+    "userMenuItem": "#userFilter", "reportMenuItem": "#reportFilter"}
+var urlMap = {  "activityFilter": "activityTable", "newsFilter": "newsTable", "courseFilter": "courseTable",
+    "userFilter": "userTable", "reportFilter": "reportTable"}
+
+var settings = {
+    "menuMap": menuMap,
+    "urlMap": urlMap
+};
+var searchPage = new SearchPage(settings);

@@ -81,8 +81,8 @@
                 <form id="publishCourseForm" name="publishCourseForm" method="post">
                     <input type="hidden" id="courseCode" name="courseCode"/>
                     <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-default"  onClick="return ActionDeterminator(true);">Publish and Create news</button>
-                    <button type="submit" class="btn btn-primary" onClick="return ActionDeterminator(false);
+                    <button type="button" class="btn btn-default"  onClick="return ActionDeterminator(true);">Publish and Create news</button>
+                    <button type="button" class="btn btn-primary" onClick="return ActionDeterminator(false);
                     ">Publish</button>
                 </form>
             </div>
@@ -99,12 +99,14 @@
         $('#publishCourseModal').modal('hide');
     }
     function ActionDeterminator(createNews) {
-        if(createNews) {
-            $("#publishCourseForm").attr("action", "<@spring.url"/admin/course/publish/"/>" + $("#courseCode").val()
-                    + "?ifCreateNews=true");
-        } else{
-            $("#publishCourseForm").attr("action", "<@spring.url"/admin/course/publish/"/>" + $("#courseCode").val());
-        }
+        $.ajax({
+            type: "POST",
+            url: "<@spring.url"/admin/course/publish/"/>" + $("#courseCode").val() + "?ifCreateNews="+createNews,
+            success: function () {
+                searchPage.doSearch(${currentPage});
+            }
+        });
+        PopUpHide();
         return true;
     }
 </script>
