@@ -6,6 +6,7 @@ import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.course.Tag;
+import net.github.rtc.app.model.user.Role;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
@@ -20,6 +21,7 @@ import java.util.Set;
 public class ActivitySearchFilter extends AbstractSearchCommand {
 
     private static final String STRING_DATE = "actionDate";
+    public static final String STRING_ENTITY = "entity";
     private String user;
     private Set<ActivityEntity> entity;
     private Set<ActivityAction> action;
@@ -89,23 +91,19 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
             }
         }
         if (entity != null && entity.size() > 0) {
-            final Conjunction entityCon = Restrictions.conjunction();
+            final Disjunction entityDis = Restrictions.disjunction();
             for (final ActivityEntity en : entity) {
-                entityCon.add(Restrictions.sqlRestriction(
-                        "exists (select t.id from Activity t where t.id = {alias}.id and t.entity = ?)",
-                        en.name(), new StringType()));
+                entityDis.add(Restrictions.eq("entity", en));
             }
-            criteria.add(entityCon);
+            criteria.add(entityDis);
         }
 
         if (action != null && action.size() > 0) {
-            final Conjunction actionCon = Restrictions.conjunction();
+            final Disjunction actionDis = Restrictions.disjunction();
             for (final ActivityAction ac : action) {
-                actionCon.add(Restrictions.sqlRestriction(
-                        "exists (select t.id from Activity t where t.id = {alias}.id and t.action = ?)",
-                        ac.name(), new StringType()));
+                actionDis.add(Restrictions.eq("action", ac));
             }
-            criteria.add(actionCon);
+            criteria.add(actionDis);
         }
         return criteria;
     }
