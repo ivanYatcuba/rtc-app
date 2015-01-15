@@ -16,9 +16,12 @@ import java.util.Set;
 public class Activity extends AbstractPersistenceObject implements java.io.Serializable {
 
     private String username;
+    @Enumerated(EnumType.STRING)
     private ActivityEntity entity;
     private String detail;
+    @Enumerated(EnumType.STRING)
     private ActivityAction action;
+    @Temporal(TemporalType.DATE)
     private Date actionDate;
 
     public Activity() {

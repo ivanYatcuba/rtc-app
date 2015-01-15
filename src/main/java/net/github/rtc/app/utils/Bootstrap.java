@@ -62,8 +62,8 @@ public class Bootstrap implements InitializingBean {
 
     public void loadTestActivities() {
         if (activityService.findAll().size() == 0) {
-            Date date1 = new Date(2014, 8, 23);
-            Date date2 = new Date(2015, 1, 3);
+            Date date1 = new Date(114, 8, 23);
+            Date date2 = new Date(115, 1, 3);
             Date date3 = new Date();
             Activity activity1 = new Activity();
             activity1.setAction(ActivityAction.SAVED);

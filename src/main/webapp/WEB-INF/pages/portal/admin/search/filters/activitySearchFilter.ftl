@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-md-6">
             <@formMacro.rtcFormTextInput "activity.filter.user" "activityFilter.user" />
-            <@formMacro.rtcFormMultiSelect "activity.filter.entity" "activityFilter.entity", ["Course", "User", "News"], "" "height: 65;"/>
+            <@formMacro.rtcFormMultiSelect "activity.filter.entity" "activityFilter.entity", activityEntities, "" "height: 65;"/>
         </div>
         <div class="col-md-6">
             <@formMacro.formDateSearch  "activityFilter.dateMoreLessEq" "activityFilter.date"/>
-            <@formMacro.rtcFormMultiSelect "activity.filter.action" "activityFilter.action", ["Saved", "Updated", "Removed"], "" "height: 65;"/>
+            <@formMacro.rtcFormMultiSelect "activity.filter.action" "activityFilter.action", activityActions, "" "height: 65;"/>
         </div>
     </div>
     <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
