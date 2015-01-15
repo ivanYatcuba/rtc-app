@@ -42,8 +42,12 @@
                     $("#expertCode").attr("value",expertId);
                 });
                 $("#expertAutoSelectInput").on("keyup", function(){
-                    if(!mapExpertDataId.hasOwnProperty($("#expertCode").value)){
-                        $("#expertCode").attr("value",null);
+                    var selectedValue = $(this).val();
+                    if(mapExpertDataId.hasOwnProperty(selectedValue)){
+                        var expertCode = mapExpertDataId[selectedValue];
+                        $("#authorId").attr("value",expertCode);
+                    }else{
+                        $("#authorId").attr("value", null);
                     }
                 });
             }

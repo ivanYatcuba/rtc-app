@@ -49,8 +49,12 @@
                     $("#authorId").attr("value",authorId);
                 })
                 $("#autoSelectInput").on("keyup", function(){
-                    if(!mapAdminDataId.hasOwnProperty($("#expertCode").value)){
-                        $("#authorId").attr("value",null);
+                    var selectedValue = $(this).val();
+                    if(mapAdminDataId.hasOwnProperty(selectedValue)){
+                        var authorId = mapAdminDataId[selectedValue];
+                        $("#authorId").attr("value",authorId);
+                    }else{
+                        $("#authorId").attr("value", null);
                     }
                 })
             }
