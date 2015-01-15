@@ -21,6 +21,9 @@ public class SearchResults<T> {
         final int end = Math.min(begin + COUNT_OF_PAGES, countPages);
         if (begin + COUNT_OF_PAGES > countPages) {
             begin = begin - (begin + COUNT_OF_PAGES - countPages);
+            if (begin < 1) {
+                begin = 1;
+            }
         }
         map.put("currentPage", page);
         map.put("lastPage", countPages);
