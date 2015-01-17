@@ -1,7 +1,6 @@
 package net.github.rtc.app.export.table;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +28,8 @@ public class CSVTable implements ReportTable {
 
     @Override
     public void writeToFile(final String fileName) throws IOException {
-        final FileWriter writer = new FileWriter(fileName);
+        final File file = new File(fileName);
+        final Writer writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
         for (final List<String> row : table) {
             for (final String cell : row) {
                 writer.append(cell).append(',');

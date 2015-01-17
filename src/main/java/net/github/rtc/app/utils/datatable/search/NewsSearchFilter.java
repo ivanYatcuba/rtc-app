@@ -45,7 +45,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
             }
         }
 
-        if (status != null && !"".equals(status)) {
+        if (status != null) {
             criteria.add(Restrictions.eq("status", status));
         }
 

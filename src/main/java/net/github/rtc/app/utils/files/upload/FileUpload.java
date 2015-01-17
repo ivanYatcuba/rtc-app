@@ -44,12 +44,10 @@ public class FileUpload implements java.io.Serializable {
         }
     }
 
-    public void deletePhoto(String code) throws Exception {
+    public boolean deletePhoto(String code) throws Exception {
         final String adr =  code + EXTENTION;
 
         final File file = new File(imgfold + adr);
-        if (file.exists()) {
-            file.delete();
-        }
+        return file.exists() && file.delete();
     }
 }

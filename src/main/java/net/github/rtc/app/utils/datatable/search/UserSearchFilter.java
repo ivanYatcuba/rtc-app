@@ -105,15 +105,12 @@ public class UserSearchFilter extends AbstractSearchCommand {
         }
 
         if (authorities != null && authorities.size() > 0) {
-            if (!"".equals(authorities.get(0).getName())) {
                 criteria.createAlias(STRING_AUTHORITIES, STRING_AUTHORITIES);
                 final Disjunction authoritiesDis = Restrictions.disjunction(); //change back to disjunction
                 for (final Role role : authorities) {
                         authoritiesDis.add(Restrictions.eq("authorities.name", role.getName()));
-//                    authoritiesDis.add(Restrictions.sqlRestriction("select * from User u where u.id in (select USER_ID from User_Role t where t.id = (select id from Role r where r.name = \""+role.getAuthority()+"\"))"));
                 }
                 criteria.add(authoritiesDis);
-            }
         }
 
         return criteria;

@@ -20,7 +20,7 @@ public class Role extends AbstractPersistenceObject implements GrantedAuthority 
 
     public Role(final String strName) {
        for (RoleType role : RoleType.values()) {
-           if (role.getRoleViewName().equals(strName) | role.name().equals(strName)) {
+           if (role.getRoleViewName().equals(strName) || role.name().equals(strName)) {
                this.name = role;
                break;
            }
