@@ -107,11 +107,11 @@ public class UserController implements MenuItem {
     @RequestMapping(value = "/getAdmins", method = RequestMethod.POST)
     public
     @ResponseBody
-    Map<String, Long> getAdminMapDataId() {
-        final Map<String, Long> results = new HashMap<>();
+    Map<String, String> getAdminMapDataId() {
+        final Map<String, String> results = new HashMap<>();
         final List<User> admins = userService.getUserByRole(RoleType.ROLE_ADMIN);
         for (final User admin : admins) {
-            results.put(admin.shortString(), admin.getId());
+            results.put(admin.shortString(), admin.getCode());
         }
         return results;
     }

@@ -16,7 +16,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     private String title;
 
-    private Long authorId;
+    private String authorCode;
 
     private NewsStatus status;
 
@@ -52,9 +52,9 @@ public class NewsSearchFilter extends AbstractSearchCommand {
             criteria.add(Restrictions.eq("status", status));
         }
 
-        if (authorId != null) {
+        if (authorCode != null && !("").equals(authorCode)) {
             criteria.createAlias(STRING_AUTHOR, STRING_AUTHOR);
-            criteria.add(Restrictions.eq("author.id", authorId));
+            criteria.add(Restrictions.eq("author.code", authorCode));
         }
         return criteria;
     }
@@ -78,12 +78,12 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         this.title = title;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public String getAuthorCode() {
+        return authorCode;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setAuthorCode(final String authorCode) {
+        this.authorCode = authorCode;
     }
 
     public NewsStatus getStatus() {

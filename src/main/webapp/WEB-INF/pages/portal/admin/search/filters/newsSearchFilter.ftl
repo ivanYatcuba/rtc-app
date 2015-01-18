@@ -19,7 +19,7 @@
                     <input type="text" class="form-control" id="autoSelectInput"/>
                 </div>
             </div>
-        <@spring.formHiddenInput "newsFilter.authorId" />
+        <@spring.formHiddenInput "newsFilter.authorCode" />
         </div>
 
         <div class="col-md-6">
@@ -46,15 +46,19 @@
                 $("#autoSelectInput").on("autocompleteselect", function(event,ui){
                     var selectedValue = (ui.item.label);
                     var authorId = mapAdminDataId[selectedValue];
-                    $("#authorId").attr("value",authorId);
+                    $("#authorCode").attr("value",authorId);
                 })
                 $("#autoSelectInput").on("keyup", function(){
                     var selectedValue = $(this).val();
                     if(mapAdminDataId.hasOwnProperty(selectedValue)){
                         var authorId = mapAdminDataId[selectedValue];
-                        $("#authorId").attr("value",authorId);
+                        $("#authorCode").attr("value",authorId);
                     }else{
-                        $("#authorId").attr("value", null);
+                        if($("#autoSelectInput").val().length > 0){
+                            $("#authorCode").attr("value", "undefined");
+                        } else {
+                            $("#authorCode").attr("value", null);
+                        }
                     }
                 })
             }

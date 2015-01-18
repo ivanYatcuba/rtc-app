@@ -45,9 +45,13 @@
                     var selectedValue = $(this).val();
                     if(mapExpertDataId.hasOwnProperty(selectedValue)){
                         var expertCode = mapExpertDataId[selectedValue];
-                        $("#authorId").attr("value",expertCode);
+                        $("#expertCode").attr("value",expertCode);
                     }else{
-                        $("#authorId").attr("value", null);
+                        if($("#expertAutoSelectInput").val().length > 0){
+                            $("#expertCode").attr("value", "undefined");
+                        } else {
+                            $("#expertCode").attr("value", null);
+                        }
                     }
                 });
             }
