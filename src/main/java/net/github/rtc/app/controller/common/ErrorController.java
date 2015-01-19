@@ -37,6 +37,15 @@ public class ErrorController {
         return mnv;
     }
 
+    @RequestMapping("error403")
+    public ModelAndView redirectToErrorPage403(final HttpServletRequest request) {
+        final ModelAndView mnv = new ModelAndView(ERROR_PAGE);
+        mnv.addObject(ERROR_TTL, "403 Error: Access is denied");
+        mnv.addObject(ERROR_MSG, "You don't have permission to view this directory or page using the credentials that you supplied.");
+        mnv.addObject(ERROR_CAS, getFullMessage(request));
+        return mnv;
+    }
+
     private String getFullMessage(final HttpServletRequest request) {
         final Integer statusCode = (Integer) request.getAttribute(
                 STRING_JAVAX + STRING_DOT_SERVLET + ".error.status_code");
