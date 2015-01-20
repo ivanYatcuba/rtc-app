@@ -2,7 +2,6 @@ package net.github.rtc.app.model.user;
 
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.activity.IActivity;
-import net.github.rtc.app.model.entityListeners.ActivityListener;
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.Number;
 import net.github.rtc.util.annotation.validation.Validatable;
@@ -29,7 +28,6 @@ import java.util.Set;
   parameters = { @Parameter(name = "encryptorRegisteredName", value = "strongHibernateStringEncryptor") })
 
 @Entity
-@EntityListeners(ActivityListener.class)
 @Validatable
 public class User extends AbstractPersistenceObject implements UserDetails, IActivity {
 

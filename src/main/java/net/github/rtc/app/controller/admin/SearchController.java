@@ -87,9 +87,6 @@ public class SearchController {
         final SearchResults<Activity> results = activityService.search(activityFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_ACTIVITIES, results.getResults());
-//        mav.addObject(STRING_ACTIVITY_ENTITIES, ActivityEntity.findAll());
-//        mav.addObject(STRING_ACTIVITY_ACTIONS, ActivityAction.findAll());
-//        mav.addObject(STRING_ACTIVITY_FILTER, activityFilter);
         return mav;
     }
 

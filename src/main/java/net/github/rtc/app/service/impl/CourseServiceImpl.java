@@ -2,6 +2,9 @@ package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.dao.GenericDao;
+import net.github.rtc.app.model.activity.events.DeleteEntityEvent;
+import net.github.rtc.app.model.activity.events.NewEntityEvent;
+import net.github.rtc.app.model.activity.events.UpdateEntityEvent;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.User;
@@ -13,6 +16,8 @@ import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -21,7 +26,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implements CourseService {
+public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implements CourseService, ApplicationEventPublisherAware {
 
     private static final String COURSE_CANNOT_BE_NULL = "course cannot be null";
     private static final int STARTING_SOON_COURSE_COUNT = 3;
@@ -33,6 +38,8 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     @Autowired
     private CourseNewsCreator courseNewsCreator;
 
+    private ApplicationEventPublisher publisher;
+
     @Override
     public Class<Course> getType() {
         return Course.class;
@@ -41,6 +48,28 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     @Override
     protected GenericDao<Course> getDao() {
         return coursesDao;
+    }
+
+    @Override
+    public Course create(Course course) {
+        NewEntityEvent entityEvent = new NewEntityEvent(this, course.getLogDetail());
+        publisher.publishEvent(entityEvent);
+        return super.create(course);
+    }
+
+    @Override
+    public Course update(Course course) {
+        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, course.getLogDetail());
+        publisher.publishEvent(entityEvent);
+        return super.update(course);
+    }
+
+    @Override
+    public void deleteByCode(String code) {
+        Course course = findByCode(code);
+        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, course.getLogDetail());
+        publisher.publishEvent(entityEvent);
+        super.deleteByCode(code);
     }
 
     @Override
@@ -74,4 +103,8 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
         courseNewsCreator.createNews(course, author);
     }
 
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.publisher = applicationEventPublisher;
+    }
 }

@@ -4,7 +4,6 @@ package net.github.rtc.app.model.news;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.activity.IActivity;
 import net.github.rtc.app.model.course.Tag;
-import net.github.rtc.app.model.entityListeners.ActivityListener;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.Validatable;
@@ -18,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@EntityListeners(ActivityListener.class)
 @Validatable
 public class News extends AbstractPersistenceObject implements Serializable,IActivity {
 

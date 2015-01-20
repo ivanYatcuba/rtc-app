@@ -2,7 +2,6 @@ package net.github.rtc.app.model.course;
 
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.activity.IActivity;
-import net.github.rtc.app.model.entityListeners.ActivityListener;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.Number;
@@ -25,7 +24,6 @@ import java.util.Set;
  * @author Vladislav Pikus
  */
 @Entity
-@EntityListeners(ActivityListener.class)
 @Validatable
 public class Course extends AbstractPersistenceObject implements Serializable, IActivity {
 

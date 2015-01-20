@@ -2,6 +2,9 @@ package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.UserDao;
+import net.github.rtc.app.model.activity.events.DeleteEntityEvent;
+import net.github.rtc.app.model.activity.events.NewEntityEvent;
+import net.github.rtc.app.model.activity.events.UpdateEntityEvent;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
@@ -12,13 +15,16 @@ import net.github.rtc.app.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements UserService {
+public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements UserService, ApplicationEventPublisherAware {
 
     private static final int USER_REMOVAL_DELAY = 3;
     private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class.getName());
@@ -29,6 +35,8 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     @Autowired
     private EncoderService encoderService;
 
+    private ApplicationEventPublisher publisher;
+
     @Override
     protected GenericDao<User> getDao() {
         return userDao;
@@ -38,13 +46,25 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     public User create(final User user) {
         user.setPassword(encoderService.encode(user.getPassword()));
         user.setRegisterDate(dateService.getCurrentDate());
+        NewEntityEvent entityEvent = new NewEntityEvent(this, user.getLogDetail());
+        publisher.publishEvent(entityEvent);
         return super.create(user);
     }
 
     @Override
     public User update(final User user) {
+        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, user.getLogDetail());
+        publisher.publishEvent(entityEvent);
         user.setPassword(encoderService.encode(user.getPassword()));
         return super.update(user);
+    }
+
+    @Override
+    public void deleteByCode(String code) {
+        User user = super.findByCode(code);
+        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, user.getLogDetail());
+        publisher.publishEvent(entityEvent);
+        super.deleteByCode(code);
     }
 
     @Override
@@ -117,5 +137,10 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     @Transactional
     public void deleteUsersMarkedForRemoval() {
         userDao.deletingUser();
+    }
+
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.publisher = applicationEventPublisher;
     }
 }
