@@ -11,7 +11,7 @@
             <th><@spring.message "activity.table.time"/></th>
         </tr>
         </thead>
-    <#if activities??>
+    <#if activities?has_content>
         <#list activities as activity>
             <tr style="vertical-align: middle">
                 <td style="vertical-align: middle; width: 25%">
@@ -28,6 +28,10 @@
                 </td>
             </tr>
         </#list>
+    <#else>
+        <td>
+            There are no activity.
+        </td>
     </#if>
     </table>
 </div>
