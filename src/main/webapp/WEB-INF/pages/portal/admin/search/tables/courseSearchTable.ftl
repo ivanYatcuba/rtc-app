@@ -52,7 +52,9 @@
             </tr>
         </#list>
     <#else>
-        <td>There are no courses. <a href="/admin/course/create">Click here</a> to add.</td>
+        <td>
+            There are no courses. <a  href="<@spring.url "/admin/course/create"/>">Click here</a> to add.
+        </td>
     </#if>
     </table>
 </div>
