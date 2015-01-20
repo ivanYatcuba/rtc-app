@@ -12,7 +12,7 @@
             <th></th>
         </tr>
         </thead>
-    <#if courses??>
+    <#if courses?has_content>
         <#list courses as course>
             <tr style="vertical-align: middle">
                 <td style="vertical-align: middle; width: 25%">
@@ -27,7 +27,7 @@
                 </td>
                 <td style="vertical-align: middle; width: 25%">${course.startDate?string('dd-MMM-yyyy')}&nbsp;-&nbsp;${course.endDate?string('dd-MMM-yyyy')}</td>
                 <td style="vertical-align: middle; width: 15%">
-                    <#if "${course.status}" == "DRAFT"> <@formMacro.rtcColorLabel "${course.status}" "label-warning" "course.status."/></#if>
+                        <#if "${course.status}" == "DRAFT"> <@formMacro.rtcColorLabel "${course.status}" "label-warning" "course.status."/></#if>
                         <#if "${course.status}" == "PUBLISHED"><@formMacro.rtcColorLabel "${course.status}" "label-success" "course.status."/> </#if>
                         <#if "${course.status}" == "ARCHIVED"> <@formMacro.rtcColorLabel "${course.status}" "label-default" "course.status."/> </#if>
                 </td>
@@ -51,6 +51,8 @@
                 </td>
             </tr>
         </#list>
+    <#else>
+        <td>There are no courses. <a href="/admin/course/create">Click here</a> to add.</td>
     </#if>
     </table>
 </div>
