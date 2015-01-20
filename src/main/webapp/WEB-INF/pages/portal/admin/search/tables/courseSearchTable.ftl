@@ -12,7 +12,7 @@
             <th></th>
         </tr>
         </thead>
-    <#if courses?has_content>
+<#if courses?has_content>
         <#list courses as course>
             <tr style="vertical-align: middle">
                 <td style="vertical-align: middle; width: 25%">
@@ -51,11 +51,6 @@
                 </td>
             </tr>
         </#list>
-    <#else>
-        <td>
-            There are no courses. <a  href="<@spring.url "/admin/course/create"/>">Click here</a> to add.
-        </td>
-    </#if>
     </table>
 </div>
 <hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
@@ -69,6 +64,11 @@
         <@datatables.addPagination/>
     </div>
 </div>
+<#else>
+    <td>
+        There are no courses. <a  href="<@spring.url "/admin/course/create"/>">Click here</a> to add.
+    </td>
+</#if>
 
 <!-- Modal -->
 <div class="modal" style="top: 15%; left: 1%" id="publishCourseModal" tabindex="-1" role="dialog" aria-labelledby="publishCourseModal" aria-hidden="true">
