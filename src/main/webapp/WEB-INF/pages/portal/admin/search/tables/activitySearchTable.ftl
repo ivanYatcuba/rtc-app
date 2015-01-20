@@ -28,11 +28,6 @@
                 </td>
             </tr>
         </#list>
-    <#else>
-        <td>
-            There are no activity.
-        </td>
-    </#if>
     </table>
 </div>
 <hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
@@ -41,3 +36,8 @@
         <@datatables.addPagination/>
     </div>
 </div>
+    <#else>
+    <td>
+        There are no activity.
+    </td>
+    </#if>
