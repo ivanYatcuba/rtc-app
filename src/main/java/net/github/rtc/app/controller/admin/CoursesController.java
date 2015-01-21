@@ -125,7 +125,8 @@ public class CoursesController implements MenuItem {
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(
-      @ModelAttribute(STRING_COURSE) final Course course, @RequestParam(required = false) final boolean ifPublish,
+      @ModelAttribute(STRING_COURSE) final Course course,
+      @RequestParam(required = false) final boolean ifPublish,
         @RequestParam(required = false) final boolean ifCreateNews) {
         course.setStatus(ifPublish ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
         course.setPublishDate(dateService.getCurrentDate());
@@ -160,9 +161,15 @@ public class CoursesController implements MenuItem {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(
       @ModelAttribute(STRING_COURSE) final Course course,
-      @RequestParam(value = "ifPublish", required = false) final boolean ifPublish) {
+      @RequestParam(value = "ifPublish", required = false) final boolean ifPublish,
+      @RequestParam(required = false) final boolean ifCreateNews) {
         course.setStatus(ifPublish ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
+        course.setPublishDate(dateService.getCurrentDate());
         courseService.update(course);
+        if (ifCreateNews) {
+            courseService.createNews(course, getCurrentUser());
+            return REDIRECT1 + VIEW + course.getCode() + "?newsJustCreated=true";
+        }
         return REDIRECT1 + VIEW + course.getCode();
     }
 
