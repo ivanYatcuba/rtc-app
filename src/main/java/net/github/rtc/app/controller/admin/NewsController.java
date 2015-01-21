@@ -113,9 +113,9 @@ public class NewsController implements MenuItem {
       @ModelAttribute(STRING_NEWS) final News news, @RequestParam(required = false) final boolean publish) {
         final News newsTmp = newsService.findByCode(news.getCode());
         news.setCreateDate(newsTmp.getCreateDate());
-        if (publish) {
-            news.setPublishDate(dateService.getCurrentDate());
-        }
+//        if (publish) {
+//            news.setPublishDate(dateService.getCurrentDate());
+//        }
         news.setAuthor(newsTmp.getAuthor());
         news.setStatus(publish ? NewsStatus.PUBLISHED : newsTmp.getStatus());
         newsService.update(news);
