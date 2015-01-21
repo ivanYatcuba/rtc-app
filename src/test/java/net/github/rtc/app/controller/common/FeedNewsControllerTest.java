@@ -1,4 +1,4 @@
-package net.github.rtc.app.controller.admin;
+package net.github.rtc.app.controller.common;
 
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.user.User;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = "classpath:mvc-test.xml")
-public class NewsControllerTest {
+public class FeedNewsControllerTest {
     public static final String STRING_NEWS = "news";
     @Mock
     private NewsService newsService;
@@ -40,7 +40,7 @@ public class NewsControllerTest {
     private Date LATTER_ENTRY_CREATION_DATE = new Date(2);
     private List<News> newsList;
     @InjectMocks
-    private NewsController newsController;
+    private FeedNewsController feedNewsController;
     private MockMvc mockMvc;
 
     @Before
@@ -55,7 +55,7 @@ public class NewsControllerTest {
         newsList = Arrays.asList(news1, news2);
         Authentication auth = new UsernamePasswordAuthenticationToken(new User(),null);
         SecurityContextHolder.getContext().setAuthentication(auth);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(newsController).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(feedNewsController).build();
     }
 
     @Test
@@ -63,7 +63,7 @@ public class NewsControllerTest {
         SearchResults<News> results = new SearchResults<>();
         results.setResults(newsList);
         when(newsService.findPublishedNews()).thenReturn(newsList);
-        mockMvc.perform(get("/admin/news/feed"))
+        mockMvc.perform(get("/news/feed"))
                 .andExpect(status().isOk())
                 /*.andExpect(model().attributeExists("STRING_NEWS"))*/
                 .andExpect(model().attributeExists("lastUpdate"));
