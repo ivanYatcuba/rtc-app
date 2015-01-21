@@ -2,7 +2,6 @@ package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.report.ExportFormat;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.User;

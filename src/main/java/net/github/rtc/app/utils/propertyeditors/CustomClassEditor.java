@@ -22,8 +22,8 @@ public class CustomClassEditor extends PropertyEditorSupport {
 
     @Override
     public String getAsText() {
-        if(this.getValue() != null) {
-            return ((Class)this.getValue()).getSimpleName();
+        if (this.getValue() != null) {
+            return ((Class) this.getValue()).getSimpleName();
         }
         return super.getAsText();
     }
