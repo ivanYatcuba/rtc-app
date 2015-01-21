@@ -48,6 +48,8 @@ public class CoursesController implements MenuItem {
     private static final String UPDATE_VIEW = "/course/courseUpdate";
     private static final String CREATE_VIEW = "/course/courseCreate";
     private static final String DETAILS_VIEW = "/course/courseDetails";
+
+    private static final String SHOW_MSG_NEWS_CREATED = "?newsJustCreated=true";;
     @Autowired
     private CourseService courseService;
     @Autowired
@@ -133,7 +135,7 @@ public class CoursesController implements MenuItem {
         courseService.create(course);
         if (ifCreateNews) {
             courseService.createNews(course, getCurrentUser());
-            return REDIRECT1 + VIEW + course.getCode() + "?newsJustCreated=true";
+            return REDIRECT1 + VIEW + course.getCode() + SHOW_MSG_NEWS_CREATED;
         }
         return REDIRECT1 + VIEW + course.getCode();
     }
@@ -168,7 +170,7 @@ public class CoursesController implements MenuItem {
         courseService.update(course);
         if (ifCreateNews) {
             courseService.createNews(course, getCurrentUser());
-            return REDIRECT1 + VIEW + course.getCode() + "?newsJustCreated=true";
+            return REDIRECT1 + VIEW + course.getCode() + SHOW_MSG_NEWS_CREATED;
         }
         return REDIRECT1 + VIEW + course.getCode();
     }
