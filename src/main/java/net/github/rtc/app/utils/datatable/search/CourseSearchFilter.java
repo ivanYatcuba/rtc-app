@@ -86,7 +86,7 @@ public class CourseSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc(startDate.toString());
+        return Order.asc("startDate");
     }
 
     public DetachedCriteria getCriteria() {

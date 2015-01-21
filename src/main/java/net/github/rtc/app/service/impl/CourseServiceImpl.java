@@ -88,8 +88,8 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
         searchFilter.setStartDate(dateService.getCurrentDate());
         searchFilter.setStatus(CourseStatus.PUBLISHED);
         searchFilter.setPage(1);
-        return coursesDao.search(searchFilter.getCriteria().addOrder(Order.asc("startDate")), 1,
-          STARTING_SOON_COURSE_COUNT).getResults();
+        return coursesDao.search(searchFilter.getCriteria(), 1,
+          STARTING_SOON_COURSE_COUNT, Order.asc("startDate")).getResults();
     }
 
     @Override

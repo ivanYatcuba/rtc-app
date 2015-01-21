@@ -74,7 +74,7 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc(registerDate.toString());
+        return Order.asc("registerDate");
     }
 
     public DetachedCriteria getCriteria() {

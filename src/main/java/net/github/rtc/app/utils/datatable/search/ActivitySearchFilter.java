@@ -67,7 +67,7 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.desc(date.toString());
+        return Order.desc("actionDate");
     }
 
     @Override
