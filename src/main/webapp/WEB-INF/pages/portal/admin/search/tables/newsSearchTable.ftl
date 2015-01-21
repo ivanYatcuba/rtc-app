@@ -58,7 +58,7 @@
                             <li>
                                 <a href="#" onclick="javascript:PopUpShow('${news.code}')">Remove</a>
                             </li>
-                            <#--<li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/news/delete/${news.code}'/>">Remove</a></li>-->
+                        <#--<li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/news/delete/${news.code}'/>">Remove</a></li>-->
                         </ul>
                     </div>
                 </td>
