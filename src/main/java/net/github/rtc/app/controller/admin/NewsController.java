@@ -6,7 +6,6 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.utils.date.DateService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.AtomFeedView;
 import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
@@ -18,14 +17,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
 @Controller("newsController")
 @RequestMapping(value = "/admin/news")
 public class NewsController implements MenuItem {
 
-    public static final String LAST_UPDATE_VIEW_KEY = "lastUpdate";
     public static final String STRING_NEWS = "news";
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_NEWS = "filterNews";
@@ -43,8 +39,6 @@ public class NewsController implements MenuItem {
     private NewsService newsService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private AtomFeedView atomFeedView;
     @Autowired
     private DateService dateService;
     @Autowired
@@ -147,28 +141,6 @@ public class NewsController implements MenuItem {
         news.setStatus(NewsStatus.PUBLISHED);
         newsService.update(news);
         return STRING_REDIRECT + STRING_ADMIN_SEARCH;
-    }
-
-    /**
-     * Redirect to atom feed view to show latest published news
-     *
-     * @return redirect to "/admin/news/feed"
-     */
-    @RequestMapping(value = "/feed", method = RequestMethod.GET)
-    public ModelAndView feed() {
-        final ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setView(atomFeedView);
-        final List<News> news = newsService.findPublishedNews();
-        modelAndView.addObject(STRING_NEWS, news);
-        modelAndView.addObject(LAST_UPDATE_VIEW_KEY, getCreationDateOfTheLast(news));
-        return modelAndView;
-    }
-
-    private Date getCreationDateOfTheLast(List<News> news) {
-        if (news.size() > 0) {
-            return news.get(0).getCreateDate();
-        }
-        return new Date(0);
     }
 
     @ModelAttribute(STRING_STATUSES)
