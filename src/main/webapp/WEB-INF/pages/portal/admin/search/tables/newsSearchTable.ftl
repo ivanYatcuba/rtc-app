@@ -53,7 +53,8 @@
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             <#if (news.status??) && (news.status == "DRAFT") >
-                                <li id="publicationLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/news/publish/${news.code}'/>">Publish</a></li>
+                                <li id="publicationLi" role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#" onclick="javascript:publish('${news.code}')">Publish</a></li>
                             </#if>
                             <li>
                                 <a href="#" onclick="javascript:PopUpShow('${news.code}')">Remove</a>
@@ -112,5 +113,14 @@
     }
     function PopUpHide() {
         $('#removeNewsModal').modal('hide');
+    }
+    function publish(newsCode) {
+        $.ajax({
+            type: "GET",
+            url: "<@spring.url"/admin/news/publish/"/>" + newsCode,
+            success: function () {
+                searchPage.doSearch(${currentPage});
+            }
+        });
     }
 </script>
