@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <#if user.photo??>
-                                <img id="Img" src="/PathToPhotos/${user.photo}"  class="avatar"/>
+                                <img id="Img" src="<@spring.url '/image/${user.photo}'/>"  class="avatar"/>
                             <#else>
                                 <img id="Img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="avatar">
                             </#if>

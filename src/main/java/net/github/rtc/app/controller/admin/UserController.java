@@ -48,7 +48,6 @@ public class UserController implements MenuItem {
     private FileUpload upload;
     @Value("${img.save.folder}")
     private String imgFold;
-    private String photo;
 
     @RequestMapping(value = "/userPage/editPage/{code}", method = RequestMethod.GET) //todo change url
     public ModelAndView editPage(@PathVariable final String code) {
@@ -56,7 +55,6 @@ public class UserController implements MenuItem {
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
         final User us = userService.findByCode(code);
         mav.addObject(STRING_USER, us);
-        photo = us.getPhoto();
         return mav;
     }
 
@@ -144,8 +142,6 @@ public class UserController implements MenuItem {
       @RequestParam(required = false) final boolean ifActive) {
         if (!img.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), img));
-        } else {
-            user.setPhoto(photo);
         }
         if (user.getStatus() != UserStatus.ACTIVE) {
             user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
