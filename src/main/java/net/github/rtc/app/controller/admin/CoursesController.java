@@ -32,9 +32,6 @@ import java.util.*;
 public class CoursesController implements MenuItem {
 
     private static final String STRING_COURSE = "course";
-    private static final String STRING_COURSES = "courses";
-    private static final String PATH_PAGE_LISTCONTENT = "/page/listcontent";
-    private static final String PATH_PAGE_COURSE_TABLE = "/courses/content/courseTable";
     private static final String STRING_TYPES = "types";
     private static final String STRING_STATUSES = "statuses";
     private static final String STRING_FILTER_COURSE = "filterCourse";

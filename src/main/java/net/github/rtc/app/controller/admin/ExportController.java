@@ -37,7 +37,6 @@ import java.util.*;
 @RequestMapping("admin/export")
 public class ExportController implements MenuItem {
 
-    private static final int REPORTS_PER_PAGE = 10;
     private static final int BUFFER_SIZE = 4096;
 
     private static final String STRING_TYPES = "types";
@@ -145,8 +144,8 @@ public class ExportController implements MenuItem {
       final HttpServletResponse response, @PathVariable final String reportCode) {
         final File downloadFile = reportService.getReport(reportService.findByCode(reportCode));
 
-        try (FileInputStream inputStream = new FileInputStream(downloadFile); final OutputStream outStream = response
-          .getOutputStream();) {
+        try (FileInputStream inputStream = new FileInputStream(downloadFile);
+             final OutputStream outStream = response.getOutputStream()) {
 
             response.setContentType(Files.probeContentType(downloadFile.toPath()));
             response.setContentLength((int) downloadFile.length());
@@ -178,22 +177,13 @@ public class ExportController implements MenuItem {
 
     public Map<String, Class> getTypes() {
         final Map<String, Class> types = new HashMap<>();
-        types.put("User", User.class);
-        types.put("Course", Course.class);
+        types.put(User.class.getSimpleName(), User.class);
+        types.put(Course.class.getSimpleName(), Course.class);
         return types;
     }
 
     public List<String> getClassFields(final Class aClass) {
         return ExportFieldExtractor.getAvailableFieldList(aClass);
-    }
-
-    @ModelAttribute("stats")
-    public List<String> getStats() {
-
-        final List<String> stats = new ArrayList<>();
-        stats.add(CourseStatus.DRAFT.name());
-        stats.add(CourseStatus.PUBLISHED.name());
-        return stats;
     }
 
     @ModelAttribute("report")
