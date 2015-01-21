@@ -34,6 +34,11 @@ public class News extends AbstractPersistenceObject implements Serializable {
     private Date createDate;
 
     @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    @ForExport("Publish date")
+    private Date publishDate = new Date();
+
+    @Column
     @Enumerated(EnumType.STRING)
     private NewsStatus status = NewsStatus.DRAFT;
 
@@ -54,6 +59,14 @@ public class News extends AbstractPersistenceObject implements Serializable {
     public News(String title, String description) {
         this.title = title;
         this.description = description;
+    }
+
+    public Date getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(final Date publishDate) {
+        this.publishDate = publishDate;
     }
 
     public String getTitle() {

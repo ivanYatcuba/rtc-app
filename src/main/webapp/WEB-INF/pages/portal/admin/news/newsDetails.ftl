@@ -44,7 +44,11 @@
         </#if>
     </div>
     <div>
-        <@formMacro.rtcFormLabelOut "news.creationDate" "${news.createDate?string('dd-MMM-yyyy')}"/>
+        <#if news.status=='DRAFT'>
+            <@formMacro.rtcFormLabelOut "news.creationDate" "${news.createDate?string('dd-MMM-yyyy')}"/>
+        <#else>
+            <@formMacro.rtcFormLabelOut "news.publishDate" "${news.publishDate?string('dd-MMM-yyyy')}"/>
+        </#if>
     </div>
 </div>
 </div>
