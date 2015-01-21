@@ -7,7 +7,6 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.DateService;
-import net.github.rtc.app.service.EncoderService;
 import net.github.rtc.app.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +25,6 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     private UserDao userDao;
     @Autowired
     private DateService dateService;
-    @Autowired
-    private EncoderService encoderService;
 
     @Override
     protected GenericDao<User> getDao() {
@@ -36,14 +33,12 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
 
     @Override
     public User create(final User user) {
-        user.setPassword(encoderService.encode(user.getPassword()));
         user.setRegisterDate(dateService.getCurrentDate());
         return super.create(user);
     }
 
     @Override
     public User update(final User user) {
-        user.setPassword(encoderService.encode(user.getPassword()));
         return super.update(user);
     }
 
