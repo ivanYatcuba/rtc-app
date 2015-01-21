@@ -2,6 +2,7 @@ package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.NewsDao;
+import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.activity.events.DeleteEntityEvent;
 import net.github.rtc.app.model.activity.events.NewEntityEvent;
 import net.github.rtc.app.model.activity.events.UpdateEntityEvent;
@@ -23,14 +24,14 @@ public class NewsServiceImpl extends AbstractGenericServiceImpl<News> implements
 
     @Override
     public News create(News news) {
-        NewEntityEvent entityEvent = new NewEntityEvent(this, news.getLogDetail());
+        NewEntityEvent entityEvent = new NewEntityEvent(this, news.getLogDetail(), ActivityEntity.NEWS);
         publisher.publishEvent(entityEvent);
         return super.create(news);
     }
 
     @Override
     public News update(News news) {
-        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, news.getLogDetail());
+        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, news.getLogDetail(), ActivityEntity.NEWS);
         publisher.publishEvent(entityEvent);
         return super.update(news);
     }
@@ -38,7 +39,7 @@ public class NewsServiceImpl extends AbstractGenericServiceImpl<News> implements
     @Override
     public void deleteByCode(String code) {
         News news = findByCode(code);
-        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, news.getLogDetail());
+        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, news.getLogDetail(), ActivityEntity.NEWS);
         publisher.publishEvent(entityEvent);
         super.deleteByCode(code);
     }

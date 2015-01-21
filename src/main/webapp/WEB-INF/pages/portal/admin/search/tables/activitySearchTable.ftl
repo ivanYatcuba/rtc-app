@@ -32,7 +32,7 @@
 </div>
 <hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
 <div class="row">
-    <div class="col-md-6" style="text-align: right">
+    <div class="col-md-12" style="text-align: right">
         <@datatables.addPagination/>
     </div>
 </div>

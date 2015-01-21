@@ -7,10 +7,7 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.course.Tag;
 import net.github.rtc.app.model.user.Role;
-import org.hibernate.criterion.Conjunction;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.hibernate.type.StringType;
 import org.springframework.stereotype.Component;
 
@@ -66,6 +63,11 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
 
     public void setAction(Set<ActivityAction> action) {
         this.action = action;
+    }
+
+    @Override
+    public Order order() {
+        return Order.desc(date.toString());
     }
 
     @Override

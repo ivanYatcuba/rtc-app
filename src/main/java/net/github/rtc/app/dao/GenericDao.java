@@ -3,6 +3,7 @@ package net.github.rtc.app.dao;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface GenericDao<T> {
 
     List<T> findAll(DetachedCriteria criteria);
 
-    SearchResults<T> search(DetachedCriteria criteria, int start, int max);
+    SearchResults<T> search(DetachedCriteria criteria, int start, int max, Order order);
 
     SearchResults<T> search(AbstractSearchCommand searchCommand);
 

@@ -2,6 +2,7 @@ package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.UserDao;
+import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.activity.events.DeleteEntityEvent;
 import net.github.rtc.app.model.activity.events.NewEntityEvent;
 import net.github.rtc.app.model.activity.events.UpdateEntityEvent;
@@ -12,6 +13,7 @@ import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.DateService;
 import net.github.rtc.app.service.EncoderService;
 import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -34,6 +37,8 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     private DateService dateService;
     @Autowired
     private EncoderService encoderService;
+    @Autowired
+    private FileUpload upload;
 
     private ApplicationEventPublisher publisher;
 
@@ -46,14 +51,26 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     public User create(final User user) {
         user.setPassword(encoderService.encode(user.getPassword()));
         user.setRegisterDate(dateService.getCurrentDate());
-        NewEntityEvent entityEvent = new NewEntityEvent(this, user.getLogDetail());
+        user.setCode(getCode());
+        getDao().create(user);
+        NewEntityEvent entityEvent = new NewEntityEvent(this, user.getLogDetail(), ActivityEntity.USER);
         publisher.publishEvent(entityEvent);
-        return super.create(user);
+        return user;
+//        return super.create(user);
+    }
+
+    @Override
+    public User create(User user, MultipartFile image) {
+        //set photo
+        if (!image.isEmpty()) {
+            user.setPhoto(upload.saveImage(user.getCode(), image));
+        }
+        return create(user);
     }
 
     @Override
     public User update(final User user) {
-        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, user.getLogDetail());
+        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, user.getLogDetail(), ActivityEntity.USER);
         publisher.publishEvent(entityEvent);
         user.setPassword(encoderService.encode(user.getPassword()));
         return super.update(user);
@@ -62,7 +79,7 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     @Override
     public void deleteByCode(String code) {
         User user = super.findByCode(code);
-        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, user.getLogDetail());
+        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, user.getLogDetail(), ActivityEntity.USER);
         publisher.publishEvent(entityEvent);
         super.deleteByCode(code);
     }

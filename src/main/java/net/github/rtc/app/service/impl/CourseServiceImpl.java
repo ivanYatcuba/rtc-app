@@ -2,6 +2,7 @@ package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.dao.GenericDao;
+import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.activity.events.DeleteEntityEvent;
 import net.github.rtc.app.model.activity.events.NewEntityEvent;
 import net.github.rtc.app.model.activity.events.UpdateEntityEvent;
@@ -52,14 +53,14 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
 
     @Override
     public Course create(Course course) {
-        NewEntityEvent entityEvent = new NewEntityEvent(this, course.getLogDetail());
+        NewEntityEvent entityEvent = new NewEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
         publisher.publishEvent(entityEvent);
         return super.create(course);
     }
 
     @Override
     public Course update(Course course) {
-        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, course.getLogDetail());
+        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
         publisher.publishEvent(entityEvent);
         return super.update(course);
     }
@@ -67,7 +68,7 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     @Override
     public void deleteByCode(String code) {
         Course course = findByCode(code);
-        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, course.getLogDetail());
+        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
         publisher.publishEvent(entityEvent);
         super.deleteByCode(code);
     }

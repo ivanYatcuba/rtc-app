@@ -3,6 +3,7 @@ package net.github.rtc.app.utils.datatable.search;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.Date;
@@ -22,6 +23,11 @@ public class NewsSearchFilter extends AbstractSearchCommand {
     private Date createDate;
 
     private char dateMoreLessEq;
+
+    @Override
+    public Order order() {
+        return Order.asc(createDate.toString());
+    }
 
     @Override
     public DetachedCriteria getCriteria() {
