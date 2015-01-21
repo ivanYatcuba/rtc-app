@@ -9,13 +9,11 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.StringType;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-@Component
 public class CourseSearchFilter extends AbstractSearchCommand {
 
     private static final String STRING_PROCENT = "%";

@@ -1,9 +1,10 @@
-package net.github.rtc.app.service.impl;
+package net.github.rtc.app.service.impl.news;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.NewsDao;
 import net.github.rtc.app.model.news.News;
-import net.github.rtc.app.service.NewsService;
+import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.news.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

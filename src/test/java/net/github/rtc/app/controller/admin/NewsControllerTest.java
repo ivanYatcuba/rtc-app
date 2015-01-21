@@ -1,11 +1,9 @@
 package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.news.News;
-import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.service.NewsService;
-import net.github.rtc.app.service.UserService;
-import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
+import net.github.rtc.app.service.news.NewsService;
+import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.junit.Before;
 import org.junit.Test;

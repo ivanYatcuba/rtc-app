@@ -1,4 +1,4 @@
-package net.github.rtc.app.service;
+package net.github.rtc.app.utils.date;
 
 import java.util.Date;
 

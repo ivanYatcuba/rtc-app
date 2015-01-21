@@ -15,15 +15,13 @@ public final class ExportFieldExtractor {
     private ExportFieldExtractor() {
     }
 
-    public static List<Field> getFieldsFromClass(
-      final Class exportClass, final List<String> fields) {
+    public static List<Field> getFieldsFromClass(final Class exportClass, final List<String> fields) {
         final List<Field> classFields = new ArrayList<>();
         for (final Field f : exportClass.getDeclaredFields()) {
             if (f.isAnnotationPresent(ForExport.class) && fields.contains(f.getAnnotation(ForExport.class).value())) {
                 classFields.add(f);
                 if (f.getAnnotation(ForExport.class).inculdeField().length != 0) {
-                    classFields.addAll(
-                      getFieldsFromClass(f.getType(), Arrays.asList(f.getAnnotation(ForExport.class).inculdeField())));
+                    classFields.addAll(getFieldsFromClass(f.getType(), Arrays.asList(f.getAnnotation(ForExport.class).inculdeField())));
                 }
             }
         }

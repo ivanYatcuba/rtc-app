@@ -2,7 +2,7 @@ package net.github.rtc.app.utils.propertyeditors;
 
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.user.UserService;
 
 import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;

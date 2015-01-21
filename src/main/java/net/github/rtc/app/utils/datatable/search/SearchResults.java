@@ -17,7 +17,7 @@ public class SearchResults<T> {
     public Map<String, Object> getPageModel() {
         final int countPages = totalResults / perPage + ((totalResults % perPage == 0) ? 0 : 1);
         final Map<String, Object> map = new HashMap<>();
-        int begin = Math.max(1, page - 2);
+        final int begin = Math.max(1, page - 2);
         final int end = Math.min(begin + COUNT_OF_PAGES, countPages);
        /* if (begin + COUNT_OF_PAGES > countPages) {
             begin = Math.max(1, begin - (begin + COUNT_OF_PAGES - countPages));

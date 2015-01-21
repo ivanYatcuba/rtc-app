@@ -1,12 +1,13 @@
-package net.github.rtc.app.service.impl;
+package net.github.rtc.app.service.impl.course;
 
 import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.service.CourseService;
-import net.github.rtc.app.service.DateService;
+import net.github.rtc.app.service.course.CourseService;
+import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
+import net.github.rtc.app.utils.date.DateService;
 import net.github.rtc.app.utils.CourseNewsCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import org.hibernate.criterion.Order;

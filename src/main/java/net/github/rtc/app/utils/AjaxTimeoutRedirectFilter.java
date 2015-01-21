@@ -25,10 +25,7 @@ public class AjaxTimeoutRedirectFilter extends GenericFilterBean {
     private AuthenticationTrustResolver authenticationTrustResolver = new AuthenticationTrustResolverImpl();
 
     @Override
-    public void doFilter(
-      ServletRequest request,
-      ServletResponse response,
-      FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
             chain.doFilter(request, response);
             logger.debug("Chain processed normally");
@@ -36,8 +33,7 @@ public class AjaxTimeoutRedirectFilter extends GenericFilterBean {
             throw ex;
         } catch (Exception ex) {
             final Throwable[] causeChain = throwableAnalyzer.determineCauseChain(ex);
-            RuntimeException ase = (AuthenticationException) throwableAnalyzer.getFirstThrowableOfType(
-              AuthenticationException.class, causeChain);
+            RuntimeException ase = (AuthenticationException) throwableAnalyzer.getFirstThrowableOfType(AuthenticationException.class, causeChain);
             if (ase == null) {
                 ase = (AccessDeniedException) throwableAnalyzer.getFirstThrowableOfType(AccessDeniedException.class, causeChain);
             }
@@ -45,11 +41,9 @@ public class AjaxTimeoutRedirectFilter extends GenericFilterBean {
                 if (ase instanceof AuthenticationException) {
                     throw ase;
                 } else if (ase instanceof AccessDeniedException) {
-                    if (authenticationTrustResolver.isAnonymous(
-                      SecurityContextHolder.getContext().getAuthentication())) {
+                    if (authenticationTrustResolver.isAnonymous(SecurityContextHolder.getContext().getAuthentication())) {
                         logger.info("User session expired or not logged in yet");
                         final String ajaxHeader = ((HttpServletRequest) request).getHeader("X-Requested-With");
-
                         if ("XMLHttpRequest".equals(ajaxHeader)) {
                             final HttpServletResponse resp = (HttpServletResponse) response;
                             resp.sendError(this.SESSION_EXPIRED_ERROR_CODE);
@@ -76,6 +70,5 @@ public class AjaxTimeoutRedirectFilter extends GenericFilterBean {
                 }
             });
         }
-
     }
 }
