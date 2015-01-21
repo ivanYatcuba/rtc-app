@@ -66,7 +66,7 @@
 </#macro>
 
 <#macro addPagination>
-<#if lastPage!=1>
+<#if lastPage gt 1>
 <div class="pagination" id="navigation">
     <div class="row">
         <ul class="pagination" style="margin: 0px">

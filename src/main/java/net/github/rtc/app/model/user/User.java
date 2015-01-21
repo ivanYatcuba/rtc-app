@@ -35,9 +35,6 @@ public class User extends AbstractPersistenceObject implements UserDetails {
     public static final String STRING_SPACE = " ";
     public static final int LARGE_LENGTH = 255;
 
-
-    /* @Column
-     private String code;*/
     @NotEmpty
     @Length(max = PRIMARY_LENGTH)
     @Column
