@@ -1,7 +1,8 @@
-package net.github.rtc.app.service;
+package net.github.rtc.app.service.user;
 
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.model.user.UserRequestStatus;
+import net.github.rtc.app.service.GenericService;
 
 import java.util.List;
 

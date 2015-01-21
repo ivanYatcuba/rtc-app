@@ -1,10 +1,11 @@
-package net.github.rtc.app.service.impl;
+package net.github.rtc.app.service.impl.user;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.UserCourseOrderDao;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.model.user.UserRequestStatus;
-import net.github.rtc.app.service.UserCourseOrderService;
+import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.user.UserCourseOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

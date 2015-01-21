@@ -1,4 +1,4 @@
-package net.github.rtc.app.service.impl;
+package net.github.rtc.app.service.impl.user;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.UserDao;
@@ -6,8 +6,9 @@ import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
-import net.github.rtc.app.service.DateService;
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.date.DateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,16 +1,14 @@
 package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserCourseOrder;
-import net.github.rtc.app.service.CourseService;
-import net.github.rtc.app.service.DateService;
-import net.github.rtc.app.service.UserCourseOrderService;
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.course.CourseService;
+import net.github.rtc.app.utils.date.DateService;
+import net.github.rtc.app.service.user.UserCourseOrderService;
+import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.util.converter.ValidationContext;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -25,9 +23,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

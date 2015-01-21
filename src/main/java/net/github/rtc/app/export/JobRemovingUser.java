@@ -1,6 +1,6 @@
 package net.github.rtc.app.export;
 
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

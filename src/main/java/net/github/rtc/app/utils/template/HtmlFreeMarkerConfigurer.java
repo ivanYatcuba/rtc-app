@@ -21,8 +21,7 @@ public class HtmlFreeMarkerConfigurer extends FreeMarkerConfigurer {
 
     private void fixFreemarkerLogging() {
         try {
-            freemarker.log.Logger
-              .selectLoggerLibrary(freemarker.log.Logger.LIBRARY_SLF4J);
+            freemarker.log.Logger.selectLoggerLibrary(freemarker.log.Logger.LIBRARY_SLF4J);
             logger.info("Switched Freemarker logging to slf4j");
         } catch (ClassNotFoundException e) {
             logger.warn("Broken Freemarker logging to slf4j");
@@ -30,10 +29,8 @@ public class HtmlFreeMarkerConfigurer extends FreeMarkerConfigurer {
     }
 
     @Override
-    protected TemplateLoader getAggregateTemplateLoader(
-      final List<TemplateLoader> templateLoaders) {
+    protected TemplateLoader getAggregateTemplateLoader(final List<TemplateLoader> templateLoaders) {
         logger.info("Using HtmlTemplateLoader to enforce HTML-safe content");
-        return new HtmlTemplateLoader(
-          super.getAggregateTemplateLoader(templateLoaders));
+        return new HtmlTemplateLoader(super.getAggregateTemplateLoader(templateLoaders));
     }
 }

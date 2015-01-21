@@ -6,26 +6,25 @@ import net.github.rtc.app.model.user.UserStatus;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Component;
+
 import java.util.Date;
 import java.util.List;
 
 
-@Component
 public class UserSearchFilter extends AbstractSearchCommand {
     private static final String STRING_PROCENT = "%";
     private static final String STRING_AUTHORITIES = "authorities";
-    private static final String STRING_REGISTER_DATE = "registerDate"; //ok
+    private static final String STRING_REGISTER_DATE = "registerDate";
 
     private String surname;
 
-    private Date registerDate; //ok
+    private Date registerDate;
 
     private List<Role> authorities;
 
-    private String status; //almost ok
+    private String status;
 
-    private char dateMoreLessEq; //
+    private char dateMoreLessEq;
 
     public char getDateMoreLessEq() {
 

@@ -5,9 +5,9 @@ import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.service.CourseService;
-import net.github.rtc.app.service.DateService;
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.course.CourseService;
+import net.github.rtc.app.utils.date.DateService;
+import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomExpertsEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
@@ -74,11 +74,11 @@ public class CoursesController implements MenuItem {
         return REDIRECT + STRING_ADMIN;
     }
 
-    @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.POST)
+    @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.POST)//todo: get
     public String publish(@PathVariable final String courseCode, @RequestParam(required = false) final boolean
       ifCreateNews) {
         final Course course = courseService.findByCode(courseCode);
-        courseService.publish(courseService.findByCode(courseCode));
+        courseService.publish(course);
         if (ifCreateNews) {
             courseService.createNews(course, getCurrentUser());
         }

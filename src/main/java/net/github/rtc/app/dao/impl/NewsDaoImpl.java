@@ -12,7 +12,6 @@ import java.util.List;
 public class NewsDaoImpl extends AbstractGenericDaoImpl<News> implements NewsDao {
     @Override
     public List<News> findPublished() {
-        return getCurrentSession().createCriteria(News.class).
-          add(Restrictions.eq("status", NewsStatus.PUBLISHED)).list();
+        return getCurrentSession().createCriteria(News.class).add(Restrictions.eq("status", NewsStatus.PUBLISHED)).list();
     }
 }

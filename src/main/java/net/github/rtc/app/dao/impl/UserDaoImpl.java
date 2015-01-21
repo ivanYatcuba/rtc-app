@@ -33,15 +33,12 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao
 
     @Override
     public User findByEmail(final String email) {
-        return (User) getCurrentSession().createCriteria(User
-          .class).
-          add(Restrictions.eq(EMAIL_STRING, email)).uniqueResult();
+        return (User) getCurrentSession().createCriteria(User.class).add(Restrictions.eq(EMAIL_STRING, email)).uniqueResult();
     }
 
     @Override
     public Role getRoleByType(final RoleType type) {
-        return (Role) getCurrentSession().createCriteria(Role.class).
-          add(Restrictions.eq("name", type)).uniqueResult();
+        return (Role) getCurrentSession().createCriteria(Role.class).add(Restrictions.eq("name", type)).uniqueResult();
     }
 
     @Override
@@ -53,9 +50,7 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao
 
     @Override
     public List<User> getUsersByType(final RoleType type) {
-        return getCurrentSession().createCriteria(
-          User.class).createAlias("authorities", "a").
-          add(Restrictions.eq("a.name", type)).list();
+        return getCurrentSession().createCriteria(User.class).createAlias("authorities", "a").add(Restrictions.eq("a.name", type)).list();
     }
 
     @Override
@@ -68,7 +63,7 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao
             } catch (Exception e) {
                 throw new ServiceProcessingException("Unable to save image: " + e.getMessage());
             }
-        session.delete(user);
+            session.delete(user);
         }
     }
 

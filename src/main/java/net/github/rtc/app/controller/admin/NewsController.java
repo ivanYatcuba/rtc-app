@@ -3,9 +3,9 @@ package net.github.rtc.app.controller.admin;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.service.DateService;
-import net.github.rtc.app.service.NewsService;
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.utils.date.DateService;
+import net.github.rtc.app.service.news.NewsService;
+import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AtomFeedView;
 import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
@@ -50,7 +50,7 @@ public class NewsController implements MenuItem {
     @Autowired
     private ValidationContext validationContext;
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @RequestMapping(value = "/search", method = RequestMethod.POST)//todo remove
     public ModelAndView viewAll(@ModelAttribute(STRING_FILTER_NEWS) final NewsSearchFilter filterNews) {
         final ModelAndView mav = new ModelAndView(ROOT + "/news/content/search/searchTable");
         final SearchResults results = newsService.search(filterNews);
@@ -60,7 +60,7 @@ public class NewsController implements MenuItem {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView viewAll() {
+    public ModelAndView viewAll() { //todo remove
         final ModelAndView mav = new ModelAndView(ROOT + "/page/pageListNews");
         final NewsSearchFilter newsFilter = new NewsSearchFilter();
         newsFilter.setPage(1);
@@ -100,7 +100,7 @@ public class NewsController implements MenuItem {
      *
      * @return modelAndView("admin/news/layout")
      */
-    @RequestMapping(value = "/{newsCode}/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/{newsCode}/edit", method = RequestMethod.GET) //todo change url
     public ModelAndView update(@PathVariable final String newsCode) {
         final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
         mav.getModelMap().addAttribute(STRING_NEWS, newsService.findByCode(newsCode));
@@ -131,7 +131,7 @@ public class NewsController implements MenuItem {
         return STRING_REDIRECT + STRING_ADMIN_SEARCH;
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    @RequestMapping(value = "/remove", method = RequestMethod.POST) //todo get
     public String setStatusForRemoval(@RequestParam final String newsCode) throws Exception {
         newsService.deleteByCode(newsCode);
         return STRING_REDIRECT + STRING_ADMIN_SEARCH;

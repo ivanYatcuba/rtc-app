@@ -2,7 +2,7 @@ package net.github.rtc.app.service.security;
 
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

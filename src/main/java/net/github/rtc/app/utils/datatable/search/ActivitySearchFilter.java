@@ -1,7 +1,6 @@
 package net.github.rtc.app.utils.datatable.search;
 
 import org.hibernate.criterion.DetachedCriteria;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -9,7 +8,6 @@ import java.util.Date;
  * Created by Илья on 29.12.2014.
  */
 
-@Component
 public class ActivitySearchFilter extends AbstractSearchCommand {
 
     //private static final String STRING_PROCENT = "%";

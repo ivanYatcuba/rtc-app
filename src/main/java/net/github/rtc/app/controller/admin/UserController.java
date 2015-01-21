@@ -3,7 +3,7 @@ package net.github.rtc.app.controller.admin;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import net.github.rtc.app.utils.files.upload.FileUpload;
 import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
@@ -50,7 +50,7 @@ public class UserController implements MenuItem {
     private String imgFold;
     private String photo;
 
-    @RequestMapping(value = "/userPage/editPage/{code}", method = RequestMethod.GET)
+    @RequestMapping(value = "/userPage/editPage/{code}", method = RequestMethod.GET) //todo change url
     public ModelAndView editPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
@@ -60,14 +60,14 @@ public class UserController implements MenuItem {
         return mav;
     }
 
-    @RequestMapping(value = "/userPage/{code}", method = RequestMethod.GET)
+    @RequestMapping(value = "/userPage/{code}", method = RequestMethod.GET) //todo change urrl
     public ModelAndView userPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         mav.addObject(STRING_USER, userService.findByCode(code));
         return mav;
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    @RequestMapping(value = "/remove", method = RequestMethod.POST) //todo get
     public String setStatusForRemoval(@RequestParam final String userCode) throws Exception {
         userService.markUserForRemoval(userCode);
         return REDIRECT_ADMIN_SEARCH;
@@ -92,7 +92,7 @@ public class UserController implements MenuItem {
         return REDIRECT_ADMIN_SEARCH;
     }
 
-    @RequestMapping(value = "/getExperts", method = RequestMethod.POST)
+    @RequestMapping(value = "/getExperts", method = RequestMethod.POST) //todo get
     public
     @ResponseBody
     Map<String, String> getExpertUsers() {
@@ -104,7 +104,7 @@ public class UserController implements MenuItem {
         return results;
     }
 
-    @RequestMapping(value = "/getAdmins", method = RequestMethod.POST)
+    @RequestMapping(value = "/getAdmins", method = RequestMethod.POST) //todo get
     public
     @ResponseBody
     Map<String, String> getAdminMapDataId() {
