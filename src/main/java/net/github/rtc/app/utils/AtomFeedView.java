@@ -1,7 +1,7 @@
 package net.github.rtc.app.utils;
 
 import com.sun.syndication.feed.atom.*;
-import net.github.rtc.app.controller.admin.NewsController;
+import net.github.rtc.app.controller.common.FeedNewsController;
 import net.github.rtc.app.model.news.News;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -45,7 +45,7 @@ public class AtomFeedView extends AbstractAtomFeedView {
      * @param feed  feed
      */
     private void setUpdatedIfNeeded(Map<String, Object> model, Feed feed) {
-        final Date lastUpdate = (Date) model.get(NewsController.LAST_UPDATE_VIEW_KEY);
+        final Date lastUpdate = (Date) model.get(FeedNewsController.LAST_UPDATE_VIEW_KEY);
         if (feed.getUpdated() == null || lastUpdate != null || lastUpdate.compareTo(feed.getUpdated()) > 0) {
             feed.setUpdated(lastUpdate);
         }

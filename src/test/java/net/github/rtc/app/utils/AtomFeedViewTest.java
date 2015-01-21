@@ -2,7 +2,7 @@ package net.github.rtc.app.utils;
 
 
 import com.sun.syndication.feed.atom.*;
-import net.github.rtc.app.controller.admin.NewsController;
+import net.github.rtc.app.controller.common.FeedNewsController;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.user.User;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class AtomFeedViewTest {
     public void testBuildFeedMetadata() {
         Map<String, Object> map = new HashMap();
         Date currentDate = new Date();
-        map.put(NewsController.LAST_UPDATE_VIEW_KEY, currentDate);
+        map.put(FeedNewsController.LAST_UPDATE_VIEW_KEY, currentDate);
         Feed feed = new Feed();
         atomFeedView.buildFeedMetadata(map, feed, null);
         assertEquals(title, feed.getTitle());
