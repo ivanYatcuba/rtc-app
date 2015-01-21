@@ -78,7 +78,7 @@
                 <li><a  href="#" class="navButton" page="${currentPage-1}">&lt;</a></li>
             </#if>
 
-            <#list beginIndex..beginIndex+2 as i>
+            <#list beginIndex..endIndex as i>
                 <#if i == currentPage><li class="active"><#else><li></#if>
                 <a href="#" class="navButton" page="${i}">${i}</a></li>
             </#list>

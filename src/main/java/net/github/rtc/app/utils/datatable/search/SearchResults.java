@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class SearchResults<T> {
 
-    private static final int COUNT_OF_PAGES = 6;
+    private static final int PAGE_OFFSET = 2;
     private List<T> results;
 
     private int totalResults;
@@ -17,11 +17,8 @@ public class SearchResults<T> {
     public Map<String, Object> getPageModel() {
         final int countPages = totalResults / perPage + ((totalResults % perPage == 0) ? 0 : 1);
         final Map<String, Object> map = new HashMap<>();
-        int begin = Math.max(1, page - 2);
-        final int end = Math.min(begin + COUNT_OF_PAGES, countPages);
-       /* if (begin + COUNT_OF_PAGES > countPages) {
-            begin = Math.max(1, begin - (begin + COUNT_OF_PAGES - countPages));
-        }*/
+        final int begin = Math.max(1, page - PAGE_OFFSET);
+        final int end = Math.min(begin + PAGE_OFFSET, countPages);
         map.put("currentPage", page);
         map.put("lastPage", countPages);
         map.put("beginIndex", begin);
