@@ -74,7 +74,7 @@ public class AtomFeedView extends AbstractAtomFeedView {
         Entry entry = new Entry();
         entry.setId(newsAbsoluteUrl + news.getCode());
         entry.setTitle(news.getTitle());
-        entry.setUpdated(news.getCreateDate());
+        entry.setUpdated(news.getPublishDate());
         final Person author = new Person();
         author.setName(news.getAuthor().getName());
         entry.setAuthors(Arrays.asList(author));
