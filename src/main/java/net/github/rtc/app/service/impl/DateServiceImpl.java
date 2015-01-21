@@ -1,9 +1,7 @@
 package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.service.DateService;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
-import org.joda.time.PeriodType;
+import org.joda.time.*;
 import org.springframework.stereotype.Component;
 
 
@@ -25,6 +23,6 @@ public class DateServiceImpl implements DateService {
     @Override
     public int getMothPeriod(final Date startDate, final Date endDate) {
         final Period period = new Period(new DateTime(startDate), new DateTime(endDate), PeriodType.months());
-        return period.getMonths();
+        return period.getMonths() + 1;
     }
 }
