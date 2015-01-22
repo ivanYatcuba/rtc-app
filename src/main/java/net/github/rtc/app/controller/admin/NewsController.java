@@ -137,7 +137,7 @@ public class NewsController implements MenuItem {
     @RequestMapping(value = "/publish/{newsCode}", method = RequestMethod.GET)
     public String publishByCode(@PathVariable final String newsCode) {
         final News news = newsService.findByCode(newsCode);
-//        news.setPublishDate(dateService.getCurrentDate());
+        news.setPublishDate(dateService.getCurrentDate());
         news.setStatus(NewsStatus.PUBLISHED);
         newsService.update(news);
         return STRING_REDIRECT + STRING_ADMIN_SEARCH;
