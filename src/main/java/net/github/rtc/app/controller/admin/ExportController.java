@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import com.google.common.collect.HashBiMap;
 import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.report.ExportFormat;
@@ -197,7 +198,7 @@ public class ExportController implements MenuItem {
 
     @InitBinder("report")
     public void initBinder(final WebDataBinder binder) {
-         binder.registerCustomEditor(Class.class, new CustomClassEditor());
+         binder.registerCustomEditor(Class.class, new CustomClassEditor(HashBiMap.create(getTypes())));
     }
 
     @Override
