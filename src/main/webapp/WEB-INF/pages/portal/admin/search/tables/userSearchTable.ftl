@@ -12,109 +12,110 @@
             <th></th>
         </tr>
         </thead>
-    <#list users as user>
-        <tr style="vertical-align: middle">
-            <#if (user.name??) && (user.surname??) >
-                <td style="width: 30%; vertical-align: middle">
+    <#if users?has_content>
+        <#list users as user>
+            <tr style="vertical-align: middle">
+                <#if (user.name??) && (user.surname??) >
+                    <td style="width: 30%; vertical-align: middle">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <#if user.photo??>
+                                    <img id="Img" src="<@spring.url '/image/${user.photo}'/>"  class="avatar"/>
+                                <#else>
+                                    <img id="Img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="avatar">
+                                </#if>
+                            </div>
+                            <div class="col-md-10" style="padding-left: 22px; vertical-align: middle ">
+                                <a href="<@spring.url"/admin/user/userPage/${user.code}"/>">  ${user.surname + " " + user.name } </a>
+                                <br><font face="Aerial"><em>
+                                <#list user.authorities as role>
+                            ${role.name.roleViewName}
+                            </#list>
+                            </em></font>
+                            </div>
+                        </div>
+                    </td>
+                <#else>
+                    <td style="vertical-align: middle">None</td>
+                </#if>
+
+                <#if (user.email)??>
                     <div class="row">
-                        <div class="col-md-2">
-                            <#if user.photo??>
-                                <img id="Img" src="<@spring.url '/image/${user.photo}'/>"  class="avatar"/>
-                            <#else>
-                                <img id="Img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="avatar">
-                            </#if>
-                        </div>
-                        <div class="col-md-10" style="padding-left: 22px; vertical-align: middle ">
-                            <a href="<@spring.url"/admin/user/userPage/${user.code}"/>">  ${user.surname + " " + user.name } </a>
-                            <br><font face="Aerial"><em>
-                            <#list user.authorities as role>
-                        ${role.name.roleViewName}
-                        </#list>
-                        </em></font>
+                        <div class="col-md-6">
+                            <td style="vertical-align: middle">${user.email}</td>
                         </div>
                     </div>
-                </td>
-            <#else>
-                <td style="vertical-align: middle">None</td>
-            </#if>
+                <#else>
+                    <td style="vertical-align: middle">None</td>
+                </#if>
 
-            <#if (user.email)??>
-                <div class="row">
-                    <div class="col-md-6">
-                        <td style="vertical-align: middle">${user.email}</td>
-                    </div>
-                </div>
-            <#else>
-                <td style="vertical-align: middle">None</td>
-            </#if>
+                <#if (user.registerDate)??>
+                    <td style="vertical-align: middle">${user.registerDate?string('dd-MMM-yyyy')}</td>
+                <#else>
+                    <td style="vertical-align: middle">None</td>
+                </#if>
 
-            <#if (user.registerDate)??>
-                <td style="vertical-align: middle">${user.registerDate?string('dd-MMM-yyyy')}</td>
-            <#else>
-                <td style="vertical-align: middle">None</td>
-            </#if>
-
-            <#if (user.status)??>
-                <td style="vertical-align: middle">
-                    <#if (user.status)=="ACTIVE">
-                        <@formMacro.rtcColorLabel "${user.status}" "label-success"  "user.status."/>
-                    <#else>
-                        <#if (user.status)=="FOR_REMOVAL">
-                            <@formMacro.rtcColorLabel "${user.status}" "label-danger"  "user.status."/>
+                <#if (user.status)??>
+                    <td style="vertical-align: middle">
+                        <#if (user.status)=="ACTIVE">
+                            <@formMacro.rtcColorLabel "${user.status}" "label-success"  "user.status."/>
                         <#else>
-                            <@formMacro.rtcColorLabel "${user.status}" "label-default"  "user.status."/>
+                            <#if (user.status)=="FOR_REMOVAL">
+                                <@formMacro.rtcColorLabel "${user.status}" "label-danger"  "user.status."/>
+                            <#else>
+                                <@formMacro.rtcColorLabel "${user.status}" "label-default"  "user.status."/>
+                            </#if>
                         </#if>
+                    </td>
+                <#else>
+                    <td style="vertical-align: middle">
+                        <@rtcColorLabel "None" "label-default"/>
+                    </td>
+                </#if>
+                <td style="width: 15%; vertical-align: middle">
+                    <#if user.isForRemoval()>
+                        <div class="btn-group">
+                            <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
+                                Action
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" style="width: 112px" role="menu">
+                                <li>
+                                    <a href="<@spring.url"/admin/user/restore/${user.code}"/>">Restore</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    <#else>
+                        <div class="btn-group">
+                            <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
+                                Action
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+
+                            <ul class="dropdown-menu" style="width: 112px role="menu">
+                            <li>
+                                <a href="#" onclick="javascript:PopUpShow('${user.code}')">Remove</a>
+                            </li>
+                            <li>
+                                <#if user.isActive()>
+                                    <a href="<@spring.url"/admin/user/inactivate/${user.code}"/>">Inactivate</a>
+                                <#else>
+                                    <a href="<@spring.url"/admin/user/activate/${user.code}"/>">Activate</a>
+                                </#if>
+                            </li>
+                            </ul>
+                        </div>
                     </#if>
                 </td>
-            <#else>
-                <td style="vertical-align: middle">
-                    <@rtcColorLabel "None" "label-default"/>
-                </td>
-            </#if>
-            <td style="width: 15%; vertical-align: middle">
-                <#if user.isForRemoval()>
-                    <div class="btn-group">
-                        <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
-                            Action
-                        </button>
-                        <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" style="width: 112px" role="menu">
-                            <li>
-                                <a href="<@spring.url"/admin/user/restore/${user.code}"/>">Restore</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                <#else>
-                    <div class="btn-group">
-                        <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
-                            Action
-                        </button>
-                        <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-
-                        <ul class="dropdown-menu" style="width: 112px role="menu">
-                        <li>
-                            <a href="#" onclick="javascript:PopUpShow('${user.code}')">Remove</a>
-                        </li>
-                        <li>
-                            <#if user.isActive()>
-                                <a href="<@spring.url"/admin/user/inactivate/${user.code}"/>">Inactivate</a>
-                            <#else>
-                                <a href="<@spring.url"/admin/user/activate/${user.code}"/>">Activate</a>
-                            </#if>
-                        </li>
-                        </ul>
-                    </div>
-                </#if>
-            </td>
-        </tr>
-    </#list>
+            </tr>
+        </#list>
     </table>
 </div>
 <hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
@@ -128,7 +129,11 @@
     <@datatables.addPagination/>
     </div>
 </div>
-
+<#else>
+    <td>
+        There are no users. <a  href="<@spring.url "/admin/user/createUser"/>">Click here</a> to add.
+    </td>
+</#if>
 <!-- Modal -->
 <div class="modal" style="top: 15%; left: 1%" id="removeUserModal" tabindex="-1" role="dialog" aria-labelledby="removeUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">

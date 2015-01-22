@@ -12,7 +12,7 @@
             <th></th>
         </tr>
         </thead>
-    <#if news??>
+    <#if news?has_content>
         <#list news as news>
             <tr style="vertical-align: middle">
                 <td style="vertical-align: middle; width: 25%">
@@ -65,7 +65,6 @@
                 </td>
             </tr>
         </#list>
-    </#if>
     </table>
 </div>
 <hr>
@@ -80,7 +79,11 @@
     <@datatables.addPagination/>
     </div>
 </div>
-
+<#else>
+<td>
+    There are no news. <a  href="<@spring.url "/admin/news/create"/>">Click here</a> to add.
+</td>
+</#if>
 <!-- Modal -->
 <div class="modal" style="top: 15%; left: 1%" id="removeNewsModal" tabindex="-1" role="dialog" aria-labelledby="removeNewsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
