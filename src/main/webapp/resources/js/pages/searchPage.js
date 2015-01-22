@@ -1,23 +1,28 @@
 function SearchPage(settings) {
     var self = this;
+    var currSerializedFilter;
 
     self.urlMap = settings.urlMap;
     self.menuMap = settings.menuMap;
 
-    self.doSearch = function (page) {
+    function doUpdateTable(useCurrentFilter, page){
         var activeForm = $(".activeForm");
         var activeFormId = activeForm.attr('id');
         var gourl = self.urlMap[activeFormId];
         if(!activeForm || activeForm.size() > 1 ) {
             return;
-        }//
+        }
+
+        if(useCurrentFilter)
+            currSerializedFilter = $("#" + activeFormId + " input" + ", #" + activeFormId + " select").serialize();
+
         page = page || 1;
         $.ajax({
             type: "POST",
             url: gourl,
-            data: $("#" + activeFormId + " input" + ", #" + activeFormId + " select").serialize()+"&page="+page,
+            data: currSerializedFilter+"&page="+page,
             success: function (result) {
-               $("#searchTable").html(result)
+                $("#searchTable").html(result)
             }, error: function (xhr, status, error) {
                 //alert(self.urlMap[activeFormId]);
                 //alert("error");
@@ -25,6 +30,17 @@ function SearchPage(settings) {
 //                alert(err.Message);
             }
         });
+
+    }
+
+    // use current filter
+    self.doSearch = function () {
+        doUpdateTable(true);
+    };
+
+    // use old filter
+    self.doChangePage = function (page) {
+        doUpdateTable(false, page);
     };
 
     self.doReset = function () {

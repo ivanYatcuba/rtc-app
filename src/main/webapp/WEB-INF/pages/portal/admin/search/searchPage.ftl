@@ -38,7 +38,7 @@
         event.preventDefault();
         searchPage.showFilterForm(this.id);
         searchPage.doReset();
-        searchPage.doSearch(1);
+        searchPage.doSearch();
 
     });
     $("#reset").on("click", function () {
@@ -50,7 +50,7 @@
     $("#searchTable").on("click", ".navButton", function (event) {
                 event.preventDefault();
                 var page = this.getAttribute("page");
-                searchPage.doSearch(page);
+                searchPage.doChangePage(page);
             }
     );
 
