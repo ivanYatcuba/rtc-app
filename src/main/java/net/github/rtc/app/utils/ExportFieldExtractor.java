@@ -1,5 +1,4 @@
 package net.github.rtc.app.utils;
-
 import net.github.rtc.util.annotation.ForExport;
 
 import java.lang.reflect.Field;
@@ -7,9 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Ivan Yatcuba on 8/22/14.
- */
 public final class ExportFieldExtractor {
 
     private ExportFieldExtractor() {

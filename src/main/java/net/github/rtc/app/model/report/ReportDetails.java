@@ -14,7 +14,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.List;
@@ -37,8 +36,9 @@ public class ReportDetails extends AbstractPersistenceObject {
     private ExportFormat exportFormat = ExportFormat.XLSX;
 
     @Column
+    @Enumerated(EnumType.STRING)
     @NotNull
-    private Class<? extends Serializable> exportClass;
+    private ReportClasses exportClass;
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
@@ -67,11 +67,11 @@ public class ReportDetails extends AbstractPersistenceObject {
         this.exportFormat = exportFormat;
     }
 
-    public Class getExportClass() {
+    public ReportClasses getExportClass() {
         return exportClass;
     }
 
-    public void setExportClass(final Class exportClass) {
+    public void setExportClass(final ReportClasses exportClass) {
         this.exportClass = exportClass;
     }
 
@@ -92,6 +92,6 @@ public class ReportDetails extends AbstractPersistenceObject {
     }
 
     public List<Field> getFieldsFromClass() throws NoSuchFieldException {
-        return ExportFieldExtractor.getFieldsFromClass(exportClass, fields);
+        return ExportFieldExtractor.getFieldsFromClass(exportClass.getValue(), fields);
     }
 }

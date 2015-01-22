@@ -19,7 +19,7 @@
             <@formMacro.rtcFormLabelOut "report.lable.name" "${report.name}"/>
         </div>
         <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "report.lable.exportClass" "${report.exportClass.simpleName}"/>
+            <@formMacro.rtcFormLabelOut "report.lable.exportClass" "${report.exportClass}"/>
         </div>
     </div>
     <div class="col-md-6">

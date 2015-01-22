@@ -79,7 +79,7 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
 
     public ReportDetails compileReport(ReportDetails report) {
         final String filePath = exportPath + report.getCode() + DOT + report.getExportFormat().toString().toLowerCase();
-        final ModelService service = serviceHolder.get(report.getExportClass());
+        final ModelService service = serviceHolder.get(report.getExportClass().getValue());
         final List<?> objects = service.findAll();
         try {
             ReportBuilder.build(report, objects, filePath);

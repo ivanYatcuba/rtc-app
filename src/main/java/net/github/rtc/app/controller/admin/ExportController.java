@@ -1,15 +1,13 @@
 package net.github.rtc.app.controller.admin;
 
-import com.google.common.collect.HashBiMap;
 import net.github.rtc.app.exception.ServiceProcessingException;
-import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.report.ReportClasses;
 import net.github.rtc.app.model.report.ExportFormat;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.report.ReportService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
-import net.github.rtc.app.utils.propertyeditors.CustomClassEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,10 +25,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.*;
-
-/**
- * Created by Chernichenko Bogdan on 15.05.2014.
- */
 
 @Controller("exportController")
 @RequestMapping("admin/export")
@@ -78,9 +71,8 @@ public class ExportController implements MenuItem {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView openCreatePage() {
-        final Set<String> formatLables = getTypes().keySet();
         final ModelAndView mav = new ModelAndView(ROOT + CREATE_VIEW);
-        mav.addObject(STRING_TYPES, formatLables);
+        mav.addObject(STRING_TYPES, ReportClasses.values());
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(ReportDetails.class));
         return mav;
     }
@@ -88,10 +80,9 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/update/{reportCode}", method = RequestMethod.GET)
     public ModelAndView openUpdatePage(@PathVariable final String reportCode) {
         final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
-        final Set<String> formatLables = getTypes().keySet();
         final ReportDetails reportDetails = reportService.findByCode(reportCode);
         mav.addObject(STRING_REPORT, reportDetails);
-        mav.addObject(STRING_TYPES, formatLables);
+        mav.addObject(STRING_TYPES, ReportClasses.values());
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(ReportDetails
           .class));
         return mav;
@@ -136,7 +127,7 @@ public class ExportController implements MenuItem {
     public
     @ResponseBody
     List<String> getFields(@RequestParam final String selectedType) {
-        return getClassFields(getTypes().get(selectedType));
+        return getClassFields(ReportClasses.valueOf(selectedType).getValue());
     }
 
     @RequestMapping(value = "/download/{reportCode}", method = RequestMethod.GET)
@@ -175,13 +166,6 @@ public class ExportController implements MenuItem {
         return ExportFormat.findAll();
     }
 
-    public Map<String, Class> getTypes() {
-        final Map<String, Class> types = new HashMap<>();
-        types.put(User.class.getSimpleName(), User.class);
-        types.put(Course.class.getSimpleName(), Course.class);
-        return types;
-    }
-
     public List<String> getClassFields(final Class aClass) {
         return ExportFieldExtractor.getAvailableFieldList(aClass);
     }
@@ -194,11 +178,6 @@ public class ExportController implements MenuItem {
     @ModelAttribute("currentUser")
     public User getCurrentUser() {
         return userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-    }
-
-    @InitBinder("report")
-    public void initBinder(final WebDataBinder binder) {
-         binder.registerCustomEditor(Class.class, new CustomClassEditor(HashBiMap.create(getTypes())));
     }
 
     @Override

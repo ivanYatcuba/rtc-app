@@ -17,7 +17,7 @@
                 <td style="vertical-align: middle; width: 25%">
                     <a href="<@spring.url "/admin/export/${report.code}" />">${report.name}</a>
                 </td>
-                <td style="vertical-align: middle">${report.exportClass.simpleName}</td>
+                <td style="vertical-align: middle">${report.exportClass}</td>
                 <td style="vertical-align: middle">${report.exportFormat}</td>
                 <td style="vertical-align: middle">${report.createdDate?string('dd-MMM-yyyy')}</td>
                 <td style="vertical-align: middle">
