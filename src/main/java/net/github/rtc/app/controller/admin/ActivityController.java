@@ -26,8 +26,9 @@ public class ActivityController {
 
     private static final String CREATE_STRING = "*********create";
 
-    @Autowired
+//    @Autowired
     private ActivityService activityService;
+
     @Autowired
     private UserService userService;
 
