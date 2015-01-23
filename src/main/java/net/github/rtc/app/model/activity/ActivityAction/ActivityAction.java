@@ -1,8 +1,6 @@
 package net.github.rtc.app.model.activity.ActivityAction;
 
 import net.github.rtc.app.model.AbstractEnumTable;
-import net.github.rtc.app.model.AbstractPersistenceIDObject;
-import net.github.rtc.app.model.activity.entityList.EntityList;
 
 import javax.persistence.*;
 
