@@ -15,31 +15,32 @@ import java.util.EnumSet;
 Template (id,value)
 * */
 @MappedSuperclass
-public class AbstractEnumTable<T extends java.lang.Enum> extends AbstractPersistenceIDObject{
+abstract public class AbstractEnumTable<T extends java.lang.Enum> extends AbstractPersistenceIDObject {
     @Enumerated(EnumType.STRING)
     @Column
     private T name;
+
+    public AbstractEnumTable(final String strName) {
+        final Class<T> type = initType();
+        for (Object role : EnumSet.allOf(type)) {
+            if (role.toString().equals(strName)) {
+                this.name = (T) role;
+                break;
+            }
+        }
+        if (this.name == null) {
+            throw new IllegalArgumentException("Enum do not consist this string.");
+        }
+    }
+
+    public AbstractEnumTable(final T name) {
+        this.name = name;
+    }
 
     private Class<T> initType() {
         final Type t = getClass().getGenericSuperclass();
         final ParameterizedType pt = (ParameterizedType) t;
         return (Class) pt.getActualTypeArguments()[0];
-    }
-
-
-    public AbstractEnumTable(final String strName) {
-        Class<T> type=initType();
-        for (Object role : EnumSet.allOf(type)) {
-            if (role.toString().equals(strName)){
-                this.name = (T)role;
-                break;
-            }
-        }
-        if(this.name==null) throw new IllegalArgumentException("Enum do not consist this string.");
-    }
-
-    public AbstractEnumTable(final T name) {
-        this.name = name;
     }
 
     public T getName() {

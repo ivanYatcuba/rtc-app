@@ -24,6 +24,8 @@ import java.util.Date;
 @Controller("activityController")
 public class ActivityController {
 
+    private static final String CREATE_STRING = "*********create";
+
     @Autowired
     private ActivityService activityService;
     @Autowired
@@ -33,16 +35,18 @@ public class ActivityController {
     public
     @ResponseBody
     Activity getActivityTable() {
-        EntityList e = new EntityList(EntityType.COURSE);
-        ActivityAction aa = new ActivityAction(ActivityActionType.SAVED);
+        final EntityList e = new EntityList(EntityType.COURSE);
+        final ActivityAction aa = new ActivityAction(ActivityActionType.SAVED);
 
-        Activity a = new Activity(e,"details", getCurrentUser(), aa, new Date());
-        System.out.print("-------a"+a);
+        final Activity a = new Activity(e, "details", getCurrentUser(), aa, new Date());
+        System.out.print("-------a" + a);
         try {
             activityService.create(a);
-        } catch(Exception ex) {System.out.print("*********create"+ex);}
+        } catch (Exception ex) {
+            System.out.print(CREATE_STRING + ex);
+        }
 
-        System.out.print("*********create");
+        System.out.print(CREATE_STRING);
         return a;
     }
 
