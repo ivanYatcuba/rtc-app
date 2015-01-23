@@ -9,12 +9,12 @@ public enum EntityType {
     COURSE("Course"), USER("User"), NEWS("News");
     private final String text;
 
+    private EntityType(final String s) {
+        text = s;
+    }
+
     @Override
     public String toString() {
         return text;
-    }
-
-    private EntityType(final String s) {
-        text = s;
     }
 }

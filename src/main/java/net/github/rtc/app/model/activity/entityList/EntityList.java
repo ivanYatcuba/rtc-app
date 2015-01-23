@@ -14,7 +14,7 @@ public class EntityList extends AbstractEnumTable<EntityType> {
         super(name);
     }
 
-    public  EntityList(EntityType name){
+    public EntityList(EntityType name) {
         super(name);
     }
 }
