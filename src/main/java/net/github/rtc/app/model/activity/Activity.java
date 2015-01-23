@@ -28,7 +28,7 @@ public class Activity extends AbstractPersistenceObject implements Serializable 
     details!  user! time!
     * */
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "entity_id")
     private EntityList entity;
 
@@ -42,7 +42,7 @@ public class Activity extends AbstractPersistenceObject implements Serializable 
     private User user;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "action_id")
     private ActivityAction action;
 
@@ -55,19 +55,19 @@ public class Activity extends AbstractPersistenceObject implements Serializable 
     public Activity() {
     }
 
-    public Activity(EntityList entity, String details, User user, ActivityAction action,Date createDate) {
-        this.entity = entity;this.details = details;this.user = user;this.action = action;this.createDate = createDate;
+    public Activity(EntityList entity, String details, User user, ActivityAction action, Date createDate) {
+        this.entity = entity; this.details = details; this.user = user; this.action = action; this.createDate = createDate;
     }
 
     @Override
     public String toString() {
-        return "Activity{" +
-                "entity=" + entity +
-                ", details='" + details + '\'' +
-                ", user=" + user +
-                ", action=" + action +
-                ", createDate=" + createDate +
-                '}';
+        return "Activity{"
+                + "entity=" + entity
+                + ", details='" + details + '\''
+                + ", user=" + user
+                + ", action=" + action
+                + ", createDate=" + createDate
+                + '}';
     }
 
     public EntityList getEntity() {
