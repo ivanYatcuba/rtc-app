@@ -1,15 +1,13 @@
 package net.github.rtc.app.service.impl;
 
 import net.github.rtc.app.service.LogService;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-@Transactional
+@Component
 public class LogServiceImpl implements LogService {
 
     private static final String PATH_FOLDER = "/var/log/rtc-app/logs/";
@@ -34,29 +32,15 @@ public class LogServiceImpl implements LogService {
     @Override
     public String readLogFile(final String fileName) {
         final StringBuilder builder = new StringBuilder();
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(PATH_FOLDER + fileName));
+        try (BufferedReader reader = new BufferedReader(new FileReader(PATH_FOLDER + fileName))) {
             String currentLine;
             while ((currentLine = reader.readLine()) != null) {
                 builder.append(currentLine);
                 builder.append(System.lineSeparator());
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            closeQuietly(reader);
+            builder.append(e);
         }
         return builder.toString();
-    }
-
-    private void closeQuietly(Closeable c) {
-        if (c != null) {
-            try {
-                c.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }
