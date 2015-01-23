@@ -4,6 +4,9 @@
     <li id="courseMenuItem" class="navMenuItem"><a href='<@spring.url"/admin/search/course"/>'>Courses</a></li>
     <li id="userMenuItem" class="navMenuItem"><a href='<@spring.url"/admin/search/user"/>'>Users</a></li>
     <li id="reportMenuItem" class="navMenuItem"><a href='<@spring.url"/admin/search/report"/>'>Reports</a></li>
+    <div style="text-align: center; margin-top: 425px">
+        <a href='<@spring.url"/admin/logs/list"/>'>Server Logs</a>
+    </div>
 </ul>
 
 <script type="text/javascript">

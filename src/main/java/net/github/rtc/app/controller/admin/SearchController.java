@@ -6,6 +6,7 @@ import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.model.report.ExportFormat;
+import net.github.rtc.app.model.report.ReportClasses;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
@@ -189,11 +190,8 @@ public class SearchController {
     }
 
     @ModelAttribute("reportTypes")
-    public Set<String> getTypes() {
-        final Map<String, Class> types = new HashMap<>();
-        types.put("User", User.class);
-        types.put("Course", Course.class);
-        return types.keySet();
+    public ReportClasses[] getTypes() {
+        return ReportClasses.values();
     }
 
     @ModelAttribute(STRING_COURSE_CATIGORIES)
