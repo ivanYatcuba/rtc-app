@@ -8,7 +8,7 @@
             <th><@spring.message "news.search.result.header.title"/></th>
             <th><@spring.message "news.search.result.header.author"/></th>
             <th><@spring.message "news.search.result.header.created.date"/></th>
-            <th><@spring.message "news.search.result.header.status"/></th>
+            <th style="text-align: center;"><@spring.message "news.search.result.header.status"/></th>
             <th></th>
         </tr>
         </thead>
@@ -30,16 +30,16 @@
                 </td>
                 <#if (news.status)??>
                     <#if (news.status)=="DRAFT">
-                        <td style="vertical-align: middle">
+                        <td style="vertical-align: middle; text-align: center">
                             <@formMacro.rtcColorLabel "Draft" "label-warning"/>
                         </td>
                     <#else>
-                        <td style="vertical-align: middle">
+                        <td style="vertical-align: middle; text-align: center">
                             <@formMacro.rtcColorLabel "Published" "label-success"/>
                         </td>
                     </#if>
                 <#else>
-                    <td style="vertical-align: middle"></td>
+                    <td style="vertical-align: middle; text-align: center"></td>
                 </#if>
 
                 <td style="width: 15%;vertical-align: middle">

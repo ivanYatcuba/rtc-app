@@ -8,7 +8,7 @@
             <th><@spring.message "course.search.result.table.name"/></th>
             <th><@spring.message "course.search.result.table.expert"/></th>
             <th><@spring.message "course.search.result.table.term"/></th>
-            <th><@spring.message "course.search.result.table.status"/></th>
+            <th style="text-align: center"><@spring.message "course.search.result.table.status"/></th>
             <th></th>
         </tr>
         </thead>
@@ -26,7 +26,7 @@
                     </#list>
                 </td>
                 <td style="vertical-align: middle; width: 25%">${course.startDate?string('dd-MMM-yyyy')}&nbsp;-&nbsp;${course.endDate?string('dd-MMM-yyyy')}</td>
-                <td style="vertical-align: middle; width: 15%">
+                <td style="vertical-align: middle; text-align: center">
                         <#if "${course.status}" == "DRAFT"> <@formMacro.rtcColorLabel "${course.status}" "label-warning" "course.status."/></#if>
                         <#if "${course.status}" == "PUBLISHED"><@formMacro.rtcColorLabel "${course.status}" "label-success" "course.status."/> </#if>
                         <#if "${course.status}" == "ARCHIVED"> <@formMacro.rtcColorLabel "${course.status}" "label-default" "course.status."/> </#if>

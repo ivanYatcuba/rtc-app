@@ -8,7 +8,7 @@
             <th><@spring.message "user.search.result.header.user"/></th>
             <th><@spring.message "user.search.result.header.email"/></th>
             <th><@spring.message "user.search.result.header.created.date"/></th>
-            <th><@spring.message "user.search.result.header.status"/></th>
+            <th style="text-align: center"><@spring.message "user.search.result.header.status"/></th>
             <th></th>
         </tr>
         </thead>
@@ -56,7 +56,7 @@
                 </#if>
 
                 <#if (user.status)??>
-                    <td style="vertical-align: middle">
+                    <td style="vertical-align: middle; text-align: center">
                         <#if (user.status)=="ACTIVE">
                             <@formMacro.rtcColorLabel "${user.status}" "label-success"  "user.status."/>
                         <#else>
