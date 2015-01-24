@@ -1,7 +1,7 @@
 <style>
     .outside {
         position: absolute;
-        left: 60px;
+        left: 80px;
         top: 650px;
     }
 </style>
