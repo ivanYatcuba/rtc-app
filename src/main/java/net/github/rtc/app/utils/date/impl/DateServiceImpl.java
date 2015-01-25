@@ -32,10 +32,8 @@ public class DateServiceImpl implements DateService {
             calendar.setTime(startDate);
             for (int i = 0; i < months; i++) {
                 final int currentMonthDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-                if (days > currentMonthDays) {
-                    days = days - currentMonthDays;
-                    calendar.add(Calendar.MONTH, 1);
-                }
+                days = days - currentMonthDays;
+                calendar.add(Calendar.MONTH, 1);
             }
 
             final int term = 14;
