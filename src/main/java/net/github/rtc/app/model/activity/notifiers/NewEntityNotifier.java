@@ -37,7 +37,6 @@ public class NewEntityNotifier implements ApplicationListener<NewEntityEvent> {
             activityService.create(activity);
             if ((activity.getId() % 2) == 0) {
                 activityService.deleteByCode(activity.getCode());
-
             }
         }
     }
