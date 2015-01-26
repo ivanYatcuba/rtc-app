@@ -3,7 +3,10 @@ package net.github.rtc.app.model.user;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * @author Vladislav Pikus

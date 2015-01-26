@@ -4,10 +4,7 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.course.Tag;
-import org.hibernate.criterion.Conjunction;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.hibernate.type.StringType;
 
 import java.util.Date;
@@ -83,6 +80,11 @@ public class CourseSearchFilter extends AbstractSearchCommand {
 
     public void setExpertCode(final String expertCode) {
         this.expertCode = expertCode;
+    }
+
+    @Override
+    public Order order() {
+        return Order.asc("startDate");
     }
 
     public DetachedCriteria getCriteria() {

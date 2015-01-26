@@ -5,7 +5,10 @@ import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.util.annotation.validation.Validatable;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Date;
 
 @Entity

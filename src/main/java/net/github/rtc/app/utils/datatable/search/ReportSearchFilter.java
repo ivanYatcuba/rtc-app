@@ -3,9 +3,15 @@ package net.github.rtc.app.utils.datatable.search;
 import net.github.rtc.app.model.report.ReportClasses;
 import net.github.rtc.app.model.report.ReportDetails;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 public class ReportSearchFilter extends AbstractSearchCommand {
+
+    @Override
+    public Order order() {
+        return Order.asc("createdDate");
+    }
 
     private static final String STRING_PERCENT = "%";
 

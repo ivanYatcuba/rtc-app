@@ -2,6 +2,7 @@ package net.github.rtc.app.model.news;
 
 
 import net.github.rtc.app.model.AbstractPersistenceObject;
+import net.github.rtc.app.model.activity.IActivity;
 import net.github.rtc.app.model.course.Tag;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.util.annotation.ForExport;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @Entity
 @Validatable
-public class News extends AbstractPersistenceObject implements Serializable {
+public class News extends AbstractPersistenceObject implements Serializable,IActivity {
 
 
     @NotEmpty
@@ -115,5 +116,12 @@ public class News extends AbstractPersistenceObject implements Serializable {
 
     public void setTags(final List<Tag> tags) {
         this.tags = tags;
+    }
+
+    @Override
+    public String getLogDetail() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("News ").append("id:" + getId()).append(" title:" + getTitle());
+        return builder.toString();
     }
 }

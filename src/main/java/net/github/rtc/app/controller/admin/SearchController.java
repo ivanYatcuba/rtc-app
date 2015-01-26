@@ -1,5 +1,8 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.model.activity.Activity;
+import net.github.rtc.app.model.activity.ActivityAction;
+import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
@@ -52,6 +55,9 @@ public class SearchController {
     private static final String MENU_ITEM = "menuItem";
     private static final String STRING_ACTIVITY = "activity";
     private static final String STRING_ACTIVITY_FILTER = "activityFilter";
+    public static final String STRING_ACTIVITY_ENTITIES = "activityEntities";
+    public static final String STRING_ACTIVITY_ACTIONS = "activityActions";
+    public static final String STRING_ACTIVITIES = "activities";
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -60,6 +66,8 @@ public class SearchController {
     private UserService userService;
     @Autowired
     private ReportService reportService;
+    @Autowired
+    private ActivityService activityService;
 
     @RequestMapping(value = "/search/{menuItem}", method = RequestMethod.GET)
     public ModelAndView searchPagewithParam(@PathVariable(MENU_ITEM) final String menuItem) {
@@ -80,6 +88,9 @@ public class SearchController {
     @ResponseBody
     ModelAndView getActivityTable(@ModelAttribute(STRING_ACTIVITY_FILTER) final ActivitySearchFilter activityFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + STRING_SEARCH_PAGE + "/activitySearchTable");
+        final SearchResults<Activity> results = activityService.search(activityFilter);
+        mav.addAllObjects(results.getPageModel());
+        mav.addObject(STRING_ACTIVITIES, results.getResults());
         return mav;
     }
 
@@ -201,6 +212,24 @@ public class SearchController {
             categories.put(type.name(), type.toString());
         }
         return categories;
+    }
+
+    @ModelAttribute(STRING_ACTIVITY_ENTITIES)
+    public Map<String, String> getActivityEntities() {
+        final Map<String, String> entities = new HashMap<>();
+        for (ActivityEntity entity: ActivityEntity.findAll()) {
+            entities.put(entity.name(), entity.toString());
+        }
+        return entities;
+    }
+
+    @ModelAttribute(STRING_ACTIVITY_ACTIONS)
+    public Map<String, String> getActivityAction() {
+        final Map<String, String> actions = new HashMap<>();
+        for (ActivityAction action : ActivityAction.findAll()) {
+            actions.put(action.name(), action.toString());
+        }
+        return actions;
     }
 
     @ModelAttribute(STRING_EXPERTS)
