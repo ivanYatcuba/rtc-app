@@ -84,7 +84,7 @@
             </#list>
             <#if lastPage gt 3 && currentPage!=lastPage>
                 <#if currentPage!=lastPage-1>
-                    <li><a href="#" class="navButton" >...</a></li>
+                    <li class="disabled"><a href="#" class="navButton" >...</a></li>
                     <li><a href="#" class="navButton" page="${lastPage}">${lastPage}</a></li>
                 <#else>
                     <li><a href="#" class="navButton" page="${lastPage}">${lastPage}</a></li>
