@@ -40,7 +40,7 @@ public class FeedNewsController {
 
     private Date getCreationDateOfTheLast(List<News> news) {
         if (news.size() > 0) {
-            return news.get(0).getCreateDate();
+            return news.get(0).getPublishDate();
         }
         return new Date(0);
     }
