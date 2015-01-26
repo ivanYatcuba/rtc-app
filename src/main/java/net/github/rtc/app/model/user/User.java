@@ -380,7 +380,7 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
 
     @Override
     public String getLogDetail() {
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append("User ").append("id:" + getId()).append(" name:" + getName());
         return builder.toString();
     }

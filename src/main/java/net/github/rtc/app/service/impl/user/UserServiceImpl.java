@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -50,7 +49,7 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
         user.setRegisterDate(dateService.getCurrentDate());
         user.setCode(getCode());
         getDao().create(user);
-        NewEntityEvent entityEvent = new NewEntityEvent(this, user.getLogDetail(), ActivityEntity.USER);
+        final NewEntityEvent entityEvent = new NewEntityEvent(this, user.getLogDetail(), ActivityEntity.USER);
         publisher.publishEvent(entityEvent);
         return user;
 //        return super.create(user);
@@ -67,15 +66,15 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
 
     @Override
     public User update(final User user) {
-        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, user.getLogDetail(), ActivityEntity.USER);
+        final UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, user.getLogDetail(), ActivityEntity.USER);
         publisher.publishEvent(entityEvent);
         return super.update(user);
     }
 
     @Override
     public void deleteByCode(String code) {
-        User user = super.findByCode(code);
-        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, user.getLogDetail(), ActivityEntity.USER);
+        final User user = super.findByCode(code);
+        final DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, user.getLogDetail(), ActivityEntity.USER);
         publisher.publishEvent(entityEvent);
         super.deleteByCode(code);
     }

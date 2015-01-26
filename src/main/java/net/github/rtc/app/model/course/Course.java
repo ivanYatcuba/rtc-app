@@ -258,7 +258,7 @@ public class Course extends AbstractPersistenceObject implements Serializable, I
 
     @Override
     public String getLogDetail() {
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append("Course ").append("id:" + getId()).append(" name:" + getName());
         return builder.toString();
     }

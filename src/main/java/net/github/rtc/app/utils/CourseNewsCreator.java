@@ -7,8 +7,8 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.utils.date.DateService;
 import net.github.rtc.app.service.news.NewsService;
+import net.github.rtc.app.utils.date.DateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

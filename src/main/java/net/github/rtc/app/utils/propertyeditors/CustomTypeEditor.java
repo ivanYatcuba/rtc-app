@@ -1,11 +1,7 @@
 package net.github.rtc.app.utils.propertyeditors;
 
 import java.beans.PropertyEditorSupport;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Custom tags editor for tag collection

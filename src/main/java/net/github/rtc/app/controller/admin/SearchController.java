@@ -56,9 +56,9 @@ public class SearchController {
     private static final String MENU_ITEM = "menuItem";
     private static final String STRING_ACTIVITY = "activity";
     private static final String STRING_ACTIVITY_FILTER = "activityFilter";
-    public static final String STRING_ACTIVITY_ENTITIES = "activityEntities";
-    public static final String STRING_ACTIVITY_ACTIONS = "activityActions";
-    public static final String STRING_ACTIVITIES = "activities";
+    private static final String STRING_ACTIVITY_ENTITIES = "activityEntities";
+    private static final String STRING_ACTIVITY_ACTIONS = "activityActions";
+    private static final String STRING_ACTIVITIES = "activities";
     @Autowired
     private NewsService newsService;
     @Autowired

@@ -6,7 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;

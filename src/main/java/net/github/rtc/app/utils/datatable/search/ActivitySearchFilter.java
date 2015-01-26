@@ -1,15 +1,12 @@
 package net.github.rtc.app.utils.datatable.search;
 
-import org.hibernate.criterion.DetachedCriteria;
 import net.github.rtc.app.model.activity.Activity;
 import net.github.rtc.app.model.activity.ActivityAction;
 import net.github.rtc.app.model.activity.ActivityEntity;
-import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseType;
-import net.github.rtc.app.model.course.Tag;
-import net.github.rtc.app.model.user.Role;
-import org.hibernate.criterion.*;
-import org.hibernate.type.StringType;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -23,7 +20,6 @@ import java.util.Set;
 public class ActivitySearchFilter extends AbstractSearchCommand {
 
     private static final String STRING_DATE = "actionDate";
-    public static final String STRING_ENTITY = "entity";
     private String user;
     private Set<ActivityEntity> entity;
     private Set<ActivityAction> action;
@@ -72,7 +68,7 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.desc("actionDate");
+        return Order.desc(STRING_DATE);
     }
 
     @Override

@@ -2,7 +2,6 @@ package net.github.rtc.app.model.activity.events;
 
 import net.github.rtc.app.model.activity.ActivityEntity;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.context.annotation.Bean;
 
 public class UpdateEntityEvent extends ApplicationEvent {
 

@@ -22,9 +22,8 @@ public class UpdateEntityNotifier implements ApplicationListener<UpdateEntityEve
 
     @Override
     public void onApplicationEvent(UpdateEntityEvent event) {
-        System.out.println("hello!");
-        User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        Activity activity = new Activity();
+        final User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        final Activity activity = new Activity();
         activity.setUsername(user.shortString());
         activity.setDetail(event.getDetails());
         activity.setAction(ActivityAction.UPDATED);

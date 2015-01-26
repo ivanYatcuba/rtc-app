@@ -1,6 +1,6 @@
 package net.github.rtc.app.controller.admin;
-import net.github.rtc.app.service.LogService;
 
+import net.github.rtc.app.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

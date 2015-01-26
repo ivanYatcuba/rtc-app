@@ -73,7 +73,7 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc("registerDate");
+        return Order.asc(STRING_REGISTER_DATE);
     }
 
     public DetachedCriteria getCriteria() {

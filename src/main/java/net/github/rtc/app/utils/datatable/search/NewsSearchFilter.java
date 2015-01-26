@@ -27,7 +27,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc("createDate");
+        return Order.asc(STRING_CREATE_DATE);
     }
 
     @Override

@@ -23,12 +23,11 @@ public class NewEntityNotifier implements ApplicationListener<NewEntityEvent> {
 
     @Override
     public void onApplicationEvent(NewEntityEvent event) {
-        System.out.println("new!");
-        Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+        final Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
-            String username = authentication.getName();
-            User user = userService.loadUserByUsername(username);
-            Activity activity = new Activity();
+            final String username = authentication.getName();
+            final User user = userService.loadUserByUsername(username);
+            final Activity activity = new Activity();
             activity.setUsername(user.shortString());
             activity.setDetail(event.getDetails());
             activity.setAction(ActivityAction.SAVED);

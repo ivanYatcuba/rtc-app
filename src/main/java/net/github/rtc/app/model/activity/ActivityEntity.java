@@ -1,7 +1,6 @@
 package net.github.rtc.app.model.activity;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

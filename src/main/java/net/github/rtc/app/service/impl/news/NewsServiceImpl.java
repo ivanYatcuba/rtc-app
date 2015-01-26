@@ -25,22 +25,22 @@ public class NewsServiceImpl extends AbstractGenericServiceImpl<News> implements
 
     @Override
     public News create(News news) {
-        NewEntityEvent entityEvent = new NewEntityEvent(this, news.getLogDetail(), ActivityEntity.NEWS);
+        final NewEntityEvent entityEvent = new NewEntityEvent(this, news.getLogDetail(), ActivityEntity.NEWS);
         publisher.publishEvent(entityEvent);
         return super.create(news);
     }
 
     @Override
     public News update(News news) {
-        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, news.getLogDetail(), ActivityEntity.NEWS);
+        final UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, news.getLogDetail(), ActivityEntity.NEWS);
         publisher.publishEvent(entityEvent);
         return super.update(news);
     }
 
     @Override
     public void deleteByCode(String code) {
-        News news = findByCode(code);
-        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, news.getLogDetail(), ActivityEntity.NEWS);
+        final News news = findByCode(code);
+        final DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, news.getLogDetail(), ActivityEntity.NEWS);
         publisher.publishEvent(entityEvent);
         super.deleteByCode(code);
     }

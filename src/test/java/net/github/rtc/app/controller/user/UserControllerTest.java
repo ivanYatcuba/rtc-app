@@ -4,9 +4,9 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.service.course.CourseService;
-import net.github.rtc.app.utils.date.DateService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.date.DateService;
 import net.github.rtc.util.converter.ValidationContext;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

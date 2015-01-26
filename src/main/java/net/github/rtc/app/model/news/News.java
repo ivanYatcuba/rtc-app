@@ -18,7 +18,7 @@ import java.util.List;
 
 @Entity
 @Validatable
-public class News extends AbstractPersistenceObject implements Serializable,IActivity {
+public class News extends AbstractPersistenceObject implements Serializable, IActivity {
 
 
     @NotEmpty
@@ -120,7 +120,7 @@ public class News extends AbstractPersistenceObject implements Serializable,IAct
 
     @Override
     public String getLogDetail() {
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append("News ").append("id:" + getId()).append(" title:" + getTitle());
         return builder.toString();
     }

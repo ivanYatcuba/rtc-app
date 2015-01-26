@@ -8,11 +8,6 @@ import org.hibernate.criterion.Restrictions;
 
 public class ReportSearchFilter extends AbstractSearchCommand {
 
-    @Override
-    public Order order() {
-        return Order.asc("createdDate");
-    }
-
     private static final String STRING_PERCENT = "%";
 
     private String name;
@@ -29,6 +24,11 @@ public class ReportSearchFilter extends AbstractSearchCommand {
             criteria.add(Restrictions.eq("exportClass", exportClass));
         }
         return criteria;
+    }
+
+    @Override
+    public Order order() {
+        return Order.asc("createdDate");
     }
 
     public String getName() {

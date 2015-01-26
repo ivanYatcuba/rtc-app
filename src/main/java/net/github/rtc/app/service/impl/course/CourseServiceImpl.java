@@ -11,9 +11,9 @@ import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
-import net.github.rtc.app.utils.date.DateService;
 import net.github.rtc.app.utils.CourseNewsCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
+import net.github.rtc.app.utils.date.DateService;
 import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,22 +54,22 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
 
     @Override
     public Course create(Course course) {
-        NewEntityEvent entityEvent = new NewEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
+        final NewEntityEvent entityEvent = new NewEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
         publisher.publishEvent(entityEvent);
         return super.create(course);
     }
 
     @Override
     public Course update(Course course) {
-        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
+        final UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
         publisher.publishEvent(entityEvent);
         return super.update(course);
     }
 
     @Override
     public void deleteByCode(String code) {
-        Course course = findByCode(code);
-        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
+        final Course course = findByCode(code);
+        final DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
         publisher.publishEvent(entityEvent);
         super.deleteByCode(code);
     }
