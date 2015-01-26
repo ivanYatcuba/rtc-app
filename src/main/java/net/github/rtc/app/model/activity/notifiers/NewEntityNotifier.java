@@ -6,7 +6,7 @@ import net.github.rtc.app.model.activity.ActivityAction;
 import net.github.rtc.app.model.activity.events.NewEntityEvent;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ActivityService;
-import net.github.rtc.app.service.UserService;
+import net.github.rtc.app.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.core.Authentication;

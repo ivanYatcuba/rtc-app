@@ -6,6 +6,7 @@ import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
+import net.github.rtc.app.service.ActivityService;
 import net.github.rtc.app.utils.date.DateService;
 import net.github.rtc.app.service.user.UserService;
 import org.jasypt.hibernate4.encryptor.HibernatePBEStringEncryptor;

@@ -13,6 +13,7 @@ import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.date.DateService;
+import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,6 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     private UserDao userDao;
     @Autowired
     private DateService dateService;
-    @Autowired
-    private EncoderService encoderService;
     @Autowired
     private FileUpload upload;
 
@@ -70,7 +69,6 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     public User update(final User user) {
         UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, user.getLogDetail(), ActivityEntity.USER);
         publisher.publishEvent(entityEvent);
-        user.setPassword(encoderService.encode(user.getPassword()));
         return super.update(user);
     }
 
