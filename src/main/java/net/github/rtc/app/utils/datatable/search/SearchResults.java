@@ -21,7 +21,7 @@ public class SearchResults<T> {
         int begin;
         int end;
         if (page == countPages) {
-            begin = Math.max(1, page - PAGE_OFFSET-1);
+            begin = Math.max(1, page - PAGE_OFFSET - 1);
             end = page;
         } else {
             begin = Math.max(1, page - PAGE_OFFSET);
