@@ -127,11 +127,11 @@ public class UserController implements MenuItem {
       @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
       @RequestParam(required = false) final boolean ifActive) {
         user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
-        userService.create(user);
-        if (!img.isEmpty()) {
+        userService.create(user, img);
+    /*    if (!img.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), img));
         }
-        userService.update(user);
+        userService.update(user);*/
         return REDIRECT_USER_PAGE + user.getCode();
     }
 

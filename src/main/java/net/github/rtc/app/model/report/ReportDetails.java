@@ -5,7 +5,6 @@ import com.sun.istack.NotNull;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.util.annotation.validation.Validatable;
-
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;

@@ -5,6 +5,7 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.Date;
@@ -68,6 +69,11 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
     public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+    }
+
+    @Override
+    public Order order() {
+        return Order.asc("registerDate");
     }
 
     public DetachedCriteria getCriteria() {

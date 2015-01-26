@@ -1,8 +1,12 @@
 package net.github.rtc.app.utils;
 
+import net.github.rtc.app.model.activity.Activity;
+import net.github.rtc.app.model.activity.ActivityAction;
+import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
+import net.github.rtc.app.service.ActivityService;
 import net.github.rtc.app.utils.date.DateService;
 import net.github.rtc.app.service.user.UserService;
 import org.jasypt.hibernate4.encryptor.HibernatePBEStringEncryptor;
@@ -12,6 +16,9 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashSet;
 
 @Component
 @DependsOn("allowEncryptionWithoutJCE")
@@ -25,6 +32,8 @@ public class Bootstrap implements InitializingBean {
     private UserService userService;
     @Autowired
     private DateService dateService;
+    @Autowired
+    private ActivityService activityService;
 
     public void loadTestUsers() {
         if (userService.loadUserByUsername(ADMIN_EMAIL) == null) {
