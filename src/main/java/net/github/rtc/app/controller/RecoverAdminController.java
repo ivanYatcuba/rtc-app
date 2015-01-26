@@ -5,7 +5,7 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.date.DateService;
+import net.github.rtc.app.service.date.DateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -47,9 +47,9 @@
     </bean>
 
 
-    <bean id="createEntityNotifier" class="net.github.rtc.app.model.activity.notifiers.NewEntityNotifier"/>
-    <bean id="updateEntityNotifier" class="net.github.rtc.app.model.activity.notifiers.UpdateEntityNotifier"/>
-    <bean id="removeEntityNotifier" class="net.github.rtc.app.model.activity.notifiers.DeleteEntityNotifier"/>
+    <bean id="createEntityNotifier" class="net.github.rtc.app.utils.notifiers.NewEntityNotifier"/>
+    <bean id="updateEntityNotifier" class="net.github.rtc.app.utils.notifiers.UpdateEntityNotifier"/>
+    <bean id="removeEntityNotifier" class="net.github.rtc.app.utils.notifiers.DeleteEntityNotifier"/>
 
     <util:map id="serviceHolder" map-class="java.util.HashMap">
         <entry>

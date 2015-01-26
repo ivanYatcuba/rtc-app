@@ -1,9 +1,9 @@
-package net.github.rtc.app.model.activity.notifiers;
+package net.github.rtc.app.utils.notifiers;
 
 
 import net.github.rtc.app.model.activity.Activity;
 import net.github.rtc.app.model.activity.ActivityAction;
-import net.github.rtc.app.model.activity.events.NewEntityEvent;
+import net.github.rtc.app.utils.events.NewEntityEvent;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ActivityService;
 import net.github.rtc.app.service.user.UserService;

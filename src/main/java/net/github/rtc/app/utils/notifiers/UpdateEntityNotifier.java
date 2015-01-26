@@ -1,8 +1,8 @@
-package net.github.rtc.app.model.activity.notifiers;
+package net.github.rtc.app.utils.notifiers;
 
 import net.github.rtc.app.model.activity.Activity;
 import net.github.rtc.app.model.activity.ActivityAction;
-import net.github.rtc.app.model.activity.events.DeleteEntityEvent;
+import net.github.rtc.app.utils.events.UpdateEntityEvent;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ActivityService;
 import net.github.rtc.app.service.user.UserService;
@@ -12,7 +12,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Date;
 
-public class DeleteEntityNotifier implements ApplicationListener<DeleteEntityEvent> {
+
+public class UpdateEntityNotifier implements ApplicationListener<UpdateEntityEvent> {
 
     @Autowired
     private UserService userService;
@@ -20,12 +21,12 @@ public class DeleteEntityNotifier implements ApplicationListener<DeleteEntityEve
     private ActivityService activityService;
 
     @Override
-    public void onApplicationEvent(DeleteEntityEvent event) {
+    public void onApplicationEvent(UpdateEntityEvent event) {
         final User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         final Activity activity = new Activity();
         activity.setUsername(user.shortString());
         activity.setDetail(event.getDetails());
-        activity.setAction(ActivityAction.REMOVED);
+        activity.setAction(ActivityAction.UPDATED);
         activity.setActionDate(new Date());
         activity.setEntity(event.getEntity());
         activityService.create(activity);

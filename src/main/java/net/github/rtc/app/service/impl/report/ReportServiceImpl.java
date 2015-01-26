@@ -8,7 +8,7 @@ import net.github.rtc.app.service.CodeGenerationService;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.report.ReportService;
-import net.github.rtc.app.utils.date.DateService;
+import net.github.rtc.app.service.date.DateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

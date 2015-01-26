@@ -6,7 +6,7 @@ import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.MailService;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.date.DateService;
+import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;

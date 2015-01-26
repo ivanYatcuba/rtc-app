@@ -1,9 +1,9 @@
-package net.github.rtc.app.model.activity.events;
+package net.github.rtc.app.utils.events;
 
 import net.github.rtc.app.model.activity.ActivityEntity;
 import org.springframework.context.ApplicationEvent;
 
-public class UpdateEntityEvent extends ApplicationEvent {
+public class DeleteEntityEvent extends ApplicationEvent {
 
     private String details;
 
@@ -13,7 +13,7 @@ public class UpdateEntityEvent extends ApplicationEvent {
      *
      * @param source the component that published the event (never {@code null})
      */
-    public UpdateEntityEvent(Object source, String details, ActivityEntity entity) {
+    public DeleteEntityEvent(Object source, String details, ActivityEntity entity) {
         super(source);
         this.details = details;
         this.entity = entity;
