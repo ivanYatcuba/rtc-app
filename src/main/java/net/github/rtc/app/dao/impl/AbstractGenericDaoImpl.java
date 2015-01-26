@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +79,7 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
     }
 
     @Override
-    public SearchResults<T> search(final DetachedCriteria dCriteria, final int start, final int max) {
+    public SearchResults<T> search(final DetachedCriteria dCriteria, final int start, final int max, Order order) {
         final Criteria criteria = dCriteria.getExecutableCriteria(getCurrentSession());
         final SearchResults<T> results = new SearchResults<>();
 
@@ -90,6 +91,7 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
         criteria.setResultTransformer(Criteria.ROOT_ENTITY);
         criteria.setFirstResult((start - 1) * max);
         criteria.setMaxResults(max);
+        criteria.addOrder(order);
 
         results.setResults(criteria.list());
         return results;
@@ -97,6 +99,6 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
 
     @Override
     public SearchResults<T> search(AbstractSearchCommand searchCommand) {
-        return search(searchCommand.getCriteria(), searchCommand.getPage(), searchCommand.getPerPage());
+        return search(searchCommand.getCriteria(), searchCommand.getPage(), searchCommand.getPerPage(), searchCommand.order());
     }
 }

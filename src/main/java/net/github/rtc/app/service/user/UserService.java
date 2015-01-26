@@ -12,6 +12,7 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.GenericService;
 import net.github.rtc.app.service.ModelService;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,6 +25,8 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
     List<User> getUserByRole(RoleType type);
 
     User loadUserByUsername(String email);
+
+    User create(User user, MultipartFile image);
 
     void markUserForRemoval(String userCode);
 

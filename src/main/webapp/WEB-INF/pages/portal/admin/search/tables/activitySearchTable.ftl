@@ -11,21 +11,33 @@
             <th><@spring.message "activity.table.time"/></th>
         </tr>
         </thead>
-        <tr style="vertical-align: middle">
-            <td style="vertical-align: middle">
-            </td>
-            <td style="vertical-align: middle">
-            </td>
-            <td style="vertical-align: middle">
-            </td>
-            <td style="vertical-align: middle">
-            </td>
-        </tr>
+    <#if activities?has_content>
+        <#list activities as activity>
+            <tr style="vertical-align: middle">
+                <td style="vertical-align: middle; width: 25%">
+                    <p>${activity.detail}</p>
+                </td>
+                <td style="vertical-align: middle;">
+                    <p>${activity.action}</p>
+                </td>
+                <td style="vertical-align: middle;">
+                    <p>${activity.username}</p>
+                </td>
+                <td style="vertical-align: middle; width: 25%">
+                    ${activity.actionDate?string('dd-MMM-yyyy')}
+                </td>
+            </tr>
+        </#list>
     </table>
 </div>
 <hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
 <div class="row">
-    <div class="col-md-6" style="text-align: right">
+    <div class="col-md-12" style="text-align: right">
         <@datatables.addPagination/>
     </div>
 </div>
+    <#else>
+    <td>
+        There are no activity.
+    </td>
+    </#if>
