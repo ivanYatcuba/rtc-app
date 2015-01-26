@@ -9,6 +9,8 @@ import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.util.converter.ValidationContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,6 +36,8 @@ public class NewsController implements MenuItem {
     private static final String UPDATE_VIEW = "/news/newsUpdate";
     private static final String CREATE_VIEW = "/news/newsCreate";
     private static final String DETAILS_VIEW = "/news/newsDetails";
+
+    private static Logger log = LoggerFactory.getLogger(NewsController.class.getName());
 
     @Autowired
     private NewsService newsService;
@@ -173,6 +177,8 @@ public class NewsController implements MenuItem {
         final String name = auth.getName(); //get logged in username
         news.setCreateDate(dateService.getCurrentDate());
         news.setAuthor(userService.loadUserByUsername(name));
+        System.out.println(news.toString());
+        log.debug(news.toString());
         if (publish) {
             news.setStatus(NewsStatus.PUBLISHED);
         }
