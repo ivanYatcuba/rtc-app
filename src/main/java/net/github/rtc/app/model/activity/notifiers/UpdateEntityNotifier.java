@@ -33,6 +33,7 @@ public class UpdateEntityNotifier implements ApplicationListener<UpdateEntityEve
         activityService.create(activity);
         if ((activity.getId() % 2) == 0) {
             activityService.deleteByCode(activity.getCode());
+
         }
     }
 }

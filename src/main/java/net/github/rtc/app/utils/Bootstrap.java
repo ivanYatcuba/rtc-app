@@ -60,6 +60,7 @@ public class Bootstrap implements InitializingBean {
         }
     }
 
+    
 //    public void loadTestActivities() {
 //        if (activityService.findAll().size() == 0) {
 //            Date date1 = new Date(114, 8, 23);

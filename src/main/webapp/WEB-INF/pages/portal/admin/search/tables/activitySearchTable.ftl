@@ -14,7 +14,7 @@
         </thead>
     <#if activities?has_content>
         <#list activities as activity>
-            <tr style="vertical-align: middle">
+            <tr style="vertical-align: middle" >
                 <#--<td>${activity.id}</td>-->
                 <td style="vertical-align: middle; width: 25%">
                     <p>${activity.detail}</p>
