@@ -30,5 +30,8 @@ public class DeleteEntityNotifier implements ApplicationListener<DeleteEntityEve
         activity.setActionDate(new Date());
         activity.setEntity(event.getEntity());
         activityService.create(activity);
+        if ((activity.getId() % 2) == 0) {
+            activityService.deleteByCode(activity.getCode());
+        }
     }
 }
