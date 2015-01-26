@@ -119,6 +119,13 @@ public class News extends AbstractPersistenceObject implements Serializable, IAc
     }
 
     @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getLogDetail()).append(createDate);
+        return builder.toString();
+    }
+
+    @Override
     public String getLogDetail() {
         final StringBuilder builder = new StringBuilder();
         builder.append("News ").append("id:" + getId()).append(" title:" + getTitle());
