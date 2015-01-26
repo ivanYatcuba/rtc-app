@@ -5,7 +5,6 @@
     <table width="100%" class="table" style="margin-bottom: 5px" id="ActivityTable">
         <thead>
         <tr>
-            <#--<th></th>-->
             <th><@spring.message "activity.table.details"/></th>
             <th><@spring.message "activity.table.action"/></th>
             <th><@spring.message "activity.table.user"/></th>
@@ -15,7 +14,6 @@
     <#if activities?has_content>
         <#list activities as activity>
             <tr style="vertical-align: middle">
-                <#--<td>${activity.id}</td>-->
                 <td style="vertical-align: middle; width: 25%">
                     <p>${activity.detail}</p>
                 </td>

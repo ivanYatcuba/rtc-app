@@ -35,9 +35,6 @@ public class NewEntityNotifier implements ApplicationListener<NewEntityEvent> {
             activity.setActionDate(new Date());
             activity.setEntity(event.getEntity());
             activityService.create(activity);
-            if ((activity.getId() % 2) == 0) {
-                activityService.deleteByCode(activity.getCode());
-            }
         }
     }
 }

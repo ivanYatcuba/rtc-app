@@ -11,10 +11,10 @@
         <servlet-class>
             org.springframework.web.servlet.DispatcherServlet
         </servlet-class>
-        <!--<init-param>
+        <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>WEB-INF/notifiers.xml</param-value>
-        </init-param>-->
+            <param-value>WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
@@ -51,7 +51,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/mvc-dispatcher-servlet.xml
+            /WEB-INF/applicationContext.xml
         </param-value>
     </context-param>
 
