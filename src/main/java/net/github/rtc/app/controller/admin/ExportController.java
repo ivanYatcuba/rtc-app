@@ -91,7 +91,12 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/{reportCode}", method = RequestMethod.GET)
     public ModelAndView viewReport(@PathVariable final String reportCode) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
-        mav.addObject(STRING_REPORT, reportService.findByCode(reportCode));
+        final ReportDetails report = reportService.findByCode(reportCode);
+
+        if (reportService.isNotFound(report)) {
+            return new ModelAndView("error404");
+        }
+        mav.addObject(STRING_REPORT, report);
         return mav;
     }
 

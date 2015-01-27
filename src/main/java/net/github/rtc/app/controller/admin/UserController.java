@@ -61,7 +61,13 @@ public class UserController implements MenuItem {
     @RequestMapping(value = "/userPage/{code}", method = RequestMethod.GET) //todo change urrl
     public ModelAndView userPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
-        mav.addObject(STRING_USER, userService.findByCode(code));
+        final User user = userService.findByCode(code);
+
+        if (userService.isNotFound(user)) {
+            return new ModelAndView("error404");
+        }
+
+        mav.addObject(STRING_USER, user);
         return mav;
     }
 

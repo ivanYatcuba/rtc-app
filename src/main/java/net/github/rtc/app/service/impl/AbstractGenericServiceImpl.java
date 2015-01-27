@@ -60,4 +60,11 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
 
         return getDao().search(searchCommand);
     }
+
+    @Override
+    public boolean isNotFound(T t) {
+        return t == null;
+    }
+
+
 }

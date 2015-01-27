@@ -18,4 +18,6 @@ public interface GenericService<T> {
     List<T> findAll();
 
     SearchResults<T> search(AbstractSearchCommand searchCommand);
+
+    boolean isNotFound(T type);
 }

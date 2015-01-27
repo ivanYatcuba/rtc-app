@@ -71,7 +71,7 @@ public class SearchController {
     private ActivityService activityService;
 
     @RequestMapping(value = "/search/{menuItem}", method = RequestMethod.GET)
-    public ModelAndView searchPagewithParam(@PathVariable(MENU_ITEM) final String menuItem) {
+    public ModelAndView searchPageWithParam(@PathVariable(MENU_ITEM) final String menuItem) {
         final ModelAndView mav = new ModelAndView("redirect:" + "/admin/search");
         mav.addObject(MENU_ITEM, menuItem);
         return mav;
