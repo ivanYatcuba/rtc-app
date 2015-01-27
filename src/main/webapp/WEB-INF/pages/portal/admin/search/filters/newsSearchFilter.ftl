@@ -36,7 +36,7 @@
         var mapAdminDataId;
         var autoCompleteAuthors;
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "<@spring.url "/admin/user/getAdmins"/>",
             success: function(response){
                 mapAdminDataId = response;

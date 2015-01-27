@@ -74,7 +74,7 @@ public class CoursesController implements MenuItem {
         return REDIRECT + STRING_ADMIN;
     }
 
-    @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.POST)//todo: get
+    @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
     public String publish(@PathVariable final String courseCode, @RequestParam(required = false) final boolean
       ifCreateNews) {
         final Course course = courseService.findByCode(courseCode);
