@@ -11,6 +11,8 @@
         >
 
     <context:component-scan base-package="net.github.rtc.app.controller"/>
+    <context:property-placeholder location="classpath:/export.properties"/>
+
 
     <!-- freemarker config -->
     <bean id="freemarkerConfig"
