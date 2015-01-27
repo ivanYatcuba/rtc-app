@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.controller.common.ResourceNotFoundException;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
@@ -64,7 +65,7 @@ public class UserController implements MenuItem {
         final User user = userService.findByCode(code);
 
         if (userService.isNotFound(user)) {
-            return new ModelAndView("error404");
+            throw new ResourceNotFoundException();
         }
 
         mav.addObject(STRING_USER, user);

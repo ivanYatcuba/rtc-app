@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.controller.common.ResourceNotFoundException;
 import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.report.ExportFormat;
 import net.github.rtc.app.model.report.ReportClasses;
@@ -94,7 +95,7 @@ public class ExportController implements MenuItem {
         final ReportDetails report = reportService.findByCode(reportCode);
 
         if (reportService.isNotFound(report)) {
-            return new ModelAndView("error404");
+            throw new ResourceNotFoundException();
         }
         mav.addObject(STRING_REPORT, report);
         return mav;

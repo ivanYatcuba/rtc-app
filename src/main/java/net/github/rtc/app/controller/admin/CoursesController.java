@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.controller.common.ResourceNotFoundException;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
@@ -100,7 +101,7 @@ public class CoursesController implements MenuItem {
         final Course course = courseService.findByCode(courseCode);
 
         if (courseService.isNotFound(course)) {
-            return new ModelAndView("error404");
+            throw new ResourceNotFoundException();
         }
 
         mav.addObject(STRING_COURSE, course);
@@ -251,6 +252,10 @@ public class CoursesController implements MenuItem {
     public String getMenuItem() {
         return STRING_COURSE;
     }
+
+
+
 }
+
 
 

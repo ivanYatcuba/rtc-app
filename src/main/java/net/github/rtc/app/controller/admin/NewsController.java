@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.controller.common.ResourceNotFoundException;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.model.user.User;
@@ -91,7 +92,7 @@ public class NewsController implements MenuItem {
         final News news = newsService.findByCode(newsCode);
 
         if (newsService.isNotFound(news)) {
-            return new ModelAndView("error404");
+            throw new ResourceNotFoundException();
         }
 
         mav.addObject(STRING_NEWS, news);
