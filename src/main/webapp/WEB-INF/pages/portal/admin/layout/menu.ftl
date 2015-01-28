@@ -1,3 +1,4 @@
+<#--if you change this menu, you have to change MenuItems.class!!!-->
 <ul class="nav nav-sidebar">
     <li id="activityMenuItem" class="navMenuItem"><a href='<@spring.url"/admin/search/activity"/>'>Activity</a></li >
     <li id="newsMenuItem" class="navMenuItem"><a href='<@spring.url"/admin/search/news"/>'>News</a></li>
@@ -11,6 +12,7 @@
         "user": "#userMenuItem", "report": "#reportMenuItem", "": "#activityMenuItem"}
 
     $(document).ready(function() {
+    <#--if you change this menu, you have to change MenuItems.class!!!-->
         $(mainMenuMap['${menuItem!""}']).addClass("active")
     });
 

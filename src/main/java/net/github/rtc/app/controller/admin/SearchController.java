@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.controller.common.ResourceNotFoundException;
 import net.github.rtc.app.model.activity.Activity;
 import net.github.rtc.app.model.activity.ActivityAction;
 import net.github.rtc.app.model.activity.ActivityEntity;
@@ -72,8 +73,11 @@ public class SearchController {
 
     @RequestMapping(value = "/search/{menuItem}", method = RequestMethod.GET)
     public ModelAndView searchPageWithParam(@PathVariable(MENU_ITEM) final String menuItem) {
+         if (!MenuItems.contains(menuItem)) {
+             throw new ResourceNotFoundException();
+         }
         final ModelAndView mav = new ModelAndView("redirect:" + "/admin/search");
-        mav.addObject(MENU_ITEM, menuItem);
+        mav.addObject(MENU_ITEM, menuItem.toString());
         return mav;
     }
 
