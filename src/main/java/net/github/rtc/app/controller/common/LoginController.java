@@ -33,10 +33,6 @@ public class LoginController {
         return buildLoginMav(model);
     }
 
-    @RequestMapping(value = "/j_spring_security_check{other}", method = RequestMethod.GET)
-    public void securityError(final ModelMap model, @PathVariable("other") String other) {
-        throw new ResourceNotFoundException();
-    }
 
     @RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
     public ModelAndView loginError(final ModelMap model) {
