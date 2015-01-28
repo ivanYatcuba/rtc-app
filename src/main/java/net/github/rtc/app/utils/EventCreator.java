@@ -5,6 +5,7 @@ import net.github.rtc.app.model.activity.ActivityAction;
 import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.activity.IActivity;
 import net.github.rtc.app.utils.events.ActivityEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 
@@ -25,7 +26,7 @@ public class EventCreator implements ApplicationEventPublisherAware {
     }
 
     @Override
-    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-        this.publisher = applicationEventPublisher;
+    public void setApplicationEventPublisher(ApplicationEventPublisher publisher) {
+        this.publisher = publisher;
     }
 }

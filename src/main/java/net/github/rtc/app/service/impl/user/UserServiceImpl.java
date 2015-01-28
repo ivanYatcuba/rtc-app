@@ -46,7 +46,6 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
         user.setRegisterDate(dateService.getCurrentDate());
         user.setCode(getCode());
         getDao().create(user);
-        creator.createAndPublishEvent(user, ActivityAction.SAVED);
         return user;
 //        return super.create(user);
     }
@@ -57,6 +56,7 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
         if (!image.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), image));
         }
+        creator.createAndPublishEvent(user, ActivityAction.SAVED);
         return create(user);
     }
 
