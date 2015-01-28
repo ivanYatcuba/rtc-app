@@ -27,7 +27,11 @@ public class FileUpload implements java.io.Serializable {
         try {
             final File file = new File(imgfold + adr);
             if (file.exists()) {
-                file.delete();
+                if (file.delete()) {
+                    System.out.println(file.getName() + " is deleted");
+                } else {
+                    System.out.println("Delete operation is failed");
+                }
             }
             FileUtils.writeByteArrayToFile(file, image.getBytes());
         } catch (Exception e) {
@@ -40,7 +44,11 @@ public class FileUpload implements java.io.Serializable {
     public void folderPhoto() {
         final File f = new File(imgfold);
         if (!f.exists()) {
-            f.mkdir();
+            if (f.mkdir()) {
+                System.out.println("Directory is created");
+            } else {
+                System.out.println("Directory is not created");
+            }
         }
     }
 

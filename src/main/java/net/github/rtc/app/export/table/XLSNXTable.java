@@ -49,7 +49,11 @@ public class XLSNXTable implements ReportTable {
     public void writeToFile(final String fileName) throws IOException {
         final File file = new File(fileName);
         if (!file.exists()) {
-            file.createNewFile();
+            if (file.createNewFile()) {
+                System.out.println("File is created");
+            } else {
+                System.out.println("File is not created");
+            }
         }
         final FileOutputStream fileOut = new FileOutputStream(file);
         sheet.getWorkbook().write(fileOut);
