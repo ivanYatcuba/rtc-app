@@ -5,7 +5,6 @@ import net.github.rtc.app.model.activity.ActivityAction;
 import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.activity.IActivity;
 import net.github.rtc.app.utils.events.ActivityEvent;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 
