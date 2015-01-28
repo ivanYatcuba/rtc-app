@@ -46,8 +46,12 @@ public class AtomFeedView extends AbstractAtomFeedView {
      */
     private void setUpdatedIfNeeded(Map<String, Object> model, Feed feed) {
         final Date lastUpdate = (Date) model.get(FeedNewsController.LAST_UPDATE_VIEW_KEY);
-        if (feed.getUpdated() == null || lastUpdate != null || lastUpdate.compareTo(feed.getUpdated()) > 0) {
-            feed.setUpdated(lastUpdate);
+        try {
+            if (feed.getUpdated() == null || lastUpdate != null || lastUpdate.compareTo(feed.getUpdated()) > 0) {
+                feed.setUpdated(lastUpdate);
+            }
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
         }
     }
 
