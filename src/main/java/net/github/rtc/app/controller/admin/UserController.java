@@ -63,11 +63,6 @@ public class UserController implements MenuItem {
     public ModelAndView userPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         final User user = userService.findByCode(code);
-
-        if (userService.isNotFound(user)) {
-            throw new ResourceNotFoundException();
-        }
-
         mav.addObject(STRING_USER, user);
         return mav;
     }

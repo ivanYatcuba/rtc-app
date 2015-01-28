@@ -19,5 +19,4 @@ public interface GenericService<T> {
 
     SearchResults<T> search(AbstractSearchCommand searchCommand);
 
-    boolean isNotFound(T type);
 }

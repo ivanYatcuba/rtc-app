@@ -93,10 +93,6 @@ public class ExportController implements MenuItem {
     public ModelAndView viewReport(@PathVariable final String reportCode) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         final ReportDetails report = reportService.findByCode(reportCode);
-
-        if (reportService.isNotFound(report)) {
-            throw new ResourceNotFoundException();
-        }
         mav.addObject(STRING_REPORT, report);
         return mav;
     }

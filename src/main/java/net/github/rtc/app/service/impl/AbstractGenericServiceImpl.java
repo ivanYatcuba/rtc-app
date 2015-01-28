@@ -1,5 +1,6 @@
 package net.github.rtc.app.service.impl;
 
+import net.github.rtc.app.controller.common.ResourceNotFoundException;
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.service.CodeGenerationService;
@@ -22,7 +23,7 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
     protected String getCode() {
         String code = codeGenerationService.generate();
         while (true) {
-            if (findByCode(code) == null) {
+            if (isExistCode(code)) {
                 return code;
             }
             code = codeGenerationService.generate();
@@ -36,7 +37,9 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
 
     @Override
     public T findByCode(String code) {
-        return getDao().findByCode(code);
+        T obj = getDao().findByCode(code);
+        if(obj==null) throw new ResourceNotFoundException();
+        return obj;
     }
 
     @Override
@@ -61,10 +64,5 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
         return getDao().search(searchCommand);
     }
 
-    @Override
-    public boolean isNotFound(T t) {
-        return t == null;
-    }
-
-
+    private boolean isExistCode(String code) { return getDao().findByCode(code) == null; }
 }

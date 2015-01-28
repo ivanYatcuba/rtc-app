@@ -99,11 +99,6 @@ public class CoursesController implements MenuItem {
       newsJustCreated) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         final Course course = courseService.findByCode(courseCode);
-
-        if (courseService.isNotFound(course)) {
-            throw new ResourceNotFoundException();
-        }
-
         mav.addObject(STRING_COURSE, course);
         mav.addObject("newsInfo", newsJustCreated);
         return mav;

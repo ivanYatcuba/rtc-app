@@ -90,11 +90,6 @@ public class NewsController implements MenuItem {
     public ModelAndView single(@PathVariable final String newsCode) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         final News news = newsService.findByCode(newsCode);
-
-        if (newsService.isNotFound(news)) {
-            throw new ResourceNotFoundException();
-        }
-
         mav.addObject(STRING_NEWS, news);
         return mav;
     }
