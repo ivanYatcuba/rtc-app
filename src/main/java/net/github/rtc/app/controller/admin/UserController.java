@@ -1,6 +1,7 @@
 package net.github.rtc.app.controller.admin;
 
 
+import net.github.rtc.app.model.user.EnglishLevel;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
@@ -184,12 +185,8 @@ public class UserController implements MenuItem {
     }
 
     @ModelAttribute("english")
-    public Collection<String> getEnglish() {
-        final Collection<String> s = new ArrayList<String>();
-        s.add("Basic");
-        s.add("Intermediate");
-        s.add("Advanced");
-        return s;
+    public EnglishLevel[] getEnglish() {
+        return EnglishLevel.values();
     }
 
     @ModelAttribute("currentUser")
