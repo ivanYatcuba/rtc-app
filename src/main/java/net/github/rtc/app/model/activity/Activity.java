@@ -16,7 +16,7 @@ public class Activity extends AbstractPersistenceObject implements java.io.Seria
     @Enumerated(EnumType.STRING)
     private ActivityAction action;
     @Temporal(TemporalType.DATE)
-    private Date actionDate;
+    private Date actionDate = new Date();
 
     public Activity() {
     }
