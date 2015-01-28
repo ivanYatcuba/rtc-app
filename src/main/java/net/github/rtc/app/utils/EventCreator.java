@@ -1,25 +1,25 @@
 package net.github.rtc.app.utils;
 
 
+import net.github.rtc.app.model.activity.Activity;
 import net.github.rtc.app.model.activity.ActivityAction;
 import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.activity.IActivity;
 import net.github.rtc.app.utils.events.ActivityEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.ServletContext;
 public class EventCreator implements ApplicationEventPublisherAware {
 
     private ApplicationEventPublisher publisher;
-    private Object source;
-    private ActivityEntity entity;
 
-    public EventCreator(Object source, ActivityEntity entity) {
-        this.source = source;
-        this.entity = entity;
-    }
-
-    public void createAndPublishEvent(IActivity activity, ActivityAction action) {
+    public void createAndPublishEvent(Object source, IActivity activity, ActivityEntity entity, ActivityAction action) {
         final ActivityEvent event = new ActivityEvent(source, activity.getLogDetail(), entity, action);
         publisher.publishEvent(event);
     }
@@ -28,4 +28,5 @@ public class EventCreator implements ApplicationEventPublisherAware {
     public void setApplicationEventPublisher(ApplicationEventPublisher publisher) {
         this.publisher = publisher;
     }
+
 }

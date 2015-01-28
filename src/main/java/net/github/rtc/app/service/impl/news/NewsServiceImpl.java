@@ -17,25 +17,25 @@ import java.util.List;
 public class NewsServiceImpl extends AbstractGenericServiceImpl<News> implements NewsService {
     @Autowired
     private NewsDao newsDao;
-
-    private EventCreator creator = new EventCreator(this, ActivityEntity.NEWS);
+    @Autowired
+    private EventCreator creator;
 
     @Override
     public News create(News news) {
-        creator.createAndPublishEvent(news, ActivityAction.SAVED);
+        creator.createAndPublishEvent(this, news, ActivityEntity.NEWS, ActivityAction.SAVED);
         return super.create(news);
     }
 
     @Override
     public News update(News news) {
-        creator.createAndPublishEvent(news, ActivityAction.UPDATED);
+        creator.createAndPublishEvent(this, news, ActivityEntity.NEWS, ActivityAction.UPDATED);
         return super.update(news);
     }
 
     @Override
     public void deleteByCode(String code) {
         final News news = findByCode(code);
-        creator.createAndPublishEvent(news, ActivityAction.REMOVED);
+        creator.createAndPublishEvent(this, news, ActivityEntity.NEWS, ActivityAction.REMOVED);
         super.deleteByCode(code);
     }
 

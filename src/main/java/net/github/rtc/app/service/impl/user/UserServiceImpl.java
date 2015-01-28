@@ -33,8 +33,8 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     private DateService dateService;
     @Autowired
     private FileUpload upload;
-
-    private EventCreator creator = new EventCreator(this, ActivityEntity.USER);
+    @Autowired
+    private EventCreator creator;
 
     @Override
     protected GenericDao<User> getDao() {
@@ -56,20 +56,20 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
         if (!image.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), image));
         }
-        creator.createAndPublishEvent(user, ActivityAction.SAVED);
+        creator.createAndPublishEvent(this, user, ActivityEntity.USER, ActivityAction.SAVED);
         return create(user);
     }
 
     @Override
     public User update(final User user) {
-        creator.createAndPublishEvent(user, ActivityAction.UPDATED);
+        creator.createAndPublishEvent(this, user, ActivityEntity.USER, ActivityAction.UPDATED);
         return super.update(user);
     }
 
     @Override
     public void deleteByCode(String code) {
         final User user = super.findByCode(code);
-        creator.createAndPublishEvent(user, ActivityAction.REMOVED);
+        creator.createAndPublishEvent(this, user, ActivityEntity.USER, ActivityAction.REMOVED);
         super.deleteByCode(code);
     }
 

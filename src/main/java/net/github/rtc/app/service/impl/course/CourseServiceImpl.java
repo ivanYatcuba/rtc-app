@@ -36,8 +36,8 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     private DateService dateService;
     @Autowired
     private CourseNewsCreator courseNewsCreator;
-
-    private EventCreator creator = new EventCreator(this, ActivityEntity.COURSE);
+    @Autowired
+    private EventCreator creator;
 
     @Override
     public Class<Course> getType() {
@@ -51,20 +51,20 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
 
     @Override
     public Course create(Course course) {
-        creator.createAndPublishEvent(course, ActivityAction.SAVED);
+        creator.createAndPublishEvent(this, course, ActivityEntity.COURSE, ActivityAction.SAVED);
         return super.create(course);
     }
 
     @Override
     public Course update(Course course) {
-        creator.createAndPublishEvent(course, ActivityAction.UPDATED);
+        creator.createAndPublishEvent(this, course, ActivityEntity.COURSE, ActivityAction.UPDATED);
         return super.update(course);
     }
 
     @Override
     public void deleteByCode(String code) {
         final Course course = findByCode(code);
-        creator.createAndPublishEvent(course, ActivityAction.REMOVED);
+        creator.createAndPublishEvent(this, course, ActivityEntity.COURSE, ActivityAction.REMOVED);
         super.deleteByCode(code);
     }
 
