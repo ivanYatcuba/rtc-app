@@ -1,5 +1,6 @@
 package net.github.rtc.app.utils;
 
+import net.github.rtc.app.model.user.EnglishLevel;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
@@ -49,7 +50,11 @@ public class Bootstrap implements InitializingBean {
             admin.setNote("note");
             admin.setBirthDate(dateService.getCurrentDate());
             admin.setStatus(UserStatus.ACTIVE);
-            admin.setEnglish("eng");
+            admin.setEnglish(EnglishLevel.INTERMEDIATE);
+            admin.setCity("Dp");
+            admin.setUniversity("");
+            admin.setFaculty("");
+            admin.setSpeciality("");
             userService.create(admin);
         }
     }

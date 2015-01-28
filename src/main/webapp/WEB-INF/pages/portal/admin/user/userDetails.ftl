@@ -113,7 +113,7 @@
     </div>
 
     <div class="col-md-6">
-      <@formMacro.rtcFormLabelOut "user.english" "${user.english}" "" "col-md-5"/>
+      <@formMacro.rtcFormLabelOut "user.english" "${user.english}" "user.english.labels." "col-md-5"/>
     </div>
 </div>
 

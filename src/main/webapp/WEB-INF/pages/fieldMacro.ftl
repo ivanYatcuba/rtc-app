@@ -255,7 +255,11 @@
                 <#if tmp_has_next>,</#if>
             </#list>
         <#else>
-               <#if "${path}"??>${path}<#else>&nbsp</#if>
+            <#if  messagePrefix == "">
+                <#if "${path}"??>${path}<#else>&nbsp</#if>
+            <#else>
+                <#if "${path}"??><@spring.message "${messagePrefix + path}"/><#else>&nbsp</#if>
+            </#if>
         </#if>
     </div>
     </#if>

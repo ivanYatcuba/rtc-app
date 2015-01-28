@@ -80,10 +80,11 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
     @Column
     @ForExport("Speciality")
     private String speciality;
-    @NotEmpty
+    @NotNull
     @Column
     @ForExport("English")
-    private String english;
+    @Enumerated(EnumType.STRING)
+    private EnglishLevel english;
     @NotEmpty
     @Column
     @Length(max = LARGE_LENGTH)
@@ -146,11 +147,11 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
         this.password = password;
     }
 
-    public String getEnglish() {
+    public EnglishLevel getEnglish() {
         return this.english;
     }
 
-    public void setEnglish(final String english) {
+    public void setEnglish(final EnglishLevel english) {
         this.english = english;
     }
 
