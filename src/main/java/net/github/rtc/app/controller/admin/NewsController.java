@@ -36,8 +36,6 @@ public class NewsController implements MenuItem {
     private static final String CREATE_VIEW = "/news/newsCreate";
     private static final String DETAILS_VIEW = "/news/newsDetails";
 
-    private static Logger log = LoggerFactory.getLogger(NewsController.class.getName());
-
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -159,8 +157,6 @@ public class NewsController implements MenuItem {
         final String name = auth.getName(); //get logged in username
         news.setCreateDate(dateService.getCurrentDate());
         news.setAuthor(userService.loadUserByUsername(name));
-        System.out.println(news.toString());
-        log.debug(news.toString());
         if (publish) {
             news.setStatus(NewsStatus.PUBLISHED);
         }
