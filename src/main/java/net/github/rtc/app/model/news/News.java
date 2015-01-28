@@ -32,7 +32,7 @@ public class News extends AbstractPersistenceObject implements Serializable, IAc
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
+    private Date createDate = new Date();
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)

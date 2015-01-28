@@ -2,10 +2,10 @@ package net.github.rtc.app.utils.notifiers;
 
 import net.github.rtc.app.model.activity.Activity;
 import net.github.rtc.app.model.activity.ActivityAction;
-import net.github.rtc.app.utils.events.UpdateEntityEvent;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.ActivityService;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.events.UpdateEntityEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.core.context.SecurityContextHolder;

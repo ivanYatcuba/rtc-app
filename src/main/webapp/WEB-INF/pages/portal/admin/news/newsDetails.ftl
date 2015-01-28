@@ -53,6 +53,6 @@
 </div>
 </div>
 <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
-<@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/news/${news.code}/edit" "Cancel" "/admin/search/${menuItem}"/>
+<@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/news/update/${news.code}" "Cancel" "/admin/search/${menuItem}"/>
 </div>
 </@layout.layout>
