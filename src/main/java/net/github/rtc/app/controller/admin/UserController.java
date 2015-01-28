@@ -1,6 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
-import net.github.rtc.app.controller.common.ResourceNotFoundException;
+
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;

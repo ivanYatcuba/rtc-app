@@ -4,13 +4,12 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -21,6 +20,8 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+
+    private final String STRING_ANONYMOS_USER = "anonymousUser"; //
 
     private ModelAndView buildLoginMav(final ModelMap model) {
         final ModelAndView mav
@@ -34,8 +35,17 @@ public class LoginController {
         return buildLoginMav(model);
     }
 
+    @RequestMapping(value = "/j_spring_security_check{other}", method = RequestMethod.GET)
+    public void securityError(final ModelMap model, @PathVariable("other") String other) {
+        throw new ResourceNotFoundException();
+    }
+
     @RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
-    public ModelAndView loginerror(final ModelMap model) {
+    public ModelAndView loginError(final ModelMap model) {
+
+        if(!ifAnonymous())
+            throw new ResourceNotFoundException();
+
         final ModelAndView mav = buildLoginMav(model);
         mav.addObject("error", "true");
 
@@ -68,5 +78,11 @@ public class LoginController {
         }
     }
 
+
+    public boolean ifAnonymous() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return authentication instanceof AnonymousAuthenticationToken;
+    }
 
 }
