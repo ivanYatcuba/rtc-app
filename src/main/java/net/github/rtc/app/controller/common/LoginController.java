@@ -21,8 +21,6 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    private final String STRING_ANONYMOS_USER = "anonymousUser"; //
-
     private ModelAndView buildLoginMav(final ModelMap model) {
         final ModelAndView mav
                 = new ModelAndView("welcome/welcomeLayout", model);
@@ -43,9 +41,9 @@ public class LoginController {
     @RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
     public ModelAndView loginError(final ModelMap model) {
 
-        if(!ifAnonymous())
+        if (!ifAnonymous()) {
             throw new ResourceNotFoundException();
-
+        }
         final ModelAndView mav = buildLoginMav(model);
         mav.addObject("error", "true");
 
@@ -81,7 +79,6 @@ public class LoginController {
 
     public boolean ifAnonymous() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         return authentication instanceof AnonymousAuthenticationToken;
     }
 

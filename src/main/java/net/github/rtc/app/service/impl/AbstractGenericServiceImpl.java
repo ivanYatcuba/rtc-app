@@ -38,7 +38,7 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
     @Override
     public T findByCode(String code) {
         final T obj = getDao().findByCode(code);
-        if (obj==null) {
+        if (obj == null) {
             throw new ResourceNotFoundException();
         }
         return obj;
