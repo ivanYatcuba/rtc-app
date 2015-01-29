@@ -3,10 +3,8 @@ package net.github.rtc.app.service.impl;
 import net.github.rtc.app.service.LogService;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +33,7 @@ public class LogServiceImpl implements LogService {
     @Override
     public String readLogFile(final String fileName) {
         final StringBuilder builder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(PATH_FOLDER + fileName))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(PATH_FOLDER + fileName), Charset.defaultCharset()))) {
             String currentLine;
             while ((currentLine = reader.readLine()) != null) {
                 builder.append(currentLine);
