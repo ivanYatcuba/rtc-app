@@ -31,7 +31,7 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
     }
 
     public Date getDate() {
-        return date;
+        return date == null ? null : new Date(date.getTime());
     }
 
     public String getUser() {
@@ -43,7 +43,9 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
     }
 
     public void setDate(final Date date) {
-        this.date = date;
+        if (date != null) {
+            this.date = new Date(date.getTime());
+        }
     }
 
     public void setUser(final String user) {
