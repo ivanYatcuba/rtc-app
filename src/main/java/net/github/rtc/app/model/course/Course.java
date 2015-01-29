@@ -119,19 +119,19 @@ public class Course extends AbstractPersistenceObject implements Serializable, I
     }
 
     public Date getStartDate() {
-        return (Date) startDate.clone();
+        return new Date(startDate.getTime());
     }
 
     public void setStartDate(final Date startDate) {
-        this.startDate = (Date) startDate.clone();
+        this.startDate = new Date(startDate.getTime());
     }
 
     public Date getEndDate() {
-        return (Date) endDate.clone();
+        return new Date(endDate.getTime());
     }
 
     public void setEndDate(final Date endDate) {
-        this.endDate = (Date) endDate.clone();
+        this.endDate = new Date(endDate.getTime());
     }
 
     public String getName() {
@@ -167,17 +167,17 @@ public class Course extends AbstractPersistenceObject implements Serializable, I
     }
 
     public Date getCreateDate() {
-        return (Date) createDate.clone();
+        return new Date(createDate.getTime());
     }
 
-    public void setCreateDate(final Date createDate) { this.createDate = (Date) createDate.clone(); }
+    public void setCreateDate(final Date createDate) { this.createDate = new Date(createDate.getTime()); }
 
     public Date getPublishDate() {
-        return (Date) publishDate.clone();
+        return new Date(publishDate.getTime());
     }
 
     public void setPublishDate(final Date publishDate) {
-        this.publishDate = (Date) publishDate.clone();
+        this.publishDate = new Date(publishDate.getTime());
     }
 
     public boolean isPublished() {

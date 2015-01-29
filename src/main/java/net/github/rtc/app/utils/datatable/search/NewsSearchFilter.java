@@ -101,11 +101,11 @@ public class NewsSearchFilter extends AbstractSearchCommand {
     }
 
     public Date getCreateDate() {
-        return (Date) createDate.clone();
+        return new Date(createDate.getTime());
     }
 
     public void setCreateDate(Date createDate) {
-        this.createDate = (Date) createDate.clone();
+        this.createDate = new Date(createDate.getTime());
     }
 
     public char getDateMoreLessEq() {

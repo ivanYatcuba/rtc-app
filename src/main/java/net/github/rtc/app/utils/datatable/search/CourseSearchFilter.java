@@ -51,11 +51,11 @@ public class CourseSearchFilter extends AbstractSearchCommand {
     }
 
     public Date getStartDate() {
-        return (Date) startDate.clone();
+        return new Date(startDate.getTime());
     }
 
     public void setStartDate(final Date startDate) {
-        this.startDate = (Date) startDate.clone();
+        this.startDate = new Date(startDate.getTime());
     }
 
     public CourseStatus getStatus() {

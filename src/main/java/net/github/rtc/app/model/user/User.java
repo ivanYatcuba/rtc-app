@@ -319,27 +319,27 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
     }
 
     public Date getBirthDate() {
-        return (Date) birthDate.clone();
+        return new Date(birthDate.getTime());
     }
 
     public void setBirthDate(final Date birthDate) {
-        this.birthDate = (Date) birthDate.clone();
+        this.birthDate = new Date(birthDate.getTime());
     }
 
     public Date getRegisterDate() {
-        return (Date) registerDate.clone();
+        return new Date(registerDate.getTime());
     }
 
     public void setRegisterDate(final Date registerDate) {
-        this.registerDate = (Date) registerDate.clone();
+        this.registerDate = new Date(registerDate.getTime());
     }
 
     public Date getRemovalDate() {
-        return (Date) removalDate.clone();
+        return new Date(removalDate.getTime());
     }
 
     public void setRemovalDate(final Date removalDate) {
-        this.removalDate = (Date) removalDate.clone();
+        this.removalDate = new Date(removalDate.getTime());
     }
 
     public UserStatus getStatus() {
