@@ -64,11 +64,11 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
     public Date getRegisterDate() {
 
-        return registerDate;
+        return (Date) registerDate.clone();
     }
 
     public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
+        this.registerDate = (Date) registerDate.clone();
     }
 
     @Override

@@ -83,11 +83,11 @@ public class ReportDetails extends AbstractPersistenceObject {
     }
 
     public Date getCreatedDate() {
-        return createdDate;
+        return (Date) createdDate.clone();
     }
 
     public void setCreatedDate(final Date createdDate) {
-        this.createdDate = createdDate;
+        this.createdDate = (Date) createdDate.clone();
     }
 
     public List<Field> getFieldsFromClass() throws NoSuchFieldException {

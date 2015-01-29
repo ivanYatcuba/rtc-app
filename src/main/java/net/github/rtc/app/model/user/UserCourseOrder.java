@@ -50,8 +50,8 @@ public class UserCourseOrder extends AbstractPersistenceObject {
       final String reason) {
         this.userCode = userCode;
         this.courseCode = courseCode;
-        this.requestDate = requestDate;
-        this.responseDate = responseDate;
+        this.requestDate = (Date) requestDate.clone();
+        this.responseDate = (Date) responseDate.clone();
         this.position = position;
         this.status = status;
         this.reason = reason;
@@ -77,19 +77,19 @@ public class UserCourseOrder extends AbstractPersistenceObject {
     }
 
     public Date getResponseDate() {
-        return responseDate;
+        return (Date) responseDate.clone();
     }
 
     public void setResponseDate(final Date responseDate) {
-        this.responseDate = responseDate;
+        this.responseDate = (Date) responseDate.clone();
     }
 
     public Date getRequestDate() {
-        return requestDate;
+        return (Date) requestDate.clone();
     }
 
     public void setRequestDate(final Date requestDate) {
-        this.requestDate = requestDate;
+        this.requestDate = (Date) requestDate.clone();
     }
 
     public UserRequestStatus getStatus() {
