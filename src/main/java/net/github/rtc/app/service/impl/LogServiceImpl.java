@@ -16,7 +16,7 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public List<String> getListOfLogs() {
-        final File folder = new File(PATH_FOLDER);
+        final File folder = new File(getPathFolder());
         final List<String> listOfFiles = new ArrayList<String>();
         if (folder.listFiles().length > 0) {
             for (final File fileEntry : folder.listFiles()) {
@@ -33,7 +33,7 @@ public class LogServiceImpl implements LogService {
     @Override
     public String readLogFile(final String fileName) {
         final StringBuilder builder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(PATH_FOLDER + fileName), Charset.defaultCharset()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(getPathFolder() + fileName), Charset.defaultCharset()))) {
             String currentLine;
             while ((currentLine = reader.readLine()) != null) {
                 builder.append(currentLine);
@@ -43,5 +43,9 @@ public class LogServiceImpl implements LogService {
             builder.append(e);
         }
         return builder.toString();
+    }
+
+    private String getPathFolder() {
+        return PATH_FOLDER;
     }
 }
