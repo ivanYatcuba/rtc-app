@@ -56,8 +56,11 @@ public class XLSNXTable implements ReportTable {
             }
         }
         final FileOutputStream fileOut = new FileOutputStream(file);
-        sheet.getWorkbook().write(fileOut);
-        fileOut.close();
+        try {
+            sheet.getWorkbook().write(fileOut);
+        } finally {
+            fileOut.close();
+        }
     }
 
 
