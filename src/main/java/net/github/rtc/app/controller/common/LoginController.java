@@ -15,25 +15,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * @author Vladislav Pikus
- */
 @Controller
 public class LoginController {
+
+    private  static final String LOGIN_LOGIN = "login/login";
 
     @Autowired
     private UserService userService;
 
-    private ModelAndView buildLoginMav(final ModelMap model) {
-        final ModelAndView mav
-                = new ModelAndView("welcome/welcomeLayout", model);
-        mav.addObject("content", "../portal/user/login");
-        return mav;
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String welcome() {
+        return "redirect:/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login(final ModelMap model) throws Exception {
-        return buildLoginMav(model);
+    public ModelAndView login() {
+        return new ModelAndView(LOGIN_LOGIN);
     }
 
 
@@ -43,7 +40,7 @@ public class LoginController {
         if (!ifAnonymous()) {
             throw new ResourceNotFoundException();
         }
-        final ModelAndView mav = buildLoginMav(model);
+        final ModelAndView mav = new ModelAndView(LOGIN_LOGIN, model);
         mav.addObject("error", "true");
 
         return mav;

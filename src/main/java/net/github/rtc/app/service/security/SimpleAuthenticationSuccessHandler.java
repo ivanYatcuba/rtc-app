@@ -53,7 +53,7 @@ public class SimpleAuthenticationSuccessHandler implements
                 return "/admin";
             }
             if ("ROLE_USER".equals(grantedAuthority.getAuthority())) {
-                return "/user/view/";
+                return "/user/profile/";
             }
         }
         return "/";
