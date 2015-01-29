@@ -8,7 +8,7 @@
             <th><@spring.message "user.search.result.header.user"/></th>
             <th><@spring.message "user.search.result.header.email"/></th>
             <th><@spring.message "user.search.result.header.created.date"/></th>
-            <th style="text-align: center"><@spring.message "user.search.result.header.status"/></th>
+            <th><@spring.message "user.search.result.header.status"/></th>
             <th></th>
         </tr>
         </thead>
