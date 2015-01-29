@@ -63,7 +63,7 @@ public class News extends AbstractPersistenceObject implements Serializable, IAc
     }
 
     public Date getPublishDate() {
-        return new Date(publishDate.getTime());
+        return publishDate == null ? null : new Date(publishDate.getTime());
     }
 
     public void setPublishDate(final Date publishDate) {
@@ -97,7 +97,7 @@ public class News extends AbstractPersistenceObject implements Serializable, IAc
     }
 
     public Date getCreateDate() {
-        return new Date(createDate.getTime());
+        return createDate == null ? null : new Date(createDate.getTime());
     }
 
     public void setCreateDate(final Date createDate) {

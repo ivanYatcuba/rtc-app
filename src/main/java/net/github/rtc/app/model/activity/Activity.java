@@ -38,7 +38,7 @@ public class Activity extends AbstractPersistenceObject implements java.io.Seria
     }
 
     public Date getActionDate() {
-        return new Date(actionDate.getTime());
+        return actionDate == null ? null : new Date(actionDate.getTime());
     }
 
     public void setActionDate(final Date actionDate) {

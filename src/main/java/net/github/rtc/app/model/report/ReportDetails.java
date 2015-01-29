@@ -83,7 +83,7 @@ public class ReportDetails extends AbstractPersistenceObject {
     }
 
     public Date getCreatedDate() {
-        return new Date(createdDate.getTime());
+        return createdDate == null ? null : new Date(createdDate.getTime());
     }
 
     public void setCreatedDate(final Date createdDate) {
