@@ -116,3 +116,4 @@ public class UserCourseOrder extends AbstractPersistenceObject {
         this.reason = reason;
     }
 }
+

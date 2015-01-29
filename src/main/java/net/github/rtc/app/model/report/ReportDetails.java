@@ -94,3 +94,4 @@ public class ReportDetails extends AbstractPersistenceObject {
         return ExportFieldExtractor.getFieldsFromClass(exportClass.getValue(), fields);
     }
 }
+

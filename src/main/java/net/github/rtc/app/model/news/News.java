@@ -132,3 +132,4 @@ public class News extends AbstractPersistenceObject implements Serializable, IAc
         return builder.toString();
     }
 }
+

@@ -111,3 +111,4 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
         return criteria;
     }
 }
+

@@ -69,7 +69,7 @@ public class AjaxTimeoutRedirectFilter extends GenericFilterBean {
                     if (throwable instanceof ServletException) {
                         return ((ServletException) throwable).getRootCause();
                     } else {
-                        throw  new IllegalArgumentException();
+                        throw new IllegalArgumentException();
                     }
                 }
             });

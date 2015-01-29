@@ -263,3 +263,4 @@ public class Course extends AbstractPersistenceObject implements Serializable, I
         return builder.toString();
     }
 }
+
