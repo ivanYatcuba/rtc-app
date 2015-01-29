@@ -83,15 +83,14 @@ public class ReportDetails extends AbstractPersistenceObject {
     }
 
     public Date getCreatedDate() {
-        return new Date(createdDate.getTime());
+        return createdDate;
     }
 
     public void setCreatedDate(final Date createdDate) {
-        this.createdDate = new Date(createdDate.getTime());
+        this.createdDate = createdDate;
     }
 
     public List<Field> getFieldsFromClass() throws NoSuchFieldException {
         return ExportFieldExtractor.getFieldsFromClass(exportClass.getValue(), fields);
     }
 }
-

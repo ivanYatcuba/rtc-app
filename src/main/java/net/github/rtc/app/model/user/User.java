@@ -319,27 +319,27 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
     }
 
     public Date getBirthDate() {
-        return new Date(birthDate.getTime());
+        return birthDate;
     }
 
     public void setBirthDate(final Date birthDate) {
-        this.birthDate = new Date(birthDate.getTime());
+        this.birthDate = birthDate;
     }
 
     public Date getRegisterDate() {
-        return new Date(registerDate.getTime());
+        return registerDate;
     }
 
     public void setRegisterDate(final Date registerDate) {
-        this.registerDate = new Date(registerDate.getTime());
+        this.registerDate = registerDate;
     }
 
     public Date getRemovalDate() {
-        return new Date(removalDate.getTime());
+        return removalDate;
     }
 
     public void setRemovalDate(final Date removalDate) {
-        this.removalDate = new Date(removalDate.getTime());
+        this.removalDate = removalDate;
     }
 
     public UserStatus getStatus() {
@@ -386,5 +386,4 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
         return builder.toString();
     }
 }
-
 

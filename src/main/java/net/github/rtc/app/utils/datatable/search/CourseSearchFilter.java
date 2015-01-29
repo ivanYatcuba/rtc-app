@@ -137,4 +137,3 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         return criteria;
     }
 }
-

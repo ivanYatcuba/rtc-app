@@ -116,4 +116,3 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         this.dateMoreLessEq = dateMoreLessEq;
     }
 }
-
