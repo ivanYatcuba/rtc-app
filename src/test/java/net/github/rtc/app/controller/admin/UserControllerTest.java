@@ -69,20 +69,6 @@ public class UserControllerTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
-    /*@Test
-    public void viewAll() throws Exception {
-        SearchResults<User> resultUserList = new SearchResults<>();
-        resultUserList.setResults(Arrays.asList(new User(), new User()));
-        when(userService.search((UserSearchFilter) notNull())).thenReturn(resultUserList);
-        mockMvc.perform(get("/admin/user/viewAll"))
-                .andExpect(status().isOk())
-                .andExpect(view().name(ROOT + PATH_PAGE_VIEW_ALL_USERS))
-                .andExpect(model().attributeExists(STRING_USERS))
-                .andExpect(model().attributeExists(STRING_AUTHORITIES))
-                .andExpect(model().attributeExists(STRING_USER_FILTER))
-                .andExpect(model().attributeExists("currentPage"))
-                .andExpect(model().attributeExists("lastPage"));
-    }*/
     @Ignore
     @Test
     public void editPage () throws Exception{

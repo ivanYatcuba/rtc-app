@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.report.ExportFormat;
 import net.github.rtc.app.model.report.ReportClasses;

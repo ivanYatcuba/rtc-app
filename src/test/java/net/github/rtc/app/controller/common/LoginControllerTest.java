@@ -51,8 +51,7 @@ public class LoginControllerTest {
     @Test
     public void testLogin() throws Exception {
         mockMvc.perform(get("/login"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("content"));
+                .andExpect(status().isOk());
     }
 //todo
 //    @Test(expected = ResourceNotFoundException.class)

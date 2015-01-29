@@ -1,6 +1,7 @@
 package net.github.rtc.app.controller.admin;
 
 
+import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.model.user.EnglishLevel;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
