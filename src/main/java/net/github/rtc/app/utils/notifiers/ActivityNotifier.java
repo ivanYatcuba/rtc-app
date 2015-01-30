@@ -2,7 +2,7 @@ package net.github.rtc.app.utils.notifiers;
 
 import net.github.rtc.app.model.activity.Activity;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.service.ActivityService;
+import net.github.rtc.app.service.activity.ActivityService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.events.ActivityEvent;

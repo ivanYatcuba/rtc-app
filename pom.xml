@@ -12,6 +12,7 @@
         <spring.security.version>3.2.4.RELEASE</spring.security.version>
         <hibernate.version>4.2.2.Final</hibernate.version>
         <poi.version>3.10-FINAL</poi.version>
+        <aspect.version>1.8.4</aspect.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -275,6 +276,24 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>${aspect.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspect.version}</version>
         </dependency>
 
     </dependencies>

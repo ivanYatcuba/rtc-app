@@ -2,8 +2,6 @@ package net.github.rtc.app.service.impl.course;
 
 import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.dao.GenericDao;
-import net.github.rtc.app.model.activity.ActivityAction;
-import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.User;
@@ -11,7 +9,6 @@ import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
 import net.github.rtc.app.utils.CourseNewsCreator;
-import net.github.rtc.app.utils.EventCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
@@ -36,8 +33,6 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     private DateService dateService;
     @Autowired
     private CourseNewsCreator courseNewsCreator;
-    @Autowired
-    private EventCreator creator;
 
     @Override
     public Class<Course> getType() {
@@ -47,25 +42,6 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     @Override
     protected GenericDao<Course> getDao() {
         return coursesDao;
-    }
-
-    @Override
-    public Course create(Course course) {
-        creator.createAndPublishEvent(this, course, ActivityEntity.COURSE, ActivityAction.SAVED);
-        return super.create(course);
-    }
-
-    @Override
-    public Course update(Course course) {
-        creator.createAndPublishEvent(this, course, ActivityEntity.COURSE, ActivityAction.UPDATED);
-        return super.update(course);
-    }
-
-    @Override
-    public void deleteByCode(String code) {
-        final Course course = findByCode(code);
-        creator.createAndPublishEvent(this, course, ActivityEntity.COURSE, ActivityAction.REMOVED);
-        super.deleteByCode(code);
     }
 
     @Override

@@ -4,7 +4,6 @@ import net.github.rtc.app.model.user.EnglishLevel;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
-import net.github.rtc.app.service.ActivityService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.user.UserService;
 import org.jasypt.hibernate4.encryptor.HibernatePBEStringEncryptor;
@@ -27,8 +26,6 @@ public class Bootstrap implements InitializingBean {
     private UserService userService;
     @Autowired
     private DateService dateService;
-    @Autowired
-    private ActivityService activityService;
 
     public void loadTestUsers() {
         if (userService.loadUserByUsername(ADMIN_EMAIL) == null) {

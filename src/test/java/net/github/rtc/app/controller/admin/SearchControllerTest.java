@@ -2,7 +2,7 @@ package net.github.rtc.app.controller.admin;
 
 
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.service.ActivityService;
+import net.github.rtc.app.service.activity.ActivityService;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.report.ReportService;
