@@ -27,6 +27,8 @@ public class CourseController implements MenuItem {
     private static final String STRING_COURSE = "course";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_COURSES = "courses";
+    private static final int COURSES_PER_PAGE = 9;
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -37,7 +39,6 @@ public class CourseController implements MenuItem {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView userCourses() throws Exception {
         final ModelAndView mav = new ModelAndView(ROOT + "/course/courses");
-        mav.addObject("courses", courseService.findAllPublished());
         return mav;
     }
 
@@ -87,6 +88,8 @@ public class CourseController implements MenuItem {
 
     @ModelAttribute("courseFilter")
     public CourseSearchFilter getCourseSearchFilter() {
-        return new CourseSearchFilter();
+        final CourseSearchFilter filter = new CourseSearchFilter();
+        filter.setPerPage(COURSES_PER_PAGE);
+        return filter;
     }
 }
