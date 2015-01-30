@@ -8,7 +8,7 @@
             <th><@spring.message "user.search.result.header.user"/></th>
             <th><@spring.message "user.search.result.header.email"/></th>
             <th><@spring.message "user.search.result.header.created.date"/></th>
-            <th style="text-align: center"><@spring.message "user.search.result.header.status"/></th>
+            <th><@spring.message "user.search.result.header.status"/></th>
             <th></th>
         </tr>
         </thead>
@@ -26,7 +26,7 @@
                                 </#if>
                             </div>
                             <div class="col-md-10" style="padding-left: 22px; vertical-align: middle ">
-                                <a href="<@spring.url"/admin/user/userPage/${user.code}"/>">  ${user.surname + " " + user.name } </a>
+                                <a href="<@spring.url"/admin/user/view/${user.code}"/>">  ${user.surname + " " + user.name } </a>
                                 <br><font face="Aerial"><em>
                                 <#list user.authorities as role>
                             ${role.name.roleViewName}
@@ -146,7 +146,7 @@
                 Are you sure you want to remove User?
             </div>
             <div class="modal-footer">
-                <form name="deleteUser" action="<@spring.url"/admin/user/remove/"/>" method="post">
+                <form name="deleteUser" action="<@spring.url"/admin/user/remove/"/>" method="get">
                     <input type="hidden" id="userCode" name="userCode"/>
                     <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" onClick="javascript:PopUpHide()">Remove</button>

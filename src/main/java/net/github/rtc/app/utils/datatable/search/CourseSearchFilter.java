@@ -51,11 +51,13 @@ public class CourseSearchFilter extends AbstractSearchCommand {
     }
 
     public Date getStartDate() {
-        return startDate;
+        return startDate == null ? null : new Date(startDate.getTime());
     }
 
     public void setStartDate(final Date startDate) {
-        this.startDate = startDate;
+        if (startDate != null) {
+            this.startDate = new Date(startDate.getTime());
+        }
     }
 
     public CourseStatus getStatus() {
@@ -84,7 +86,7 @@ public class CourseSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc("startDate");
+        return Order.asc(STRING_START_DATE);
     }
 
     public DetachedCriteria getCriteria() {

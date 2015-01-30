@@ -71,7 +71,7 @@
         <@formMacro.rtcFormTextInput  "user.programmingLanguages" "user.programmingLanguages" "" "maxlength='255'"/>
     </div>
     <div class="col-md-6">
-        <@formMacro.rtcFormSingleSelect "user.english" "user.english",  ["Basic", "Intermediate", "Advanced"] "required" "" />
+        <@formMacro.rtcFormSingleSelect "user.english" "user.english" english "required" "" "user.english.labels." {"" : ""}/>
     </div>
 </div>
 <div class="row"><div class="col-md-10"><hr/></div></div>

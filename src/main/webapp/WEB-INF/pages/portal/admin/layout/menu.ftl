@@ -1,11 +1,4 @@
-<style>
-    .outside {
-        position: absolute;
-        left: 80px;
-        top: 650px;
-    }
-</style>
-
+<#--if you change this menu, you have to change MenuItems.class!!!-->
 <ul class="nav nav-sidebar">
     <li id="activityMenuItem" class="navMenuItem"><a href='<@spring.url"/admin/search/activity"/>'>Activity</a></li >
     <li id="newsMenuItem" class="navMenuItem"><a href='<@spring.url"/admin/search/news"/>'>News</a></li>
@@ -14,15 +7,17 @@
     <li id="reportMenuItem" class="navMenuItem"><a href='<@spring.url"/admin/search/report"/>'>Reports</a></li>
 </ul>
 
-<div class="outside">
-    <a href='<@spring.url"/admin/logs/list"/>'>Server Log</a>
-</div>
-
 <script type="text/javascript">
     var mainMenuMap = { "activity": "#activityMenuItem", "news": "#newsMenuItem", "course": "#courseMenuItem",
         "user": "#userMenuItem", "report": "#reportMenuItem", "": "#activityMenuItem"}
 
     $(document).ready(function() {
+    <#--if you change this menu, you have to change MenuItems.class!!!-->
         $(mainMenuMap['${menuItem!""}']).addClass("active")
     });
+
+    $(document).click(function() {
+        console.log($("#menu").val());
+    });
+
 </script>

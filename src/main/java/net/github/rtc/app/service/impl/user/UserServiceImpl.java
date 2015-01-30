@@ -2,18 +2,23 @@ package net.github.rtc.app.service.impl.user;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.UserDao;
+import net.github.rtc.app.model.activity.ActivityAction;
+import net.github.rtc.app.model.activity.ActivityEntity;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
+import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.date.DateService;
+import net.github.rtc.app.utils.EventCreator;
+import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,6 +31,10 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     private UserDao userDao;
     @Autowired
     private DateService dateService;
+    @Autowired
+    private FileUpload upload;
+    @Autowired
+    private EventCreator creator;
 
     @Override
     protected GenericDao<User> getDao() {
@@ -35,12 +44,33 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     @Override
     public User create(final User user) {
         user.setRegisterDate(dateService.getCurrentDate());
-        return super.create(user);
+        user.setCode(getCode());
+        getDao().create(user);
+        return user;
+//        return super.create(user);
+    }
+
+    @Override
+    public User create(User user, MultipartFile image) {
+        //set photo
+        if (!image.isEmpty()) {
+            user.setPhoto(upload.saveImage(user.getCode(), image));
+        }
+        creator.createAndPublishEvent(this, user, ActivityEntity.USER, ActivityAction.SAVED);
+        return create(user);
     }
 
     @Override
     public User update(final User user) {
+        creator.createAndPublishEvent(this, user, ActivityEntity.USER, ActivityAction.UPDATED);
         return super.update(user);
+    }
+
+    @Override
+    public void deleteByCode(String code) {
+        final User user = super.findByCode(code);
+        creator.createAndPublishEvent(this, user, ActivityEntity.USER, ActivityAction.REMOVED);
+        super.deleteByCode(code);
     }
 
     @Override
@@ -114,4 +144,5 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     public void deleteUsersMarkedForRemoval() {
         userDao.deletingUser();
     }
+
 }

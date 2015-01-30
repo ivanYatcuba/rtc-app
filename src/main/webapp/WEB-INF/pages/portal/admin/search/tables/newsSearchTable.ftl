@@ -8,7 +8,7 @@
             <th><@spring.message "news.search.result.header.title"/></th>
             <th><@spring.message "news.search.result.header.author"/></th>
             <th><@spring.message "news.search.result.header.created.date"/></th>
-            <th style="text-align: center;"><@spring.message "news.search.result.header.status"/></th>
+            <th><@spring.message "news.search.result.header.status"/></th>
             <th></th>
         </tr>
         </thead>
@@ -96,7 +96,7 @@
                 Are you sure you want to remove this news?
             </div>
             <div class="modal-footer">
-                <form name="deleteNews" action="<@spring.url"/admin/news/remove/"/>" method="post">
+                <form name="deleteNews" action="<@spring.url"/admin/news/remove/"/>" method="get">
                     <input type="hidden" id="newsCode" name="newsCode"/>
                     <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" onClick="javascript:PopUpHide()">Remove</button>

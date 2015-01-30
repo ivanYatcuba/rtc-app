@@ -1,13 +1,13 @@
 package net.github.rtc.app.controller.admin;
 
+
+import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.utils.date.DateService;
+import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.datatable.search.NewsSearchFilter;
-import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -44,28 +44,6 @@ public class NewsController implements MenuItem {
     @Autowired
     private ValidationContext validationContext;
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)//todo remove
-    public ModelAndView viewAll(@ModelAttribute(STRING_FILTER_NEWS) final NewsSearchFilter filterNews) {
-        final ModelAndView mav = new ModelAndView(ROOT + "/news/content/search/searchTable");
-        final SearchResults results = newsService.search(filterNews);
-        mav.addAllObjects(results.getPageModel());
-        mav.addObject(STRING_NEWS, results.getResults());
-        return mav;
-    }
-
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView viewAll() { //todo remove
-        final ModelAndView mav = new ModelAndView(ROOT + "/page/pageListNews");
-        final NewsSearchFilter newsFilter = new NewsSearchFilter();
-        newsFilter.setPage(1);
-        final SearchResults results = newsService.search(newsFilter);
-        mav.addAllObjects(results.getPageModel());
-        mav.addObject(STRING_NEWS, results.getResults());
-        mav.addObject(STRING_STATUSES, getStatuses());
-        mav.addObject(STRING_FILTER_NEWS, newsFilter);
-        return mav;
-    }
-
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         final ModelAndView mav = new ModelAndView(ROOT + CREATE_VIEW);
@@ -94,7 +72,7 @@ public class NewsController implements MenuItem {
      *
      * @return modelAndView("admin/news/layout")
      */
-    @RequestMapping(value = "/{newsCode}/edit", method = RequestMethod.GET) //todo change url
+    @RequestMapping(value = "update/{newsCode}", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable final String newsCode) {
         final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
         mav.getModelMap().addAttribute(STRING_NEWS, newsService.findByCode(newsCode));
@@ -128,7 +106,7 @@ public class NewsController implements MenuItem {
         return STRING_REDIRECT + STRING_ADMIN_SEARCH;
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST) //todo get
+    @RequestMapping(value = "/remove", method = RequestMethod.GET)
     public String setStatusForRemoval(@RequestParam final String newsCode) throws Exception {
         newsService.deleteByCode(newsCode);
         return STRING_REDIRECT + STRING_ADMIN_SEARCH;

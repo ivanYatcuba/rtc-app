@@ -1,5 +1,8 @@
 package net.github.rtc.app.controller.admin;
 
+
+import net.github.rtc.app.controller.common.MenuItem;
+import net.github.rtc.app.model.user.EnglishLevel;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
@@ -29,7 +32,7 @@ import java.util.*;
 public class UserController implements MenuItem {
 
     private static final String STRING_USER = "user";
-    private static final String REDIRECT_USER_PAGE = "redirect:/admin/user/userPage/";
+    private static final String REDIRECT_USER_PAGE = "redirect:/admin/user/view/";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_ADMIN_SEARCH = "redirect:/admin/search";
     private static final String STRING_USER_FILTER = "userFilter";
@@ -49,7 +52,7 @@ public class UserController implements MenuItem {
     @Value("${img.save.folder}")
     private String imgFold;
 
-    @RequestMapping(value = "/userPage/editPage/{code}", method = RequestMethod.GET) //todo change url
+    @RequestMapping(value = "/edit/{code}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
         mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
@@ -58,14 +61,15 @@ public class UserController implements MenuItem {
         return mav;
     }
 
-    @RequestMapping(value = "/userPage/{code}", method = RequestMethod.GET) //todo change urrl
+    @RequestMapping(value = "/view/{code}", method = RequestMethod.GET)
     public ModelAndView userPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
-        mav.addObject(STRING_USER, userService.findByCode(code));
+        final User user = userService.findByCode(code);
+        mav.addObject(STRING_USER, user);
         return mav;
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST) //todo get
+    @RequestMapping(value = "/remove", method = RequestMethod.GET)
     public String setStatusForRemoval(@RequestParam final String userCode) throws Exception {
         userService.markUserForRemoval(userCode);
         return REDIRECT_ADMIN_SEARCH;
@@ -90,7 +94,7 @@ public class UserController implements MenuItem {
         return REDIRECT_ADMIN_SEARCH;
     }
 
-    @RequestMapping(value = "/getExperts", method = RequestMethod.POST) //todo get
+    @RequestMapping(value = "/getExperts", method = RequestMethod.GET)
     public
     @ResponseBody
     Map<String, String> getExpertUsers() {
@@ -102,7 +106,7 @@ public class UserController implements MenuItem {
         return results;
     }
 
-    @RequestMapping(value = "/getAdmins", method = RequestMethod.POST) //todo get
+    @RequestMapping(value = "/getAdmins", method = RequestMethod.GET)
     public
     @ResponseBody
     Map<String, String> getAdminMapDataId() {
@@ -128,10 +132,6 @@ public class UserController implements MenuItem {
       @RequestParam(required = false) final boolean ifActive) {
         user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
         userService.create(user, img);
-    /*    if (!img.isEmpty()) {
-            user.setPhoto(upload.saveImage(user.getCode(), img));
-        }
-        userService.update(user);*/
         return REDIRECT_USER_PAGE + user.getCode();
     }
 
@@ -186,12 +186,8 @@ public class UserController implements MenuItem {
     }
 
     @ModelAttribute("english")
-    public Collection<String> getEnglish() {
-        final Collection<String> s = new ArrayList<String>();
-        s.add("Basic");
-        s.add("Intermediate");
-        s.add("Advanced");
-        return s;
+    public EnglishLevel[] getEnglish() {
+        return EnglishLevel.values();
     }
 
     @ModelAttribute("currentUser")

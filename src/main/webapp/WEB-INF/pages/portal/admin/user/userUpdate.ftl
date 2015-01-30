@@ -8,9 +8,9 @@
     <@spring.formHiddenInput "user.id" />
     <@spring.formHiddenInput "user.registerDate" />
     <@spring.formHiddenInput "user.status" />
-    <@spring.formHiddenInput "user.photo" />
+    <#if user.photo??><@spring.formHiddenInput "user.photo" /></#if>
     <#include "userForm.ftl" />
-    <@formMacro.rtcSubmit "Save" "Cancel" "/admin/user/userPage/${user.code}"/>
+    <@formMacro.rtcSubmit "Save" "Cancel" "/admin/user/view/${user.code}"/>
 </@formMacro.rtcForm>
 
 </@layout.layout>

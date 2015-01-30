@@ -1,9 +1,11 @@
 package net.github.rtc.app.utils;
 
+import net.github.rtc.app.model.user.EnglishLevel;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
-import net.github.rtc.app.utils.date.DateService;
+import net.github.rtc.app.service.ActivityService;
+import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.user.UserService;
 import org.jasypt.hibernate4.encryptor.HibernatePBEStringEncryptor;
 import org.springframework.beans.factory.InitializingBean;
@@ -25,6 +27,8 @@ public class Bootstrap implements InitializingBean {
     private UserService userService;
     @Autowired
     private DateService dateService;
+    @Autowired
+    private ActivityService activityService;
 
     public void loadTestUsers() {
         if (userService.loadUserByUsername(ADMIN_EMAIL) == null) {
@@ -46,7 +50,11 @@ public class Bootstrap implements InitializingBean {
             admin.setNote("note");
             admin.setBirthDate(dateService.getCurrentDate());
             admin.setStatus(UserStatus.ACTIVE);
-            admin.setEnglish("eng");
+            admin.setEnglish(EnglishLevel.INTERMEDIATE);
+            admin.setCity("Dp");
+            admin.setUniversity("");
+            admin.setFaculty("");
+            admin.setSpeciality("");
             userService.create(admin);
         }
     }

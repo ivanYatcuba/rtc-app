@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.controller.common.ResourceNotFoundException;
 import net.github.rtc.app.model.activity.Activity;
 import net.github.rtc.app.model.activity.ActivityAction;
 import net.github.rtc.app.model.activity.ActivityEntity;
@@ -14,6 +15,7 @@ import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
+import net.github.rtc.app.service.ActivityService;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.report.ReportService;
@@ -55,9 +57,9 @@ public class SearchController {
     private static final String MENU_ITEM = "menuItem";
     private static final String STRING_ACTIVITY = "activity";
     private static final String STRING_ACTIVITY_FILTER = "activityFilter";
-    public static final String STRING_ACTIVITY_ENTITIES = "activityEntities";
-    public static final String STRING_ACTIVITY_ACTIONS = "activityActions";
-    public static final String STRING_ACTIVITIES = "activities";
+    private static final String STRING_ACTIVITY_ENTITIES = "activityEntities";
+    private static final String STRING_ACTIVITY_ACTIONS = "activityActions";
+    private static final String STRING_ACTIVITIES = "activities";
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -70,9 +72,12 @@ public class SearchController {
     private ActivityService activityService;
 
     @RequestMapping(value = "/search/{menuItem}", method = RequestMethod.GET)
-    public ModelAndView searchPagewithParam(@PathVariable(MENU_ITEM) final String menuItem) {
+    public ModelAndView searchPageWithParam(@PathVariable(MENU_ITEM) final String menuItem) {
+         if (!MenuItems.contains(menuItem)) {
+             throw new ResourceNotFoundException();
+         }
         final ModelAndView mav = new ModelAndView("redirect:" + "/admin/search");
-        mav.addObject(MENU_ITEM, menuItem);
+        mav.addObject(MENU_ITEM, menuItem.toString());
         return mav;
     }
 

@@ -2,15 +2,9 @@ package net.github.rtc.app.model.activity;
 
 
 import net.github.rtc.app.model.AbstractPersistenceObject;
-import net.github.rtc.util.annotation.ForExport;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 public class Activity extends AbstractPersistenceObject implements java.io.Serializable {
@@ -22,7 +16,7 @@ public class Activity extends AbstractPersistenceObject implements java.io.Seria
     @Enumerated(EnumType.STRING)
     private ActivityAction action;
     @Temporal(TemporalType.DATE)
-    private Date actionDate;
+    private Date actionDate = new Date();
 
     public Activity() {
     }
@@ -44,11 +38,13 @@ public class Activity extends AbstractPersistenceObject implements java.io.Seria
     }
 
     public Date getActionDate() {
-        return actionDate;
+        return actionDate == null ? null : new Date(actionDate.getTime());
     }
 
-    public void setActionDate(Date actionDate) {
-        this.actionDate = actionDate;
+    public void setActionDate(final Date actionDate) {
+        if (actionDate != null) {
+            this.actionDate = new Date(actionDate.getTime());
+        }
     }
 
     public ActivityEntity getEntity() {

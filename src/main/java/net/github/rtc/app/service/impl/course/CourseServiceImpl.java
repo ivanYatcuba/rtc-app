@@ -2,24 +2,21 @@ package net.github.rtc.app.service.impl.course;
 
 import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.dao.GenericDao;
+import net.github.rtc.app.model.activity.ActivityAction;
 import net.github.rtc.app.model.activity.ActivityEntity;
-import net.github.rtc.app.model.activity.events.DeleteEntityEvent;
-import net.github.rtc.app.model.activity.events.NewEntityEvent;
-import net.github.rtc.app.model.activity.events.UpdateEntityEvent;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.course.CourseService;
+import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
-import net.github.rtc.app.utils.date.DateService;
 import net.github.rtc.app.utils.CourseNewsCreator;
+import net.github.rtc.app.utils.EventCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -28,7 +25,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implements CourseService, ApplicationEventPublisherAware {
+public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implements CourseService {
 
     private static final String COURSE_CANNOT_BE_NULL = "course cannot be null";
     private static final int STARTING_SOON_COURSE_COUNT = 3;
@@ -39,8 +36,8 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     private DateService dateService;
     @Autowired
     private CourseNewsCreator courseNewsCreator;
-
-    private ApplicationEventPublisher publisher;
+    @Autowired
+    private EventCreator creator;
 
     @Override
     public Class<Course> getType() {
@@ -54,23 +51,20 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
 
     @Override
     public Course create(Course course) {
-        NewEntityEvent entityEvent = new NewEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
-        publisher.publishEvent(entityEvent);
+        creator.createAndPublishEvent(this, course, ActivityEntity.COURSE, ActivityAction.SAVED);
         return super.create(course);
     }
 
     @Override
     public Course update(Course course) {
-        UpdateEntityEvent entityEvent = new UpdateEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
-        publisher.publishEvent(entityEvent);
+        creator.createAndPublishEvent(this, course, ActivityEntity.COURSE, ActivityAction.UPDATED);
         return super.update(course);
     }
 
     @Override
     public void deleteByCode(String code) {
-        Course course = findByCode(code);
-        DeleteEntityEvent entityEvent = new DeleteEntityEvent(this, course.getLogDetail(), ActivityEntity.COURSE);
-        publisher.publishEvent(entityEvent);
+        final Course course = findByCode(code);
+        creator.createAndPublishEvent(this, course, ActivityEntity.COURSE, ActivityAction.REMOVED);
         super.deleteByCode(code);
     }
 
@@ -105,8 +99,4 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
         courseNewsCreator.createNews(course, author);
     }
 
-    @Override
-    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-        this.publisher = applicationEventPublisher;
-    }
 }

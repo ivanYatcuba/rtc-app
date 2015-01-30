@@ -80,10 +80,11 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
     @Column
     @ForExport("Speciality")
     private String speciality;
-    @NotEmpty
+    @NotNull
     @Column
     @ForExport("English")
-    private String english;
+    @Enumerated(EnumType.STRING)
+    private EnglishLevel english;
     @NotEmpty
     @Column
     @Length(max = LARGE_LENGTH)
@@ -146,11 +147,11 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
         this.password = password;
     }
 
-    public String getEnglish() {
+    public EnglishLevel getEnglish() {
         return this.english;
     }
 
-    public void setEnglish(final String english) {
+    public void setEnglish(final EnglishLevel english) {
         this.english = english;
     }
 
@@ -318,27 +319,33 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
     }
 
     public Date getBirthDate() {
-        return birthDate;
+        return birthDate == null ? null : new Date(birthDate.getTime());
     }
 
     public void setBirthDate(final Date birthDate) {
-        this.birthDate = birthDate;
+        if (birthDate != null) {
+            this.birthDate = new Date(birthDate.getTime());
+        }
     }
 
     public Date getRegisterDate() {
-        return registerDate;
+        return registerDate == null ? null : new Date(registerDate.getTime());
     }
 
     public void setRegisterDate(final Date registerDate) {
-        this.registerDate = registerDate;
+        if (registerDate != null) {
+            this.registerDate = new Date(registerDate.getTime());
+        }
     }
 
     public Date getRemovalDate() {
-        return removalDate;
+        return removalDate == null ? null : new Date(removalDate.getTime());
     }
 
     public void setRemovalDate(final Date removalDate) {
-        this.removalDate = removalDate;
+        if (removalDate != null) {
+            this.removalDate = new Date(removalDate.getTime());
+        }
     }
 
     public UserStatus getStatus() {
@@ -380,7 +387,7 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
 
     @Override
     public String getLogDetail() {
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append("User ").append("id:" + getId()).append(" name:" + getName());
         return builder.toString();
     }

@@ -29,7 +29,7 @@
         var mapExpertDataId;
         var expertAutoComplete;
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "<@spring.url "/admin/user/getExperts"/>",
             success: function(response){
                 mapExpertDataId = response;

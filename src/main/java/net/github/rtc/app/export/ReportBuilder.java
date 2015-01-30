@@ -45,58 +45,62 @@ public final class ReportBuilder {
             final ExportFormat exportFormat) {
 
         ReportTable reportTable = null;
-        if (exportFormat.equals(ExportFormat.XLSX)) {
-            reportTable = new XLSNXTable(new XSSFWorkbook(), sheetName);
-        } else if (exportFormat.equals(ExportFormat.XLS)) {
-            reportTable = new XLSNXTable(new HSSFWorkbook(), sheetName);
-        } else if (exportFormat.equals(ExportFormat.CSV)) {
-            reportTable = new CSVTable();
-        }
-
-        //Table header creation
-        int currentCol = 0;
-        int currentRow = 0;
-        reportTable.createRow(currentRow);
-        for (final Field field : reportFields) {
-            reportTable.createCell(currentRow, currentCol,
-                    field.getAnnotation(ForExport.class).value());
-            currentCol++;
-        }
-        //Getting info from list
-        currentRow++;
-        for (final T object : objectsList) {
-            reportTable.createRow(currentRow);
-            for (int j = 0; j < reportFields.size(); j++) {
-                reportFields.get(j).setAccessible(true);
-                try {
-                    if (reportFields.get(
-                            j).getDeclaringClass() != object.getClass()) {
-                        for (final Field f : object.getClass()
-                                .getDeclaredFields()) {
-                            if (f.getType() == reportFields.get(
-                                    j).getDeclaringClass()) {
-                                f.setAccessible(true);
-                                reportTable.createCell(currentRow, j,
-                                        reportFields.get(j).get(f.get(object)));
-                                f.setAccessible(false);
-                                break;
-                            }
-                        }
-                    } else {
-                        reportTable.createCell(currentRow, j,
-                                reportFields.get(j).get(object));
-                    }
-                } catch (IllegalAccessException | NullPointerException e) {
-                    reportTable.createCell(currentRow, j, "");
-                }
-                reportFields.get(j).setAccessible(false);
-            }
-            currentRow++;
-        }
         try {
-            reportTable.writeToFile(filePath);
-        } catch (final IOException e) {
-            e.printStackTrace();
+            if (exportFormat.equals(ExportFormat.XLSX)) {
+                reportTable = new XLSNXTable(new XSSFWorkbook(), sheetName);
+            } else if (exportFormat.equals(ExportFormat.XLS)) {
+                reportTable = new XLSNXTable(new HSSFWorkbook(), sheetName);
+            } else if (exportFormat.equals(ExportFormat.CSV)) {
+                reportTable = new CSVTable();
+            }
+
+            //Table header creation
+            int currentCol = 0;
+            int currentRow = 0;
+            reportTable.createRow(currentRow);
+            for (final Field field : reportFields) {
+                reportTable.createCell(currentRow, currentCol,
+                        field.getAnnotation(ForExport.class).value());
+                currentCol++;
+            }
+            //Getting info from list
+            currentRow++;
+            for (final T object : objectsList) {
+                reportTable.createRow(currentRow);
+                for (int j = 0; j < reportFields.size(); j++) {
+                    reportFields.get(j).setAccessible(true);
+                    try {
+                        if (reportFields.get(
+                                j).getDeclaringClass() != object.getClass()) {
+                            for (final Field f : object.getClass()
+                                    .getDeclaredFields()) {
+                                if (f.getType() == reportFields.get(
+                                        j).getDeclaringClass()) {
+                                    f.setAccessible(true);
+                                    reportTable.createCell(currentRow, j,
+                                            reportFields.get(j).get(f.get(object)));
+                                    f.setAccessible(false);
+                                    break;
+                                }
+                            }
+                        } else {
+                            reportTable.createCell(currentRow, j,
+                                    reportFields.get(j).get(object));
+                        }
+                    } catch (IllegalAccessException | NullPointerException e) {
+                        reportTable.createCell(currentRow, j, "");
+                    }
+                    reportFields.get(j).setAccessible(false);
+                }
+                currentRow++;
+            }
+            try {
+                reportTable.writeToFile(filePath);
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
         }
     }
 }

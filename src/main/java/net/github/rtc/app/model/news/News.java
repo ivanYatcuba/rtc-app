@@ -18,7 +18,7 @@ import java.util.List;
 
 @Entity
 @Validatable
-public class News extends AbstractPersistenceObject implements Serializable,IActivity {
+public class News extends AbstractPersistenceObject implements Serializable, IActivity {
 
 
     @NotEmpty
@@ -32,7 +32,7 @@ public class News extends AbstractPersistenceObject implements Serializable,IAct
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
+    private Date createDate = new Date();
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -63,11 +63,13 @@ public class News extends AbstractPersistenceObject implements Serializable,IAct
     }
 
     public Date getPublishDate() {
-        return publishDate;
+        return publishDate == null ? null : new Date(publishDate.getTime());
     }
 
     public void setPublishDate(final Date publishDate) {
-        this.publishDate = publishDate;
+        if (publishDate != null) {
+            this.publishDate = new Date(publishDate.getTime());
+        }
     }
 
     public String getTitle() {
@@ -95,11 +97,13 @@ public class News extends AbstractPersistenceObject implements Serializable,IAct
     }
 
     public Date getCreateDate() {
-        return createDate;
+        return createDate == null ? null : new Date(createDate.getTime());
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreateDate(final Date createDate) {
+        if (createDate != null) {
+            this.createDate = new Date(createDate.getTime());
+        }
     }
 
     public NewsStatus getStatus() {
@@ -119,8 +123,15 @@ public class News extends AbstractPersistenceObject implements Serializable,IAct
     }
 
     @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getLogDetail()).append(createDate);
+        return builder.toString();
+    }
+
+    @Override
     public String getLogDetail() {
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append("News ").append("id:" + getId()).append(" title:" + getTitle());
         return builder.toString();
     }

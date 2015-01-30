@@ -6,8 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
-import org.springframework.security.web.authentication
-  .AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +53,7 @@ public class SimpleAuthenticationSuccessHandler implements
                 return "/admin";
             }
             if ("ROLE_USER".equals(grantedAuthority.getAuthority())) {
-                return "/user/view/";
+                return "/user/profile/";
             }
         }
         return "/";

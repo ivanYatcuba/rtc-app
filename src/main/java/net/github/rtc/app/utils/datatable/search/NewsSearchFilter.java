@@ -27,7 +27,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc("createDate");
+        return Order.asc(STRING_CREATE_DATE);
     }
 
     @Override
@@ -101,11 +101,13 @@ public class NewsSearchFilter extends AbstractSearchCommand {
     }
 
     public Date getCreateDate() {
-        return createDate;
+        return createDate == null ? null : new Date(createDate.getTime());
     }
 
     public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+        if (createDate != null) {
+            this.createDate = new Date(createDate.getTime());
+        }
     }
 
     public char getDateMoreLessEq() {

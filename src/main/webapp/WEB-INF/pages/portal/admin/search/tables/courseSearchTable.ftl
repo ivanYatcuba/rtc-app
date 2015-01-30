@@ -8,7 +8,7 @@
             <th><@spring.message "course.search.result.table.name"/></th>
             <th><@spring.message "course.search.result.table.expert"/></th>
             <th><@spring.message "course.search.result.table.term"/></th>
-            <th style="text-align: center"><@spring.message "course.search.result.table.status"/></th>
+            <th><@spring.message "course.search.result.table.status"/></th>
             <th></th>
         </tr>
         </thead>
@@ -104,7 +104,7 @@
     }
     function ActionDeterminator(createNews) {
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "<@spring.url"/admin/course/publish/"/>" + $("#courseCode").val() + "?ifCreateNews="+createNews,
             success: function () {
                 searchPage.doSearch(${currentPage});

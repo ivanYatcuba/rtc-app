@@ -1,12 +1,13 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.course.CourseService;
-import net.github.rtc.app.utils.date.DateService;
+import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomExpertsEditor;
@@ -73,7 +74,7 @@ public class CoursesController implements MenuItem {
         return REDIRECT + STRING_ADMIN;
     }
 
-    @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.POST)//todo: get
+    @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
     public String publish(@PathVariable final String courseCode, @RequestParam(required = false) final boolean
       ifCreateNews) {
         final Course course = courseService.findByCode(courseCode);
@@ -246,6 +247,10 @@ public class CoursesController implements MenuItem {
     public String getMenuItem() {
         return STRING_COURSE;
     }
+
+
+
 }
+
 
 

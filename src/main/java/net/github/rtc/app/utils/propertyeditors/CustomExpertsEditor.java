@@ -4,7 +4,10 @@ import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.user.UserService;
 
 import java.beans.PropertyEditorSupport;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class CustomExpertsEditor extends PropertyEditorSupport {
 

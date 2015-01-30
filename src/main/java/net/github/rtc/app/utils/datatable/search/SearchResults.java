@@ -18,12 +18,18 @@ public class SearchResults<T> {
     public Map<String, Object> getPageModel() {
         final int countPages = totalResults / perPage + ((totalResults % perPage == 0) ? 0 : 1);
         final Map<String, Object> map = new HashMap<>();
-        final int begin = Math.max(1, page - PAGE_OFFSET);
+        int begin;
         int end;
-        if (countPages == MAX_OFFSET) {
-            end = MAX_OFFSET;
+        if (page == countPages) {
+            begin = Math.max(1, page - PAGE_OFFSET - 1);
+            end = page;
         } else {
-            end = Math.min(begin + PAGE_OFFSET, countPages);
+            begin = Math.max(1, page - PAGE_OFFSET);
+            if (countPages == MAX_OFFSET) {
+                end = MAX_OFFSET;
+            } else {
+                end = Math.min(begin + PAGE_OFFSET, countPages);
+            }
         }
         map.put("currentPage", page);
         map.put("lastPage", countPages);

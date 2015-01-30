@@ -1,8 +1,9 @@
 package net.github.rtc.app.controller.admin;
 
+import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.exception.ServiceProcessingException;
-import net.github.rtc.app.model.report.ReportClasses;
 import net.github.rtc.app.model.report.ExportFormat;
+import net.github.rtc.app.model.report.ReportClasses;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.report.ReportService;
@@ -24,7 +25,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
-import java.util.*;
+import java.util.List;
 
 @Controller("exportController")
 @RequestMapping("admin/export")
@@ -91,7 +92,8 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/{reportCode}", method = RequestMethod.GET)
     public ModelAndView viewReport(@PathVariable final String reportCode) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
-        mav.addObject(STRING_REPORT, reportService.findByCode(reportCode));
+        final ReportDetails report = reportService.findByCode(reportCode);
+        mav.addObject(STRING_REPORT, report);
         return mav;
     }
 
