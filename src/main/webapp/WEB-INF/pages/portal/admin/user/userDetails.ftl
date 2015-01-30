@@ -69,7 +69,7 @@
     </div>
 
     <div class="col-md-6">
-        <@formMacro.rtcFormLabelOut "user.role" user.authorities "user.role" "col-md-5"/>
+        <@formMacro.rtcFormLabelOut "user.role" user.authorities "user.role." "col-md-5"/>
     </div>
 </div>
 

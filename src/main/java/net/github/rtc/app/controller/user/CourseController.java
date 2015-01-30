@@ -27,7 +27,7 @@ public class CourseController implements MenuItem {
     private static final String STRING_COURSE = "course";
     private static final String STRING_VALIDATION_RULES = "validationRules";
     private static final String STRING_COURSES = "courses";
-    private static final int COURSES_PER_PAGE = 9;
+    private static final int COURSES_PER_PAGE = 6;
 
     @Autowired
     private UserService userService;

@@ -256,9 +256,9 @@
             </#list>
         <#else>
             <#if  messagePrefix == "">
-                <#if "${path}"??>${path}<#else>&nbsp</#if>
+                <#if path??>${path}<#else>&nbsp</#if>
             <#else>
-                <#if "${path}"??><@spring.message "${messagePrefix + path}"/><#else>&nbsp</#if>
+                <#if path??><@spring.message "${messagePrefix + path}"/><#else>&nbsp</#if>
             </#if>
         </#if>
     </div>
