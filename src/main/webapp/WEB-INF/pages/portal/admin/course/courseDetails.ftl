@@ -22,7 +22,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <@formMacro.rtcFormLabelOut "course.category" course.types/>
+            <@formMacro.rtcFormLabelOut "course.category" course.types "courses.types."/>
         </div>
         <div class="col-md-6">
             <@formMacro.rtcFormLabelOut "course.endDate" "${course.endDate?date?string('dd-MMM-yyyy')}"/>

@@ -17,7 +17,10 @@
             <tr style="vertical-align: middle">
                 <td style="vertical-align: middle; width: 25%">
                     <a href="<@spring.url "/admin/course/view/${course.code}" />">${course.name}</a>
-                    <p style="font-family: 'Times New Roman', Times, serif; font-style: italic">${course.types?join(", ")}</p>
+                    <p style="font-family: 'Times New Roman', Times, serif; font-style: italic">
+                    <#list course.types as type>
+                        <@spring.message "courses.types.${type}"/><#if type_has_next>, </#if>
+                    </#list></p>
                 </td>
                 <td style="vertical-align: middle;">
                     <#list course.experts as expert>

@@ -250,15 +250,15 @@
         <#if path? is_sequence>
             <#list path as tmp>
                 <#if  messagePrefix == ""> ${tmp}
-                <#else>  <@spring.message "${messagePrefix}.${tmp}"/>
+                <#else>  <@spring.message "${messagePrefix + tmp}"/>
                 </#if>
                 <#if tmp_has_next>,</#if>
             </#list>
         <#else>
             <#if  messagePrefix == "">
-                <#if "${path}"??>${path}<#else>&nbsp</#if>
+                <#if path??>${path}<#else>&nbsp</#if>
             <#else>
-                <#if "${path}"??><@spring.message "${messagePrefix + path}"/><#else>&nbsp</#if>
+                <#if path??><@spring.message "${messagePrefix + path}"/><#else>&nbsp</#if>
             </#if>
         </#if>
     </div>

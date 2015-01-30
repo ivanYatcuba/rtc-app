@@ -8,7 +8,8 @@ import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.util.converter.ValidationContext;
+import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,34 +26,20 @@ public class CourseController implements MenuItem {
     private static final String STRING_USER = "user";
     private static final String STRING_COURSE = "course";
     private static final String STRING_VALIDATION_RULES = "validationRules";
+    private static final String STRING_COURSES = "courses";
+    private static final int COURSES_PER_PAGE = 6;
+
     @Autowired
     private UserService userService;
     @Autowired
     private CourseService courseService;
     @Autowired
     private UserCourseOrderService userCourseOrderService;
-    @Autowired
-    private ValidationContext validationContext;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView userCourses() throws Exception {
-        final User user = userService.loadUserByUsername(
-                SecurityContextHolder.getContext().getAuthentication().getName());
-        final UserCourseOrder currentUserCourseOrder = userCourseOrderService.getUserOrderByUserCode(user.getCode());
-        if (currentUserCourseOrder == null) {
-            final ModelAndView mav = new ModelAndView(ROOT + "/page/usercours");
-            mav.addObject(STRING_VALIDATION_RULES, validationContext.get(UserCourseOrder.class));
-            mav.addObject(STRING_USER, user);
-            mav.addObject("courses", courseService.findAllPublished());
-            return mav;
-        } else {
-            final ModelAndView mav = new ModelAndView(ROOT + "/page/courseorder");
-            final Course orderedCourse = courseService.findByCode(currentUserCourseOrder.getCourseCode());
-            mav.addObject(STRING_USER, user);
-            mav.addObject("orderStatus", currentUserCourseOrder.getStatus());
-            mav.addObject(STRING_COURSE, orderedCourse);
-            return mav;
-        }
+        final ModelAndView mav = new ModelAndView(ROOT + "/course/courses");
+        return mav;
     }
 
     @RequestMapping(value = "/courseDetails/{courseCode}", method = RequestMethod.GET)
@@ -74,6 +61,15 @@ public class CourseController implements MenuItem {
         return mav;
     }
 
+    @RequestMapping(value = "/courseTable", method = RequestMethod.POST)
+    public @ResponseBody ModelAndView getCourseTable(@ModelAttribute("courseFilter") final CourseSearchFilter courseFilter) {
+        final ModelAndView mav = new ModelAndView(ROOT + "/course/courseTable");
+        final SearchResults<Course> results = courseService.search(courseFilter);
+        mav.addAllObjects(results.getPageModel());
+        mav.addObject(STRING_COURSES, results.getResults());
+        return mav;
+    }
+
     @RequestMapping(value = "/position/{courseCode}", method = RequestMethod.GET)
     public @ResponseBody
     Set<CourseType> getPositions(@PathVariable String courseCode) {
@@ -83,5 +79,17 @@ public class CourseController implements MenuItem {
     @Override
     public String getMenuItem() {
         return STRING_COURSE;
+    }
+
+    @ModelAttribute("courseTypes")
+    public CourseType[] getTypes() {
+        return CourseType.values();
+    }
+
+    @ModelAttribute("courseFilter")
+    public CourseSearchFilter getCourseSearchFilter() {
+        final CourseSearchFilter filter = new CourseSearchFilter();
+        filter.setPerPage(COURSES_PER_PAGE);
+        return filter;
     }
 }
