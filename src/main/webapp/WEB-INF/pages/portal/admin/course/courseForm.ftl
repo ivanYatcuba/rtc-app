@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-md-6">
         <@formMacro.rtcFormTextInput "course.name" "course.name" "required" 'maxlength="50"'/>
-        <@formMacro.rtcFormMultiSelect "course.category" "course.types" categories "" "height: 65; background-color:#FFFACD"/>
+        <@formMacro.rtcFormMultiSelect "course.category" "course.types" categories "" "height: 65; background-color:#FFFACD" "courses.types."/>
         <@formMacro.rtcFormTextInput "course.capacity" "course.capacity"  "input-small required" 'style="width:50px;" onkeydown="return isNumber(event);" size="2" maxlength="2"' />
     </div>
     <div class="col-md-6">

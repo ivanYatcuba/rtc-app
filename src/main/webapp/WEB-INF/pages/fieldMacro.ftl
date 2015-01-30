@@ -250,7 +250,7 @@
         <#if path? is_sequence>
             <#list path as tmp>
                 <#if  messagePrefix == ""> ${tmp}
-                <#else>  <@spring.message "${messagePrefix}.${tmp}"/>
+                <#else>  <@spring.message "${messagePrefix + tmp}"/>
                 </#if>
                 <#if tmp_has_next>,</#if>
             </#list>

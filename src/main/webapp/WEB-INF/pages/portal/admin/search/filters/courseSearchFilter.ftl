@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6">
         <@formMacro.rtcFormTextInput "courseFilter.name" "courseFilter.name"/>
-            <@formMacro.rtcFormMultiSelect "courseFilter.types" "courseFilter.types" courseCategories "" "height: 65;"/>
+            <@formMacro.rtcFormMultiSelect "courseFilter.types" "courseFilter.types" courseCategories "" "height: 65;", "courses.types."/>
         </div>
         <div class="col-md-6">
         <@formMacro.formDateSearch  "courseFilter.dateMoreLessEq" "courseFilter.startDate"/>
