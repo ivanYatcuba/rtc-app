@@ -3,35 +3,25 @@
 
 <@layout.layout>
 
-<ul class="nav nav-pills" role="tablist">
-    <li role="presentation" class="dropdown">
-        <a id="drop6" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-            Dropdown
-            <span class="caret"></span>
-        </a>
-        <ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop6">
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-            <li role="presentation" class="divider"></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-        </ul>
-    </li>
-</ul>
-
-
-
 <div class="col-md-offset-3 col-md-6">
-    <div class="form-group"><label class="control-label col-md-4" for="types"><@spring.message "courses.catalog"/></label>
-    <div class="col-md-8">
-        <select id="types" name="types" class = "form-control">
-            <option value=""><@spring.message "courses.types.All"/></option>
-            <#list courseTypes as type>
-            <option value="${type}">
-                <@spring.message "courses.types.${type}"/>
-            </option>
-            </#list>
-        </select>
+    <div class="form-group"><label class="control-label col-md-4" for="types" style="padding-top: 2%"><@spring.message "courses.catalog"/></label>
+    <div class="col-md-8" style="margin-left: -5%;">
+
+        <ul id="typeMenu" class="nav nav-pills" role="tablist" style="padding-bottom: 10%">
+            <li role="presentation" class="dropdown">
+                <a id="drop6" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                    <span id="currentType" type=""><@spring.message "courses.types.All"/></span>
+                    <span class="caret"></span>
+                </a>
+                <ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop6">
+                    <li role="presentation"><a class="typeItem" role="menuitem" tabindex="-1" href="#"  type=""><@spring.message "courses.types.All"/></a></li>
+                    <#list courseTypes as type>
+                        <li role="presentation"><a class="typeItem" role="menuitem" tabindex="-1" href="#" type="${type}"> <@spring.message "courses.types.${type}"/></a></li>
+                    </#list>
+                </ul>
+            </li>
+        </ul>
+
     </div>
     </div>
 </div>
@@ -45,28 +35,31 @@
 
 <script>
     $(function() {
-       search(1);
+       search("", 1);
     });
 
-    $('#types').on('change', function (e) {
-        search(1);
+
+    $("#typeMenu").on("click", ".typeItem", function (event) {
+        var type = this.getAttribute("type");
+        $("#currentType").attr("type", type);
+        $("#currentType").text(this.text);
+        search(type, 1);
     });
 
     $("#coursesContent").on("click", ".navButton", function (event) {
         event.preventDefault();
         var page = this.getAttribute("page");
-        search(page);
+        search($("#currentType").attr("type"), page);
     });
 
-    function search(page) {
+    function search(type, page) {
         $.ajax({
             type: "POST",
             url: "<@spring.url "/user/courses/courseTable"/>",
-            data: $("#types").serialize()+"&page="+page,
+            data: "types="+type+"&page="+page,
             success: function (result) {
                 $("#coursesContent").html(result)
             }, error: function (xhr, status, error) {
-                alert("err")
             }
         });
     }
