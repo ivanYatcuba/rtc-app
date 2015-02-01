@@ -17,7 +17,6 @@ public class CourseSearchFilter extends AbstractSearchCommand {
     private static final String STRING_TAGS = "tags";
     private static final String STRING_START_DATE = "startDate";
     private static final String EXPERTS = "experts";
-    private static final String STATUS = "status";
     private String name;
     private char dateMoreLessEq;
     private Set<CourseType> types;
@@ -96,7 +95,7 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         if (name != null && !("").equals(name)) {
             criteria.add(Restrictions.like("name", STRING_PROCENT + name + STRING_PROCENT));
         }
-        if (status != null && status.size()>0) {
+        if (status != null && status.size() > 0) {
             criteria.add(Restrictions.in("status", status));
         }
         if (startDate != null) {

@@ -58,8 +58,8 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
 
     @Override
     public void archive(String courseCode) {
-        Course course = findByCode(courseCode);
-        log.debug("Publishing course: {}  ", course);
+        final Course course = findByCode(courseCode);
+        log.debug("Archiving course: {}  ", course);
         Assert.notNull(course, COURSE_CANNOT_BE_NULL);
         course.setStatus(CourseStatus.ARCHIVED);
         coursesDao.update(course);
@@ -67,7 +67,7 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
 
     @Override
     public SearchResults<Course> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter) {
-        if(withArchived) {
+        if (withArchived) {
             filter.getStatus().add(CourseStatus.ARCHIVED);
         }
         return search(filter);
