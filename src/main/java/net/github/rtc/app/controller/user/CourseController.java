@@ -2,6 +2,7 @@ package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserCourseOrder;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 @Controller
@@ -62,9 +65,10 @@ public class CourseController implements MenuItem {
     }
 
     @RequestMapping(value = "/courseTable", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView getCourseTable(@ModelAttribute("courseFilter") final CourseSearchFilter courseFilter) {
+    public @ResponseBody ModelAndView getCourseTable(@ModelAttribute("courseFilter") final CourseSearchFilter courseFilter,
+                                                     @RequestParam(required = false) final boolean withArchived) {
         final ModelAndView mav = new ModelAndView(ROOT + "/course/courseTable");
-        final SearchResults<Course> results = courseService.search(courseFilter);
+        final SearchResults<Course> results = courseService.searchCoursesForUser(withArchived, courseFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_COURSES, results.getResults());
         return mav;
@@ -90,6 +94,7 @@ public class CourseController implements MenuItem {
     public CourseSearchFilter getCourseSearchFilter() {
         final CourseSearchFilter filter = new CourseSearchFilter();
         filter.setPerPage(COURSES_PER_PAGE);
+        filter.setStatus(new HashSet<>(Arrays.asList(CourseStatus.PUBLISHED)));
         return filter;
     }
 }

@@ -47,6 +47,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                 <li id="publicationLi" role="presentation"><a role="menuitem" tabindex="-1"onclick="javascript:PopUpShow('${course.code}')">Publish</a></li>
+                                <li id="publicationLi" role="presentation"><a role="menuitem" tabindex="-1"onclick="javascript:ArchiveCourse('${course.code}')">Archive</a></li>
                             <#--<li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/delete/${course.code}"/>">Remove</a></li>-->
                             </ul>
                         </div>
@@ -104,6 +105,16 @@
     }
     function PopUpHide() {
         $('#publishCourseModal').modal('hide');
+    }
+    function ArchiveCourse(code){
+        $.ajax({
+            type: "GET",
+            url: "<@spring.url"/admin/course/archive/"/>" + code,
+            success: function () {
+                searchPage.doSearch(${currentPage});
+            }
+        });
+        return true;
     }
     function ActionDeterminator(createNews) {
         $.ajax({

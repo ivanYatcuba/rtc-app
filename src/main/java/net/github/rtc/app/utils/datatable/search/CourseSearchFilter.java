@@ -17,11 +17,12 @@ public class CourseSearchFilter extends AbstractSearchCommand {
     private static final String STRING_TAGS = "tags";
     private static final String STRING_START_DATE = "startDate";
     private static final String EXPERTS = "experts";
+    private static final String STATUS = "status";
     private String name;
     private char dateMoreLessEq;
     private Set<CourseType> types;
     private Date startDate;
-    private CourseStatus status;
+    private Set<CourseStatus> status;
     private List<Tag> tags;
     private String expertCode;
 
@@ -60,11 +61,11 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         }
     }
 
-    public CourseStatus getStatus() {
+    public Set<CourseStatus> getStatus() {
         return status;
     }
 
-    public void setStatus(final CourseStatus status) {
+    public void setStatus(Set<CourseStatus> status) {
         this.status = status;
     }
 
@@ -95,8 +96,8 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         if (name != null && !("").equals(name)) {
             criteria.add(Restrictions.like("name", STRING_PROCENT + name + STRING_PROCENT));
         }
-        if (status != null) {
-            criteria.add(Restrictions.eq("status", status));
+        if (status != null && status.size()>0) {
+            criteria.add(Restrictions.in("status", status));
         }
         if (startDate != null) {
             switch (dateMoreLessEq) {

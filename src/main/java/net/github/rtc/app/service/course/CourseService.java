@@ -4,6 +4,8 @@ import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.GenericService;
 import net.github.rtc.app.service.ModelService;
+import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 
 import java.util.List;
 
@@ -15,6 +17,10 @@ public interface CourseService extends ModelService<Course>, GenericService<Cour
      * @param course what course?
      */
     void publish(Course course);
+
+    void archive(String courseCode);
+
+    SearchResults<Course> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter);
 
     List<Course> startingSoonCourses();
 

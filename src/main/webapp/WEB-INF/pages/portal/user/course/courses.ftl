@@ -2,7 +2,7 @@
 <#import "../../../fieldMacro.ftl" as formMacro />
 
 <@layout.layout>
-
+<input type="hidden" id="withArchive" value="false">
 <div class="col-md-offset-3 col-md-6">
     <div class="form-group"><label class="control-label col-md-4" for="types" style="padding-top: 2%"><@spring.message "courses.catalog"/></label>
     <div class="col-md-8" style="margin-left: -5%;">
@@ -53,10 +53,11 @@
     });
 
     function search(type, page) {
+        var withArchive = $("#withArchive").val();
         $.ajax({
             type: "POST",
             url: "<@spring.url "/user/courses/courseTable"/>",
-            data: "types="+type+"&page="+page,
+            data: "types="+ type +"&page="+ page + "&withArchived=" + withArchive,
             success: function (result) {
                 $("#coursesContent").html(result)
             }, error: function (xhr, status, error) {

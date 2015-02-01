@@ -10,101 +10,132 @@
         margin-bottom: 10px;
     }
 </style>
-<h3 class="page-header"><@spring.message "user.details"/></h3><br/>
+<h4 class="page-header"><@spring.message "user.details"/></h4>
+<div style="width: 85%">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12" >
+                    <label style="float: left;
+        width: 11.9em;
+        text-align: right;
+        margin-bottom: 10px;" class=""><@spring.message "user.gender"/></label>&nbsp&nbsp&nbsp
+                    <#list ["Male", "Female"] as value>
+                        <input type="radio" name="gender" disabled value="${value}"
+                            <#if value == user.gender> checked </#if>>
+                    ${value}
+                    </#list>
+                </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.email" "${user.email}" "" />
-        </div>
-    </div>
-</div>
 
-<hr>
+                <div class="col-md-12">
+                    <@formMacro.rtcFormLabelOut "user.surname" "${user.surname}" "" "col-md-5"/>
+                </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.gender" "${user.gender}" "" />
-        </div>
-    </div>
-</div>
+                <div class="col-md-12">
+                    <@formMacro.rtcFormLabelOut "user.name" "${user.name}" "" "col-md-5"/>
+                </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.surname" "${user.surname}" "" />
-        </div>
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.middleName" "${user.middleName}" "" />
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.name" "${user.name}" "" />
-        </div>
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.birthDate" "${user.birthDate}" "" />
-        </div>
-    </div>
-</div>
 
-<hr>
-<div class="row">
-    <div class="col-md-6">
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.city" "${user.city}" "" />
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.phone" "${user.phone}" "" />
-        </div>
-    </div>
-</div>
 
-<hr>
-<div class="row">
-    <div class="col-md-6">
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.university" "${user.university}" "" />
-        </div>
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.faculty" "${user.faculty}" "" />
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.speciality" "${user.speciality}" "" />
-        </div>
-    </div>
-</div>
+                <div class="col-md-12">
+                    <@formMacro.rtcFormLabelOut "user.middleName" "${user.middleName}" "" "col-md-5"/>
+                </div>
 
-<hr>
-<div class="row">
-    <div class="col-md-6">
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.programmingLanguages" user.programmingLanguages "" />
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.english" "${user.english}" "" />
-        </div>
-    </div>
-</div>
+                <div class="col-md-12">
+                    <@formMacro.rtcFormLabelOut "user.birthDate" "${user.birthDate?string('dd-MMM-yyyy')}" "" "col-md-5"/>
+                </div>
 
-<hr>
-<div class="row">
-    <div class="col-md-6">
-        <div class="col-md-12">
-        <@formMacro.rtcFormLabelOut "user.english" "${user.note}" "" />
+            </div>
+        </div>
+        <div>
+
+            <div>
+                <#if user.photo??>
+                    <img id="Img" src="<@spring.url '/image/${user.photo}'/>"  class="img-circle"/>
+                <#else>
+                    <img id="Img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="img-circle">
+                </#if>
+            </div>
         </div>
     </div>
-</div>
 
-<hr>
-<div class="row">
-<@formMacro.rtcSubmitDoOrCancel "action.edit" "/user/profile/edit" "Cancel" "/user/search"/>
+    <hr>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <@formMacro.rtcFormLabelOut "user.email" "${user.email}" "" "col-md-5"/>
+        </div>
+
+        <div class="col-md-6">
+            <@formMacro.rtcFormLabelOut "user.role" user.authorities "user.role." "col-md-5"/>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6">
+            <@formMacro.rtcFormLabelOut "user.city" "${user.city}" "" "col-md-5"/>
+        </div>
+
+        <div class="col-md-6">
+            <@formMacro.rtcFormLabelOut "user.phone" "${user.phone}" "" "col-md-5"/>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+
+
+        <div class="col-md-6">
+            <@formMacro.rtcFormLabelOut "user.university" "${user.university}" "" "col-md-5"/>
+        </div>
+
+        <div class="col-md-6">
+            <@formMacro.rtcFormLabelOut "user.speciality" "${user.speciality}" "" "col-md-5"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <@formMacro.rtcFormLabelOut "user.faculty" "${user.faculty}" "" "col-md-5"/>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <@formMacro.rtcFormLabelOut "user.programmingLanguages" user.programmingLanguages  "" "col-md-5"/>
+        </div>
+
+        <div class="col-md-6">
+            <@formMacro.rtcFormLabelOut "user.english" "${user.english}" "user.english.labels." "col-md-5"/>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6">
+            <@formMacro.rtcFormLabelOut "user.note" "${user.note}" "" "col-md-5"/>
+        </div>
+    </div>
+    <hr>
+
+
+    <hr>
+    <div class="row">
+        <div style="text-align: right">
+            <a href="<@spring.url "/user/profile/edit" />">
+                <input type="submit" class="btn btn-primary" value="<@spring.message "action.edit"/>">
+            </a>
+        </div>
+
+    </div>
+
 </div>
 </@layout.layout>

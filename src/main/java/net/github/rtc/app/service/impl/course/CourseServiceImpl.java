@@ -10,6 +10,7 @@ import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
 import net.github.rtc.app.utils.CourseNewsCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -54,10 +57,27 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     }
 
     @Override
+    public void archive(String courseCode) {
+        Course course = findByCode(courseCode);
+        log.debug("Publishing course: {}  ", course);
+        Assert.notNull(course, COURSE_CANNOT_BE_NULL);
+        course.setStatus(CourseStatus.ARCHIVED);
+        coursesDao.update(course);
+    }
+
+    @Override
+    public SearchResults<Course> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter) {
+        if(withArchived) {
+            filter.getStatus().add(CourseStatus.ARCHIVED);
+        }
+        return search(filter);
+    }
+
+    @Override
     public List<Course> startingSoonCourses() {
         final CourseSearchFilter searchFilter = new CourseSearchFilter();
         searchFilter.setStartDate(dateService.getCurrentDate());
-        searchFilter.setStatus(CourseStatus.PUBLISHED);
+        searchFilter.setStatus(new HashSet<>(Arrays.asList(CourseStatus.PUBLISHED)));
         searchFilter.setPage(1);
         return coursesDao.search(searchFilter.getCriteria(), 1,
           STARTING_SOON_COURSE_COUNT, Order.asc("startDate")).getResults();
@@ -66,7 +86,7 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     @Override
     public List<Course> findAllPublished() {
         final CourseSearchFilter courseSearchFilter = new CourseSearchFilter();
-        courseSearchFilter.setStatus(CourseStatus.PUBLISHED);
+        courseSearchFilter.setStatus(new HashSet<>(Arrays.asList(CourseStatus.PUBLISHED)));
         return coursesDao.findAll(courseSearchFilter.getCriteria());
     }
 

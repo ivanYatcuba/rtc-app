@@ -4,7 +4,8 @@
 <div id="courseTable" class="row-fluid">
 <#list courses as course>
     <div class="col-md-4">
-        <div class="thumbnail" style="font-size: small; display:inline-block; float:none;text-align:left; padding-left: 25px; padding-right: 25px">
+        <div class="thumbnail" style="font-size: small; display:inline-block; float:none;text-align:left; padding-left: 25px; padding-right: 25px;
+        <#if course.status == "ARCHIVED">background-color: #f3eaea;</#if>">
             <div style="width: 242px;">
 
                 <a style="text-decoration: underline;  font-size: large; " href="<@spring.url'/user/courseDetails/${course.code}'/>">${course.name} </a>
@@ -37,8 +38,9 @@
 
                 <div class="col-md-6">
                     <div  style="text-align: right">
-                        <img src="<@spring.url'/resources/images/user/c1.png'/>"  alt="...">
-                        &nbsp;0/15<br/>&nbsp;
+                        <img src="<@spring.url'/resources/images/user/c1.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
+                        &nbsp;<span data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.appliedCapacity'/>">0</span>/
+                        <span data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.totalCapacity'/>">${course.capacity}</span><br/>&nbsp;
                     </div>
                 </div>
             </div>
@@ -50,7 +52,7 @@
 <#if currentPage == lastPage>
 <div class="row">
     <div  class="col-md-offset-6 col-md-6">
-        <button type="button" class="btn btn-primary"><@spring.message "courses.archive"/></button>
+        <button id="withArchiveButton" type="button" class="btn btn-primary btn-xs"><@spring.message "courses.archive"/></button>
     </div>
 </div>
 </#if>
@@ -67,5 +69,9 @@
             var str = $(this).html();
             $(this).html(shorten(str, 150));
         });
+    });
+    $("#withArchiveButton").click(function (event) {
+        $("#withArchive").val("true");
+        search($("#currentType").attr("type"), 1);
     });
 </script>

@@ -85,6 +85,12 @@ public class CoursesController implements MenuItem {
         return REDIRECT + STRING_ADMIN;
     }
 
+    @RequestMapping(value = "/archive/{courseCode}", method = RequestMethod.GET)
+    public String archive(@PathVariable final String courseCode) {
+        courseService.archive(courseCode);
+        return REDIRECT + STRING_ADMIN;
+    }
+
     /**
      * Process the request to get details about course by selected code
      * URL example: "/1". Parse by pattern: "/{code}"
