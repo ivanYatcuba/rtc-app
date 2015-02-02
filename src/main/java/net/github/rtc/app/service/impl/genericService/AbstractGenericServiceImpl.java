@@ -1,4 +1,4 @@
-package net.github.rtc.app.service.impl;
+package net.github.rtc.app.service.impl.genericService;
 
 import net.github.rtc.app.controller.common.ResourceNotFoundException;
 import net.github.rtc.app.dao.GenericDao;

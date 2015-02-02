@@ -7,7 +7,7 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceWithCheckActivityImpl;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Service
-public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements UserService {
+public class UserServiceImpl extends AbstractGenericServiceWithCheckActivityImpl<User> implements UserService {
 
     private static final int USER_REMOVAL_DELAY = 3;
     private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class.getName());
@@ -40,9 +40,8 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     public User create(final User user) {
         user.setRegisterDate(dateService.getCurrentDate());
         user.setCode(getCode());
-        getDao().create(user);
+        super.create(user);
         return user;
-//        return super.create(user);
     }
 
     @Override
@@ -125,16 +124,4 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
     public void deleteUsersMarkedForRemoval() {
         userDao.deletingUser();
     }
-
-
-    @Override
-    public void deleteByCode(String code) {
-        super.deleteByCode(code);
-    }
-
-    @Override
-    public User update(User t) {
-        return super.update(t);
-    }
-
 }

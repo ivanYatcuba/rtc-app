@@ -22,8 +22,4 @@
     <!--Import Beans-->
     <import resource="classpath:/spring/beans.xml"/>
 
-    <!--Import Aspects-->
-    <import resource="classpath:/aspect/aspect.xml"/>
-
-
 </beans>

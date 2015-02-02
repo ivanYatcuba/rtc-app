@@ -8,7 +8,7 @@ import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceWithCheckActivityImpl;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.utils.CourseNewsCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
@@ -30,7 +30,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implements CourseService {
+public class CourseServiceImpl extends AbstractGenericServiceWithCheckActivityImpl<Course> implements CourseService {
 
     private static final String COURSE_CANNOT_BE_NULL = "course cannot be null";
     private static final int STARTING_SOON_COURSE_COUNT = 3;
@@ -114,19 +114,5 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     @Override
     public void createNews(final Course course, final User author) {
         courseNewsCreator.createNews(course, author);
-    }
-
-
-    @Override
-    public void deleteByCode(String code) {
-        super.deleteByCode(code);
-    }
-
-    @Override
-    public Course create(Course t) { return  super.create(t); }
-
-    @Override
-    public Course update(Course t) {
-        return super.update(t);
     }
 }

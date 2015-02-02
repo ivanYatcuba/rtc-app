@@ -5,7 +5,7 @@ import net.github.rtc.app.dao.ActivityDao;
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.model.activity.Activity;
 import net.github.rtc.app.service.activity.ActivityService;
-import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -7,7 +7,7 @@ import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.service.CodeGenerationService;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.report.ReportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
