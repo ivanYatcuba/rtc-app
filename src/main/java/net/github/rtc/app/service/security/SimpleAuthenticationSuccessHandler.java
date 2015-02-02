@@ -51,8 +51,7 @@ public class SimpleAuthenticationSuccessHandler implements
         for (final GrantedAuthority grantedAuthority : authorities) {
             if (("ROLE_ADMIN").equals(grantedAuthority.getAuthority())) {
                 return "/admin";
-            }
-            if ("ROLE_USER".equals(grantedAuthority.getAuthority())) {
+            } else {
                 return "/user/profile/";
             }
         }

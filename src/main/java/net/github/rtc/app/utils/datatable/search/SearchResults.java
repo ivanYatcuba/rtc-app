@@ -60,4 +60,16 @@ public class SearchResults<T> {
         }
         this.results = newResults;
     }
+
+    public int getTotalResults() {
+        return totalResults;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public int getPerPage() {
+        return perPage;
+    }
 }

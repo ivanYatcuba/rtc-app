@@ -1,7 +1,7 @@
 package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.controller.common.MenuItem;
-import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.User;
@@ -11,15 +11,14 @@ import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
+import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/user/courses")
@@ -38,6 +37,8 @@ public class CourseController implements MenuItem {
     private CourseService courseService;
     @Autowired
     private UserCourseOrderService userCourseOrderService;
+    @Autowired
+    private ValidationContext validationContext;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView userCourses() throws Exception {
@@ -56,11 +57,16 @@ public class CourseController implements MenuItem {
 
     @RequestMapping(value = "/sendOrder", method = RequestMethod.POST)
     public ModelAndView sendCourseOrder(@ModelAttribute("order") final UserCourseOrder myCourse) {
-        final ModelAndView mav = new ModelAndView("redirect:/user/userCourses");
+        final ModelAndView mav = new ModelAndView("redirect:/user/courses");
         final User user = userService.loadUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
         myCourse.setUserCode(user.getCode());
-        userCourseOrderService.create(myCourse);
+        try {
+            userCourseOrderService.create(myCourse);
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+
         return mav;
     }
 
@@ -68,9 +74,10 @@ public class CourseController implements MenuItem {
     public @ResponseBody ModelAndView getCourseTable(@ModelAttribute("courseFilter") final CourseSearchFilter courseFilter,
                                                      @RequestParam(required = false) final boolean withArchived) {
         final ModelAndView mav = new ModelAndView(ROOT + "/course/courseTable");
-        final SearchResults<Course> results = courseService.searchCoursesForUser(withArchived, courseFilter);
+        final SearchResults<UserCourseDTO> results = courseService.searchCoursesForUser(withArchived, courseFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(STRING_COURSES, results.getResults());
+        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(UserCourseOrder.class));
         return mav;
     }
 
@@ -96,5 +103,10 @@ public class CourseController implements MenuItem {
         filter.setPerPage(COURSES_PER_PAGE);
         filter.setStatus(new HashSet<>(Arrays.asList(CourseStatus.PUBLISHED)));
         return filter;
+    }
+
+    @ModelAttribute("order")
+    public UserCourseOrder courseOrder() {
+        return new UserCourseOrder();
     }
 }

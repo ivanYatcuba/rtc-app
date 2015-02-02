@@ -1,5 +1,6 @@
 package net.github.rtc.app.service.course;
 
+import net.github.rtc.app.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.GenericService;
@@ -20,7 +21,7 @@ public interface CourseService extends ModelService<Course>, GenericService<Cour
 
     void archive(String courseCode);
 
-    SearchResults<Course> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter);
+    SearchResults<UserCourseDTO> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter);
 
     List<Course> startingSoonCourses();
 

@@ -23,7 +23,8 @@
             </div>
             <img src="<@spring.url'/resources/images/profile.jpg'/>"  alt="..." style="width: 242px;height: 200px"><br/>
             <div style="width: 242px; min-height: 8em; height: 8em">
-                    <p><span class="description">${course.description}</span><br/><a>More >></a></p>
+                    <p><span class="description">${course.description}</span><br/>
+                        <a onClick='setCode("${course.code}");PopUpShow("${course.types?join(',')}")'>More >></a></p>
             </div>
             <div class="row">
                 <div class="col-md-6">
@@ -38,8 +39,17 @@
 
                 <div class="col-md-6">
                     <div  style="text-align: right">
+                        <#if course.acceptancePercent == 0>
+                        <img src="<@spring.url'/resources/images/user/c0.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
+                        <#elseif course.acceptancePercent <= 50>
                         <img src="<@spring.url'/resources/images/user/c1.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
-                        &nbsp;<span data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.appliedCapacity'/>">0</span>/
+                        <#elseif course.acceptancePercent gt 50 && course.acceptancePercent != 100>
+                        <img src="<@spring.url'/resources/images/user/c2.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
+                        <#else >
+                        <img src="<@spring.url'/resources/images/user/c3.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
+                        </#if>
+
+                        &nbsp;<span data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.appliedCapacity'/>">${course.acceptedOrders}</span>/
                         <span data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.totalCapacity'/>">${course.capacity}</span><br/>&nbsp;
                     </div>
                 </div>

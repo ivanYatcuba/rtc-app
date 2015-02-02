@@ -1,5 +1,8 @@
 package net.github.rtc.app.controller.user;
 
+import net.github.rtc.app.controller.common.ErrorControllerTest;
+import net.github.rtc.app.model.user.Role;
+import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
@@ -12,15 +15,19 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.Arrays;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -65,6 +72,7 @@ public class ProfileControllerTest {
         user.setEmail(EMAIL);
         user.setName(NAME);
         user.setSurname(SURNAME);
+        user.setAuthorities(Arrays.asList(new Role(RoleType.ROLE_USER)));
         Authentication auth = new UsernamePasswordAuthenticationToken(user,null);
         SecurityContextHolder.getContext().setAuthentication(auth);
         when(userService.loadUserByUsername(EMAIL)).thenReturn(user);
@@ -80,6 +88,16 @@ public class ProfileControllerTest {
 
     @Test
     public void testEditUser() throws Exception {
+        UsernamePasswordAuthenticationToken principal =
+                new UsernamePasswordAuthenticationToken("user1", "1111");
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute(
+                HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+                new ErrorControllerTest.MockSecurityContext(principal));
+        User user = new User();
+        user.setAuthorities(Arrays.asList(new Role(RoleType.ROLE_ADMIN)));
+        when(userService.loadUserByUsername("user1")).thenReturn(user);
+
         when(validationContext.get(User.class)).thenReturn("validationContext");
         mockMvc.perform(get("/user/profile/edit"))
                 .andExpect(status().isOk())

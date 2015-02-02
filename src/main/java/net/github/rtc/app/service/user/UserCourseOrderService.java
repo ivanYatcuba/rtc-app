@@ -12,4 +12,10 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
 
     List<UserCourseOrder> getOrderByStatus(UserRequestStatus status);
 
+    List<UserCourseOrder> getOrderByExpertCode(String expertCode);
+
+    int getAcceptedOrdersForCourse(String courseCode);
+
+    boolean changeOrderStatus(final UserRequestStatus userRequestStatus, final String orderCode);
+
 }

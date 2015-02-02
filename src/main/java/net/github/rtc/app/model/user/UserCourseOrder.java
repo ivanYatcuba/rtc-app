@@ -1,5 +1,6 @@
 package net.github.rtc.app.model.user;
 
+import com.sun.istack.NotNull;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.util.annotation.validation.Validatable;
@@ -29,7 +30,7 @@ public class UserCourseOrder extends AbstractPersistenceObject {
 
     @Column
     @Enumerated(EnumType.STRING)
-    @NotEmpty
+    @NotNull
     private CourseType position;
 
     @Column

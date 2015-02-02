@@ -2,15 +2,19 @@ package net.github.rtc.app.service.impl.course;
 
 import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.dao.GenericDao;
+import net.github.rtc.app.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.utils.CourseNewsCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +35,8 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     private static final String COURSE_CANNOT_BE_NULL = "course cannot be null";
     private static final int STARTING_SOON_COURSE_COUNT = 3;
     private static Logger log = LoggerFactory.getLogger(CourseServiceImpl.class.getName());
+    @Autowired
+    private UserCourseOrderService orderService;
     @Autowired
     private CoursesDao coursesDao;
     @Autowired
@@ -66,11 +73,25 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
     }
 
     @Override
-    public SearchResults<Course> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter) {
+    public SearchResults<UserCourseDTO> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter) {
         if (withArchived) {
             filter.getStatus().add(CourseStatus.ARCHIVED);
         }
-        return search(filter);
+        final SearchResults<Course> results = search(filter);
+        final Mapper mapper = new DozerBeanMapper();
+        final List<UserCourseDTO> newResults = new ArrayList<>();
+        for (Course course: results.getResults()) {
+            final UserCourseDTO userCourseDTO = new UserCourseDTO();
+            userCourseDTO.setAcceptedOrders(orderService.getAcceptedOrdersForCourse(course.getCode()));
+            mapper.map(course, userCourseDTO);
+            newResults.add(userCourseDTO);
+        }
+        final SearchResults<UserCourseDTO> newSearchResults = new SearchResults<>();
+        newSearchResults.setPage(results.getPage());
+        newSearchResults.setPerPage(results.getPerPage());
+        newSearchResults.setTotalResults(results.getTotalResults());
+        newSearchResults.setResults(newResults);
+        return newSearchResults;
     }
 
     @Override
