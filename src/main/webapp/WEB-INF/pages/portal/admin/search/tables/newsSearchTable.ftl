@@ -47,14 +47,11 @@
                         <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenu1"
                                 data-toggle="dropdown">
                             Action</button>
-                        <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="min-width: 100px;">
                             <#if (news.status??) && (news.status == "DRAFT") >
                                 <li id="publicationLi" role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="#" onclick="javascript:publish('${news.code}')">Publish</a></li>
+                                    <a role="menuitem" tabindex="-1" href="#" onclick="javascript:publish('${news.code}')">Publish</a>
+                                </li>
                             </#if>
                             <li>
                                 <a href="#" onclick="javascript:PopUpShow('${news.code}')">Remove</a>

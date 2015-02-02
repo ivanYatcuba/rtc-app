@@ -23,11 +23,7 @@
                 <td style="vertical-align: middle">
                     <div class="btn-group">
                         <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenuReport" data-toggle="dropdown">Action</button>
-                        <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="min-width: 100px;">
                             <li id="downloadLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/export/download/${report.code}'/>">Download</a></li>
                             <li id="removeLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/export/delete/${report.code}'/>">Remove</a></li>
                         </ul>
