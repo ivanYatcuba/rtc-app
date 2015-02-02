@@ -78,10 +78,6 @@
                             <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
                                 Action
                             </button>
-                            <button type="button" class="btn btn-default dropdown-toggle" style="height: 34px" data-toggle="dropdown">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
                             <ul class="dropdown-menu" style="width: 112px" role="menu">
                                 <li>
                                     <a href="<@spring.url"/admin/user/restore/${user.code}"/>">Restore</a>
