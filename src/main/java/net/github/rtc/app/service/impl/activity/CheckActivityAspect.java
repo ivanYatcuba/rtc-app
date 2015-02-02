@@ -6,42 +6,49 @@ import net.github.rtc.app.model.activity.IActivity;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.service.GenericService;
 import net.github.rtc.app.utils.EventCreator;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import  net.github.rtc.app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessResourceFailureException;
+
 
 @Aspect
 public class CheckActivityAspect {
     @Autowired
     private EventCreator creator;
 
-    @AfterReturning(pointcut =
-            "execution(* net.github.rtc.app.service.course.CourseService.create(..))"
-                    + "|| execution(* net.github.rtc.app.service.user.UserService.create(..))"
-                    + "|| execution(* net.github.rtc.app.service.news.NewsService.create(..))",
+    @Pointcut("within(net.github.rtc.app.service.course.CourseService+)"
+            + "|| within(net.github.rtc.app.service.news.NewsService+)"
+            + "|| within(net.github.rtc.app.service.user.UserService+)")
+    public void filterService() { }
+
+    @Pointcut("execution(* create(..))")
+    public void create() { }
+    @Pointcut("execution(* update(..))")
+    public void update() { }
+    @Pointcut("execution(* deleteByCode(..))")
+    public void delete() { }
+
+
+
+    @AfterReturning(pointcut = "filterService() && create()",
             returning = "entityResult")
-    public void afterCreate(JoinPoint joinPoint, Object entityResult) {
+    public void activityAboutCreate(JoinPoint joinPoint, Object entityResult) {
         creator.createAndPublishEvent(this, (IActivity) entityResult, getActivityEntity(entityResult), ActivityAction.SAVED);
     }
 
-    @AfterReturning(pointcut =
-            "execution(* net.github.rtc.app.service.course.CourseService.update(..))"
-                    + "|| execution(* net.github.rtc.app.service.user.UserService.update(..) )"
-                    + "|| execution(* net.github.rtc.app.service.news.NewsService.update(..) )",
+    @AfterReturning(pointcut = "filterService() && update()",
             returning = "entityResult")
-    public void afterUpdate(JoinPoint joinPoint, Object entityResult) {
+    public void activityAboutUpdate(JoinPoint joinPoint, Object entityResult) {
         creator.createAndPublishEvent(this, (IActivity) entityResult, getActivityEntity(entityResult), ActivityAction.UPDATED);
     }
 
 
-    @Around("execution(* net.github.rtc.app.service.course.CourseService.deleteByCode(..))"
-                    + "|| execution(* net.github.rtc.app.service.user.UserService.deleteByCode(..) )"
-                    + "|| execution(* net.github.rtc.app.service.news.NewsService.deleteByCode(..) )")
-    public void beforeDelete(ProceedingJoinPoint joinPoint) {
+    @Around("filterService() && delete()")
+    public void activityAboutDelete(ProceedingJoinPoint joinPoint) {
         final Object code = joinPoint.getArgs()[0];
         final Object entityObj = ((GenericService) joinPoint.getThis()).findByCode((String) code);
         try {

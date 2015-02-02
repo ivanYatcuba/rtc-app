@@ -22,4 +22,17 @@ public class NewsServiceImpl extends AbstractGenericServiceImpl<News> implements
     public List<News> findPublishedNews() {
         return newsDao.findPublished();
     }
+
+    @Override
+    public void deleteByCode(String code) {
+        super.deleteByCode(code);
+    }
+
+    @Override
+    public News create(News t) { return  super.create(t); }
+
+    @Override
+    public News update(News t) {
+        return super.update(t);
+    }
 }
