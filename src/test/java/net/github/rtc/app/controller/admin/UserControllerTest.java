@@ -69,12 +69,11 @@ public class UserControllerTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
-    @Ignore
     @Test
     public void editPage () throws Exception{
         when(userService.findByCode(ANY_USER_CODE)).thenReturn(user);
         when(validationContext.get(User.class)).thenReturn(ANY_STRING);
-        mockMvc.perform(get("/admin/user/userPage/editPage/{code}", ANY_USER_CODE))
+        mockMvc.perform(get("/admin/user/edit/{code}", ANY_USER_CODE))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ROOT + "/user/userUpdate"))
                 .andExpect(model().attributeExists(STRING_VALIDATION_RULES))
@@ -95,10 +94,9 @@ public class UserControllerTest {
 //        verify(userService, times(1)).findByCode(ANY_USER_CODE);
 //        /*verifyNoMoreInteractions(userService);*/
 //    }
-    @Ignore
     @Test
     public void remove () throws Exception {
-        mockMvc.perform(post("/admin/user/remove").param("userCode",ANY_USER_CODE))
+        mockMvc.perform(get("/admin/user/remove").param("userCode",ANY_USER_CODE))
                 .andExpect(status().isFound())
                 /*.andExpect(redirectedUrl(ADMIN_SEARCH))*/;
         verify(userService, times(1)).markUserForRemoval(ANY_USER_CODE);
