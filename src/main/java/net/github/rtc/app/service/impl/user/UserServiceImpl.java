@@ -126,4 +126,15 @@ public class UserServiceImpl extends AbstractGenericServiceImpl<User> implements
         userDao.deletingUser();
     }
 
+
+    @Override
+    public void deleteByCode(String code) {
+        super.deleteByCode(code);
+    }
+
+    @Override
+    public User update(User t) {
+        return super.update(t);
+    }
+
 }

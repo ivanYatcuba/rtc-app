@@ -95,4 +95,17 @@ public class CourseServiceImpl extends AbstractGenericServiceImpl<Course> implem
         courseNewsCreator.createNews(course, author);
     }
 
+
+    @Override
+    public void deleteByCode(String code) {
+        super.deleteByCode(code);
+    }
+
+    @Override
+    public Course create(Course t) { return  super.create(t); }
+
+    @Override
+    public Course update(Course t) {
+        return super.update(t);
+    }
 }
