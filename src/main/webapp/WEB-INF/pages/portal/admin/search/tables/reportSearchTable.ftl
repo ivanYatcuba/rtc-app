@@ -11,7 +11,7 @@
             <th></th>
         </tr>
         </thead>
-    <#if reports??>
+    <#if reports?has_content>
         <#list reports as report>
             <tr style="vertical-align: middle">
                 <td style="vertical-align: middle; width: 25%">
@@ -32,7 +32,6 @@
                 </td>
             </tr>
         </#list>
-    </#if>
     </table>
 </div>
 <hr>
@@ -46,3 +45,8 @@
     <@datatables.addPagination/>
     </div>
 </div>
+<#else>
+    <td>
+        There are no reports. <a  href="<@spring.url "/admin/export/create"/>">Click here</a> to add.
+    </td>
+</#if>

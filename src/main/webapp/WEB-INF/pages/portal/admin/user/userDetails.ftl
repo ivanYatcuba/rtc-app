@@ -126,27 +126,27 @@
 </div>
 <hr>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label class="col-md-5"><@spring.message "user.status"/>:&nbsp</label>
-            <div>
-                <p class="form-control-static">
-                <#if user.status=="ACTIVE">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5"><@spring.message "user.status"/>:&nbsp</label>
+                <div>
+                    <p>
+                        <#if user.status=="ACTIVE">
                     <@formMacro.rtcColorLabel "${user.status}" "label-success" "user.status."/>
                 <#elseif user.status=="FOR_REMOVAL">
-                    <@formMacro.rtcColorLabel "${user.status}" "label-danger" "user.status."/>
-                <#elseif user.status=="INACTIVE">
-                    <@formMacro.rtcColorLabel "${user.status}" "label-warning" "user.status."/>
-                </#if>
-                </p>
+                            <@formMacro.rtcColorLabel "${user.status}" "label-danger" "user.status."/>
+                        <#elseif user.status=="INACTIVE">
+                            <@formMacro.rtcColorLabel "${user.status}" "label-warning" "user.status."/>
+                        </#if>
+                    </p>
+                </div>
             </div>
+            <@formMacro.rtcFormLabelOut "user.registerDate" "${user.registerDate? string['dd-MMM-yyyy']}" ""
+            "col-md-5" />
         </div>
-             <@formMacro.rtcFormLabelOut "user.registerDate" "${user.registerDate? string['dd-MMM-yyyy']}" ""
-             "col-md-5" />
-    </div>
 
-</div>
+    </div>
 
 <hr>
 <#if user.status == "FOR_REMOVAL">

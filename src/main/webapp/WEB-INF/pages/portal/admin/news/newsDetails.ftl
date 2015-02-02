@@ -36,7 +36,7 @@
 <div class="row">
 <div class="col-md-12">
     <div>
-        <label><@spring.message "news.status"/></label>&nbsp
+        <label style="margin-right: 15px"><@spring.message "news.status"/></label>
         <#if news.status=='DRAFT'>
             <@formMacro.rtcColorLabel "Draft" "label-warning"/>
         <#else>
