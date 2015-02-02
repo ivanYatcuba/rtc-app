@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.user;
 
+import net.github.rtc.app.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserCourseOrder;
@@ -7,27 +8,37 @@ import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
+
+import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@Ignore //temporary, really
+@RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(locations = "classpath:mvc-test.xml")
 public class CourseControllerTest {
 
     private static final String EMAIL = "vasya@mail.ru";
@@ -36,12 +47,10 @@ public class CourseControllerTest {
 
     private static final String SURNAME = "pupkin";
 
-    private static final String CURRENT_USERNAME = "?currentUserName=vasya%40mail.ru";
-
     private static final String COURSE_CODE = "X";
 
     @InjectMocks
-    private ProfileController controller;
+    private CourseController controller;
 
     @Mock
     private UserService userService;
@@ -74,43 +83,44 @@ public class CourseControllerTest {
     }
 
     @Test
-    public void testUserCoursesIfNull() throws Exception {
-        when(validationContext.get(UserCourseOrder.class)).thenReturn("validationContext");
-        mockMvc.perform(get("/user/userCourses"))
+    public void testUserCoursesTable() throws Exception {
+        SearchResults<UserCourseDTO> searchResults = new SearchResults<>();
+        searchResults.setResults(new ArrayList<UserCourseDTO>());
+        searchResults.setPage(10);
+        searchResults.setPerPage(10);
+        searchResults.setTotalResults(10);
+        when(courseService.searchCoursesForUser(anyBoolean(), isA(CourseSearchFilter.class))).thenReturn(searchResults);
+        mockMvc.perform(post("/user/courses/courseTable"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("user", "courses"))
-                .andExpect(model().attributeExists("validationRules"));
+                .andExpect(model().attributeExists("courses"));
     }
 
     @Test
     public void testUserCourses() throws Exception {
-        UserCourseOrder order = new UserCourseOrder();
-        order.setCourseCode("code");
-        when(userCourseOrderService.getUserOrderByUserCode(user.getCode())).thenReturn(order);
-        when(courseService.findByCode(order.getCourseCode())).thenReturn(new Course());
-        mockMvc.perform(get("/user/userCourses"))
+        mockMvc.perform(get("/user/courses"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("user", "course", "orderStatus"));
+                .andExpect(forwardedUrl("portal/user/course/courses"));
     }
 
     @Test
     public void testCourseDetails() throws Exception {
         when(courseService.findByCode(COURSE_CODE)).thenReturn(new Course());
-        mockMvc.perform(get("/user/courseDetails/{courseCode}", COURSE_CODE))
+        mockMvc.perform(get("/user/courses/courseDetails/{courseCode}", COURSE_CODE))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("user", "course"));
+                .andExpect(model().attributeExists("course"))
+                .andExpect(forwardedUrl("portal/user/page/courseDetail"));
     }
 
     @Test
     public void testSendCourseOrder() throws Exception {
-        mockMvc.perform(post("/user/sendOrder").sessionAttr("order", new UserCourseOrder()))
+        mockMvc.perform(post("/user/courses/sendOrder").sessionAttr("order", new UserCourseOrder()))
                 .andExpect(status().isFound());
     }
 
     @Test
     public void testCoursePosition() throws Exception {
         when(courseService.findByCode(COURSE_CODE)).thenReturn(new Course());
-        mockMvc.perform(get("/user/position/{courseCode}", COURSE_CODE))
+        mockMvc.perform(get("/user/courses/position/{courseCode}", COURSE_CODE))
                 .andExpect(status().isOk());
     }
 }
