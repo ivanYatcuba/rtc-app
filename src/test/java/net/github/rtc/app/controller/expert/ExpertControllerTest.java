@@ -1,6 +1,5 @@
 package net.github.rtc.app.controller.expert;
 
-import net.github.rtc.app.model.user.Request;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.service.course.CourseService;
@@ -8,7 +7,6 @@ import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.service.date.DateService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,8 +21,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
-
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -32,7 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = "classpath:mvc-test.xml")
-@Ignore
 public class ExpertControllerTest {
 
     private static final String EMAIL = "vasya@mail.ru";
@@ -77,33 +72,25 @@ public class ExpertControllerTest {
     @Test
     public void testExpertCourses() throws Exception {
         when(userService.loadUserByUsername(EMAIL)).thenReturn(user);
-        mockMvc.perform(get("/expert/requests"))
-                .andExpect(status().isOk())
-                .andExpect(model().attribute("requests", new ArrayList<Request>()))
-                .andExpect(model().attribute("user", user));
+        mockMvc.perform(get("/user/expert/order"))
+                .andExpect(status().isOk());
     }
 
-    @Test
-    public void testUserCourses() throws Exception {
-        mockMvc.perform(get("/expert/all"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("courses"));
-    }
 
     @Test
     public void testAcceptRequest() throws Exception {
         when(userCourseOrderService.findByCode(ORDER_CODE)).thenReturn(new UserCourseOrder());
-        mockMvc.perform(get("/expert/accept/{orderId}", ORDER_CODE))
+        mockMvc.perform(get("/user/expert/order/accept/{orderId}", ORDER_CODE))
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/expert/requests" + CURRENT_USER));
+                .andExpect(redirectedUrl("/user/expert/order?menuItem=orders"));
     }
 
     @Test
     public void testDeclineRequest() throws Exception {
         when(userCourseOrderService.findByCode(ORDER_CODE)).thenReturn(new UserCourseOrder());
-        mockMvc.perform(get("/expert/decline/{orderId}", ORDER_CODE))
+        mockMvc.perform(get("/user/expert/order/decline/{orderId}", ORDER_CODE))
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/expert/requests" + CURRENT_USER));
+                .andExpect(redirectedUrl("/user/expert/order?menuItem=orders"));
     }
 
 }

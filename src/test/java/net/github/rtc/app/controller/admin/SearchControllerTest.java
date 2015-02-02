@@ -1,6 +1,7 @@
 package net.github.rtc.app.controller.admin;
 
 
+import net.github.rtc.app.model.activity.Activity;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.activity.ActivityService;
 import net.github.rtc.app.service.course.CourseService;
@@ -8,6 +9,7 @@ import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.report.ReportService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.ActivitySearchFilter;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -23,6 +25,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
+
+import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,7 +58,7 @@ public class SearchControllerTest {
         SecurityContextHolder.getContext().setAuthentication(auth);
         this.mockMvc = MockMvcBuilders.standaloneSetup(searchController).build();
     }
-    @Ignore
+
     @Test
     public void checkActivityTable() throws Exception {
         ActivitySearchFilter searchFilter = new ActivitySearchFilter();
@@ -60,6 +66,12 @@ public class SearchControllerTest {
         searchFilter.setPerPage(5);
         searchFilter.setDateMoreLessEq('=');
         searchFilter.setUser("");
+        SearchResults<Activity> results = new SearchResults<>();
+        results.setPage(10);
+        results.setPerPage(10);
+        results.setTotalResults(10);
+        results.setResults(new ArrayList<Activity>());
+        when(activityService.search(isA(ActivitySearchFilter.class))).thenReturn(results);
         mockMvc.perform(post("/admin/activityTable").sessionAttr("activityFilter", searchFilter))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("activities"));
