@@ -29,10 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
-/**
- * Created by Berdniky on 15.10.2014.
- */
-
 @Controller
 @RequestMapping(value = "/admin")
 public class SearchController {
@@ -55,7 +51,6 @@ public class SearchController {
     private static final String REPORT_FILTER = "reportFilter";
     private static final String EXPERTS = "experts";
     private static final String MENU_ITEM = "menuItem";
-    private static final String ACTIVITY = "activity";
     private static final String ACTIVITY_FILTER = "activityFilter";
     private static final String ACTIVITY_ENTITIES = "activityEntities";
     private static final String ACTIVITY_ACTIONS = "activityActions";
@@ -77,7 +72,7 @@ public class SearchController {
              throw new ResourceNotFoundException();
          }
         final ModelAndView mav = new ModelAndView("redirect:" + "/admin/search");
-        mav.addObject(MENU_ITEM, menuItem.toString());
+        mav.addObject(MENU_ITEM, menuItem);
         return mav;
     }
 

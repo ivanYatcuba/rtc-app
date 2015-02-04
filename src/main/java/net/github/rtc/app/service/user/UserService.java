@@ -44,4 +44,6 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
     void restoreAndDeactivateUser(String userCode);
 
     Map<String, String> getUserNameCodeMap(RoleType roleType);
+
+    void registerUser(User user);
 }

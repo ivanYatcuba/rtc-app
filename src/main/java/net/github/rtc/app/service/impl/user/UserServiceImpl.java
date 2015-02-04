@@ -6,6 +6,7 @@ import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
+import net.github.rtc.app.service.MailService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.genericservise.AbstractCRUDEventsService;
 import net.github.rtc.app.service.user.UserService;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,8 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     private DateService dateService;
     @Autowired
     private FileUpload upload;
+    @Autowired
+    private MailService mailService;
 
     @Override
     protected GenericDao<User> getDao() {
@@ -151,5 +155,14 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
             results.put(admin.shortString(), admin.getCode());
         }
         return results;
+    }
+
+    @Override
+    public void registerUser(User user) {
+        user.setStatus(UserStatus.ACTIVE);
+        user.setAuthorities(Arrays.asList(getRoleByType(RoleType.ROLE_USER)));
+        user.setRegisterDate(dateService.getCurrentDate());
+        create(user);
+        mailService.sendRegistrationMail(user);
     }
 }
