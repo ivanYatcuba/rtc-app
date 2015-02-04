@@ -32,14 +32,14 @@ import java.util.*;
 @RequestMapping("admin/course")
 public class CoursesController implements MenuItem {
 
-    private static final String STRING_COURSE = "course";
-    private static final String STRING_TYPES = "types";
-    private static final String STRING_STATUSES = "statuses";
-    private static final String STRING_FILTER_COURSE = "filterCourse";
+    private static final String COURSE = "course";
+    private static final String TYPES = "types";
+    private static final String STATUSES = "statuses";
+    private static final String FILTER_COURSE = "filterCourse";
     private static final String REDIRECT = "redirect:/";
-    private static final String STRING_ADMIN = "admin";
-    private static final String STRING_VALIDATION_RULES = "validationRules";
-    private static final String STRING_EXPERTS = "experts";
+    private static final String ADMIN = "admin";
+    private static final String VALIDATION_RULES = "validationRules";
+    private static final String EXPERTS = "experts";
     private static final String VIEW = "view/";
     private static final String REDIRECT1 = "redirect: ";
     private static final String ROOT = "portal/admin";
@@ -71,7 +71,7 @@ public class CoursesController implements MenuItem {
         if (course.getStatus() != CourseStatus.PUBLISHED) {
             courseService.deleteByCode(courseCode);
         }
-        return REDIRECT + STRING_ADMIN;
+        return REDIRECT + ADMIN;
     }
 
     @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
@@ -82,13 +82,13 @@ public class CoursesController implements MenuItem {
         if (ifCreateNews) {
             courseService.createNews(course, getCurrentUser());
         }
-        return REDIRECT + STRING_ADMIN;
+        return REDIRECT + ADMIN;
     }
 
     @RequestMapping(value = "/archive/{courseCode}", method = RequestMethod.GET)
     public String archive(@PathVariable final String courseCode) {
         courseService.archive(courseCode);
-        return REDIRECT + STRING_ADMIN;
+        return REDIRECT + ADMIN;
     }
 
     /**
@@ -105,7 +105,7 @@ public class CoursesController implements MenuItem {
       newsJustCreated) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         final Course course = courseService.findByCode(courseCode);
-        mav.addObject(STRING_COURSE, course);
+        mav.addObject(COURSE, course);
         mav.addObject("newsInfo", newsJustCreated);
         return mav;
     }
@@ -118,7 +118,7 @@ public class CoursesController implements MenuItem {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         final ModelAndView mav = new ModelAndView(ROOT + CREATE_VIEW);
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course.class));
+        mav.addObject(VALIDATION_RULES, validationContext.get(Course.class));
         return mav;
     }
 
@@ -131,7 +131,7 @@ public class CoursesController implements MenuItem {
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(
-      @ModelAttribute(STRING_COURSE) final Course course,
+      @ModelAttribute(COURSE) final Course course,
       @RequestParam(required = false) final boolean ifPublish,
         @RequestParam(required = false) final boolean ifCreateNews) {
         course.setStatus(ifPublish ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
@@ -153,8 +153,8 @@ public class CoursesController implements MenuItem {
     public ModelAndView update(@PathVariable final String courseCode) {
         final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
         final Course returnCourse = courseService.findByCode(courseCode);
-        mav.getModelMap().addAttribute(STRING_COURSE, returnCourse);
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(Course.class));
+        mav.getModelMap().addAttribute(COURSE, returnCourse);
+        mav.addObject(VALIDATION_RULES, validationContext.get(Course.class));
         return mav;
     }
 
@@ -166,7 +166,7 @@ public class CoursesController implements MenuItem {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(
-      @ModelAttribute(STRING_COURSE) final Course course,
+      @ModelAttribute(COURSE) final Course course,
       @RequestParam(value = "ifPublish", required = false) final boolean ifPublish,
       @RequestParam(required = false) final boolean ifCreateNews) {
         course.setStatus(ifPublish ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
@@ -184,14 +184,14 @@ public class CoursesController implements MenuItem {
      *
      * @param binder
      */
-    @InitBinder(STRING_COURSE)
+    @InitBinder(COURSE)
     public void initBinder(final WebDataBinder binder) {
         binder.registerCustomEditor(List.class, "tags", new CustomTagsEditor());
-        binder.registerCustomEditor(List.class, STRING_TYPES, new CustomTypeEditor());
-        binder.registerCustomEditor(Set.class, STRING_EXPERTS, new CustomExpertsEditor(userService));
+        binder.registerCustomEditor(List.class, TYPES, new CustomTypeEditor());
+        binder.registerCustomEditor(Set.class, EXPERTS, new CustomExpertsEditor(userService));
     }
 
-    @InitBinder(STRING_FILTER_COURSE)
+    @InitBinder(FILTER_COURSE)
     public void initFilterBinder(final WebDataBinder binder) {
         initBinder(binder);
     }
@@ -210,7 +210,7 @@ public class CoursesController implements MenuItem {
         return categories;
     }
 
-    @ModelAttribute(STRING_EXPERTS)
+    @ModelAttribute(EXPERTS)
     public Map<String, String> getExpertUsers() {
         final Map<String, String> expertMap = new HashMap<>();
         for (User u : userService.getUserByRole(RoleType.ROLE_EXPERT)) {
@@ -219,7 +219,7 @@ public class CoursesController implements MenuItem {
         return expertMap;
     }
 
-    @ModelAttribute(STRING_STATUSES)
+    @ModelAttribute(STATUSES)
     public Collection<String> getStatuses() {
         return CourseStatus.findAll();
     }
@@ -234,7 +234,7 @@ public class CoursesController implements MenuItem {
         return userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
-    @ModelAttribute(STRING_FILTER_COURSE)
+    @ModelAttribute(FILTER_COURSE)
     public CourseSearchFilter getFilterCourse() {
         return new CourseSearchFilter();
     }
@@ -244,14 +244,14 @@ public class CoursesController implements MenuItem {
      *
      * @return course object
      */
-    @ModelAttribute(value = STRING_COURSE)
+    @ModelAttribute(value = COURSE)
     public Course getCommandObject() {
         return new Course();
     }
 
     @Override
     public String getMenuItem() {
-        return STRING_COURSE;
+        return COURSE;
     }
 
 

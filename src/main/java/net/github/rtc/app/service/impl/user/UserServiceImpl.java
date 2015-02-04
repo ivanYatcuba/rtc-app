@@ -7,7 +7,7 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.model.user.UserStatus;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceWithCheckActivityImpl;
+import net.github.rtc.app.service.impl.genericservise.AbstractCRUDEventsService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Service
-public class UserServiceImpl extends AbstractGenericServiceWithCheckActivityImpl<User> implements UserService {
+public class UserServiceImpl extends AbstractCRUDEventsService<User> implements UserService {
 
     private static final int USER_REMOVAL_DELAY = 3;
     private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class.getName());

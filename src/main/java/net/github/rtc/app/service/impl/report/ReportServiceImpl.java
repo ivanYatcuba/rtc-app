@@ -7,7 +7,7 @@ import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.service.CodeGenerationService;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.impl.genericservise.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.report.ReportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ import java.util.Map;
 @Service
 public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails> implements ReportService {
 
-    private static final String STRING_REPORT = "Report: ";
+    private static final String REPORT = "Report: ";
     private static final String DOT = ".";
     private static Logger log = LoggerFactory.getLogger(ReportServiceImpl.class.getName());
     @Autowired
@@ -52,7 +52,7 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
         try {
             compileReport(report);
             final ReportDetails result = reportDao.create(report);
-            log.info(STRING_REPORT + report.getCode() + " created successfully!");
+            log.info(REPORT + report.getCode() + " created successfully!");
             return result;
         } catch (final Exception e) {
             log.info("Report creation failed: " + report.getCode());
@@ -68,7 +68,7 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
         try {
             compileReport(report);
             reportDao.update(report);
-            log.info(STRING_REPORT + report.getCode() + " updated successfully!");
+            log.info(REPORT + report.getCode() + " updated successfully!");
             return report;
         } catch (final Exception e) {
             log.info("Report update failed: " + report.getCode());

@@ -22,13 +22,13 @@ import java.util.Collection;
 @RequestMapping(value = "/admin/news")
 public class NewsController implements MenuItem {
 
-    public static final String STRING_NEWS = "news";
-    private static final String STRING_STATUSES = "statuses";
-    private static final String STRING_FILTER_NEWS = "filterNews";
-    private static final String STRING_REDIRECT_VIEW = "redirect:/admin/news/";
-    private static final String STRING_VALIDATION_RULES = "validationRules";
-    private static final String STRING_REDIRECT = "redirect:";
-    private static final String STRING_ADMIN_SEARCH = "/admin/search";
+    public static final String NEWS = "news";
+    private static final String STATUSES = "statuses";
+    private static final String FILTER_NEWS = "filterNews";
+    private static final String REDIRECT_VIEW = "redirect:/admin/news/";
+    private static final String VALIDATION_RULES = "validationRules";
+    private static final String REDIRECT = "redirect:";
+    private static final String ADMIN_SEARCH = "/admin/search";
 
     private static final String ROOT = "portal/admin";
     private static final String UPDATE_VIEW = "/news/newsUpdate";
@@ -47,7 +47,7 @@ public class NewsController implements MenuItem {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         final ModelAndView mav = new ModelAndView(ROOT + CREATE_VIEW);
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(News.class));
+        mav.addObject(VALIDATION_RULES, validationContext.get(News.class));
         return mav;
     }
 
@@ -63,7 +63,7 @@ public class NewsController implements MenuItem {
     public ModelAndView single(@PathVariable final String newsCode) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         final News news = newsService.findByCode(newsCode);
-        mav.addObject(STRING_NEWS, news);
+        mav.addObject(NEWS, news);
         return mav;
     }
 
@@ -75,8 +75,8 @@ public class NewsController implements MenuItem {
     @RequestMapping(value = "update/{newsCode}", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable final String newsCode) {
         final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
-        mav.getModelMap().addAttribute(STRING_NEWS, newsService.findByCode(newsCode));
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(News.class));
+        mav.getModelMap().addAttribute(NEWS, newsService.findByCode(newsCode));
+        mav.addObject(VALIDATION_RULES, validationContext.get(News.class));
         return mav;
     }
 
@@ -88,7 +88,7 @@ public class NewsController implements MenuItem {
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String update(
-      @ModelAttribute(STRING_NEWS) final News news, @RequestParam(required = false) final boolean publish) {
+      @ModelAttribute(NEWS) final News news, @RequestParam(required = false) final boolean publish) {
         final News newsTmp = newsService.findByCode(news.getCode());
         news.setCreateDate(newsTmp.getCreateDate());
         if (publish) {
@@ -97,19 +97,19 @@ public class NewsController implements MenuItem {
         news.setAuthor(newsTmp.getAuthor());
         news.setStatus(publish ? NewsStatus.PUBLISHED : newsTmp.getStatus());
         newsService.update(news);
-        return STRING_REDIRECT_VIEW + news.getCode();
+        return REDIRECT_VIEW + news.getCode();
     }
 
     @RequestMapping(value = "/delete/{newsCode}", method = RequestMethod.GET)
     public String deleteByCode(@PathVariable final String newsCode) {
         newsService.deleteByCode(newsCode);
-        return STRING_REDIRECT + STRING_ADMIN_SEARCH;
+        return REDIRECT + ADMIN_SEARCH;
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
     public String setStatusForRemoval(@RequestParam final String newsCode) throws Exception {
         newsService.deleteByCode(newsCode);
-        return STRING_REDIRECT + STRING_ADMIN_SEARCH;
+        return REDIRECT + ADMIN_SEARCH;
     }
 
     @RequestMapping(value = "/publish/{newsCode}", method = RequestMethod.GET)
@@ -118,15 +118,15 @@ public class NewsController implements MenuItem {
         news.setPublishDate(dateService.getCurrentDate());
         news.setStatus(NewsStatus.PUBLISHED);
         newsService.update(news);
-        return STRING_REDIRECT + STRING_ADMIN_SEARCH;
+        return REDIRECT + ADMIN_SEARCH;
     }
 
-    @ModelAttribute(STRING_STATUSES)
+    @ModelAttribute(STATUSES)
     public Collection<String> getStatuses() {
         return NewsStatus.findAll();
     }
 
-    @ModelAttribute(STRING_NEWS)
+    @ModelAttribute(NEWS)
     public News getNews() {
 
         return new News();
@@ -146,7 +146,7 @@ public class NewsController implements MenuItem {
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(
-      @ModelAttribute(STRING_NEWS) final News news, @RequestParam(required = false) final boolean publish) {
+      @ModelAttribute(NEWS) final News news, @RequestParam(required = false) final boolean publish) {
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         final String name = auth.getName(); //get logged in username
         news.setCreateDate(dateService.getCurrentDate());
@@ -155,11 +155,11 @@ public class NewsController implements MenuItem {
             news.setStatus(NewsStatus.PUBLISHED);
         }
         newsService.create(news);
-        return STRING_REDIRECT_VIEW + news.getCode();
+        return REDIRECT_VIEW + news.getCode();
     }
 
     @Override
     public String getMenuItem() {
-        return STRING_NEWS;
+        return NEWS;
     }
 }

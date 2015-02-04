@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 
 public class ReportSearchFilter extends AbstractSearchCommand {
 
-    private static final String STRING_PERCENT = "%";
+    private static final String PERCENT = "%";
 
     private String name;
 
@@ -18,7 +18,7 @@ public class ReportSearchFilter extends AbstractSearchCommand {
     public DetachedCriteria getCriteria() {
         final DetachedCriteria criteria = DetachedCriteria.forClass(ReportDetails.class);
         if (name != null && !("").equals(name)) {
-            criteria.add(Restrictions.like("name", STRING_PERCENT + name + STRING_PERCENT));
+            criteria.add(Restrictions.like("name", PERCENT + name + PERCENT));
         }
         if (exportClass != null) {
             criteria.add(Restrictions.eq("exportClass", exportClass));

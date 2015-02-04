@@ -5,7 +5,7 @@ import net.github.rtc.app.dao.UserCourseOrderDao;
 import net.github.rtc.app.model.user.UserCourseOrder;
 import net.github.rtc.app.model.user.UserRequestStatus;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.impl.genericservise.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

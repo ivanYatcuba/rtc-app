@@ -34,8 +34,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(locations = "classpath:mvc-test.xml")
 public class ErrorControllerTest  {
 
-    private static final String STRING_JAVAX = "javax";
-    private static final String STRING_DOT_SERVLET = ".servlet";
+    private static final String JAVAX = "javax";
+    private static final String DOT_SERVLET = ".servlet";
 
     public static class MockSecurityContext implements SecurityContext {
 
@@ -82,7 +82,7 @@ public class ErrorControllerTest  {
         User user = new User();
         user.setAuthorities(Arrays.asList(new Role(RoleType.ROLE_ADMIN)));
         when(userService.loadUserByUsername("user1")).thenReturn(user);
-        mockMvc.perform(get("/error500").requestAttr(STRING_JAVAX + STRING_DOT_SERVLET
+        mockMvc.perform(get("/error500").requestAttr(JAVAX + DOT_SERVLET
                 + ".error.status_code", new Integer(500)).session(session))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("errorTitle", "errorMessage", "errorCause"));
@@ -99,7 +99,7 @@ public class ErrorControllerTest  {
         User user = new User();
         user.setAuthorities(Arrays.asList(new Role(RoleType.ROLE_ADMIN)));
         when(userService.loadUserByUsername("user1")).thenReturn(user);
-        mockMvc.perform(get("/error404").requestAttr(STRING_JAVAX + STRING_DOT_SERVLET
+        mockMvc.perform(get("/error404").requestAttr(JAVAX + DOT_SERVLET
                 + ".error.status_code", new Integer(404)).session(session))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("errorTitle", "errorMessage", "errorCause"));

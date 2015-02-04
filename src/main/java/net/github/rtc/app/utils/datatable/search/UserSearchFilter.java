@@ -13,9 +13,9 @@ import java.util.List;
 
 
 public class UserSearchFilter extends AbstractSearchCommand {
-    private static final String STRING_PROCENT = "%";
-    private static final String STRING_AUTHORITIES = "authorities";
-    private static final String STRING_REGISTER_DATE = "registerDate";
+    private static final String PROCENT = "%";
+    private static final String AUTHORITIES = "authorities";
+    private static final String REGISTER_DATE = "registerDate";
 
     private String surname;
 
@@ -75,26 +75,26 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc(STRING_REGISTER_DATE);
+        return Order.asc(REGISTER_DATE);
     }
 
     public DetachedCriteria getCriteria() {
         final DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
 
         if (surname != null && !("").equals(surname)) {
-            criteria.add(Restrictions.ilike("surname", STRING_PROCENT + surname + STRING_PROCENT));
+            criteria.add(Restrictions.ilike("surname", PROCENT + surname + PROCENT));
         }
 
         if (registerDate != null) {
             switch (dateMoreLessEq) {
             case '>':
-                criteria.add(Restrictions.gt(STRING_REGISTER_DATE, registerDate));
+                criteria.add(Restrictions.gt(REGISTER_DATE, registerDate));
                 break;
             case '=':
-                criteria.add(Restrictions.eq(STRING_REGISTER_DATE, registerDate));
+                criteria.add(Restrictions.eq(REGISTER_DATE, registerDate));
                 break;
             case '<':
-                criteria.add(Restrictions.lt(STRING_REGISTER_DATE, registerDate));
+                criteria.add(Restrictions.lt(REGISTER_DATE, registerDate));
                 break;
             default: break;
             }
@@ -112,7 +112,7 @@ public class UserSearchFilter extends AbstractSearchCommand {
         }
 
         if (authorities != null && authorities.size() > 0) {
-                criteria.createAlias(STRING_AUTHORITIES, STRING_AUTHORITIES);
+                criteria.createAlias(AUTHORITIES, AUTHORITIES);
                 final Disjunction authoritiesDis = Restrictions.disjunction(); //change back to disjunction
                 for (final Role role : authorities) {
                         authoritiesDis.add(Restrictions.eq("authorities.name", role.getName()));

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CustomRoleEditor extends PropertyEditorSupport {
 
-    private static final String STRING_COMMA = ",";
+    private static final String COMMA = ",";
 
     private UserService userService;
 
@@ -25,7 +25,7 @@ public class CustomRoleEditor extends PropertyEditorSupport {
 
     @Override
     public void setAsText(final String text) {
-        final List<String> rolesSplit = Arrays.asList(text.split(STRING_COMMA));
+        final List<String> rolesSplit = Arrays.asList(text.split(COMMA));
         final Collection<Role> roles = new ArrayList<>();
         if (!rolesSplit.get(0).isEmpty()) {
             for (final String roleName : rolesSplit) {

@@ -37,13 +37,13 @@ public class UserControllerTest {
     private static final String ROOT = "portal/admin";
     private static final String PATH_PAGE_VIEW_ALL_USERS = "/page/viewAllusers";
     private static final String PATH_ADMIN_USER = "admin/user";
-    private static final String STRING_AUTHORITIES = "authorities";
-    private static final String STRING_USER_FILTER = "userFilter";
+    private static final String AUTHORITIES = "authorities";
+    private static final String USER_FILTER = "userFilter";
     private static final String PATH_PAGE_USER_PAGE = "/page/userPage";
     private static final String ADMIN_SEARCH = "/admin/search";
 
-    private static final String STRING_VALIDATION_RULES = "validationRules";
-    private static final String STRING_USER = "user";
+    private static final String VALIDATION_RULES = "validationRules";
+    private static final String USER = "user";
     private static final String ANY_USER_CODE = "anyCode";
     private static final String ANY_STRING = "anyString";
     private static final String USER_CODE = "userCode";
@@ -76,8 +76,8 @@ public class UserControllerTest {
         mockMvc.perform(get("/admin/user/edit/{code}", ANY_USER_CODE))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ROOT + "/user/userUpdate"))
-                .andExpect(model().attributeExists(STRING_VALIDATION_RULES))
-                .andExpect(model().attributeExists(STRING_USER));
+                .andExpect(model().attributeExists(VALIDATION_RULES))
+                .andExpect(model().attributeExists(USER));
         verify(userService, times(1)).findByCode(ANY_USER_CODE);
         verify(validationContext, times(1)).get(User.class);
         /*verifyNoMoreInteractions(userService);*/
@@ -90,7 +90,7 @@ public class UserControllerTest {
 //        mockMvc.perform(get("/admin/user/userDetails/{code}", ANY_USER_CODE))
 //                .andExpect(status().isOk())
 //                .andExpect(view().name(ROOT + "/user/userDetails"))
-//                .andExpect(model().attributeExists(STRING_USER));
+//                .andExpect(model().attributeExists(USER));
 //        verify(userService, times(1)).findByCode(ANY_USER_CODE);
 //        /*verifyNoMoreInteractions(userService);*/
 //    }

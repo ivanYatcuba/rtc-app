@@ -26,9 +26,9 @@ public class ProfileController implements MenuItem {
 
     private static final String USER_ROOT = "portal/user";
     private static final String EXPERT_ROOT = "portal/expert";
-    private static final String STRING_USER = "user";
-    private static final String STRING_REDIRECT = "redirect:/";
-    private static final String STRING_VALIDATION_RULES = "validationRules";
+    private static final String USER = "user";
+    private static final String REDIRECT = "redirect:/";
+    private static final String VALIDATION_RULES = "validationRules";
     @Autowired
     private UserService userService;
     @Autowired
@@ -40,7 +40,7 @@ public class ProfileController implements MenuItem {
     public ModelAndView user() {
         final ModelAndView mav = new ModelAndView(getRoot() + "/profile/profile");
         final User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        mav.addObject(STRING_USER, user);
+        mav.addObject(USER, user);
         return mav;
     }
 
@@ -54,8 +54,8 @@ public class ProfileController implements MenuItem {
         final User user = userService.loadUserByUsername(
           SecurityContextHolder.getContext().getAuthentication().getName());
         final ModelAndView mav = new ModelAndView(getRoot() + "/profile/editProfile");
-        mav.getModelMap().addAttribute(STRING_USER, user);
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
+        mav.getModelMap().addAttribute(USER, user);
+        mav.addObject(VALIDATION_RULES, validationContext.get(User.class));
         return mav;
     }
 
@@ -67,13 +67,13 @@ public class ProfileController implements MenuItem {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView update(
-      @ModelAttribute(STRING_USER) final User user) {
+      @ModelAttribute(USER) final User user) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
         userService.update(user);
         final Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         authenticationManager.authenticate(request);
         SecurityContextHolder.getContext().setAuthentication(request);
-        return new ModelAndView(STRING_REDIRECT + "user/profile");
+        return new ModelAndView(REDIRECT + "user/profile");
     }
 
     private String getRoot() {
@@ -93,7 +93,7 @@ public class ProfileController implements MenuItem {
      *
      * @param binder
      */
-    @InitBinder(STRING_USER)
+    @InitBinder(USER)
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));

@@ -31,13 +31,13 @@ import java.util.*;
 @RequestMapping("admin/user")
 public class UserController implements MenuItem {
 
-    private static final String STRING_USER = "user";
+    private static final String USER = "user";
     private static final String REDIRECT_USER_PAGE = "redirect:/admin/user/view/";
-    private static final String STRING_VALIDATION_RULES = "validationRules";
+    private static final String VALIDATION_RULES = "validationRules";
     private static final String REDIRECT_ADMIN_SEARCH = "redirect:/admin/search";
-    private static final String STRING_USER_FILTER = "userFilter";
-    private static final String STRING_AUTHORITIES = "authorities";
-    private static final String STRING_STATUSES = "statuses";
+    private static final String USER_FILTER = "userFilter";
+    private static final String AUTHORITIES = "authorities";
+    private static final String STATUSES = "statuses";
     private static final String PROGRAMMING_LANGUAGES = "programmingLanguages";
     private static final String ROOT = "portal/admin";
     private static final String UPDATE_VIEW = "/user/userUpdate";
@@ -55,9 +55,9 @@ public class UserController implements MenuItem {
     @RequestMapping(value = "/edit/{code}", method = RequestMethod.GET)
     public ModelAndView editPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
+        mav.addObject(VALIDATION_RULES, validationContext.get(User.class));
         final User us = userService.findByCode(code);
-        mav.addObject(STRING_USER, us);
+        mav.addObject(USER, us);
         return mav;
     }
 
@@ -65,7 +65,7 @@ public class UserController implements MenuItem {
     public ModelAndView userPage(@PathVariable final String code) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         final User user = userService.findByCode(code);
-        mav.addObject(STRING_USER, user);
+        mav.addObject(USER, user);
         return mav;
     }
 
@@ -121,13 +121,13 @@ public class UserController implements MenuItem {
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
         final ModelAndView mav = new ModelAndView(ROOT + CREATE_VIEW);
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(User.class));
+        mav.addObject(VALIDATION_RULES, validationContext.get(User.class));
         return mav;
     }
 
     @RequestMapping(value = "/save", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public String save(
-      @ModelAttribute(STRING_USER) final User user,
+      @ModelAttribute(USER) final User user,
       @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
       @RequestParam(required = false) final boolean ifActive) {
         user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
@@ -137,7 +137,7 @@ public class UserController implements MenuItem {
 
     @RequestMapping(value = "/update/{code}", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public String update(
-      @ModelAttribute(STRING_USER) @Valid final User user,
+      @ModelAttribute(USER) @Valid final User user,
       @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
       @RequestParam(required = false) final boolean ifActive) {
         if (!img.isEmpty()) {
@@ -153,25 +153,25 @@ public class UserController implements MenuItem {
     @InitBinder
     public void initFilterBinder(final WebDataBinder binder) {
         binder.registerCustomEditor(List.class, PROGRAMMING_LANGUAGES, new CustomTypeEditor());
-        binder.registerCustomEditor(List.class, STRING_AUTHORITIES, new CustomRoleEditor(userService));
+        binder.registerCustomEditor(List.class, AUTHORITIES, new CustomRoleEditor(userService));
     }
 
-    @ModelAttribute(value = STRING_USER)
+    @ModelAttribute(value = USER)
     public User getCommandObject() {
         return new User();
     }
 
-    @ModelAttribute(STRING_USER_FILTER)
+    @ModelAttribute(USER_FILTER)
     public UserSearchFilter getFilterUser() {
         return new UserSearchFilter();
     }
 
-    @ModelAttribute(STRING_STATUSES)
+    @ModelAttribute(STATUSES)
     public Collection<String> getStatuses() {
         return UserStatus.findAll();
     }
 
-    @ModelAttribute(STRING_AUTHORITIES)
+    @ModelAttribute(AUTHORITIES)
     public Collection<String> getAuthorities() {
         return RoleType.findAll();
     }
@@ -202,6 +202,6 @@ public class UserController implements MenuItem {
 
     @Override
     public String getMenuItem() {
-        return STRING_USER;
+        return USER;
     }
 }

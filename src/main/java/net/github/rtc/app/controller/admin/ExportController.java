@@ -33,9 +33,9 @@ public class ExportController implements MenuItem {
 
     private static final int BUFFER_SIZE = 4096;
 
-    private static final String STRING_TYPES = "types";
-    private static final String STRING_VALIDATION_RULES = "validationRules";
-    private static final String STRING_REPORT = "report";
+    private static final String TYPES = "types";
+    private static final String VALIDATION_RULES = "validationRules";
+    private static final String REPORT = "report";
     private static final String REDIRECT_EXPORT = "redirect:/admin/export/";
     private static final String PAGE_REPORT_LIST = "/page/reportList";
     private static Logger log = LoggerFactory.getLogger(ExportController.class.getName());
@@ -73,8 +73,8 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView openCreatePage() {
         final ModelAndView mav = new ModelAndView(ROOT + CREATE_VIEW);
-        mav.addObject(STRING_TYPES, ReportClasses.values());
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(ReportDetails.class));
+        mav.addObject(TYPES, ReportClasses.values());
+        mav.addObject(VALIDATION_RULES, validationContext.get(ReportDetails.class));
         return mav;
     }
 
@@ -82,9 +82,9 @@ public class ExportController implements MenuItem {
     public ModelAndView openUpdatePage(@PathVariable final String reportCode) {
         final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
         final ReportDetails reportDetails = reportService.findByCode(reportCode);
-        mav.addObject(STRING_REPORT, reportDetails);
-        mav.addObject(STRING_TYPES, ReportClasses.values());
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(ReportDetails
+        mav.addObject(REPORT, reportDetails);
+        mav.addObject(TYPES, ReportClasses.values());
+        mav.addObject(VALIDATION_RULES, validationContext.get(ReportDetails
           .class));
         return mav;
     }
@@ -93,7 +93,7 @@ public class ExportController implements MenuItem {
     public ModelAndView viewReport(@PathVariable final String reportCode) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
         final ReportDetails report = reportService.findByCode(reportCode);
-        mav.addObject(STRING_REPORT, report);
+        mav.addObject(REPORT, report);
         return mav;
     }
 
@@ -184,6 +184,6 @@ public class ExportController implements MenuItem {
 
     @Override
     public String getMenuItem() {
-        return STRING_REPORT;
+        return REPORT;
     }
 }
