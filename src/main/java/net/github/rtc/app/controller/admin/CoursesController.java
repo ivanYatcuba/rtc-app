@@ -32,14 +32,14 @@ public class CoursesController implements MenuItem {
     private static final String EXPERTS = "experts";
     private static final String VALIDATION_RULES = "validationRules";
 
-    private static final String REDIRECT = "redirect:/";
-    private static final String ADMIN = "admin";
+    private static final String REDIRECT = "redirect:";
+    private static final String ADMIN = "/admin";
     private static final String ROOT = "portal/admin";
     private static final String VIEW = "view/";
     private static final String UPDATE_VIEW = "/course/courseUpdate";
     private static final String CREATE_VIEW = "/course/courseCreate";
     private static final String DETAILS_VIEW = "/course/courseDetails";
-    private static final String SHOW_MSG_NEWS_CREATED = "?newsJustCreated=true";
+    private static final String NEWS_CREATED = "?newsJustCreated=";
 
     @Autowired
     private CourseService courseService;
@@ -60,10 +60,7 @@ public class CoursesController implements MenuItem {
                        @RequestParam(required = false) final boolean ifPublish,
                        @RequestParam(required = false) final boolean ifCreateNews) {
         courseService.saveCourse(ifPublish, ifCreateNews, course, false);
-        if (ifCreateNews) {
-            return REDIRECT + VIEW + course.getCode() + SHOW_MSG_NEWS_CREATED;
-        }
-        return REDIRECT + VIEW + course.getCode();
+        return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + ifCreateNews;
     }
 
     @RequestMapping(value = VIEW + "{courseCode}", method = RequestMethod.GET)
@@ -88,10 +85,7 @@ public class CoursesController implements MenuItem {
                          @RequestParam(required = false) final boolean ifPublish,
                          @RequestParam(required = false) final boolean ifCreateNews) {
         courseService.saveCourse(ifPublish, ifCreateNews, course, true);
-        if (ifCreateNews) {
-            return REDIRECT + VIEW + course.getCode() + SHOW_MSG_NEWS_CREATED;
-        }
-        return REDIRECT + VIEW + course.getCode();
+        return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + ifCreateNews;
     }
 
     @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)

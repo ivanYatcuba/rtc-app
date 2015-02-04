@@ -53,7 +53,7 @@
     function getFieldsSelect(fields, checked) {
         var fieldsSelect = "<div class='form-group' id='" + currentFieldId + "'><div " +
                 "class='col-md-10'><label " +
-                "for=\"fieldsCount\"></label><select name='reportFields' class='form-control'>";
+                "for=\"fieldsCount\"></label><select name='fields' class='form-control'>";
         for (var i = 0; i < fields.length; i++) {
             if(fields[i] == checked){
                 fieldsSelect += "<option selected>" + fields[i] + "</option>";
