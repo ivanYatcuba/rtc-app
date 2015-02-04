@@ -3,7 +3,7 @@
 
 <@layout.layout>
 
-<@formMacro.rtcForm "userName" "/admin/user/update/${user.code}" "user.editUser" "${validationRules}" "multipart/form-data">
+<@formMacro.rtcForm "userName" "/admin/user/update/" "user.editUser" "${validationRules}" "multipart/form-data">
     <@spring.formHiddenInput "user.code" />
     <@spring.formHiddenInput "user.id" />
     <@spring.formHiddenInput "user.registerDate" />

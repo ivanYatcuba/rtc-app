@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService extends ModelService<User>, UserDetailsService, GenericService<User> {
 
@@ -26,7 +27,7 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
 
     User loadUserByUsername(String email);
 
-    User create(User user, MultipartFile image);
+    User save(User user, MultipartFile image, boolean ifActive, boolean doUpdate);
 
     void markUserForRemoval(String userCode);
 
@@ -39,4 +40,8 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
     void deleteUsersMarkedForRemoval();
 
     User getAuthorizedUser();
+
+    void restoreAndDeactivateUser(String userCode);
+
+    Map<String, String> getUserNameCodeMap(RoleType roleType);
 }

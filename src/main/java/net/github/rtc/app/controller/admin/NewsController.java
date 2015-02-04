@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
 
-@Controller("newsController")
+@Controller
 @RequestMapping(value = "/admin/news")
 public class NewsController implements MenuItem {
 

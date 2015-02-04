@@ -18,7 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl extends AbstractCRUDEventsService<User> implements UserService {
@@ -46,12 +48,16 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     }
 
     @Override
-    public User create(User user, MultipartFile image) {
-        //set photo
+    public User save(User user, MultipartFile image, boolean ifActive, boolean doUpdate) {
+        user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
         if (!image.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), image));
         }
-        return create(user);
+        if (doUpdate) {
+            return update(user);
+        } else {
+            return create(user);
+        }
     }
 
     @Override
@@ -129,5 +135,21 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     @Override
     public User getAuthorizedUser() {
         return loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+    }
+
+    @Override
+    public void restoreAndDeactivateUser(String userCode) {
+        restoreUser(userCode);
+        inactivateUser(userCode);
+    }
+
+    @Override
+    public Map<String, String> getUserNameCodeMap(RoleType roleType) {
+        final Map<String, String> results = new HashMap<>();
+        final List<User> admins = getUserByRole(roleType);
+        for (final User admin : admins) {
+            results.put(admin.shortString(), admin.getCode());
+        }
+        return results;
     }
 }
