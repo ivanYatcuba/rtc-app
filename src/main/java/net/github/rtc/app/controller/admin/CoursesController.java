@@ -60,7 +60,7 @@ public class CoursesController implements MenuItem {
                        @RequestParam(required = false) final boolean published,
                        @RequestParam(required = false) final boolean newsCreated) {
         courseService.saveCourse(published, newsCreated, course, false);
-        return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + newsCreated;
+        return new StringBuilder().append(REDIRECT).append(VIEW).append(course.getCode()).append(NEWS_CREATED).append(newsCreated).toString();
     }
 
     @RequestMapping(value = VIEW + "{courseCode}", method = RequestMethod.GET)
@@ -85,7 +85,7 @@ public class CoursesController implements MenuItem {
                          @RequestParam(required = false) final boolean published,
                          @RequestParam(required = false) final boolean newsCreated) {
         courseService.saveCourse(published, published, course, true);
-        return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + newsCreated;
+        return new StringBuilder().append(REDIRECT).append(VIEW).append(course.getCode()).append(NEWS_CREATED).append(newsCreated).toString();
     }
 
     @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
