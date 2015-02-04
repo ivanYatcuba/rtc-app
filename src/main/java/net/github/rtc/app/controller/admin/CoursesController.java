@@ -57,10 +57,10 @@ public class CoursesController implements MenuItem {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute(COURSE) final Course course,
-                       @RequestParam(required = false) final boolean ifPublish,
-                       @RequestParam(required = false) final boolean ifCreateNews) {
-        courseService.saveCourse(ifPublish, ifCreateNews, course, false);
-        return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + ifCreateNews;
+                       @RequestParam(required = false) final boolean published,
+                       @RequestParam(required = false) final boolean newsCreated) {
+        courseService.saveCourse(published, newsCreated, course, false);
+        return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + newsCreated;
     }
 
     @RequestMapping(value = VIEW + "{courseCode}", method = RequestMethod.GET)
@@ -82,10 +82,10 @@ public class CoursesController implements MenuItem {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@ModelAttribute(COURSE) final Course course,
-                         @RequestParam(required = false) final boolean ifPublish,
-                         @RequestParam(required = false) final boolean ifCreateNews) {
-        courseService.saveCourse(ifPublish, ifCreateNews, course, true);
-        return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + ifCreateNews;
+                         @RequestParam(required = false) final boolean published,
+                         @RequestParam(required = false) final boolean newsCreated) {
+        courseService.saveCourse(published, published, course, true);
+        return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + newsCreated;
     }
 
     @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
@@ -96,8 +96,8 @@ public class CoursesController implements MenuItem {
 
     @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
     public String publish(@PathVariable final String courseCode,
-                          @RequestParam(required = false) final boolean ifCreateNews) {
-        courseService.publish(ifCreateNews, courseCode);
+                          @RequestParam(required = false) final boolean newsCreated) {
+        courseService.publish(newsCreated, courseCode);
         return REDIRECT + ADMIN;
     }
 
