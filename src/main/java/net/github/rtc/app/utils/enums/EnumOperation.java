@@ -62,6 +62,6 @@ public final class EnumOperation {
                 return type;
             }
         }
-        throw new IllegalArgumentException(enumClass.getTypeName() + " doesn't contains " + roleName);
+        throw new IllegalArgumentException(enumClass.getSimpleName() + " doesn't contains " + roleName);
     }
 }
