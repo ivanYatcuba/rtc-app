@@ -1,19 +1,10 @@
 package net.github.rtc.app.model.activity;
 
 
-import java.util.Arrays;
-import java.util.List;
 
 public enum ActivityAction {
 
-    SAVED("SAVED"), UPDATED("UPDATED"), REMOVED("REMOVED");
-
-    private String code;
-
-    ActivityAction(String code) {
-        this.code = code;
-    }
-
+    SAVED, UPDATED, REMOVED;
     @Override
     public String toString() {
         String name = "";
@@ -32,13 +23,5 @@ public enum ActivityAction {
                 break;
         }
         return name;
-    }
-
-    public static List<ActivityAction> findAll() {
-        return Arrays.asList(ActivityAction.values());
-    }
-
-    public String getCode() {
-        return this.code;
     }
 }

@@ -3,6 +3,7 @@ package net.github.rtc.app.utils.propertyeditors;
 import net.github.rtc.app.model.user.Role;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.enums.EnumOperation;
 
 import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class CustomRoleEditor extends PropertyEditorSupport {
         final Collection<Role> roles = new ArrayList<>();
         if (!rolesSplit.get(0).isEmpty()) {
             for (final String roleName : rolesSplit) {
-               roles.add(userService.getRoleByType(RoleType.getTypeByString(roleName)));
+               roles.add(userService.getRoleByType(EnumOperation.getTypeByString(RoleType.class, roleName)));
             }
         }
         this.setValue(roles);

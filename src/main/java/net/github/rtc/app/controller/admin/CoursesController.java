@@ -8,6 +8,7 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.enums.EnumOperation;
 import net.github.rtc.app.utils.propertyeditors.CustomExpertsEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
@@ -114,11 +115,7 @@ public class CoursesController implements MenuItem {
 
     @ModelAttribute(CATEGORIES)
     public Map<String, String> getCategories() {
-        final Map<String, String> categories = new HashMap<>();
-        for (CourseType type : CourseType.findAll()) {
-            categories.put(type.name(), type.toString());
-        }
-        return categories;
+        return EnumOperation.getMapNameValue(CourseType.class);
     }
 
     @ModelAttribute(EXPERTS)
@@ -131,7 +128,7 @@ public class CoursesController implements MenuItem {
     }
     @ModelAttribute(STATUSES)
     public Collection<String> getStatuses() {
-        return CourseStatus.findAll();
+        return EnumOperation.findAllName(CourseStatus.class);
     }
 
     @InitBinder(COURSE)

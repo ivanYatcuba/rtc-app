@@ -1,17 +1,7 @@
 package net.github.rtc.app.model.activity;
 
-
-import java.util.Arrays;
-import java.util.List;
-
 public enum ActivityEntity {
-    USER("USER"), COURSE("COURSE"), NEWS("NEWS");
-
-    private String code;
-
-    ActivityEntity(String code) {
-        this.code = code;
-    }
+    USER, COURSE, NEWS;
 
     @Override
     public String toString() {
@@ -31,13 +21,5 @@ public enum ActivityEntity {
                 break;
         }
         return name;
-    }
-
-    public static List<ActivityEntity> findAll() {
-        return Arrays.asList(ActivityEntity.values());
-    }
-
-    public String getCode() {
-        return this.code;
     }
 }

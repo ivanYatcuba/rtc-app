@@ -5,6 +5,7 @@ import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.user.UserService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -68,14 +69,5 @@ public class LoginControllerTest {
                 .param("email", "mail")
                 .param("currentEmail", "mail"))
                 .andExpect(status().isOk());
-    }
-
-    @Test
-    public void testLoginAttempt() throws Exception {
-        when(userService.loadUserByUsername(SecurityContextHolder
-                .getContext().getAuthentication().getName())).thenReturn(user);
-        mockMvc.perform(get("/login_attempt"))
-                .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/admin"));
     }
 }

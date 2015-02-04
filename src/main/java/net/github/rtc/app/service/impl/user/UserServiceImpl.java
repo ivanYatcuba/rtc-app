@@ -150,9 +150,9 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     @Override
     public Map<String, String> getUserNameCodeMap(RoleType roleType) {
         final Map<String, String> results = new HashMap<>();
-        final List<User> admins = getUserByRole(roleType);
-        for (final User admin : admins) {
-            results.put(admin.shortString(), admin.getCode());
+        final List<User> users = getUserByRole(roleType);
+        for (final User user : users) {
+            results.put(user.shortString(), user.getCode());
         }
         return results;
     }

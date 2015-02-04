@@ -6,6 +6,7 @@ import net.github.rtc.app.model.report.ReportClasses;
 import net.github.rtc.app.model.report.ReportDetails;
 import net.github.rtc.app.service.report.ReportService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
+import net.github.rtc.app.utils.enums.EnumOperation;
 import net.github.rtc.util.converter.ValidationContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,7 +114,7 @@ public class ExportController implements MenuItem {
 
     @ModelAttribute(FORMATS)
     public List<String> getFormats() {
-        return ExportFormat.findAll();
+        return EnumOperation.findAllName(ExportFormat.class);
     }
 
     @ModelAttribute(TYPES)

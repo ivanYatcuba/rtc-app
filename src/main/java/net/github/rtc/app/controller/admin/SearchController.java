@@ -21,6 +21,7 @@ import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.report.ReportService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.*;
+import net.github.rtc.app.utils.enums.EnumOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -68,7 +69,7 @@ public class SearchController {
 
     @RequestMapping(value = "/search/{menuItem}", method = RequestMethod.GET)
     public ModelAndView searchPageWithParam(@PathVariable(MENU_ITEM) final String menuItem) {
-         if (!MenuItems.contains(menuItem)) {
+         if (!EnumOperation.containsValue(MenuItems.class, menuItem)) {
              throw new ResourceNotFoundException();
          }
         final ModelAndView mav = new ModelAndView("redirect:" + "/admin/search");
@@ -113,7 +114,7 @@ public class SearchController {
         final SearchResults<Course> results = courseService.search(courseFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(COURSES, results.getResults());
-        mav.addObject(TYPES, CourseType.findAll());
+        mav.addObject(TYPES, EnumOperation.findAll(CourseType.class));
         mav.addObject(COURSE_STATUSES, getCourseStatuses());
         mav.addObject(COURSE_FILTER, courseFilter);
         return mav;
@@ -168,36 +169,32 @@ public class SearchController {
 
     @ModelAttribute(NEWS_STATUSES)
     public Collection<String> getNewsStatuses() {
-        return NewsStatus.findAll();
+        return EnumOperation.findAllName(NewsStatus.class);
     }
 
     @ModelAttribute(USER_STATUSES)
     public Collection<String> getUserStatuses() {
-        return UserStatus.findAll();
+        return EnumOperation.findAllName(UserStatus.class);
     }
 
     @ModelAttribute(COURSE_STATUSES)
     public Collection<String> getCourseStatuses() {
-        return CourseStatus.findAll();
+        return EnumOperation.findAllName(CourseStatus.class);
     }
 
     @ModelAttribute(USER_AUTHORITIES)
     public Collection<String> getAuthorities() {
-        return RoleType.findAll();
+        return EnumOperation.findAllName(RoleType.class);
     }
 
     @ModelAttribute("reportFormats")
     public List<String> getFormats() {
-        return ExportFormat.findAll();
+        return EnumOperation.findAllName(ExportFormat.class);
     }
 
     @ModelAttribute("reportStats")
     public List<String> getStats() {
-
-        final List<String> stats = new ArrayList<>();
-        stats.add(CourseStatus.DRAFT.name());
-        stats.add(CourseStatus.PUBLISHED.name());
-        return stats;
+        return CourseStatus.getActiveStatus();
     }
 
     @ModelAttribute("reportTypes")
@@ -207,29 +204,18 @@ public class SearchController {
 
     @ModelAttribute(COURSE_CATIGORIES)
     public Map<String, String> getCategories() {
-        final Map<String, String> categories = new HashMap<>();
-        for (CourseType type : CourseType.findAll()) {
-            categories.put(type.name(), type.toString());
-        }
-        return categories;
+        //QA("QA"), DEV("DEV"), BA("BA")
+        return  EnumOperation.getMapNameValue(CourseType.class);
     }
 
     @ModelAttribute(ACTIVITY_ENTITIES)
     public Map<String, String> getActivityEntities() {
-        final Map<String, String> entities = new HashMap<>();
-        for (ActivityEntity entity: ActivityEntity.findAll()) {
-            entities.put(entity.name(), entity.toString());
-        }
-        return entities;
+        return EnumOperation.getMapNameValue(ActivityEntity.class);
     }
 
     @ModelAttribute(ACTIVITY_ACTIONS)
     public Map<String, String> getActivityAction() {
-        final Map<String, String> actions = new HashMap<>();
-        for (ActivityAction action : ActivityAction.findAll()) {
-            actions.put(action.name(), action.toString());
-        }
-        return actions;
+        return EnumOperation.getMapNameValue(ActivityAction.class);
     }
 
     @ModelAttribute(EXPERTS)

@@ -56,21 +56,6 @@ public class UserModelTest {
     }
 
     @Test
-    public void roleFindAllTest(){
-        List<String> res = RoleType.findAll();
-        assertEquals(RoleType.values().length, res.size());
-        for (final RoleType type: RoleType.values()) {
-            assertTrue(res.contains(type.name()));
-        }
-    }
-
-    @Test
-    public void roleGetTypeByStringTest(){
-        assertNull(RoleType.getTypeByString("X"));
-        assertEquals(RoleType.ROLE_ADMIN, RoleType.getTypeByString("ROLE_ADMIN"));
-    }
-
-    @Test
     public void roleToStringTest() {
         Role role = new Role();
         role.setName(RoleType.ROLE_ADMIN);

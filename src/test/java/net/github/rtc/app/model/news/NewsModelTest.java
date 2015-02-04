@@ -14,15 +14,6 @@ import static org.junit.Assert.fail;
 public class NewsModelTest {
 
     @Test
-    public void findAllTest(){
-        List<String> res = NewsStatus.findAll();
-        assertEquals(NewsStatus.values().length, res.size());
-        for (final NewsStatus status : NewsStatus.values()) {
-            assertTrue(res.contains(status.name()));
-        }
-    }
-
-    @Test
     public void testNewsConstructor() {
         try {
             new News();
