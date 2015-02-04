@@ -92,9 +92,6 @@
                             </button>
                             <ul class="dropdown-menu" style="min-width: 100px;" role="menu">
                             <li>
-                                <a href="#" onclick="javascript:PopUpShow('${user.code}')">Remove</a>
-                            </li>
-                            <li>
                                 <#if user.isActive()>
                                     <a href="<@spring.url"/admin/user/inactivate/${user.code}"/>">Inactivate</a>
                                 <#else>

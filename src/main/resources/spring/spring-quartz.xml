@@ -8,8 +8,6 @@
         http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
     <task:annotation-driven/>
-    <bean id="jobRemovingUser"
-          class="net.github.rtc.app.export.JobRemovingUser"/>
     <bean id="scheduler"
           class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
 </beans>
