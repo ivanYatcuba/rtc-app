@@ -98,13 +98,13 @@ public class CoursesController implements MenuItem {
     public String publish(@PathVariable final String courseCode,
                           @RequestParam(required = false) final boolean newsCreated) {
         courseService.publish(newsCreated, courseCode);
-        return REDIRECT + ADMIN;
+        return new StringBuilder().append(REDIRECT).append(ADMIN).toString();
     }
 
     @RequestMapping(value = "/archive/{courseCode}", method = RequestMethod.GET)
     public String archive(@PathVariable final String courseCode) {
         courseService.archive(courseCode);
-        return REDIRECT + ADMIN;
+        return new StringBuilder().append(REDIRECT).append(ADMIN).toString();
     }
 
     @ModelAttribute(value = COURSE)

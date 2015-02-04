@@ -58,7 +58,7 @@ public class UserController implements MenuItem {
                        @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
                        @RequestParam(required = false) final boolean ifActive) {
         userService.save(user, img, ifActive, false);
-        return REDIRECT_USER_PAGE + user.getCode();
+        return new StringBuilder().append(REDIRECT_USER_PAGE).append(user.getCode()).toString();
     }
 
     @RequestMapping(value = "/view/{code}", method = RequestMethod.GET)
@@ -81,7 +81,7 @@ public class UserController implements MenuItem {
                          @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
                          @RequestParam(required = false) final boolean ifActive) {
         userService.save(user, img, ifActive, true);
-        return REDIRECT_USER_PAGE + user.getCode();
+        return new StringBuilder().append(REDIRECT_USER_PAGE).append(user.getCode()).toString();
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.GET)

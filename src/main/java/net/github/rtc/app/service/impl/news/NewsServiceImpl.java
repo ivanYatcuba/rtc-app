@@ -31,25 +31,33 @@ public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements 
     }
 
     @Override
-    public void saveNews(News news, boolean ifPublish, boolean doUpdate) {
-        news.setCreateDate(dateService.getCurrentDate());
-        news.setAuthor(userService.getAuthorizedUser());
+    public void create(News news, boolean ifPublish) {
+        setAuthorAndDate(news);
+        create(news);
+    }
+
+    @Override
+    public void update(News news, boolean ifPublish) {
         if (ifPublish) {
-            news.setStatus(NewsStatus.PUBLISHED);
-            news.setPublishDate(dateService.getCurrentDate());
+            setPublish(news);
         }
-        if (doUpdate) {
-            update(news);
-        } else {
-            create(news);
-        }
+        update(news);
     }
 
     @Override
     public void publish(String newsCode) {
         final News news = findByCode(newsCode);
+        setPublish(news);
+        update(news);
+    }
+
+    private void setPublish(News news) {
         news.setStatus(NewsStatus.PUBLISHED);
         news.setPublishDate(dateService.getCurrentDate());
-        update(news);
+    }
+
+    private void setAuthorAndDate(News news) {
+        news.setCreateDate(dateService.getCurrentDate());
+        news.setAuthor(userService.getAuthorizedUser());
     }
 }

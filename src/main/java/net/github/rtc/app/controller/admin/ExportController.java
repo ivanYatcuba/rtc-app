@@ -53,7 +53,7 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/insertReport", method = RequestMethod.POST)
     public String createReport(@ModelAttribute("report") final ReportDetails report) {
         reportService.create(report);
-        return REDIRECT_EXPORT + report.getCode();
+        return new StringBuilder().append(REDIRECT_EXPORT).append(report.getCode()).toString();
     }
 
     @RequestMapping(value = "/{reportCode}", method = RequestMethod.GET)
@@ -74,7 +74,7 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/updateReport", method = RequestMethod.POST)
     public String editReport(@ModelAttribute("report") final ReportDetails report) {
         reportService.update(report);
-        return REDIRECT_EXPORT + report.getCode();
+        return new StringBuilder().append(REDIRECT_EXPORT).append(report.getCode()).toString();
     }
 
     @RequestMapping(value = "/delete/{reportCode}", method = RequestMethod.GET)
