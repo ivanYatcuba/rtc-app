@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface NewsService extends GenericService<News> {
     List<News> findPublishedNews();
+    void saveNews(News news, boolean ifPublish, boolean doUpdate);
+    void publish(String newsCode);
 }
