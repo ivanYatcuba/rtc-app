@@ -165,4 +165,12 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
         create(user);
         mailService.sendRegistrationMail(user);
     }
+
+    @Override
+    public boolean userWithMailExists(String email, String currentEmail) {
+        if (email.equals(currentEmail)) {
+            return true;
+        }
+        return loadUserByUsername(email) == null;
+    }
 }

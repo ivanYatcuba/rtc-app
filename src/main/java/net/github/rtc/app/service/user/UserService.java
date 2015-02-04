@@ -46,4 +46,6 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
     Map<String, String> getUserNameCodeMap(RoleType roleType);
 
     void registerUser(User user);
+
+    boolean userWithMailExists(String email, String currentEmail);
 }
