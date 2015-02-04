@@ -1,8 +1,8 @@
 package net.github.rtc.app.utils.enums;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
-import junit.framework.Assert;
 import net.github.rtc.app.controller.admin.MenuItems;
+import org.junit.Ignore;
+import junit.framework.Assert;
 import net.github.rtc.app.model.news.NewsStatus;
 import net.github.rtc.app.model.user.RoleType;
 import org.junit.Test;
