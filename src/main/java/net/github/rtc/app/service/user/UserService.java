@@ -37,4 +37,6 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
     void inactivateUser(String userCode);
 
     void deleteUsersMarkedForRemoval();
+
+    User getAuthorizedUser();
 }

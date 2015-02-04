@@ -13,6 +13,7 @@ import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -123,5 +124,10 @@ public class UserServiceImpl extends AbstractGenericServiceWithCheckActivityImpl
     @Transactional
     public void deleteUsersMarkedForRemoval() {
         userDao.deletingUser();
+    }
+
+    @Override
+    public User getAuthorizedUser() {
+        return loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 }

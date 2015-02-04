@@ -10,12 +10,12 @@ import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceWithCheckActivityImpl;
 import net.github.rtc.app.service.user.UserCourseOrderService;
+import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.CourseNewsCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
-import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -33,7 +31,6 @@ import java.util.List;
 public class CourseServiceImpl extends AbstractGenericServiceWithCheckActivityImpl<Course> implements CourseService {
 
     private static final String COURSE_CANNOT_BE_NULL = "course cannot be null";
-    private static final int STARTING_SOON_COURSE_COUNT = 3;
     private static Logger log = LoggerFactory.getLogger(CourseServiceImpl.class.getName());
     @Autowired
     private UserCourseOrderService orderService;
@@ -43,6 +40,8 @@ public class CourseServiceImpl extends AbstractGenericServiceWithCheckActivityIm
     private DateService dateService;
     @Autowired
     private CourseNewsCreator courseNewsCreator;
+    @Autowired
+    private UserService userService;
 
     @Override
     public Class<Course> getType() {
@@ -55,12 +54,17 @@ public class CourseServiceImpl extends AbstractGenericServiceWithCheckActivityIm
     }
 
     @Override
-    public void publish(final Course course) {
+    public void publish(boolean ifCreateNews, String courseCode) {
+        final Course course = findByCode(courseCode);
         log.debug("Publishing course: {}  ", course);
         Assert.notNull(course, COURSE_CANNOT_BE_NULL);
         course.setStatus(CourseStatus.PUBLISHED);
         course.setPublishDate(dateService.getCurrentDate());
         coursesDao.update(course);
+        if (ifCreateNews) {
+           createNews(course, userService.getAuthorizedUser());
+        }
+
     }
 
     @Override
@@ -95,20 +99,26 @@ public class CourseServiceImpl extends AbstractGenericServiceWithCheckActivityIm
     }
 
     @Override
-    public List<Course> startingSoonCourses() {
-        final CourseSearchFilter searchFilter = new CourseSearchFilter();
-        searchFilter.setStartDate(dateService.getCurrentDate());
-        searchFilter.setStatus(new HashSet<>(Arrays.asList(CourseStatus.PUBLISHED)));
-        searchFilter.setPage(1);
-        return coursesDao.search(searchFilter.getCriteria(), 1,
-          STARTING_SOON_COURSE_COUNT, Order.asc("startDate")).getResults();
+    public void saveCourse(boolean ifPublish, boolean ifCreateNews, Course course, boolean doUpdate) {
+        course.setStatus(ifPublish ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
+        course.setPublishDate(dateService.getCurrentDate());
+        if (doUpdate) {
+            update(course);
+        } else {
+            create(course);
+        }
+        if (ifCreateNews) {
+            createNews(course, userService.getAuthorizedUser());
+        }
     }
 
+
     @Override
-    public List<Course> findAllPublished() {
-        final CourseSearchFilter courseSearchFilter = new CourseSearchFilter();
-        courseSearchFilter.setStatus(new HashSet<>(Arrays.asList(CourseStatus.PUBLISHED)));
-        return coursesDao.findAll(courseSearchFilter.getCriteria());
+    public void deleteByCode(String code) {
+        final Course course = findByCode(code);
+        if (course.getStatus() != CourseStatus.PUBLISHED) {
+            super.deleteByCode(code);
+        }
     }
 
     @Override

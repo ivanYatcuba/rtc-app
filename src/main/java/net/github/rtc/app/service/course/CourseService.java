@@ -8,30 +8,15 @@ import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 
-import java.util.List;
-
 public interface CourseService extends ModelService<Course>, GenericService<Course> {
 
-    /**
-     * Set course status as published
-     *
-     * @param course what course?
-     */
-    void publish(Course course);
+    void publish(final boolean ifCreateNews, String courseCode);
 
     void archive(String courseCode);
 
     SearchResults<UserCourseDTO> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter);
 
-    List<Course> startingSoonCourses();
+    void saveCourse(final boolean ifPublish, final boolean ifCreateNews, Course course, boolean doUpdate);
 
-    List<Course> findAllPublished();
-
-    /**
-     *
-     * @param course create news about the course
-     * @param author user that will be displayed as author of the news
-     */
     void createNews(Course course, User author);
-
 }
