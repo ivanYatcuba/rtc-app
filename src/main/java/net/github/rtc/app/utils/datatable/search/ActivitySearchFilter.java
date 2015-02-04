@@ -19,7 +19,7 @@ import java.util.Set;
 @Component
 public class ActivitySearchFilter extends AbstractSearchCommand {
 
-    private static final String STRING_DATE = "actionDate";
+    private static final String DATE = "actionDate";
     private String user;
     private Set<ActivityEntity> entity;
     private Set<ActivityAction> action;
@@ -70,7 +70,7 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.desc(STRING_DATE);
+        return Order.desc(DATE);
     }
 
     @Override
@@ -83,13 +83,13 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
         if (date != null) {
             switch (dateMoreLessEq) {
                 case '>':
-                    criteria.add(Restrictions.gt(STRING_DATE, date));
+                    criteria.add(Restrictions.gt(DATE, date));
                     break;
                 case '=':
-                    criteria.add(Restrictions.eq(STRING_DATE, date));
+                    criteria.add(Restrictions.eq(DATE, date));
                     break;
                 case '<':
-                    criteria.add(Restrictions.lt(STRING_DATE, date));
+                    criteria.add(Restrictions.lt(DATE, date));
                     break;
                 default:
                     break;

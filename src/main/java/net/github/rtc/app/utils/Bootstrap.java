@@ -18,7 +18,7 @@ import java.util.Arrays;
 @DependsOn("allowEncryptionWithoutJCE")
 public class Bootstrap implements InitializingBean {
 
-    private static final String STRING_ADMIN = "admin";
+    private static final String ADMIN = "admin";
     private static final String ADMIN_EMAIL = "admin@email.com";
     @Autowired
     private HibernatePBEStringEncryptor hibernateStringEncryptor;
@@ -39,7 +39,7 @@ public class Bootstrap implements InitializingBean {
                 userService.createRole(RoleType.ROLE_EXPERT);
             }
 
-            final User admin = new User("TestName", "TestMiddlename", "TestSurname", ADMIN_EMAIL, STRING_ADMIN);
+            final User admin = new User("TestName", "TestMiddlename", "TestSurname", ADMIN_EMAIL, ADMIN);
             admin.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_ADMIN)));
             admin.setRegisterDate(dateService.getCurrentDate());
             admin.setGender("Male");

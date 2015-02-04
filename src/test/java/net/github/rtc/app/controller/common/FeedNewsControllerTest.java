@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = "classpath:mvc-test.xml")
 public class FeedNewsControllerTest {
-    public static final String STRING_NEWS = "news";
+    public static final String NEWS = "news";
     @Mock
     private NewsService newsService;
     @Mock
@@ -65,7 +65,7 @@ public class FeedNewsControllerTest {
         when(newsService.findPublishedNews()).thenReturn(newsList);
         mockMvc.perform(get("/news/feed"))
                 .andExpect(status().isOk())
-                /*.andExpect(model().attributeExists("STRING_NEWS"))*/
+                /*.andExpect(model().attributeExists("NEWS"))*/
                 .andExpect(model().attributeExists("lastUpdate"));
         verify(newsService, times(1)).findPublishedNews();
         verifyNoMoreInteractions(newsService);

@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("recover")
 public class RecoverAdminController {
 
-    private static final String STRING_ADMIN = "admin";
+    private static final String ADMIN = "admin";
     private static final String ADMIN_EMAIL = "admin@email.com";
 
     @Autowired
@@ -34,7 +34,7 @@ public class RecoverAdminController {
             userService.deleteByCode(admins.get(0).getCode());
         }
         if (admins.size() == 0 || admins.get(0).isForRemoval()) {
-            final User admin = new User("TestName", "TestMiddlename", "TestSurname", ADMIN_EMAIL, STRING_ADMIN);
+            final User admin = new User("TestName", "TestMiddlename", "TestSurname", ADMIN_EMAIL, ADMIN);
             admin.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_ADMIN)));
             admin.setRegisterDate(dateService.getCurrentDate());
             admin.setGender("Male");

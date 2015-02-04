@@ -25,10 +25,10 @@ import java.util.*;
 public class CourseController implements MenuItem {
 
     private static final String ROOT = "portal/user";
-    private static final String STRING_USER = "user";
-    private static final String STRING_COURSE = "course";
-    private static final String STRING_VALIDATION_RULES = "validationRules";
-    private static final String STRING_COURSES = "courses";
+    private static final String USER = "user";
+    private static final String COURSE = "course";
+    private static final String VALIDATION_RULES = "validationRules";
+    private static final String COURSES = "courses";
     private static final int COURSES_PER_PAGE = 6;
 
     @Autowired
@@ -49,8 +49,8 @@ public class CourseController implements MenuItem {
     @RequestMapping(value = "/courseDetails/{courseCode}", method = RequestMethod.GET)
     public ModelAndView courseDetails(@PathVariable final String courseCode) {
         final ModelAndView mav = new ModelAndView("portal/user/page/courseDetail");
-        mav.addObject(STRING_COURSE, courseService.findByCode(courseCode));
-        mav.addObject(STRING_USER,
+        mav.addObject(COURSE, courseService.findByCode(courseCode));
+        mav.addObject(USER,
                 userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
         return mav;
     }
@@ -76,8 +76,8 @@ public class CourseController implements MenuItem {
         final ModelAndView mav = new ModelAndView(ROOT + "/course/courseTable");
         final SearchResults<UserCourseDTO> results = courseService.searchCoursesForUser(withArchived, courseFilter);
         mav.addAllObjects(results.getPageModel());
-        mav.addObject(STRING_COURSES, results.getResults());
-        mav.addObject(STRING_VALIDATION_RULES, validationContext.get(UserCourseOrder.class));
+        mav.addObject(COURSES, results.getResults());
+        mav.addObject(VALIDATION_RULES, validationContext.get(UserCourseOrder.class));
         return mav;
     }
 
@@ -89,7 +89,7 @@ public class CourseController implements MenuItem {
 
     @Override
     public String getMenuItem() {
-        return STRING_COURSE;
+        return COURSE;
     }
 
     @ModelAttribute("courseTypes")

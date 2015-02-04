@@ -17,8 +17,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class ErrorController {
     public static final String ERROR = "error";
-    private static final String STRING_JAVAX = "javax";
-    private static final String STRING_DOT_SERVLET = ".servlet";
+    private static final String JAVAX = "javax";
+    private static final String DOT_SERVLET = ".servlet";
     private static final String ADMIN_ERROR_PAGE = "portal/admin/error";
     private static final String USER_ERROR_PAGE = "portal/user/error";
     private static final String ERROR_PAGE = "error/error";
@@ -58,14 +58,14 @@ public class ErrorController {
 
     private String getFullMessage(final HttpServletRequest request) {
         final Integer statusCode = (Integer) request.getAttribute(
-                STRING_JAVAX + STRING_DOT_SERVLET + ".error.status_code");
+                JAVAX + DOT_SERVLET + ".error.status_code");
         final Throwable throwable = (Throwable) request.getAttribute(
-                STRING_JAVAX + STRING_DOT_SERVLET + ".error.exception");
+                JAVAX + DOT_SERVLET + ".error.exception");
         final String exceptionMessage = getExceptionMessage(throwable,
                 statusCode);
 
         String requestUri = (String) request.getAttribute(
-                STRING_JAVAX + STRING_DOT_SERVLET + ".error.request_uri");
+                JAVAX + DOT_SERVLET + ".error.request_uri");
         if (requestUri == null) {
             requestUri = "Unknown";
         }

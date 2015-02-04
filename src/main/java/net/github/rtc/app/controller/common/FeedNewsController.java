@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Controller
 public class FeedNewsController {
-    public static final String STRING_NEWS = "news";
+    public static final String NEWS = "news";
     public static final String LAST_UPDATE_VIEW_KEY = "lastUpdate";
     @Autowired
     private NewsService newsService;
@@ -33,7 +33,7 @@ public class FeedNewsController {
         final ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView(atomFeedView);
         final List<News> news = newsService.findPublishedNews();
-        modelAndView.addObject(STRING_NEWS, news);
+        modelAndView.addObject(NEWS, news);
         modelAndView.addObject(LAST_UPDATE_VIEW_KEY, getCreationDateOfTheLast(news));
         return modelAndView;
     }

@@ -8,7 +8,7 @@ import net.github.rtc.app.model.course.CourseStatus;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceWithCheckActivityImpl;
+import net.github.rtc.app.service.impl.genericservise.AbstractCRUDEventsService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.CourseNewsCreator;
@@ -28,7 +28,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CourseServiceImpl extends AbstractGenericServiceWithCheckActivityImpl<Course> implements CourseService {
+public class CourseServiceImpl extends AbstractCRUDEventsService<Course> implements CourseService {
 
     private static final String COURSE_CANNOT_BE_NULL = "course cannot be null";
     private static Logger log = LoggerFactory.getLogger(CourseServiceImpl.class.getName());

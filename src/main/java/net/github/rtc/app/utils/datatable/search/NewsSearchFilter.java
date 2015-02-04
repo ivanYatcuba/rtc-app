@@ -11,9 +11,9 @@ import java.util.Date;
 
 public class NewsSearchFilter extends AbstractSearchCommand {
 
-    private static final String STRING_PERCENT = "%";
-    private static final String STRING_CREATE_DATE = "createDate";
-    private static final String STRING_AUTHOR = "author";
+    private static final String PERCENT = "%";
+    private static final String CREATE_DATE = "createDate";
+    private static final String AUTHOR = "author";
 
     private String title;
 
@@ -27,27 +27,27 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc(STRING_CREATE_DATE);
+        return Order.asc(CREATE_DATE);
     }
 
     @Override
     public DetachedCriteria getCriteria() {
         final DetachedCriteria criteria = DetachedCriteria.forClass(News.class);
         if (title != null && !("").equals(title)) {
-            criteria.add(Restrictions.like("title", STRING_PERCENT + title + STRING_PERCENT));
+            criteria.add(Restrictions.like("title", PERCENT + title + PERCENT));
         }
         if (createDate != null) {
             switch (dateMoreLessEq) {
                 case '>':
                     final Date fromDate = setNightTime(createDate);
-                    criteria.add(Restrictions.gt(STRING_CREATE_DATE, fromDate));
+                    criteria.add(Restrictions.gt(CREATE_DATE, fromDate));
                     break;
                 case '=':
                     final Date toDate = setNightTime(createDate);
-                    criteria.add(Restrictions.between(STRING_CREATE_DATE, createDate, toDate));
+                    criteria.add(Restrictions.between(CREATE_DATE, createDate, toDate));
                     break;
                 case '<':
-                    criteria.add(Restrictions.lt(STRING_CREATE_DATE, createDate));
+                    criteria.add(Restrictions.lt(CREATE_DATE, createDate));
                     break;
                 default:
                     break;
@@ -59,7 +59,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         }
 
         if (authorCode != null && !("").equals(authorCode)) {
-            criteria.createAlias(STRING_AUTHOR, STRING_AUTHOR);
+            criteria.createAlias(AUTHOR, AUTHOR);
             criteria.add(Restrictions.eq("author.code", authorCode));
         }
         return criteria;

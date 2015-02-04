@@ -7,12 +7,15 @@ import net.github.rtc.app.model.course.CourseType;
 import net.github.rtc.app.model.user.RoleType;
 import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.course.CourseService;
+import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.propertyeditors.CustomExpertsEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTagsEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -29,14 +32,14 @@ import java.util.*;
 @RequestMapping("admin/course")
 public class CoursesController implements MenuItem {
 
-    private static final String STRING_COURSE = "course";
-    private static final String STRING_TYPES = "types";
-    private static final String STRING_STATUSES = "statuses";
-    private static final String STRING_FILTER_COURSE = "filterCourse";
+    private static final String COURSE = "course";
+    private static final String TYPES = "types";
+    private static final String STATUSES = "statuses";
+    private static final String FILTER_COURSE = "filterCourse";
     private static final String REDIRECT = "redirect:/";
-    private static final String STRING_ADMIN = "admin";
-    private static final String STRING_VALIDATION_RULES = "validationRules";
-    private static final String STRING_EXPERTS = "experts";
+    private static final String ADMIN = "admin";
+    private static final String VALIDATION_RULES = "validationRules";
+    private static final String EXPERTS = "experts";
     private static final String VIEW = "view/";
     private static final String REDIRECT1 = "redirect: ";
     private static final String ROOT = "portal/admin";
@@ -153,7 +156,7 @@ public class CoursesController implements MenuItem {
 
     @Override
     public String getMenuItem() {
-        return STRING_COURSE;
+        return COURSE;
     }
 }
 

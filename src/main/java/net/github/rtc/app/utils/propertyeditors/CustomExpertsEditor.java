@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class CustomExpertsEditor extends PropertyEditorSupport {
 
-    private static final String STRING_COMMA = ",";
+    private static final String COMMA = ",";
 
     private UserService userService;
 
@@ -21,7 +21,7 @@ public class CustomExpertsEditor extends PropertyEditorSupport {
 
     @Override
     public void setAsText(final String text) {
-        final List<String> expertsSplit = Arrays.asList(text.split(STRING_COMMA));
+        final List<String> expertsSplit = Arrays.asList(text.split(COMMA));
         final Set<User> experts = new HashSet<>();
         for (String s : expertsSplit) {
             experts.add(userService.findByCode(s));

@@ -13,9 +13,9 @@ import java.util.Set;
 
 public class CourseSearchFilter extends AbstractSearchCommand {
 
-    private static final String STRING_PROCENT = "%";
-    private static final String STRING_TAGS = "tags";
-    private static final String STRING_START_DATE = "startDate";
+    private static final String PROCENT = "%";
+    private static final String TAGS = "tags";
+    private static final String START_DATE = "startDate";
     private static final String EXPERTS = "experts";
     private String name;
     private char dateMoreLessEq;
@@ -86,14 +86,14 @@ public class CourseSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc(STRING_START_DATE);
+        return Order.asc(START_DATE);
     }
 
     public DetachedCriteria getCriteria() {
         final DetachedCriteria criteria = DetachedCriteria.forClass(Course.class);
 
         if (name != null && !("").equals(name)) {
-            criteria.add(Restrictions.like("name", STRING_PROCENT + name + STRING_PROCENT));
+            criteria.add(Restrictions.like("name", PROCENT + name + PROCENT));
         }
         if (status != null && status.size() > 0) {
             criteria.add(Restrictions.in("status", status));
@@ -101,20 +101,20 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         if (startDate != null) {
             switch (dateMoreLessEq) {
             case '>':
-                criteria.add(Restrictions.gt(STRING_START_DATE, startDate));
+                criteria.add(Restrictions.gt(START_DATE, startDate));
                 break;
             case '=':
-                criteria.add(Restrictions.eq(STRING_START_DATE, startDate));
+                criteria.add(Restrictions.eq(START_DATE, startDate));
                 break;
             case '<':
-                criteria.add(Restrictions.lt(STRING_START_DATE, startDate));
+                criteria.add(Restrictions.lt(START_DATE, startDate));
                 break;
             default:
                 break;
             }
         }
         if (tags != null && tags.size() > 0) {
-            criteria.createAlias(STRING_TAGS, STRING_TAGS);
+            criteria.createAlias(TAGS, TAGS);
             final Disjunction tagDis = Restrictions.disjunction();
             for (final Tag tag : tags) {
                 tagDis.add(Restrictions.eq("tags.value", tag.getValue()));
