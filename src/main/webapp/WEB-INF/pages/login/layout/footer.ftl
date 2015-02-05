@@ -5,7 +5,7 @@
             <div class="navbar-collapse collapse">
                 <div class="container">
                     <ul class="nav navbar-nav" style="margin-left: 3.0em">
-                        <p class="text-muted credit">Copyright 2014 Exigen Services</p>
+                        <p class="text-muted credit">Copyright 2015 Exigen Services</p>
                     </ul>
                     <ul class="nav navbar-nav navbar-right"
                         style="margin-right: 3em">
