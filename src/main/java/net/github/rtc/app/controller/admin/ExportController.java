@@ -94,11 +94,10 @@ public class ExportController implements MenuItem {
     @ResponseBody
     public void downloadUserExport(@PathVariable final String reportCode,  final HttpServletResponse response) throws IOException {
         final ReportDetails reportDetails = reportService.findByCode(reportCode);
-        try {
-            final File downloadFile = reportService.getReport(reportDetails);
-            response.setContentType(Files.probeContentType(downloadFile.toPath()));
-            response.setHeader(HEADER_KEY, String.format("attachment; " + "filename=\"%s\"", reportDetails.getName()));
-            final InputStream is = new FileInputStream(downloadFile);
+        final File downloadFile = reportService.getReport(reportDetails);
+        response.setContentType(Files.probeContentType(downloadFile.toPath()));
+        response.setHeader(HEADER_KEY, String.format("attachment; " + "filename=\"%s\"", reportDetails.getName()));
+        try (final InputStream is = new FileInputStream(downloadFile)) {
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {
