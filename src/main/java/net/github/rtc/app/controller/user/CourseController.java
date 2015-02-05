@@ -1,11 +1,11 @@
 package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.controller.common.MenuItem;
-import net.github.rtc.app.dto.user.UserCourseDTO;
-import net.github.rtc.app.model.course.CourseStatus;
-import net.github.rtc.app.model.course.CourseType;
-import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.model.user.UserCourseOrder;
+import net.github.rtc.app.model.dto.user.UserCourseDTO;
+import net.github.rtc.app.model.entity.course.CourseStatus;
+import net.github.rtc.app.model.entity.course.CourseType;
+import net.github.rtc.app.model.entity.user.User;
+import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;

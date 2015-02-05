@@ -1,12 +1,12 @@
 package net.github.rtc.app.service.impl.genericservise;
 
-import net.github.rtc.app.model.AbstractPersistenceObject;
-import net.github.rtc.app.model.activity.ActivityAction;
-import net.github.rtc.app.model.activity.ActivityEntity;
-import net.github.rtc.app.model.activity.IActivity;
-import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.news.News;
-import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.entity.AbstractPersistenceObject;
+import net.github.rtc.app.model.entity.activity.ActivityAction;
+import net.github.rtc.app.model.entity.activity.ActivityEntity;
+import net.github.rtc.app.model.entity.activity.IActivity;
+import net.github.rtc.app.model.entity.course.Course;
+import net.github.rtc.app.model.entity.news.News;
+import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.utils.EventCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 

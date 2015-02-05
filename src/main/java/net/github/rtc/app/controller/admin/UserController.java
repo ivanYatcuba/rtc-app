@@ -2,10 +2,10 @@ package net.github.rtc.app.controller.admin;
 
 
 import net.github.rtc.app.controller.common.MenuItem;
-import net.github.rtc.app.model.user.EnglishLevel;
-import net.github.rtc.app.model.user.RoleType;
-import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.model.user.UserStatus;
+import net.github.rtc.app.model.entity.user.EnglishLevel;
+import net.github.rtc.app.model.entity.user.RoleType;
+import net.github.rtc.app.model.entity.user.User;
+import net.github.rtc.app.model.entity.user.UserStatus;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
 import net.github.rtc.app.utils.enums.EnumOperation;

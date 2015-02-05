@@ -1,8 +1,8 @@
 package net.github.rtc.app.service.user;
 
-import net.github.rtc.app.model.user.Role;
-import net.github.rtc.app.model.user.RoleType;
-import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.entity.user.Role;
+import net.github.rtc.app.model.entity.user.RoleType;
+import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.GenericService;
 import net.github.rtc.app.service.ModelService;
 import org.springframework.security.core.userdetails.UserDetailsService;

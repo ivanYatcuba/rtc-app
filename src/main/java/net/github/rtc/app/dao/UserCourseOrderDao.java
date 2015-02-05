@@ -1,7 +1,7 @@
 package net.github.rtc.app.dao;
 
-import net.github.rtc.app.model.user.UserCourseOrder;
-import net.github.rtc.app.model.user.UserRequestStatus;
+import net.github.rtc.app.model.entity.user.UserCourseOrder;
+import net.github.rtc.app.model.entity.user.UserRequestStatus;
 
 import java.util.List;
 

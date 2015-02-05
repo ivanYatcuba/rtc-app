@@ -1,7 +1,7 @@
 package net.github.rtc.app.export;
 
 
-import net.github.rtc.app.model.report.ReportDetails;
+import net.github.rtc.app.model.entity.report.ReportDetails;
 import net.github.rtc.app.service.report.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

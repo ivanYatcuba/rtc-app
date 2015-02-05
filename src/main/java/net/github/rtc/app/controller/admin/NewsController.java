@@ -2,8 +2,8 @@ package net.github.rtc.app.controller.admin;
 
 
 import net.github.rtc.app.controller.common.MenuItem;
-import net.github.rtc.app.model.news.News;
-import net.github.rtc.app.model.news.NewsStatus;
+import net.github.rtc.app.model.entity.news.News;
+import net.github.rtc.app.model.entity.news.NewsStatus;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.utils.enums.EnumOperation;
 import net.github.rtc.util.converter.ValidationContext;

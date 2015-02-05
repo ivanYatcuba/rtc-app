@@ -1,7 +1,7 @@
 package net.github.rtc.app.utils.datatable.search;
 
-import net.github.rtc.app.model.news.News;
-import net.github.rtc.app.model.news.NewsStatus;
+import net.github.rtc.app.model.entity.news.News;
+import net.github.rtc.app.model.entity.news.NewsStatus;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;

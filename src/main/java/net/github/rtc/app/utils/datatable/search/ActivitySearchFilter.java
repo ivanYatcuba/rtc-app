@@ -1,8 +1,8 @@
 package net.github.rtc.app.utils.datatable.search;
 
-import net.github.rtc.app.model.activity.Activity;
-import net.github.rtc.app.model.activity.ActivityAction;
-import net.github.rtc.app.model.activity.ActivityEntity;
+import net.github.rtc.app.model.entity.activity.Activity;
+import net.github.rtc.app.model.entity.activity.ActivityAction;
+import net.github.rtc.app.model.entity.activity.ActivityEntity;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Order;

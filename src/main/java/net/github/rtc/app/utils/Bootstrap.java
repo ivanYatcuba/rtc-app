@@ -1,9 +1,9 @@
 package net.github.rtc.app.utils;
 
-import net.github.rtc.app.model.user.EnglishLevel;
-import net.github.rtc.app.model.user.RoleType;
-import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.model.user.UserStatus;
+import net.github.rtc.app.model.entity.user.EnglishLevel;
+import net.github.rtc.app.model.entity.user.RoleType;
+import net.github.rtc.app.model.entity.user.User;
+import net.github.rtc.app.model.entity.user.UserStatus;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.user.UserService;
 import org.jasypt.hibernate4.encryptor.HibernatePBEStringEncryptor;

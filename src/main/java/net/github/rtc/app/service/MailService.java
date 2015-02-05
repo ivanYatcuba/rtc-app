@@ -1,7 +1,7 @@
 package net.github.rtc.app.service;
 
 
-import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.entity.user.User;
 import org.springframework.mail.SimpleMailMessage;
 
 /**

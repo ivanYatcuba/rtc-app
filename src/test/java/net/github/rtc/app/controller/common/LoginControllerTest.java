@@ -1,11 +1,10 @@
 package net.github.rtc.app.controller.common;
 
-import net.github.rtc.app.model.user.Role;
-import net.github.rtc.app.model.user.RoleType;
-import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.entity.user.Role;
+import net.github.rtc.app.model.entity.user.RoleType;
+import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.user.UserService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,7 +18,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;

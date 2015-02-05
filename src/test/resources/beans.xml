@@ -35,14 +35,14 @@
     <util:map id="serviceHolder" map-class="java.util.HashMap">
         <entry>
             <key>
-                <value type="java.lang.Class">net.github.rtc.app.model.user.User</value>
+                <value type="java.lang.Class">net.github.rtc.app.model.entity.user.User</value>
             </key>
             <ref bean="userServiceImpl"/>
         </entry>
 
         <entry>
             <key>
-                <value type="java.lang.Class">net.github.rtc.app.model.course.Course</value>
+                <value type="java.lang.Class">net.github.rtc.app.model.entity.course.Course</value>
             </key>
             <ref bean="courseServiceImpl"/>
         </entry>

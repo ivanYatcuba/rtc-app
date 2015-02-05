@@ -1,10 +1,10 @@
 package net.github.rtc.app.dao;
 
-import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.entity.course.Course;
 
 /**
  * Data Access Object Interface
- * Provides CRUD operations with {@link net.github.rtc.app.model.course
+ * Provides CRUD operations with {@link net.github.rtc.app.model.entity.course
  * .Course} objects
  *
  * @author Vladislav Pikus

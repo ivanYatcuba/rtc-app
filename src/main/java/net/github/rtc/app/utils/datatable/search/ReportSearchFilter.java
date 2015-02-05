@@ -1,7 +1,7 @@
 package net.github.rtc.app.utils.datatable.search;
 
-import net.github.rtc.app.model.report.ReportClasses;
-import net.github.rtc.app.model.report.ReportDetails;
+import net.github.rtc.app.model.entity.report.ReportClasses;
+import net.github.rtc.app.model.entity.report.ReportDetails;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;

@@ -1,9 +1,9 @@
 package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.controller.common.ErrorControllerTest;
-import net.github.rtc.app.model.user.Role;
-import net.github.rtc.app.model.user.RoleType;
-import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.entity.user.Role;
+import net.github.rtc.app.model.entity.user.RoleType;
+import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;

@@ -1,11 +1,11 @@
 package net.github.rtc.app.dao;
 
-import net.github.rtc.app.model.AbstractPersistenceObject;
-import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseType;
-import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.model.user.UserCourseOrder;
-import net.github.rtc.app.model.user.UserRequestStatus;
+import net.github.rtc.app.model.entity.AbstractPersistenceObject;
+import net.github.rtc.app.model.entity.course.Course;
+import net.github.rtc.app.model.entity.course.CourseType;
+import net.github.rtc.app.model.entity.user.User;
+import net.github.rtc.app.model.entity.user.UserCourseOrder;
+import net.github.rtc.app.model.entity.user.UserRequestStatus;
 import net.github.rtc.app.service.CodeGenerationService;
 import net.github.rtc.app.service.impl.CodeGenerationServiceImpl;
 import org.springframework.beans.factory.InitializingBean;

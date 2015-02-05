@@ -1,6 +1,6 @@
 package net.github.rtc.app.dao.impl;
 
-import net.github.rtc.app.model.report.ReportDetails;
+import net.github.rtc.app.model.entity.report.ReportDetails;
 import org.springframework.stereotype.Repository;
 
 /**

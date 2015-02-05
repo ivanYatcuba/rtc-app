@@ -3,8 +3,8 @@ package net.github.rtc.app.utils.enums;
 import net.github.rtc.app.controller.admin.MenuItems;
 import org.junit.Ignore;
 import junit.framework.Assert;
-import net.github.rtc.app.model.news.NewsStatus;
-import net.github.rtc.app.model.user.RoleType;
+import net.github.rtc.app.model.entity.news.NewsStatus;
+import net.github.rtc.app.model.entity.user.RoleType;
 import org.junit.Test;
 
 import java.util.List;

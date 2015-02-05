@@ -1,9 +1,9 @@
 package net.github.rtc.app.utils.datatable.search;
 
-import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.course.CourseStatus;
-import net.github.rtc.app.model.course.CourseType;
-import net.github.rtc.app.model.course.Tag;
+import net.github.rtc.app.model.entity.course.Course;
+import net.github.rtc.app.model.entity.course.CourseStatus;
+import net.github.rtc.app.model.entity.course.CourseType;
+import net.github.rtc.app.model.entity.course.Tag;
 import org.hibernate.criterion.*;
 import org.hibernate.type.StringType;
 

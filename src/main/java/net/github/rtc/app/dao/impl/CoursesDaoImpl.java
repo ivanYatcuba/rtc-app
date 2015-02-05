@@ -1,7 +1,7 @@
 package net.github.rtc.app.dao.impl;
 
 import net.github.rtc.app.dao.CoursesDao;
-import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.entity.course.Course;
 import org.springframework.stereotype.Repository;
 
 /**

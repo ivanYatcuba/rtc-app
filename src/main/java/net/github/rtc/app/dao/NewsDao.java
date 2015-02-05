@@ -1,6 +1,6 @@
 package net.github.rtc.app.dao;
 
-import net.github.rtc.app.model.news.News;
+import net.github.rtc.app.model.entity.news.News;
 
 import java.util.List;
 

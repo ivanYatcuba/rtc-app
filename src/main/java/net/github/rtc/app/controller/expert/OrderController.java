@@ -1,7 +1,7 @@
 package net.github.rtc.app.controller.expert;
 
 import net.github.rtc.app.controller.common.MenuItem;
-import net.github.rtc.app.model.user.UserRequestStatus;
+import net.github.rtc.app.model.entity.user.UserRequestStatus;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

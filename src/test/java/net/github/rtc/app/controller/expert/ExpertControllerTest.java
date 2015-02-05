@@ -1,7 +1,7 @@
 package net.github.rtc.app.controller.expert;
 
-import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.model.user.UserCourseOrder;
+import net.github.rtc.app.model.entity.user.User;
+import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;

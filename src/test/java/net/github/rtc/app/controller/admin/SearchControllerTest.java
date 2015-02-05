@@ -1,8 +1,8 @@
 package net.github.rtc.app.controller.admin;
 
 
-import net.github.rtc.app.model.activity.Activity;
-import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.entity.activity.Activity;
+import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.activity.ActivityService;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.news.NewsService;
@@ -11,7 +11,6 @@ import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.ActivitySearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

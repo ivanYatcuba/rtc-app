@@ -1,9 +1,9 @@
 package net.github.rtc.app.utils;
 
 
-import net.github.rtc.app.model.activity.ActivityAction;
-import net.github.rtc.app.model.activity.ActivityEntity;
-import net.github.rtc.app.model.activity.IActivity;
+import net.github.rtc.app.model.entity.activity.ActivityAction;
+import net.github.rtc.app.model.entity.activity.ActivityEntity;
+import net.github.rtc.app.model.entity.activity.IActivity;
 import net.github.rtc.app.utils.events.ActivityEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;

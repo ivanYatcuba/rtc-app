@@ -1,7 +1,7 @@
 package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.controller.common.MenuItem;
-import net.github.rtc.app.model.user.*;
+import net.github.rtc.app.model.entity.user.*;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;

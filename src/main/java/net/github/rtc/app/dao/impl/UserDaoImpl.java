@@ -8,9 +8,9 @@ package net.github.rtc.app.dao.impl;
 
 import net.github.rtc.app.dao.UserDao;
 import net.github.rtc.app.exception.ServiceProcessingException;
-import net.github.rtc.app.model.user.Role;
-import net.github.rtc.app.model.user.RoleType;
-import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.entity.user.Role;
+import net.github.rtc.app.model.entity.user.RoleType;
+import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;

@@ -1,9 +1,9 @@
 package net.github.rtc.app.controller.user;
 
-import net.github.rtc.app.dto.user.UserCourseDTO;
-import net.github.rtc.app.model.course.Course;
-import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.model.user.UserCourseOrder;
+import net.github.rtc.app.model.dto.user.UserCourseDTO;
+import net.github.rtc.app.model.entity.course.Course;
+import net.github.rtc.app.model.entity.user.User;
+import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
@@ -12,7 +12,6 @@ import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

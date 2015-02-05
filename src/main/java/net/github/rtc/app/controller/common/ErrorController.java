@@ -1,8 +1,8 @@
 package net.github.rtc.app.controller.common;
 
 import com.google.common.base.Throwables;
-import net.github.rtc.app.model.user.RoleType;
-import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.entity.user.RoleType;
+import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

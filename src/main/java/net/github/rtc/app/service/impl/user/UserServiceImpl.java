@@ -2,10 +2,10 @@ package net.github.rtc.app.service.impl.user;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.UserDao;
-import net.github.rtc.app.model.user.Role;
-import net.github.rtc.app.model.user.RoleType;
-import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.model.user.UserStatus;
+import net.github.rtc.app.model.entity.user.Role;
+import net.github.rtc.app.model.entity.user.RoleType;
+import net.github.rtc.app.model.entity.user.User;
+import net.github.rtc.app.model.entity.user.UserStatus;
 import net.github.rtc.app.service.MailService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.genericservise.AbstractCRUDEventsService;

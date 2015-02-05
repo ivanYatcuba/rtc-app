@@ -1,8 +1,8 @@
 package net.github.rtc.app.dao.impl;
 
 import net.github.rtc.app.dao.UserCourseOrderDao;
-import net.github.rtc.app.model.user.UserCourseOrder;
-import net.github.rtc.app.model.user.UserRequestStatus;
+import net.github.rtc.app.model.entity.user.UserCourseOrder;
+import net.github.rtc.app.model.entity.user.UserRequestStatus;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;

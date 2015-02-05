@@ -1,7 +1,7 @@
 package net.github.rtc.app.controller.common;
 
-import net.github.rtc.app.model.news.News;
-import net.github.rtc.app.model.user.User;
+import net.github.rtc.app.model.entity.news.News;
+import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;

@@ -2,7 +2,7 @@ package net.github.rtc.app.utils;
 
 import com.sun.syndication.feed.atom.*;
 import net.github.rtc.app.controller.common.FeedNewsController;
-import net.github.rtc.app.model.news.News;
+import net.github.rtc.app.model.entity.news.News;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

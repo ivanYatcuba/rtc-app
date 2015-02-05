@@ -1,8 +1,8 @@
 package net.github.rtc.app.utils.datatable.search;
 
-import net.github.rtc.app.model.user.Role;
-import net.github.rtc.app.model.user.User;
-import net.github.rtc.app.model.user.UserStatus;
+import net.github.rtc.app.model.entity.user.Role;
+import net.github.rtc.app.model.entity.user.User;
+import net.github.rtc.app.model.entity.user.UserStatus;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Order;

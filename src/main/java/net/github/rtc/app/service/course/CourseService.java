@@ -1,7 +1,7 @@
 package net.github.rtc.app.service.course;
 
-import net.github.rtc.app.dto.user.UserCourseDTO;
-import net.github.rtc.app.model.course.Course;
+import net.github.rtc.app.model.dto.user.UserCourseDTO;
+import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.service.GenericService;
 import net.github.rtc.app.service.ModelService;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;

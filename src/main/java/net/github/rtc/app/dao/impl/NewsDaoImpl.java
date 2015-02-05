@@ -1,8 +1,8 @@
 package net.github.rtc.app.dao.impl;
 
 import net.github.rtc.app.dao.NewsDao;
-import net.github.rtc.app.model.news.News;
-import net.github.rtc.app.model.news.NewsStatus;
+import net.github.rtc.app.model.entity.news.News;
+import net.github.rtc.app.model.entity.news.NewsStatus;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;

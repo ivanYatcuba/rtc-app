@@ -1,6 +1,6 @@
 package net.github.rtc.app.utils.propertyeditors;
 
-import net.github.rtc.app.model.course.Tag;
+import net.github.rtc.app.model.entity.course.Tag;
 
 import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;

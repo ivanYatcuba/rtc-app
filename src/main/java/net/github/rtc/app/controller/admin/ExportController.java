@@ -1,9 +1,9 @@
 package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.controller.common.MenuItem;
-import net.github.rtc.app.model.report.ExportFormat;
-import net.github.rtc.app.model.report.ReportClasses;
-import net.github.rtc.app.model.report.ReportDetails;
+import net.github.rtc.app.model.entity.report.ExportFormat;
+import net.github.rtc.app.model.entity.report.ReportClasses;
+import net.github.rtc.app.model.entity.report.ReportDetails;
 import net.github.rtc.app.service.report.ReportService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.app.utils.enums.EnumOperation;
