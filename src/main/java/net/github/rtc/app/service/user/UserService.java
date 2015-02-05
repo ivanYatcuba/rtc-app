@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package net.github.rtc.app.service.user;
 
 import net.github.rtc.app.model.user.Role;
@@ -27,9 +21,9 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
 
     User loadUserByUsername(String email);
 
-    public User create(User user, MultipartFile image, boolean isActive);
+    User create(User user, MultipartFile image, boolean isActive);
 
-    public User update(User user, MultipartFile image, boolean isActive);
+    User update(User user, MultipartFile image, boolean isActive);
 
     void markUserForRemoval(String userCode);
 

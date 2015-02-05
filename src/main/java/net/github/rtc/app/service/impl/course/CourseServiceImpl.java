@@ -117,7 +117,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
 
     private void setCourseStatusAndPublishDate(boolean published, Course course) {
         course.setStatus(published ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
-        if(published) {
+        if (published) {
             course.setPublishDate(dateService.getCurrentDate());
         }
     }
