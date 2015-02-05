@@ -16,7 +16,8 @@ public interface CourseService extends ModelService<Course>, GenericService<Cour
 
     SearchResults<UserCourseDTO> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter);
 
-    void saveCourse(final boolean ifPublish, final boolean ifCreateNews, Course course, boolean doUpdate);
+    void create(final boolean isPublished, final boolean newsCreated, Course course);
+    void update(final boolean isPublished, final boolean newsCreated, Course course);
 
-    void createNews(Course course, User author);
+
 }

@@ -52,15 +52,21 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     }
 
     @Override
-    public User save(User user, MultipartFile image, boolean ifActive, boolean doUpdate) {
-        user.setStatus(ifActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
+    public User create(User user, MultipartFile image, boolean isActive) {
+        setStatusAndImage(user, image, isActive);
+        return create(user);
+    }
+
+    @Override
+    public User update(User user, MultipartFile image, boolean isActive) {
+        setStatusAndImage(user, image, isActive);
+        return update(user);
+    }
+
+    private void setStatusAndImage(User user, MultipartFile image, boolean isActive) {
+        user.setStatus(isActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
         if (!image.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), image));
-        }
-        if (doUpdate) {
-            return update(user);
-        } else {
-            return create(user);
         }
     }
 

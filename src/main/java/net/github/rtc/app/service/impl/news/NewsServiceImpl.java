@@ -2,12 +2,15 @@ package net.github.rtc.app.service.impl.news;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.NewsDao;
+import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.news.News;
 import net.github.rtc.app.model.news.NewsStatus;
+import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.genericservise.AbstractCRUDEventsService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.CourseNewsCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,8 @@ public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements 
     private UserService userService;
     @Autowired
     private DateService dateService;
+    @Autowired
+    private CourseNewsCreator courseNewsCreator;
 
     protected GenericDao<News> getDao() {
         return newsDao;
@@ -31,14 +36,17 @@ public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements 
     }
 
     @Override
-    public void create(News news, boolean ifPublish) {
+    public void create(News news, boolean isPublished) {
         setAuthorAndDate(news);
+        if (isPublished) {
+            setPublish(news);
+        }
         create(news);
     }
 
     @Override
-    public void update(News news, boolean ifPublish) {
-        if (ifPublish) {
+    public void update(News news, boolean isPublished) {
+        if (isPublished) {
             setPublish(news);
         }
         update(news);
@@ -49,6 +57,11 @@ public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements 
         final News news = findByCode(newsCode);
         setPublish(news);
         update(news);
+    }
+
+    @Override
+    public void createNewsFromCourse(Course course, User author) {
+        courseNewsCreator.createNews(course, author);
     }
 
     private void setPublish(News news) {

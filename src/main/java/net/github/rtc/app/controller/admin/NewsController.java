@@ -46,7 +46,7 @@ public class NewsController implements MenuItem {
     public String save(@ModelAttribute(NEWS) final News news,
                        @RequestParam(required = false) final boolean publish) {
         newsService.create(news, publish);
-        return new StringBuilder().append(REDIRECT_VIEW).append(news.getCode()).toString();
+        return REDIRECT_VIEW + news.getCode();
     }
 
     @RequestMapping(value = "/{newsCode}", method = RequestMethod.GET)
@@ -68,19 +68,19 @@ public class NewsController implements MenuItem {
     public String update(@ModelAttribute(NEWS) final News news,
                          @RequestParam(required = false) final boolean publish) {
         newsService.update(news, publish);
-        return new StringBuilder().append(REDIRECT_VIEW).append(news.getCode()).toString();
+        return REDIRECT_VIEW + news.getCode();
     }
 
     @RequestMapping(value = "/delete/{newsCode}", method = RequestMethod.GET)
     public String deleteByCode(@PathVariable final String newsCode) {
         newsService.deleteByCode(newsCode);
-        return new StringBuilder().append(REDIRECT).append(ADMIN_SEARCH).toString();
+        return REDIRECT + ADMIN_SEARCH;
     }
 
     @RequestMapping(value = "/publish/{newsCode}", method = RequestMethod.GET)
     public String publishByCode(@PathVariable final String newsCode) {
         newsService.publish(newsCode);
-        return new StringBuilder().append(REDIRECT).append(ADMIN_SEARCH).toString();
+        return REDIRECT + ADMIN_SEARCH;
     }
 
     @ModelAttribute(STATUSES)

@@ -27,7 +27,9 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
 
     User loadUserByUsername(String email);
 
-    User save(User user, MultipartFile image, boolean ifActive, boolean doUpdate);
+    public User create(User user, MultipartFile image, boolean isActive);
+
+    public User update(User user, MultipartFile image, boolean isActive);
 
     void markUserForRemoval(String userCode);
 

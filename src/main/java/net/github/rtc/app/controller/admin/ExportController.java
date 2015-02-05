@@ -54,7 +54,7 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/insertReport", method = RequestMethod.POST)
     public String createReport(@ModelAttribute("report") final ReportDetails report) {
         reportService.create(report);
-        return new StringBuilder().append(REDIRECT_EXPORT).append(report.getCode()).toString();
+        return REDIRECT_EXPORT + report.getCode();
     }
 
     @RequestMapping(value = "/{reportCode}", method = RequestMethod.GET)
@@ -75,7 +75,7 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/updateReport", method = RequestMethod.POST)
     public String editReport(@ModelAttribute("report") final ReportDetails report) {
         reportService.update(report);
-        return new StringBuilder().append(REDIRECT_EXPORT).append(report.getCode()).toString();
+        return REDIRECT_EXPORT + report.getCode();
     }
 
     @RequestMapping(value = "/delete/{reportCode}", method = RequestMethod.GET)
@@ -92,12 +92,12 @@ public class ExportController implements MenuItem {
 
     @RequestMapping(value = "/download/{reportCode}", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
-    public void downloadUserExport(@PathVariable final String reportCode,  final HttpServletResponse response) throws IOException {
+    public void downloadUserExport(@PathVariable final String reportCode,  final HttpServletResponse response) {
         final ReportDetails reportDetails = reportService.findByCode(reportCode);
         final File downloadFile = reportService.getReport(reportDetails);
-        response.setContentType(Files.probeContentType(downloadFile.toPath()));
         response.setHeader(HEADER_KEY, String.format("attachment; " + "filename=\"%s\"", reportDetails.getName()));
         try (final InputStream is = new FileInputStream(downloadFile)) {
+            response.setContentType(Files.probeContentType(downloadFile.toPath()));
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {

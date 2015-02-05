@@ -57,9 +57,9 @@ public class UserController implements MenuItem {
     @RequestMapping(value = "/save", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public String save(@ModelAttribute(USER) final User user,
                        @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
-                       @RequestParam(required = false) final boolean ifActive) {
-        userService.save(user, img, ifActive, false);
-        return new StringBuilder().append(REDIRECT_USER_PAGE).append(user.getCode()).toString();
+                       @RequestParam(required = false) final boolean isActive) {
+        userService.create(user, img, isActive);
+        return REDIRECT_USER_PAGE + user.getCode();
     }
 
     @RequestMapping(value = "/view/{code}", method = RequestMethod.GET)
@@ -80,9 +80,9 @@ public class UserController implements MenuItem {
     @RequestMapping(value = "/update", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public String update(@ModelAttribute(USER) @Valid final User user,
                          @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
-                         @RequestParam(required = false) final boolean ifActive) {
-        userService.save(user, img, ifActive, true);
-        return new StringBuilder().append(REDIRECT_USER_PAGE).append(user.getCode()).toString();
+                         @RequestParam(required = false) final boolean isActive) {
+        userService.update(user, img, isActive);
+        return REDIRECT_USER_PAGE + user.getCode();
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
@@ -154,8 +154,7 @@ public class UserController implements MenuItem {
 
     @ModelAttribute(ROLES)
     public List<RoleType> getCategories() {
-        final List<RoleType> roles = EnumOperation.findAll(RoleType.class);
-        return roles;
+        return EnumOperation.findAll(RoleType.class);
     }
 
     @Override

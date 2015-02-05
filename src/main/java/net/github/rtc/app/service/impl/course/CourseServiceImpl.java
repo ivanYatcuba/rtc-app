@@ -5,13 +5,12 @@ import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.course.CourseStatus;
-import net.github.rtc.app.model.user.User;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.genericservise.AbstractCRUDEventsService;
+import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.CourseNewsCreator;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.dozer.DozerBeanMapper;
@@ -39,7 +38,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
     @Autowired
     private DateService dateService;
     @Autowired
-    private CourseNewsCreator courseNewsCreator;
+    private NewsService newsService;
     @Autowired
     private UserService userService;
 
@@ -62,7 +61,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
         course.setPublishDate(dateService.getCurrentDate());
         coursesDao.update(course);
         if (newsCreated) {
-           createNews(course, userService.getAuthorizedUser());
+           newsService.createNewsFromCourse(course, userService.getAuthorizedUser());
         }
 
     }
@@ -99,19 +98,29 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
     }
 
     @Override
-    public void saveCourse(boolean published, boolean newsCreated, Course course, boolean doUpdate) {
-        course.setStatus(published ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
-        course.setPublishDate(dateService.getCurrentDate());
-        if (doUpdate) {
-            update(course);
-        } else {
-            create(course);
-        }
+    public void create(boolean published, boolean newsCreated, Course course) {
+        setCourseStatusAndPublishDate(published, course);
+        create(course);
         if (newsCreated) {
-            createNews(course, userService.getAuthorizedUser());
+            newsService.createNewsFromCourse(course, userService.getAuthorizedUser());
         }
     }
 
+    @Override
+    public void update(boolean published, boolean newsCreated, Course course) {
+        setCourseStatusAndPublishDate(published, course);
+        update(course);
+        if (newsCreated) {
+            newsService.createNewsFromCourse(course, userService.getAuthorizedUser());
+        }
+    }
+
+    private void setCourseStatusAndPublishDate(boolean published, Course course) {
+        course.setStatus(published ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
+        if(published) {
+            course.setPublishDate(dateService.getCurrentDate());
+        }
+    }
 
     @Override
     public void deleteByCode(String code) {
@@ -119,10 +128,5 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
         if (course.getStatus() != CourseStatus.PUBLISHED) {
             super.deleteByCode(code);
         }
-    }
-
-    @Override
-    public void createNews(final Course course, final User author) {
-        courseNewsCreator.createNews(course, author);
     }
 }

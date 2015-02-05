@@ -60,8 +60,8 @@ public class CoursesController implements MenuItem {
     public String save(@ModelAttribute(COURSE) final Course course,
                        @RequestParam(required = false) final boolean published,
                        @RequestParam(required = false) final boolean newsCreated) {
-        courseService.saveCourse(published, newsCreated, course, false);
-        return new StringBuilder().append(REDIRECT).append(VIEW).append(course.getCode()).append(NEWS_CREATED).append(newsCreated).toString();
+        courseService.create(published, newsCreated, course);
+        return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + newsCreated;
     }
 
     @RequestMapping(value = VIEW + "{courseCode}", method = RequestMethod.GET)
@@ -85,8 +85,8 @@ public class CoursesController implements MenuItem {
     public String update(@ModelAttribute(COURSE) final Course course,
                          @RequestParam(required = false) final boolean published,
                          @RequestParam(required = false) final boolean newsCreated) {
-        courseService.saveCourse(published, published, course, true);
-        return new StringBuilder().append(REDIRECT).append(VIEW).append(course.getCode()).append(NEWS_CREATED).append(newsCreated).toString();
+        courseService.update(published, published, course);
+        return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + newsCreated;
     }
 
     @RequestMapping(value = "/delete/{courseCode}", method = RequestMethod.GET)
@@ -99,13 +99,13 @@ public class CoursesController implements MenuItem {
     public String publish(@PathVariable final String courseCode,
                           @RequestParam(required = false) final boolean newsCreated) {
         courseService.publish(newsCreated, courseCode);
-        return new StringBuilder().append(REDIRECT).append(ADMIN).toString();
+        return REDIRECT + ADMIN;
     }
 
     @RequestMapping(value = "/archive/{courseCode}", method = RequestMethod.GET)
     public String archive(@PathVariable final String courseCode) {
         courseService.archive(courseCode);
-        return new StringBuilder().append(REDIRECT).append(ADMIN).toString();
+        return REDIRECT + ADMIN;
     }
 
     @ModelAttribute(value = COURSE)
