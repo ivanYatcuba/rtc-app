@@ -406,3 +406,16 @@
 </script>
 </#macro>
 
+<#macro capacityIndicator acceptedOrders totalOrders>
+    <#assign acceptancePercent = acceptedOrders*100/totalOrders>
+
+    <#if acceptancePercent == 0>
+    <img src="<@spring.url'/resources/images/user/c0.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
+    <#elseif acceptancePercent <= 50>
+    <img src="<@spring.url'/resources/images/user/c1.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
+    <#elseif acceptancePercent gt 50 && acceptancePercent != 100>
+    <img src="<@spring.url'/resources/images/user/c2.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
+    <#else >
+    <img src="<@spring.url'/resources/images/user/c3.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
+    </#if>
+</#macro>

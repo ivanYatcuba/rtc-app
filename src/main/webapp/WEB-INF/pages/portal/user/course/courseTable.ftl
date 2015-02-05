@@ -39,16 +39,7 @@
 
                 <div class="col-md-6">
                     <div  style="text-align: right">
-                        <#if course.acceptancePercent == 0>
-                        <img src="<@spring.url'/resources/images/user/c0.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
-                        <#elseif course.acceptancePercent <= 50>
-                        <img src="<@spring.url'/resources/images/user/c1.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
-                        <#elseif course.acceptancePercent gt 50 && course.acceptancePercent != 100>
-                        <img src="<@spring.url'/resources/images/user/c2.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
-                        <#else >
-                        <img src="<@spring.url'/resources/images/user/c3.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
-                        </#if>
-
+                        <@formMacro.capacityIndicator course.acceptedOrders  course.capacity/>
                         &nbsp;<span data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.appliedCapacity'/>">${course.acceptedOrders}</span>/
                         <span data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.totalCapacity'/>">${course.capacity}</span><br/>&nbsp;
                     </div>

@@ -105,7 +105,4 @@ public class UserCourseDTO {
         this.acceptedOrders = acceptedOrders;
     }
 
-    public Integer getAcceptancePercent() {
-        return acceptedOrders * HUNDRED / capacity;
-    }
 }
