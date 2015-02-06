@@ -10,6 +10,7 @@ import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.genericservise.AbstractCRUDEventsService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.CourseNewsCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,6 +72,6 @@ public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements 
 
     private void setAuthorAndDate(News news) {
         news.setCreateDate(dateService.getCurrentDate());
-        news.setAuthor(userService.getAuthorizedUser());
+        news.setAuthor(AuthorizedUserProvider.getAuthorizedUser());
     }
 }

@@ -3,6 +3,7 @@ package net.github.rtc.app.controller.user;
 import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.model.entity.user.*;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class ProfileController implements MenuItem {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView user() {
         final ModelAndView mav = new ModelAndView(getRoot() + "/profile/profile");
-        final User user = userService.getAuthorizedUser();
+        final User user = AuthorizedUserProvider.getAuthorizedUser();
         mav.addObject(USER, user);
         return mav;
     }
@@ -51,7 +52,7 @@ public class ProfileController implements MenuItem {
      */
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView edit() {
-        final User user = userService.getAuthorizedUser();
+        final User user = AuthorizedUserProvider.getAuthorizedUser();
         final ModelAndView mav = new ModelAndView(getRoot() + "/profile/editProfile");
         mav.getModelMap().addAttribute(USER, user);
         mav.addObject(VALIDATION_RULES, validationContext.get(User.class));
@@ -76,7 +77,7 @@ public class ProfileController implements MenuItem {
     }
 
     private String getRoot() {
-        final User user = userService.getAuthorizedUser();
+        final User user = AuthorizedUserProvider.getAuthorizedUser();
         final List<String> auth = new ArrayList<>();
         for (GrantedAuthority role: user.getAuthorities()) {
             auth.add(role.getAuthority());
@@ -101,7 +102,7 @@ public class ProfileController implements MenuItem {
 
     @ModelAttribute("currentUserName")
     public String getCurrentUserName() {
-        return userService.getAuthorizedUserName();
+        return AuthorizedUserProvider.getAuthorizedUserName();
     }
 
     @ModelAttribute("order")

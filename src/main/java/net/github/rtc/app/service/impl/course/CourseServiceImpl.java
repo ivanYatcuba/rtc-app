@@ -11,6 +11,7 @@ import net.github.rtc.app.service.impl.genericservise.AbstractCRUDEventsService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.dozer.DozerBeanMapper;
@@ -61,7 +62,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
         course.setPublishDate(dateService.getCurrentDate());
         coursesDao.update(course);
         if (isNewsCreated) {
-           newsService.createNewsFromCourse(course, userService.getAuthorizedUser());
+           newsService.createNewsFromCourse(course, AuthorizedUserProvider.getAuthorizedUser());
         }
 
     }
@@ -102,7 +103,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
         setCourseStatusAndPublishDate(published, course);
         create(course);
         if (newsCreated) {
-            newsService.createNewsFromCourse(course, userService.getAuthorizedUser());
+            newsService.createNewsFromCourse(course, AuthorizedUserProvider.getAuthorizedUser());
         }
     }
 
@@ -111,7 +112,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
         setCourseStatusAndPublishDate(published, course);
         update(course);
         if (newsCreated) {
-            newsService.createNewsFromCourse(course, userService.getAuthorizedUser());
+            newsService.createNewsFromCourse(course, AuthorizedUserProvider.getAuthorizedUser());
         }
     }
 

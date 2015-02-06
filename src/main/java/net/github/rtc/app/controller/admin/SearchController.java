@@ -20,6 +20,7 @@ import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.report.ReportService;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.*;
 import net.github.rtc.app.utils.enums.EnumHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -228,7 +229,7 @@ public class SearchController {
 
     @ModelAttribute("currentUser")
     public User getCurrentUser() {
-        return userService.getAuthorizedUser();
+        return AuthorizedUserProvider.getAuthorizedUser();
     }
 
 }

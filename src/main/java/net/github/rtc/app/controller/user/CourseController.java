@@ -9,6 +9,7 @@ import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
@@ -50,14 +51,14 @@ public class CourseController implements MenuItem {
         final ModelAndView mav = new ModelAndView("portal/user/page/courseDetail");
         mav.addObject(COURSE, courseService.findByCode(courseCode));
         mav.addObject(USER,
-                userService.getAuthorizedUser());
+                AuthorizedUserProvider.getAuthorizedUser());
         return mav;
     }
 
     @RequestMapping(value = "/sendOrder", method = RequestMethod.POST)
     public ModelAndView sendCourseOrder(@ModelAttribute("order") final UserCourseOrder myCourse) {
         final ModelAndView mav = new ModelAndView("redirect:/user/courses");
-        final User user = userService.getAuthorizedUser();
+        final User user = AuthorizedUserProvider.getAuthorizedUser();
         myCourse.setUserCode(user.getCode());
         try {
             userCourseOrderService.create(myCourse);
