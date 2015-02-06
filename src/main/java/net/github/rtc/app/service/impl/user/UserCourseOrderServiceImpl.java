@@ -7,6 +7,8 @@ import net.github.rtc.app.model.entity.user.UserRequestStatus;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.genericservise.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserCourseOrderService;
+import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.AuthorizedUserProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     private UserCourseOrderDao userCourseOrderDao;
     @Autowired
     private DateService dateService;
+    @Autowired
+    private UserService userService;
 
     @Override
     @Transactional
@@ -61,6 +65,13 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
       return false;
     }
     return true;
+  }
+
+
+  @Override
+  public UserCourseOrder create(UserCourseOrder order) {
+    order.setUserCode(AuthorizedUserProvider.getAuthorizedUser().getCode());
+    return super.create(order);
   }
 
   @Override

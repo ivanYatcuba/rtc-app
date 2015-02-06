@@ -4,11 +4,9 @@ import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.model.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.entity.course.CourseStatus;
 import net.github.rtc.app.model.entity.course.CourseType;
-import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
-import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
@@ -32,8 +30,6 @@ public class CourseController implements MenuItem {
     private static final int COURSES_PER_PAGE = 6;
 
     @Autowired
-    private UserService userService;
-    @Autowired
     private CourseService courseService;
     @Autowired
     private UserCourseOrderService userCourseOrderService;
@@ -50,23 +46,14 @@ public class CourseController implements MenuItem {
     public ModelAndView courseDetails(@PathVariable final String courseCode) {
         final ModelAndView mav = new ModelAndView("portal/user/page/courseDetail");
         mav.addObject(COURSE, courseService.findByCode(courseCode));
-        mav.addObject(USER,
-                AuthorizedUserProvider.getAuthorizedUser());
+        mav.addObject(USER, AuthorizedUserProvider.getAuthorizedUser());
         return mav;
     }
 
     @RequestMapping(value = "/sendOrder", method = RequestMethod.POST)
-    public ModelAndView sendCourseOrder(@ModelAttribute("order") final UserCourseOrder myCourse) {
-        final ModelAndView mav = new ModelAndView("redirect:/user/courses");
-        final User user = AuthorizedUserProvider.getAuthorizedUser();
-        myCourse.setUserCode(user.getCode());
-        try {
-            userCourseOrderService.create(myCourse);
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-
-        return mav;
+    public String sendCourseOrder(@ModelAttribute("order") final UserCourseOrder order) {
+        userCourseOrderService.create(order);
+        return "redirect:/user/courses";
     }
 
     @RequestMapping(value = "/courseTable", method = RequestMethod.POST)

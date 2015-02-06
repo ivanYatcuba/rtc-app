@@ -34,6 +34,13 @@ public class OrderController implements MenuItem {
         return mav;
     }
 
+    @RequestMapping(value = "/orderTable", method = RequestMethod.GET)
+    public ModelAndView ordersTable(@PathVariable final String orderCode) {
+        final ModelAndView mav = new ModelAndView(ROOT + "/orders/orderTable");
+        mav.addObject(ORDERS, userCourseOrderService.getOrderByExpertCode(AuthorizedUserProvider.getAuthorizedUser().getCode()));
+        return mav;
+    }
+
     @RequestMapping(value = "/accept/{orderCode}", method = RequestMethod.GET)
     public String acceptRequest(@PathVariable final String orderCode) {
         userCourseOrderService.changeOrderStatus(UserRequestStatus.ACCEPTED, orderCode);
