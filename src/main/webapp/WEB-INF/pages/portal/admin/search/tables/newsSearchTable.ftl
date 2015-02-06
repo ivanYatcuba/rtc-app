@@ -54,7 +54,7 @@
                                 </li>
                             </#if>
                             <li>
-                                <a href="#" onclick="javascript:PopUpShow('${news.code}')">Remove</a>
+                                <a href="#" onclick="PopUpShow('${news.code}')">Remove</a>
                             </li>
                         <#--<li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/news/delete/${news.code}'/>">Remove</a></li>-->
                         </ul>
@@ -96,7 +96,7 @@
                 <form name="deleteNews" action="<@spring.url"/admin/news/remove/"/>" method="get">
                     <input type="hidden" id="newsCode" name="newsCode"/>
                     <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary" onClick="javascript:PopUpHide()">Remove</button>
+                    <button type="button" class="btn btn-primary" onClick="PopUpHide()">Remove</button>
                 </form>
             </div>
         </div>
@@ -113,6 +113,14 @@
     }
     function PopUpHide() {
         $('#removeNewsModal').modal('hide');
+        var newsCode = $("#newsCode").val();
+        $.ajax({
+            type: "GET",
+            url: '<@spring.url"/admin/news/delete/"/>' + newsCode,
+            success: function () {
+                searchPage.doSearch(${currentPage});
+            }
+        });
     }
     function publish(newsCode) {
         $.ajax({
