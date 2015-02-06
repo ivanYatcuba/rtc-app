@@ -37,6 +37,8 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
 
     User getAuthorizedUser();
 
+    String getAuthorizedUserName();
+
     void restoreAndDeactivateUser(String userCode);
 
     Map<String, String> getUserNameCodeMap(RoleType roleType);

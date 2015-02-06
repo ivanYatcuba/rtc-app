@@ -5,7 +5,7 @@ import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.news.NewsStatus;
 import net.github.rtc.app.service.news.NewsService;
-import net.github.rtc.app.utils.enums.EnumOperation;
+import net.github.rtc.app.utils.enums.EnumHelper;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -85,7 +85,7 @@ public class NewsController implements MenuItem {
 
     @ModelAttribute(STATUSES)
     public Collection<String> getStatuses() {
-        return EnumOperation.findAllName(NewsStatus.class);
+        return EnumHelper.getNames(NewsStatus.class);
     }
 
     @ModelAttribute(NEWS)

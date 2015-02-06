@@ -39,7 +39,7 @@ public class ProfileController implements MenuItem {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView user() {
         final ModelAndView mav = new ModelAndView(getRoot() + "/profile/profile");
-        final User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getAuthorizedUser();
         mav.addObject(USER, user);
         return mav;
     }
@@ -51,8 +51,7 @@ public class ProfileController implements MenuItem {
      */
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView edit() {
-        final User user = userService.loadUserByUsername(
-          SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getAuthorizedUser();
         final ModelAndView mav = new ModelAndView(getRoot() + "/profile/editProfile");
         mav.getModelMap().addAttribute(USER, user);
         mav.addObject(VALIDATION_RULES, validationContext.get(User.class));
@@ -77,7 +76,7 @@ public class ProfileController implements MenuItem {
     }
 
     private String getRoot() {
-        final User user = userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getAuthorizedUser();
         final List<String> auth = new ArrayList<>();
         for (GrantedAuthority role: user.getAuthorities()) {
             auth.add(role.getAuthority());
@@ -102,7 +101,7 @@ public class ProfileController implements MenuItem {
 
     @ModelAttribute("currentUserName")
     public String getCurrentUserName() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
+        return userService.getAuthorizedUserName();
     }
 
     @ModelAttribute("order")

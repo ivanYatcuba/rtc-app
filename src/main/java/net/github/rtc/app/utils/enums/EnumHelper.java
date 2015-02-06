@@ -2,15 +2,15 @@ package net.github.rtc.app.utils.enums;
 
 import java.util.*;
 
-public final class EnumOperation {
+public final class EnumHelper {
 
-    private EnumOperation() { }
+    private EnumHelper() { }
 
     public static  <E extends Enum<E>>  List<E> findAll(Class<E>  enumClass) {
         return Arrays.asList(enumClass.getEnumConstants());
     }
 
-    public static  <E extends Enum<E>>  List<String> findAllName(Class<E>  enumClass) {
+    public static  <E extends Enum<E>>  List<String> getNames(Class<E> enumClass) {
         final List<String> res = new ArrayList<>();
 
         for (final  E value : enumClass.getEnumConstants()) {
@@ -19,7 +19,7 @@ public final class EnumOperation {
         return res;
     }
 
-    public static  <E extends Enum<E>>  List<String> findAllValue(Class<E> enumClass) {
+    public static  <E extends Enum<E>>  List<String> getValues(Class<E> enumClass) {
         final List<String> res = new ArrayList<>();
 
         for (final  E value : enumClass.getEnumConstants()) {
@@ -30,7 +30,7 @@ public final class EnumOperation {
 
 
 
-    public static  <E extends Enum<E>>  Map<String, String> getMapNameValue(Class<E> enumClass) {
+    public static  <E extends Enum<E>>  Map<String, String> createNameValueMap(Class<E> enumClass) {
         final Map<String, String> dictionary = new HashMap<>();
         for (E value : findAll(enumClass)) {
             dictionary.put(value.name(), value.toString());

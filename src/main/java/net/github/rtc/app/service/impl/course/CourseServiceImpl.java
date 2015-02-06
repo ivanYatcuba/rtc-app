@@ -53,14 +53,14 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
     }
 
     @Override
-    public void publish(boolean newsCreated, String courseCode) {
+    public void publish(boolean isNewsCreated, String courseCode) {
         final Course course = findByCode(courseCode);
         log.debug("Publishing course: {}  ", course);
         Assert.notNull(course, COURSE_CANNOT_BE_NULL);
         course.setStatus(CourseStatus.PUBLISHED);
         course.setPublishDate(dateService.getCurrentDate());
         coursesDao.update(course);
-        if (newsCreated) {
+        if (isNewsCreated) {
            newsService.createNewsFromCourse(course, userService.getAuthorizedUser());
         }
 

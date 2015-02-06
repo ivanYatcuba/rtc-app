@@ -8,7 +8,7 @@ import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserStatus;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
-import net.github.rtc.app.utils.enums.EnumOperation;
+import net.github.rtc.app.utils.enums.EnumHelper;
 import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
@@ -139,22 +139,22 @@ public class UserController implements MenuItem {
 
     @ModelAttribute(STATUSES)
     public Collection<String> getStatuses() {
-        return EnumOperation.findAllName(UserStatus.class);
+        return EnumHelper.getNames(UserStatus.class);
     }
 
     @ModelAttribute(AUTHORITIES)
     public Collection<String> getAuthorities() {
-        return EnumOperation.findAllName(RoleType.class);
+        return EnumHelper.getNames(RoleType.class);
     }
 
     @ModelAttribute(ENGLISH)
     public List<EnglishLevel> getEnglish() {
-        return EnumOperation.findAll(EnglishLevel.class);
+        return EnumHelper.findAll(EnglishLevel.class);
     }
 
     @ModelAttribute(ROLES)
     public List<RoleType> getCategories() {
-        return EnumOperation.findAll(RoleType.class);
+        return EnumHelper.findAll(RoleType.class);
     }
 
     @Override

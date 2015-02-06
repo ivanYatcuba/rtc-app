@@ -33,9 +33,10 @@ public class LoginController {
 
     @RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
     public ModelAndView loginError(final ModelMap model) {
-        if (!ifAnonymous()) {
+        if (!isAnonymous()) {
             throw new ResourceNotFoundException();
         }
+
         final ModelAndView mav = new ModelAndView(LOGIN_LOGIN, model);
         mav.addObject("error", "true");
         return mav;
@@ -48,7 +49,7 @@ public class LoginController {
         return userService.userWithMailExists(email, currentEmail);
     }
 
-    private boolean ifAnonymous() {
+    private boolean isAnonymous() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication instanceof AnonymousAuthenticationToken;
     }

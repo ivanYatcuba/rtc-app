@@ -5,7 +5,7 @@ import net.github.rtc.app.model.entity.activity.ActivityEntity;
 import org.springframework.context.ApplicationEvent;
 
 
-public class ActivityEvent extends ApplicationEvent implements IEvent {
+public class ActivityEvent extends ApplicationEvent {
 
     private String details;
 

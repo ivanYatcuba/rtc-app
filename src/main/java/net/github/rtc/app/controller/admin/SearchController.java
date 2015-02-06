@@ -21,9 +21,8 @@ import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.report.ReportService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.*;
-import net.github.rtc.app.utils.enums.EnumOperation;
+import net.github.rtc.app.utils.enums.EnumHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -69,7 +68,7 @@ public class SearchController {
 
     @RequestMapping(value = "/search/{menuItem}", method = RequestMethod.GET)
     public ModelAndView searchPageWithParam(@PathVariable(MENU_ITEM) final String menuItem) {
-         if (!EnumOperation.containsValue(MenuItems.class, menuItem)) {
+         if (!EnumHelper.containsValue(MenuItems.class, menuItem)) {
              throw new ResourceNotFoundException();
          }
         final ModelAndView mav = new ModelAndView("redirect:" + "/admin/search");
@@ -114,7 +113,7 @@ public class SearchController {
         final SearchResults<Course> results = courseService.search(courseFilter);
         mav.addAllObjects(results.getPageModel());
         mav.addObject(COURSES, results.getResults());
-        mav.addObject(TYPES, EnumOperation.findAll(CourseType.class));
+        mav.addObject(TYPES, EnumHelper.findAll(CourseType.class));
         mav.addObject(COURSE_STATUSES, getCourseStatuses());
         mav.addObject(COURSE_FILTER, courseFilter);
         return mav;
@@ -169,27 +168,27 @@ public class SearchController {
 
     @ModelAttribute(NEWS_STATUSES)
     public Collection<String> getNewsStatuses() {
-        return EnumOperation.findAllName(NewsStatus.class);
+        return EnumHelper.getNames(NewsStatus.class);
     }
 
     @ModelAttribute(USER_STATUSES)
     public Collection<String> getUserStatuses() {
-        return EnumOperation.findAllName(UserStatus.class);
+        return EnumHelper.getNames(UserStatus.class);
     }
 
     @ModelAttribute(COURSE_STATUSES)
     public Collection<String> getCourseStatuses() {
-        return EnumOperation.findAllName(CourseStatus.class);
+        return EnumHelper.getNames(CourseStatus.class);
     }
 
     @ModelAttribute(USER_AUTHORITIES)
     public Collection<String> getAuthorities() {
-        return EnumOperation.findAllName(RoleType.class);
+        return EnumHelper.getNames(RoleType.class);
     }
 
     @ModelAttribute("reportFormats")
     public List<String> getFormats() {
-        return EnumOperation.findAllName(ExportFormat.class);
+        return EnumHelper.getNames(ExportFormat.class);
     }
 
     @ModelAttribute("reportStats")
@@ -205,17 +204,17 @@ public class SearchController {
     @ModelAttribute(COURSE_CATIGORIES)
     public Map<String, String> getCategories() {
         //QA("QA"), DEV("DEV"), BA("BA")
-        return  EnumOperation.getMapNameValue(CourseType.class);
+        return  EnumHelper.createNameValueMap(CourseType.class);
     }
 
     @ModelAttribute(ACTIVITY_ENTITIES)
     public Map<String, String> getActivityEntities() {
-        return EnumOperation.getMapNameValue(ActivityEntity.class);
+        return EnumHelper.createNameValueMap(ActivityEntity.class);
     }
 
     @ModelAttribute(ACTIVITY_ACTIONS)
     public Map<String, String> getActivityAction() {
-        return EnumOperation.getMapNameValue(ActivityAction.class);
+        return EnumHelper.createNameValueMap(ActivityAction.class);
     }
 
     @ModelAttribute(EXPERTS)
@@ -229,7 +228,7 @@ public class SearchController {
 
     @ModelAttribute("currentUser")
     public User getCurrentUser() {
-        return userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return userService.getAuthorizedUser();
     }
 
 }

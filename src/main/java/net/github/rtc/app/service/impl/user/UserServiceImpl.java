@@ -148,6 +148,11 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     }
 
     @Override
+    public String getAuthorizedUserName() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    @Override
     public void restoreAndDeactivateUser(String userCode) {
         restoreUser(userCode);
         inactivateUser(userCode);

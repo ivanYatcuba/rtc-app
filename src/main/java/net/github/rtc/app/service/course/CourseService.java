@@ -9,7 +9,7 @@ import net.github.rtc.app.utils.datatable.search.SearchResults;
 
 public interface CourseService extends ModelService<Course>, GenericService<Course> {
 
-    void publish(final boolean ifCreateNews, String courseCode);
+    void publish(final boolean isNewsCreated, String courseCode);
 
     void archive(String courseCode);
 

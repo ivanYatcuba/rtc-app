@@ -13,7 +13,6 @@ import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,15 +50,14 @@ public class CourseController implements MenuItem {
         final ModelAndView mav = new ModelAndView("portal/user/page/courseDetail");
         mav.addObject(COURSE, courseService.findByCode(courseCode));
         mav.addObject(USER,
-                userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+                userService.getAuthorizedUser());
         return mav;
     }
 
     @RequestMapping(value = "/sendOrder", method = RequestMethod.POST)
     public ModelAndView sendCourseOrder(@ModelAttribute("order") final UserCourseOrder myCourse) {
         final ModelAndView mav = new ModelAndView("redirect:/user/courses");
-        final User user = userService.loadUserByUsername(
-                SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getAuthorizedUser();
         myCourse.setUserCode(user.getCode());
         try {
             userCourseOrderService.create(myCourse);

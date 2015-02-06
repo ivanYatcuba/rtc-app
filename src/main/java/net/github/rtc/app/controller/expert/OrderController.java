@@ -5,7 +5,6 @@ import net.github.rtc.app.model.entity.user.UserRequestStatus;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +28,7 @@ public class OrderController implements MenuItem {
         final ModelAndView mav = new ModelAndView(ROOT + "/orders/orders");
         mav.addObject(ORDERS,
                     userCourseOrderService.getOrderByExpertCode(
-                    userService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).
+                    userService.getAuthorizedUser().
                             getCode()));
         return mav;
     }
