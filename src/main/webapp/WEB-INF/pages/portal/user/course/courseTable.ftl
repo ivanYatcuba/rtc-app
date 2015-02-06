@@ -8,7 +8,7 @@
         <#if course.status == "ARCHIVED">background-color: #f3eaea;</#if>">
             <div style="width: 242px;">
 
-                <a style="text-decoration: underline;  font-size: large; " href="<@spring.url'/user/courseDetails/${course.code}'/>">${course.name} </a>
+                <a style="text-decoration: underline;  font-size: large; " href="<@spring.url'/user/courses/courseDetails/${course.code}'/>">${course.name} </a>
                 <br/>
                 <div class="col-md-6" style="padding-left: 0px">
                     <span style="font-style: italic; font-size: small;">${course.experts?first.name}&nbsp;${course.experts?first.surname}</span>

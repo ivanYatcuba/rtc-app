@@ -104,11 +104,11 @@ public class CourseControllerTest {
 
     @Test
     public void testCourseDetails() throws Exception {
-        when(courseService.findByCode(COURSE_CODE)).thenReturn(new Course());
+        when(courseService.getUserCourseDTObyCode(COURSE_CODE)).thenReturn(new UserCourseDTO());
         mockMvc.perform(get("/user/courses/courseDetails/{courseCode}", COURSE_CODE))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("course"))
-                .andExpect(forwardedUrl("portal/user/page/courseDetail"));
+                .andExpect(forwardedUrl("portal/user/course/userCourseDetails"));
     }
 
     @Test

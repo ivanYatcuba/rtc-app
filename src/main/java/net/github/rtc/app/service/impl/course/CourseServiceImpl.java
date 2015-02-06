@@ -7,7 +7,7 @@ import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseStatus;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.genericservise.AbstractCRUDEventsService;
+import net.github.rtc.app.service.impl.genericService.AbstractCRUDEventsService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
@@ -96,6 +96,16 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
         newSearchResults.setTotalResults(results.getTotalResults());
         newSearchResults.setResults(newResults);
         return newSearchResults;
+    }
+
+    @Override
+    public UserCourseDTO getUserCourseDTObyCode(String code) {
+        final UserCourseDTO userCourseDTO = new UserCourseDTO();
+        final Course course = coursesDao.findByCode(code);
+        final Mapper mapper = new DozerBeanMapper();
+        userCourseDTO.setAcceptedOrders(orderService.getAcceptedOrdersForCourse(course.getCode()));
+        mapper.map(course, userCourseDTO);
+        return userCourseDTO;
     }
 
     @Override

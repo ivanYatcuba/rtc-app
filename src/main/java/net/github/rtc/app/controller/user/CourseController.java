@@ -16,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/user/courses")
@@ -44,8 +46,8 @@ public class CourseController implements MenuItem {
 
     @RequestMapping(value = "/courseDetails/{courseCode}", method = RequestMethod.GET)
     public ModelAndView courseDetails(@PathVariable final String courseCode) {
-        final ModelAndView mav = new ModelAndView("portal/user/page/courseDetail");
-        mav.addObject(COURSE, courseService.findByCode(courseCode));
+        final ModelAndView mav = new ModelAndView(ROOT + "/course/userCourseDetails");
+        mav.addObject(COURSE, courseService.getUserCourseDTObyCode(courseCode));
         mav.addObject(USER, AuthorizedUserProvider.getAuthorizedUser());
         return mav;
     }

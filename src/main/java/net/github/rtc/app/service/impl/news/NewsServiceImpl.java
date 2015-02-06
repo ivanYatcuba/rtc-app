@@ -7,7 +7,7 @@ import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.news.NewsStatus;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.genericservise.AbstractCRUDEventsService;
+import net.github.rtc.app.service.impl.genericService.AbstractCRUDEventsService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;

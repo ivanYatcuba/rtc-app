@@ -126,8 +126,6 @@
     </div>
     <hr>
 
-
-    <hr>
     <div class="row">
         <div style="text-align: right">
             <a href="<@spring.url "/user/profile/edit" />">

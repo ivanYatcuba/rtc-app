@@ -8,7 +8,7 @@ import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserStatus;
 import net.github.rtc.app.service.MailService;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.genericservise.AbstractCRUDEventsService;
+import net.github.rtc.app.service.impl.genericService.AbstractCRUDEventsService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.slf4j.Logger;

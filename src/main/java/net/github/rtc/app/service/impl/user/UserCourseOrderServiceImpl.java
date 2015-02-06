@@ -5,7 +5,7 @@ import net.github.rtc.app.dao.UserCourseOrderDao;
 import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.model.entity.user.UserRequestStatus;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.genericservise.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
