@@ -54,7 +54,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         final Collection<? extends GrantedAuthority> authorities
                 = user.getAuthorities();
 
-        return new UsernamePasswordAuthenticationToken(username, password,
+        return new UsernamePasswordAuthenticationToken(user, password,
                 authorities);
     }
 
