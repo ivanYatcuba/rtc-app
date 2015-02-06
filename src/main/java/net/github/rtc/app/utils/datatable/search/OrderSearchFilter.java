@@ -22,11 +22,13 @@ public class OrderSearchFilter extends AbstractSearchCommand {
     }
 
     public Date getOrderDate() {
-        return orderDate;
+        return orderDate == null ? null : new Date(orderDate.getTime());
     }
 
     public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+        if (orderDate != null) {
+            this.orderDate = new Date(orderDate.getTime());
+        }
     }
 
     public UserRequestStatus getStatus() {
