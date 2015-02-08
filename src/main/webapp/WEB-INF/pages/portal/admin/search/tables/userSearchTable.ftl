@@ -27,11 +27,11 @@
                             </div>
                             <div class="col-md-10" style="padding-left: 22px; vertical-align: middle ">
                                 <a href="<@spring.url"/admin/user/view/${user.code}"/>">  ${user.surname + " " + user.name } </a>
-                                <br><font face="Aerial"><em>
+                                <br><span style="font-family: Aerial; "><em>
                                 <#list user.authorities as role>
                             ${role.name.roleViewName}
                             </#list>
-                            </em></font>
+                            </em></span>
                             </div>
                         </div>
                     </td>

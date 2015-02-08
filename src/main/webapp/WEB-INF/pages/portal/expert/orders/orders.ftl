@@ -3,7 +3,7 @@
 
 <@layout.layout>
 <script src="<@spring.url'/resources/js/pages/searchPage.js'/>"></script>
-<div id="reportFilter" class="filterForm" style="display: none;width: 100%; float: left; ">
+<div id="orderFilter" class="filterForm" style="width: 100%; float: left; ">
     <#include "orderFilter.ftl"/>
 </div>
 
@@ -16,43 +16,17 @@
 
 <script type="text/javascript">
 
-
-    $(".navMenuItem").on("click", function (event) {
-        event.preventDefault();
-        searchPage.showFilterForm(this.id);
-        searchPage.doReset();
-        searchPage.doSearch();
-
-    });
-    $("#reset").on("click", function () {
-                searchPage.doReset();
-                searchPage.doSearch();
-            }
-    );
-    $("#searchTable").on("click", ".navButton", function (event) {
-                event.preventDefault();
-                var page = this.getAttribute("page");
-                searchPage.doChangePage(page);
-            }
-    );
-    $("#search").on('click', function (event) {
-        event.preventDefault();
-        searchPage.doSearch();
-    });
-    function search() {
+    $(document).ready(function() {
         $.ajax({
-            type: "POST",
-            url: <@spring.url "/user/expert/order/orderTable"/>,
-            data: currSerializedFilter+"&page="+page,
+            type: "GET",
+            url: '<@spring.url "/user/expert/order/orderTable"/>',
             success: function (result) {
                 $("#searchTable").html(result)
             }, error: function (xhr, status, error) {
             }
         });
-    }
-    $( document ).ready(function() {
-
     });
+
     function ajaxSessionTimeout() {
         window.location.replace("<@spring.url'/login'/>");
     }

@@ -1,3 +1,4 @@
+<#import "../../../fieldMacro.ftl" as formMacro />
 <#import "../../../datatables.ftl" as datatables/>
 <h4><strong><@spring.message "order.search.result.page.header"/></strong></h4>
 <div>
@@ -16,16 +17,27 @@
     <#list orders as order>
         <tr style="vertical-align: middle">
             <td style="vertical-align: middle; width: 25%">
-                23
+                <#if order.userPhoto??>
+                    <img id="img" src="<@spring.url '/image/${order.userPhoto}'/>"  class="avatar"/>
+                <#else>
+                    <img id="img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="avatar">
+                </#if>
+                <a href="<@spring.url "/user/expert/order/user/${order.userCode}"/>">  ${order.userName} </a>
             </td>
             <td style="vertical-align: middle">
-
+                <#if order.orderDate??>
+                ${order.orderDate?string('dd-MMM-yyyy')!" "}
+                </#if>
             </td>
             <td style="vertical-align: middle">
-
+                <a href="<@spring.url "/user/expert/order/course/${order.courseCode}"/>">  ${order.courseName} </a><br/>
+                (${order.courseStartDate?string('dd-MMM-yyyy')!" "} - ${order.courseEndDate?string('dd-MMM-yyyy')!" "})
             </td>
             <td style="vertical-align: middle">
-
+                <@formMacro.capacityIndicator order.courseAcceptedOrders order.courseCapacity />${order.courseAcceptedOrders} / ${order.courseCapacity}
+            </td>
+            <td style="vertical-align: middle">
+                ${order.status}
             </td>
             <td style="vertical-align: middle">
                 <div class="btn-group">

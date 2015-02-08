@@ -375,14 +375,20 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
         return this.status == UserStatus.ACTIVE;
     }
 
-    public String shortString() {
-        return new StringBuilder(this.name).append(SPACE).append(this.surname).append(SPACE).append(
-          this.email).toString();
+    public String getFullName() {
+        return new StringBuilder(this.name).append(SPACE).append(this.surname).toString();
     }
 
+    //todo:refactor
     @Override
     public String toString() {
         return new StringBuilder(this.name).append(SPACE).append(this.surname).toString();
+    }
+
+    //is this shorter?
+    public String shortString() {
+        return new StringBuilder(this.name).append(SPACE).append(this.surname).append(SPACE).append(
+                this.email).toString();
     }
 
     @Override

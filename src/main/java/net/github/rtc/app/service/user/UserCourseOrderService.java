@@ -1,5 +1,6 @@
 package net.github.rtc.app.service.user;
 
+import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
 import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.model.entity.user.UserRequestStatus;
 import net.github.rtc.app.service.GenericService;
@@ -12,7 +13,7 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
 
     List<UserCourseOrder> getOrderByStatus(UserRequestStatus status);
 
-    List<UserCourseOrder> getOrderByExpertCode(String expertCode);
+    List<ExpertOrderDTO> getOrderByExpertCode(String expertCode);
 
     int getAcceptedOrdersForCourse(String courseCode);
 

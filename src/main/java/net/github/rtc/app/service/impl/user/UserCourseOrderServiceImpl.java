@@ -2,8 +2,11 @@ package net.github.rtc.app.service.impl.user;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.UserCourseOrderDao;
+import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
+import net.github.rtc.app.model.dto.user.ExpertOrderDtoBuilder;
 import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.model.entity.user.UserRequestStatus;
+import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserCourseOrderService;
@@ -15,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,6 +32,8 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     private DateService dateService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CourseService courseService;
 
     @Override
     @Transactional
@@ -45,8 +51,17 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     }
 
   @Override
-  public List<UserCourseOrder> getOrderByExpertCode(String expertCode) {
-    return userCourseOrderDao.getOrderByExpert(expertCode);
+  public List<ExpertOrderDTO> getOrderByExpertCode(String expertCode) {
+    final List<UserCourseOrder> orders = userCourseOrderDao.getOrderByExpert(expertCode);
+    final List<ExpertOrderDTO> orderDTOs = new ArrayList<>();
+    final ExpertOrderDtoBuilder dtoBuilder = new ExpertOrderDtoBuilder();
+    for (UserCourseOrder order: orders) {
+      orderDTOs.add(dtoBuilder.setOrder(order).
+              setCourse(courseService.findByCode(order.getCourseCode())).
+              setAcceptedOrders(getAcceptedOrdersForCourse(order.getCourseCode())).
+              setUser(userService.findByCode(order.getUserCode())).build());
+    }
+    return orderDTOs;
   }
 
   @Override

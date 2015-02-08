@@ -12,6 +12,7 @@ public class OrderSearchFilter extends AbstractSearchCommand {
     private CourseType courseType;
     private Date orderDate;
     private UserRequestStatus status;
+    private char dateMoreLessEq;
 
     public CourseType getCourseType() {
         return courseType;
@@ -29,6 +30,14 @@ public class OrderSearchFilter extends AbstractSearchCommand {
         if (orderDate != null) {
             this.orderDate = new Date(orderDate.getTime());
         }
+    }
+
+    public char getDateMoreLessEq() {
+        return dateMoreLessEq;
+    }
+
+    public void setDateMoreLessEq(char dateMoreLessEq) {
+        this.dateMoreLessEq = dateMoreLessEq;
     }
 
     public UserRequestStatus getStatus() {

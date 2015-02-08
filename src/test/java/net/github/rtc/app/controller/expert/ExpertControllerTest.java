@@ -1,5 +1,6 @@
 package net.github.rtc.app.controller.expert;
 
+import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.service.course.CourseService;
@@ -75,7 +76,7 @@ public class ExpertControllerTest {
 
     @Test
     public void testExpertCourses() throws Exception {
-        when(userCourseOrderService.getOrderByExpertCode(user.getCode())).thenReturn(new ArrayList<UserCourseOrder>());
+        when(userCourseOrderService.getOrderByExpertCode(user.getCode())).thenReturn(new ArrayList<ExpertOrderDTO>());
         mockMvc.perform(get("/user/expert/order"))
                 .andExpect(status().isOk());
     }
@@ -85,16 +86,14 @@ public class ExpertControllerTest {
     public void testAcceptRequest() throws Exception {
         when(userCourseOrderService.findByCode(ORDER_CODE)).thenReturn(new UserCourseOrder());
         mockMvc.perform(get("/user/expert/order/accept/{orderId}", ORDER_CODE))
-                .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/user/expert/order?menuItem=orders"));
+                .andExpect(status().isFound());
     }
 
     @Test
     public void testDeclineRequest() throws Exception {
         when(userCourseOrderService.findByCode(ORDER_CODE)).thenReturn(new UserCourseOrder());
         mockMvc.perform(get("/user/expert/order/decline/{orderId}", ORDER_CODE))
-                .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/user/expert/order?menuItem=orders"));
+                .andExpect(status().isFound());
     }
 
 }

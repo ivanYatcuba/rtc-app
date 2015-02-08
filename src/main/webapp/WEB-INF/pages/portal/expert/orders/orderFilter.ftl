@@ -8,12 +8,12 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-12">
-
+                <@formMacro.formDateSearch "orderFilter.dateMoreLessEq", "orderFilter.orderDate"/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-
+                <@formMacro.rtcFormSingleSelect "orderFilter.status", "orderFilter.status", orderStatuses, "", "", "order.status.", {"" : "All"}/>
                 </div>
             </div>
         </div>

@@ -15,7 +15,6 @@ public class HtmlFreeMarkerConfigurer extends FreeMarkerConfigurer {
 
     @Override
     public void afterPropertiesSet() throws IOException, TemplateException {
-        fixFreemarkerLogging();
         super.afterPropertiesSet();
     }
 
