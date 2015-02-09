@@ -62,19 +62,23 @@ public class ExpertOrderDTO {
     }
 
     public Date getCourseStartDate() {
-        return courseStartDate;
+        return courseStartDate == null ? null : new Date(courseStartDate.getTime());
     }
 
     public void setCourseStartDate(Date courseStartDate) {
-        this.courseStartDate = courseStartDate;
+        if (courseStartDate != null) {
+            this.courseStartDate = new Date(courseStartDate.getTime());
+        }
     }
 
     public Date getCourseEndDate() {
-        return courseEndDate;
+        return courseEndDate == null ? null : new Date(courseEndDate.getTime());
     }
 
     public void setCourseEndDate(Date courseEndDate) {
-        this.courseEndDate = courseEndDate;
+        if (courseEndDate != null) {
+            this.courseEndDate = new Date(courseEndDate.getTime());
+        }
     }
 
     public int getCourseCapacity() {
@@ -94,11 +98,13 @@ public class ExpertOrderDTO {
     }
 
     public Date getOrderDate() {
-        return orderDate;
+        return orderDate == null ? null : new Date(orderDate.getTime());
     }
 
     public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+        if (orderDate != null) {
+            this.orderDate = new Date(orderDate.getTime());
+        }
     }
 
     public UserRequestStatus getStatus() {
