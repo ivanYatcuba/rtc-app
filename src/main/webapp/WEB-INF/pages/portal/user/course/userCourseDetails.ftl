@@ -64,8 +64,16 @@
         </div>
     </div>
     <hr style="height: 1px; margin-top: 5px; margin-bottom: 10px; border-top: 1px solid #ddd;"/>
-    <@formMacro.rtcSubmitDoOrCancel "coursesPage.action.order" "/user/courses/sendOrder" "coursesPage.action.cancel" "/user/courses"/>
+    <#if "${course.status}" == "ARCHIVED">
+        <@formMacro.rtcCancelButton "/user/courses"/>
+    <#else>
+        <@formMacro.rtcSubmitDoOrCancel "coursesPage.action.order" "/user/courses/sendOrder" "coursesPage.action.cancel" "/user/courses"/>
+    </#if>
 </div>
+
 </@layout.layout>
+
+
+
 
 

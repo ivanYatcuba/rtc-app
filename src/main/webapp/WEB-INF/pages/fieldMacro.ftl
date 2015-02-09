@@ -73,6 +73,12 @@
 </div>
 </#macro>
 
+<#macro rtcCancelButton url>
+    <div class="span2" style="text-align: right">
+        <a class="btn btn-default" class="btn btn-default" href="<@spring.url "${url}"/>" >Cancel</a>
+    </div>
+</#macro>
+
 <#macro rtcSearchButtons pageUrl>
 <div class="row" style="text-align: right">
     <div class="col-md-10" style="text-align: right"> <input type="submit" id="searchButton" class="btn btn-primary" value="Search"/>

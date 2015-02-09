@@ -30,10 +30,7 @@ public class RecoverAdminController {
     @RequestMapping(method = RequestMethod.GET)
     public String recoverAdmin() {
         final List<User> admins = userService.getUserByRole(RoleType.ROLE_ADMIN);
-        if (admins.get(0).isForRemoval()) {
-            userService.deleteByCode(admins.get(0).getCode());
-        }
-        if (admins.size() == 0 || admins.get(0).isForRemoval()) {
+        if (admins.size() == 0) {
             final User admin = new User("TestName", "TestMiddlename", "TestSurname", ADMIN_EMAIL, ADMIN);
             admin.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_ADMIN)));
             admin.setRegisterDate(dateService.getCurrentDate());
