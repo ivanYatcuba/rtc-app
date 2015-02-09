@@ -85,17 +85,19 @@
 </div>
 
 <div class="row"><div class="col-md-10"><hr/></div></div>
-<#if !user.status?? || user.status != "ACTIVE">
+
+<div class="row" <#if !user.status?? || user.status == "ACTIVE">style="display: none;"</#if>>
+
 <div class="row">
     <div class="col-md-6">
         <label  class="control-label col-md-3"></label>
-        <input id="isActive" name="isActive" type="checkbox" <#if user.isActive()> checked = "checked" </#if>>
+        <input id="isActive" name="isActive" type="checkbox" <#if user.active> checked = "checked" </#if>>
         <@spring.message "user.active"/>
     </div>
 </div>
 <div class="row"><div class="col-md-10"><hr/></div></div>
 
-</#if>
+</div>
 <script type="text/javascript" charset="utf8"
         src="<@spring.url'/resources/js/pages/userMailValidation.js'/>"></script>
 
