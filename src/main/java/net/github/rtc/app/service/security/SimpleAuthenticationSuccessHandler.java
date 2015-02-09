@@ -1,6 +1,7 @@
 package net.github.rtc.app.service.security;
 
 
+import net.github.rtc.app.utils.AuthorizedUserProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -26,6 +27,9 @@ public class SimpleAuthenticationSuccessHandler implements
       final HttpServletRequest request,
       final HttpServletResponse response,
       final Authentication authentication) throws IOException {
+
+        AuthorizedUserProvider.initProfileHeaderDTO();
+
         handle(request, response, authentication);
         clearAuthenticationAttributes(request);
     }

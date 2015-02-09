@@ -9,11 +9,7 @@
 
     <div class="col-md-6">
         <div>
-        <#if user.photo??>
-            <img id="photoView" src="<@spring.url '/image/${user.photo}'/>"  alt="image" class="img-circle"/>
-        <#else>
-            <img id="photoView"  src="<@spring.url '/resources/images/errorCat.jpg'/>" alt="image" class="img-circle"/>
-        </#if>
+            <@formMacro.userImage "${(user.photo)!}" "photoView" "img-circle" />
         </div>
         <div class="row">
             <div class="col-md-6">

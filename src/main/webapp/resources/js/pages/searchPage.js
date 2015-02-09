@@ -24,10 +24,8 @@ function SearchPage(settings) {
             success: function (result) {
                 $("#searchTable").html(result)
             }, error: function (xhr, status, error) {
-                //alert(self.urlMap[activeFormId]);
-                //alert("error");
-//                var err = eval("(" + xhr.responseText + ")");
-//                alert(err.Message);
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
             }
         });
 
@@ -55,7 +53,6 @@ function SearchPage(settings) {
     };
 
     self.showFilterForm = function (menuId) {
-//        alert(menuId+"   "+self.menuMap[menuId]);
         self.emptyTable();
         $("#searchButtons").show();
         $(".filterForm").hide();

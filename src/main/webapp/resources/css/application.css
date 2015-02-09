@@ -138,6 +138,12 @@ input:-webkit-autofill.focus {
     border-radius: 50%;
 }
 
+.profileImg {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+}
+
 .fileUpload {
     position: relative;
     overflow: hidden;

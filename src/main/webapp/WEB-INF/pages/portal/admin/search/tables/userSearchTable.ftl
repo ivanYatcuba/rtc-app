@@ -19,11 +19,7 @@
                     <td style="width: 30%; vertical-align: middle">
                         <div class="row">
                             <div class="col-md-2">
-                                <#if user.photo??>
-                                    <img id="Img" src="<@spring.url '/image/${user.photo}'/>"  class="avatar"/>
-                                <#else>
-                                    <img id="Img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="avatar">
-                                </#if>
+                                <@formMacro.userImage "${(user.photo)!}" "Img" "avatar" />
                             </div>
                             <div class="col-md-10" style="padding-left: 22px; vertical-align: middle ">
                                 <a href="<@spring.url"/admin/user/view/${user.code}"/>">  ${user.surname + " " + user.name } </a>

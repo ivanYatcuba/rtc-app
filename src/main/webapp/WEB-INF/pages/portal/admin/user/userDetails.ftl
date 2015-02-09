@@ -49,14 +49,7 @@
         </div>
     </div>
     <div>
-
-        <div>
-        <#if user.photo??>
-            <img id="Img" src="<@spring.url '/image/${user.photo}'/>"  class="img-circle"/>
-        <#else>
-            <img id="Img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="img-circle">
-        </#if>
-        </div>
+        <@formMacro.userImage "${(user.photo)!}" "Img" "img-circle" />
     </div>
   </div>
 

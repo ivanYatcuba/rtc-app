@@ -425,3 +425,12 @@
     <img src="<@spring.url'/resources/images/user/c3.png'/>"  alt="..."  data-toggle="tooltip" data-placement="bottom" title="<@spring.message 'course.freeCapacity'/>">
     </#if>
 </#macro>
+
+
+<#macro userImage imageId="" id="" class="" alt="image">
+    <#if imageId?has_content>
+        <img id="${id}" src="<@spring.url '/image/${imageId}'/>"  class="${class}" alt="${alt}"/>
+    <#else>
+        <img id="${id}" src="<@spring.url'/resources/images/errorCat.jpg'/>"  class="${class}" alt="${alt}"/>
+    </#if>
+</#macro>
