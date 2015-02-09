@@ -1,18 +1,27 @@
 package net.github.rtc.app.utils.datatable.search;
 
+import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseType;
+import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.model.entity.user.UserRequestStatus;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Order;
+import org.hibernate.criterion.*;
 
 import java.util.Date;
 
 public class OrderSearchFilter extends AbstractSearchCommand {
 
+    private static final String EXPERTS = "experts";
+    private static final String POSITION = "position";
+    private static final String REQUEST_DATE = "requestDate";
+    private static final String STATUS = "status";
+    private static final String COURSE_CODE = "courseCode";
+    private static final String CODE = "code";
+
     private CourseType courseType;
     private Date orderDate;
     private UserRequestStatus status;
     private char dateMoreLessEq;
+    private String expertCode;
 
     public CourseType getCourseType() {
         return courseType;
@@ -48,13 +57,56 @@ public class OrderSearchFilter extends AbstractSearchCommand {
         this.status = status;
     }
 
+    public String getExpertCode() {
+        return expertCode;
+    }
+
+    public void setExpertCode(String expertCode) {
+        this.expertCode = expertCode;
+    }
+
     @Override
     public Order order() {
-        return null;
+        return Order.asc(REQUEST_DATE);
     }
 
     @Override
     public DetachedCriteria getCriteria() {
-        return null;
+        final DetachedCriteria criteria = DetachedCriteria.forClass(UserCourseOrder.class);
+        if (courseType != null) {
+            criteria.add(Restrictions.eq(POSITION, courseType));
+        }
+        if (orderDate != null) {
+            switch (dateMoreLessEq) {
+                case '>':
+                    final Date fromDate = orderDate;
+                    criteria.add(Restrictions.gt(REQUEST_DATE, fromDate));
+                    break;
+                case '=':
+                    final Date toDate = orderDate;
+                    criteria.add(Restrictions.between(REQUEST_DATE, orderDate, toDate));
+                    break;
+                case '<':
+                    criteria.add(Restrictions.lt(REQUEST_DATE, orderDate));
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        if (status != null) {
+            criteria.add(Restrictions.eq(STATUS, status));
+        }
+
+        if (expertCode != null && !("").equals(expertCode)) {
+            final DetachedCriteria subQuery = DetachedCriteria.forClass(Course.class);
+            subQuery.createAlias(EXPERTS, EXPERTS);
+            final Conjunction experts = Restrictions.conjunction();
+            experts.add(Restrictions.eq(EXPERTS + "." + CODE, expertCode));
+            subQuery.add(experts);
+            subQuery.setProjection(Projections.property(CODE));
+            criteria.add(Property.forName(COURSE_CODE).in(subQuery));
+        }
+        return criteria;
     }
 }

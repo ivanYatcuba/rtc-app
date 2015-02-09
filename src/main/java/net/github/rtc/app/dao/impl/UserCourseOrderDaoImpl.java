@@ -26,14 +26,6 @@ public class UserCourseOrderDaoImpl extends AbstractGenericDaoImpl<UserCourseOrd
     }
 
     @Override
-    public List<UserCourseOrder> getOrderByExpert(String expertCode) {
-        //todo: better implementation?
-        final String query = "from UserCourseOrder ord where ord.courseCode in "
-                + "(select course.code from Course course join course.experts experts  where experts.code = '" + expertCode + "')";
-        return getCurrentSession().createQuery(query).list();
-    }
-
-    @Override
     public int getAcceptedOrdersForCourse(String courseCode) {
         return ((Long) getCurrentSession().createCriteria(UserCourseOrder.class).
                 add(Restrictions.eq(STATUS, UserRequestStatus.ACCEPTED)).

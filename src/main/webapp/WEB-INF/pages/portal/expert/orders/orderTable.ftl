@@ -22,7 +22,7 @@
                 <#else>
                     <img id="img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="avatar">
                 </#if>
-                <a href="<@spring.url "/user/expert/order/user/${order.userCode}"/>">  ${order.userName} </a>
+                <a style="text-decoration: underline;" href="<@spring.url "/user/expert/order/user/${order.userCode}"/>">  ${order.userName} </a>
             </td>
             <td style="vertical-align: middle">
                 <#if order.orderDate??>
@@ -30,21 +30,41 @@
                 </#if>
             </td>
             <td style="vertical-align: middle">
-                <a href="<@spring.url "/user/expert/order/course/${order.courseCode}"/>">  ${order.courseName} </a><br/>
-                (${order.courseStartDate?string('dd-MMM-yyyy')!" "} - ${order.courseEndDate?string('dd-MMM-yyyy')!" "})
+                <a style="text-decoration: underline;" href="<@spring.url "/user/expert/order/course/${order.courseCode}"/>">  ${order.courseName} </a><br/>
+                 <span style="font-style: italic;font-size: smaller;">(${order.courseStartDate?string('dd-MMM-yyyy')!" "}&nbsp;-&nbsp;${order.courseEndDate?string('dd-MMM-yyyy')!" "})</span>
             </td>
             <td style="vertical-align: middle">
                 <@formMacro.capacityIndicator order.courseAcceptedOrders order.courseCapacity />${order.courseAcceptedOrders} / ${order.courseCapacity}
             </td>
             <td style="vertical-align: middle">
-                ${order.status}
+                <#if order.status == 'PENDING' >
+                    <@formMacro.rtcColorLabel "PENDING" "label-default" "order.status."/>
+                </#if>
+                <#if order.status == 'ACCEPTED' >
+                    <@formMacro.rtcColorLabel "ACCEPTED" "label-success" "order.status."/>
+                </#if>
+                <#if order.status == 'REJECTED' >
+                    <@formMacro.rtcColorLabel "REJECTED" "label-danger" "order.status."/>
+                </#if>
             </td>
             <td style="vertical-align: middle">
                 <div class="btn-group">
-                    <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenuReport" data-toggle="dropdown">Action</button>
+                    <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenu1" data-toggle="dropdown">Action</button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="min-width: 100px;">
-                        <li id="downloadLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/export/download/${report.code}'/>">Download</a></li>
-                        <li id="removeLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/export/delete/${report.code}'/>">Remove</a></li>
+                        <#if order.status == 'PENDING' >
+                            <li><a class="btn" onclick="doAjaxCall('<@spring.url'/user/expert/order/accept/${order.orderCode}'/>')">
+                                    <@spring.message "order.action.accept"/></a></li>
+                            <li><a class="btn" onclick="doAjaxCall('<@spring.url'/user/expert/order/decline/${order.orderCode}'/>')">
+                                    <@spring.message "order.action.reject"/></a></li>
+                        </#if>
+                        <#if order.status == 'ACCEPTED' >
+                            <li><a class="btn" onclick="doAjaxCall('<@spring.url'/user/expert/order/decline/${order.orderCode}'/>')">
+                                <@spring.message "order.action.reject"/></a></li>
+                        </#if>
+                        <#if order.status == 'REJECTED' >
+                            <li><a class="btn" onclick="doAjaxCall('<@spring.url'/user/expert/order/accept/${order.orderCode}'/>')">
+                                <@spring.message "order.action.accept"/></a></li>
+                        </#if>
                     </ul>
                 </div>
             </td>
@@ -54,17 +74,25 @@
 </div>
 <hr>
 <div class="row">
-    <div class="col-md-6">
-        <form  class="inline-box" style="margin: 0px"  name="createNews" action="<@spring.url"/admin/export/create"/>"method="get">
-            <button  class="btn btn-primary" type="submit">Create New</button>
-        </form>
-    </div>
-    <div class="col-md-6" style="text-align: right">
+    <div class="col-md-12" style="text-align: right">
         <@datatables.addPagination/>
     </div>
 </div>
 <#else>
     <td>
-        There are no reports. <a  href="<@spring.url "/admin/export/create"/>">Click here</a> to add.
+        There are no orders yet.
     </td>
 </#if>
+
+<script>
+    function doAjaxCall(url) {
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (result) {
+                search(${currentPage});
+            }, error: function (xhr, status, error) {
+            }
+        });
+    }
+</script>

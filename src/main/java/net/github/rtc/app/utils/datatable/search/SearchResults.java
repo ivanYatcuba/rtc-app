@@ -38,6 +38,12 @@ public class SearchResults<T> {
         return map;
     }
 
+    public void importPageModel(SearchResults searchResults) {
+        page = searchResults.getPage();
+        perPage = searchResults.getPerPage();
+        totalResults = searchResults.getTotalResults();
+    }
+
     public void setPage(int page) {
         this.page = page;
     }

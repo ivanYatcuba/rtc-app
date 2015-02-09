@@ -39,17 +39,17 @@
     <div class="row">
         <div class="col-md-6">
             <label  class="control-label col-md-3"></label>
-            <input id="ifPublish" name="ifPublish" type="checkbox" >
+            <input id="ifPublish" name="published" type="checkbox" >
             <@spring.message "coursesPage.action.publishAsNews"/>
         </div>
         <div id="ifCreateNewsBlock" class="col-md-6">
             <label  class="control-label col-md-3"></label>
-            <input id="ifCreateNews" name="ifCreateNews" type="checkbox" >
+            <input id="ifCreateNews" name="newsCreated" type="checkbox" >
             <@spring.message "coursesPage.action.createNews"/>
         </div>
     </div>
 <#else>
-    <input id="ifPublish" name="ifPublish" type="hidden" value="True">
+    <input id="ifPublish" name="published" type="hidden" value="True">
 </#if>
 
 

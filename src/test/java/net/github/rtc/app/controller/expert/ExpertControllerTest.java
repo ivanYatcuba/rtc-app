@@ -76,7 +76,7 @@ public class ExpertControllerTest {
 
     @Test
     public void testExpertCourses() throws Exception {
-        when(userCourseOrderService.getOrderByExpertCode(user.getCode())).thenReturn(new ArrayList<ExpertOrderDTO>());
+        //when(userCourseOrderService.getOrderByExpertCode(user.getCode())).thenReturn(new ArrayList<ExpertOrderDTO>());
         mockMvc.perform(get("/user/expert/order"))
                 .andExpect(status().isOk());
     }

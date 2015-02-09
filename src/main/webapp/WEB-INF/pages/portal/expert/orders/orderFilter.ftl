@@ -1,6 +1,7 @@
 <#import "../../../fieldMacro.ftl" as formMacro />
 <h4><strong><@spring.message "report.search.result.page.criteria"/></strong></h4>
 <div class="form-horizontal">
+    <@spring.formHiddenInput "orderFilter.expertCode" />
     <div class="row">
         <div class="col-md-6">
         <@formMacro.rtcFormMultiSelect "orderFilter.courseType" "orderFilter.courseType" courseCategories "" "height: 65;", "courses.types."/>

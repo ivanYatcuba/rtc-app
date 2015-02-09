@@ -10,7 +10,5 @@ public interface UserCourseOrderDao extends GenericDao<UserCourseOrder> {
 
     List<UserCourseOrder> getOrderByStatus(UserRequestStatus status);
 
-    List<UserCourseOrder> getOrderByExpert(String expertCode);
-
     int getAcceptedOrdersForCourse(String courseCode);
 }

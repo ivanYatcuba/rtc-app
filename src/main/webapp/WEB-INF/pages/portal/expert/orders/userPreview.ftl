@@ -125,4 +125,12 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12" style="text-align: right">
+        <a class="btn btn-default" href="<@spring.url "/user/expert/order/"/>">
+            Cancel
+        </a>
+    </div>
+</div>
 </@layout.layout>

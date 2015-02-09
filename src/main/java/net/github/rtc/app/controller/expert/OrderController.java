@@ -1,6 +1,7 @@
 package net.github.rtc.app.controller.expert;
 
 import net.github.rtc.app.controller.common.MenuItem;
+import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
 import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.user.UserRequestStatus;
 import net.github.rtc.app.service.course.CourseService;
@@ -8,6 +9,7 @@ import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.OrderSearchFilter;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,19 +36,16 @@ public class OrderController implements MenuItem {
     private CourseService courseService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView expertOrders() {
-        final ModelAndView mav = new ModelAndView(ROOT + "/orders/orders");
-        mav.addObject(ORDERS,
-                    userCourseOrderService.getOrderByExpertCode(
-                            AuthorizedUserProvider.getAuthorizedUser().
-                                    getCode()));
-        return mav;
+    public String expertOrders() {
+        return ROOT + "/orders/orders";
     }
 
     @RequestMapping(value = "/orderTable", method = RequestMethod.GET)
-    public ModelAndView ordersTable() {
+    public ModelAndView ordersTable(@ModelAttribute(ORDER_FILTER) OrderSearchFilter searchFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + "/orders/orderTable");
-        mav.addObject(ORDERS, userCourseOrderService.getOrderByExpertCode(AuthorizedUserProvider.getAuthorizedUser().getCode()));
+        final SearchResults<ExpertOrderDTO> searchResults = userCourseOrderService.searchOrderForExpert(searchFilter);
+        mav.addObject(ORDERS, searchResults.getResults());
+        mav.addAllObjects(searchResults.getPageModel());
         return mav;
     }
 
@@ -78,7 +77,9 @@ public class OrderController implements MenuItem {
 
     @ModelAttribute(ORDER_FILTER)
     public OrderSearchFilter getCourseSearchFilter() {
-        return new OrderSearchFilter();
+        final OrderSearchFilter orderSearchFilter = new OrderSearchFilter();
+        orderSearchFilter.setExpertCode(AuthorizedUserProvider.getAuthorizedUser().getCode());
+        return orderSearchFilter;
     }
 
     @ModelAttribute(COURSE_CATEGORIES)

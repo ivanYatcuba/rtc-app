@@ -91,9 +91,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
             newResults.add(userCourseDTO);
         }
         final SearchResults<UserCourseDTO> newSearchResults = new SearchResults<>();
-        newSearchResults.setPage(results.getPage());
-        newSearchResults.setPerPage(results.getPerPage());
-        newSearchResults.setTotalResults(results.getTotalResults());
+        newSearchResults.importPageModel(results);
         newSearchResults.setResults(newResults);
         return newSearchResults;
     }

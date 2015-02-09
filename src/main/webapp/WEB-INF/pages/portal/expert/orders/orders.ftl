@@ -16,16 +16,43 @@
 
 <script type="text/javascript">
 
+    var serializedFilter = "";
+
     $(document).ready(function() {
+        search(1);
+    });
+
+    function search(page) {
         $.ajax({
             type: "GET",
             url: '<@spring.url "/user/expert/order/orderTable"/>',
+            data: serializedFilter + "&page=" + page,
             success: function (result) {
                 $("#searchTable").html(result)
             }, error: function (xhr, status, error) {
             }
         });
+    }
+
+    $("#searchTable").on("click", ".navButton", function (event) {
+        event.preventDefault();
+        var page = this.getAttribute("page");
+        search(page);
     });
+
+    $("#search").on('click', function (event) {
+        event.preventDefault();
+        serializedFilter = $("#orderFilter :input").serialize();
+        search(1);
+    });
+
+    $("#reset").on("click", function () {
+            $(".form-horizontal input, textarea").val("");
+            $(".form-horizontal ul#tagsTag li.tagit-choice").remove();
+            $(".form-horizontal select option:selected").removeAttr("selected");
+            search(1);
+        }
+    );
 
     function ajaxSessionTimeout() {
         window.location.replace("<@spring.url'/login'/>");

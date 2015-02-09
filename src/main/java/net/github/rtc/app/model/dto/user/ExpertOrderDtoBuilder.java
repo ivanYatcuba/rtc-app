@@ -32,6 +32,9 @@ public class ExpertOrderDtoBuilder {
     }
 
     public ExpertOrderDTO build() {
+        if (order == null || course == null || user == null) {
+            throw new NullPointerException();
+        }
         final ExpertOrderDTO orderDTO = new ExpertOrderDTO();
         orderDTO.setCourseCode(course.getCode());
         orderDTO.setCourseName(course.getName());

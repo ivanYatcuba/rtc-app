@@ -12,6 +12,8 @@ import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceImpl
 import net.github.rtc.app.service.user.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
+import net.github.rtc.app.utils.datatable.search.OrderSearchFilter;
+import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,17 +53,20 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     }
 
   @Override
-  public List<ExpertOrderDTO> getOrderByExpertCode(String expertCode) {
-    final List<UserCourseOrder> orders = userCourseOrderDao.getOrderByExpert(expertCode);
+  public SearchResults<ExpertOrderDTO> searchOrderForExpert(OrderSearchFilter searchFilter) {
+    final SearchResults<UserCourseOrder> searchResults = search(searchFilter);
     final List<ExpertOrderDTO> orderDTOs = new ArrayList<>();
     final ExpertOrderDtoBuilder dtoBuilder = new ExpertOrderDtoBuilder();
-    for (UserCourseOrder order: orders) {
+    for (UserCourseOrder order: searchResults.getResults()) {
       orderDTOs.add(dtoBuilder.setOrder(order).
               setCourse(courseService.findByCode(order.getCourseCode())).
               setAcceptedOrders(getAcceptedOrdersForCourse(order.getCourseCode())).
               setUser(userService.findByCode(order.getUserCode())).build());
     }
-    return orderDTOs;
+    final SearchResults<ExpertOrderDTO> newSearchResults = new SearchResults<>();
+    newSearchResults.importPageModel(searchResults);
+    newSearchResults.setResults(orderDTOs);
+    return newSearchResults;
   }
 
   @Override
@@ -86,6 +91,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
   @Override
   public UserCourseOrder create(UserCourseOrder order) {
     order.setUserCode(AuthorizedUserProvider.getAuthorizedUser().getCode());
+    order.setRequestDate(dateService.getCurrentDate());
     return super.create(order);
   }
 

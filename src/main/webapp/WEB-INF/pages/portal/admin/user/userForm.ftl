@@ -89,7 +89,7 @@
 <div class="row">
     <div class="col-md-6">
         <label  class="control-label col-md-3"></label>
-        <input id="ifActive" name="ifActive" type="checkbox" <#if user.isActive()> checked = "checked" </#if>>
+        <input id="isActive" name="isActive" type="checkbox" <#if user.isActive()> checked = "checked" </#if>>
         <@spring.message "user.active"/>
     </div>
 </div>
