@@ -6,8 +6,8 @@ import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.model.entity.user.UserRequestStatus;
-import net.github.rtc.app.service.CodeGenerationService;
-import net.github.rtc.app.service.impl.CodeGenerationServiceImpl;
+import net.github.rtc.app.service.generic.CodeGenerationService;
+import net.github.rtc.app.service.generic.CodeGenerationServiceImpl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 

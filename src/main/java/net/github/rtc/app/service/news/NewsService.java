@@ -3,7 +3,7 @@ package net.github.rtc.app.service.news;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.service.GenericService;
+import net.github.rtc.app.service.generic.GenericService;
 
 import java.util.List;
 

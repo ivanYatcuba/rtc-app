@@ -3,8 +3,8 @@ package net.github.rtc.app.service.user;
 import net.github.rtc.app.model.entity.user.Role;
 import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.service.GenericService;
-import net.github.rtc.app.service.ModelService;
+import net.github.rtc.app.service.generic.GenericService;
+import net.github.rtc.app.service.generic.ModelService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.multipart.MultipartFile;
 

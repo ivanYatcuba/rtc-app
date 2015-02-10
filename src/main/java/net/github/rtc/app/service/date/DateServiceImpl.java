@@ -1,4 +1,4 @@
-package net.github.rtc.app.service.date.impl;
+package net.github.rtc.app.service.date;
 
 import net.github.rtc.app.service.date.DateService;
 import org.joda.time.DateTime;

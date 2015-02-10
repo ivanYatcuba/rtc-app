@@ -1,10 +1,9 @@
-package net.github.rtc.app.service.impl;
+package net.github.rtc.app.service.mail;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailSender;

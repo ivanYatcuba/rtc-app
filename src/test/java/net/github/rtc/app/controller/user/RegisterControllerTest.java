@@ -2,7 +2,7 @@ package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.controller.common.RegisterController;
 import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.service.MailService;
+import net.github.rtc.app.service.mail.MailService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.util.converter.ValidationContext;

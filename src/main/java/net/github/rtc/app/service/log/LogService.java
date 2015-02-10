@@ -1,4 +1,4 @@
-package net.github.rtc.app.service;
+package net.github.rtc.app.service.log;
 
 import java.util.List;
 

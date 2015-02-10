@@ -5,7 +5,7 @@ import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
 import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.user.UserRequestStatus;
 import net.github.rtc.app.service.course.CourseService;
-import net.github.rtc.app.service.user.UserCourseOrderService;
+import net.github.rtc.app.service.order.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.OrderSearchFilter;

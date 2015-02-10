@@ -5,7 +5,7 @@ import net.github.rtc.app.model.entity.user.Role;
 import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.course.CourseService;
-import net.github.rtc.app.service.user.UserCourseOrderService;
+import net.github.rtc.app.service.order.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.util.converter.ValidationContext;

@@ -1,4 +1,4 @@
-package net.github.rtc.app.service;
+package net.github.rtc.app.service.mail;
 
 
 import net.github.rtc.app.model.entity.user.User;

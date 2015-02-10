@@ -1,4 +1,4 @@
-package net.github.rtc.app.service;
+package net.github.rtc.app.service.generic;
 
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;

@@ -1,4 +1,4 @@
-package net.github.rtc.app.service.impl.user;
+package net.github.rtc.app.service.user;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.UserDao;
@@ -6,10 +6,9 @@ import net.github.rtc.app.model.entity.user.Role;
 import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserStatus;
-import net.github.rtc.app.service.MailService;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.genericService.AbstractCRUDEventsService;
-import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
+import net.github.rtc.app.service.mail.MailService;
 import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

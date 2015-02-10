@@ -1,4 +1,4 @@
-package net.github.rtc.app.service.impl.genericService;
+package net.github.rtc.app.service.generic;
 
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
 import net.github.rtc.app.model.entity.activity.ActivityAction;

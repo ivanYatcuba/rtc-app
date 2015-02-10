@@ -1,9 +1,9 @@
-package net.github.rtc.app.service.user;
+package net.github.rtc.app.service.order;
 
 import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
 import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.model.entity.user.UserRequestStatus;
-import net.github.rtc.app.service.GenericService;
+import net.github.rtc.app.service.generic.GenericService;
 import net.github.rtc.app.utils.datatable.search.OrderSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 

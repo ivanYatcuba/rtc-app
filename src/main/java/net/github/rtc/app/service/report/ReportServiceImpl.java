@@ -1,14 +1,13 @@
-package net.github.rtc.app.service.impl.report;
+package net.github.rtc.app.service.report;
 
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.impl.ReportDao;
 import net.github.rtc.app.export.ReportBuilder;
 import net.github.rtc.app.model.entity.report.ReportDetails;
-import net.github.rtc.app.service.CodeGenerationService;
-import net.github.rtc.app.service.ModelService;
+import net.github.rtc.app.service.generic.CodeGenerationService;
+import net.github.rtc.app.service.generic.ModelService;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.impl.genericService.AbstractGenericServiceImpl;
-import net.github.rtc.app.service.report.ReportService;
+import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package net.github.rtc.app.service.impl;
+package net.github.rtc.app.service.log;
 
-import net.github.rtc.app.service.LogService;
+import net.github.rtc.app.service.log.LogService;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
