@@ -8,7 +8,7 @@ import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.order.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.search.filter.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
 import org.junit.Before;
@@ -85,9 +85,9 @@ public class CourseControllerTest {
     public void testUserCoursesTable() throws Exception {
         SearchResults<UserCourseDTO> searchResults = new SearchResults<>();
         searchResults.setResults(new ArrayList<UserCourseDTO>());
-        searchResults.setPage(10);
-        searchResults.setPerPage(10);
-        searchResults.setTotalResults(10);
+        searchResults.getPageModel().setPage(10);
+        searchResults.getPageModel().setPerPage(10);
+        searchResults.getPageModel().setTotalResults(10);
         when(courseService.searchCoursesForUser(anyBoolean(), isA(CourseSearchFilter.class))).thenReturn(searchResults);
         mockMvc.perform(post("/user/courses/courseTable"))
                 .andExpect(status().isOk())

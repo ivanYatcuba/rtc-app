@@ -8,7 +8,7 @@ import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.order.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
-import net.github.rtc.app.utils.datatable.search.OrderSearchFilter;
+import net.github.rtc.app.utils.datatable.search.filter.OrderSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,7 +45,7 @@ public class OrderController implements MenuItem {
         final ModelAndView mav = new ModelAndView(ROOT + "/orders/orderTable");
         final SearchResults<ExpertOrderDTO> searchResults = userCourseOrderService.searchOrderForExpert(searchFilter);
         mav.addObject(ORDERS, searchResults.getResults());
-        mav.addAllObjects(searchResults.getPageModel());
+        mav.addAllObjects(searchResults.getPageModel().getPageParams());
         return mav;
     }
 

@@ -3,7 +3,7 @@ package net.github.rtc.app.service.generic;
 import net.github.rtc.app.controller.common.ResourceNotFoundException;
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
-import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
+import net.github.rtc.app.utils.datatable.search.filter.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

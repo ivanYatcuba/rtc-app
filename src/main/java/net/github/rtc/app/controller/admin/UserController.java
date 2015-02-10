@@ -7,7 +7,7 @@ import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserStatus;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.datatable.search.UserSearchFilter;
+import net.github.rtc.app.utils.datatable.search.filter.UserSearchFilter;
 import net.github.rtc.app.utils.enums.EnumHelper;
 import net.github.rtc.app.utils.propertyeditors.CustomRoleEditor;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;

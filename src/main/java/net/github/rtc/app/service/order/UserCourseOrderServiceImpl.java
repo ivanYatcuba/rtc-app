@@ -11,7 +11,7 @@ import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
-import net.github.rtc.app.utils.datatable.search.OrderSearchFilter;
+import net.github.rtc.app.utils.datatable.search.filter.OrderSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,7 +63,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
               setUser(userService.findByCode(order.getUserCode())).build());
     }
     final SearchResults<ExpertOrderDTO> newSearchResults = new SearchResults<>();
-    newSearchResults.importPageModel(searchResults);
+    newSearchResults.setPageModel(searchResults.getPageModel());
     newSearchResults.setResults(orderDTOs);
     return newSearchResults;
   }

@@ -1,7 +1,7 @@
 package net.github.rtc.app.dao.impl;
 
 import net.github.rtc.app.dao.GenericDao;
-import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
+import net.github.rtc.app.utils.datatable.search.filter.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -83,9 +83,9 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
         final Criteria criteria = dCriteria.getExecutableCriteria(getCurrentSession());
         final SearchResults<T> results = new SearchResults<>();
 
-        results.setPage(start);
-        results.setPerPage(max);
-        results.setTotalResults(((Long) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue());
+        results.getPageModel().setPage(start);
+        results.getPageModel().setPerPage(max);
+        results.getPageModel().setTotalResults(((Long) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue());
 
         criteria.setProjection(null);
         criteria.setResultTransformer(Criteria.ROOT_ENTITY);

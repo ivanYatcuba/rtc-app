@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.datatable.search;
+package net.github.rtc.app.utils.datatable.search.filter;
 
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseStatus;

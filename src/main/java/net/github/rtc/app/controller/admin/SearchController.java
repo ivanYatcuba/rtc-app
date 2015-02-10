@@ -22,6 +22,7 @@ import net.github.rtc.app.service.report.ReportService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.*;
+import net.github.rtc.app.utils.datatable.search.filter.*;
 import net.github.rtc.app.utils.enums.EnumHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,7 +91,7 @@ public class SearchController {
     ModelAndView getActivityTable(@ModelAttribute(ACTIVITY_FILTER) final ActivitySearchFilter activityFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/activitySearchTable");
         final SearchResults<Activity> results = activityService.search(activityFilter);
-        mav.addAllObjects(results.getPageModel());
+        mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(ACTIVITIES, results.getResults());
         return mav;
     }
@@ -101,7 +102,7 @@ public class SearchController {
     ModelAndView getNewsTable(@ModelAttribute(NEWS_FILTER) final NewsSearchFilter newsFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/newsSearchTable");
         final SearchResults<News> results = newsService.search(newsFilter);
-        mav.addAllObjects(results.getPageModel());
+        mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(NEWS, results.getResults());
         return mav;
     }
@@ -112,7 +113,7 @@ public class SearchController {
     ModelAndView getCourseTable(@ModelAttribute(COURSE_FILTER) final CourseSearchFilter courseFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/courseSearchTable");
         final SearchResults<Course> results = courseService.search(courseFilter);
-        mav.addAllObjects(results.getPageModel());
+        mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(COURSES, results.getResults());
         mav.addObject(TYPES, EnumHelper.findAll(CourseType.class));
         mav.addObject(COURSE_STATUSES, getCourseStatuses());
@@ -126,7 +127,7 @@ public class SearchController {
     ModelAndView getUserTable(@ModelAttribute(USER_FILTER) final UserSearchFilter userFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/userSearchTable");
         final SearchResults<User> results = userService.search(userFilter);
-        mav.addAllObjects(results.getPageModel());
+        mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(USERS, results.getResults());
         return mav;
     }
@@ -137,7 +138,7 @@ public class SearchController {
     ModelAndView getReportTable(@ModelAttribute(REPORT_FILTER) final ReportSearchFilter reportFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/reportSearchTable");
         final SearchResults<ReportDetails> results = reportService.search(reportFilter);
-        mav.addAllObjects(results.getPageModel());
+        mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(REPORTS, results.getResults());
         return mav;
     }

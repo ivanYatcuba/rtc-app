@@ -98,7 +98,7 @@ public class CoursesController implements MenuItem {
     @RequestMapping(value = "/publish/{courseCode}", method = RequestMethod.GET)
     public String publish(@PathVariable final String courseCode,
                           @RequestParam(required = false) final boolean newsCreated) {
-        courseService.publish(newsCreated, courseCode);
+        courseService.publish(courseCode, newsCreated);
         return REDIRECT + ADMIN;
     }
 

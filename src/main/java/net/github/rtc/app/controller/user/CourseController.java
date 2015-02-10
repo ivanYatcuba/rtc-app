@@ -8,7 +8,7 @@ import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.order.UserCourseOrderService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
-import net.github.rtc.app.utils.datatable.search.CourseSearchFilter;
+import net.github.rtc.app.utils.datatable.search.filter.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +63,7 @@ public class CourseController implements MenuItem {
                                                      @RequestParam(required = false) final boolean withArchived) {
         final ModelAndView mav = new ModelAndView(ROOT + "/course/courseTable");
         final SearchResults<UserCourseDTO> results = courseService.searchCoursesForUser(withArchived, courseFilter);
-        mav.addAllObjects(results.getPageModel());
+        mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(COURSES, results.getResults());
         mav.addObject(VALIDATION_RULES, validationContext.get(UserCourseOrder.class));
         return mav;

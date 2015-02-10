@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.datatable.search;
+package net.github.rtc.app.utils.datatable.search.filter;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;

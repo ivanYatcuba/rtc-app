@@ -8,7 +8,7 @@ import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.report.ReportService;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.datatable.search.ActivitySearchFilter;
+import net.github.rtc.app.utils.datatable.search.filter.ActivitySearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.junit.Before;
 import org.junit.Test;
@@ -66,9 +66,9 @@ public class SearchControllerTest {
         searchFilter.setDateMoreLessEq('=');
         searchFilter.setUser("");
         SearchResults<Activity> results = new SearchResults<>();
-        results.setPage(10);
-        results.setPerPage(10);
-        results.setTotalResults(10);
+        results.getPageModel().setPage(10);
+        results.getPageModel().setPerPage(10);
+        results.getPageModel().setTotalResults(10);
         results.setResults(new ArrayList<Activity>());
         when(activityService.search(isA(ActivitySearchFilter.class))).thenReturn(results);
         mockMvc.perform(post("/admin/activityTable").sessionAttr("activityFilter", searchFilter))
