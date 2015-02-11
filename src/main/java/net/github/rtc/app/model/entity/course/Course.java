@@ -293,6 +293,6 @@ public class Course extends AbstractPersistenceObject implements Serializable, I
         return  COURSE
                 + "id=" + this.getId()
                 + NAME + name
-                + "... }";
+                + " ...}";
     }
 }

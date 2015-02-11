@@ -21,7 +21,7 @@ import java.util.List;
 public class News extends AbstractPersistenceObject implements Serializable, IActivity {
 
     private static final  String NEWS = "News {";
-    private static final  String TITLE = "title='";
+    private static final  String TITLE = " title='";
     private static final  char SLASH = '\'';
 
     @NotEmpty
@@ -144,6 +144,6 @@ public class News extends AbstractPersistenceObject implements Serializable, IAc
         return  NEWS
                 + "id=" + this.getId()
                 + TITLE + title + SLASH
-                + "... }";
+                + " ...}";
     }
 }

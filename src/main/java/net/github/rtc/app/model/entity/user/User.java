@@ -397,7 +397,7 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
                 + "id=" + this.getId()
                 + ", surname=" + surname
                 + ", name=" + name
-                + "... }";
+                + " ...}";
     }
 }
 
