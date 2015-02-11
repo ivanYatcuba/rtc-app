@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public final class AuthorizedUserProvider {
-    private static ProfileHeaderDTO profileHeaderDTO = new ProfileHeaderDTO();
+
 
     final private static String ANONYMOUS = "anonymousUser";
 
@@ -27,12 +27,7 @@ public final class AuthorizedUserProvider {
     }
 
     static public ProfileHeaderDTO getProfileHeaderDTO() {
-        return profileHeaderDTO;
-    }
-
-    static public void initProfileHeaderDTO() {
         final User user = AuthorizedUserProvider.getAuthorizedUser();
-        profileHeaderDTO.setName(user.toString());
-        profileHeaderDTO.setImageId(user.getPhoto());
+        return new ProfileHeaderDTO(user.toString(), user.getPhoto());
     }
 }

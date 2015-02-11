@@ -47,7 +47,7 @@
     </bean>
 
     <bean class="net.github.rtc.app.utils.notifiers.ActivityNotifier"/>
-    <bean class="net.github.rtc.app.utils.EventCreator"/>
+    <bean class="net.github.rtc.app.utils.events.EventCreator"/>
 
     <util:map id="serviceHolder" map-class="java.util.HashMap">
         <entry>

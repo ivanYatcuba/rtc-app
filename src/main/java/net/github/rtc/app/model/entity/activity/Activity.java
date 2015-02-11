@@ -10,16 +10,19 @@ import java.util.Date;
 public class Activity extends AbstractPersistenceObject implements java.io.Serializable {
 
     private String username;
+
     @Enumerated(EnumType.STRING)
     private ActivityEntity entity;
+
     private String detail;
+
     @Enumerated(EnumType.STRING)
     private ActivityAction action;
-    @Temporal(TemporalType.DATE)
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date actionDate = new Date();
 
-    public Activity() {
-    }
+    public Activity() { }
 
     public String getUsername() {
         return username;

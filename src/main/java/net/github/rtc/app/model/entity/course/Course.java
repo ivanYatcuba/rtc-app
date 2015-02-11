@@ -31,6 +31,10 @@ public class Course extends AbstractPersistenceObject implements Serializable, I
     private static final int DESCRIPTION_LENGTH = 255;
     private static final int PRIMARY_LENGTH = 50;
     private static final int DEFAULT_CAPACITY = 10;
+
+    private static final  String COURSE = "Course {";
+    private static final  String NAME = ", name=";
+
     @NotNull
     @Number
     @Min(1)
@@ -210,24 +214,7 @@ public class Course extends AbstractPersistenceObject implements Serializable, I
         return this.status == CourseStatus.PUBLISHED;
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Course{");
-        sb.append(", code='").append(getCode()).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", types=").append(types);
-        sb.append(", experts=").append(experts);
-        sb.append(", capacity=").append(capacity);
-        sb.append(", startDate=").append(startDate);
-        sb.append(", endDate=").append(endDate);
-        sb.append(", createDate=").append(createDate);
-        sb.append(", publishDate=").append(publishDate);
-        sb.append(", tags=").append(tags);
-        sb.append(", description=").append(description);
-        sb.append(", status=").append(status);
-        sb.append('}');
-        return sb.toString();
-    }
+
 
     @Override
     public boolean equals(final Object o) {
@@ -282,10 +269,30 @@ public class Course extends AbstractPersistenceObject implements Serializable, I
         return result;
     }
 
+
+    @Override
+    public String toString() {
+        return  COURSE
+                + "capacity=" + capacity
+                + NAME + name
+                + ", types=" + types
+                + ", startDate=" + startDate
+                + ", endDate=" + endDate
+                + ", status=" + status
+                + ", createDate=" + createDate
+                + ", publishDate=" + publishDate
+                + ", description='" + description
+                + '\''
+                + ", tags=" + tags
+                + ", experts=" + experts
+                + '}';
+    }
+
     @Override
     public String getLogDetail() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Course ").append("id:" + getId()).append(" name:" + getName());
-        return builder.toString();
+        return  COURSE
+                + "id=" + this.getId()
+                + NAME + name
+                + "... }";
     }
 }
