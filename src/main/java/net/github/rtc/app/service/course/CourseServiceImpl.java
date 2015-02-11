@@ -6,7 +6,6 @@ import net.github.rtc.app.model.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseStatus;
 import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
 import net.github.rtc.app.service.news.NewsService;
@@ -140,8 +139,8 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
     public void addParticipant(String courseCode, String userCode) {
         Validate.notNull(courseCode);
         Validate.notNull(userCode);
-        User user = userService.findByCode(userCode);
-        Course course = findByCode(courseCode);
+        final User user = userService.findByCode(userCode);
+        final Course course = findByCode(courseCode);
         if (course != null && user != null) {
             course.getParticipants().add(user);
             super.update(course);

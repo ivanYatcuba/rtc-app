@@ -92,10 +92,10 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     @Override
     @Transactional
     public UserCourseOrder create(String courseCode, CourseType position) {
-        Date now = LocalDate.now().toDate();
-        String userCode = AuthorizedUserProvider.getAuthorizedUser().getCode();
+        final Date now = LocalDate.now().toDate();
+        final String userCode = AuthorizedUserProvider.getAuthorizedUser().getCode();
 
-        UserCourseOrder userCourseOrder = new UserCourseOrder();
+        final UserCourseOrder userCourseOrder = new UserCourseOrder();
         userCourseOrder.setCourseCode(courseCode);
         userCourseOrder.setPosition(position);
         userCourseOrder.setUserCode(userCode);
@@ -106,7 +106,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
 
     @Override
     public void acceptOrder(String orderCode) {
-        UserCourseOrder order = findByCode(orderCode);
+        final UserCourseOrder order = findByCode(orderCode);
         order.setStatus(UserRequestStatus.ACCEPTED);
         order.setResponseDate(LocalDate.now().toDate());
         super.update(order);
