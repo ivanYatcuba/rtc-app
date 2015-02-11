@@ -90,8 +90,24 @@ public class Course extends AbstractPersistenceObject implements Serializable, I
     @ForExport(value = "Experts")
     private Set<User> experts;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(name = "courses_participants",
+            joinColumns = { @JoinColumn(name = "courseId") },
+            inverseJoinColumns = { @JoinColumn(name = "userId") })
+    @ForExport(value = "Participants")
+    private Set<User> participants;
+
     public Course() {
 
+    }
+
+    public Set<User> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Set<User> participants) {
+        this.participants = participants;
     }
 
     public List<Tag> getTags() {

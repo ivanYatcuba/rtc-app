@@ -13,11 +13,13 @@ public interface CourseService extends ModelService<Course>, GenericService<Cour
 
     void archive(String courseCode);
 
-    void create(final boolean isPublished, final boolean newsCreated, Course course);
-
-    void update(final boolean isPublished, final boolean newsCreated, Course course);
-
     SearchResults<UserCourseDTO> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter);
 
     UserCourseDTO getUserCourseDTObyCode(String code);
+
+    void create(final boolean isPublished, final boolean newsCreated, Course course);
+    void update(final boolean isPublished, final boolean newsCreated, Course course);
+
+    void addParticipant(String courseCode, String userCode);
+    void deleteParticipant(String courseCode, String userCode);
 }

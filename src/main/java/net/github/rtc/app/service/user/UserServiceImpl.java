@@ -26,7 +26,7 @@ import java.util.Map;
 public class UserServiceImpl extends AbstractCRUDEventsService<User> implements UserService {
 
     private static final int USER_REMOVAL_DELAY = 3;
-    private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class.getName());
     @Autowired
     private UserDao userDao;
     @Autowired
@@ -76,28 +76,28 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     @Override
     @Transactional
     public void createRole(final RoleType type) {
-        log.debug("Creating user role with type: {}", type);
+        LOG.debug("Creating user role with type: {}", type);
         userDao.createRole(type);
     }
 
     @Override
     @Transactional
     public Role getRoleByType(final RoleType type) {
-        log.debug("Getting user role with type: {}", type);
+        LOG.debug("Getting user role with type: {}", type);
         return userDao.getRoleByType(type);
     }
 
     @Override
     @Transactional
     public List<User> getUserByRole(final RoleType type) {
-        log.debug("Getting user list with type: {}", type);
+        LOG.debug("Getting user list with type: {}", type);
         return userDao.getUsersByType(type);
     }
 
     @Override
     @Transactional
     public User loadUserByUsername(final String email) {
-        log.debug("Loading user with email: {}", email);
+        LOG.debug("Loading user with email: {}", email);
         return userDao.findByEmail(email);
     }
 

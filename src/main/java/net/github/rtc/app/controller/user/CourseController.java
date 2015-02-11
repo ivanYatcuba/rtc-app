@@ -11,6 +11,8 @@ import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.filter.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.util.converter.ValidationContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,7 @@ import java.util.Set;
 @Controller
 @RequestMapping("/user/courses")
 public class CourseController implements MenuItem {
+    private static final Logger LOG = LoggerFactory.getLogger(CourseController.class.getName());
 
     private static final String ROOT = "portal/user";
     private static final String USER = "user";
@@ -39,9 +42,8 @@ public class CourseController implements MenuItem {
     private ValidationContext validationContext;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView userCourses() throws Exception {
-        final ModelAndView mav = new ModelAndView(ROOT + "/course/courses");
-        return mav;
+    public String userCourses() throws Exception {
+        return ROOT + "/course/courses";
     }
 
     @RequestMapping(value = "/courseDetails/{courseCode}", method = RequestMethod.GET)
@@ -53,14 +55,16 @@ public class CourseController implements MenuItem {
     }
 
     @RequestMapping(value = "/sendOrder", method = RequestMethod.POST)
-    public String sendCourseOrder(@ModelAttribute("order") final UserCourseOrder order) {
-        userCourseOrderService.create(order);
+    public String sendCourseOrder(String courseCode, CourseType position) {
+        userCourseOrderService.create(courseCode, position);
         return "redirect:/user/courses";
     }
 
     @RequestMapping(value = "/courseTable", method = RequestMethod.POST)
-    public @ResponseBody ModelAndView getCourseTable(@ModelAttribute("courseFilter") final CourseSearchFilter courseFilter,
-                                                     @RequestParam(required = false) final boolean withArchived) {
+    public
+    @ResponseBody
+    ModelAndView getCourseTable(@ModelAttribute("courseFilter") final CourseSearchFilter courseFilter,
+                                @RequestParam(required = false) final boolean withArchived) {
         final ModelAndView mav = new ModelAndView(ROOT + "/course/courseTable");
         final SearchResults<UserCourseDTO> results = courseService.searchCoursesForUser(withArchived, courseFilter);
         mav.addAllObjects(results.getPageModel().getPageParams());
@@ -70,7 +74,8 @@ public class CourseController implements MenuItem {
     }
 
     @RequestMapping(value = "/position/{courseCode}", method = RequestMethod.GET)
-    public @ResponseBody
+    public
+    @ResponseBody
     Set<CourseType> getPositions(@PathVariable String courseCode) {
         return courseService.findByCode(courseCode).getTypes();
     }

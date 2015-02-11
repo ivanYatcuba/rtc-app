@@ -67,9 +67,60 @@
     <#if "${course.status}" == "ARCHIVED">
         <@formMacro.rtcCancelButton "/user/courses"/>
     <#else>
-        <@formMacro.rtcSubmitDoOrCancel "coursesPage.action.order" "/user/courses/sendOrder" "coursesPage.action.cancel" "/user/courses"/>
+        <div class="span2" style="text-align: right">
+            <#if !course.isCurrentUserAssigned()>
+                <input onclick="popUpShow()" class="btn btn-primary" value="Apply order"/>
+            </#if>
+            <a class="btn btn-default" href="/user/courses">Cancel</a>
+        </div>
     </#if>
 </div>
+
+<div class="modal" style="top: 15%; left: 1%" id="selectRoleModal" tabindex="-1" role="dialog" aria-labelledby="selectRoleModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancel</span></button>
+                <h4 class="modal-title">Apply order</h4>
+            </div>
+            <div class="modal-body">
+                <@formMacro.rtcFormRadioButtons "course.selectRole" "course.types" courseTypes />
+            </div>
+            <div class="modal-footer">
+                <form id="publishCourseForm" name="publishCourseForm" method="post">
+                    <input type="hidden" id="courseCode" name="courseCode" value="${course.code}"/>
+                    <button type="button" class="btn btn-primary" id="applyBtn">Apply</button>
+                    <button type="button" class="btn btn-default" id="cancelBtn">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function popUpShow() {
+        $('#selectRoleModal').modal('show')
+    }
+    function popUpHide() {
+        $('#selectRoleModal').modal('hide');
+    }
+
+    $("#applyBtn").on("click", function(event) {
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "<@spring.url"/user/courses/sendOrder/"/>",
+            data: {courseCode: $("#courseCode").val(), position: $("[name='types']:checked").val()},
+
+        })
+        popUpHide();
+    })
+
+    $("#cancelBtn").on("click",function(event) {
+        event.preventDefault();
+        popUpHide();
+    })
+</script>
 
 </@layout.layout>
 

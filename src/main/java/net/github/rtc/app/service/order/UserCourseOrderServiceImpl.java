@@ -4,6 +4,7 @@ import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.UserCourseOrderDao;
 import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
 import net.github.rtc.app.model.dto.user.ExpertOrderDtoBuilder;
+import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.model.entity.user.UserRequestStatus;
 import net.github.rtc.app.service.course.CourseService;
@@ -13,6 +14,7 @@ import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.filter.OrderSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -86,15 +89,31 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     return true;
   }
 
+    @Override
+    @Transactional
+    public UserCourseOrder create(String courseCode, CourseType position) {
+        Date now = LocalDate.now().toDate();
+        String userCode = AuthorizedUserProvider.getAuthorizedUser().getCode();
 
-  @Override
-  public UserCourseOrder create(UserCourseOrder order) {
-    order.setUserCode(AuthorizedUserProvider.getAuthorizedUser().getCode());
-    order.setRequestDate(dateService.getCurrentDate());
-    return super.create(order);
-  }
+        UserCourseOrder userCourseOrder = new UserCourseOrder();
+        userCourseOrder.setCourseCode(courseCode);
+        userCourseOrder.setPosition(position);
+        userCourseOrder.setUserCode(userCode);
+        userCourseOrder.setRequestDate(now);
+        userCourseOrder.setReason("prosto tak");
+        return super.create(userCourseOrder);
+    }
 
-  @Override
+    @Override
+    public void acceptOrder(String orderCode) {
+        UserCourseOrder order = findByCode(orderCode);
+        order.setStatus(UserRequestStatus.ACCEPTED);
+        order.setResponseDate(LocalDate.now().toDate());
+        super.update(order);
+        courseService.addParticipant(order.getCourseCode(), order.getUserCode());
+    }
+
+    @Override
     protected GenericDao<UserCourseOrder> getDao() {
         return userCourseOrderDao;
     }

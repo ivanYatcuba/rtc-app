@@ -20,6 +20,7 @@ public class UserCourseDTO {
     private CourseStatus status;
     private String description;
     private Set<User> experts;
+    private boolean currentUserAssigned;
 
     public String getCode() {
         return code;
@@ -105,4 +106,15 @@ public class UserCourseDTO {
         this.acceptedOrders = acceptedOrders;
     }
 
+    public boolean isCurrentUserAssigned() {
+        return currentUserAssigned;
+    }
+    //for freemarker
+    public boolean getCurrentUserAssigned() {
+        return currentUserAssigned;
+    }
+
+    public void setCurrentUserAssigned(boolean currentUserAssigned) {
+        this.currentUserAssigned = currentUserAssigned;
+    }
 }
