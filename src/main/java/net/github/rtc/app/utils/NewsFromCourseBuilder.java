@@ -52,7 +52,7 @@ public class NewsFromCourseBuilder {
         if (creationDate == null) {
             throw new IllegalArgumentException(ILLEGAL_ARGUMENT);
         }
-        this.creationDate = creationDate;
+        this.creationDate = new Date(creationDate.getTime());
         return this;
     }
 
