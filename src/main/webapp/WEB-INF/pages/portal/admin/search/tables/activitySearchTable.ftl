@@ -24,7 +24,7 @@
                     <p>${activity.username}</p>
                 </td>
                 <td style="vertical-align: middle; width: 25%">
-                    ${activity.actionDate?string('yyyy-MMM-dd HH:mm:ss')}
+                    ${activity.actionDate?string('dd-MMM-yyyy HH:mm:ss')}
                 </td>
             </tr>
         </#list>
