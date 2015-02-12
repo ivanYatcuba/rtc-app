@@ -85,7 +85,7 @@ public class CoursesController implements MenuItem {
     public String update(@ModelAttribute(COURSE) final Course course,
                          @RequestParam(required = false) final boolean published,
                          @RequestParam(required = false) final boolean newsCreated) {
-        courseService.update(published, published, course);
+        courseService.update(published, newsCreated, course);
         return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + newsCreated;
     }
 

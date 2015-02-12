@@ -20,6 +20,9 @@ import java.util.List;
 @Validatable
 public class News extends AbstractPersistenceObject implements Serializable, IActivity {
 
+    private static final  String NEWS = "News {";
+    private static final  String TITLE = " title='";
+    private static final  char SLASH = '\'';
 
     @NotEmpty
     @Column
@@ -125,17 +128,25 @@ public class News extends AbstractPersistenceObject implements Serializable, IAc
         this.tags = tags;
     }
 
+
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getLogDetail()).append(createDate);
-        return builder.toString();
+        return  NEWS
+                + TITLE + title + SLASH
+                + ", author=" + author
+                + ", createDate=" + createDate
+                + ", publishDate=" + publishDate
+                + ", status=" + status
+                + ", description='" + description + SLASH
+                + ", tags=" + tags
+                + '}';
     }
 
     @Override
     public String getLogDetail() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("News ").append("id:" + getId()).append(" title:" + getTitle());
-        return builder.toString();
+        return  NEWS
+                + "id=" + this.getId()
+                + TITLE + title + SLASH
+                + " ...}";
     }
 }
