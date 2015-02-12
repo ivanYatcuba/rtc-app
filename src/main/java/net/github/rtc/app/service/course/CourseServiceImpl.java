@@ -11,7 +11,6 @@ import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.order.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.SearchResultsBuilder;
 import net.github.rtc.app.utils.datatable.search.SearchResultsMapper;
 import net.github.rtc.app.utils.datatable.search.filter.CourseSearchFilter;
@@ -68,7 +67,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
         course.setPublishDate(dateService.getCurrentDate());
         coursesDao.update(course);
         if (isNewsCreated) {
-           newsService.createNewsFromCourse(course, AuthorizedUserProvider.getAuthorizedUser());
+           newsService.createNewsFromCourse(course);
         }
     }
 
@@ -107,7 +106,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
         setCourseStatusAndPublishDate(published, course);
         create(course);
         if (newsCreated) {
-            newsService.createNewsFromCourse(course, AuthorizedUserProvider.getAuthorizedUser());
+            newsService.createNewsFromCourse(course);
         }
     }
 
@@ -116,7 +115,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
         setCourseStatusAndPublishDate(published, course);
         update(course);
         if (newsCreated) {
-            newsService.createNewsFromCourse(course, AuthorizedUserProvider.getAuthorizedUser());
+            newsService.createNewsFromCourse(course);
         }
     }
 

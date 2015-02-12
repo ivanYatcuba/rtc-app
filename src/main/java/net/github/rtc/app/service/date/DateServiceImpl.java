@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Calendar;
 import java.util.Date;
 
-@Component("DateService")
+@Component
 public class DateServiceImpl implements DateService {
 
     @Override

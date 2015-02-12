@@ -41,7 +41,7 @@ public class News extends AbstractPersistenceObject implements Serializable, IAc
 
     @Column
     @Enumerated(EnumType.STRING)
-    private NewsStatus status = NewsStatus.DRAFT;
+    private NewsStatus status;
 
     @NotEmpty
     @Column
@@ -107,6 +107,9 @@ public class News extends AbstractPersistenceObject implements Serializable, IAc
     }
 
     public NewsStatus getStatus() {
+        if (status == null) {
+            return NewsStatus.DRAFT;
+        }
         return status;
     }
 

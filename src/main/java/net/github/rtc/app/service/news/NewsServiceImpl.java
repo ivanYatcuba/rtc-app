@@ -5,12 +5,10 @@ import net.github.rtc.app.dao.NewsDao;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.news.NewsStatus;
-import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
-import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
-import net.github.rtc.app.utils.CourseNewsCreator;
+import net.github.rtc.app.utils.NewsFromCourseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +19,9 @@ public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements 
     @Autowired
     private NewsDao newsDao;
     @Autowired
-    private UserService userService;
-    @Autowired
     private DateService dateService;
     @Autowired
-    private CourseNewsCreator courseNewsCreator;
+    private NewsFromCourseBuilder newsFromCourseBuilder;
 
     protected GenericDao<News> getDao() {
         return newsDao;
@@ -60,8 +56,10 @@ public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements 
     }
 
     @Override
-    public void createNewsFromCourse(Course course, User author) {
-        courseNewsCreator.createNews(course, author);
+    public void createNewsFromCourse(Course course) {
+        create(newsFromCourseBuilder.setCourse(course).
+                setAuthor(AuthorizedUserProvider.getAuthorizedUser()).
+                setCreationDate(dateService.getCurrentDate()).build());
     }
 
     private void setPublish(News news) {
