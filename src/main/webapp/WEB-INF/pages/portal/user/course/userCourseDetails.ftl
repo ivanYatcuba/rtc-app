@@ -71,7 +71,7 @@
             <#if !course.isCurrentUserAssigned()>
                 <input onclick="popUpShow()" class="btn btn-primary" value="Apply order"/>
             </#if>
-            <a class="btn btn-default" href="/user/courses">Cancel</a>
+            <a class="btn btn-default" href="<@spring.url "/user/courses"/>">Cancel</a>
         </div>
     </#if>
 </div>
