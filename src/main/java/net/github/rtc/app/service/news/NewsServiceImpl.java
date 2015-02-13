@@ -11,7 +11,6 @@ import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.NewsFromCourseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
