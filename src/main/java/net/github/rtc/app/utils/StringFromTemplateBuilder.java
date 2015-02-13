@@ -3,6 +3,8 @@ package net.github.rtc.app.utils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.io.StringWriter;
 import java.util.Map;
 
 @Component
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class StringFromTemplateBuilder {
 
     private static final String UNKNOWN_VALUE = "UNKNOWN VALUE";
