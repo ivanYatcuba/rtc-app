@@ -10,6 +10,8 @@ import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.NewsFromCourseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +22,9 @@ public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements 
     private NewsDao newsDao;
     @Autowired
     private DateService dateService;
+
     @Autowired
-    private NewsFromCourseBuilder newsFromCourseBuilder;
+    private ApplicationContext appContext;
 
     protected GenericDao<News> getDao() {
         return newsDao;
@@ -57,6 +60,8 @@ public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements 
 
     @Override
     public void createNewsFromCourse(Course course) {
+        final NewsFromCourseBuilder newsFromCourseBuilder = appContext.getBean(NewsFromCourseBuilder.class);
+
         create(newsFromCourseBuilder.setCourse(course).
                 setAuthor(AuthorizedUserProvider.getAuthorizedUser()).
                 setCreationDate(dateService.getCurrentDate()).build());
