@@ -88,7 +88,7 @@ public class CourseControllerTest {
         searchResults.getPageModel().setPage(10);
         searchResults.getPageModel().setPerPage(10);
         searchResults.getPageModel().setTotalResults(10);
-        when(courseService.searchCoursesForUser(anyBoolean(), isA(CourseSearchFilter.class))).thenReturn(searchResults);
+        when(courseService.searchCoursesForUser(isA(CourseSearchFilter.class))).thenReturn(searchResults);
         mockMvc.perform(post("/user/courses/courseTable"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("courses"));

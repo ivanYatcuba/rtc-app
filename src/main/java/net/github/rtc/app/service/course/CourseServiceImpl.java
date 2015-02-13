@@ -2,6 +2,7 @@ package net.github.rtc.app.service.course;
 
 import net.github.rtc.app.dao.CoursesDao;
 import net.github.rtc.app.dao.GenericDao;
+import net.github.rtc.app.model.dto.builder.UserCourseDtoBuilder;
 import net.github.rtc.app.model.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseStatus;
@@ -16,8 +17,6 @@ import net.github.rtc.app.utils.datatable.search.SearchResultsMapper;
 import net.github.rtc.app.utils.datatable.search.filter.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.apache.commons.lang3.Validate;
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,10 +81,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
     }
 
     @Override
-    public SearchResults<UserCourseDTO> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter) {
-        if (withArchived) {
-            filter.getStatus().add(CourseStatus.ARCHIVED);
-        }
+    public SearchResults<UserCourseDTO> searchCoursesForUser(CourseSearchFilter filter) {
         final SearchResultsBuilder<Course, UserCourseDTO> courseDTOSearchResultsBuilder = new SearchResultsBuilder<>();
         return courseDTOSearchResultsBuilder.setSearchResultsToTransform(search(filter)).
                 setSearchResultsMapper(getCourseToCourseDtoMapper()).build();
@@ -93,17 +89,15 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
 
     @Override
     public UserCourseDTO getUserCourseDTObyCode(String code) {
-        final UserCourseDTO userCourseDTO = new UserCourseDTO();
-        final Course course = coursesDao.findByCode(code);
-        final Mapper mapper = new DozerBeanMapper();
-        userCourseDTO.setAcceptedOrders(orderService.getAcceptedOrdersForCourse(course.getCode()));
-        mapper.map(course, userCourseDTO);
-        return userCourseDTO;
+        return new UserCourseDtoBuilder().setCourse(findByCode(code)).
+                setAcceptedOrdersCount(orderService.getAcceptedOrdersCount(code)).build();
     }
 
     @Override
     public void create(boolean published, boolean newsCreated, Course course) {
-        setCourseStatusAndPublishDate(published, course);
+        if (published) {
+            publish(course);
+        }
         create(course);
         if (newsCreated) {
             newsService.createNewsFromCourse(course);
@@ -112,7 +106,9 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
 
     @Override
     public void update(boolean published, boolean newsCreated, Course course) {
-        setCourseStatusAndPublishDate(published, course);
+        if (published) {
+            publish(course);
+        }
         update(course);
         if (newsCreated) {
             newsService.createNewsFromCourse(course);
@@ -127,11 +123,9 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
         }
     }
 
-    private void setCourseStatusAndPublishDate(boolean published, Course course) {
-        course.setStatus(published ? CourseStatus.PUBLISHED : CourseStatus.DRAFT);
-        if (published) {
-            course.setPublishDate(dateService.getCurrentDate());
-        }
+    private void publish(Course course) {
+        course.setStatus(CourseStatus.PUBLISHED);
+        course.setPublishDate(dateService.getCurrentDate());
     }
 
     @Override
@@ -157,11 +151,9 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
             public List<UserCourseDTO> map(List<Course> searchResults) {
                 final List<UserCourseDTO> outputResults = new ArrayList<>();
                 for (Course course: searchResults) {
-                    final Mapper mapper = new DozerBeanMapper();
-                    final UserCourseDTO userCourseDTO = new UserCourseDTO();
-                    userCourseDTO.setAcceptedOrders(orderService.getAcceptedOrdersForCourse(course.getCode()));
-                    mapper.map(course, userCourseDTO);
-                    outputResults.add(userCourseDTO);
+                    final UserCourseDtoBuilder dtoBuilder = new UserCourseDtoBuilder();
+                    outputResults.add(dtoBuilder.setCourse(course).
+                            setAcceptedOrdersCount(orderService.getAcceptedOrdersCount(course.getCode())).build());
                 }
                 return outputResults;
             }

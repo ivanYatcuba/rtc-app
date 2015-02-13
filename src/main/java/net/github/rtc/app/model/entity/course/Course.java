@@ -183,6 +183,9 @@ public class Course extends AbstractPersistenceObject implements Serializable, I
     }
 
     public CourseStatus getStatus() {
+        if (status == null) {
+            return CourseStatus.DRAFT;
+        }
         return status;
     }
 

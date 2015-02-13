@@ -13,7 +13,7 @@ public interface CourseService extends ModelService<Course>, GenericService<Cour
 
     void archive(String courseCode);
 
-    SearchResults<UserCourseDTO> searchCoursesForUser(boolean withArchived, CourseSearchFilter filter);
+    SearchResults<UserCourseDTO> searchCoursesForUser(CourseSearchFilter filter);
 
     UserCourseDTO getUserCourseDTObyCode(String code);
 

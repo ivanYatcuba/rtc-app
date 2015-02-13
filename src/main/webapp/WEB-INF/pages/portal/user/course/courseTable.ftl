@@ -71,8 +71,18 @@
             $(this).html(shorten(str, 150));
         });
     });
+
     $("#withArchiveButton").click(function (event) {
-        $("#withArchive").val("true");
-        search($("#currentType").attr("type"), 1);
+        var val = $("#withArchive").val();
+        var withArchive;
+        if(val =="false") {
+            withArchive = true;
+            $("#withArchive").val("true");
+        } else {
+            withArchive = false;
+            $("#withArchive").val("false");
+        }
+        var page = $('#coursesContent').find('.active').find('.navButton').attr("page");
+        search($("#currentType").attr("type"), page);
     });
 </script>

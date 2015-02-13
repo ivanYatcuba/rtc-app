@@ -9,7 +9,6 @@ import java.util.Set;
 
 public class UserCourseDTO {
 
-    public static final int HUNDRED = 100;
     private String code;
     private Integer capacity;
     private Integer acceptedOrders;

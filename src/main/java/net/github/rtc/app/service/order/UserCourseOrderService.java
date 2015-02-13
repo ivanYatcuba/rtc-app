@@ -18,7 +18,7 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
 
     SearchResults<ExpertOrderDTO> searchOrderForExpert(OrderSearchFilter searchFilter);
 
-    int getAcceptedOrdersForCourse(String courseCode);
+    int getAcceptedOrdersCount(String courseCode);
 
     boolean changeOrderStatus(final UserRequestStatus userRequestStatus, final String orderCode);
 

@@ -13,10 +13,11 @@ import java.util.Set;
 
 public class CourseSearchFilter extends AbstractSearchCommand {
 
-    private static final String PROCENT = "%";
+    private static final String PERCENT = "%";
     private static final String TAGS = "tags";
     private static final String START_DATE = "startDate";
     private static final String EXPERTS = "experts";
+    private static final String STATUS = "status";
     private String name;
     private char dateMoreLessEq;
     private Set<CourseType> types;
@@ -24,9 +25,9 @@ public class CourseSearchFilter extends AbstractSearchCommand {
     private Set<CourseStatus> status;
     private List<Tag> tags;
     private String expertCode;
+    private boolean withArchived = false;
 
     public char getDateMoreLessEq() {
-
         return dateMoreLessEq;
     }
 
@@ -84,19 +85,30 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         this.expertCode = expertCode;
     }
 
+    public boolean isWithArchived() {
+        return withArchived;
+    }
+
+    public void setWithArchived(boolean withArchived) {
+        this.withArchived = withArchived;
+        if (withArchived) {
+            getStatus().add(CourseStatus.ARCHIVED);
+        }
+    }
+
     @Override
     public Order order() {
-        return Order.asc(START_DATE);
+        return Order.asc("id");
     }
 
     public DetachedCriteria getCriteria() {
         final DetachedCriteria criteria = DetachedCriteria.forClass(Course.class);
 
         if (name != null && !("").equals(name)) {
-            criteria.add(Restrictions.like("name", PROCENT + name + PROCENT));
+            criteria.add(Restrictions.like("name", PERCENT + name + PERCENT));
         }
         if (status != null && status.size() > 0) {
-            criteria.add(Restrictions.in("status", status));
+            criteria.add(Restrictions.in(STATUS, status));
         }
         if (startDate != null) {
             switch (dateMoreLessEq) {
@@ -136,6 +148,10 @@ public class CourseSearchFilter extends AbstractSearchCommand {
             experts.add(Restrictions.eq("experts.code", expertCode));
             criteria.add(experts);
         }
+        if (withArchived) {
+            criteria.addOrder(Order.desc(STATUS));
+        }
+        criteria.addOrder(Order.asc(START_DATE));
         return criteria;
     }
 }

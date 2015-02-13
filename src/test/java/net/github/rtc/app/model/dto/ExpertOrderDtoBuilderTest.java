@@ -1,7 +1,7 @@
 package net.github.rtc.app.model.dto;
 
 import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
-import net.github.rtc.app.model.dto.user.ExpertOrderDtoBuilder;
+import net.github.rtc.app.model.dto.builder.ExpertOrderDtoBuilder;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserCourseOrder;

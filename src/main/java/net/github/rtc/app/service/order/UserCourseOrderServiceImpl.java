@@ -3,7 +3,7 @@ package net.github.rtc.app.service.order;
 import net.github.rtc.app.dao.GenericDao;
 import net.github.rtc.app.dao.UserCourseOrderDao;
 import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
-import net.github.rtc.app.model.dto.user.ExpertOrderDtoBuilder;
+import net.github.rtc.app.model.dto.builder.ExpertOrderDtoBuilder;
 import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.model.entity.user.UserRequestStatus;
@@ -12,6 +12,8 @@ import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
+import net.github.rtc.app.utils.datatable.search.SearchResultsBuilder;
+import net.github.rtc.app.utils.datatable.search.SearchResultsMapper;
 import net.github.rtc.app.utils.datatable.search.filter.OrderSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import org.joda.time.LocalDate;
@@ -56,23 +58,13 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
 
   @Override
   public SearchResults<ExpertOrderDTO> searchOrderForExpert(OrderSearchFilter searchFilter) {
-    final SearchResults<UserCourseOrder> searchResults = search(searchFilter);
-    final List<ExpertOrderDTO> orderDTOs = new ArrayList<>();
-    final ExpertOrderDtoBuilder dtoBuilder = new ExpertOrderDtoBuilder();
-    for (UserCourseOrder order: searchResults.getResults()) {
-      orderDTOs.add(dtoBuilder.setOrder(order).
-              setCourse(courseService.findByCode(order.getCourseCode())).
-              setAcceptedOrders(getAcceptedOrdersForCourse(order.getCourseCode())).
-              setUser(userService.findByCode(order.getUserCode())).build());
-    }
-    final SearchResults<ExpertOrderDTO> newSearchResults = new SearchResults<>();
-    newSearchResults.setPageModel(searchResults.getPageModel());
-    newSearchResults.setResults(orderDTOs);
-    return newSearchResults;
+    final SearchResultsBuilder<UserCourseOrder, ExpertOrderDTO> resultsBuilder = new SearchResultsBuilder<>();
+    return resultsBuilder.setSearchResultsToTransform(search(searchFilter)).
+            setSearchResultsMapper(getOrderToExpertOrderMapper()).build();
   }
 
   @Override
-  public int getAcceptedOrdersForCourse(String courseCode) {
+  public int getAcceptedOrdersCount(String courseCode) {
     return userCourseOrderDao.getAcceptedOrdersForCourse(courseCode);
   }
 
@@ -116,5 +108,22 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     @Override
     protected GenericDao<UserCourseOrder> getDao() {
         return userCourseOrderDao;
+    }
+
+    private SearchResultsMapper<UserCourseOrder, ExpertOrderDTO> getOrderToExpertOrderMapper() {
+        return new SearchResultsMapper<UserCourseOrder, ExpertOrderDTO>() {
+            @Override
+            public List<ExpertOrderDTO> map(List<UserCourseOrder> searchResults) {
+                final List<ExpertOrderDTO> outputResults = new ArrayList<>();
+                for (UserCourseOrder order: searchResults) {
+                    final ExpertOrderDtoBuilder dtoBuilder = new ExpertOrderDtoBuilder();
+                    outputResults.add(dtoBuilder.setOrder(order).
+                            setCourse(courseService.findByCode(order.getCourseCode())).
+                            setAcceptedOrders(getAcceptedOrdersCount(order.getCourseCode())).
+                            setUser(userService.findByCode(order.getUserCode())).build());
+                }
+                return outputResults;
+            }
+        };
     }
 }
