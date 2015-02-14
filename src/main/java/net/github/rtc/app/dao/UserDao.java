@@ -19,6 +19,8 @@ public interface UserDao extends GenericDao<User> {
      */
     User findByEmail(String email);
 
+    boolean isEmailExist(String email);
+
     Role getRoleByType(RoleType type);
 
     Role createRole(RoleType type);

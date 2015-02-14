@@ -35,11 +35,9 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
 
     void deleteUsersMarkedForRemoval();
 
-    void restoreAndDeactivateUser(String userCode);
-
-    Map<String, String> getUserNameCodeMap(RoleType roleType);
+    Map<String, String> findUserNameCode(RoleType roleType);
 
     void registerUser(User user);
 
-    boolean userWithMailExists(String email, String currentEmail);
+    boolean isEmailExist(String email);
 }

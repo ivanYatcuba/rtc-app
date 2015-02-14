@@ -108,7 +108,9 @@
         document.getElementById('note').value = text.substr(0, length - extra);
     });
 
+    var currentMail;
     $(document).ready(function(){
+        currentMail = document.getElementById('email').value;
         function limits(obj, limit){
             var text = $(obj).val();
             var length = text.length;
@@ -122,7 +124,7 @@
     });
 
     $(function () {
-        addMailValidation("<@spring.url "/mailExist/" />", "${user.email!""}")
+        addMailValidation("<@spring.url "/mailExist/" />", currentMail)
     });
 
     function showMyImage(fileInput) {

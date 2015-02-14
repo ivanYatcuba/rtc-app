@@ -93,7 +93,7 @@ public class UserController implements MenuItem {
 
     @RequestMapping(value = "/restore/{userCode}", method = RequestMethod.GET)
     public String setStatusActiveAndRestore(@PathVariable final String userCode) {
-        userService.restoreAndDeactivateUser(userCode);
+        userService.restoreUser(userCode);
         return REDIRECT_ADMIN_SEARCH;
     }
 
@@ -112,13 +112,13 @@ public class UserController implements MenuItem {
     @RequestMapping(value = "/getExperts", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, String> getExpertUsers() {
-        return userService.getUserNameCodeMap(RoleType.ROLE_EXPERT);
+        return userService.findUserNameCode(RoleType.ROLE_EXPERT);
     }
 
     @RequestMapping(value = "/getAdmins", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, String> getAdminMapDataId() {
-        return userService.getUserNameCodeMap(RoleType.ROLE_ADMIN);
+        return userService.findUserNameCode(RoleType.ROLE_ADMIN);
     }
 
     @InitBinder

@@ -13,6 +13,7 @@ import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,6 +35,14 @@ public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao
     @Override
     public User findByEmail(final String email) {
         return (User) getCurrentSession().createCriteria(User.class).add(Restrictions.eq(EMAIL_STRING, email)).uniqueResult();
+    }
+
+    @Override
+    public boolean isEmailExist(String email) {
+        final int count = ((Long) getCurrentSession().createCriteria(User.class)
+                .add(Restrictions.eq(EMAIL_STRING, email))
+                .setProjection(Projections.rowCount()).uniqueResult()).intValue();
+        return count != 0;
     }
 
     @Override

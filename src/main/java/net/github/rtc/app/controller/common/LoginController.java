@@ -46,7 +46,10 @@ public class LoginController {
     @ResponseBody
     public boolean mailExist(@RequestParam final String email,
                              @RequestParam final String currentEmail) {
-        return userService.userWithMailExists(email, currentEmail);
+        if (email.equals(currentEmail)) {
+            return true;
+        }
+        return !userService.isEmailExist(email);
     }
 
     private boolean isAnonymous() {

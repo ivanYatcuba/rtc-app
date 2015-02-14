@@ -62,7 +62,9 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     }
 
     private void setStatusAndImage(User user, MultipartFile image, boolean isActive) {
-        user.setStatus(isActive ? UserStatus.ACTIVE : UserStatus.INACTIVE);
+        if (isActive) {
+            user.setStatus(UserStatus.ACTIVE);
+        }
         if (!image.isEmpty()) {
             user.setPhoto(upload.saveImage(user.getCode(), image));
         }
@@ -130,6 +132,7 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     @Transactional
     public void restoreUser(String userCode) {
         final User user = findByCode(userCode);
+        user.setStatus(UserStatus.INACTIVE);
         user.setRemovalDate(null);
         super.update(user);
     }
@@ -141,13 +144,7 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     }
 
     @Override
-    public void restoreAndDeactivateUser(String userCode) {
-        restoreUser(userCode);
-        inactivateUser(userCode);
-    }
-
-    @Override
-    public Map<String, String> getUserNameCodeMap(RoleType roleType) {
+    public Map<String, String> findUserNameCode(RoleType roleType) {
         final Map<String, String> results = new HashMap<>();
         final List<User> users = getUserByRole(roleType);
         for (final User user : users) {
@@ -166,10 +163,8 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     }
 
     @Override
-    public boolean userWithMailExists(String email, String currentEmail) {
-        if (email.equals(currentEmail)) {
-            return true;
-        }
-        return loadUserByUsername(email) == null;
+    @Transactional
+    public boolean isEmailExist(String email) {
+        return userDao.isEmailExist(email);
     }
 }
