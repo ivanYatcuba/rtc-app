@@ -14,6 +14,8 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
 
     UserCourseOrder getUserOrderByUserCode(String userCode);
 
+    List<UserCourseOrder> getUserOrdersByCode(String userCode);
+
     List<UserCourseOrder> getOrderByStatus(UserRequestStatus status);
 
     SearchResults<ExpertOrderDTO> searchOrderForExpert(OrderSearchFilter searchFilter);

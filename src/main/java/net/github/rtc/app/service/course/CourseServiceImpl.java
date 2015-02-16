@@ -7,11 +7,13 @@ import net.github.rtc.app.model.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseStatus;
 import net.github.rtc.app.model.entity.user.User;
+import net.github.rtc.app.model.entity.user.UserCourseOrder;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.order.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.SearchResultsBuilder;
 import net.github.rtc.app.utils.datatable.search.SearchResultsMapper;
 import net.github.rtc.app.utils.datatable.search.filter.CourseSearchFilter;
@@ -90,7 +92,8 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
     @Override
     public UserCourseDTO getUserCourseDTObyCode(String code) {
         return new UserCourseDtoBuilder().setCourse(findByCode(code)).
-                setAcceptedOrdersCount(orderService.getAcceptedOrdersCount(code)).build();
+                setAcceptedOrdersCount(orderService.getAcceptedOrdersCount(code)).
+                setCurrentUserAssigned(isUserAssignedForCourse(code)).build();
     }
 
     @Override
@@ -143,6 +146,16 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
     @Override
     public void deleteParticipant(String courseCode, String userCode) {
 
+    }
+
+    private boolean isUserAssignedForCourse(String courseCode) {
+        final String code = AuthorizedUserProvider.getAuthorizedUser().getCode();
+        List<UserCourseOrder> userCourseOrders = orderService.getUserOrdersByCode(code);
+        for (UserCourseOrder o : userCourseOrders) {
+            if (o.getUserCode().equals(code) && o.getCourseCode().equals(courseCode))
+                return true;
+        }
+        return false;
     }
 
     private SearchResultsMapper<Course, UserCourseDTO> getCourseToCourseDtoMapper() {

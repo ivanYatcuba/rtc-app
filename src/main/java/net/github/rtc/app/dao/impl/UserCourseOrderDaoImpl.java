@@ -21,6 +21,11 @@ public class UserCourseOrderDaoImpl extends AbstractGenericDaoImpl<UserCourseOrd
     }
 
     @Override
+    public List<UserCourseOrder> getUserOrdersByCode(String userCode) {
+        return getCurrentSession().createCriteria(UserCourseOrder.class).add(Restrictions.eq("userCode", userCode)).list();
+    }
+
+    @Override
     public List<UserCourseOrder> getOrderByStatus(final UserRequestStatus status) {
         return getCurrentSession().createCriteria(UserCourseOrder.class).add(Restrictions.eq(STATUS, status)).list();
     }

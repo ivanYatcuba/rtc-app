@@ -84,14 +84,12 @@
                 <h4 class="modal-title">Apply order</h4>
             </div>
             <div class="modal-body">
-                <@formMacro.rtcFormRadioButtons "course.selectRole" "course.types" courseTypes />
+                <@formMacro.rtcRadioButtons "course.selectRole" "course.types" course.types "" "" course.types[0] "courses.types."/>
             </div>
             <div class="modal-footer">
-                <form id="publishCourseForm" name="publishCourseForm" method="post">
-                    <input type="hidden" id="courseCode" name="courseCode" value="${course.code}"/>
-                    <button type="button" class="btn btn-primary" id="applyBtn">Apply</button>
-                    <button type="button" class="btn btn-default" id="cancelBtn">Cancel</button>
-                </form>
+                <input type="hidden" id="courseCode" name="courseCode" value="${course.code}"/>
+                <button type="button" class="btn btn-primary" id="applyBtn">Apply</button>
+                <button type="button" class="btn btn-default" id="cancelBtn">Cancel</button>
             </div>
         </div>
     </div>
@@ -111,9 +109,12 @@
             type: "POST",
             url: "<@spring.url"/user/courses/sendOrder/"/>",
             data: {courseCode: $("#courseCode").val(), position: $("[name='types']:checked").val()},
-
+            success: function() {
+                window.location.href = "<@spring.url"/user/courses/"/>";
+            }
         })
         popUpHide();
+
     })
 
     $("#cancelBtn").on("click",function(event) {

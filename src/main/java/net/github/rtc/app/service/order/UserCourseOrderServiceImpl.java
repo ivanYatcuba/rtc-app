@@ -50,18 +50,25 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
 
     @Override
     @Transactional
+    public List<UserCourseOrder> getUserOrdersByCode(String userCode) {
+        log.info("Get user orders by user code: " + userCode);
+        return userCourseOrderDao.getUserOrdersByCode(userCode);
+    }
+
+    @Override
+    @Transactional
     public List<UserCourseOrder> getOrderByStatus(
       final UserRequestStatus status) {
         log.info("Get user orders with status: " + status);
         return userCourseOrderDao.getOrderByStatus(status);
     }
 
-  @Override
-  public SearchResults<ExpertOrderDTO> searchOrderForExpert(OrderSearchFilter searchFilter) {
-    final SearchResultsBuilder<UserCourseOrder, ExpertOrderDTO> resultsBuilder = new SearchResultsBuilder<>();
-    return resultsBuilder.setSearchResultsToTransform(search(searchFilter)).
+    @Override
+    public SearchResults<ExpertOrderDTO> searchOrderForExpert(OrderSearchFilter searchFilter) {
+        final SearchResultsBuilder<UserCourseOrder, ExpertOrderDTO> resultsBuilder = new SearchResultsBuilder<>();
+        return resultsBuilder.setSearchResultsToTransform(search(searchFilter)).
             setSearchResultsMapper(getOrderToExpertOrderMapper()).build();
-  }
+    }
 
   @Override
   public int getAcceptedOrdersCount(String courseCode) {

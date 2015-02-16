@@ -155,16 +155,37 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormRadioButtons label path options class="" style="" default="" disabled="">
+<#macro rtcFormRadioButtons label path options class="" style="" default="" disabled="" messagePrefix="">
     <@rtcFieldWrapper label path>
         <#--<@bind path/>-->
         <#list options as value>
             <input type="radio" class="${class}" style="${style}" name="${status.expression}" ${disabled} value="${value}"
                 <#if value == default> checked </#if>
             <@closeTag/>
-            ${value}
+            <#if messagePrefix == "">
+                ${value?html}
+            <#else>
+                <@message "${messagePrefix + value?html}"/>
+            </#if>
         </#list>
     </@rtcFieldWrapper>
+</#macro>
+
+<#macro rtcRadioButtons label path options class="" style="" default="" messagePrefix="">
+    <@spring.bind path/>
+    <label for="${path?substring(path?index_of(".")+1,path?length)}"><@spring.message "${label}"/></label>
+    <br>
+    <#list options as value>
+        <input type="radio" class="${class}" style="${style}" name="${status.expression}" value="${value}"
+            <#if value == default> checked </#if>
+        <@closeTag/>
+        <#if messagePrefix == "">
+            ${value?html}
+        <#else>
+            <@message "${messagePrefix + value?html}"/>
+        </#if>
+        <br>
+    </#list>
 </#macro>
 
 <#macro rtcFormSingleSelect label path options class="" style="" messagePrefix="" noSelection={"" : ""} default="">
