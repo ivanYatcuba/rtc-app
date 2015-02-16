@@ -2,14 +2,8 @@ package net.github.rtc.app.model.dto.builder;
 
 import net.github.rtc.app.model.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.entity.course.Course;
-import net.github.rtc.app.service.order.UserCourseOrderService;
-import net.github.rtc.app.utils.AuthorizedUserProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserCourseDtoBuilder {
-
-    @Autowired
-    private UserCourseOrderService userCourseOrderService;
 
     private Course course;
     private int acceptedOrdersCount;

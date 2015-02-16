@@ -150,10 +150,11 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
 
     private boolean isUserAssignedForCourse(String courseCode) {
         final String code = AuthorizedUserProvider.getAuthorizedUser().getCode();
-        List<UserCourseOrder> userCourseOrders = orderService.getUserOrdersByCode(code);
+        final List<UserCourseOrder> userCourseOrders = orderService.getUserOrdersByCode(code);
         for (UserCourseOrder o : userCourseOrders) {
-            if (o.getUserCode().equals(code) && o.getCourseCode().equals(courseCode))
+            if (o.getUserCode().equals(code) && o.getCourseCode().equals(courseCode)) {
                 return true;
+            }
         }
         return false;
     }
