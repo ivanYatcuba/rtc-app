@@ -6,6 +6,7 @@
 <div class="col-md-offset-3 col-md-6" style="margin-bottom: 10px">
     <div class="form-group"><h4 class="control-label col-md-4" for="types" ><strong><@spring.message "courses.catalog"/></strong></h4>
     <div class="col-md-5" style="margin-left: -5%;">
+
         <ul
                 <#--style="padding-top: 10%"-->
             id="typeMenu" class="nav nav-pills" role="tablist"
