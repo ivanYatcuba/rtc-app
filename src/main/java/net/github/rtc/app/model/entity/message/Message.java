@@ -46,7 +46,9 @@ public class Message extends AbstractPersistenceObject {
         this.receiverUserCode = receiverUserCode;
         this.senderUserCode = senderUserCode;
         this.text = text;
-        this.sendingDate = sendingDate;
+        if (sendingDate != null) {
+            this.sendingDate = new Date(sendingDate.getTime());
+        }
         this.type = type;
     }
 

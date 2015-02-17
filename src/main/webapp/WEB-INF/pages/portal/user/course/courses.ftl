@@ -5,28 +5,28 @@
 <input type="hidden" id="withArchive" value="false">
 <div class="col-md-offset-3 col-md-6" style="margin-bottom: 10px">
     <div class="form-group"><h4 class="control-label col-md-4" for="types" ><strong><@spring.message "courses.catalog"/></strong></h4>
-    <div class="col-md-5" style="margin-left: -5%;">
+        <div class="col-md-5" style="margin-left: -5%;">
 
-        <ul
-                <#--style="padding-top: 10%"-->
-            id="typeMenu" class="nav nav-pills" role="tablist"
+            <ul
+            <#--style="padding-top: 10%"-->
+                    id="typeMenu" class="nav nav-pills" role="tablist"
             <#--style="padding-bottom: 10%"-->
-                >
-            <li role="presentation" class="dropdown">
-                <a id="drop6" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                    <span id="currentType" type=""><@spring.message "courses.types.All"/></span>
-                    <span class="caret"></span>
-                </a>
-                <ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop6">
-                    <li role="presentation"><a class="typeItem" role="menuitem" tabindex="-1" href="#"  type=""><@spring.message "courses.types.All"/></a></li>
-                    <#list courseTypes as type>
-                        <li role="presentation"><a class="typeItem" role="menuitem" tabindex="-1" href="#" type="${type}"> <@spring.message "courses.types.${type}"/></a></li>
-                    </#list>
-                </ul>
-            </li>
-        </ul>
+                    >
+                <li role="presentation" class="dropdown">
+                    <a id="drop6" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                        <span id="currentType" type=""><@spring.message "courses.types.All"/></span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop6">
+                        <li role="presentation"><a class="typeItem" role="menuitem" tabindex="-1" href="#"  type=""><@spring.message "courses.types.All"/></a></li>
+                        <#list courseTypes as type>
+                            <li role="presentation"><a class="typeItem" role="menuitem" tabindex="-1" href="#" type="${type}"> <@spring.message "courses.types.${type}"/></a></li>
+                        </#list>
+                    </ul>
+                </li>
+            </ul>
 
-    </div>
+        </div>
     </div>
 </div>
 
@@ -64,7 +64,7 @@
 
 <script>
     $(function() {
-       search("", 1);
+        search("", 1);
     });
 
 
@@ -114,9 +114,9 @@
                 var res = "";
                 result.forEach(function(element, index, array){
                     res += "<div id='position.name'> "+
-                    "<input type='radio' name='position' value='"+element+"'/>&nbsp;"+
-                    element+
-                    "<br/></div>"
+                            "<input type='radio' name='position' value='"+element+"'/>&nbsp;"+
+                            element+
+                            "<br/></div>"
                 });
                 $("#positions").html(res);
             }
