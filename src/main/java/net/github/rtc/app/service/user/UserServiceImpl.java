@@ -44,7 +44,6 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     @Override
     public User create(final User user) {
         user.setRegisterDate(dateService.getCurrentDate());
-        user.setCode(getCode());
         super.create(user);
         return user;
     }
@@ -66,8 +65,13 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
             user.setStatus(UserStatus.ACTIVE);
         }
         if (!image.isEmpty()) {
-            user.setPhoto(upload.saveImage(user.getCode(), image));
+            final String url = saveImage(user.getCode(), image);
+            user.setPhoto(url);
         }
+    }
+
+    private String saveImage(String userCode, MultipartFile file) {
+        return upload.saveImage(userCode, file);
     }
 
     @Override
