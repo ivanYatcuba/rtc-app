@@ -4,10 +4,14 @@
 <@layout.layout>
 <input type="hidden" id="withArchive" value="false">
 <div class="col-md-offset-3 col-md-6" style="margin-bottom: 10px">
-    <div class="form-group"><h2 class="control-label col-md-7" for="types" ><@spring.message "courses.catalog"/></h2>
-    <div class="col-md-5" style="margin-left: -10%;">
+    <div class="form-group"><h4 class="control-label col-md-4" for="types" ><strong><@spring.message "courses.catalog"/></strong></h4>
+    <div class="col-md-5" style="margin-left: -5%;">
 
-        <ul style="padding-top: 10%" id="typeMenu" class="nav nav-pills" role="tablist" style="padding-bottom: 10%">
+        <ul
+                <#--style="padding-top: 10%"-->
+            id="typeMenu" class="nav nav-pills" role="tablist"
+            <#--style="padding-bottom: 10%"-->
+                >
             <li role="presentation" class="dropdown">
                 <a id="drop6" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
                     <span id="currentType" type=""><@spring.message "courses.types.All"/></span>
