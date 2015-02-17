@@ -12,7 +12,7 @@
 </style>
 <div style="width: 85%">
 <div>
-    <h4 class="page-header"><@spring.message "news.details"/></h4>
+    <h4><strong><@spring.message "news.details"/></strong></h4>
 </div>
 <div class="row">
     <div class="col-md-6">

@@ -47,7 +47,7 @@
 <#macro rtcForm name action title validationRules="" enctype="">
 <form class="form-horizontal" name="${name}" id="${name}" action="<@spring.url "${action}" />" method="post" enctype="${enctype}">
     <@rtcFormValidation formName="${name}" jsonRules="${validationRules}"/>
-    <h4 class="page-header"><@spring.message "${title}"/></h4><br/>
+    <h4><strong><@spring.message "${title}"/></strong></h4><br/>
     <#nested>
 </form>
 </#macro>

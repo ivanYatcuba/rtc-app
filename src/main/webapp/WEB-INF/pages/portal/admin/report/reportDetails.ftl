@@ -2,7 +2,7 @@
 <#import "../../../fieldMacro.ftl" as formMacro />
 
 <@layout.layout>
-<h3 class="page-header"><@spring.message "report.details"/></h3><br>
+<h4><strong><@spring.message "report.details"/></strong></h4>
 <style>
     label {
         float: left;
