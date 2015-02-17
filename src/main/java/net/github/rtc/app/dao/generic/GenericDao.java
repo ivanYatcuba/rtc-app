@@ -1,4 +1,4 @@
-package net.github.rtc.app.dao;
+package net.github.rtc.app.dao.generic;
 
 import net.github.rtc.app.utils.datatable.search.filter.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;

@@ -1,6 +1,6 @@
 /*package net.github.rtc.app.service;
 //todo
-import net.github.rtc.app.dao.GenericDao;
+import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import net.github.rtc.app.utils.datatable.search.SearchResults;

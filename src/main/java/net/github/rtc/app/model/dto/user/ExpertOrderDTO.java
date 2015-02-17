@@ -1,6 +1,6 @@
 package net.github.rtc.app.model.dto.user;
 
-import net.github.rtc.app.model.entity.user.UserRequestStatus;
+import net.github.rtc.app.model.entity.order.UserRequestStatus;
 
 import java.util.Date;
 

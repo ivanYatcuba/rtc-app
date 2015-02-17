@@ -41,64 +41,79 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
     @Column
     @ForExport("Surname")
     private String surname;
+
     @NotEmpty
     @Length(max = PRIMARY_LENGTH)
     @Column
     @ForExport("Name")
     private String name;
+
     @Length(max = PRIMARY_LENGTH)
     @Column
     @ForExport("Middle name")
     private String middleName;
+
     @NotNull
     @Column
     @ForExport("Birthday")
     private Date birthDate;
+
     @NotEmpty
     @Number
     @Column
     @ForExport("Phone")
     private String phone;
+
     @NotEmpty
     @Email
     @Column
     @ForExport("Email")
     private String email;
+
     @Length(max = SECONDARY_LENGTH)
     @Column
     @ForExport("City")
     private String city;
+
     @Length(max = SECONDARY_LENGTH)
     @Column
     @ForExport("University")
     private String university;
+
     @Length(max = SECONDARY_LENGTH)
     @Column
     @ForExport("Faculty")
     private String faculty;
+
     @Length(max = SECONDARY_LENGTH)
     @Column
     @ForExport("Speciality")
     private String speciality;
+
     @NotNull
     @Column
     @ForExport("English")
     @Enumerated(EnumType.STRING)
     private EnglishLevel english;
+
     @NotEmpty
     @Column
     @Length(max = LARGE_LENGTH)
     @ForExport("Note")
     private String note;
+
     @NotEmpty
     @Column
     @Type(type = "encryptedString")
     private String password;
+
     @Column
     @ForExport("Gender")
     private String gender = "Male";
+
     @Column
     private String photo;
+
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "UserProgLanguages",
@@ -107,18 +122,22 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 1)
     private Set<String> programmingLanguages;
+
     @NotNull
     @Column
     @Temporal(TemporalType.DATE)
     @ForExport("Register Date")
     private Date registerDate;
+
     @Column
     private Date removalDate;
+
     @NotNull
     @Column
     @ForExport("Status")
     @Enumerated(EnumType.STRING)
     private UserStatus status = UserStatus.INACTIVE;
+
     /* Spring Security fields*/
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "User_Role",
@@ -126,6 +145,7 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
       inverseJoinColumns = { @JoinColumn(name = "id") })
     @ForExport("Role")
     private List<Role> authorities;
+
     @Column
     private boolean accountNonExpired = true;
     @Column

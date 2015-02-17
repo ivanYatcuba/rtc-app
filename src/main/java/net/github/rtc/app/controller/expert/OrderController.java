@@ -3,7 +3,7 @@ package net.github.rtc.app.controller.expert;
 import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
 import net.github.rtc.app.model.entity.course.CourseType;
-import net.github.rtc.app.model.entity.user.UserRequestStatus;
+import net.github.rtc.app.model.entity.order.UserRequestStatus;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.order.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;

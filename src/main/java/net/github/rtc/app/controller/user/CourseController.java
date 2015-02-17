@@ -4,7 +4,7 @@ import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.model.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.entity.course.CourseStatus;
 import net.github.rtc.app.model.entity.course.CourseType;
-import net.github.rtc.app.model.entity.user.UserCourseOrder;
+import net.github.rtc.app.model.entity.order.UserCourseOrder;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.order.UserCourseOrderService;
 import net.github.rtc.app.utils.datatable.search.filter.CourseSearchFilter;

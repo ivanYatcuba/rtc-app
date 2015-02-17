@@ -2,8 +2,8 @@ package net.github.rtc.app.utils.datatable.search.filter;
 
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseType;
-import net.github.rtc.app.model.entity.user.UserCourseOrder;
-import net.github.rtc.app.model.entity.user.UserRequestStatus;
+import net.github.rtc.app.model.entity.order.UserCourseOrder;
+import net.github.rtc.app.model.entity.order.UserRequestStatus;
 import org.hibernate.criterion.*;
 
 import java.util.Date;

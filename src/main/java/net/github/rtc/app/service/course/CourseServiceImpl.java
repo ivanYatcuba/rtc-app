@@ -1,13 +1,13 @@
 package net.github.rtc.app.service.course;
 
-import net.github.rtc.app.dao.CoursesDao;
-import net.github.rtc.app.dao.GenericDao;
+import net.github.rtc.app.dao.courses.CoursesDao;
+import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.model.dto.builder.UserCourseDtoBuilder;
 import net.github.rtc.app.model.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseStatus;
 import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.model.entity.user.UserCourseOrder;
+import net.github.rtc.app.model.entity.order.UserCourseOrder;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
 import net.github.rtc.app.service.news.NewsService;

@@ -4,8 +4,8 @@ import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
 import net.github.rtc.app.model.dto.builder.ExpertOrderDtoBuilder;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.model.entity.user.UserCourseOrder;
-import net.github.rtc.app.model.entity.user.UserRequestStatus;
+import net.github.rtc.app.model.entity.order.UserCourseOrder;
+import net.github.rtc.app.model.entity.order.UserRequestStatus;
 import org.junit.Before;
 import org.junit.Test;
 
