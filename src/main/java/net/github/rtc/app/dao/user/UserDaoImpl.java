@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-package net.github.rtc.app.dao.impl;
+package net.github.rtc.app.dao.user;
 
-import net.github.rtc.app.dao.UserDao;
+import net.github.rtc.app.dao.generic.AbstractGenericDaoImpl;
 import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.entity.user.Role;
 import net.github.rtc.app.model.entity.user.RoleType;

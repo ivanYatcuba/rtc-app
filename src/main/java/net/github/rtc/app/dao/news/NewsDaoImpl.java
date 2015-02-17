@@ -1,6 +1,6 @@
-package net.github.rtc.app.dao.impl;
+package net.github.rtc.app.dao.news;
 
-import net.github.rtc.app.dao.NewsDao;
+import net.github.rtc.app.dao.generic.AbstractGenericDaoImpl;
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.news.NewsStatus;
 import org.hibernate.criterion.Order;

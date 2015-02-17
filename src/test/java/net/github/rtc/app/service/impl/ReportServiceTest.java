@@ -1,8 +1,8 @@
 /*
 package net.github.rtc.app.service.impl;
 //todo
-import net.github.rtc.app.dao.GenericDao;
-import net.github.rtc.app.dao.impl.ReportDao;
+import net.github.rtc.app.dao.generic.GenericDao;
+import net.github.rtc.app.dao.report.ReportDao;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.report.ExportFormat;

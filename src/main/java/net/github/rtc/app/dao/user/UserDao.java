@@ -1,5 +1,6 @@
-package net.github.rtc.app.dao;
+package net.github.rtc.app.dao.user;
 
+import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.model.entity.user.Role;
 import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.model.entity.user.User;

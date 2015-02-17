@@ -1,4 +1,4 @@
-package net.github.rtc.app.model.entity.user;
+package net.github.rtc.app.model.entity.order;
 
 public class Request {
     private String orderCode;

@@ -1,7 +1,7 @@
 package net.github.rtc.app.service.report;
 
-import net.github.rtc.app.dao.GenericDao;
-import net.github.rtc.app.dao.impl.ReportDao;
+import net.github.rtc.app.dao.generic.GenericDao;
+import net.github.rtc.app.dao.report.ReportDao;
 import net.github.rtc.app.export.ReportBuilder;
 import net.github.rtc.app.model.entity.report.ReportDetails;
 import net.github.rtc.app.service.generic.CodeGenerationService;

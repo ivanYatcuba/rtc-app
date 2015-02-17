@@ -1,5 +1,6 @@
-package net.github.rtc.app.dao.impl;
+package net.github.rtc.app.dao.report;
 
+import net.github.rtc.app.dao.generic.AbstractGenericDaoImpl;
 import net.github.rtc.app.model.entity.report.ReportDetails;
 import org.springframework.stereotype.Repository;
 
