@@ -33,7 +33,7 @@ public class MessageBuilder {
         if (sendingDate == null) {
             throw new IllegalArgumentException();
         }
-        this.sendingDate = sendingDate;
+        this.sendingDate = new Date(sendingDate.getTime());
         return this;
     }
 
