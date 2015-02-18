@@ -22,7 +22,7 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
 
     int getAcceptedOrdersCount(String courseCode);
 
-    boolean changeOrderStatus(final UserRequestStatus userRequestStatus, final String orderCode);
+    boolean changeOrderStatus(final String orderCode, final UserRequestStatus userRequestStatus);
 
     UserCourseOrder create(String courseCode, CourseType position);
 

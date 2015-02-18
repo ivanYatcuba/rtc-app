@@ -29,7 +29,7 @@ public class Message extends AbstractPersistenceObject {
     @Column
     private Date sendingDate;
 
-    @NotEmpty
+    @NotNull
     @Column
     @Enumerated(EnumType.STRING)
     private MessageType type;

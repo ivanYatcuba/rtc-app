@@ -5,7 +5,9 @@ import net.github.rtc.app.dao.message.MessageDao;
 import net.github.rtc.app.model.entity.message.Message;
 import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> implements MessageService {
 
     @Autowired

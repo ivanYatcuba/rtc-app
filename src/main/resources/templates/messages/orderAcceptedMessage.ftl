@@ -1,0 +1,1 @@
+Your course order was accepted by course expert.

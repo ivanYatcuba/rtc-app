@@ -16,6 +16,7 @@ import net.github.rtc.app.utils.datatable.search.SearchResultsBuilder;
 import net.github.rtc.app.utils.datatable.search.SearchResultsMapper;
 import net.github.rtc.app.utils.datatable.search.filter.OrderSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
+import net.github.rtc.app.utils.message.event.MessageEventCreator;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ import java.util.List;
 public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserCourseOrder> implements
   UserCourseOrderService {
 
-    private static Logger log = LoggerFactory.getLogger(UserCourseOrderServiceImpl.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(UserCourseOrderServiceImpl.class.getName());
     @Autowired
     private UserCourseOrderDao userCourseOrderDao;
     @Autowired
@@ -40,18 +41,20 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     private UserService userService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private MessageEventCreator eventCreator;
 
     @Override
     @Transactional
     public UserCourseOrder getUserOrderByUserCode(final String userCode) {
-        log.info("Get user order by user code: " + userCode);
+        LOG.info("Get user order by user code: " + userCode);
         return userCourseOrderDao.getUserOrder(userCode);
     }
 
     @Override
     @Transactional
     public List<UserCourseOrder> getUserOrdersByCode(String userCode) {
-        log.info("Get user orders by user code: " + userCode);
+        LOG.info("Get user orders by user code: " + userCode);
         return userCourseOrderDao.getUserOrdersByCode(userCode);
     }
 
@@ -59,7 +62,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     @Transactional
     public List<UserCourseOrder> getOrderByStatus(
       final UserRequestStatus status) {
-        log.info("Get user orders with status: " + status);
+        LOG.info("Get user orders with status: " + status);
         return userCourseOrderDao.getOrderByStatus(status);
     }
 
@@ -76,7 +79,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
   }
 
   @Override
-  public boolean changeOrderStatus(UserRequestStatus userRequestStatus, String orderCode) {
+  public boolean changeOrderStatus(String orderCode, UserRequestStatus userRequestStatus) {
     final UserCourseOrder order = findByCode(orderCode);
     order.setResponseDate(dateService.getCurrentDate());
     order.setStatus(userRequestStatus);
@@ -85,6 +88,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     } catch (Exception e) {
       return false;
     }
+    eventCreator.createOrderResponseMessageEvent(order);
     return true;
   }
 

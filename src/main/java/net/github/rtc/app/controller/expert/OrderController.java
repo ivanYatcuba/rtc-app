@@ -51,14 +51,13 @@ public class OrderController implements MenuItem {
 
     @RequestMapping(value = "/accept/{orderCode}", method = RequestMethod.GET)
     public String acceptRequest(@PathVariable final String orderCode) {
-        //userCourseOrderService.changeOrderStatus(UserRequestStatus.ACCEPTED, orderCode);
-        userCourseOrderService.acceptOrder(orderCode);
+        userCourseOrderService.changeOrderStatus(orderCode, UserRequestStatus.ACCEPTED);
         return REDIRECT_REQUESTS;
     }
 
     @RequestMapping(value = "/decline/{orderCode}", method = RequestMethod.GET)
     public String declineRequest(@PathVariable final String orderCode) {
-        userCourseOrderService.changeOrderStatus(UserRequestStatus.REJECTED, orderCode);
+        userCourseOrderService.changeOrderStatus(orderCode, UserRequestStatus.REJECTED);
         return REDIRECT_REQUESTS;
     }
 

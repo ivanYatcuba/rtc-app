@@ -1,0 +1,1 @@
+Your course order was rejected by course expert.
