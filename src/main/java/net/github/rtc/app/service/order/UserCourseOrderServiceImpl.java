@@ -104,6 +104,9 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
         userCourseOrder.setUserCode(userCode);
         userCourseOrder.setRequestDate(now);
         userCourseOrder.setReason("prosto tak");
+
+        eventCreator.createOrderSendMessageEvent(userCourseOrder);
+
         return super.create(userCourseOrder);
     }
 

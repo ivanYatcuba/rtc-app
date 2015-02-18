@@ -1,16 +1,17 @@
-package net.github.rtc.app.utils.notifiers;
+package net.github.rtc.app.utils.activity.notifiers;
 
 import net.github.rtc.app.model.entity.activity.Activity;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.activity.ActivityService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.utils.AuthorizedUserProvider;
-import net.github.rtc.app.utils.events.ActivityEvent;
+import net.github.rtc.app.utils.activity.events.ActivityEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ActivityNotifier implements ApplicationListener<ActivityEvent> {
-
 
     @Autowired
     private ActivityService activityService;

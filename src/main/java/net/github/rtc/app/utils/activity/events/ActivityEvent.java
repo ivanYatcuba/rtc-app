@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.events;
+package net.github.rtc.app.utils.activity.events;
 
 import net.github.rtc.app.model.entity.activity.ActivityAction;
 import net.github.rtc.app.model.entity.activity.ActivityEntity;

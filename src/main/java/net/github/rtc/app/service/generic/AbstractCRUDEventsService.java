@@ -7,7 +7,7 @@ import net.github.rtc.app.model.entity.activity.IActivity;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.utils.events.EventCreator;
+import net.github.rtc.app.utils.activity.events.EventCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractCRUDEventsService<T  extends AbstractPersistenceObject & IActivity>  extends AbstractGenericServiceImpl<T>  {

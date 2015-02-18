@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.events;
+package net.github.rtc.app.utils.activity.events;
 
 
 import net.github.rtc.app.model.entity.activity.ActivityAction;
@@ -6,6 +6,9 @@ import net.github.rtc.app.model.entity.activity.ActivityEntity;
 import net.github.rtc.app.model.entity.activity.IActivity;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
+import org.springframework.stereotype.Component;
+
+@Component
 public class EventCreator implements ApplicationEventPublisherAware {
 
     private ApplicationEventPublisher publisher;
