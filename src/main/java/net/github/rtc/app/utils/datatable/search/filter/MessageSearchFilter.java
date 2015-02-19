@@ -76,6 +76,7 @@ public class MessageSearchFilter extends AbstractSearchCommand {
                     break;
                 case UNREAD: criteria.add(Restrictions.eq(IS_READ, false));
                     break;
+                default: break;
             }
 
         }

@@ -8,5 +8,5 @@ import net.github.rtc.app.utils.datatable.search.filter.MessageSearchFilter;
 
 public interface MessageService extends GenericService<Message> {
 
-    public SearchResults<MessageDTO> searchMessagesForUser(MessageSearchFilter searchFilter);
+    SearchResults<MessageDTO> searchMessagesForUser(MessageSearchFilter searchFilter);
 }

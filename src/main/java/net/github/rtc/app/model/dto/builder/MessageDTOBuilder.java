@@ -25,7 +25,7 @@ public class MessageDTOBuilder {
         final String userCode = source.getSenderUserCode();
         final String userName =   userService.findByCode(userCode).getFullName();
 
-        MessageDTO messageDTO = new MessageDTO();
+        final MessageDTO messageDTO = new MessageDTO();
         messageDTO.setUserName(userName);
         messageDTO.setText(source.getText());
         messageDTO.setSendingDate(source.getSendingDate());
