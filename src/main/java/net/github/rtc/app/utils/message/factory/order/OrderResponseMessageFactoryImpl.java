@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 
-@Component
+@Component("responseMessageFactoryImpl")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class OrderResponseMessageFactoryImpl implements OrderMessageFactory {
 
