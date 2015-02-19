@@ -12,7 +12,9 @@ public class DateCriteriaCreator {
 
     public DateCriteriaCreator(String fieldName, Date date) {
         this.fieldName = fieldName;
-        this.date = date;
+        if (date != null) {
+            this.date = new Date(date.getTime());
+        }
     }
 
     public SimpleExpression getDateCriteria(char dateMoreLessEq) {
