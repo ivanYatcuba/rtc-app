@@ -77,21 +77,8 @@ public class OrderSearchFilter extends AbstractSearchCommand {
             criteria.add(Restrictions.eq(POSITION, courseType));
         }
         if (orderDate != null) {
-            switch (dateMoreLessEq) {
-                case '>':
-                    final Date fromDate = orderDate;
-                    criteria.add(Restrictions.gt(REQUEST_DATE, fromDate));
-                    break;
-                case '=':
-                    final Date toDate = orderDate;
-                    criteria.add(Restrictions.between(REQUEST_DATE, orderDate, toDate));
-                    break;
-                case '<':
-                    criteria.add(Restrictions.lt(REQUEST_DATE, orderDate));
-                    break;
-                default:
-                    break;
-            }
+            final DateCriteriaCreator dateCriteriaCreator = new DateCriteriaCreator(REQUEST_DATE, orderDate);
+            criteria.add(dateCriteriaCreator.getDateCriteria(dateMoreLessEq));
         }
 
         if (status != null) {

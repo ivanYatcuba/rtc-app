@@ -37,21 +37,8 @@ public class NewsSearchFilter extends AbstractSearchCommand {
             criteria.add(Restrictions.like("title", PERCENT + title + PERCENT));
         }
         if (createDate != null) {
-            switch (dateMoreLessEq) {
-                case '>':
-                    final Date fromDate = setNightTime(createDate);
-                    criteria.add(Restrictions.gt(CREATE_DATE, fromDate));
-                    break;
-                case '=':
-                    final Date toDate = setNightTime(createDate);
-                    criteria.add(Restrictions.between(CREATE_DATE, createDate, toDate));
-                    break;
-                case '<':
-                    criteria.add(Restrictions.lt(CREATE_DATE, createDate));
-                    break;
-                default:
-                    break;
-            }
+            final DateCriteriaCreator dateCriteriaCreator = new DateCriteriaCreator(CREATE_DATE, createDate);
+            criteria.add(dateCriteriaCreator.getDateCriteria(dateMoreLessEq));
         }
 
         if (status != null) {

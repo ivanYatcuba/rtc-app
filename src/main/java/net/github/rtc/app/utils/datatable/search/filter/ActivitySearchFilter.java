@@ -81,19 +81,8 @@ public class ActivitySearchFilter extends AbstractSearchCommand {
             criteria.add(Restrictions.like("username", user));
         }
         if (date != null) {
-            switch (dateMoreLessEq) {
-                case '>':
-                    criteria.add(Restrictions.gt(DATE, date));
-                    break;
-                case '=':
-                    criteria.add(Restrictions.eq(DATE, date));
-                    break;
-                case '<':
-                    criteria.add(Restrictions.lt(DATE, date));
-                    break;
-                default:
-                    break;
-            }
+            final DateCriteriaCreator dateCriteriaCreator = new DateCriteriaCreator(DATE, date);
+            criteria.add(dateCriteriaCreator.getDateCriteria(dateMoreLessEq));
         }
         if (entity != null && entity.size() > 0) {
             final Disjunction entityDis = Restrictions.disjunction();

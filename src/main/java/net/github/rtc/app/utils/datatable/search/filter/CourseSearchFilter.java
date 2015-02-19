@@ -111,19 +111,8 @@ public class CourseSearchFilter extends AbstractSearchCommand {
             criteria.add(Restrictions.in(STATUS, status));
         }
         if (startDate != null) {
-            switch (dateMoreLessEq) {
-            case '>':
-                criteria.add(Restrictions.gt(START_DATE, startDate));
-                break;
-            case '=':
-                criteria.add(Restrictions.eq(START_DATE, startDate));
-                break;
-            case '<':
-                criteria.add(Restrictions.lt(START_DATE, startDate));
-                break;
-            default:
-                break;
-            }
+            final DateCriteriaCreator dateCriteriaCreator = new DateCriteriaCreator(START_DATE, startDate);
+            criteria.add(dateCriteriaCreator.getDateCriteria(dateMoreLessEq));
         }
         if (tags != null && tags.size() > 0) {
             criteria.createAlias(TAGS, TAGS);

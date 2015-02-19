@@ -86,18 +86,8 @@ public class UserSearchFilter extends AbstractSearchCommand {
         }
 
         if (registerDate != null) {
-            switch (dateMoreLessEq) {
-            case '>':
-                criteria.add(Restrictions.gt(REGISTER_DATE, registerDate));
-                break;
-            case '=':
-                criteria.add(Restrictions.eq(REGISTER_DATE, registerDate));
-                break;
-            case '<':
-                criteria.add(Restrictions.lt(REGISTER_DATE, registerDate));
-                break;
-            default: break;
-            }
+            final DateCriteriaCreator dateCriteriaCreator = new DateCriteriaCreator(REGISTER_DATE, registerDate);
+            criteria.add(dateCriteriaCreator.getDateCriteria(dateMoreLessEq));
 
         }
 
