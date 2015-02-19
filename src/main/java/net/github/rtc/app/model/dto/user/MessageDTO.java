@@ -16,7 +16,9 @@ public class MessageDTO {
     public MessageDTO(String userName, String text, Date sendingDate) {
         this.userName = userName;
         this.text = text;
-        this.sendingDate = sendingDate;
+        if (sendingDate != null) {
+            this.sendingDate = new Date(sendingDate.getTime());
+        }
     }
 
     public String getUserName() {
@@ -36,10 +38,12 @@ public class MessageDTO {
     }
 
     public Date getSendingDate() {
-        return sendingDate;
+        return sendingDate == null ? null : new Date(sendingDate.getTime());
     }
 
     public void setSendingDate(Date sendingDate) {
-        this.sendingDate = sendingDate;
+        if (sendingDate != null) {
+            this.sendingDate = new Date(sendingDate.getTime());
+        }
     }
 }
