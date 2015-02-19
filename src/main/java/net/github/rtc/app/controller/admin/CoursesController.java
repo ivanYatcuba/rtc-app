@@ -122,7 +122,7 @@ public class CoursesController implements MenuItem {
     public Map<String, String> getExpertUsers() {
         final Map<String, String> expertMap = new HashMap<>();
         for (User u : userService.getUserByRole(RoleType.ROLE_EXPERT)) {
-            expertMap.put(u.getCode(), u.toString());
+            expertMap.put(u.getCode(), u.getFullName());
         }
         return expertMap;
     }

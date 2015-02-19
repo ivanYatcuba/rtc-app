@@ -396,7 +396,7 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
     }
 
     public String getFullName() {
-        return new StringBuilder(this.name).append(SPACE).append(this.surname).toString();
+        return this.surname + SPACE + this.name;
     }
 
     //todo:refactor

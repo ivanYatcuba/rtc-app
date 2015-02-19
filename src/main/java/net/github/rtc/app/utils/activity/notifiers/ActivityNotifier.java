@@ -23,7 +23,7 @@ public class ActivityNotifier implements ApplicationListener<ActivityEvent> {
             final User user = AuthorizedUserProvider.getAuthorizedUser();
             final Activity activity = new Activity();
 
-            activity.setUsername(user.toString());
+            activity.setUsername(user.getFullName());
             activity.setDetail(event.getDetails());
             activity.setAction(event.getAction());
             activity.setActionDate(dateService.getCurrentDate());

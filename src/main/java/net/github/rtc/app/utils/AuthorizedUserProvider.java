@@ -28,6 +28,6 @@ public final class AuthorizedUserProvider {
 
     static public ProfileHeaderDTO getProfileHeaderDTO() {
         final User user = AuthorizedUserProvider.getAuthorizedUser();
-        return new ProfileHeaderDTO(user.toString(), user.getPhoto());
+        return new ProfileHeaderDTO(user.getFullName(), user.getPhoto());
     }
 }
