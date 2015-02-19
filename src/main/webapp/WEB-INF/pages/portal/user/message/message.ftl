@@ -14,6 +14,28 @@
 
 <div id="searchTable"></div>
 
+<!-- Modal -->
+<div class="modal" style="top: 15%; left: 1%" id="removeMessageModal" tabindex="-1" role="dialog" aria-labelledby="removeMessageModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="removeMessageModalLabel">Remove News</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to remove this news?
+            </div>
+            <div class="modal-footer">
+                <form name="deleteMessage" >
+                    <input type="hidden" id="messageCode" name="messageCode"/>
+                    <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onClick="PopUpHide()">Remove</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
 
     var serializedFilter = "";
@@ -25,7 +47,7 @@
     function search(page) {
         $.ajax({
             type: "GET",
-            url: '<@spring.url "/user/expert/message/messageTable"/>',
+            url: '<@spring.url "/user/message/messageTable"/>',
             data: serializedFilter + "&page=" + page,
             success: function (result) {
                 $("#searchTable").html(result)
@@ -53,6 +75,35 @@
             search(1);
         }
     );
+
+    function shorten(text, maxLength) {
+        var ret = text;
+        if (ret.length > maxLength) {
+            ret = ret.substr(0,maxLength-3) + "...";
+        }
+        return ret;
+    }
+
+
+    function PopUpShow(messageCode) {
+        $("#messageCode").val(messageCode);
+        $('#removeMessageModal').modal('show')
+    }
+    function PopUpHide() {
+        $('#removeMessageModal').modal('hide');
+        var messageCode = $("#messageCode").val();
+        var page = $('#searchTable').find('.active').find('.navButton').attr("page");
+        if(page == null) {
+            page = 1;
+        }
+        $.ajax({
+            type: "GET",
+            url: '<@spring.url"/user/message/remove/"/>' + messageCode,
+            success: function () {
+                search(page);
+            }
+        });
+    }
 
     function ajaxSessionTimeout() {
         window.location.replace("<@spring.url'/login'/>");

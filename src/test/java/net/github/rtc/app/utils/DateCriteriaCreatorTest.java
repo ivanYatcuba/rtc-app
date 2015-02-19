@@ -1,7 +1,10 @@
 package net.github.rtc.app.utils;
 
 import net.github.rtc.app.utils.datatable.search.filter.DateCriteriaCreator;
+import org.hibernate.criterion.BetweenExpression;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.SimpleExpression;
+import org.joda.time.DateTime;
 import org.junit.Test;
 
 import java.util.Date;
@@ -35,16 +38,18 @@ public class DateCriteriaCreatorTest {
     @Test(expected = IllegalArgumentException.class)
     public void testEqCriteriaWrongArg() {
         final DateCriteriaCreator creator = new DateCriteriaCreator(DATE, TEST_DATE);
-        final SimpleExpression expression = creator.getDateCriteria('y');
+        final Criterion expression = creator.getDateCriteria('y');
     }
 
     private void testCriteria(char prop) {
         final DateCriteriaCreator creator = new DateCriteriaCreator(DATE, TEST_DATE);
-        final SimpleExpression expression = creator.getDateCriteria(GT);
-        final String op = expression.toString().replaceAll(DATE, "").replaceAll(TEST_DATE.toString(), "");
-        assertEquals(DATE, expression.getPropertyName());
-        assertEquals(TEST_DATE, expression.getValue());
-        assertEquals(prop, op.charAt(0));
+        final Criterion expression = creator.getDateCriteria(prop);
+        if(expression instanceof SimpleExpression) {
+            final String op = expression.toString().replaceAll(DATE, "").replaceAll(TEST_DATE.toString(), "");
+            assertEquals(DATE, ((SimpleExpression)expression).getPropertyName());
+            assertEquals(new DateTime(TEST_DATE).withTimeAtStartOfDay().toDate(), ((SimpleExpression)expression).getValue());
+            assertEquals(prop, op.charAt(0));
+        }
     }
 
 }

@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class MessageDTO {
 
+    private String code;
+
     private String userName;
 
     private String text;
@@ -45,5 +47,13 @@ public class MessageDTO {
         if (sendingDate != null) {
             this.sendingDate = new Date(sendingDate.getTime());
         }
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

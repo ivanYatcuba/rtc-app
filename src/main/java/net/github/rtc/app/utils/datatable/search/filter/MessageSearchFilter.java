@@ -57,7 +57,7 @@ public class MessageSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc(SENDING_DATE);
+        return Order.desc(SENDING_DATE);
     }
 
     @Override

@@ -1,7 +1,8 @@
 package net.github.rtc.app.utils.datatable.search.filter;
 
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.SimpleExpression;
+import org.joda.time.DateTime;
 
 import java.util.Date;
 
@@ -17,11 +18,14 @@ public class DateCriteriaCreator {
         }
     }
 
-    public SimpleExpression getDateCriteria(char dateMoreLessEq) {
+    public Criterion getDateCriteria(char dateMoreLessEq) {
+        final DateTime today = new DateTime(date).withTimeAtStartOfDay();
         switch (dateMoreLessEq) {
-            case '>': return Restrictions.gt(fieldName, date);
-            case '=': return Restrictions.eq(fieldName, date);
-            case '<': return Restrictions.lt(fieldName, date);
+            case '>': return Restrictions.gt(fieldName, today.toDate());
+            case '=':
+                final DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
+                return Restrictions.between(fieldName, today.toDate(), tomorrow.toDate());
+            case '<': return Restrictions.lt(fieldName, today.toDate());
             default: throw new IllegalArgumentException();
         }
     }

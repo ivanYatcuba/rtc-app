@@ -3,11 +3,15 @@
 <div class="form-horizontal">
     <@spring.formHiddenInput "messageFilter.userCode" />
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
         <@formMacro.rtcFormSingleSelect "messageFilter.status" "messageFilter.status" messageStatus, "", "", "message.status.", {"" : "All"}/>
         </div>
         <div class="col-md-6">
-                <@formMacro.formDateSearch "messageFilter.dateMoreLessEq", "messageFilter.receivedDate"/>
+            <div class="form-group">
+                <label for="compare" class="control-label col-md-4" ><@spring.message "messageFilter.sendingDate"/></label>
+                <div id="compare"class="col-md-2"><@formMacro.formSingleSelect "messageFilter.dateMoreLessEq", ["=", "<", ">"], 'class=form-control'/></div>
+                <div class="col-md-3"><@formMacro.rtcDateInput  "messageFilter.sendingDate" 'class=form-control style="background-color: #fff"' /></div>
+            </div>
         </div>
 
     </div>

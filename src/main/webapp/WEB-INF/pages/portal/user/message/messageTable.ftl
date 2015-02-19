@@ -5,10 +5,10 @@
 <table width="100%" class="table" style="margin-bottom: 5px" id="ReportTable">
     <thead>
     <tr>
-        <th><@spring.message " message.search.result.header.subject"/></th>
+        <th class="col-md-5"><@spring.message "message.search.result.header.subject"/></th>
         <th><@spring.message "message.search.result.header.from"/></th>
         <th><@spring.message "message.search.result.header.received"/></th>
-        <th></th>
+        <th class="col-md-2"></th>
     </tr>
     </thead>
 <#if messages?has_content>
@@ -16,7 +16,7 @@
         <tr style="vertical-align: middle">
 
             <td style="vertical-align: middle">
-            <a href="#">${message.text}</a>
+            <a href="#"><span class="description">${message.text}</span></a>
             </td>
 
             <td style="vertical-align: middle">
@@ -28,7 +28,7 @@
             </td>
 
             <td style="vertical-align: middle">
-                <button type="button" class="btn btn-default">Default</button>
+                <button type="button" class="btn btn-default" onclick="PopUpShow('${message.code}')"><@spring.message "message.action.Remove"/></button>
             </td>
         </tr>
     </#list>
@@ -47,6 +47,12 @@
 </#if>
 
 <script>
+    $(function() {
+        $.each($('.description'), function() {
+            var str = $(this).html();
+            $(this).html(shorten(str, 50));
+        });
+    });
     function doAjaxCall(url) {
         $.ajax({
             type: "GET",

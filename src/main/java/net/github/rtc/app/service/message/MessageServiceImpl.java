@@ -2,10 +2,10 @@ package net.github.rtc.app.service.message;
 
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.dao.message.MessageDao;
-import net.github.rtc.app.model.dto.builder.MessageDTOBuilder;
 import net.github.rtc.app.model.dto.user.MessageDTO;
 import net.github.rtc.app.model.entity.message.Message;
 import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.SearchResultsBuilder;
 import net.github.rtc.app.utils.datatable.search.SearchResultsMapper;
@@ -21,6 +21,9 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
 
     @Autowired
     private MessageDao messageDao;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     protected GenericDao<Message> getDao() {
@@ -40,8 +43,12 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
             public List<MessageDTO> map(List<Message> searchResults) {
                 final List<MessageDTO> outputResults = new ArrayList<>();
                 for (Message msg : searchResults) {
-                    final MessageDTOBuilder dtoBuilder = new MessageDTOBuilder(msg);
-                    outputResults.add(dtoBuilder.build());
+                    final MessageDTO messageDTO = new MessageDTO();
+                    messageDTO.setUserName(userService.findByCode(msg.getSenderUserCode()).getName());
+                    messageDTO.setText(msg.getText());
+                    messageDTO.setSendingDate(msg.getSendingDate());
+                    messageDTO.setCode(msg.getCode());
+                    outputResults.add(messageDTO);
                 }
                 return outputResults;
             }
