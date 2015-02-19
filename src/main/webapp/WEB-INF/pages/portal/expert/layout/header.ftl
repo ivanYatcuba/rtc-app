@@ -10,6 +10,11 @@
             <li style="margin-right: 50px;height: 45px">
                 <a href='<@spring.url"/user/profile/"/>'>${(profileHeader.name)!}</a>
             </li>
+            <#if profileHeader.unreadMessageCount!=0>
+                <li style="margin-right: 50px;height: 45px">
+                    <a>(${(profileHeader.unreadMessageCount)!})</a>
+                </li>
+            </#if>
 
             <li style="margin-right: 20px; height: 45px">
                 <a href='<@spring.url"/logout"/>'><img src="<@spring.url'/resources/images/exit.png'/>"></a>

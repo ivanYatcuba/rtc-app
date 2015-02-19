@@ -7,4 +7,5 @@ import javax.annotation.Resource;
 
 @Resource
 public interface MessageDao  extends GenericDao<Message> {
+    int getUnreadMessageCont(String userCode);
 }
