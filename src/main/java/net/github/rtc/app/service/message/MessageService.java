@@ -9,4 +9,6 @@ import net.github.rtc.app.utils.datatable.search.filter.MessageSearchFilter;
 public interface MessageService extends GenericService<Message> {
 
     SearchResults<MessageDTO> searchMessagesForUser(MessageSearchFilter searchFilter);
+    Message readMessage(String messageCode);
+    int getUserUnreadMessageCount(String userCode);
 }

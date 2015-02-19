@@ -41,6 +41,14 @@ public class MessageController implements MenuItem {
         return mav;
     }
 
+
+    @RequestMapping(value = "/{code}", method = RequestMethod.GET)
+    public ModelAndView getMessageDetail(@PathVariable String code) {
+        final ModelAndView mav = new ModelAndView(ROOT + "/messageDetails");
+        mav.addObject("message",  messageService.readMessage(code));
+        return mav;
+    }
+
     @RequestMapping(value = "/remove/{code}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public void removeMessage(@PathVariable String code) {

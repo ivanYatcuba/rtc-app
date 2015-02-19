@@ -16,7 +16,7 @@
         <tr style="vertical-align: middle">
 
             <td style="vertical-align: middle">
-            <a href="#"><span class="description">${message.text}</span></a>
+            <a href="<@spring.url "/user/message/"/>${message.code}"><span class="description">${message.text}</span></a>
             </td>
 
             <td style="vertical-align: middle">

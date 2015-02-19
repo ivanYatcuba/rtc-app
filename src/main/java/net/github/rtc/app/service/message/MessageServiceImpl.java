@@ -37,6 +37,18 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
                     setSearchResultsMapper(getMessageMapper()).build();
     }
 
+    @Override
+    public Message readMessage(String messageCode) {
+        final  Message message = findByCode(messageCode);
+        message.setRead(true);
+        return messageDao.update(message);
+    }
+
+    @Override
+    public int getUserUnreadMessageCount(String userCode) {
+        return messageDao.getUnreadMessageCont(userCode);
+    }
+
     private SearchResultsMapper<Message, MessageDTO> getMessageMapper() {
         return new SearchResultsMapper<Message, MessageDTO>() {
             @Override
