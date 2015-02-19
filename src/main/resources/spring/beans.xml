@@ -27,9 +27,6 @@
         <property name="basename" value="classpath:/errorMessages" />
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
-    <bean id="messageFactoryProvider" class="net.github.rtc.app.utils.message.AbstractMessageFactoryProvider">
-        <lookup-method name="getOrderResponseMessageFactory" bean="orderResponseMessageFactoryImpl"/>
-    </bean>
     <!--################################################## -->
 
     <bean id="rtcMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -49,8 +46,6 @@
         </property>
     </bean>
 
-    <bean class="net.github.rtc.app.utils.notifiers.ActivityNotifier"/>
-    <bean class="net.github.rtc.app.utils.events.EventCreator"/>
 
     <util:map id="serviceHolder" map-class="java.util.HashMap">
         <entry>

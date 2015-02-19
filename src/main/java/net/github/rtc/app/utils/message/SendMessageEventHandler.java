@@ -2,34 +2,26 @@ package net.github.rtc.app.utils.message;
 
 import net.github.rtc.app.model.entity.message.Message;
 import net.github.rtc.app.service.message.MessageService;
-import net.github.rtc.app.utils.message.event.OrderResponseMessageEvent;
-import net.github.rtc.app.utils.message.event.AbstractSendMessageEvent;
-import net.github.rtc.app.utils.message.factory.MessageFactory;
-import net.github.rtc.app.utils.message.factory.OrderResponseMessageFactoryImpl;
+import net.github.rtc.app.utils.message.event.OrderMessageEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Component
-public class SendMessageEventHandler implements ApplicationListener<AbstractSendMessageEvent> {
+public class SendMessageEventHandler implements ApplicationListener<OrderMessageEvent> {
 
     @Autowired
     private MessageService messageService;
-    @Autowired
-    private AbstractMessageFactoryProvider messageFactoryProvider;
 
     @Override
-    public void onApplicationEvent(AbstractSendMessageEvent sendMessageEvent) {
-        final Message message = getMessageFactory(sendMessageEvent).getMessage();
-        messageService.create(message);
-    }
-
-    private MessageFactory getMessageFactory(AbstractSendMessageEvent event) {
-        if (event instanceof OrderResponseMessageEvent) {
-            final OrderResponseMessageFactoryImpl factory = messageFactoryProvider.getOrderResponseMessageFactory();
-            factory.setOrder(((OrderResponseMessageEvent) event).getOrder());
-            return factory;
+    @Transactional
+    public void onApplicationEvent(OrderMessageEvent sendMessageEvent) {
+        final List<Message> msgList = sendMessageEvent.getMessages();
+        for (Message message: msgList) {
+            messageService.create(message);
         }
-        throw new IllegalArgumentException();
     }
 }

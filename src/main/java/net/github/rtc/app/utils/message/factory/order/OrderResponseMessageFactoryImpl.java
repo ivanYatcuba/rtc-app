@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.message.factory;
+package net.github.rtc.app.utils.message.factory.order;
 
 import net.github.rtc.app.model.entity.message.Message;
 import net.github.rtc.app.model.entity.message.MessageType;
@@ -12,9 +12,12 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public class OrderResponseMessageFactoryImpl implements MessageFactory {
+public class OrderResponseMessageFactoryImpl implements OrderMessageFactory {
 
     private static final String ACCEPTED_TEMPLATE_PATH = "/templates/messages/orderAcceptedMessage.ftl";
     private static final String REJECTED_TEMPLATE_PATH = "/templates/messages/orderRejectedMessage.ftl";
@@ -26,16 +29,19 @@ public class OrderResponseMessageFactoryImpl implements MessageFactory {
     @Autowired
     private DateService dateService;
 
+    @Override
     public void setOrder(UserCourseOrder order) {
         this.order = order;
     }
 
     @Override
-    public Message getMessage() {
-        return new MessageBuilder().setSenderCode(AuthorizedUserProvider.getAuthorizedUser().getCode()).
+    public List<Message> getMessages() {
+        final Message msg = new MessageBuilder().setSenderCode(AuthorizedUserProvider.getAuthorizedUser().getCode()).
                 setReceiverCode(order.getUserCode()).
                 setSendingDate(dateService.getCurrentDate()).
-                setType(MessageType.USER).setText(getMessageText()).build();
+                setType(MessageType.SYSTEM).setText(getMessageText()).build();
+
+        return Arrays.asList(msg);
     }
 
     private String getMessageText() {
