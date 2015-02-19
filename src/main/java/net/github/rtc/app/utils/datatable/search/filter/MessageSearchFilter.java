@@ -25,11 +25,13 @@ public class MessageSearchFilter extends AbstractSearchCommand {
     }
 
     public Date getSendingDate() {
-        return sendingDate;
+        return sendingDate == null ? null : new Date(sendingDate.getTime());
     }
 
     public void setSendingDate(Date sendingDate) {
-        this.sendingDate = sendingDate;
+        if (sendingDate != null) {
+            this.sendingDate = new Date(sendingDate.getTime());
+        }
     }
 
     public char getDateMoreLessEq() {
