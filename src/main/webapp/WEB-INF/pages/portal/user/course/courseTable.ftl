@@ -24,7 +24,7 @@
             <img src="<@spring.url'/resources/images/profile.jpg'/>"  alt="..." style="width: 242px;height: 200px"><br/>
             <div style="width: 242px; min-height: 8em; height: 8em">
                     <p><span class="description">${course.description}</span><br/>
-                        <a onClick='setCode("${course.code}");PopUpShow("${course.types?join(',')}")'>More >></a></p>
+                        <a href="<@spring.url'/user/courses/courseDetails/${course.code}'/>">More >></a></p>
             </div>
             <div class="row">
                 <div class="col-md-6">
