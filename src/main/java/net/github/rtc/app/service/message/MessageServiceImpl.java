@@ -40,8 +40,11 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
     @Override
     public Message readMessage(String messageCode) {
         final  Message message = findByCode(messageCode);
-        message.setRead(true);
-        return messageDao.update(message);
+        if (!message.isRead()) {
+            message.setRead(true);
+            return messageDao.update(message);
+        }
+        return message;
     }
 
     @Override

@@ -8,13 +8,9 @@
                 <a style="padding-right: 0px" href='<@spring.url"/user/profile/"/>'><@formMacro.userImage "${(profileHeader.imageId)!}" "" "profileImg" /></a>
             </li>
             <li style="margin-right: 50px;height: 45px">
-                <a href='<@spring.url"/user/profile/"/>'>${(profileHeader.name)!}</a>
+                <a href='<@spring.url"/user/profile/"/>'>${(profileHeader.name)!}
+            <#if profileHeader.unreadMessageCount!=0>(${(profileHeader.unreadMessageCount)!})</#if></a>
             </li>
-            <#if profileHeader.unreadMessageCount!=0>
-                <li style="margin-right: 50px;height: 45px">
-                    <a>(${(profileHeader.unreadMessageCount)!})</a>
-                </li>
-            </#if>
             <li style="margin-right: 20px;height: 45px">
                 <a href='<@spring.url"/logout"/>'><img src="<@spring.url'/resources/images/exit.png'/>"></a>
             </li>

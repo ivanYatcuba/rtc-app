@@ -4,6 +4,7 @@ package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.model.dto.user.MessageDTO;
+import net.github.rtc.app.model.dto.user.ProfileHeaderDTO;
 import net.github.rtc.app.model.entity.message.MessageStatus;
 import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.service.message.MessageService;
@@ -45,9 +46,12 @@ public class MessageController implements MenuItem {
     }
 
     @RequestMapping(value = "/{code}", method = RequestMethod.GET)
-    public ModelAndView getMessageDetail(@PathVariable String code) {
+    public ModelAndView getMessageDetail(@PathVariable String code,
+                                         @ModelAttribute("profileHeader") ProfileHeaderDTO  headerDTO) {
         final ModelAndView mav = new ModelAndView(getRoot() + "/messageDetails");
-        mav.addObject("message",  messageService.readMessage(code));
+        mav.addObject("message", messageService.readMessage(code));
+        headerDTO.setUnreadMessageCount(messageService.getUserUnreadMessageCount(
+                AuthorizedUserProvider.getAuthorizedUser().getCode()));
         return mav;
     }
 

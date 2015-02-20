@@ -35,7 +35,6 @@
         </div>
     </div>
 </div>
-
 <script type="text/javascript">
 
     var serializedFilter = "";
@@ -69,11 +68,11 @@
     });
 
     $("#reset").on("click", function () {
-            $(".form-horizontal input, textarea").val("");
-            $(".form-horizontal ul#tagsTag li.tagit-choice").remove();
-            $(".form-horizontal select option:selected").removeAttr("selected");
-            search(1);
-        }
+                $(".form-horizontal input, textarea").val("");
+                $(".form-horizontal ul#tagsTag li.tagit-choice").remove();
+                $(".form-horizontal select option:selected").removeAttr("selected");
+                search(1);
+            }
     );
 
     function shorten(text, maxLength) {
