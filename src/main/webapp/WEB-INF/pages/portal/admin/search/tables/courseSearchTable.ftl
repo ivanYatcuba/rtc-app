@@ -42,8 +42,8 @@
                                     data-toggle="dropdown">
                                 Action</button>
                             <ul class="dropdown-menu" style="min-width: 100px;"  role="menu" aria-labelledby="dropdownMenu1">
-                                <li id="publicationLi" role="presentation"><a role="menuitem" href="#" tabindex="-1" onclick="javascript:PopUpShow('${course.code}')">Publish</a></li>
-                                <li id="publicationLi" role="presentation"><a role="menuitem" href="#" tabindex="-1" onclick="javascript:ArchiveCourse('${course.code}')">Archive</a></li>
+                                <li id="publicationLi" role="presentation"><a role="menuitem" href="#" tabindex="-1" onclick="PopUpShow('${course.code}')">Publish</a></li>
+                                <li id="publicationLi" role="presentation"><a role="menuitem" href="#" tabindex="-1" onclick="ArchiveCourse('${course.code}')">Archive</a></li>
                             <#--<li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/delete/${course.code}"/>">Remove</a></li>-->
                             </ul>
                         </div>
@@ -85,7 +85,7 @@
                 <form id="publishCourseForm" name="publishCourseForm" method="post">
                     <input type="hidden" id="courseCode" name="courseCode"/>
                     <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-default"  onClick="return ActionDeterminator(true);">Publish and Create news</button>
+                    <button type="button" class="btn btn-default" style="width: 200px"  onClick="return ActionDeterminator(true);">Publish and Create news</button>
                     <button type="button" class="btn btn-primary" onClick="return ActionDeterminator(false);
                     ">Publish</button>
                 </form>
