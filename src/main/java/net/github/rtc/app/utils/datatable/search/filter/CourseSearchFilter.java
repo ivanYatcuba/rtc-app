@@ -98,7 +98,7 @@ public class CourseSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc("id");
+        return Order.desc("id");
     }
 
     public DetachedCriteria getCriteria() {
