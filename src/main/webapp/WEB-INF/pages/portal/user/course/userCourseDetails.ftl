@@ -97,7 +97,11 @@
 
 <script type="text/javascript">
     function popUpShow() {
-        $('#selectRoleModal').modal('show')
+        <#if course.types?size gt 1>
+            $('#selectRoleModal').modal('show');
+        <#else>
+            applyCourse();
+        </#if>
     }
     function popUpHide() {
         $('#selectRoleModal').modal('hide');
@@ -105,6 +109,17 @@
 
     $("#applyBtn").on("click", function(event) {
         event.preventDefault();
+        applyCourse();
+        popUpHide();
+
+    });
+
+    $("#cancelBtn").on("click",function(event) {
+        event.preventDefault();
+        popUpHide();
+    });
+
+    function applyCourse() {
         $.ajax({
             type: "POST",
             url: "<@spring.url"/user/courses/sendOrder/"/>",
@@ -112,15 +127,8 @@
             success: function() {
                 window.location.href = "<@spring.url"/user/courses/"/>";
             }
-        })
-        popUpHide();
-
-    })
-
-    $("#cancelBtn").on("click",function(event) {
-        event.preventDefault();
-        popUpHide();
-    })
+        });
+    }
 </script>
 
 </@layout.layout>
