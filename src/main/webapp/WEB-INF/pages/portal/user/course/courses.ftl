@@ -34,32 +34,6 @@
 
 </div>
 
-<!--Deprecated-->
-<div class="popup" id="window-popup" style="display: none">
-    <div class="popup-content">
-        <h2><@spring.message "userCourses"/></h2>
-        <strong>
-            <@spring.message "userCourses.IHave"/> <@spring.message "userCourses.IHave2"/>
-        </strong>
-        <form name="modal" id="modal" action="<@spring.url'/user/courses/sendOrder/'/>" method="post">
-            <@spring.formHiddenInput "order.courseCode"/>
-            <div id="positions">
-            </div>
-            <strong><@spring.message "userCourses.because"/></strong><br/>
-            <@spring.bind "order.reason"/>
-            <textarea class="input-block-level" name="reason" id="redex"
-                      style="width: 100%; height: 100%"></textarea><br>
-            <style type="text/css">#redex {
-                resize: none;
-            }</style>
-            <br/>
-            <input type="submit" class="btn" value="OK">
-            <button class="btn" type="button" onClick="javascript:PopUpHide()">Cancel</button>
-        </form>
-    </div>
-</div>
-
-
 </@layout.layout>
 
 <script>
