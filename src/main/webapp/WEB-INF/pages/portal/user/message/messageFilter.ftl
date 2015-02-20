@@ -1,7 +1,7 @@
 <#import "../../../fieldMacro.ftl" as formMacro />
 <h4><strong><@spring.message "message.criteria"/></strong></h4>
+<@spring.formHiddenInput "messageFilter.userCode" />
 <div class="form-horizontal">
-    <@spring.formHiddenInput "messageFilter.userCode" />
     <div class="row">
         <div class="col-md-4">
         <@formMacro.rtcFormSingleSelect "messageFilter.status" "messageFilter.status" messageStatus, "", "", "message.status.", {"" : "All"}/>
