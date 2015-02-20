@@ -12,10 +12,15 @@ import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
@@ -25,34 +30,37 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(BlockJUnit4ClassRunner.class)
-public class NewsFromCourseBuilderTest {
+public class NewsBuilderTest {
 
     public static final String TEST_STRING = "test string";
 
     @Mock
     private DateService dateService;
     @Mock
-    private StringFromTemplateBuilder stringFromTemplateBuilder;
+    private TemplateStringBuilder templateStringBuilder;
     @InjectMocks
-    private NewsFromCourseBuilder newsFromCourseBuilder = new NewsFromCourseBuilder();
+    private NewsBuilder newsBuilder = new NewsBuilder();
 
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
     }
 
+    @Before
+    public void prepareUsersList(){
+        MockitoAnnotations.initMocks(this);
+        Authentication auth = new UsernamePasswordAuthenticationToken(new User(), null);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+    }
 
     @Test
     public void testNewsCreation() {
-        when(stringFromTemplateBuilder.build()).thenReturn(TEST_STRING);
-        when(stringFromTemplateBuilder.setTemplate(any(String.class))).thenReturn(stringFromTemplateBuilder);
-        when(stringFromTemplateBuilder.setTemplateParams(anyMap())).thenReturn(stringFromTemplateBuilder);
+        when(templateStringBuilder.build(any(String.class), anyMap())).thenReturn(TEST_STRING);
 
         final User author = getAuthor();
         final Course course = getBaCourse();
         final Date creationDate = new Date();
-        final News news = newsFromCourseBuilder.setCourse(course).setAuthor(author).
-                setCreationDate(creationDate).build();
+        final News news = newsBuilder.build(course);
 
         assertEquals(news.getAuthor(), author);
         assertEquals(creationDate, news.getCreateDate());
@@ -63,27 +71,12 @@ public class NewsFromCourseBuilderTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNewsCreationWrongArgumentCourse() {
-        newsFromCourseBuilder.setCourse(null);
+        newsBuilder.build(null);
     }
 
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testNewsCreationWrongArgumentAuthor() {
-        newsFromCourseBuilder.setAuthor(null);
-    }
-
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testNewsCreationWrongArgumentCreationDate() {
-        newsFromCourseBuilder.setCreationDate(null);
-    }
 
     private User getAuthor() {
-        final User user = new User();
-        user.setName("name");
-        user.setSurname("surname");
-        user.setMiddleName("middlename");
-        return user;
+        return AuthorizedUserProvider.getAuthorizedUser();
     }
 
     private Course getBaCourse() {

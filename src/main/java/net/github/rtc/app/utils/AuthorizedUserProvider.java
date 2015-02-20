@@ -1,6 +1,5 @@
 package net.github.rtc.app.utils;
 
-import net.github.rtc.app.model.dto.user.ProfileHeaderDTO;
 import net.github.rtc.app.model.entity.user.User;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,10 +23,5 @@ public final class AuthorizedUserProvider {
 
     static public String getAuthorizedUserName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
-
-    static public ProfileHeaderDTO getProfileHeaderDTO() {
-        final User user = AuthorizedUserProvider.getAuthorizedUser();
-        return new ProfileHeaderDTO(user.getFullName(), user.getPhoto());
     }
 }
