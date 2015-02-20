@@ -9,6 +9,10 @@ public class UserCourseDtoBuilder {
     private int acceptedOrdersCount;
     private boolean currentUserAssigned;
 
+    public UserCourseDtoBuilder(Course course) {
+        this.course = course;
+    }
+
     public UserCourseDtoBuilder setCourse(Course course) {
         this.course = course;
         return this;

@@ -91,7 +91,8 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
 
     @Override
     public UserCourseDTO getUserCourseDTObyCode(String code) {
-        return new UserCourseDtoBuilder().setCourse(findByCode(code)).
+        final Course course = findByCode(code);
+        return new UserCourseDtoBuilder(course).
                 setAcceptedOrdersCount(orderService.getAcceptedOrdersCount(code)).
                 setCurrentUserAssigned(isUserAssignedForCourse(code)).build();
     }
@@ -165,8 +166,8 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
             public List<UserCourseDTO> map(List<Course> searchResults) {
                 final List<UserCourseDTO> outputResults = new ArrayList<>();
                 for (Course course: searchResults) {
-                    final UserCourseDtoBuilder dtoBuilder = new UserCourseDtoBuilder();
-                    outputResults.add(dtoBuilder.setCourse(course).
+                    final UserCourseDtoBuilder dtoBuilder = new UserCourseDtoBuilder(course);
+                    outputResults.add(dtoBuilder.
                             setAcceptedOrdersCount(orderService.getAcceptedOrdersCount(course.getCode())).build());
                 }
                 return outputResults;
