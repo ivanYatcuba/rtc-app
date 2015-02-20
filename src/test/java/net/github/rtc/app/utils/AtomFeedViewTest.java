@@ -59,7 +59,7 @@ public class AtomFeedViewTest {
         news1.setAuthor(author);
         news1.setTitle("title");
         news1.setDescription("bla bla");
-        news1.setCreateDate(currentDate);
+        news1.setPublishDate(currentDate);
         Map<String, Object> map = new HashMap<>();
         map.put("news", Arrays.asList(news1));
         List<Entry> entries =  atomFeedView.buildFeedEntries(map, null, null);
