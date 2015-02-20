@@ -28,7 +28,7 @@ public class ReportSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc("createdDate");
+        return Order.desc("createdDate");
     }
 
     public String getName() {

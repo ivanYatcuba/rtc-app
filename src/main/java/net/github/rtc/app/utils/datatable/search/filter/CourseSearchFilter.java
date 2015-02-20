@@ -140,7 +140,7 @@ public class CourseSearchFilter extends AbstractSearchCommand {
         if (withArchived) {
             criteria.addOrder(Order.desc(STATUS));
         }
-        criteria.addOrder(Order.asc(START_DATE));
+        criteria.addOrder(Order.desc("createDate"));
         return criteria;
     }
 }

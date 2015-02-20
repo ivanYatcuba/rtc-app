@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public class UserSearchFilter extends AbstractSearchCommand {
-    private static final String PROCENT = "%";
+    private static final String PERCENT = "%";
     private static final String AUTHORITIES = "authorities";
     private static final String REGISTER_DATE = "registerDate";
 
@@ -75,14 +75,14 @@ public class UserSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc(REGISTER_DATE);
+        return Order.desc(REGISTER_DATE);
     }
 
     public DetachedCriteria getCriteria() {
         final DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
 
         if (surname != null && !("").equals(surname)) {
-            criteria.add(Restrictions.ilike("surname", PROCENT + surname + PROCENT));
+            criteria.add(Restrictions.ilike("surname", PERCENT + surname + PERCENT));
         }
 
         if (registerDate != null) {

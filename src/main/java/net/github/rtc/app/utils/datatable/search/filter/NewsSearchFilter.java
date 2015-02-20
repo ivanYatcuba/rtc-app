@@ -6,7 +6,6 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class NewsSearchFilter extends AbstractSearchCommand {
@@ -27,7 +26,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc(CREATE_DATE);
+        return Order.desc(CREATE_DATE);
     }
 
     @Override
@@ -52,16 +51,7 @@ public class NewsSearchFilter extends AbstractSearchCommand {
         return criteria;
     }
 
-    private Date setNightTime(Date currentDate) {
-        final int hour = 23;
-        final int minuteSecond = 59;
-        final Calendar calendar = Calendar.getInstance();
-        calendar.setTime(currentDate);
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minuteSecond);
-        calendar.set(Calendar.SECOND, minuteSecond);
-        return calendar.getTime();
-    }
+
 
     public String getTitle() {
         return title;
