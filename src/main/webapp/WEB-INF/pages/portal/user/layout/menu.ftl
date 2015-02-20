@@ -6,7 +6,7 @@
 </ul>
 
 <script type="text/javascript">
-    var mainMenuMap = { "profile": "#profileMenuItem",  "course": "#courseMenuItem", "messages":"#messageMenuItem"}
+    var mainMenuMap = { "profile": "#profileMenuItem",  "course": "#courseMenuItem", "messages":"#messageMenuItem"};
 
     $(document).ready(function() {
     <#--if you change this menu, you have to change MenuItems.class!!!-->

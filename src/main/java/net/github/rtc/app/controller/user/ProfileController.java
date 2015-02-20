@@ -12,7 +12,6 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -78,12 +77,7 @@ public class ProfileController implements MenuItem {
     }
 
     private String getRoot() {
-        final User user = AuthorizedUserProvider.getAuthorizedUser();
-        final List<String> auth = new ArrayList<>();
-        for (GrantedAuthority role: user.getAuthorities()) {
-            auth.add(role.getAuthority());
-        }
-        if (auth.contains(RoleType.ROLE_EXPERT.name())) {
+        if (AuthorizedUserProvider.getAuthorizedUser().hasRole(RoleType.ROLE_EXPERT.name())) {
             return EXPERT_ROOT;
         }
         return USER_ROOT;
