@@ -100,6 +100,17 @@
             type: "GET",
             url: '<@spring.url"/user/message/remove/"/>' + messageCode,
             success: function () {
+                $.ajax({
+                    type: "GET",
+                    url: '<@spring.url"/user/message/unreadMessages"/>',
+                    success: function (data) {
+                        if(data != 0) {
+                            $("#headerMessageIndicator").text("("+data+")");
+                        } else {
+                            $("#headerMessageIndicator").text("");
+                        }
+                    }
+                });
                 search(page);
             }
         });

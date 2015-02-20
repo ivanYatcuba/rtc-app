@@ -9,7 +9,8 @@
             </li>
             <li style="margin-right: 50px;height: 45px">
                 <a href='<@spring.url"/user/profile/"/>'>${(profileHeader.name)!}
-            <#if profileHeader.unreadMessageCount!=0>(${(profileHeader.unreadMessageCount)!})</#if></a>
+            <#if profileHeader.unreadMessageCount!=0>
+                <span id="headerMessageIndicator">(${(profileHeader.unreadMessageCount)!})</span></#if></a>
             </li>
 
             <li style="margin-right: 20px; height: 45px">

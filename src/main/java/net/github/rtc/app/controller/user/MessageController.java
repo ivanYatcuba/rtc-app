@@ -61,6 +61,12 @@ public class MessageController implements MenuItem {
         messageService.deleteByCode(code);
     }
 
+    @RequestMapping(value = "/unreadMessages", method = RequestMethod.GET)
+    @ResponseBody
+    public int getUnreadMessage() {
+        return messageService.getUserUnreadMessageCount(AuthorizedUserProvider.getAuthorizedUser().getCode());
+    }
+
     @ModelAttribute(MESSAGE_FILTER)
     public MessageSearchFilter getMessageSearchFilter() {
         final MessageSearchFilter messageSearchFilter = new MessageSearchFilter();
