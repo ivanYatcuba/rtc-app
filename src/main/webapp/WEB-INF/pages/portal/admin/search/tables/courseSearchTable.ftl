@@ -86,8 +86,7 @@
                     <input type="hidden" id="courseCode" name="courseCode"/>
                     <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-default" style="width: 200px"  onClick="return ActionDeterminator(true);">Publish and Create news</button>
-                    <button type="button" class="btn btn-primary" onClick="return ActionDeterminator(false);
-                    ">Publish</button>
+                    <button type="button" class="btn btn-primary" onClick="return ActionDeterminator(false);">Publish</button>
                 </form>
             </div>
         </div>
@@ -107,7 +106,7 @@
             type: "GET",
             url: "<@spring.url"/admin/course/archive/"/>" + code,
             success: function () {
-                searchPage.doSearch(${currentPage});
+                searchPage.doChangePage(${currentPage});
             }
         });
         return true;
@@ -117,7 +116,7 @@
             type: "GET",
             url: "<@spring.url"/admin/course/publish/"/>" + $("#courseCode").val() + "?ifCreateNews="+createNews,
             success: function () {
-                searchPage.doSearch(${currentPage});
+                searchPage.doChangePage(${currentPage});
             }
         });
         PopUpHide();
