@@ -24,6 +24,10 @@
 <#include "filters/reportSearchFilter.ftl"/>
 </div>
 
+<div id="logsFilter" class="filterForm" style="display: none;width: 100%; float: left; ">
+    <#include "filters/logSearchFilter.ftl"/>
+</div>
+
 <div id="searchButtons" class="row" style="text-align: right;">
     <button id="search" type="button" class="btn btn-primary">Search</button>
     <button id="reset" type="button" class="btn btn-default">Reset</button>

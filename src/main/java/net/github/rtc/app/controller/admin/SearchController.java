@@ -17,6 +17,7 @@ import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserStatus;
 import net.github.rtc.app.service.activity.ActivityService;
 import net.github.rtc.app.service.course.CourseService;
+import net.github.rtc.app.service.log.LogService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.report.ReportService;
 import net.github.rtc.app.service.user.UserService;
@@ -57,6 +58,8 @@ public class SearchController {
     private static final String ACTIVITY_ENTITIES = "activityEntities";
     private static final String ACTIVITY_ACTIONS = "activityActions";
     private static final String ACTIVITIES = "activities";
+    private static final String LOGS_FILTER = "logsFilter";
+    private static final String LOGS = "logs";
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -67,6 +70,8 @@ public class SearchController {
     private ReportService reportService;
     @Autowired
     private ActivityService activityService;
+    @Autowired
+    private LogService logService;
 
     @RequestMapping(value = "/search/{menuItem}", method = RequestMethod.GET)
     public ModelAndView searchPageWithParam(@PathVariable(MENU_ITEM) final String menuItem) {
@@ -143,6 +148,15 @@ public class SearchController {
         return mav;
     }
 
+    @RequestMapping(value = "/logsTable", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ModelAndView getActivityTable(@ModelAttribute(LOGS_FILTER) final LogsSearchFilter logsFilter) {
+        final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/logsSearchTable");
+        mav.addObject(LOGS, logService.findAllLogFileNames());
+        return mav;
+    }
+
     @ModelAttribute(ACTIVITY_FILTER)
     public ActivitySearchFilter getActivitySearchFilter() {
         return  new ActivitySearchFilter();
@@ -166,6 +180,11 @@ public class SearchController {
     @ModelAttribute(REPORT_FILTER)
     public ReportSearchFilter getReportSearchFilter() {
         return new ReportSearchFilter();
+    }
+
+    @ModelAttribute(LOGS_FILTER)
+    public LogsSearchFilter getLogsSearchFilter() {
+        return new LogsSearchFilter();
     }
 
     @ModelAttribute(NEWS_STATUSES)

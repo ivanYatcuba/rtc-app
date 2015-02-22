@@ -1,10 +1,16 @@
 package net.github.rtc.app.service.log;
 
+import net.github.rtc.app.model.entity.logs.Logs;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -12,25 +18,28 @@ public class LogServiceImpl implements LogService {
 
     private static final String PATH_FOLDER = "/var/log/rtc-app/logs/";
     private static final int BEGIN_INDEX = 22;
+    private static final int BYTES = 1024;
 
     @Override
-    public List<String> getListOfLogs() {
+    public List<Logs> findAllLogFileNames() {
         final File folder = new File(getPathFolder());
-        final List<String> listOfFiles = new ArrayList<String>();
+        final List<Logs> listOfLogs = new ArrayList<Logs>();
         if (folder.listFiles().length > 0) {
             for (final File fileEntry : folder.listFiles()) {
                 if (fileEntry.isFile()) {
-                    listOfFiles.add(fileEntry.getPath().substring(BEGIN_INDEX));
+                    try {
+                        listOfLogs.add(new Logs(fileEntry.getPath().substring(BEGIN_INDEX), getSize(fileEntry), getCreatedDate(fileEntry.getPath())));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        } else {
-            listOfFiles.add("There are no files in current directory!");
         }
-        return listOfFiles;
+        return listOfLogs;
     }
 
     @Override
-    public String readLogFile(final String fileName) {
+    public String getLogData(final String fileName) {
         final StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(getPathFolder() + fileName), Charset.defaultCharset()))) {
             String currentLine;
@@ -44,7 +53,22 @@ public class LogServiceImpl implements LogService {
         return builder.toString();
     }
 
-    private String getPathFolder() {
+    public static String getPathFolder() {
         return PATH_FOLDER;
+    }
+
+    private String getSize(final File file) {
+        String size = "";
+        if (file.exists()) {
+            final int sizeInMegabytes = (int) ((file.length() / BYTES) / BYTES);
+            size = sizeInMegabytes + "Mb";
+        }
+        return size;
+    }
+
+    private Date getCreatedDate(final String filePath) throws IOException {
+        final Path file = Paths.get(filePath);
+        final BasicFileAttributes attributes = Files.readAttributes(file, BasicFileAttributes.class);
+        return new Date(attributes.creationTime().toMillis());
     }
 }

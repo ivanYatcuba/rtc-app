@@ -5,7 +5,8 @@ public enum MenuItems {
     NEWS("news"),
     COURSE("course"),
     USER("user"),
-    REPORT("report");
+    REPORT("report"),
+    LOGS("logs");
 
     private final String text;
 

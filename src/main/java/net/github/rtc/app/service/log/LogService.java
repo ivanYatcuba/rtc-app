@@ -1,10 +1,12 @@
 package net.github.rtc.app.service.log;
 
+import net.github.rtc.app.model.entity.logs.Logs;
+
 import java.util.List;
 
 public interface LogService {
 
-    List<String> getListOfLogs();
+    List<Logs> findAllLogFileNames();
 
-    String readLogFile(final String fileName);
+    String getLogData(final String fileName);
 }
