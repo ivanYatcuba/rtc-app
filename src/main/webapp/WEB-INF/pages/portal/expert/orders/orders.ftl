@@ -50,6 +50,7 @@
             $(".form-horizontal input, textarea").val("");
             $(".form-horizontal ul#tagsTag li.tagit-choice").remove();
             $(".form-horizontal select option:selected").removeAttr("selected");
+            serializedFilter = "";
             search(1);
         }
     );

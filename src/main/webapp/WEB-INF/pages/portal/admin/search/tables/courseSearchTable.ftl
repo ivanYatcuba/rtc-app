@@ -114,7 +114,7 @@
     function ActionDeterminator(createNews) {
         $.ajax({
             type: "GET",
-            url: "<@spring.url"/admin/course/publish/"/>" + $("#courseCode").val() + "?ifCreateNews="+createNews,
+            url: "<@spring.url"/admin/course/publish/"/>" + $("#courseCode").val() + "?newsCreated="+createNews,
             success: function () {
                 searchPage.doChangePage(${currentPage});
             }
