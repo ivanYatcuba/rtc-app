@@ -4,8 +4,8 @@ import net.github.rtc.app.model.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.service.generic.GenericService;
 import net.github.rtc.app.service.generic.ModelService;
-import net.github.rtc.app.utils.datatable.search.filter.CourseSearchFilter;
-import net.github.rtc.app.utils.datatable.search.SearchResults;
+import net.github.rtc.app.model.dto.filter.CourseSearchFilter;
+import net.github.rtc.app.model.dto.SearchResults;
 
 /**
  * The service class that is responsible for operation on Course model class

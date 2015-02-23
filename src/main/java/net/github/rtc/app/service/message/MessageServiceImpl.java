@@ -6,10 +6,10 @@ import net.github.rtc.app.model.dto.user.MessageDTO;
 import net.github.rtc.app.model.entity.message.Message;
 import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.datatable.search.SearchResults;
-import net.github.rtc.app.utils.datatable.search.SearchResultsBuilder;
-import net.github.rtc.app.utils.datatable.search.SearchResultsMapper;
-import net.github.rtc.app.utils.datatable.search.filter.MessageSearchFilter;
+import net.github.rtc.app.model.dto.SearchResults;
+import net.github.rtc.app.service.builder.SearchResultsBuilder;
+import net.github.rtc.app.service.builder.SearchResultsMapper;
+import net.github.rtc.app.model.dto.filter.MessageSearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

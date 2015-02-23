@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.datatable.search;
+package net.github.rtc.app.model.dto;
 
 import java.util.HashMap;
 import java.util.Map;

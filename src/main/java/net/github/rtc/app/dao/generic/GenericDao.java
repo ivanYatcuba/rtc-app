@@ -1,7 +1,7 @@
 package net.github.rtc.app.dao.generic;
 
-import net.github.rtc.app.utils.datatable.search.filter.AbstractSearchCommand;
-import net.github.rtc.app.utils.datatable.search.SearchResults;
+import net.github.rtc.app.model.dto.filter.AbstractSearchCommand;
+import net.github.rtc.app.model.dto.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 

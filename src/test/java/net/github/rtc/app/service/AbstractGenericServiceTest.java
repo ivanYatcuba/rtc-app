@@ -3,7 +3,7 @@
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
-import net.github.rtc.app.utils.datatable.search.SearchResults;
+import net.github.rtc.app.model.dto.SearchResults;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

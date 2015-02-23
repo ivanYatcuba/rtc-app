@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.datatable.search.filter;
+package net.github.rtc.app.model.dto.filter;
 
 import net.github.rtc.app.model.entity.user.Role;
 import net.github.rtc.app.model.entity.user.User;

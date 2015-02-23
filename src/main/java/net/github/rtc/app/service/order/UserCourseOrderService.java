@@ -5,8 +5,8 @@ import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.order.UserCourseOrder;
 import net.github.rtc.app.model.entity.order.UserRequestStatus;
 import net.github.rtc.app.service.generic.GenericService;
-import net.github.rtc.app.utils.datatable.search.filter.OrderSearchFilter;
-import net.github.rtc.app.utils.datatable.search.SearchResults;
+import net.github.rtc.app.model.dto.filter.OrderSearchFilter;
+import net.github.rtc.app.model.dto.SearchResults;
 
 import java.util.List;
 

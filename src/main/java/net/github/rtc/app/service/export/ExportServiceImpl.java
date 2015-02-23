@@ -1,7 +1,7 @@
 package net.github.rtc.app.service.export;
 
 import net.github.rtc.app.dao.generic.GenericDao;
-import net.github.rtc.app.dao.export.ExpertDao;
+import net.github.rtc.app.dao.export.ExportDao;
 import net.github.rtc.app.model.entity.report.ReportDetails;
 import net.github.rtc.app.service.generic.CodeGenerationService;
 import net.github.rtc.app.service.generic.ModelService;
@@ -26,7 +26,7 @@ public class ExportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
     private static final String DOT = ".";
     private static Logger log = LoggerFactory.getLogger(ExportServiceImpl.class.getName());
     @Autowired
-    private ExpertDao expertDao;
+    private ExportDao exportDao;
     @Autowired
     private DateService dateService;
     @Autowired
@@ -38,7 +38,7 @@ public class ExportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
 
     @Override
     protected GenericDao<ReportDetails> getDao() {
-        return expertDao;
+        return exportDao;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ExportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
         report.setCreatedDate(dateService.getCurrentDate());
         try {
             compileReport(report);
-            final ReportDetails result = expertDao.create(report);
+            final ReportDetails result = exportDao.create(report);
             log.info(REPORT + report.getCode() + " created successfully!");
             return result;
         } catch (final Exception e) {
@@ -65,7 +65,7 @@ public class ExportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
         log.info("Updating report: " + report);
         try {
             compileReport(report);
-            expertDao.update(report);
+            exportDao.update(report);
             log.info(REPORT + report.getCode() + " updated successfully!");
             return report;
         } catch (final Exception e) {
