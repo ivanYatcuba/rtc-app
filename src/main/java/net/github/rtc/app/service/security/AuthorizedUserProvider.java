@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils;
+package net.github.rtc.app.service.security;
 
 import net.github.rtc.app.model.entity.user.User;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;

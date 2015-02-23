@@ -32,7 +32,7 @@ public class UserCourseOrderDaoImpl extends AbstractGenericDaoImpl<UserCourseOrd
     }
 
     @Override
-    public int getAcceptedOrdersForCourse(String courseCode) {
+    public int getAcceptedOrdersCourseCount(String courseCode) {
         return ((Long) getCurrentSession().createCriteria(UserCourseOrder.class).
                 add(Restrictions.eq(STATUS, UserRequestStatus.ACCEPTED)).
                 add(Restrictions.eq("courseCode", courseCode)).setProjection(Projections.rowCount()).uniqueResult()).intValue();

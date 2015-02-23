@@ -3,7 +3,7 @@ package net.github.rtc.app.service.order;
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.dao.order.UserCourseOrderDao;
 import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
-import net.github.rtc.app.model.dto.builder.ExpertOrderDtoBuilder;
+import net.github.rtc.app.service.builder.ExpertOrderDtoBuilder;
 import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.order.UserCourseOrder;
 import net.github.rtc.app.model.entity.order.UserRequestStatus;
@@ -11,7 +11,7 @@ import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.AuthorizedUserProvider;
+import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.SearchResultsBuilder;
 import net.github.rtc.app.utils.datatable.search.SearchResultsMapper;
 import net.github.rtc.app.utils.datatable.search.filter.OrderSearchFilter;
@@ -75,7 +75,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
 
   @Override
   public int getAcceptedOrdersCount(String courseCode) {
-    return userCourseOrderDao.getAcceptedOrdersForCourse(courseCode);
+    return userCourseOrderDao.getAcceptedOrdersCourseCount(courseCode);
   }
 
   @Override
@@ -131,10 +131,10 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
                 final List<ExpertOrderDTO> outputResults = new ArrayList<>();
                 for (UserCourseOrder order: searchResults) {
                     final ExpertOrderDtoBuilder dtoBuilder = new ExpertOrderDtoBuilder();
-                    outputResults.add(dtoBuilder.setOrder(order).
-                            setCourse(courseService.findByCode(order.getCourseCode())).
-                            setAcceptedOrders(getAcceptedOrdersCount(order.getCourseCode())).
-                            setUser(userService.findByCode(order.getUserCode())).build());
+                    outputResults.add(dtoBuilder.buildOrderFields(order).
+                            buildCourseFields(courseService.findByCode(order.getCourseCode())).
+                            buildAcceptedOrders(getAcceptedOrdersCount(order.getCourseCode())).
+                            buildUserFields(userService.findByCode(order.getUserCode())).get());
                 }
                 return outputResults;
             }

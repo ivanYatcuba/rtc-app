@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.message;
+package net.github.rtc.app.service.handler;
 
 import net.github.rtc.app.model.entity.message.Message;
 import net.github.rtc.app.service.message.MessageService;

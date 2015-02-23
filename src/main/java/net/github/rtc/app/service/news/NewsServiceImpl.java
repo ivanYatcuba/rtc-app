@@ -7,7 +7,7 @@ import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.news.NewsStatus;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
-import net.github.rtc.app.utils.AuthorizedUserProvider;
+import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import net.github.rtc.app.utils.NewsBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

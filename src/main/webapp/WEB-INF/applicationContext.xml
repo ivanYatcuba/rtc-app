@@ -7,7 +7,7 @@
                http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
     <context:component-scan
-            base-package=" net.github.rtc.app.dao, net.github.rtc.app.exception, net.github.rtc.app.export,
+            base-package=" net.github.rtc.app.dao, net.github.rtc.app.exception, net.github.rtc.app.job.export,
              net.github.rtc.app.model, net.github.rtc.app.service, net.github.rtc.app.utils"/>
     <context:property-placeholder
             location="classpath:/hibernate.properties, classpath:/export.properties, classpath:feed.properties"/>

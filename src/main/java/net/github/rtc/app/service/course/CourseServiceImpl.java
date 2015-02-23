@@ -2,7 +2,7 @@ package net.github.rtc.app.service.course;
 
 import net.github.rtc.app.dao.courses.CoursesDao;
 import net.github.rtc.app.dao.generic.GenericDao;
-import net.github.rtc.app.model.dto.builder.UserCourseDtoBuilder;
+import net.github.rtc.app.service.builder.UserCourseDtoBuilder;
 import net.github.rtc.app.model.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseStatus;
@@ -13,18 +13,17 @@ import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.order.UserCourseOrderService;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.AuthorizedUserProvider;
+import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.SearchResultsBuilder;
 import net.github.rtc.app.utils.datatable.search.SearchResultsMapper;
 import net.github.rtc.app.utils.datatable.search.filter.CourseSearchFilter;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
-import org.apache.commons.lang3.Validate;
+import org.springframework.util.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,8 +92,8 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
     public UserCourseDTO getUserCourseDTObyCode(String code) {
         final Course course = findByCode(code);
         return new UserCourseDtoBuilder(course).
-                setAcceptedOrdersCount(orderService.getAcceptedOrdersCount(code)).
-                setCurrentUserAssigned(isUserAssignedForCourse(code)).build();
+                buildAcceptedOrdersCount(orderService.getAcceptedOrdersCount(code)).
+                buildCurrentUserAssigned(isUserAssignedForCourse(code)).build();
     }
 
     @Override
@@ -134,8 +133,8 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
 
     @Override
     public void addParticipant(String courseCode, String userCode) {
-        Validate.notNull(courseCode);
-        Validate.notNull(userCode);
+        Assert.notNull(courseCode);
+        Assert.notNull(userCode);
         final User user = userService.findByCode(userCode);
         final Course course = findByCode(courseCode);
         if (course != null && user != null) {
@@ -168,7 +167,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
                 for (Course course: searchResults) {
                     final UserCourseDtoBuilder dtoBuilder = new UserCourseDtoBuilder(course);
                     outputResults.add(dtoBuilder.
-                            setAcceptedOrdersCount(orderService.getAcceptedOrdersCount(course.getCode())).build());
+                            buildAcceptedOrdersCount(orderService.getAcceptedOrdersCount(course.getCode())).build());
                 }
                 return outputResults;
             }

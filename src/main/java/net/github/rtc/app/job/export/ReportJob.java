@@ -1,8 +1,8 @@
-package net.github.rtc.app.export;
+package net.github.rtc.app.job.export;
 
 
 import net.github.rtc.app.model.entity.report.ReportDetails;
-import net.github.rtc.app.service.report.ReportService;
+import net.github.rtc.app.service.export.ExportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -12,13 +12,13 @@ import java.util.List;
 @Component
 public class ReportJob {
     @Autowired
-    private ReportService reportService;
+    private ExportService exportService;
 
     @Scheduled(cron = "0 0/15 * * * ?")
     public void reportUpdate() {
-        final List<ReportDetails> myList = reportService.findAll();
+        final List<ReportDetails> myList = exportService.findAll();
         for (ReportDetails report : myList) {
-            reportService.compileReport(report);
+            exportService.compileReport(report);
         }
     }
 }
