@@ -59,14 +59,6 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     }
 
     @Override
-    @Transactional
-    public List<UserCourseOrder> getOrderByStatus(
-      final UserRequestStatus status) {
-        LOG.info("Get user orders with status: " + status);
-        return userCourseOrderDao.getOrderByStatus(status);
-    }
-
-    @Override
     public SearchResults<ExpertOrderDTO> searchOrderForExpert(OrderSearchFilter searchFilter) {
         final SearchResultsBuilder<UserCourseOrder, ExpertOrderDTO> resultsBuilder = new SearchResultsBuilder<>();
         return resultsBuilder.setSearchResultsToTransform(search(searchFilter)).
@@ -108,15 +100,6 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
         eventCreator.createOrderSendMessageEvent(userCourseOrder);
 
         return super.create(userCourseOrder);
-    }
-
-    @Override
-    public void acceptOrder(String orderCode) {
-        final UserCourseOrder order = findByCode(orderCode);
-        order.setStatus(UserRequestStatus.ACCEPTED);
-        order.setResponseDate(LocalDate.now().toDate());
-        super.update(order);
-        courseService.addParticipant(order.getCourseCode(), order.getUserCode());
     }
 
     @Override
