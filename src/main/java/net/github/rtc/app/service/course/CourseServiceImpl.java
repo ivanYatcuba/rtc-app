@@ -34,8 +34,8 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
 
     private static final String COURSE_CANNOT_BE_NULL = "course cannot be null";
     private static final String COURSE_CODE_CANNOT_BE_NULL = "course code cannot be null";
-
     private static final Logger LOG = LoggerFactory.getLogger(CourseServiceImpl.class.getName());
+
     @Autowired
     private UserCourseOrderService orderService;
     @Autowired
@@ -97,7 +97,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
     }
 
     @Override
-    public void create(boolean published, boolean newsCreated, Course course) {
+    public void create(Course course, boolean published, boolean newsCreated) {
         if (published) {
             publish(course);
         }
@@ -108,7 +108,7 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
     }
 
     @Override
-    public void update(boolean published, boolean newsCreated, Course course) {
+    public void update(Course course, boolean published, boolean newsCreated) {
         if (published) {
             publish(course);
         }

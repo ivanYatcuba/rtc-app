@@ -31,15 +31,14 @@ public class OrderSendMessageFactoryImpl implements OrderMessageFactory {
     @Override
     public List<Message> getMessages(UserCourseOrder order) {
         final List<Message> msgList = new ArrayList<>();
-        final Message msg = new Message();
-        msg.setSenderUserCode(order.getUserCode());
-        msg.setSendingDate(dateService.getCurrentDate());
-        msg.setType(MessageType.SYSTEM);
-        msg.setText(getMessageText());
-
         final Course course = courseService.findByCode(order.getCourseCode());
 
         for (User expert : course.getExperts()) {
+            final Message msg = new Message();
+            msg.setSenderUserCode(order.getUserCode());
+            msg.setSendingDate(dateService.getCurrentDate());
+            msg.setType(MessageType.SYSTEM);
+            msg.setText(getMessageText());
             msg.setReceiverUserCode(expert.getCode());
             msgList.add(msg);
         }
