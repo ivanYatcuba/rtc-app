@@ -54,7 +54,7 @@ public class ExpertOrderDtoBuilderTest {
         assertEquals(dto.getCourseName(), testCourse.getName());
 
         assertEquals(dto.getUserCode(), testUser.getCode());
-        assertEquals(dto.getUserName(), testUser.getFullName());
+        assertEquals(dto.getUserName(), testUser.getSurnameName());
         assertEquals(dto.getUserPhoto(), testUser.getPhoto());
 
         assertEquals(dto.getOrderCode(), testOrder.getCode());

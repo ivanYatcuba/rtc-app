@@ -45,7 +45,7 @@ public class ExpertOrderDtoBuilder {
         orderDTO.setCourseAcceptedOrders(acceptedOrders);
 
         orderDTO.setUserCode(user.getCode());
-        orderDTO.setUserName(user.getFullName());
+        orderDTO.setUserName(user.getSurnameName());
         orderDTO.setUserPhoto(user.getPhoto());
 
         orderDTO.setOrderCode(order.getCode());
