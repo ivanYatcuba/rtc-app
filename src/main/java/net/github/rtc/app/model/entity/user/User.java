@@ -395,7 +395,7 @@ public class User extends AbstractPersistenceObject implements UserDetails, IAct
         return this.status == UserStatus.ACTIVE;
     }
 
-    public String getFullName() {
+    public String getSurnameName() {
         return this.surname + SPACE + this.name;
     }
 

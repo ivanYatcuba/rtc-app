@@ -1,1 +1,1 @@
-Your course order was accepted by course expert.
+Your course request was accepted by course expert.

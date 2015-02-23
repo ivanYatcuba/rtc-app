@@ -23,7 +23,7 @@ public class ActivityEventHandler implements ApplicationListener<ActivityEvent> 
             final User user = AuthorizedUserProvider.getAuthorizedUser();
             final Activity activity = new Activity();
 
-            activity.setUsername(user.getFullName());
+            activity.setUsername(user.getSurnameName());
             activity.setDetail(event.getDetails());
             activity.setAction(event.getAction());
             activity.setActionDate(dateService.getCurrentDate());

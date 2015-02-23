@@ -28,7 +28,7 @@ public class ExpertOrderDtoBuilder {
 
     public ExpertOrderDtoBuilder buildUserFields(User user) {
         orderDTO.setUserCode(user.getCode());
-        orderDTO.setUserName(user.getFullName());
+        orderDTO.setUserName(user.getSurnameName());
         orderDTO.setUserPhoto(user.getPhoto());
         return this;
     }

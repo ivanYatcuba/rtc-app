@@ -59,7 +59,7 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
                 final List<MessageDTO> outputResults = new ArrayList<>();
                 for (Message msg : searchResults) {
                     final MessageDTO messageDTO = new MessageDTO();
-                    messageDTO.setUserName(userService.findByCode(msg.getSenderUserCode()).getName());
+                    messageDTO.setUserName(userService.findByCode(msg.getSenderUserCode()).getSurnameName());
                     messageDTO.setText(msg.getText());
                     messageDTO.setSendingDate(msg.getSendingDate());
                     messageDTO.setCode(msg.getCode());

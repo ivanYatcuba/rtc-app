@@ -17,6 +17,6 @@ public class ProfileHeaderInitializer {
     public ProfileHeaderDTO getProfileHeaderDTO() {
         final User user =  AuthorizedUserProvider.getAuthorizedUser();
         final int unreadMessageCount =  messageService.getUserUnreadMessageCount(user.getCode());
-        return new ProfileHeaderDTO(user.getFullName(), user.getPhoto(), unreadMessageCount);
+        return new ProfileHeaderDTO(user.getSurnameName(), user.getPhoto(), unreadMessageCount);
     }
 }
