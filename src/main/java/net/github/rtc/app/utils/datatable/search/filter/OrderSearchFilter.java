@@ -67,7 +67,7 @@ public class OrderSearchFilter extends AbstractSearchCommand {
 
     @Override
     public Order order() {
-        return Order.asc(REQUEST_DATE);
+        return Order.desc(REQUEST_DATE);
     }
 
     @Override
