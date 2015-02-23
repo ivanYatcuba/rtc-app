@@ -60,7 +60,7 @@ public class CoursesController implements MenuItem {
     public String save(@ModelAttribute(COURSE) final Course course,
                        @RequestParam(required = false) final boolean published,
                        @RequestParam(required = false) final boolean newsCreated) {
-        courseService.create(published, newsCreated, course);
+        courseService.create(course, published, newsCreated);
         return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + newsCreated;
     }
 
@@ -85,7 +85,7 @@ public class CoursesController implements MenuItem {
     public String update(@ModelAttribute(COURSE) final Course course,
                          @RequestParam(required = false) final boolean published,
                          @RequestParam(required = false) final boolean newsCreated) {
-        courseService.update(published, newsCreated, course);
+        courseService.update(course, published, newsCreated);
         return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + newsCreated;
     }
 
