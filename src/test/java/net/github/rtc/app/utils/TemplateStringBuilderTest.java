@@ -11,8 +11,6 @@ public class TemplateStringBuilderTest {
     private static final String TEMPLATE_PATH = "/templates/testTemplate.ftl";
     private static final String STRING_TEMPLATE = "This is test string with params: %s, %s";
 
-    private static final String UNKNOWN_VALUE = "UNKNOWN VALUE";
-
     @Test
     public void testStringFromTemplateBuilder() {
         final Map<String, Object> templateParams = new HashMap<>();
@@ -26,7 +24,7 @@ public class TemplateStringBuilderTest {
     public void testWrongArgumentMap(){
         final Map<String, Object> templateParams = new HashMap<>();
         templateParams.put("paramNotExists", "Some String");
-        assertEquals(UNKNOWN_VALUE,
+        assertEquals(TemplateStringBuilder.UNKNOWN_VALUE,
                 new TemplateStringBuilder().build(TEMPLATE_PATH, templateParams));
         }
 

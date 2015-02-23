@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 public class TemplateStringBuilder {
 
-    private static final String UNKNOWN_VALUE = "UNKNOWN VALUE";
+    public static final String UNKNOWN_VALUE = "UNKNOWN VALUE";
 
     public String build(String templatePath) {
         return build(templatePath, new HashMap<String, Object>());
