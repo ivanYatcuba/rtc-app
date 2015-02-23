@@ -16,9 +16,6 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by denis on 21.11.14.
- */
 @Service("mailService")
 public class MailServiceImpl implements MailService {
     private static final String SENDER_MAIL = "rtcsender@gmail.com";

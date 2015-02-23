@@ -5,20 +5,28 @@ import net.github.rtc.app.model.entity.user.User;
 import org.springframework.mail.SimpleMailMessage;
 
 /**
- * Created by denis on 21.11.14.
+ * Service that is responsible for mail management
  */
 public interface MailService {
+
     /**
      *
-     * @param from -
+     * @param from
      * @param to
      * @param subject
-     * @param msg -
+     * @param msg
      */
     void sendMail(String from, String to, String subject, String msg);
 
+    /**
+     *
+     * @param msg
+     */
     void sendMail(SimpleMailMessage msg);
 
+    /**
+     * Send mail with registration details to mentioned user
+     * @param user
+     */
     void sendRegistrationMail(User user);
-
 }
