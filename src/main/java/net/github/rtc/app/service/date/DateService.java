@@ -3,7 +3,7 @@ package net.github.rtc.app.service.date;
 import java.util.Date;
 
 /**
- * Created by denis on 13.10.14.
+ * Class that helps to work with dates
  */
 public interface DateService {
     /**
@@ -20,5 +20,12 @@ public interface DateService {
      */
     Date addDays(Date oldDate, final int days);
 
+    /**
+     * Calculates dates difference in month
+     * Example getMothPeriod(02.03.2015, 13.05.2015) returns 2
+     * @param startDate
+     * @param endDate
+     * @return difference in month as number
+     */
     int getMothPeriod(Date startDate, Date endDate);
 }
