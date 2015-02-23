@@ -5,6 +5,7 @@ import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.date.DateService;
+import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.HashMap;

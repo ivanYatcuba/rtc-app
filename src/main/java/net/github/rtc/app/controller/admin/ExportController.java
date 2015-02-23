@@ -4,7 +4,7 @@ import net.github.rtc.app.controller.common.MenuItem;
 import net.github.rtc.app.model.entity.report.ExportFormat;
 import net.github.rtc.app.model.entity.report.ReportClasses;
 import net.github.rtc.app.model.entity.report.ReportDetails;
-import net.github.rtc.app.service.report.ReportService;
+import net.github.rtc.app.service.export.ExportService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.app.utils.enums.EnumHelper;
 import net.github.rtc.util.converter.ValidationContext;
@@ -40,7 +40,7 @@ public class ExportController implements MenuItem {
     private static final String REDIRECT_EXPORT = "redirect:/admin/export/";
 
     @Autowired
-    private ReportService reportService;
+    private ExportService exportService;
     @Autowired
     private ValidationContext validationContext;
 
@@ -53,34 +53,34 @@ public class ExportController implements MenuItem {
 
     @RequestMapping(value = "/insertReport", method = RequestMethod.POST)
     public String createReport(@ModelAttribute("report") final ReportDetails report) {
-        reportService.create(report);
+        exportService.create(report);
         return REDIRECT_EXPORT + report.getCode();
     }
 
     @RequestMapping(value = "/{reportCode}", method = RequestMethod.GET)
     public ModelAndView viewReport(@PathVariable final String reportCode) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
-        mav.addObject(REPORT, reportService.findByCode(reportCode));
+        mav.addObject(REPORT, exportService.findByCode(reportCode));
         return mav;
     }
 
     @RequestMapping(value = "/update/{reportCode}", method = RequestMethod.GET)
     public ModelAndView openUpdatePage(@PathVariable final String reportCode) {
         final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
-        mav.addObject(REPORT, reportService.findByCode(reportCode));
+        mav.addObject(REPORT, exportService.findByCode(reportCode));
         mav.addObject(VALIDATION_RULES, validationContext.get(ReportDetails.class));
         return mav;
     }
 
     @RequestMapping(value = "/updateReport", method = RequestMethod.POST)
     public String editReport(@ModelAttribute("report") final ReportDetails report) {
-        reportService.update(report);
+        exportService.update(report);
         return REDIRECT_EXPORT + report.getCode();
     }
 
     @RequestMapping(value = "/delete/{reportCode}", method = RequestMethod.GET)
     public String deleteReport(@PathVariable final String reportCode) {
-        reportService.deleteByCode(reportCode);
+        exportService.deleteByCode(reportCode);
         return "redirect:/admin/search";
     }
 
@@ -93,8 +93,8 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/download/{reportCode}", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
     public void downloadUserExport(@PathVariable final String reportCode,  final HttpServletResponse response) {
-        final ReportDetails reportDetails = reportService.findByCode(reportCode);
-        final File downloadFile = reportService.getReport(reportDetails);
+        final ReportDetails reportDetails = exportService.findByCode(reportCode);
+        final File downloadFile = exportService.getReport(reportDetails);
         response.setHeader(HEADER_KEY, String.format("attachment; " + "filename=\"%s\"", reportDetails.getName()));
         try (final InputStream is = new FileInputStream(downloadFile)) {
             response.setContentType(Files.probeContentType(downloadFile.toPath()));

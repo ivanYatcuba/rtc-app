@@ -1,4 +1,4 @@
-package net.github.rtc.app.export.table;
+package net.github.rtc.app.service.export.table;
 
 import java.io.IOException;
 

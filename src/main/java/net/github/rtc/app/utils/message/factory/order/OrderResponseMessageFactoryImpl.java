@@ -5,7 +5,7 @@ import net.github.rtc.app.model.entity.message.MessageType;
 import net.github.rtc.app.model.entity.order.UserCourseOrder;
 import net.github.rtc.app.model.entity.order.UserRequestStatus;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.utils.AuthorizedUserProvider;
+import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import net.github.rtc.app.utils.TemplateStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

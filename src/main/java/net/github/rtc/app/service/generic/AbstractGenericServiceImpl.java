@@ -21,7 +21,7 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
     protected String getCode() {
         String code = codeGenerationService.generate();
         while (true) {
-            if (!isExistCode(code)) {
+            if (!isCodeExist(code)) {
                 return code;
             }
             code = codeGenerationService.generate();
@@ -36,7 +36,7 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
     @Override
     public T findByCode(String code) {
         final T obj = getDao().findByCode(code);
-        if (!isExistCode(code)) {
+        if (!isCodeExist(code)) {
             throw new ResourceNotFoundException();
         }
         return obj;
@@ -64,5 +64,5 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
         return getDao().search(searchCommand);
     }
 
-    private boolean isExistCode(String code) { return getDao().findByCode(code) != null; }
+    private boolean isCodeExist(String code) { return getDao().findByCode(code) != null; }
 }

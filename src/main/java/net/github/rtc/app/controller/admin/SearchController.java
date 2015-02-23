@@ -19,9 +19,9 @@ import net.github.rtc.app.service.activity.ActivityService;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.log.LogService;
 import net.github.rtc.app.service.news.NewsService;
-import net.github.rtc.app.service.report.ReportService;
+import net.github.rtc.app.service.export.ExportService;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.AuthorizedUserProvider;
+import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.*;
 import net.github.rtc.app.utils.datatable.search.filter.*;
 import net.github.rtc.app.utils.enums.EnumHelper;
@@ -67,7 +67,7 @@ public class SearchController {
     @Autowired
     private UserService userService;
     @Autowired
-    private ReportService reportService;
+    private ExportService exportService;
     @Autowired
     private ActivityService activityService;
     @Autowired
@@ -142,7 +142,7 @@ public class SearchController {
     @ResponseBody
     ModelAndView getReportTable(@ModelAttribute(REPORT_FILTER) final ReportSearchFilter reportFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/reportSearchTable");
-        final SearchResults<ReportDetails> results = reportService.search(reportFilter);
+        final SearchResults<ReportDetails> results = exportService.search(reportFilter);
         mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(REPORTS, results.getResults());
         return mav;

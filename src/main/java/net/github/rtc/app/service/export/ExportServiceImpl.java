@@ -1,8 +1,7 @@
-package net.github.rtc.app.service.report;
+package net.github.rtc.app.service.export;
 
 import net.github.rtc.app.dao.generic.GenericDao;
-import net.github.rtc.app.dao.report.ReportDao;
-import net.github.rtc.app.export.ReportBuilder;
+import net.github.rtc.app.dao.export.ExpertDao;
 import net.github.rtc.app.model.entity.report.ReportDetails;
 import net.github.rtc.app.service.generic.CodeGenerationService;
 import net.github.rtc.app.service.generic.ModelService;
@@ -21,13 +20,13 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails> implements ReportService {
+public class ExportServiceImpl extends AbstractGenericServiceImpl<ReportDetails> implements ExportService {
 
     private static final String REPORT = "Report: ";
     private static final String DOT = ".";
-    private static Logger log = LoggerFactory.getLogger(ReportServiceImpl.class.getName());
+    private static Logger log = LoggerFactory.getLogger(ExportServiceImpl.class.getName());
     @Autowired
-    private ReportDao reportDao;
+    private ExpertDao expertDao;
     @Autowired
     private DateService dateService;
     @Autowired
@@ -39,7 +38,7 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
 
     @Override
     protected GenericDao<ReportDetails> getDao() {
-        return reportDao;
+        return expertDao;
     }
 
     @Override
@@ -50,7 +49,7 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
         report.setCreatedDate(dateService.getCurrentDate());
         try {
             compileReport(report);
-            final ReportDetails result = reportDao.create(report);
+            final ReportDetails result = expertDao.create(report);
             log.info(REPORT + report.getCode() + " created successfully!");
             return result;
         } catch (final Exception e) {
@@ -66,7 +65,7 @@ public class ReportServiceImpl extends AbstractGenericServiceImpl<ReportDetails>
         log.info("Updating report: " + report);
         try {
             compileReport(report);
-            reportDao.update(report);
+            expertDao.update(report);
             log.info(REPORT + report.getCode() + " updated successfully!");
             return report;
         } catch (final Exception e) {

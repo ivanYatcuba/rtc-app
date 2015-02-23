@@ -8,7 +8,7 @@ import net.github.rtc.app.model.dto.user.ProfileHeaderDTO;
 import net.github.rtc.app.model.entity.message.MessageStatus;
 import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.service.message.MessageService;
-import net.github.rtc.app.utils.AuthorizedUserProvider;
+import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import net.github.rtc.app.utils.datatable.search.SearchResults;
 import net.github.rtc.app.utils.datatable.search.filter.MessageSearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
