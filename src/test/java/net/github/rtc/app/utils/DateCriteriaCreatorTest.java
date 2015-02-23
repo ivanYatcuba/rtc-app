@@ -1,7 +1,6 @@
 package net.github.rtc.app.utils;
 
-import net.github.rtc.app.utils.datatable.search.filter.DateCriteriaCreator;
-import org.hibernate.criterion.BetweenExpression;
+import net.github.rtc.app.model.dto.filter.DateCriteriaCreator;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.SimpleExpression;
 import org.joda.time.DateTime;

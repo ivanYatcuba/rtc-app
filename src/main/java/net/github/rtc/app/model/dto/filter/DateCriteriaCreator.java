@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.datatable.search.filter;
+package net.github.rtc.app.model.dto.filter;
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;

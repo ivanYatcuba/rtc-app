@@ -1,6 +1,7 @@
 package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.controller.common.ResourceNotFoundException;
+import net.github.rtc.app.model.dto.SearchResults;
 import net.github.rtc.app.model.entity.activity.Activity;
 import net.github.rtc.app.model.entity.activity.ActivityAction;
 import net.github.rtc.app.model.entity.activity.ActivityEntity;
@@ -22,8 +23,7 @@ import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.export.ExportService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.service.security.AuthorizedUserProvider;
-import net.github.rtc.app.utils.datatable.search.*;
-import net.github.rtc.app.utils.datatable.search.filter.*;
+import net.github.rtc.app.model.dto.filter.*;
 import net.github.rtc.app.utils.enums.EnumHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

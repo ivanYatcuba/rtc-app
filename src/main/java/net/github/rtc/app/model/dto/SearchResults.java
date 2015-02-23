@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.datatable.search;
+package net.github.rtc.app.model.dto;
 
 import java.util.ArrayList;
 import java.util.List;
