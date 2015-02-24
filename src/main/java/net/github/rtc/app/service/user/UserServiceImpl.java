@@ -64,6 +64,12 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
         return update(user);
     }
 
+    /**
+     * Set user photo path and upload photo to server also optionally set ACTIVE status
+     * @param user for what user operation will be performed
+     * @param image user's new photo
+     * @param isActive is it necessary to set status ACTIVE
+     */
     private void setStatusAndImage(User user, MultipartFile image, boolean isActive) {
         if (isActive) {
             user.setStatus(UserStatus.ACTIVE);
@@ -74,6 +80,12 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
         }
     }
 
+    /**
+     * Save user's photo to server
+     * @param userCode code of the user which photo needs to be saved
+     * @param file file that needs to be saved
+     * @return path of the saved image
+     */
     private String saveImage(String userCode, MultipartFile file) {
         return upload.saveImage(userCode, file);
     }
@@ -143,12 +155,6 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
         user.setStatus(UserStatus.INACTIVE);
         user.setRemovalDate(null);
         super.update(user);
-    }
-
-    @Override
-    @Transactional
-    public void deleteUsersMarkedForRemoval() {
-        userDao.deletingUser();
     }
 
     @Override
