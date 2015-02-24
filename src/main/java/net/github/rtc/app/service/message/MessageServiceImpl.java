@@ -52,6 +52,10 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
         return messageDao.getUnreadMessageCont(userCode);
     }
 
+    /**
+     * Returns an object that map list of messages to messageDTOs list
+     * @return anonymous class mapper
+     */
     private SearchResultsMapper<Message, MessageDTO> getMessageMapper() {
         return new SearchResultsMapper<Message, MessageDTO>() {
             @Override

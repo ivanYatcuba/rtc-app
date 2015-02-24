@@ -16,12 +16,13 @@ import java.util.List;
 @Component
 public class LogServiceImpl implements LogService {
 
+    //todo: maybe move it to property file and use @Value?
     private static final String PATH_FOLDER = "/var/log/rtc-app/logs/";
     private static final int BEGIN_INDEX = 22;
     private static final int BYTES = 1024;
 
     @Override
-    public List<Logs> findAllLogFileNames() {
+    public List<Logs> findAllLogs() {
         final File folder = new File(getPathFolder());
         final List<Logs> listOfLogs = new ArrayList<Logs>();
         if (folder.listFiles().length > 0) {
@@ -53,10 +54,19 @@ public class LogServiceImpl implements LogService {
         return builder.toString();
     }
 
+    /**
+     * Get path of the folder that contains logs
+     * @return path
+     */
     public static String getPathFolder() {
         return PATH_FOLDER;
     }
 
+    /**
+     * Get log file size in Megabytes
+     * @param file file for what size will be calculated
+     * @return size in string with Mb suffix
+     */
     private String getSize(final File file) {
         String size = "";
         if (file.exists()) {
@@ -66,6 +76,12 @@ public class LogServiceImpl implements LogService {
         return size;
     }
 
+    /**
+     * Get creation date of log file
+     * @param filePath path of the file
+     * @return
+     * @throws IOException if file not found
+     */
     private Date getCreatedDate(final String filePath) throws IOException {
         final Path file = Paths.get(filePath);
         final BasicFileAttributes attributes = Files.readAttributes(file, BasicFileAttributes.class);

@@ -100,7 +100,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     }
 
     /**
-     * Returns an object that map list of courses to courseDTOs list
+     * Returns an object that map list of orders to orderDTOs list
      * @return anonymous class mapper
      */
     private SearchResultsMapper<UserCourseOrder, ExpertOrderDTO> getOrderToExpertOrderMapper() {
