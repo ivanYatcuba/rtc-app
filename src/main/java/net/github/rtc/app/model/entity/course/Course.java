@@ -1,7 +1,7 @@
 package net.github.rtc.app.model.entity.course;
 
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
-import net.github.rtc.app.model.entity.activity.IActivity;
+import net.github.rtc.app.model.entity.activity.Auditable;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.Number;
@@ -25,7 +25,7 @@ import java.util.Set;
  */
 @Entity
 @Validatable
-public class Course extends AbstractPersistenceObject implements Serializable, IActivity {
+public class Course extends AbstractPersistenceObject implements Serializable, Auditable {
 
     private static final int HASH_CODE_CONSTANT = 31;
     private static final int DESCRIPTION_LENGTH = 255;

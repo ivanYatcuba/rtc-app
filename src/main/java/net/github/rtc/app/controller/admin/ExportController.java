@@ -1,9 +1,9 @@
 package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.controller.common.MenuItem;
-import net.github.rtc.app.model.entity.report.ExportFormat;
-import net.github.rtc.app.model.entity.report.ReportClasses;
-import net.github.rtc.app.model.entity.report.ReportDetails;
+import net.github.rtc.app.model.entity.export.ExportFormat;
+import net.github.rtc.app.model.entity.export.ExportClasses;
+import net.github.rtc.app.model.entity.export.ExportDetails;
 import net.github.rtc.app.service.export.ExportService;
 import net.github.rtc.app.utils.ExportFieldExtractor;
 import net.github.rtc.app.utils.enums.EnumHelper;
@@ -28,15 +28,15 @@ public class ExportController implements MenuItem {
     private static Logger log = LoggerFactory.getLogger(ExportController.class.getName());
 
     private static final String TYPES = "types";
-    private static final String REPORT = "report";
+    private static final String EXPORT = "export";
     private static final String FORMATS = "formats";
     private static final String VALIDATION_RULES = "validationRules";
     private static final String HEADER_KEY = "Content-Disposition";
 
     private static final String ROOT = "portal/admin";
-    private static final String UPDATE_VIEW = "/report/reportUpdate";
-    private static final String CREATE_VIEW = "/report/reportCreate";
-    private static final String DETAILS_VIEW = "/report/reportDetails";
+    private static final String UPDATE_VIEW = "/export/exportUpdate";
+    private static final String CREATE_VIEW = "/export/exportCreate";
+    private static final String DETAILS_VIEW = "/export/exportDetails";
     private static final String REDIRECT_EXPORT = "redirect:/admin/export/";
 
     @Autowired
@@ -47,68 +47,68 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView openCreatePage() {
         final ModelAndView mav = new ModelAndView(ROOT + CREATE_VIEW);
-        mav.addObject(VALIDATION_RULES, validationContext.get(ReportDetails.class));
+        mav.addObject(VALIDATION_RULES, validationContext.get(ExportDetails.class));
         return mav;
     }
 
-    @RequestMapping(value = "/insertReport", method = RequestMethod.POST)
-    public String createReport(@ModelAttribute("report") final ReportDetails report) {
-        exportService.create(report);
-        return REDIRECT_EXPORT + report.getCode();
+    @RequestMapping(value = "/insertExport", method = RequestMethod.POST)
+    public String createExport(@ModelAttribute("export") final ExportDetails export) {
+        exportService.create(export);
+        return REDIRECT_EXPORT + export.getCode();
     }
 
-    @RequestMapping(value = "/{reportCode}", method = RequestMethod.GET)
-    public ModelAndView viewReport(@PathVariable final String reportCode) {
+    @RequestMapping(value = "/{exportCode}", method = RequestMethod.GET)
+    public ModelAndView viewExport(@PathVariable final String exportCode) {
         final ModelAndView mav = new ModelAndView(ROOT + DETAILS_VIEW);
-        mav.addObject(REPORT, exportService.findByCode(reportCode));
+        mav.addObject(EXPORT, exportService.findByCode(exportCode));
         return mav;
     }
 
-    @RequestMapping(value = "/update/{reportCode}", method = RequestMethod.GET)
-    public ModelAndView openUpdatePage(@PathVariable final String reportCode) {
+    @RequestMapping(value = "/update/{exportCode}", method = RequestMethod.GET)
+    public ModelAndView openUpdatePage(@PathVariable final String exportCode) {
         final ModelAndView mav = new ModelAndView(ROOT + UPDATE_VIEW);
-        mav.addObject(REPORT, exportService.findByCode(reportCode));
-        mav.addObject(VALIDATION_RULES, validationContext.get(ReportDetails.class));
+        mav.addObject(EXPORT, exportService.findByCode(exportCode));
+        mav.addObject(VALIDATION_RULES, validationContext.get(ExportDetails.class));
         return mav;
     }
 
-    @RequestMapping(value = "/updateReport", method = RequestMethod.POST)
-    public String editReport(@ModelAttribute("report") final ReportDetails report) {
-        exportService.update(report);
-        return REDIRECT_EXPORT + report.getCode();
+    @RequestMapping(value = "/updateExport", method = RequestMethod.POST)
+    public String editExport(@ModelAttribute("export") final ExportDetails export) {
+        exportService.update(export);
+        return REDIRECT_EXPORT + export.getCode();
     }
 
-    @RequestMapping(value = "/delete/{reportCode}", method = RequestMethod.GET)
-    public String deleteReport(@PathVariable final String reportCode) {
-        exportService.deleteByCode(reportCode);
+    @RequestMapping(value = "/delete/{exportCode}", method = RequestMethod.GET)
+    public String deleteExport(@PathVariable final String exportCode) {
+        exportService.deleteByCode(exportCode);
         return "redirect:/admin/search";
     }
 
     @RequestMapping(value = "/getFields", method = RequestMethod.GET)
     @ResponseBody
     public List<String> getFields(@RequestParam final String selectedType) {
-        return ExportFieldExtractor.getAvailableFieldList(ReportClasses.valueOf(selectedType).getValue());
+        return ExportFieldExtractor.getAvailableFieldList(ExportClasses.valueOf(selectedType).getValue());
     }
 
-    @RequestMapping(value = "/download/{reportCode}", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @RequestMapping(value = "/download/{exportCode}", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
-    public void downloadUserExport(@PathVariable final String reportCode,  final HttpServletResponse response) {
-        final ReportDetails reportDetails = exportService.findByCode(reportCode);
-        final File downloadFile = exportService.getReport(reportDetails);
-        response.setHeader(HEADER_KEY, String.format("attachment; " + "filename=\"%s\"", reportDetails.getName()));
+    public void downloadUserExport(@PathVariable final String exportCode,  final HttpServletResponse response) {
+        final ExportDetails exportDetails = exportService.findByCode(exportCode);
+        final File downloadFile = exportService.getExport(exportDetails);
+        response.setHeader(HEADER_KEY, String.format("attachment; " + "filename=\"%s\"", exportDetails.getName()));
         try (final InputStream is = new FileInputStream(downloadFile)) {
             response.setContentType(Files.probeContentType(downloadFile.toPath()));
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {
-            log.info("Error writing file to output stream. Filename was '{}'", reportCode, ex);
+            log.info("Error writing file to output stream. Filename was '{}'", exportCode, ex);
             throw new RuntimeException("IOError writing file to output stream");
         }
     }
 
-    @ModelAttribute(REPORT)
-    public ReportDetails getCommandObject() {
-        return new ReportDetails();
+    @ModelAttribute(EXPORT)
+    public ExportDetails getCommandObject() {
+        return new ExportDetails();
     }
 
     @ModelAttribute(FORMATS)
@@ -117,12 +117,12 @@ public class ExportController implements MenuItem {
     }
 
     @ModelAttribute(TYPES)
-    public ReportClasses[] getTypes() {
-        return ReportClasses.values();
+    public ExportClasses[] getTypes() {
+        return ExportClasses.values();
     }
 
     @Override
     public String getMenuItem() {
-        return REPORT;
+        return EXPORT;
     }
 }

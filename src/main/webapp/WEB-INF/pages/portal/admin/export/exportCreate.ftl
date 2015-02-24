@@ -3,15 +3,15 @@
 
 <@layout.layout>
 
-<@formMacro.rtcForm "reportForm" "/admin/export/insertReport" "report.create.page.header" "${validationRules}">
-    <#include "reportForm.ftl" />
+<@formMacro.rtcForm "exportForm" "/admin/export/insertExport" "export.create.page.header" "${validationRules}">
+    <#include "exportForm.ftl" />
     <@formMacro.rtcSubmit "Create" "Cancel" "/admin/search/${menuItem}"/>
 </@formMacro.rtcForm>
 
 </@layout.layout>
 
 <script type="text/javascript">
-    function CheckNullReportFields(userCode) {
+    function CheckNullExportFields(userCode) {
         $("#userCode").val(userCode);
         $('#removeUserModal').modal('show')
     }

@@ -1,10 +1,10 @@
-package net.github.rtc.app.service.export;
+package net.github.rtc.app.service.builder;
 
+import net.github.rtc.app.model.entity.export.ExportDetails;
+import net.github.rtc.app.model.entity.export.ExportFormat;
 import net.github.rtc.app.service.export.table.CSVTable;
-import net.github.rtc.app.service.export.table.ReportTable;
+import net.github.rtc.app.service.export.table.ExportTable;
 import net.github.rtc.app.service.export.table.XLSNXTable;
-import net.github.rtc.app.model.entity.report.ExportFormat;
-import net.github.rtc.app.model.entity.report.ReportDetails;
 import net.github.rtc.util.annotation.ForExport;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -19,83 +19,83 @@ import java.util.List;
  * This class helps to create xlsx report file of some model class
  * collection on disk
  */
-public final class ReportBuilder {
-    private ReportBuilder() {
+public final class ExportBuilder {
+    private ExportBuilder() {
     }
 
-    public static <T> void build(ReportDetails report, List<T> objectsList, String exportPath) throws NoSuchFieldException {
-        build(report.getFieldsFromClass(), objectsList, report.getName(), exportPath, report.getExportFormat());
+    public static <T> void build(ExportDetails export, List<T> objectsList, String exportPath) throws NoSuchFieldException {
+        build(export.getFieldsFromClass(), objectsList, export.getName(), exportPath, export.getExportFormat());
     }
 
     /**
-     * Create xlsx report file
+     * Create xlsx export file
      *
-     * @param reportFields report about this model class,
-     *                     which fields that needs to be in report are
+     * @param exportFields export about this model class,
+     *                     which fields that needs to be in export are
      *                     annotated by @ForExport.
-     * @param objectsList  list of object that will be stored in report table.
+     * @param objectsList  list of object that will be stored in export table.
      * @param sheetName    name of sheet in xlsx file.
-     * @param filePath     path where report file will be stored
+     * @param filePath     path where export file will be stored
      */
     public static <T> void build(
-            final List<Field> reportFields,
+            final List<Field> exportFields,
             final List<T> objectsList,
             final String sheetName,
             final String filePath,
             final ExportFormat exportFormat) {
 
-        ReportTable reportTable = null;
+        ExportTable exportTable = null;
         try {
             if (exportFormat.equals(ExportFormat.XLSX)) {
-                reportTable = new XLSNXTable(new XSSFWorkbook(), sheetName);
+                exportTable = new XLSNXTable(new XSSFWorkbook(), sheetName);
             } else if (exportFormat.equals(ExportFormat.XLS)) {
-                reportTable = new XLSNXTable(new HSSFWorkbook(), sheetName);
+                exportTable = new XLSNXTable(new HSSFWorkbook(), sheetName);
             } else if (exportFormat.equals(ExportFormat.CSV)) {
-                reportTable = new CSVTable();
+                exportTable = new CSVTable();
             }
 
             //Table header creation
             int currentCol = 0;
             int currentRow = 0;
-            reportTable.createRow(currentRow);
-            for (final Field field : reportFields) {
-                reportTable.createCell(currentRow, currentCol,
+            exportTable.createRow(currentRow);
+            for (final Field field : exportFields) {
+                exportTable.createCell(currentRow, currentCol,
                         field.getAnnotation(ForExport.class).value());
                 currentCol++;
             }
             //Getting info from list
             currentRow++;
             for (final T object : objectsList) {
-                reportTable.createRow(currentRow);
-                for (int j = 0; j < reportFields.size(); j++) {
-                    reportFields.get(j).setAccessible(true);
+                exportTable.createRow(currentRow);
+                for (int j = 0; j < exportFields.size(); j++) {
+                    exportFields.get(j).setAccessible(true);
                     try {
-                        if (reportFields.get(
+                        if (exportFields.get(
                                 j).getDeclaringClass() != object.getClass()) {
                             for (final Field f : object.getClass()
                                     .getDeclaredFields()) {
-                                if (f.getType() == reportFields.get(
+                                if (f.getType() == exportFields.get(
                                         j).getDeclaringClass()) {
                                     f.setAccessible(true);
-                                    reportTable.createCell(currentRow, j,
-                                            reportFields.get(j).get(f.get(object)));
+                                    exportTable.createCell(currentRow, j,
+                                            exportFields.get(j).get(f.get(object)));
                                     f.setAccessible(false);
                                     break;
                                 }
                             }
                         } else {
-                            reportTable.createCell(currentRow, j,
-                                    reportFields.get(j).get(object));
+                            exportTable.createCell(currentRow, j,
+                                    exportFields.get(j).get(object));
                         }
                     } catch (IllegalAccessException | NullPointerException e) {
-                        reportTable.createCell(currentRow, j, "");
+                        exportTable.createCell(currentRow, j, "");
                     }
-                    reportFields.get(j).setAccessible(false);
+                    exportFields.get(j).setAccessible(false);
                 }
                 currentRow++;
             }
             try {
-                reportTable.writeToFile(filePath);
+                exportTable.writeToFile(filePath);
             } catch (final IOException e) {
                 e.printStackTrace();
             }

@@ -10,9 +10,9 @@ import net.github.rtc.app.model.entity.course.CourseStatus;
 import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.news.NewsStatus;
-import net.github.rtc.app.model.entity.report.ExportFormat;
-import net.github.rtc.app.model.entity.report.ReportClasses;
-import net.github.rtc.app.model.entity.report.ReportDetails;
+import net.github.rtc.app.model.entity.export.ExportFormat;
+import net.github.rtc.app.model.entity.export.ExportClasses;
+import net.github.rtc.app.model.entity.export.ExportDetails;
 import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserStatus;
@@ -50,8 +50,8 @@ public class SearchController {
     private static final String USER_AUTHORITIES = "userAuthorities";
     private static final String USER_FILTER = "userFilter";
     private static final String COURSES = "courses";
-    private static final String REPORTS = "reports";
-    private static final String REPORT_FILTER = "reportFilter";
+    private static final String EXPORTS = "exports";
+    private static final String EXPORT_FILTER = "exportFilter";
     private static final String EXPERTS = "experts";
     private static final String MENU_ITEM = "menuItem";
     private static final String ACTIVITY_FILTER = "activityFilter";
@@ -137,14 +137,14 @@ public class SearchController {
         return mav;
     }
 
-    @RequestMapping(value = "/reportTable", method = RequestMethod.POST)
+    @RequestMapping(value = "/exportTable", method = RequestMethod.POST)
     public
     @ResponseBody
-    ModelAndView getReportTable(@ModelAttribute(REPORT_FILTER) final ReportSearchFilter reportFilter) {
-        final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/reportSearchTable");
-        final SearchResults<ReportDetails> results = exportService.search(reportFilter);
+    ModelAndView getReportTable(@ModelAttribute(EXPORT_FILTER) final ExportSearchFilter exportFilter) {
+        final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/exportSearchTable");
+        final SearchResults<ExportDetails> results = exportService.search(exportFilter);
         mav.addAllObjects(results.getPageModel().getPageParams());
-        mav.addObject(REPORTS, results.getResults());
+        mav.addObject(EXPORTS, results.getResults());
         return mav;
     }
 
@@ -177,9 +177,9 @@ public class SearchController {
         return new UserSearchFilter();
     }
 
-    @ModelAttribute(REPORT_FILTER)
-    public ReportSearchFilter getReportSearchFilter() {
-        return new ReportSearchFilter();
+    @ModelAttribute(EXPORT_FILTER)
+    public ExportSearchFilter getReportSearchFilter() {
+        return new ExportSearchFilter();
     }
 
     @ModelAttribute(LOGS_FILTER)
@@ -207,19 +207,19 @@ public class SearchController {
         return EnumHelper.getNames(RoleType.class);
     }
 
-    @ModelAttribute("reportFormats")
+    @ModelAttribute("exportFormats")
     public List<String> getFormats() {
         return EnumHelper.getNames(ExportFormat.class);
     }
 
-    @ModelAttribute("reportStats")
+    @ModelAttribute("exportStats")
     public List<String> getStats() {
         return CourseStatus.getActiveStatus();
     }
 
-    @ModelAttribute("reportTypes")
-    public ReportClasses[] getTypes() {
-        return ReportClasses.values();
+    @ModelAttribute("exportTypes")
+    public ExportClasses[] getTypes() {
+        return ExportClasses.values();
     }
 
     @ModelAttribute(COURSE_CATIGORIES)

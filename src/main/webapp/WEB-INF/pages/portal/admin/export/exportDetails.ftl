@@ -2,7 +2,7 @@
 <#import "../../../fieldMacro.ftl" as formMacro />
 
 <@layout.layout>
-<h4><strong><@spring.message "report.details"/></strong></h4>
+<h4><strong><@spring.message "export.details"/></strong></h4>
 <style>
     label {
         float: left;
@@ -16,15 +16,15 @@
 <div class="row">
     <div class="col-md-6">
         <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "report.lable.name" "${report.name}"/>
+            <@formMacro.rtcFormLabelOut "export.lable.name" "${export.name}"/>
         </div>
         <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "report.lable.exportClass" "${report.exportClass}"/>
+            <@formMacro.rtcFormLabelOut "export.lable.exportClass" "${export.exportClass}"/>
         </div>
     </div>
     <div class="col-md-6">
         <div class="col-md-12">
-            <@formMacro.rtcFormLabelOut "report.lable.exportFormat" "${report.exportFormat}"/>
+            <@formMacro.rtcFormLabelOut "export.lable.exportFormat" "${export.exportFormat}"/>
         </div>
     </div>
 </div>
@@ -32,9 +32,9 @@
 <hr>
 <div class="row">
     <div class="col-md-6">
-        <p style="margin-left: 6em"><b><@spring.message "report.lable.fields"/></b></p>
-        <#if report.fields??>
-            <#list report.fields as field>
+        <p style="margin-left: 6em"><b><@spring.message "export.lable.fields"/></b></p>
+        <#if export.fields??>
+            <#list export.fields as field>
                 <label></label>
 
                 <p>&nbsp${field}</p>
@@ -44,6 +44,6 @@
 </div>
 <hr>
 <div class="row">
-<@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/export/update/${report.code}" "action.cancel" "/admin/search/${menuItem}"/>
+<@formMacro.rtcSubmitDoOrCancel "action.edit" "/admin/export/update/${export.code}" "action.cancel" "/admin/search/${menuItem}"/>
 </div>
 </@layout.layout>

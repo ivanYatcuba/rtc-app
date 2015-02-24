@@ -1,4 +1,4 @@
-package net.github.rtc.app.model.entity.report;
+package net.github.rtc.app.model.entity.export;
 
 
 import com.sun.istack.NotNull;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @Entity
 @Validatable
-public class ReportDetails extends AbstractPersistenceObject {
+public class ExportDetails extends AbstractPersistenceObject {
     private static final int PRIMARY_LENGTH = 50;
 
     @Column
@@ -37,12 +37,12 @@ public class ReportDetails extends AbstractPersistenceObject {
     @Column
     @Enumerated(EnumType.STRING)
     @NotNull
-    private ReportClasses exportClass;
+    private ExportClasses exportClass;
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "ReportField",
-      joinColumns = @JoinColumn(name = "report_id"))
+    @CollectionTable(name = "ExportField",
+      joinColumns = @JoinColumn(name = "export_id"))
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 1)
     private List<String> fields;
@@ -66,11 +66,11 @@ public class ReportDetails extends AbstractPersistenceObject {
         this.exportFormat = exportFormat;
     }
 
-    public ReportClasses getExportClass() {
+    public ExportClasses getExportClass() {
         return exportClass;
     }
 
-    public void setExportClass(final ReportClasses exportClass) {
+    public void setExportClass(final ExportClasses exportClass) {
         this.exportClass = exportClass;
     }
 

@@ -1,8 +1,8 @@
 package net.github.rtc.app.service.handler;
 
 import net.github.rtc.app.model.entity.message.Message;
+import net.github.rtc.app.model.event.OrderMessageEvent;
 import net.github.rtc.app.service.message.MessageService;
-import net.github.rtc.app.utils.message.event.OrderMessageEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;

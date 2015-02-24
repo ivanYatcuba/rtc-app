@@ -1,6 +1,6 @@
 package net.github.rtc.app.model.entity.activity;
 
 
-public interface IActivity {
+public interface Auditable {
     String getLogDetail();
 }

@@ -1,19 +1,19 @@
 <div class="row">
     <div class="col-md-6">
-        <@formMacro.rtcFormTextInput "report.lable.name" "report.name" "required" ""/>
+        <@formMacro.rtcFormTextInput "export.lable.name" "export.name" "required" ""/>
     </div>
     <div class="col-md-6" >
-        <@formMacro.rtcFormSingleSelect "report.lable.exportFormat" "report.exportFormat" formats "required" "" "report.exportFormat." ""/>
+        <@formMacro.rtcFormSingleSelect "export.lable.exportFormat" "export.exportFormat" formats "required" "" "export.exportFormat." ""/>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6">
-        <@formMacro.rtcFormSingleSelect "report.lable.exportClass" "report.exportClass" types "required" "" "report.exportClass." ""/>
+        <@formMacro.rtcFormSingleSelect "export.lable.exportClass" "export.exportClass" types "required" "" "export.exportClass." ""/>
     </div>
 </div>
 <hr>
 <div class="row">
-    <b><@spring.message "report.lable.fields"/></b>
+    <b><@spring.message "export.lable.fields"/></b>
 </div>
 <div class="row">
     <div id="fields" class="col-md-3 col-md-offset-2"></div>
@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<input type="hidden" id="reportCount" name="reportCount" value="">
+<input type="hidden" id="exportCount" name="exportCount" value="">
 <script>
     var fields;
     var currentFieldId = 0;
@@ -80,9 +80,9 @@
                     var div = $("#fields");
                     div.html("");
                 } else {
-                <#if report.fields??>
+                <#if export.fields??>
                     <#assign i = 0>
-                    <#list report.fields as f>
+                    <#list export.fields as f>
                         $("#fields").append(getFieldsSelect(fields, "${f}"));
                         fieldsCount++;
                         <#assign i = i+1>

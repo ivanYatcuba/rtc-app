@@ -1,22 +1,22 @@
 package net.github.rtc.app.model.dto.filter;
 
-import net.github.rtc.app.model.entity.report.ReportClasses;
-import net.github.rtc.app.model.entity.report.ReportDetails;
+import net.github.rtc.app.model.entity.export.ExportClasses;
+import net.github.rtc.app.model.entity.export.ExportDetails;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-public class ReportSearchFilter extends AbstractSearchCommand {
+public class ExportSearchFilter extends AbstractSearchCommand {
 
     private static final String PERCENT = "%";
 
     private String name;
 
-    private ReportClasses exportClass;
+    private ExportClasses exportClass;
 
     @Override
     public DetachedCriteria getCriteria() {
-        final DetachedCriteria criteria = DetachedCriteria.forClass(ReportDetails.class);
+        final DetachedCriteria criteria = DetachedCriteria.forClass(ExportDetails.class);
         if (name != null && !("").equals(name)) {
             criteria.add(Restrictions.like("name", PERCENT + name + PERCENT));
         }
@@ -39,11 +39,11 @@ public class ReportSearchFilter extends AbstractSearchCommand {
         this.name = name;
     }
 
-    public ReportClasses getExportClass() {
+    public ExportClasses getExportClass() {
         return exportClass;
     }
 
-    public void setExportClass(ReportClasses exportClass) {
+    public void setExportClass(ExportClasses exportClass) {
         this.exportClass = exportClass;
     }
 }

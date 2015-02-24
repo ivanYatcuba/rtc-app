@@ -1,7 +1,7 @@
 package net.github.rtc.app.model.entity.user;
 
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
-import net.github.rtc.app.model.entity.activity.IActivity;
+import net.github.rtc.app.model.entity.activity.Auditable;
 import net.github.rtc.util.annotation.ForExport;
 import net.github.rtc.util.annotation.validation.Number;
 import net.github.rtc.util.annotation.validation.Validatable;
@@ -29,7 +29,7 @@ import java.util.Set;
 
 @Entity
 @Validatable
-public class User extends AbstractPersistenceObject implements UserDetails, IActivity {
+public class User extends AbstractPersistenceObject implements UserDetails, Auditable {
 
     public static final int PRIMARY_LENGTH = 50; //FUCKING FUCK!!!FUUU11!!11!
     public static final int SECONDARY_LENGTH = 30;

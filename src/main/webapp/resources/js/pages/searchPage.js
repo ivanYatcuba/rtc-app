@@ -71,9 +71,9 @@ function SearchPage(settings) {
 }
 
 var menuMap = { "activityMenuItem": "#activityFilter", "newsMenuItem": "#newsFilter", "courseMenuItem": "#courseFilter",
-    "userMenuItem": "#userFilter", "reportMenuItem": "#reportFilter", "logsMenuItem": "#logsFilter" }
+    "userMenuItem": "#userFilter", "exportMenuItem": "#exportFilter", "logsMenuItem": "#logsFilter" }
 var urlMap = { "activityFilter": "activityTable", "newsFilter": "newsTable", "courseFilter": "courseTable",
-    "userFilter": "userTable", "reportFilter": "reportTable", "logsFilter": "logsTable" }
+    "userFilter": "userTable", "exportFilter": "exportTable", "logsFilter": "logsTable" }
 
 var settings = {
     "menuMap": menuMap,

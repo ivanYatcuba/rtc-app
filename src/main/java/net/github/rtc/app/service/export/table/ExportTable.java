@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Created by Ivan Yatcuba on 8/22/14.
  */
-public interface ReportTable {
+public interface ExportTable {
     void createRow(int rowIndex);
 
     void createCell(int rowIndex, int cellIndex, Object value);

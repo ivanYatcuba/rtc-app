@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.message.event;
+package net.github.rtc.app.model.event;
 
 import net.github.rtc.app.model.entity.message.Message;
 import org.springframework.context.ApplicationEvent;

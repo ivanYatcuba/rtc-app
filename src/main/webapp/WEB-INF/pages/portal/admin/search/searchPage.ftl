@@ -20,8 +20,8 @@
 <#include "filters/userSearchFilter.ftl"/>
 </div>
 
-<div id="reportFilter" class="filterForm" style="display: none;width: 100%; float: left; ">
-<#include "filters/reportSearchFilter.ftl"/>
+<div id="exportFilter" class="filterForm" style="display: none;width: 100%; float: left; ">
+<#include "filters/exportSearchFilter.ftl"/>
 </div>
 
 <div id="logsFilter" class="filterForm" style="display: none;width: 100%; float: left; ">

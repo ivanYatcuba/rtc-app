@@ -2,7 +2,7 @@ package net.github.rtc.app.model.entity.news;
 
 
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
-import net.github.rtc.app.model.entity.activity.IActivity;
+import net.github.rtc.app.model.entity.activity.Auditable;
 import net.github.rtc.app.model.entity.course.Tag;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.util.annotation.ForExport;
@@ -18,7 +18,7 @@ import java.util.List;
 
 @Entity
 @Validatable
-public class News extends AbstractPersistenceObject implements Serializable, IActivity {
+public class News extends AbstractPersistenceObject implements Serializable, Auditable {
 
     private static final  String NEWS = "News {";
     private static final  String TITLE = " title='";

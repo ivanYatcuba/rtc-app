@@ -1,13 +1,13 @@
-package net.github.rtc.app.model.entity.report;
+package net.github.rtc.app.model.entity.export;
 
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.user.User;
 
-public enum ReportClasses {
+public enum ExportClasses {
     Course(Course.class), User(User.class);
     private Class value;
 
-    private ReportClasses(Class value) {
+    private ExportClasses(Class value) {
         this.value = value;
     }
 

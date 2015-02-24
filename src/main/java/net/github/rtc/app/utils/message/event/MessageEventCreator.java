@@ -1,6 +1,8 @@
 package net.github.rtc.app.utils.message.event;
 
 import net.github.rtc.app.model.entity.order.UserCourseOrder;
+
+import net.github.rtc.app.model.event.OrderMessageEvent;
 import net.github.rtc.app.utils.message.factory.order.OrderResponseMessageFactoryImpl;
 import net.github.rtc.app.utils.message.factory.order.OrderSendMessageFactoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * Created by Ivan Yatcuba on 8/22/14.
  */
-public class XLSNXTable implements ReportTable {
+public class XLSNXTable implements ExportTable {
 
     private Sheet sheet;
     private CellStyle cellStyle;

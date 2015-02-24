@@ -1,4 +1,4 @@
-package net.github.rtc.app.model.entity.report;
+package net.github.rtc.app.model.entity.export;
 
 
 import net.github.rtc.app.utils.enums.EnumHelper;
@@ -12,7 +12,7 @@ import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(BlockJUnit4ClassRunner.class)
-public class ReportModelTest {
+public class ExportModelTest {
 
     @Test
     public void findAllTest(){

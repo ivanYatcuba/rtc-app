@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Ivan Yatcuba on 8/22/14.
  */
-public class CSVTable implements ReportTable {
+public class CSVTable implements ExportTable {
 
     private List<List<String>> table;
 

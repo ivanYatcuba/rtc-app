@@ -1,5 +1,5 @@
 <#import "../../../fieldMacro.ftl" as formMacro />
-<h4><strong><@spring.message "report.search.result.page.criteria"/></strong></h4>
+<h4><strong><@spring.message "export.search.result.page.criteria"/></strong></h4>
 <@spring.formHiddenInput "orderFilter.expertCode" />
 <div class="form-horizontal">
     <div class="row">
