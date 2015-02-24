@@ -6,13 +6,10 @@ import net.github.rtc.app.service.builder.UserCourseDtoBuilder;
 import net.github.rtc.app.model.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseStatus;
-import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.model.entity.order.UserCourseOrder;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.order.UserCourseOrderService;
-import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import net.github.rtc.app.service.builder.SearchResultsBuilder;
 import net.github.rtc.app.service.builder.SearchResultsMapper;
@@ -44,8 +41,6 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
     private DateService dateService;
     @Autowired
     private NewsService newsService;
-    @Autowired
-    private UserService userService;
 
     @Override
     public Class<Course> getType() {
@@ -126,39 +121,29 @@ public class CourseServiceImpl extends AbstractCRUDEventsService<Course> impleme
         }
     }
 
+    /**
+     * Set course status as PUBLISHED and set publish date as current
+     * @param course course that needs to be changed
+     */
     private void publish(Course course) {
         course.setStatus(CourseStatus.PUBLISHED);
         course.setPublishDate(dateService.getCurrentDate());
     }
 
-    @Override
-    public void addParticipant(String courseCode, String userCode) {
-        Assert.notNull(courseCode);
-        Assert.notNull(userCode);
-        final User user = userService.findByCode(userCode);
-        final Course course = findByCode(courseCode);
-        if (course != null && user != null) {
-            course.getParticipants().add(user);
-            super.update(course);
-        }
-    }
-
-    @Override
-    public void deleteParticipant(String courseCode, String userCode) {
-
-    }
-
+    /**
+     * Returns true if current user is assigned for course
+     * @param courseCode course code of course that needs to be checked
+     * @return boolean value
+     */
     private boolean isUserAssignedForCourse(String courseCode) {
-        final String code = AuthorizedUserProvider.getAuthorizedUser().getCode();
-        final List<UserCourseOrder> userCourseOrders = orderService.getUserOrdersByCode(code);
-        for (UserCourseOrder o : userCourseOrders) {
-            if (o.getUserCode().equals(code) && o.getCourseCode().equals(courseCode)) {
-                return true;
-            }
-        }
-        return false;
+        final String userCode = AuthorizedUserProvider.getAuthorizedUser().getCode();
+        return orderService.getUserCourseOrder(userCode, courseCode) != null;
     }
 
+    /**
+     * Returns an object that map list of courses to courseDTOs list
+     * @return anonymous class mapper
+     */
     private SearchResultsMapper<Course, UserCourseDTO> getCourseToCourseDtoMapper() {
             return new SearchResultsMapper<Course, UserCourseDTO>() {
             @Override

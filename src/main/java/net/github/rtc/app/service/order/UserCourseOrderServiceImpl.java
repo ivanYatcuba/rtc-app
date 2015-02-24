@@ -45,20 +45,6 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     private MessageEventCreator eventCreator;
 
     @Override
-    @Transactional
-    public UserCourseOrder getUserOrderByUserCode(final String userCode) {
-        LOG.info("Get user order by user code: " + userCode);
-        return userCourseOrderDao.getUserOrder(userCode);
-    }
-
-    @Override
-    @Transactional
-    public List<UserCourseOrder> getUserOrdersByCode(String userCode) {
-        LOG.info("Get user orders by user code: " + userCode);
-        return userCourseOrderDao.getUserOrdersByCode(userCode);
-    }
-
-    @Override
     public SearchResults<ExpertOrderDTO> searchOrderForExpert(OrderSearchFilter searchFilter) {
         final SearchResultsBuilder<UserCourseOrder, ExpertOrderDTO> resultsBuilder = new SearchResultsBuilder<>();
         return resultsBuilder.setSearchResultsToTransform(search(searchFilter)).
@@ -95,7 +81,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
         userCourseOrder.setPosition(position);
         userCourseOrder.setUserCode(userCode);
         userCourseOrder.setRequestDate(now);
-        userCourseOrder.setReason("prosto tak");
+        userCourseOrder.setReason("");
 
         eventCreator.createOrderSendMessageEvent(userCourseOrder);
 
@@ -103,10 +89,20 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     }
 
     @Override
+    @Transactional
+    public UserCourseOrder getUserCourseOrder(String userCode, String courseCode) {
+        return userCourseOrderDao.getUserCourseOrder(userCode, courseCode);
+    }
+
+    @Override
     protected GenericDao<UserCourseOrder> getDao() {
         return userCourseOrderDao;
     }
 
+    /**
+     * Returns an object that map list of courses to courseDTOs list
+     * @return anonymous class mapper
+     */
     private SearchResultsMapper<UserCourseOrder, ExpertOrderDTO> getOrderToExpertOrderMapper() {
         return new SearchResultsMapper<UserCourseOrder, ExpertOrderDTO>() {
             @Override

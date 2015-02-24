@@ -15,34 +15,38 @@ public interface CourseService extends ModelService<Course>, GenericService<Cour
 
     /**
      * Publish course and possibly create news with it
-     * @param courseCode
+     * @param courseCode code of the course that needs to be published
      * @param isNewsCreated flag that determines if news needs to be created
      */
     void publish(String courseCode, final boolean isNewsCreated);
 
     /**
      * Set course status to archived and update
-     * @param courseCode
+     * @param courseCode code of the course that needs to be archived
      */
     void archive(String courseCode);
 
     /**
      * Search courses for user and present it as DTO
-     * @param filter
-     * @return
+     * @param filter object that contains search params
+     * @see net.github.rtc.app.model.dto.filter.CourseSearchFilter
+     *
+     * @return search results for user view presented as DTO
+     * @see net.github.rtc.app.model.dto.user.UserCourseDTO
      */
     SearchResults<UserCourseDTO> searchCoursesForUser(CourseSearchFilter filter);
 
     /**
      * Get a single course for user and present it as DTO
-     * @param code
-     * @return
+     * @param code code of the course that needs to be found
+     * @return course for user view presented as DTO
+     * @see net.github.rtc.app.model.dto.user.UserCourseDTO
      */
     UserCourseDTO getUserCourseDTObyCode(String code);
 
     /**
      * Create course and possibly publish and create news about it
-     * @param course
+     * @param course actually the course that needs to be created
      * @param isPublished flag that determines if news needs to be published
      * @param newsCreated flag that determines if news needs to be created
      */
@@ -50,23 +54,9 @@ public interface CourseService extends ModelService<Course>, GenericService<Cour
 
     /**
      * Update course and possibly publish and create news about it
-     * @param course
+     * @param course actually the course that needs to be updated
      * @param isPublished flag that determines if news needs to be published
      * @param newsCreated flag that determines if news needs to be created
      */
     void update(Course course, final boolean isPublished, final boolean newsCreated);
-
-    /**
-     * Add user as a participant of a course
-     * @param courseCode
-     * @param userCode
-     */
-    void addParticipant(String courseCode, String userCode);
-
-    /**
-     * Remove user from course participants
-     * @param courseCode
-     * @param userCode
-     */
-    void deleteParticipant(String courseCode, String userCode);
 }

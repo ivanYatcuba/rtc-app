@@ -39,7 +39,7 @@ public class UserCourseOrder extends AbstractPersistenceObject {
 
     @Column
     @NotEmpty
-    private String reason;
+    private String reason; //todo: do we need this field?
 
     public UserCourseOrder(
       final String userCode,

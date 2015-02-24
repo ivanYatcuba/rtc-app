@@ -17,20 +17,6 @@ import java.util.List;
 public interface UserCourseOrderService extends GenericService<UserCourseOrder> {
 
     /**
-     * Get a single order for specified user
-     * @param userCode
-     * @return
-     */
-    UserCourseOrder getUserOrderByUserCode(String userCode);
-
-    /**
-     * Get all orders for specified user
-     * @param userCode
-     * @return
-     */
-    List<UserCourseOrder> getUserOrdersByCode(String userCode);
-
-    /**
      * Search
      * @param searchFilter object that contains the params of the search
      * @return Search result that contains  DTOs
@@ -40,15 +26,15 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
 
     /**
      * Get number of accepted orders for specified course
-     * @param courseCode
+     * @param courseCode code of the course for what operation will be performed
      * @return number of orders with status ACCEPTED
      */
     int getAcceptedOrdersCount(String courseCode);
 
     /**
      * Set new status for order
-     * @param orderCode
-     * @param userRequestStatus
+     * @param orderCode code of the order for what operation will be performed
+     * @param userRequestStatus new status of the order
      * @return if operation was completed successfully
      */
     boolean changeOrderStatus(final String orderCode, final UserRequestStatus userRequestStatus);
@@ -56,9 +42,17 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
 
     /**
      * Create order for course on specified position
-     * @param courseCode
-     * @param position
-     * @return
+     * @param courseCode code of the course for what order will be created
+     * @param position position for what user wanna be applied on course
+     * @return created order
      */
     UserCourseOrder create(String courseCode, CourseType position);
+
+    /**
+     * Get order with specified user code and course code
+     * @param userCode user code for order
+     * @param courseCode course code for order
+     * @return order with mentioned params
+     */
+    UserCourseOrder getUserCourseOrder(String userCode, String courseCode);
 }

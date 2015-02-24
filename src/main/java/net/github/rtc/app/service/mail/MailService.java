@@ -10,23 +10,17 @@ import org.springframework.mail.SimpleMailMessage;
 public interface MailService {
 
     /**
-     *
-     * @param from
-     * @param to
-     * @param subject
-     * @param msg
+     * Send mail from one user to another
+     * @param from sender address
+     * @param to receiver address
+     * @param subject topic of the mail
+     * @param msg text of the message
      */
     void sendMail(String from, String to, String subject, String msg);
 
     /**
-     *
-     * @param msg
-     */
-    void sendMail(SimpleMailMessage msg);
-
-    /**
      * Send mail with registration details to mentioned user
-     * @param user
+     * @param user user on whose email the message will be send
      */
     void sendRegistrationMail(User user);
 }

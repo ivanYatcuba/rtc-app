@@ -29,6 +29,7 @@ public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements 
         return newsDao;
     }
 
+    @Override
     public List<News> findPublishedNews() {
         return newsDao.findPublished();
     }
@@ -62,11 +63,19 @@ public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements 
         create(newsBuilder.build(course));
     }
 
+    /**
+     * Set news status as PUBLISHED and set publish date as current
+     * @param news news that will be updated
+     */
     private void setPublish(News news) {
         news.setStatus(NewsStatus.PUBLISHED);
         news.setPublishDate(dateService.getCurrentDate());
     }
 
+    /**
+     * Set news creation date as current and set author as current logged user
+     * @param news news that will be updated
+     */
     private void setAuthorAndDate(News news) {
         news.setCreateDate(dateService.getCurrentDate());
         news.setAuthor(AuthorizedUserProvider.getAuthorizedUser());

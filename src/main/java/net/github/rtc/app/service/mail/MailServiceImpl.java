@@ -38,10 +38,8 @@ public class MailServiceImpl implements MailService {
         message.setText(msg);
         mailSender.send(message);
     }
-    @Async
-    public void sendMail(SimpleMailMessage msg) {
-        mailSender.send(msg);
-    }
+
+
     @Async
     public void sendRegistrationMail(User user) {
         final Configuration config = new Configuration();

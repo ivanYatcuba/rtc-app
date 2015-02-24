@@ -3,6 +3,7 @@ package net.github.rtc.app.dao.order;
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.model.entity.order.UserCourseOrder;
 import net.github.rtc.app.model.entity.order.UserRequestStatus;
+import net.github.rtc.app.model.entity.user.User;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface UserCourseOrderDao extends GenericDao<UserCourseOrder> {
     List<UserCourseOrder> getOrderByStatus(UserRequestStatus status);
 
     int getAcceptedOrdersCourseCount(String courseCode);
+
+    UserCourseOrder getUserCourseOrder(String userCode, String courseCode);
 }

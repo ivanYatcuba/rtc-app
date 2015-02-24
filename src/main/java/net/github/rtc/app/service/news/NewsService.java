@@ -13,33 +13,33 @@ import java.util.List;
 public interface NewsService extends GenericService<News> {
     /**
      * Find all news with status PUBLISHED
-     * @return
+     * @return list of published news
      */
     List<News> findPublishedNews();
 
     /**
      * Create news and publish it if necessary
-     * @param news
+     * @param news the news that will be persisted to db
      * @param isPublished flag that determines if news needs to be published
      */
     void create(News news, boolean isPublished);
 
     /**
      * Update news and publish it if necessary
-     * @param news
+     * @param news the news that will be updated
      * @param isPublished flag that determines if news needs to be published
      */
     void update(News news, boolean isPublished);
 
     /**
      * Publish news and update it
-     * @param newsCode
+     * @param newsCode code of the news that will be published
      */
     void publish(String newsCode);
 
     /**
      * Create news about the course
-     * @param course
+     * @param course the course about what news will be created
      */
     void createNewsFromCourse(Course course);
 }
