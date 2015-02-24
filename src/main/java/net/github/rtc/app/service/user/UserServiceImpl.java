@@ -6,6 +6,7 @@ import net.github.rtc.app.model.entity.user.Role;
 import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserStatus;
+import net.github.rtc.app.service.builder.MailMessageBuilder;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
 import net.github.rtc.app.service.mail.MailService;
@@ -13,6 +14,7 @@ import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,6 +37,8 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
     private FileUpload upload;
     @Autowired
     private MailService mailService;
+    @Autowired
+    private MailMessageBuilder mailMessageBuilder;
 
     @Override
     protected GenericDao<User> getDao() {
@@ -163,7 +167,9 @@ public class UserServiceImpl extends AbstractCRUDEventsService<User> implements 
         user.setAuthorities(Arrays.asList(getRoleByType(RoleType.ROLE_USER)));
         user.setRegisterDate(dateService.getCurrentDate());
         create(user);
-        mailService.sendRegistrationMail(user);
+
+        final SimpleMailMessage msg = mailMessageBuilder.build(user);
+        mailService.sendMail(msg);
     }
 
     @Override
