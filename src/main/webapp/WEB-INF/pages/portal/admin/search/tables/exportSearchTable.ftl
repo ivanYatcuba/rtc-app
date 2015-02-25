@@ -1,3 +1,4 @@
+<#import "../../../../fieldMacro.ftl" as formMacro/>
 <#import "../../../../datatables.ftl" as datatables/>
 <h4><strong><@spring.message "export.search.result.page.header"/></strong></h4>
 <div>
@@ -22,7 +23,7 @@
                 <td style="vertical-align: middle">${export.createdDate?string('dd-MMM-yyyy')}</td>
                 <td style="vertical-align: middle">
                     <div class="btn-group">
-                        <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenuExport" data-toggle="dropdown">Action</button>
+                        <@formMacro.splitButton/>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="min-width: 100px;">
                             <li id="downloadLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/export/download/${export.code}'/>">Download</a></li>
                             <li id="removeLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url'/admin/export/delete/${export.code}'/>">Remove</a></li>

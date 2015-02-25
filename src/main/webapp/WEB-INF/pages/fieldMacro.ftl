@@ -455,3 +455,11 @@
         <img id="${id}" src="<@spring.url'/resources/images/errorCat.jpg'/>"  class="${class}" alt="${alt}"/>
     </#if>
 </#macro>
+
+<#macro splitButton>
+<button style="width: 80px" class="btn btn-default dropdown-toggle"  data-toggle="dropdown" type="button">Action</button>
+<button style="width: 23px; margin-left: -3px" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>&#11;
+</button>
+</#macro>

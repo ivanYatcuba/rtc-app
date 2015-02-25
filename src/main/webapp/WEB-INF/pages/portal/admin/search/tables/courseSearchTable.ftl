@@ -38,10 +38,8 @@
                 <td style="width: 15%;vertical-align: middle">
                     <#if (course.status??) && (course.status == "DRAFT") >
                         <div class="btn-group" >
-                            <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenu1"
-                                    data-toggle="dropdown">
-                                Action</button>
-                            <ul class="dropdown-menu" style="min-width: 100px;"  role="menu" aria-labelledby="dropdownMenu1">
+                            <@formMacro.splitButton/>
+                            <ul class="dropdown-menu" style="min-width: 100px;"  role="menu" >
                                 <li id="publicationLi" role="presentation"><a role="menuitem" href="#" tabindex="-1" onclick="PopUpShow('${course.code}')">Publish</a></li>
                                 <li id="publicationLi" role="presentation"><a role="menuitem" href="#" tabindex="-1" onclick="ArchiveCourse('${course.code}')">Archive</a></li>
                             <#--<li id="deleteLi" role="presentation"><a role="menuitem" tabindex="-1" href="<@spring.url "/admin/course/delete/${course.code}"/>">Remove</a></li>-->

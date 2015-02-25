@@ -49,7 +49,7 @@
             </td>
             <td style="vertical-align: middle">
                 <div class="btn-group">
-                    <button class="btn btn-default" type="button" style="width: 100px" id="dropdownMenu1" data-toggle="dropdown">Action</button>
+                    <@formMacro.splitButton/>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="min-width: 100px;">
                         <#if order.status == 'PENDING' >
                             <li><a class="btn" onclick="doAjaxCall('<@spring.url'/user/expert/order/accept/${order.orderCode}'/>')">

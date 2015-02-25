@@ -71,8 +71,10 @@
                 <td style="width: 15%; vertical-align: middle">
                     <#if user.isForRemoval()>
                         <div class="btn-group">
-                            <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
-                                Action
+                            <button style="width: 90px" class="btn btn-default" type="button">Action</button>
+                            <button style="width: 10px;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>&#11;
                             </button>
                             <ul class="dropdown-menu" style="width: 112px" role="menu">
                                 <li>
@@ -83,9 +85,7 @@
 
                     <#else>
                         <div class="btn-group">
-                            <button class="btn btn-default" style="width: 100px" type="button" data-toggle="dropdown">
-                                Action
-                            </button>
+                            <@formMacro.splitButton/>
                             <ul class="dropdown-menu" style="min-width: 100px;" role="menu">
                             <li>
                                 <#if user.isActive()>
