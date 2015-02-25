@@ -1,10 +1,8 @@
 package net.github.rtc.app.model.dto;
 
-import net.github.rtc.app.model.entity.AbstractPersistenceObject;
-
 import java.util.Date;
 
-public class Logs extends AbstractPersistenceObject {
+public class Logs {
 
     private String file;
 
