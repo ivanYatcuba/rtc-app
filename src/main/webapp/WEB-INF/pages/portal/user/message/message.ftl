@@ -106,7 +106,7 @@
                     url: '<@spring.url"/user/message/unreadMessages"/>',
                     success: function (data) {
                         if(data != 0) {
-                            $("#headerMessageIndicator").text("("+data+")");
+                            $("#headerMessageIndicator").text(data);
                         } else {
                             $("#headerMessageIndicator").text("");
                         }
