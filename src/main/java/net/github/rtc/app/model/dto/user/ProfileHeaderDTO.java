@@ -1,18 +1,18 @@
 package net.github.rtc.app.model.dto.user;
 
-public class ProfileHeaderDTO {
+public class ProfileHeaderDto {
     private String name;
     private String imageId;
     private int unreadMessageCount;
 
-    public ProfileHeaderDTO() { }
+    public ProfileHeaderDto() { }
 
-    public ProfileHeaderDTO(String name, String imageUrl) {
+    public ProfileHeaderDto(String name, String imageUrl) {
         this.name = name;
         this.imageId = imageUrl;
     }
 
-    public ProfileHeaderDTO(String name, String imageId, int unreadMessageCount) {
+    public ProfileHeaderDto(String name, String imageId, int unreadMessageCount) {
         this.name = name;
         this.imageId = imageId;
         this.unreadMessageCount = unreadMessageCount;
