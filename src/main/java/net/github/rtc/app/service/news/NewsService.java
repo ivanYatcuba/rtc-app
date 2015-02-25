@@ -2,6 +2,7 @@ package net.github.rtc.app.service.news;
 
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.news.News;
+import net.github.rtc.app.model.entity.news.NewsStatus;
 import net.github.rtc.app.service.generic.GenericService;
 
 import java.util.List;
@@ -41,5 +42,11 @@ public interface NewsService extends GenericService<News> {
      * Create news about the course
      * @param course the course about what news will be created
      */
-    void createNewsFromCourse(Course course);
+    void create(Course course);
+
+    /**
+     * Find all news by news status
+     * @param status a current status of news
+     */
+    List<News> findAllByStatus(NewsStatus status);
 }

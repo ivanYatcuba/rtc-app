@@ -61,8 +61,13 @@ public class NewsServiceImpl extends AbstractCrudEventsService<News> implements 
     }
 
     @Override
-    public void createNewsFromCourse(Course course) {
+    public void create(Course course) {
         create(newsBuilder.build(course));
+    }
+
+    @Override
+    public List<News> findAllByStatus(NewsStatus status) {
+        return newsDao.findAllByStatus(status);
     }
 
     /**

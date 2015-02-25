@@ -64,7 +64,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
         course.setPublishDate(dateService.getCurrentDate());
         coursesDao.update(course);
         if (isNewsCreated) {
-           newsService.createNewsFromCourse(course);
+           newsService.create(course);
         }
     }
 
@@ -100,7 +100,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
         }
         create(course);
         if (newsCreated) {
-            newsService.createNewsFromCourse(course);
+            newsService.create(course);
         }
     }
 
@@ -111,7 +111,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
         }
         update(course);
         if (newsCreated) {
-            newsService.createNewsFromCourse(course);
+            newsService.create(course);
         }
     }
 
