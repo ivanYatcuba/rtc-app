@@ -2,7 +2,6 @@ package net.github.rtc.app.model.dto;
 
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
 
-import javax.persistence.TemporalType;
 import java.util.Date;
 
 public class Logs extends AbstractPersistenceObject {
