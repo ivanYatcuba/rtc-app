@@ -2,7 +2,7 @@ package net.github.rtc.app.controller.common;
 
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.service.news.NewsService;
-import net.github.rtc.app.utils.AtomFeedView;
+import net.github.rtc.app.controller.AtomFeedView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

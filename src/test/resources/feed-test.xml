@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd" default-lazy-init="true"
         >
 
-   <bean id="atomFeedView" class="net.github.rtc.app.utils.AtomFeedView"/>
+   <bean id="atomFeedView" class="net.github.rtc.app.controller.AtomFeedView"/>
 
     <context:property-placeholder
             location="classpath:/hibernate.properties, classpath:/export.properties, classpath:feed.properties"/>

@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils;
+package net.github.rtc.app.controller;
 
 import com.sun.syndication.feed.atom.*;
 import net.github.rtc.app.controller.common.FeedNewsController;
@@ -14,7 +14,6 @@ import java.util.*;
 
 @Component
 public class AtomFeedView extends AbstractAtomFeedView {
-
 
     @Value("${feed.title}")
     private String title;

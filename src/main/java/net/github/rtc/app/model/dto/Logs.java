@@ -1,23 +1,16 @@
-package net.github.rtc.app.model.entity.logs;
+package net.github.rtc.app.model.dto;
 
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
 
-import javax.persistence.Entity;
-import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
 
-/**
- * Created by Илья on 21.02.2015.
- */
-@Entity
 public class Logs extends AbstractPersistenceObject {
 
     private String file;
 
     private String size;
 
-    @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 
     public Logs() {

@@ -10,7 +10,7 @@
             base-package=" net.github.rtc.app.dao, net.github.rtc.app.exception, net.github.rtc.app.job.export,
              net.github.rtc.app.model, net.github.rtc.app.service, net.github.rtc.app.utils"/>
     <context:property-placeholder
-            location="classpath:/hibernate.properties, classpath:/export.properties, classpath:feed.properties"/>
+            location="classpath:/hibernate.properties, classpath:/export.properties"/>
 
 
     <!-- Import spring security configurations -->

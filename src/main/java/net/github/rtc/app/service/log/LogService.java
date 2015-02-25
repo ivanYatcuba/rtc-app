@@ -1,6 +1,6 @@
 package net.github.rtc.app.service.log;
 
-import net.github.rtc.app.model.entity.logs.Logs;
+import net.github.rtc.app.model.dto.Logs;
 
 import java.util.List;
 

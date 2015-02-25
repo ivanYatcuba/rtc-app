@@ -1,10 +1,11 @@
-package net.github.rtc.app.utils;
+package net.github.rtc.app.controller;
 
 
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.feed.atom.Link;
 import com.sun.syndication.feed.atom.Person;
+import net.github.rtc.app.controller.AtomFeedView;
 import net.github.rtc.app.controller.common.FeedNewsController;
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.user.User;
