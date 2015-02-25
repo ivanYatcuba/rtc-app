@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @see net.github.rtc.app.model.event.ActivityEvent
  * @param <T>
  */
-public abstract class AbstractCRUDEventsService<T  extends AbstractPersistenceObject & Auditable>  extends AbstractGenericServiceImpl<T>  {
+public abstract class AbstractCrudEventsService<T  extends AbstractPersistenceObject & Auditable>  extends AbstractGenericServiceImpl<T>  {
 
     @Autowired
     private EventCreator creator;

@@ -7,7 +7,7 @@ import net.github.rtc.app.model.dto.user.UserCourseDTO;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseStatus;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
+import net.github.rtc.app.service.generic.AbstractCrudEventsService;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.order.UserCourseOrderService;
 import net.github.rtc.app.service.security.AuthorizedUserProvider;
@@ -27,7 +27,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CourseServiceImpl extends AbstractCRUDEventsService<Course> implements CourseService {
+public class CourseServiceImpl extends AbstractCrudEventsService<Course> implements CourseService {
 
     private static final String COURSE_CANNOT_BE_NULL = "course cannot be null";
     private static final String COURSE_CODE_CANNOT_BE_NULL = "course code cannot be null";

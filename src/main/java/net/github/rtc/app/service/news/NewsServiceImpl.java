@@ -6,7 +6,7 @@ import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.news.NewsStatus;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
+import net.github.rtc.app.service.generic.AbstractCrudEventsService;
 import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import net.github.rtc.app.utils.NewsBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class NewsServiceImpl extends AbstractCRUDEventsService<News> implements NewsService {
+public class NewsServiceImpl extends AbstractCrudEventsService<News> implements NewsService {
     @Autowired
     private NewsDao newsDao;
     @Autowired

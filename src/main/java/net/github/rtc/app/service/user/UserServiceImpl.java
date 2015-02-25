@@ -8,7 +8,7 @@ import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.user.UserStatus;
 import net.github.rtc.app.service.builder.MailMessageBuilder;
 import net.github.rtc.app.service.date.DateService;
-import net.github.rtc.app.service.generic.AbstractCRUDEventsService;
+import net.github.rtc.app.service.generic.AbstractCrudEventsService;
 import net.github.rtc.app.service.mail.MailService;
 import net.github.rtc.app.utils.files.upload.FileUpload;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class UserServiceImpl extends AbstractCRUDEventsService<User> implements UserService {
+public class UserServiceImpl extends AbstractCrudEventsService<User> implements UserService {
 
     private static final int USER_REMOVAL_DELAY = 3;
     private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class.getName());
