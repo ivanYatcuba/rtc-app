@@ -2,7 +2,7 @@ package net.github.rtc.app.model.dto.user;
 
 import java.util.Date;
 
-public class MessageDTO {
+public class MessageDto {
 
     private String code;
 
@@ -12,10 +12,10 @@ public class MessageDTO {
 
     private Date sendingDate;
 
-    public MessageDTO() {
+    public MessageDto() {
     }
 
-    public MessageDTO(String userName, String text, Date sendingDate) {
+    public MessageDto(String userName, String text, Date sendingDate) {
         this.userName = userName;
         this.text = text;
         if (sendingDate != null) {

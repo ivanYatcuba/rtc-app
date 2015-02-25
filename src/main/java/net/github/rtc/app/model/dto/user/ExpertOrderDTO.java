@@ -4,7 +4,7 @@ import net.github.rtc.app.model.entity.order.UserRequestStatus;
 
 import java.util.Date;
 
-public class ExpertOrderDTO {
+public class ExpertOrderDto {
 
     private String userCode;
     private String userName;
