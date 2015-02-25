@@ -2,7 +2,7 @@ package net.github.rtc.app.service.order;
 
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.dao.order.UserCourseOrderDao;
-import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
+import net.github.rtc.app.model.dto.user.ExpertOrderDto;
 import net.github.rtc.app.service.builder.ExpertOrderDtoBuilder;
 import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.order.UserCourseOrder;
@@ -45,8 +45,8 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     private MessageEventCreator eventCreator;
 
     @Override
-    public SearchResults<ExpertOrderDTO> searchOrderForExpert(OrderSearchFilter searchFilter) {
-        final SearchResultsBuilder<UserCourseOrder, ExpertOrderDTO> resultsBuilder = new SearchResultsBuilder<>();
+    public SearchResults<ExpertOrderDto> searchOrderForExpert(OrderSearchFilter searchFilter) {
+        final SearchResultsBuilder<UserCourseOrder, ExpertOrderDto> resultsBuilder = new SearchResultsBuilder<>();
         return resultsBuilder.setSearchResultsToTransform(search(searchFilter)).
             setSearchResultsMapper(getOrderToExpertOrderMapper()).build();
     }
@@ -103,11 +103,11 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
      * Returns an object that map list of orders to orderDTOs list
      * @return anonymous class mapper
      */
-    private SearchResultsMapper<UserCourseOrder, ExpertOrderDTO> getOrderToExpertOrderMapper() {
-        return new SearchResultsMapper<UserCourseOrder, ExpertOrderDTO>() {
+    private SearchResultsMapper<UserCourseOrder, ExpertOrderDto> getOrderToExpertOrderMapper() {
+        return new SearchResultsMapper<UserCourseOrder, ExpertOrderDto>() {
             @Override
-            public List<ExpertOrderDTO> map(List<UserCourseOrder> searchResults) {
-                final List<ExpertOrderDTO> outputResults = new ArrayList<>();
+            public List<ExpertOrderDto> map(List<UserCourseOrder> searchResults) {
+                final List<ExpertOrderDto> outputResults = new ArrayList<>();
                 for (UserCourseOrder order: searchResults) {
                     final ExpertOrderDtoBuilder dtoBuilder = new ExpertOrderDtoBuilder();
                     outputResults.add(dtoBuilder.buildOrderFields(order).

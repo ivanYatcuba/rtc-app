@@ -1,7 +1,7 @@
 package net.github.rtc.app.controller.user;
 
 import net.github.rtc.app.controller.common.MenuItem;
-import net.github.rtc.app.model.dto.user.UserCourseDTO;
+import net.github.rtc.app.model.dto.user.UserCourseDto;
 import net.github.rtc.app.model.entity.course.CourseStatus;
 import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.order.UserCourseOrder;
@@ -44,7 +44,7 @@ public class CourseController implements MenuItem {
     @RequestMapping(value = "/courseDetails/{courseCode}", method = RequestMethod.GET)
     public ModelAndView courseDetails(@PathVariable final String courseCode) {
         final ModelAndView mav = new ModelAndView(ROOT + "/course/userCourseDetails");
-        mav.addObject(COURSE, courseService.getUserCourseDTObyCode(courseCode));
+        mav.addObject(COURSE, courseService.getUserCourseDtoByCode(courseCode));
         return mav;
     }
 
@@ -59,7 +59,7 @@ public class CourseController implements MenuItem {
     @ResponseBody
     ModelAndView getCourseTable(@ModelAttribute("courseFilter") final CourseSearchFilter courseFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + "/course/courseTable");
-        final SearchResults<UserCourseDTO> results = courseService.searchCoursesForUser(courseFilter);
+        final SearchResults<UserCourseDto> results = courseService.searchCoursesForUser(courseFilter);
         mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(COURSES, results.getResults());
         mav.addObject(VALIDATION_RULES, validationContext.get(UserCourseOrder.class));

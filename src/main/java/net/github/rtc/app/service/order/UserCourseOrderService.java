@@ -1,6 +1,6 @@
 package net.github.rtc.app.service.order;
 
-import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
+import net.github.rtc.app.model.dto.user.ExpertOrderDto;
 import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.order.UserCourseOrder;
 import net.github.rtc.app.model.entity.order.UserRequestStatus;
@@ -18,9 +18,9 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
      * Search
      * @param searchFilter object that contains the params of the search
      * @return Search result that contains  DTOs
-     * @see net.github.rtc.app.model.dto.user.ExpertOrderDTO
+     * @see net.github.rtc.app.model.dto.user.ExpertOrderDto
      */
-    SearchResults<ExpertOrderDTO> searchOrderForExpert(OrderSearchFilter searchFilter);
+    SearchResults<ExpertOrderDto> searchOrderForExpert(OrderSearchFilter searchFilter);
 
     /**
      * Get number of accepted orders for specified course

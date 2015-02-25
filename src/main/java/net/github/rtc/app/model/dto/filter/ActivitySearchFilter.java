@@ -17,7 +17,7 @@ import java.util.Set;
  */
 
 @Component
-public class ActivitySearchFilter extends AbstractSearchCommand {
+public class ActivitySearchFilter extends AbstractSearchFilter {
 
     private static final String DATE = "actionDate";
     private String user;

@@ -6,7 +6,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-public class ExportSearchFilter extends AbstractSearchCommand {
+public class ExportSearchFilter extends AbstractSearchFilter {
 
     private static final String PERCENT = "%";
 

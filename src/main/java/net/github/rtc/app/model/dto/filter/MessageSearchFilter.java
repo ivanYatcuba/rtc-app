@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.Date;
 
-public class MessageSearchFilter extends AbstractSearchCommand {
+public class MessageSearchFilter extends AbstractSearchFilter {
 
     private static final String SENDING_DATE = "sendingDate";
     private static final String IS_READ = "isRead";

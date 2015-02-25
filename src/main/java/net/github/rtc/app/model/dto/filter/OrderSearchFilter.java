@@ -8,7 +8,7 @@ import org.hibernate.criterion.*;
 
 import java.util.Date;
 
-public class OrderSearchFilter extends AbstractSearchCommand {
+public class OrderSearchFilter extends AbstractSearchFilter {
 
     private static final String EXPERTS = "experts";
     private static final String POSITION = "position";

@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.Date;
 
-public class NewsSearchFilter extends AbstractSearchCommand {
+public class NewsSearchFilter extends AbstractSearchFilter {
 
     private static final String PERCENT = "%";
     private static final String CREATE_DATE = "createDate";

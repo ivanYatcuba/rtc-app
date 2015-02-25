@@ -1,6 +1,6 @@
 package net.github.rtc.app.service.message;
 
-import net.github.rtc.app.model.dto.user.MessageDTO;
+import net.github.rtc.app.model.dto.user.MessageDto;
 import net.github.rtc.app.model.entity.message.Message;
 import net.github.rtc.app.service.generic.GenericService;
 import net.github.rtc.app.model.dto.SearchResults;
@@ -19,9 +19,9 @@ public interface MessageService extends GenericService<Message> {
      * @see net.github.rtc.app.model.dto.filter.MessageSearchFilter
      *
      * @return search results for user view presented as DTO
-     * @see net.github.rtc.app.model.dto.user.MessageDTO
+     * @see net.github.rtc.app.model.dto.user.MessageDto
      */
-    SearchResults<MessageDTO> searchMessagesForUser(MessageSearchFilter searchFilter);
+    SearchResults<MessageDto> searchMessagesForUser(MessageSearchFilter searchFilter);
 
     /**
      * If message has isRead property false set it to true

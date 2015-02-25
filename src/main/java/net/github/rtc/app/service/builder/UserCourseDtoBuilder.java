@@ -1,41 +1,41 @@
 package net.github.rtc.app.service.builder;
 
-import net.github.rtc.app.model.dto.user.UserCourseDTO;
+import net.github.rtc.app.model.dto.user.UserCourseDto;
 import net.github.rtc.app.model.entity.course.Course;
 
 public class UserCourseDtoBuilder {
 
-    private UserCourseDTO courseDTO = new UserCourseDTO();
+    private UserCourseDto courseDto = new UserCourseDto();
 
     public UserCourseDtoBuilder(Course course) {
         buildCourseFields(course);
     }
 
     public UserCourseDtoBuilder buildCourseFields(Course course) {
-        courseDTO.setCapacity(course.getCapacity());
-        courseDTO.setCode(course.getCode());
-        courseDTO.setDescription(course.getDescription());
-        courseDTO.setEndDate(course.getEndDate());
-        courseDTO.setExperts(course.getExperts());
-        courseDTO.setName(course.getName());
-        courseDTO.setStartDate(course.getStartDate());
-        courseDTO.setStatus(course.getStatus());
-        courseDTO.setTypes(course.getTypes());
+        courseDto.setCapacity(course.getCapacity());
+        courseDto.setCode(course.getCode());
+        courseDto.setDescription(course.getDescription());
+        courseDto.setEndDate(course.getEndDate());
+        courseDto.setExperts(course.getExperts());
+        courseDto.setName(course.getName());
+        courseDto.setStartDate(course.getStartDate());
+        courseDto.setStatus(course.getStatus());
+        courseDto.setTypes(course.getTypes());
         return this;
     }
 
     public UserCourseDtoBuilder buildAcceptedOrdersCount(int acceptedOrdersCount) {
-        courseDTO.setAcceptedOrders(acceptedOrdersCount);
+        courseDto.setAcceptedOrders(acceptedOrdersCount);
         return this;
     }
 
     public UserCourseDtoBuilder buildCurrentUserAssigned(boolean currentUserAssigned) {
-        courseDTO.setCurrentUserAssigned(currentUserAssigned);
+        courseDto.setCurrentUserAssigned(currentUserAssigned);
         return this;
     }
 
-    public UserCourseDTO build() {
-        return courseDTO;
+    public UserCourseDto build() {
+        return courseDto;
     }
 
 }

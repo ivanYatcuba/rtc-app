@@ -1,7 +1,7 @@
 package net.github.rtc.app.controller.expert;
 
 import net.github.rtc.app.controller.common.MenuItem;
-import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
+import net.github.rtc.app.model.dto.user.ExpertOrderDto;
 import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.order.UserRequestStatus;
 import net.github.rtc.app.service.course.CourseService;
@@ -43,7 +43,7 @@ public class OrderController implements MenuItem {
     @RequestMapping(value = "/orderTable", method = RequestMethod.GET)
     public ModelAndView ordersTable(@ModelAttribute(ORDER_FILTER) OrderSearchFilter searchFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + "/orders/orderTable");
-        final SearchResults<ExpertOrderDTO> searchResults = userCourseOrderService.searchOrderForExpert(searchFilter);
+        final SearchResults<ExpertOrderDto> searchResults = userCourseOrderService.searchOrderForExpert(searchFilter);
         mav.addObject(ORDERS, searchResults.getResults());
         mav.addAllObjects(searchResults.getPageModel().getPageParams());
         return mav;
@@ -71,7 +71,7 @@ public class OrderController implements MenuItem {
     @RequestMapping(value = "/course/{courseCode}", method = RequestMethod.GET)
     public ModelAndView coursePreview(@PathVariable String courseCode) {
         final ModelAndView mav = new ModelAndView(ROOT + "/orders/coursePreview");
-        mav.addObject("course", courseService.getUserCourseDTObyCode(courseCode));
+        mav.addObject("course", courseService.getUserCourseDtoByCode(courseCode));
         return mav;
     }
 

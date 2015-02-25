@@ -1,6 +1,6 @@
 package net.github.rtc.app.controller.user;
 
-import net.github.rtc.app.model.dto.user.UserCourseDTO;
+import net.github.rtc.app.model.dto.user.UserCourseDto;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.order.UserCourseOrder;
@@ -82,8 +82,8 @@ public class CourseControllerTest {
 
     @Test
     public void testUserCoursesTable() throws Exception {
-        SearchResults<UserCourseDTO> searchResults = new SearchResults<>();
-        searchResults.setResults(new ArrayList<UserCourseDTO>());
+        SearchResults<UserCourseDto> searchResults = new SearchResults<>();
+        searchResults.setResults(new ArrayList<UserCourseDto>());
         searchResults.getPageModel().setPage(10);
         searchResults.getPageModel().setPerPage(10);
         searchResults.getPageModel().setTotalResults(10);
@@ -102,7 +102,7 @@ public class CourseControllerTest {
 
     @Test
     public void testCourseDetails() throws Exception {
-        when(courseService.getUserCourseDTObyCode(COURSE_CODE)).thenReturn(new UserCourseDTO());
+        when(courseService.getUserCourseDtoByCode(COURSE_CODE)).thenReturn(new UserCourseDto());
         mockMvc.perform(get("/user/courses/courseDetails/{courseCode}", COURSE_CODE))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("course"))

@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class UserSearchFilter extends AbstractSearchCommand {
+public class UserSearchFilter extends AbstractSearchFilter {
     private static final String PERCENT = "%";
     private static final String AUTHORITIES = "authorities";
     private static final String REGISTER_DATE = "registerDate";

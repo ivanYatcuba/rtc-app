@@ -1,6 +1,6 @@
 package net.github.rtc.app.model.dto;
 
-import net.github.rtc.app.model.dto.user.ExpertOrderDTO;
+import net.github.rtc.app.model.dto.user.ExpertOrderDto;
 import net.github.rtc.app.service.builder.ExpertOrderDtoBuilder;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.user.User;
@@ -43,7 +43,7 @@ public class ExpertOrderDtoBuilderTest {
     @Test
     public void testDtoBuilder() {
         ExpertOrderDtoBuilder dtoBuilder = new ExpertOrderDtoBuilder();
-        ExpertOrderDTO dto = dtoBuilder.buildCourseFields(testCourse).buildUserFields(testUser).
+        ExpertOrderDto dto = dtoBuilder.buildCourseFields(testCourse).buildUserFields(testUser).
                 buildOrderFields(testOrder).buildAcceptedOrders(0).get();
         assertEquals(dto.getCourseAcceptedOrders(), 0);
 
@@ -64,7 +64,7 @@ public class ExpertOrderDtoBuilderTest {
     @Test(expected=NullPointerException.class)
     public void testDtoBuilderException() {
         ExpertOrderDtoBuilder dtoBuilder = new ExpertOrderDtoBuilder();
-        ExpertOrderDTO dto = dtoBuilder.buildCourseFields(null).buildUserFields(testUser).
+        ExpertOrderDto dto = dtoBuilder.buildCourseFields(null).buildUserFields(testUser).
                 buildOrderFields(testOrder).buildAcceptedOrders(0).get();
 
     }

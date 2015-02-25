@@ -3,7 +3,7 @@ package net.github.rtc.app.model.dto.filter;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 
-public abstract class AbstractSearchCommand implements SearchCommand {
+public abstract class AbstractSearchFilter implements SearchFilter {
     private static final int NUMBER_OF_ENTITIES_PER_PAGE = 5;
 
     private int page;

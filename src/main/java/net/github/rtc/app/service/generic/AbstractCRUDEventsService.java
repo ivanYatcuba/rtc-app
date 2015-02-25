@@ -4,11 +4,10 @@ import net.github.rtc.app.model.entity.AbstractPersistenceObject;
 import net.github.rtc.app.model.entity.activity.ActivityAction;
 import net.github.rtc.app.model.entity.activity.ActivityEntity;
 import net.github.rtc.app.model.entity.activity.Auditable;
-import net.github.rtc.app.model.entity.course.Course;
-import net.github.rtc.app.model.entity.news.News;
-import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.utils.activity.events.EventCreator;
+import net.github.rtc.app.model.event.ActivityEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+
 
 /**
  * Class that implements commonly used CRUD operations and creates activity events
@@ -16,10 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @see net.github.rtc.app.model.event.ActivityEvent
  * @param <T>
  */
-public abstract class AbstractCrudEventsService<T  extends AbstractPersistenceObject & Auditable>  extends AbstractGenericServiceImpl<T>  {
+public abstract class AbstractCrudEventsService<T  extends AbstractPersistenceObject & Auditable>
+        extends AbstractGenericServiceImpl<T>  {
 
     @Autowired
-    private EventCreator creator;
+    private ApplicationEventPublisher publisher;
 
     /**
      * Persist object to db and creates event about this operations
@@ -29,7 +29,7 @@ public abstract class AbstractCrudEventsService<T  extends AbstractPersistenceOb
     @Override
     public T create(T object) {
         final T createdObj = super.create(object);
-        creator.createAndPublishEvent(this, createdObj, getActivityEntity(createdObj), ActivityAction.SAVED);
+        createAndPublishEvent(createdObj, ActivityAction.SAVED);
         return createdObj;
     }
     /**
@@ -40,7 +40,7 @@ public abstract class AbstractCrudEventsService<T  extends AbstractPersistenceOb
     @Override
     public T update(T object) {
         final T updatedObj = super.update(object);
-        creator.createAndPublishEvent(this, updatedObj, getActivityEntity(updatedObj), ActivityAction.UPDATED);
+        createAndPublishEvent(updatedObj, ActivityAction.UPDATED);
         return updatedObj;
     }
 
@@ -53,8 +53,21 @@ public abstract class AbstractCrudEventsService<T  extends AbstractPersistenceOb
     public void deleteByCode(String code) {
         final T deletedObj = findByCode(code);
         super.deleteByCode(code);
-        creator.createAndPublishEvent(this, deletedObj, getActivityEntity(deletedObj), ActivityAction.REMOVED);
+        createAndPublishEvent(deletedObj, ActivityAction.REMOVED);
 
+    }
+
+    /**
+     * Creates event about operation
+     * @param activity - object that needs to be handled
+     * @param action - event type
+     */
+    private void createAndPublishEvent(Auditable activity,  ActivityAction action) {
+        final String detail = activity.getLogDetail();
+        final ActivityEntity entity = getActivityEntity(activity);
+        final ActivityEvent event = new ActivityEvent(this, detail, entity, action);
+
+        publisher.publishEvent(event);
     }
 
     /**
@@ -63,16 +76,6 @@ public abstract class AbstractCrudEventsService<T  extends AbstractPersistenceOb
      * @param entityObj object on what CRUD operation was performed
      * @return activity entity that corresponds to selected object
      */
-    private ActivityEntity getActivityEntity(Auditable entityObj) {
-        if (entityObj instanceof User) {
-            return ActivityEntity.USER;
-        }
-        if (entityObj instanceof Course) {
-            return ActivityEntity.COURSE;
-        }
-        if (entityObj instanceof News) {
-            return ActivityEntity.NEWS;
-        }
-        throw new IllegalArgumentException();
-    }
+     protected abstract ActivityEntity getActivityEntity(Auditable entityObj);
+
 }

@@ -3,7 +3,7 @@ package net.github.rtc.app.service.generic;
 import net.github.rtc.app.controller.common.ResourceNotFoundException;
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
-import net.github.rtc.app.model.dto.filter.AbstractSearchCommand;
+import net.github.rtc.app.model.dto.filter.AbstractSearchFilter;
 import net.github.rtc.app.model.dto.SearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,7 +73,7 @@ public abstract class AbstractGenericServiceImpl<T extends AbstractPersistenceOb
     }
 
     @Override
-    public SearchResults<T> search(AbstractSearchCommand searchCommand) {
+    public SearchResults<T> search(AbstractSearchFilter searchCommand) {
 
         return getDao().search(searchCommand);
     }

@@ -1,6 +1,6 @@
 package net.github.rtc.app.service.generic;
 
-import net.github.rtc.app.model.dto.filter.AbstractSearchCommand;
+import net.github.rtc.app.model.dto.filter.AbstractSearchFilter;
 import net.github.rtc.app.model.dto.SearchResults;
 
 import java.util.List;
@@ -48,9 +48,9 @@ public interface GenericService<T> {
     /**
      * Search entities in the db with specified params
      * @param searchCommand object that contains search params
-     * @see net.github.rtc.app.model.dto.filter.AbstractSearchCommand
+     * @see net.github.rtc.app.model.dto.filter.AbstractSearchFilter
      * @return object that contains search results and it's page model
      */
-    SearchResults<T> search(AbstractSearchCommand searchCommand);
+    SearchResults<T> search(AbstractSearchFilter searchCommand);
 
 }

@@ -1,6 +1,6 @@
 package net.github.rtc.app.dao.generic;
 
-import net.github.rtc.app.model.dto.filter.AbstractSearchCommand;
+import net.github.rtc.app.model.dto.filter.AbstractSearchFilter;
 import net.github.rtc.app.model.dto.SearchResults;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -97,7 +97,7 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
     }
 
     @Override
-    public SearchResults<T> search(AbstractSearchCommand searchCommand) {
+    public SearchResults<T> search(AbstractSearchFilter searchCommand) {
         return search(searchCommand.getCriteria(), searchCommand.getPage(), searchCommand.getPerPage(), searchCommand.order());
     }
 }

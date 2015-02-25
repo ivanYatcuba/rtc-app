@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-public class CourseSearchFilter extends AbstractSearchCommand {
+public class CourseSearchFilter extends AbstractSearchFilter {
 
     private static final String PERCENT = "%";
     private static final String TAGS = "tags";

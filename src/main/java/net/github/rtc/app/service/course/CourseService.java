@@ -1,6 +1,6 @@
 package net.github.rtc.app.service.course;
 
-import net.github.rtc.app.model.dto.user.UserCourseDTO;
+import net.github.rtc.app.model.dto.user.UserCourseDto;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.service.generic.GenericService;
 import net.github.rtc.app.service.generic.ModelService;
@@ -32,17 +32,17 @@ public interface CourseService extends ModelService<Course>, GenericService<Cour
      * @see net.github.rtc.app.model.dto.filter.CourseSearchFilter
      *
      * @return search results for user view presented as DTO
-     * @see net.github.rtc.app.model.dto.user.UserCourseDTO
+     * @see net.github.rtc.app.model.dto.user.UserCourseDto
      */
-    SearchResults<UserCourseDTO> searchCoursesForUser(CourseSearchFilter filter);
+    SearchResults<UserCourseDto> searchCoursesForUser(CourseSearchFilter filter);
 
     /**
      * Get a single course for user and present it as DTO
      * @param code code of the course that needs to be found
      * @return course for user view presented as DTO
-     * @see net.github.rtc.app.model.dto.user.UserCourseDTO
+     * @see net.github.rtc.app.model.dto.user.UserCourseDto
      */
-    UserCourseDTO getUserCourseDTObyCode(String code);
+    UserCourseDto getUserCourseDtoByCode(String code);
 
     /**
      * Create course and possibly publish and create news about it

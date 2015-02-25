@@ -2,8 +2,10 @@ package net.github.rtc.app.service.course;
 
 import net.github.rtc.app.dao.courses.CoursesDao;
 import net.github.rtc.app.dao.generic.GenericDao;
+import net.github.rtc.app.model.entity.activity.ActivityEntity;
+import net.github.rtc.app.model.entity.activity.Auditable;
 import net.github.rtc.app.service.builder.UserCourseDtoBuilder;
-import net.github.rtc.app.model.dto.user.UserCourseDTO;
+import net.github.rtc.app.model.dto.user.UserCourseDto;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseStatus;
 import net.github.rtc.app.service.date.DateService;
@@ -77,14 +79,14 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
     }
 
     @Override
-    public SearchResults<UserCourseDTO> searchCoursesForUser(CourseSearchFilter filter) {
-        final SearchResultsBuilder<Course, UserCourseDTO> courseDTOSearchResultsBuilder = new SearchResultsBuilder<>();
-        return courseDTOSearchResultsBuilder.setSearchResultsToTransform(search(filter)).
+    public SearchResults<UserCourseDto> searchCoursesForUser(CourseSearchFilter filter) {
+        final SearchResultsBuilder<Course, UserCourseDto> courseDtoSearchResultsBuilder = new SearchResultsBuilder<>();
+        return courseDtoSearchResultsBuilder.setSearchResultsToTransform(search(filter)).
                 setSearchResultsMapper(getCourseToCourseDtoMapper()).build();
     }
 
     @Override
-    public UserCourseDTO getUserCourseDTObyCode(String code) {
+    public UserCourseDto getUserCourseDtoByCode(String code) {
         final Course course = findByCode(code);
         return new UserCourseDtoBuilder(course).
                 buildAcceptedOrdersCount(orderService.getAcceptedOrdersCount(code)).
@@ -121,6 +123,11 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
         }
     }
 
+    @Override
+    protected ActivityEntity getActivityEntity(Auditable entityObj) {
+            return ActivityEntity.COURSE;
+    }
+
     /**
      * Set course status as PUBLISHED and set publish date as current
      * @param course course that needs to be changed
@@ -144,11 +151,11 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
      * Returns an object that map list of courses to courseDTOs list
      * @return anonymous class mapper
      */
-    private SearchResultsMapper<Course, UserCourseDTO> getCourseToCourseDtoMapper() {
-            return new SearchResultsMapper<Course, UserCourseDTO>() {
+    private SearchResultsMapper<Course, UserCourseDto> getCourseToCourseDtoMapper() {
+            return new SearchResultsMapper<Course, UserCourseDto>() {
             @Override
-            public List<UserCourseDTO> map(List<Course> searchResults) {
-                final List<UserCourseDTO> outputResults = new ArrayList<>();
+            public List<UserCourseDto> map(List<Course> searchResults) {
+                final List<UserCourseDto> outputResults = new ArrayList<>();
                 for (Course course: searchResults) {
                     final UserCourseDtoBuilder dtoBuilder = new UserCourseDtoBuilder(course);
                     outputResults.add(dtoBuilder.
@@ -158,4 +165,5 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
             }
         };
     }
+
 }

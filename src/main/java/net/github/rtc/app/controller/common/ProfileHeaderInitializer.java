@@ -1,6 +1,6 @@
 package net.github.rtc.app.controller.common;
 
-import net.github.rtc.app.model.dto.user.ProfileHeaderDTO;
+import net.github.rtc.app.model.dto.user.ProfileHeaderDto;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.message.MessageService;
 import net.github.rtc.app.service.security.AuthorizedUserProvider;
@@ -14,9 +14,9 @@ public class ProfileHeaderInitializer {
     private MessageService messageService;
 
     @ModelAttribute("profileHeader")
-    public ProfileHeaderDTO getProfileHeaderDTO() {
+    public ProfileHeaderDto getProfileHeaderDto() {
         final User user =  AuthorizedUserProvider.getAuthorizedUser();
         final int unreadMessageCount =  messageService.getUserUnreadMessageCount(user.getCode());
-        return new ProfileHeaderDTO(user.getSurnameName(), user.getPhoto(), unreadMessageCount);
+        return new ProfileHeaderDto(user.getSurnameName(), user.getPhoto(), unreadMessageCount);
     }
 }

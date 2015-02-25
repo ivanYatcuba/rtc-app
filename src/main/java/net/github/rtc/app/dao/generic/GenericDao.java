@@ -1,6 +1,6 @@
 package net.github.rtc.app.dao.generic;
 
-import net.github.rtc.app.model.dto.filter.AbstractSearchCommand;
+import net.github.rtc.app.model.dto.filter.AbstractSearchFilter;
 import net.github.rtc.app.model.dto.SearchResults;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
@@ -30,6 +30,6 @@ public interface GenericDao<T> {
 
     SearchResults<T> search(DetachedCriteria criteria, int start, int max, Order order);
 
-    SearchResults<T> search(AbstractSearchCommand searchCommand);
+    SearchResults<T> search(AbstractSearchFilter searchCommand);
 
 }

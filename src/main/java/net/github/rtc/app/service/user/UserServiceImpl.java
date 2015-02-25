@@ -2,6 +2,8 @@ package net.github.rtc.app.service.user;
 
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.dao.user.UserDao;
+import net.github.rtc.app.model.entity.activity.ActivityEntity;
+import net.github.rtc.app.model.entity.activity.Auditable;
 import net.github.rtc.app.model.entity.user.Role;
 import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.model.entity.user.User;
@@ -182,5 +184,10 @@ public class UserServiceImpl extends AbstractCrudEventsService<User> implements 
     @Transactional
     public boolean isEmailExist(String email) {
         return userDao.isEmailExist(email);
+    }
+
+    @Override
+    protected ActivityEntity getActivityEntity(Auditable entityObj) {
+        return ActivityEntity.USER;
     }
 }

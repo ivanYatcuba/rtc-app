@@ -7,7 +7,7 @@ import net.github.rtc.app.model.entity.user.User;
 import java.util.Date;
 import java.util.Set;
 
-public class UserCourseDTO {
+public class UserCourseDto {
 
     private String code;
     private Integer capacity;

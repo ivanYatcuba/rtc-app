@@ -2,7 +2,7 @@ package net.github.rtc.app.service.message;
 
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.dao.message.MessageDao;
-import net.github.rtc.app.model.dto.user.MessageDTO;
+import net.github.rtc.app.model.dto.user.MessageDto;
 import net.github.rtc.app.model.entity.message.Message;
 import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserService;
@@ -31,8 +31,8 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
     }
 
     @Override
-    public SearchResults<MessageDTO> searchMessagesForUser(MessageSearchFilter searchFilter) {
-            final SearchResultsBuilder<Message, MessageDTO> resultsBuilder = new SearchResultsBuilder<>();
+    public SearchResults<MessageDto> searchMessagesForUser(MessageSearchFilter searchFilter) {
+            final SearchResultsBuilder<Message, MessageDto> resultsBuilder = new SearchResultsBuilder<>();
             return resultsBuilder.setSearchResultsToTransform(search(searchFilter)).
                     setSearchResultsMapper(getMessageMapper()).build();
     }
@@ -56,18 +56,18 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
      * Returns an object that map list of messages to messageDTOs list
      * @return anonymous class mapper
      */
-    private SearchResultsMapper<Message, MessageDTO> getMessageMapper() {
-        return new SearchResultsMapper<Message, MessageDTO>() {
+    private SearchResultsMapper<Message, MessageDto> getMessageMapper() {
+        return new SearchResultsMapper<Message, MessageDto>() {
             @Override
-            public List<MessageDTO> map(List<Message> searchResults) {
-                final List<MessageDTO> outputResults = new ArrayList<>();
+            public List<MessageDto> map(List<Message> searchResults) {
+                final List<MessageDto> outputResults = new ArrayList<>();
                 for (Message msg : searchResults) {
-                    final MessageDTO messageDTO = new MessageDTO();
-                    messageDTO.setUserName(userService.findByCode(msg.getSenderUserCode()).getSurnameName());
-                    messageDTO.setText(msg.getText());
-                    messageDTO.setSendingDate(msg.getSendingDate());
-                    messageDTO.setCode(msg.getCode());
-                    outputResults.add(messageDTO);
+                    final MessageDto messageDto = new MessageDto();
+                    messageDto.setUserName(userService.findByCode(msg.getSenderUserCode()).getSurnameName());
+                    messageDto.setText(msg.getText());
+                    messageDto.setSendingDate(msg.getSendingDate());
+                    messageDto.setCode(msg.getCode());
+                    outputResults.add(messageDto);
                 }
                 return outputResults;
             }

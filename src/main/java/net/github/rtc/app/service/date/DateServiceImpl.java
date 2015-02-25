@@ -3,12 +3,12 @@ package net.github.rtc.app.service.date;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Date;
 
-@Component
+@Service
 public class DateServiceImpl implements DateService {
 
     @Override
