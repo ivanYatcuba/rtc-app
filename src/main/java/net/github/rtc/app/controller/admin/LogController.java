@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/logs")
@@ -48,10 +49,14 @@ public class LogController implements MenuItem {
     @ResponseBody
     public void downloadLogFile(@PathVariable String fileName, final HttpServletResponse response) {
         final File downloadFile = new File(LogServiceImpl.getPathFolder() + fileName);
+        response.setContentType("text/plain");
         response.setHeader(HEADER_KEY, String.format("attachment; " + "filename=\"%s\"", fileName));
-        try (final InputStream is = new FileInputStream(downloadFile)) {
-            response.setContentType(Files.probeContentType(downloadFile.toPath()));
-            org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+        try  {
+            final List<String> lines = Files.readAllLines(downloadFile.toPath(), Charset.defaultCharset());
+            for (String s: lines) {
+                final ServletOutputStream out = response.getOutputStream();
+                out.println(s);
+            }
             response.flushBuffer();
         } catch (IOException ex) {
             log.info("Error writing file to output stream. Filename was '{}'", fileName, ex);
