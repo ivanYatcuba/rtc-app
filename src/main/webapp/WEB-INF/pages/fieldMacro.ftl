@@ -457,9 +457,9 @@
 </#macro>
 
 <#macro splitButton>
-<button style="width: 80px" class="btn btn-default dropdown-toggle"  data-toggle="dropdown" type="button">Action</button>
-<button style="width: 23px; margin-left: -3px" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+<button style="width: 80px; height: 34px" class="btn btn-default dropdown-toggle"  data-toggle="dropdown" type="button">Action</button>
+<button style="width: 23px; margin-left: -3px; height: 34px" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
     <span class="caret"></span>
-    <span class="sr-only">Toggle Dropdown</span>&#11;
+    <span class="sr-only">Toggle Dropdown</span>
 </button>
 </#macro>

@@ -1,0 +1,1 @@
+Your ${courseName} was ${status} by ${expertLastName} ${expertFirstName} ${courseName} on ${responseDate?date?string('dd-MMM-yyyy')} <#if isRejected==true>by ${reason}</#if>

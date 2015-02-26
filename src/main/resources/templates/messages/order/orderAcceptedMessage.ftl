@@ -1,1 +1,0 @@
-Your course request was accepted by course expert.

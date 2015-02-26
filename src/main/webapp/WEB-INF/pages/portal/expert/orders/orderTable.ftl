@@ -54,11 +54,11 @@
                         <#if order.status == 'PENDING' >
                             <li><a class="btn" onclick="doAjaxCall('<@spring.url'/user/expert/order/accept/${order.orderCode}'/>')">
                                     <@spring.message "order.action.accept"/></a></li>
-                            <li><a class="btn" onclick="doAjaxCall('<@spring.url'/user/expert/order/decline/${order.orderCode}'/>')">
+                            <li><a class="btn" onclick="showRejectPopUp('${order.orderCode}')">
                                     <@spring.message "order.action.reject"/></a></li>
                         </#if>
                         <#if order.status == 'ACCEPTED' >
-                            <li><a class="btn" onclick="doAjaxCall('<@spring.url'/user/expert/order/decline/${order.orderCode}'/>')">
+                            <li><a class="btn" onclick="showRejectPopUp('${order.orderCode}')">
                                 <@spring.message "order.action.reject"/></a></li>
                         </#if>
                         <#if order.status == 'REJECTED' >
@@ -94,5 +94,10 @@
             }, error: function (xhr, status, error) {
             }
         });
+    }
+    function showRejectPopUp(code) {
+        $('#orderCode').val(code);
+        $('#reason').val('');
+        $('#rejectOrderModal').modal('show')
     }
 </script>

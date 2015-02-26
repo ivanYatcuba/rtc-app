@@ -14,7 +14,7 @@
 </div>
 <div class="row">
     <div class="span12">
-    ${request.reason}
+    ${request.rejectReason}
     </div>
 </div>
 </#list>

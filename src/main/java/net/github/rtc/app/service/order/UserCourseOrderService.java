@@ -30,13 +30,19 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
     int getAcceptedOrdersCount(String courseCode);
 
     /**
-     * Set new status for order
+     * Accept user's course order - means set it's reply date and status ACCEPTED
      * @param orderCode code of the order for what operation will be performed
-     * @param userRequestStatus new status of the order
-     * @return if operation was completed successfully
+     * @return updated order
      */
-    boolean changeOrderStatus(final String orderCode, final UserRequestStatus userRequestStatus);
+    UserCourseOrder acceptOrder(final String orderCode);
 
+    /**
+     * Decline user's course order - means set it's reply date, status REJECTED and reason of the rejection
+     * @param orderCode code of the order for what operation will be performed
+     * @param reason the reason of rejection
+     * @return updated order
+     */
+    UserCourseOrder declineOrder(final String orderCode, final String reason);
 
     /**
      * Create order for course on specified position

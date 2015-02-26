@@ -87,7 +87,7 @@ public class ExpertControllerTest {
     @Test
     public void testDeclineRequest() throws Exception {
         when(userCourseOrderService.findByCode(ORDER_CODE)).thenReturn(new UserCourseOrder());
-        mockMvc.perform(get("/user/expert/order/decline/{orderId}", ORDER_CODE))
+        mockMvc.perform(get("/user/expert/order/decline/{orderId}", ORDER_CODE).param("reason","reason"))
                 .andExpect(status().isFound());
     }
 

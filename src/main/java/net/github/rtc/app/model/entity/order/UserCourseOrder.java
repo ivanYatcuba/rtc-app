@@ -39,7 +39,7 @@ public class UserCourseOrder extends AbstractPersistenceObject {
 
     @Column
     @NotEmpty
-    private String reason; //todo: do we need this field?
+    private String rejectReason;
 
     public UserCourseOrder(
       final String userCode,
@@ -48,7 +48,7 @@ public class UserCourseOrder extends AbstractPersistenceObject {
       final Date responseDate,
       final CourseType position,
       final UserRequestStatus status,
-      final String reason) {
+      final String rejectReason) {
         this.userCode = userCode;
         this.courseCode = courseCode;
         if (requestDate != null) {
@@ -59,7 +59,7 @@ public class UserCourseOrder extends AbstractPersistenceObject {
         }
         this.position = position;
         this.status = status;
-        this.reason = reason;
+        this.rejectReason = rejectReason;
     }
 
     public UserCourseOrder() {
@@ -117,11 +117,11 @@ public class UserCourseOrder extends AbstractPersistenceObject {
         this.position = position;
     }
 
-    public String getReason() {
-        return reason;
+    public String getRejectReason() {
+        return rejectReason;
     }
 
-    public void setReason(final String reason) {
-        this.reason = reason;
+    public void setRejectReason(final String rejectReason) {
+        this.rejectReason = rejectReason;
     }
 }

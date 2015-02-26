@@ -56,32 +56,48 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     return userCourseOrderDao.getAcceptedOrdersCourseCount(courseCode);
   }
 
-  @Override
-  public boolean changeOrderStatus(String orderCode, UserRequestStatus userRequestStatus) {
-    final UserCourseOrder order = findByCode(orderCode);
-    order.setResponseDate(dateService.getCurrentDate());
-    order.setStatus(userRequestStatus);
-    try {
-      update(order);
-    } catch (Exception e) {
-      return false;
+    @Override
+    @Transactional
+    public UserCourseOrder acceptOrder(String orderCode) {
+        final UserCourseOrder order = findByCode(orderCode);
+        changeOrderStatus(order, UserRequestStatus.ACCEPTED);
+        eventCreator.createOrderResponseMessageEvent(order);
+        return userCourseOrderDao.update(order);
     }
-    eventCreator.createOrderResponseMessageEvent(order);
-    return true;
-  }
+
+    @Override
+    @Transactional
+    public UserCourseOrder declineOrder(String orderCode, String reason) {
+        final UserCourseOrder order = findByCode(orderCode);
+        order.setRejectReason(reason);
+        changeOrderStatus(order, UserRequestStatus.REJECTED);
+        eventCreator.createOrderResponseMessageEvent(order);
+        return userCourseOrderDao.update(order);
+    }
+
+    /**
+     * Set new status for order and response date
+     * @param order order that needs to be updated
+     * @param status new status of the order
+     * @return updated order
+     */
+    private UserCourseOrder changeOrderStatus(final UserCourseOrder order, UserRequestStatus status) {
+        order.setResponseDate(dateService.getCurrentDate());
+        order.setStatus(status);
+        return order;
+    }
+
 
     @Override
     @Transactional
     public UserCourseOrder create(String courseCode, CourseType position) {
-        final Date now = LocalDate.now().toDate();
         final String userCode = AuthorizedUserProvider.getAuthorizedUser().getCode();
 
         final UserCourseOrder userCourseOrder = new UserCourseOrder();
         userCourseOrder.setCourseCode(courseCode);
         userCourseOrder.setPosition(position);
         userCourseOrder.setUserCode(userCode);
-        userCourseOrder.setRequestDate(now);
-        userCourseOrder.setReason("prosto tak be back");
+        userCourseOrder.setRequestDate(dateService.getCurrentDate());
 
         eventCreator.createOrderSendMessageEvent(userCourseOrder);
         return super.create(userCourseOrder);

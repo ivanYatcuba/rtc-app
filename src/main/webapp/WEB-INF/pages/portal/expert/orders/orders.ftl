@@ -14,6 +14,31 @@
 
 <div id="searchTable"></div>
 
+<!-- Modal -->
+<div class="modal" style="top: 15%; left: 1%" id="rejectOrderModal" tabindex="-1" role="dialog" aria-labelledby="rejectOrderModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="rejectOrderModalLabel"><@spring.message 'order.modal.header' /></h4>
+            </div>
+            <div class="modal-body">
+                <form name="reasonForm" id="reasonForm">
+                <label for="reason" style="font-weight: normal"><@spring.message 'order.modal.reason' /></label>
+                <textarea id="reason" name="reason" class="form-control" rows="3" required></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <form name="rejectOrder" >
+                    <input type="hidden" id="orderCode" name="orderCode"/>
+                    <button type="button" class="btn btn-default"  data-dismiss="modal"><@spring.message 'course.cancel' /></button>
+                    <button type="button" class="btn btn-primary" onClick="rejectOrderCall()"><@spring.message 'order.action.reject' /></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
 
     var serializedFilter = "";
@@ -21,6 +46,7 @@
     $(document).ready(function() {
         search(1);
     });
+    $("#reasonForm").validate();
 
     function search(page) {
         $.ajax({
@@ -54,6 +80,24 @@
             search(1);
         }
     );
+
+    function rejectOrderCall() {
+        if ($("#reasonForm").valid()) {
+            var orderCode = $("#orderCode").val();
+            var reason = $("#reasonForm").serialize();
+            $.ajax({
+                type: "GET",
+                url: '<@spring.url "/user/expert/order/decline/"/>' + orderCode,
+                data: reason,
+                success: function (result) {
+                    var page = $('#searchTable').find('.active').find('.navButton').attr("page");
+                    search(page);
+                    $('#rejectOrderModal').modal('hide');
+                }, error: function (xhr, status, error) {
+                }
+            });
+        }
+    }
 
     function ajaxSessionTimeout() {
         window.location.replace("<@spring.url'/login'/>");

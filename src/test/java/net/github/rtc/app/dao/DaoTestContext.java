@@ -69,7 +69,7 @@ public class DaoTestContext implements InitializingBean {
                 userCourseOrder.setCode(codeGenerationService.generate());
                 userCourseOrder.setCourseCode(codeGenerationService.generate());
                 userCourseOrder.setPosition(CourseType.BA);
-                userCourseOrder.setReason("bla bla");
+                userCourseOrder.setRejectReason("bla bla");
                 userCourseOrder.setStatus(UserRequestStatus.PENDING);
                 userCourseOrder.setUserCode(codeGenerationService.generate());
                 return userCourseOrder;
@@ -108,7 +108,7 @@ public class DaoTestContext implements InitializingBean {
                 assertEquals(courseOrderSample.getCode(), courseOrderAnother.getCode());
                 assertEquals(courseOrderSample.getCourseCode(), courseOrderAnother.getCourseCode());
                 assertEquals(courseOrderSample.getPosition(), courseOrderAnother.getPosition());
-                assertEquals(courseOrderSample.getReason(), courseOrderAnother.getReason());
+                assertEquals(courseOrderSample.getRejectReason(), courseOrderAnother.getRejectReason());
                 assertEquals(courseOrderSample.getStatus(), courseOrderAnother.getStatus());
                 assertEquals(courseOrderSample.getUserCode(), courseOrderAnother.getUserCode());
             }});
