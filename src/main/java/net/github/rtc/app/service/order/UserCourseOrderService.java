@@ -3,7 +3,6 @@ package net.github.rtc.app.service.order;
 import net.github.rtc.app.model.dto.user.ExpertOrderDto;
 import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.app.model.entity.order.UserCourseOrder;
-import net.github.rtc.app.model.entity.order.UserRequestStatus;
 import net.github.rtc.app.service.generic.GenericService;
 import net.github.rtc.app.model.dto.filter.OrderSearchFilter;
 import net.github.rtc.app.model.dto.SearchResults;
