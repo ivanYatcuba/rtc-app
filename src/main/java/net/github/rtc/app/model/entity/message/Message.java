@@ -2,6 +2,7 @@ package net.github.rtc.app.model.entity.message;
 
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
 import net.github.rtc.util.annotation.validation.Validatable;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -12,6 +13,8 @@ import java.util.Date;
 @Validatable
 public class Message extends AbstractPersistenceObject {
 
+    private static final int SUBJECT_LENGTH = 50;
+
     @NotEmpty
     @Column
     private String receiverUserCode;
@@ -20,9 +23,14 @@ public class Message extends AbstractPersistenceObject {
     @Column
     private String senderUserCode;
 
+    @Length(max = SUBJECT_LENGTH)
     @NotEmpty
     @Column
-    private String text;
+    private String subject;
+
+    @NotEmpty
+    @Column
+    private String description;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
@@ -42,10 +50,11 @@ public class Message extends AbstractPersistenceObject {
     public Message() {
     }
 
-    public Message(String receiverUserCode, String senderUserCode, String text, Date sendingDate, MessageType type) {
+    public Message(String receiverUserCode, String senderUserCode, String subject, String description, Date sendingDate, MessageType type) {
         this.receiverUserCode = receiverUserCode;
         this.senderUserCode = senderUserCode;
-        this.text = text;
+        this.subject = subject;
+        this.description = description;
         if (sendingDate != null) {
             this.sendingDate = new Date(sendingDate.getTime());
         }
@@ -79,12 +88,20 @@ public class Message extends AbstractPersistenceObject {
         }
     }
 
-    public String getText() {
-        return text;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public boolean isRead() {

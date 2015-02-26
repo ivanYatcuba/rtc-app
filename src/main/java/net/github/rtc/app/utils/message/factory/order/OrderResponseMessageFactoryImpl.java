@@ -16,8 +16,8 @@ import java.util.List;
 @Component("responseMessageFactoryImpl")
 public class OrderResponseMessageFactoryImpl implements OrderMessageFactory {
 
-    private static final String ACCEPTED_TEMPLATE_PATH = "/templates/messages/orderAcceptedMessage.ftl";
-    private static final String REJECTED_TEMPLATE_PATH = "/templates/messages/orderRejectedMessage.ftl";
+    private static final String ACCEPTED_TEMPLATE_PATH = "/templates/messages/order/orderAcceptedMessage.ftl";
+    private static final String REJECTED_TEMPLATE_PATH = "/templates/messages/order/orderRejectedMessage.ftl";
 
     @Autowired
     private DateService dateService;
@@ -32,8 +32,8 @@ public class OrderResponseMessageFactoryImpl implements OrderMessageFactory {
         msg.setReceiverUserCode(order.getUserCode());
         msg.setSendingDate(dateService.getCurrentDate());
         msg.setType(MessageType.SYSTEM);
-        msg.setText(getMessageText(order.getStatus()));
-
+        msg.setSubject(getMessageText(order.getStatus()));
+        msg.setDescription(msg.getSubject()); //todo task 'Expert: Reject action'
         return Arrays.asList(msg);
     }
 

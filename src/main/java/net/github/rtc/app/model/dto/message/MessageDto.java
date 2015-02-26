@@ -1,4 +1,4 @@
-package net.github.rtc.app.model.dto.user;
+package net.github.rtc.app.model.dto.message;
 
 import java.util.Date;
 
@@ -8,16 +8,19 @@ public class MessageDto {
 
     private String userName;
 
-    private String text;
+    private String subject;
+
+    private String description;
 
     private Date sendingDate;
 
     public MessageDto() {
     }
 
-    public MessageDto(String userName, String text, Date sendingDate) {
+    public MessageDto(String userName, String subject, String description, Date sendingDate) {
         this.userName = userName;
-        this.text = text;
+        this.subject = subject;
+        this.description = description;
         if (sendingDate != null) {
             this.sendingDate = new Date(sendingDate.getTime());
         }
@@ -31,12 +34,20 @@ public class MessageDto {
         this.userName = userName;
     }
 
-    public String getText() {
-        return text;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getSendingDate() {

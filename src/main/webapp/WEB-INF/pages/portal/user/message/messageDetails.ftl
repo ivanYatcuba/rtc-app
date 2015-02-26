@@ -5,7 +5,7 @@
     <h4><strong><@spring.message "message.header.messageDetails"/></strong></h4>
 <div class="row">
     <div class="col-md-12">
-       <textarea readonly rows="3" class="col-md-12" style="resize: none;">${message.text}</textarea>
+       <textarea readonly rows="3" class="col-md-12" style="resize: none;">${message.description}</textarea>
     </div>
 </div>
 <br/>

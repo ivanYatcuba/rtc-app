@@ -7,23 +7,26 @@ import net.github.rtc.app.model.entity.order.UserCourseOrder;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
+import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.utils.TemplateStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Component("orderSendMessageFactory")
 public class OrderSendMessageFactoryImpl implements OrderMessageFactory {
 
-    private static final String NEW_ORDER_TEMPLATE_PATH = "/templates/messages/newOrderMessage.ftl";
-
+    private static final String SUBJECT_TEMPLATE_PATH = "/templates/messages/order/request/subject.ftl";
+    private static final String DESCRIPTION_TEMPLATE_PATH = "/templates/messages/order/request/description.ftl";
     @Autowired
     private DateService dateService;
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private TemplateStringBuilder templateStringBuilder;
@@ -38,15 +41,29 @@ public class OrderSendMessageFactoryImpl implements OrderMessageFactory {
             msg.setSenderUserCode(order.getUserCode());
             msg.setSendingDate(dateService.getCurrentDate());
             msg.setType(MessageType.SYSTEM);
-            msg.setText(getMessageText());
+            msg.setSubject(getMessageSubject());
+            msg.setDescription(getMessageDescription(order));
             msg.setReceiverUserCode(expert.getCode());
             msgList.add(msg);
         }
         return msgList;
     }
 
-    private String getMessageText() {
-            return templateStringBuilder.build(NEW_ORDER_TEMPLATE_PATH);
-        }
+    private String getMessageSubject() {
+        return templateStringBuilder.build(SUBJECT_TEMPLATE_PATH);
+    }
+
+    private String getMessageDescription(UserCourseOrder order) {
+        final User user =  userService.findByCode(order.getUserCode());
+
+        final Map<String, Object> templateObj = new HashMap<>();
+        templateObj.put("userName", user.getName());
+        templateObj.put("userSurName",  user.getSurname());
+        templateObj.put("courseName", courseService.findByCode(order.getCourseCode()).getName());
+        templateObj.put("orderDate", order.getRequestDate());
+
+        return templateStringBuilder.build(DESCRIPTION_TEMPLATE_PATH, templateObj);
+    }
+
 
 }

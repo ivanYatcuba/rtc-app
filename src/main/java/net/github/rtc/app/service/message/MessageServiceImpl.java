@@ -2,7 +2,7 @@ package net.github.rtc.app.service.message;
 
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.dao.message.MessageDao;
-import net.github.rtc.app.model.dto.user.MessageDto;
+import net.github.rtc.app.model.dto.message.MessageDto;
 import net.github.rtc.app.model.entity.message.Message;
 import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserService;
@@ -64,7 +64,8 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
                 for (Message msg : searchResults) {
                     final MessageDto messageDto = new MessageDto();
                     messageDto.setUserName(userService.findByCode(msg.getSenderUserCode()).getSurnameName());
-                    messageDto.setText(msg.getText());
+                    messageDto.setSubject(msg.getSubject());
+                    messageDto.setDescription(msg.getDescription());
                     messageDto.setSendingDate(msg.getSendingDate());
                     messageDto.setCode(msg.getCode());
                     outputResults.add(messageDto);

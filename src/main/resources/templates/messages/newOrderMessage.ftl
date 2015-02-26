@@ -1,1 +1,0 @@
-You received a new course order.

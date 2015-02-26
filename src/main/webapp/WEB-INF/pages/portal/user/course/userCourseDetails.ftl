@@ -2,6 +2,16 @@
 <#import "../layout/layout.ftl" as layout/>
 
 <@layout.layout>
+    <#if course.isCurrentUserAssigned()>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Information</h3>
+        </div>
+        <div class="panel-body">You request has been sent to the course expert. Please wait for approval.</div>
+    </div>
+    </#if>  <#--todo: if accepted/rejeceted? -->
+
+
 <h4><strong><@spring.message "course.details"/></strong></h4>
 <div class="form-horizontal">
     <div class="row">
