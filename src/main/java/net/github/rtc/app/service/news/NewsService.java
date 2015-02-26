@@ -12,11 +12,6 @@ import java.util.List;
  * @see net.github.rtc.app.model.entity.news.News
  */
 public interface NewsService extends GenericService<News> {
-    /**
-     * Find all news with status PUBLISHED
-     * @return list of published news
-     */
-    List<News> findPublishedNews();
 
     /**
      * Create news and publish it if necessary

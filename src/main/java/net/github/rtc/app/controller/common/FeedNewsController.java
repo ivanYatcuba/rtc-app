@@ -1,6 +1,7 @@
 package net.github.rtc.app.controller.common;
 
 import net.github.rtc.app.model.entity.news.News;
+import net.github.rtc.app.model.entity.news.NewsStatus;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.controller.AtomFeedView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class FeedNewsController {
     public ModelAndView feed() {
         final ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView(atomFeedView);
-        final List<News> news = newsService.findPublishedNews();
+        final List<News> news = newsService.findAllByStatus(NewsStatus.PUBLISHED);
         modelAndView.addObject(NEWS, news);
         modelAndView.addObject(LAST_UPDATE_VIEW_KEY, getCreationDateOfTheLast(news));
         return modelAndView;

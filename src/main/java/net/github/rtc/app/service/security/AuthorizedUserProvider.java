@@ -12,6 +12,10 @@ public final class AuthorizedUserProvider {
 
     private AuthorizedUserProvider() { }
 
+    /**
+     * Receive User-object of current authorized user
+     * @return User object of current authorized user
+     */
     static public User getAuthorizedUser() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof AnonymousAuthenticationToken) {
@@ -21,6 +25,10 @@ public final class AuthorizedUserProvider {
         }
     }
 
+    /**
+     * Receive current authorized user name
+     * @return string username of authorized user
+     */
     static public String getAuthorizedUserName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }

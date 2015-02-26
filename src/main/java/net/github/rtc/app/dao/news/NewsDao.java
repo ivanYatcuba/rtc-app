@@ -7,7 +7,7 @@ import net.github.rtc.app.model.entity.news.NewsStatus;
 import java.util.List;
 
 public interface NewsDao extends GenericDao<News> {
-    List<News> findPublished();
 
     List<News> findAllByStatus(NewsStatus status);
+
 }
