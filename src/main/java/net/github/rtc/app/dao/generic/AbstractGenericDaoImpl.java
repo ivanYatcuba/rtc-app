@@ -2,6 +2,7 @@ package net.github.rtc.app.dao.generic;
 
 import net.github.rtc.app.model.dto.filter.AbstractSearchFilter;
 import net.github.rtc.app.model.dto.SearchResults;
+import net.github.rtc.app.model.entity.AbstractPersistenceObject;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @Component
 @SuppressWarnings("unchecked")
-public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
+public abstract class AbstractGenericDaoImpl<T extends AbstractPersistenceObject> implements GenericDao<T> {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -30,6 +31,10 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
         type = (Class) pt.getActualTypeArguments()[0];
     }
 
+    /**
+     * Get current hibernate session
+     * @return hibernate session
+     */
     protected Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
