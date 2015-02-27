@@ -11,7 +11,7 @@ import net.github.rtc.app.exception.ServiceProcessingException;
 import net.github.rtc.app.model.entity.user.Role;
 import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.utils.files.upload.FileUpload;
+import net.github.rtc.app.utils.web.files.upload.FileUpload;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;

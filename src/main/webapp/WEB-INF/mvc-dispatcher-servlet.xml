@@ -16,7 +16,7 @@
 
     <!-- freemarker config -->
     <bean id="freemarkerConfig"
-          class="net.github.rtc.app.utils.template.HtmlFreeMarkerConfigurer">
+          class="net.github.rtc.app.utils.web.template.HtmlFreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/pages/"/>
         <property name="freemarkerSettings">
             <props>
@@ -43,7 +43,7 @@
         <property name="attributesMap">
             <map>
                 <entry key="additionalTags">
-                    <bean class="net.github.rtc.app.utils.freemarker.AdditionalTagsRenderer"/>
+                    <bean class="net.github.rtc.app.utils.web.AdditionalTagsRenderer"/>
                 </entry>
             </map>
         </property>

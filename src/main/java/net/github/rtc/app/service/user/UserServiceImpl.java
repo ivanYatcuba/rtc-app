@@ -12,7 +12,7 @@ import net.github.rtc.app.service.builder.MailMessageBuilder;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractCrudEventsService;
 import net.github.rtc.app.service.mail.MailService;
-import net.github.rtc.app.utils.files.upload.FileUpload;
+import net.github.rtc.app.utils.web.files.upload.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
