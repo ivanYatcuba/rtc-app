@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 @Service("mailService")
 public class MailServiceImpl implements MailService {
-    private static final String SENDER_MAIL = "rtcsender@gmail.com";
-    private static final String REGISTRATION_SUBJECT = "Registration confirmation";
 
     @Autowired
     @Qualifier("rtcMailSender")
