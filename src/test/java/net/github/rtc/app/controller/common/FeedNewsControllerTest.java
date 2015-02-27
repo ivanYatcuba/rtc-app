@@ -1,6 +1,7 @@
 package net.github.rtc.app.controller.common;
 
 import net.github.rtc.app.model.entity.news.News;
+import net.github.rtc.app.model.entity.news.NewsStatus;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.news.NewsService;
 import net.github.rtc.app.service.user.UserService;
@@ -62,12 +63,12 @@ public class FeedNewsControllerTest {
     public void returnViewWithNews() throws Exception {
         SearchResults<News> results = new SearchResults<>();
         results.setResults(newsList);
-        when(newsService.findPublishedNews()).thenReturn(newsList);
+        when(newsService.findAllByStatus(NewsStatus.PUBLISHED)).thenReturn(newsList);
         mockMvc.perform(get("/news/feed"))
                 .andExpect(status().isOk())
                 /*.andExpect(model().attributeExists("NEWS"))*/
                 .andExpect(model().attributeExists("lastUpdate"));
-        verify(newsService, times(1)).findPublishedNews();
+        verify(newsService, times(1)).findAllByStatus(NewsStatus.PUBLISHED);
         verifyNoMoreInteractions(newsService);
     }
 }

@@ -21,6 +21,12 @@ public class SimpleAuthenticationSuccessHandler implements
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
+    /**
+     * Called when a user has been successfully authenticated.
+     * @param request - the request which caused the successful authentication
+     * @param response - the response
+     * @param authentication - the Authentication object which was created during the authentication process
+     */
     @Override
     public void onAuthenticationSuccess(
       final HttpServletRequest request,
@@ -30,6 +36,12 @@ public class SimpleAuthenticationSuccessHandler implements
         clearAuthenticationAttributes(request);
     }
 
+    /**
+     * Handle request and redirect to some url
+     * @param request - the request which caused the successful authentication
+     * @param response - the response
+     * @param authentication - the Authentication object which was created during the authentication process
+     */
     protected void handle(
       final HttpServletRequest request,
       final HttpServletResponse response,
@@ -58,6 +70,10 @@ public class SimpleAuthenticationSuccessHandler implements
         return "/";
     }
 
+    /**
+     * Remove attributes from session which have got from request
+     * @param request - the request which caused the successful authentication
+     */
     protected void clearAuthenticationAttributes(
       final HttpServletRequest request) {
         final HttpSession session = request.getSession(false);
@@ -67,10 +83,18 @@ public class SimpleAuthenticationSuccessHandler implements
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
 
+    /**
+     * Set redirect strategy field
+     * @param redirectStrategy - Redirect strategy object
+     */
     public void setRedirectStrategy(final RedirectStrategy redirectStrategy) {
         this.redirectStrategy = redirectStrategy;
     }
 
+    /**
+     * Get current redirect strategy
+     * @return  - redirect strategy object
+     */
     protected RedirectStrategy getRedirectStrategy() {
         return redirectStrategy;
     }

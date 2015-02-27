@@ -32,11 +32,6 @@ public class NewsServiceImpl extends AbstractCrudEventsService<News> implements 
     }
 
     @Override
-    public List<News> findPublishedNews() {
-        return newsDao.findPublished();
-    }
-
-    @Override
     public void create(News news, boolean isPublished) {
         setAuthorAndDate(news);
         if (isPublished) {

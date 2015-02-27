@@ -16,11 +16,6 @@ public class NewsDaoImpl extends AbstractGenericDaoImpl<News> implements NewsDao
     public static final String PUBLISH_DATE = "publishDate";
 
     @Override
-    public List<News> findPublished() {
-        return getCurrentSession().createCriteria(News.class).add(Restrictions.eq(STATUS, NewsStatus.PUBLISHED)).addOrder(Order.asc(PUBLISH_DATE)).list();
-    }
-
-    @Override
     public List<News> findAllByStatus(NewsStatus status) {
         return getCurrentSession().createCriteria(News.class).add(Restrictions.eq(STATUS, status)).addOrder(Order.asc(PUBLISH_DATE)).list();
     }
