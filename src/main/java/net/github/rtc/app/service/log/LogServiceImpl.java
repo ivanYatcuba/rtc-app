@@ -1,6 +1,6 @@
 package net.github.rtc.app.service.log;
 
-import net.github.rtc.app.model.dto.Logs;
+import net.github.rtc.app.model.dto.Log;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -22,14 +22,14 @@ public class LogServiceImpl implements LogService {
     private static final int BYTES = 1024;
 
     @Override
-    public List<Logs> findAllLogs() {
+    public List<Log> findAllLogs() {
         final File folder = new File(getPathFolder());
-        final List<Logs> listOfLogs = new ArrayList<Logs>();
+        final List<Log> listOfLogs = new ArrayList<Log>();
         if (folder.listFiles().length > 0) {
             for (final File fileEntry : folder.listFiles()) {
                 if (fileEntry.isFile()) {
                     try {
-                        listOfLogs.add(new Logs(fileEntry.getPath().substring(BEGIN_INDEX), getSize(fileEntry), getCreatedDate(fileEntry.getPath())));
+                        listOfLogs.add(new Log(fileEntry.getPath().substring(BEGIN_INDEX), getSize(fileEntry), getCreatedDate(fileEntry.getPath())));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

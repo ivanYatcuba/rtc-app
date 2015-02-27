@@ -1,6 +1,6 @@
 package net.github.rtc.app.service.log;
 
-import net.github.rtc.app.model.dto.Logs;
+import net.github.rtc.app.model.dto.Log;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface LogService {
      * Get info about all logs on server
      * @return list of objects that contain info about logs
      */
-    List<Logs> findAllLogs();
+    List<Log> findAllLogs();
 
     /**
      * Get text of the log file
