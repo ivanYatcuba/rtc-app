@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
-@Controller
+@Controller("coursesController")
 @RequestMapping("admin/course")
 public class CourseController implements MenuItem {
 

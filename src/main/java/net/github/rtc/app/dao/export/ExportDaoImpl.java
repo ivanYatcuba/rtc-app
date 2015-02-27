@@ -5,5 +5,5 @@ import net.github.rtc.app.model.entity.export.ExportDetails;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ExportDaoImpl extends AbstractGenericDaoImpl<ExportDetails>implements ExportDao {
+public class ExportDaoImpl extends AbstractGenericDaoImpl<ExportDetails> implements ExportDao {
 }
