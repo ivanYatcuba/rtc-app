@@ -8,7 +8,7 @@ import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.user.UserService;
-import net.github.rtc.app.utils.TemplateStringBuilder;
+import net.github.rtc.app.service.builder.TemplateStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

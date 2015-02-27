@@ -6,6 +6,7 @@ import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.news.NewsStatus;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.builder.NewsBuilder;
+import net.github.rtc.app.service.builder.TemplateStringBuilder;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import org.junit.Before;

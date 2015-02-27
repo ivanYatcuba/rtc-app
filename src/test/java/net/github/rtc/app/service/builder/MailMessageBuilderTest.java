@@ -1,7 +1,6 @@
 package net.github.rtc.app.service.builder;
 
 import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.utils.TemplateStringBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
