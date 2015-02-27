@@ -23,7 +23,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("admin/course")
-public class CoursesController implements MenuItem {
+public class CourseController implements MenuItem {
 
     private static final String COURSE = "course";
     private static final String TYPES = "types";

@@ -1,6 +1,6 @@
 package net.github.rtc.app.service.course;
 
-import net.github.rtc.app.dao.courses.CoursesDao;
+import net.github.rtc.app.dao.course.CourseDao;
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.model.entity.activity.ActivityEntity;
 import net.github.rtc.app.model.entity.activity.Auditable;
@@ -38,7 +38,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
     @Autowired
     private UserCourseOrderService orderService;
     @Autowired
-    private CoursesDao coursesDao;
+    private CourseDao courseDao;
     @Autowired
     private DateService dateService;
     @Autowired
@@ -51,7 +51,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
 
     @Override
     protected GenericDao<Course> getDao() {
-        return coursesDao;
+        return courseDao;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
         LOG.debug("Publishing course: {}  ", course.getCode());
         course.setStatus(CourseStatus.PUBLISHED);
         course.setPublishDate(dateService.getCurrentDate());
-        coursesDao.update(course);
+        courseDao.update(course);
         if (isNewsCreated) {
            newsService.create(course);
         }
@@ -75,7 +75,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
         Assert.notNull(course, COURSE_CANNOT_BE_NULL);
         LOG.debug("Archiving course: {}  ", course.getCode());
         course.setStatus(CourseStatus.ARCHIVED);
-        coursesDao.update(course);
+        courseDao.update(course);
     }
 
     @Override
