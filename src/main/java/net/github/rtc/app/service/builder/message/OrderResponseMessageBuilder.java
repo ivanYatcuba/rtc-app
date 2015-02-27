@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.message.factory.order;
+package net.github.rtc.app.service.builder.message;
 
 import net.github.rtc.app.model.entity.message.Message;
 import net.github.rtc.app.model.entity.message.MessageType;
@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component("responseMessageFactoryImpl")
-public class OrderResponseMessageFactoryImpl implements OrderMessageFactory {
+@Component("orderResponseMessageBuilder")
+public class OrderResponseMessageBuilder {
 
     private static final String SUBJECT_TEMPLATE_PATH = "/templates/messages/order/response/subject.ftl";
     private static final String DESCRIPTION_TEMPLATE_PATH = "/templates/messages/order/response/description.ftl";
@@ -41,8 +41,7 @@ public class OrderResponseMessageFactoryImpl implements OrderMessageFactory {
     @Autowired
     private MessageSource messageSource;
 
-    @Override
-    public List<Message> getMessages(UserCourseOrder order) {
+    public List<Message> build(UserCourseOrder order) {
         final Message msg = new Message();
         msg.setSenderUserCode(AuthorizedUserProvider.getAuthorizedUser().getCode());
         msg.setReceiverUserCode(order.getUserCode());

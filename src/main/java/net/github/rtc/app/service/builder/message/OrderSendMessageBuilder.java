@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.message.factory.order;
+package net.github.rtc.app.service.builder.message;
 
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.message.Message;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@Component("orderSendMessageFactory")
-public class OrderSendMessageFactoryImpl implements OrderMessageFactory {
+@Component("orderSendMessageBuilder")
+public class OrderSendMessageBuilder {
 
     private static final String SUBJECT_TEMPLATE_PATH = "/templates/messages/order/request/subject.ftl";
     private static final String DESCRIPTION_TEMPLATE_PATH = "/templates/messages/order/request/description.ftl";
@@ -31,8 +31,7 @@ public class OrderSendMessageFactoryImpl implements OrderMessageFactory {
     @Autowired
     private TemplateStringBuilder templateStringBuilder;
 
-    @Override
-    public List<Message> getMessages(UserCourseOrder order) {
+    public List<Message> build(UserCourseOrder order) {
         final List<Message> msgList = new ArrayList<>();
         final Course course = courseService.findByCode(order.getCourseCode());
 

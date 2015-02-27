@@ -4,6 +4,9 @@ import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.dao.message.MessageDao;
 import net.github.rtc.app.model.dto.message.MessageDto;
 import net.github.rtc.app.model.entity.message.Message;
+import net.github.rtc.app.model.entity.order.UserCourseOrder;
+import net.github.rtc.app.service.builder.message.OrderResponseMessageBuilder;
+import net.github.rtc.app.service.builder.message.OrderSendMessageBuilder;
 import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.model.dto.SearchResults;
@@ -24,6 +27,12 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderResponseMessageBuilder orderResponseMessageBuilder;
+
+    @Autowired
+    private OrderSendMessageBuilder orderSendMessageBuilder;
 
     @Override
     protected GenericDao<Message> getDao() {
@@ -73,5 +82,20 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
                 return outputResults;
             }
         };
+    }
+
+
+    public void createOrderResponseMessage(UserCourseOrder order) {
+        create(orderResponseMessageBuilder.build(order));
+    }
+
+    public void createOrderSendMessage(UserCourseOrder order) {
+        create(orderSendMessageBuilder.build(order));
+    }
+
+    private void create(List<Message> messageList) {
+        for (Message msg: messageList) {
+            create(msg);
+        }
     }
 }

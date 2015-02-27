@@ -10,13 +10,13 @@ import net.github.rtc.app.model.entity.order.UserRequestStatus;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
+import net.github.rtc.app.service.message.MessageService;
 import net.github.rtc.app.service.user.UserService;
 import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import net.github.rtc.app.service.builder.SearchResultsBuilder;
 import net.github.rtc.app.service.builder.SearchResultsMapper;
 import net.github.rtc.app.model.dto.filter.OrderSearchFilter;
 import net.github.rtc.app.model.dto.SearchResults;
-import net.github.rtc.app.utils.message.event.MessageEventCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     @Autowired
     private CourseService courseService;
     @Autowired
-    private MessageEventCreator eventCreator;
+    private MessageService messageService;
 
     @Override
     public SearchResults<ExpertOrderDto> searchOrderForExpert(OrderSearchFilter searchFilter) {
@@ -59,7 +59,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     public UserCourseOrder acceptOrder(String orderCode) {
         final UserCourseOrder order = findByCode(orderCode);
         changeOrderStatus(order, UserRequestStatus.ACCEPTED);
-        eventCreator.createOrderResponseMessageEvent(order);
+        messageService.createOrderResponseMessage(order);
         return userCourseOrderDao.update(order);
     }
 
@@ -69,7 +69,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
         final UserCourseOrder order = findByCode(orderCode);
         order.setRejectReason(reason);
         changeOrderStatus(order, UserRequestStatus.REJECTED);
-        eventCreator.createOrderResponseMessageEvent(order);
+        messageService.createOrderResponseMessage(order);
         return userCourseOrderDao.update(order);
     }
 
@@ -97,7 +97,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
         userCourseOrder.setUserCode(userCode);
         userCourseOrder.setRequestDate(dateService.getCurrentDate());
 
-        eventCreator.createOrderSendMessageEvent(userCourseOrder);
+        messageService.createOrderSendMessage(userCourseOrder);
         return super.create(userCourseOrder);
     }
 

@@ -2,6 +2,7 @@ package net.github.rtc.app.service.message;
 
 import net.github.rtc.app.model.dto.message.MessageDto;
 import net.github.rtc.app.model.entity.message.Message;
+import net.github.rtc.app.model.entity.order.UserCourseOrder;
 import net.github.rtc.app.service.generic.GenericService;
 import net.github.rtc.app.model.dto.SearchResults;
 import net.github.rtc.app.model.dto.filter.MessageSearchFilter;
@@ -37,4 +38,16 @@ public interface MessageService extends GenericService<Message> {
      * @return count of unread messages
      */
     int getUserUnreadMessageCount(String userCode);
+
+    /**
+     * Create order response message abd persist its to db
+     * @param order response order
+     */
+    void createOrderResponseMessage(UserCourseOrder order);
+
+    /**
+     * Create order send message abd persist its to db
+     * @param order sent order
+     */
+    void createOrderSendMessage(UserCourseOrder order);
 }
