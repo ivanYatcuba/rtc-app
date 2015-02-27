@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils;
+package net.github.rtc.app.service.builder;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

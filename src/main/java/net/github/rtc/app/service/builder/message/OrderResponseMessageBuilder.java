@@ -7,7 +7,7 @@ import net.github.rtc.app.model.entity.order.UserRequestStatus;
 import net.github.rtc.app.service.course.CourseService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.security.AuthorizedUserProvider;
-import net.github.rtc.app.utils.TemplateStringBuilder;
+import net.github.rtc.app.service.builder.TemplateStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;

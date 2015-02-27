@@ -1,7 +1,7 @@
 package net.github.rtc.app.service.export;
 
 import net.github.rtc.app.dao.generic.GenericDao;
-import net.github.rtc.app.dao.export.ExportDao;
+import net.github.rtc.app.dao.export.ExportDaoImpl;
 import net.github.rtc.app.model.entity.export.ExportDetails;
 import net.github.rtc.app.service.builder.ExportBuilder;
 import net.github.rtc.app.service.generic.CodeGenerationService;
@@ -27,7 +27,7 @@ public class ExportServiceImpl extends AbstractGenericServiceImpl<ExportDetails>
     private static final String DOT = ".";
     private static Logger log = LoggerFactory.getLogger(ExportServiceImpl.class.getName());
     @Autowired
-    private ExportDao exportDao;
+    private ExportDaoImpl exportDao;
     @Autowired
     private DateService dateService;
     @Autowired

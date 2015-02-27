@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils.freemarker;
+package net.github.rtc.app.utils.web;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.web.servlet.support.BindStatus;

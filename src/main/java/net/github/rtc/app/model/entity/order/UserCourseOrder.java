@@ -4,12 +4,12 @@ import com.sun.istack.NotNull;
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
 import net.github.rtc.app.model.entity.course.CourseType;
 import net.github.rtc.util.annotation.validation.Validatable;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -38,7 +38,7 @@ public class UserCourseOrder extends AbstractPersistenceObject {
     private UserRequestStatus status = UserRequestStatus.PENDING;
 
     @Column
-    @NotEmpty
+    @Size(min = 1)
     private String rejectReason;
 
     public UserCourseOrder(

@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils;
+package net.github.rtc.app.service.builder;
 
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseType;

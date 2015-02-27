@@ -33,5 +33,5 @@
     <global-method-security secured-annotations="enabled" />
     <beans:bean id="simpleAuthenticationSuccessHandler"
                 class="net.github.rtc.app.service.security.SimpleAuthenticationSuccessHandler"/>
-    <beans:bean id="ajaxTimeoutRedirectFilter" class="net.github.rtc.app.utils.AjaxTimeoutRedirectFilter"/>
+    <beans:bean id="ajaxTimeoutRedirectFilter" class="net.github.rtc.app.utils.web.AjaxTimeoutRedirectFilter"/>
 </beans:beans>

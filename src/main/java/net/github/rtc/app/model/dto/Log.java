@@ -2,7 +2,7 @@ package net.github.rtc.app.model.dto;
 
 import java.util.Date;
 
-public class Logs {
+public class Log {
 
     private String file;
 
@@ -10,11 +10,11 @@ public class Logs {
 
     private Date createdDate;
 
-    public Logs() {
+    public Log() {
 
     }
 
-    public Logs(String file, String size, Date createdDate) {
+    public Log(String file, String size, Date createdDate) {
         this.file = file;
         this.size = size;
         if (createdDate != null) {

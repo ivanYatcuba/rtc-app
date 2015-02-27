@@ -1,4 +1,4 @@
-package net.github.rtc.app.utils;
+package net.github.rtc.app.utils.web;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
