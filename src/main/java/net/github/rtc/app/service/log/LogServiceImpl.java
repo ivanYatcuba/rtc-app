@@ -1,6 +1,7 @@
 package net.github.rtc.app.service.log;
 
 import net.github.rtc.app.model.dto.Log;
+import net.github.rtc.app.model.dto.filter.LogsSearchFilter;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -9,9 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class LogServiceImpl implements LogService {
@@ -86,5 +85,32 @@ public class LogServiceImpl implements LogService {
         final Path file = Paths.get(filePath);
         final BasicFileAttributes attributes = Files.readAttributes(file, BasicFileAttributes.class);
         return new Date(attributes.creationTime().toMillis());
+    }
+
+    public Map<String, Object> getLogsPageParams(LogsSearchFilter logsSearchFilter) {
+        int begin = (logsSearchFilter.getPage() - 1) * logsSearchFilter.getPerPage();
+        int end = begin + logsSearchFilter.getPerPage();
+        if (end > findAllLogs().size()) {
+            end = findAllLogs().size();
+        }
+        final Map<String, Object> map = new HashMap<>();
+        map.put("logs", findAllLogs().subList(begin, end));
+        map.put("currentPage", logsSearchFilter.getPage());
+        final int countPages = findAllLogs().size() / logsSearchFilter.getPerPage() + ((findAllLogs().size() % logsSearchFilter.getPerPage() == 0) ? 0 : 1);
+        map.put("lastPage", countPages);
+        if (logsSearchFilter.getPage() == countPages) {
+            begin = Math.max(1, logsSearchFilter.getPage() - logsSearchFilter.getPageOffset() - 1);
+            end = logsSearchFilter.getPage();
+        } else {
+            begin = Math.max(1, logsSearchFilter.getPage() - logsSearchFilter.getPageOffset());
+            if (countPages == logsSearchFilter.getMaxOffset()) {
+                end = logsSearchFilter.getMaxOffset();
+            } else {
+                end = Math.min(begin + logsSearchFilter.getPageOffset(), countPages);
+            }
+        }
+        map.put("beginIndex", begin);
+        map.put("endIndex", end);
+        return map;
     }
 }
