@@ -7,7 +7,6 @@
 
 <body>
     <div id="wrap">
-    <#include "header.ftl" />
         <div class="container">
             <#nested>
         </div>
