@@ -6,12 +6,14 @@
 </head>
 
 <body>
-    <div id="wrap">
-        <div class="container">
+    <div class="container">
+        <div class="row">
             <#nested>
         </div>
     </div>
-    <#include "footer.ftl" />
+    <div id="footer" class="container">
+        <#include "footer.ftl" />
+    </div>
 </body>
 
 <script src="<@spring.url'/resources/js/jquery/jquery-1.11.1.min.js'/>"></script>
