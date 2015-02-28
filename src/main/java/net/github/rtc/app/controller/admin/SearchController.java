@@ -151,9 +151,9 @@ public class SearchController {
     @RequestMapping(value = "/logsTable", method = RequestMethod.POST)
     public
     @ResponseBody
-    ModelAndView getActivityTable(@ModelAttribute(LOGS_FILTER) final LogsSearchFilter logsFilter) {
+    ModelAndView getLogsTable(@ModelAttribute(LOGS_FILTER) final LogsSearchFilter logsFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/logsSearchTable");
-        mav.addObject(LOGS, logService.findAllLogs());
+        mav.addAllObjects(logService.search(logsFilter));
         return mav;
     }
 

@@ -10,10 +10,10 @@
 
                 <a style="text-decoration: underline;  font-size: large; " href="<@spring.url'/user/courses/courseDetails/${course.code}'/>">${course.name} </a>
                 <br/>
-                <div class="col-md-6" style="padding-left: 0px">
+                <div class="col-md-5" style="padding-left: 0px">
                     <span style="font-style: italic; font-size: small;">${course.experts?first.name}&nbsp;${course.experts?first.surname}</span>
                 </div>
-                <div class="col-md-6" style="text-align: right">
+                <div class="col-md-7" style="text-align: right; padding-right: 0px">
                     <#if course.startDate?date?string('yyyy') != course.endDate?date?string('yyyy')>
                         <span style="font-style: italic;font-size: smaller;">${course.startDate?date?string('dd-MMM-yyyy')}&nbsp;-&nbsp;${course.endDate?date?string('dd-MMM-yyyy')}</span>
                     <#else >

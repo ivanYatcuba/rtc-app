@@ -1,6 +1,7 @@
 package net.github.rtc.app.service.log;
 
 import net.github.rtc.app.model.dto.Log;
+import net.github.rtc.app.model.dto.filter.LogsSearchFilter;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -9,9 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Component
 public class LogServiceImpl implements LogService {
@@ -86,5 +87,90 @@ public class LogServiceImpl implements LogService {
         final Path file = Paths.get(filePath);
         final BasicFileAttributes attributes = Files.readAttributes(file, BasicFileAttributes.class);
         return new Date(attributes.creationTime().toMillis());
+    }
+
+    @Override
+    public Map<String, Object> search(LogsSearchFilter logsSearchFilter) {
+        List<Log> logs;
+        if (logsSearchFilter.getCreatedDate() == null) {
+            logs = findAllLogs();
+        } else {
+            Date checkedLogCreatedDate;
+            Date logCreatedDate;
+            checkedLogCreatedDate = parseDate(logsSearchFilter.getCreatedDate());
+            logs = new ArrayList<Log>();
+            for (Log log: findAllLogs()) {
+                logCreatedDate = parseDate(log.getCreatedDate());
+                switch (logsSearchFilter.getDateMoreLessEq()) {
+                    case '=':
+                        if (logCreatedDate.equals(checkedLogCreatedDate)) {
+                            logs.add(log);
+                        }
+                        break;
+                    case '<':
+                        if (logCreatedDate.before(checkedLogCreatedDate)) {
+                            logs.add(log);
+                        }
+                        break;
+                    case '>':
+                        if (logCreatedDate.after(checkedLogCreatedDate)) {
+                            logs.add(log);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        return getLogsPageParams(logs, logsSearchFilter);
+    }
+
+    /**
+     * Get params of the logs table on logs search page
+     * @param logs contains logs for logs search page
+     * @param logsSearchFilter contains basic params for logs table on logs search page
+     * @return maps of objects that contain params about logs table on logs search page
+     */
+    private Map<String, Object> getLogsPageParams(List<Log> logs, LogsSearchFilter logsSearchFilter) {
+        int begin = (logsSearchFilter.getPage() - 1) * logsSearchFilter.getPerPage();
+        int end = begin + logsSearchFilter.getPerPage();
+        if (end > logs.size()) {
+            end = logs.size();
+        }
+        final Map<String, Object> map = new HashMap<>();
+        map.put("logs", logs.subList(begin, end));
+        map.put("currentPage", logsSearchFilter.getPage());
+        final int countPages = logs.size() / logsSearchFilter.getPerPage() + ((logs.size() % logsSearchFilter.getPerPage() == 0) ? 0 : 1);
+        map.put("lastPage", countPages);
+        if (logsSearchFilter.getPage() == countPages) {
+            begin = Math.max(1, logsSearchFilter.getPage() - logsSearchFilter.getPageOffset() - 1);
+            end = logsSearchFilter.getPage();
+        } else {
+            begin = Math.max(1, logsSearchFilter.getPage() - logsSearchFilter.getPageOffset());
+            if (countPages == logsSearchFilter.getMaxOffset()) {
+                end = logsSearchFilter.getMaxOffset();
+            } else {
+                end = Math.min(begin + logsSearchFilter.getPageOffset(), countPages);
+            }
+        }
+        map.put("beginIndex", begin);
+        map.put("endIndex", end);
+        return map;
+    }
+
+    /**
+     *
+     * @param date what will be parsed to format dd-MMM-yyyy
+     * @return parse date
+     */
+    private Date parseDate(Date date) {
+        Date pDate = null;
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        try {
+            pDate = dateFormat.parse(dateFormat.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return pDate;
     }
 }
