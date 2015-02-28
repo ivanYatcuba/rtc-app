@@ -25,9 +25,9 @@ public interface LogService {
     String getLogData(final String fileName);
 
     /**
-     * Get params of the logs table on logs search page
-     * @param logsSearchFilter contains basic params for logs table on logs search page
-     * @return maps of objects that contain params about logs table on logs search page
+     * Search logs by created date
+     * @param logsSearchFilter contains data for search
+     * @return list of objects that satisfy the search results
      */
-    Map<String, Object> getLogsPageParams(LogsSearchFilter logsSearchFilter);
+    Map<String, Object> search(LogsSearchFilter logsSearchFilter);
 }

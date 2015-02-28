@@ -10,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
@@ -87,16 +89,58 @@ public class LogServiceImpl implements LogService {
         return new Date(attributes.creationTime().toMillis());
     }
 
-    public Map<String, Object> getLogsPageParams(LogsSearchFilter logsSearchFilter) {
+    @Override
+    public Map<String, Object> search(LogsSearchFilter logsSearchFilter) {
+        List<Log> logs;
+        if (logsSearchFilter.getCreatedDate() == null) {
+            logs = findAllLogs();
+        } else {
+            Date checkedLogCreatedDate;
+            Date logCreatedDate;
+            checkedLogCreatedDate = parseDate(logsSearchFilter.getCreatedDate());
+            logs = new ArrayList<Log>();
+            for (Log log: findAllLogs()) {
+                logCreatedDate = parseDate(log.getCreatedDate());
+                switch (logsSearchFilter.getDateMoreLessEq()) {
+                    case '=':
+                        if (logCreatedDate.equals(checkedLogCreatedDate)) {
+                            logs.add(log);
+                        }
+                        break;
+                    case '<':
+                        if (logCreatedDate.before(checkedLogCreatedDate)) {
+                            logs.add(log);
+                        }
+                        break;
+                    case '>':
+                        if (logCreatedDate.after(checkedLogCreatedDate)) {
+                            logs.add(log);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        return getLogsPageParams(logs, logsSearchFilter);
+    }
+
+    /**
+     * Get params of the logs table on logs search page
+     * @param logs contains logs for logs search page
+     * @param logsSearchFilter contains basic params for logs table on logs search page
+     * @return maps of objects that contain params about logs table on logs search page
+     */
+    private Map<String, Object> getLogsPageParams(List<Log> logs, LogsSearchFilter logsSearchFilter) {
         int begin = (logsSearchFilter.getPage() - 1) * logsSearchFilter.getPerPage();
         int end = begin + logsSearchFilter.getPerPage();
-        if (end > findAllLogs().size()) {
-            end = findAllLogs().size();
+        if (end > logs.size()) {
+            end = logs.size();
         }
         final Map<String, Object> map = new HashMap<>();
-        map.put("logs", findAllLogs().subList(begin, end));
+        map.put("logs", logs.subList(begin, end));
         map.put("currentPage", logsSearchFilter.getPage());
-        final int countPages = findAllLogs().size() / logsSearchFilter.getPerPage() + ((findAllLogs().size() % logsSearchFilter.getPerPage() == 0) ? 0 : 1);
+        final int countPages = logs.size() / logsSearchFilter.getPerPage() + ((logs.size() % logsSearchFilter.getPerPage() == 0) ? 0 : 1);
         map.put("lastPage", countPages);
         if (logsSearchFilter.getPage() == countPages) {
             begin = Math.max(1, logsSearchFilter.getPage() - logsSearchFilter.getPageOffset() - 1);
@@ -112,5 +156,21 @@ public class LogServiceImpl implements LogService {
         map.put("beginIndex", begin);
         map.put("endIndex", end);
         return map;
+    }
+
+    /**
+     *
+     * @param date what will be parsed to format dd-MMM-yyyy
+     * @return parse date
+     */
+    private Date parseDate(Date date) {
+        Date pDate = null;
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        try {
+            pDate = dateFormat.parse(dateFormat.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return pDate;
     }
 }

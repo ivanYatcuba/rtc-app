@@ -153,7 +153,7 @@ public class SearchController {
     @ResponseBody
     ModelAndView getLogsTable(@ModelAttribute(LOGS_FILTER) final LogsSearchFilter logsFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/logsSearchTable");
-        mav.addAllObjects(logService.getLogsPageParams(logsFilter));
+        mav.addAllObjects(logService.search(logsFilter));
         return mav;
     }
 
