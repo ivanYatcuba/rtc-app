@@ -1,1 +1,1 @@
-Your course request was ${status} by course expert.
+Course order was ${status}.
