@@ -91,7 +91,7 @@
                 data: reason,
                 success: function (result) {
                     var page = $('#searchTable').find('.active').find('.navButton').attr("page");
-                    if(page == 'undefined') {
+                    if(typeof page === 'undefined') {
                         page = 1;
                     }
                     search(page);
