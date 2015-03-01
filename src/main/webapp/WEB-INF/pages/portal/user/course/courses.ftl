@@ -7,25 +7,12 @@
     <div class="form-group"><h4 class="control-label col-md-4" for="types" ><strong><@spring.message "courses.catalog"/></strong></h4>
         <div class="col-md-5" style="margin-left: -5%;">
 
-            <ul
-            <#--style="padding-top: 10%"-->
-                    id="typeMenu" class="nav nav-pills" role="tablist"
-            <#--style="padding-bottom: 10%"-->
-                    >
-                <li role="presentation" class="dropdown">
-                    <a id="drop6" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                        <span id="currentType" type=""><@spring.message "courses.types.All"/></span>
-                        <span class="caret"></span>
-                    </a>
-                    <ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop6">
-                        <li role="presentation"><a class="typeItem" role="menuitem" tabindex="-1" href="#"  type=""><@spring.message "courses.types.All"/></a></li>
-                        <#list courseTypes as type>
-                            <li role="presentation"><a class="typeItem" role="menuitem" tabindex="-1" href="#" type="${type}"> <@spring.message "courses.types.${type}"/></a></li>
-                        </#list>
-                    </ul>
-                </li>
-            </ul>
-
+            <select id='types' class="form-control">
+                <option value=""><@spring.message "courses.types.All"/></option>
+                <#list courseTypes as type>
+                    <option value="${type}"><@spring.message "courses.types.${type}"/></option>
+                </#list>
+            </select>
         </div>
     </div>
 </div>
@@ -41,18 +28,16 @@
         search("", 1);
     });
 
-
-    $("#typeMenu").on("click", ".typeItem", function (event) {
-        var type = this.getAttribute("type");
-        $("#currentType").attr("type", type);
-        $("#currentType").text(this.text);
+    $("#types").change(function (event) {
+        event.preventDefault();
+        var type = $("#types").val();
         search(type, 1);
     });
 
     $("#coursesContent").on("click", ".navButton", function (event) {
         event.preventDefault();
         var page = this.getAttribute("page");
-        search($("#currentType").attr("type"), page);
+        search($("#types").val(), page);
     });
 
     function search(type, page) {

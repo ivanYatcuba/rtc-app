@@ -83,6 +83,6 @@
             $("#withArchive").val("false");
         }
         var page = $('#coursesContent').find('.active').find('.navButton').attr("page");
-        search($("#currentType").attr("type"), page);
+        search($("#types").val(), page);
     });
 </script>
