@@ -25,7 +25,7 @@ public class LogServiceImpl implements LogService {
     @Override
     public List<Log> findAllLogs() {
         final File folder = new File(getPathFolder());
-        final List<Log> listOfLogs = new ArrayList<Log>();
+        final List<Log> listOfLogs = new ArrayList<>();
         if (folder.listFiles().length > 0) {
             for (final File fileEntry : folder.listFiles()) {
                 if (fileEntry.isFile()) {
@@ -37,6 +37,12 @@ public class LogServiceImpl implements LogService {
                 }
             }
         }
+        Collections.sort(listOfLogs, new Comparator<Log>() {
+            @Override
+            public int compare(Log o1, Log o2) {
+                return (-1)*o1.getCreatedDate().compareTo(o2.getCreatedDate());
+            }
+        });
         return listOfLogs;
     }
 
