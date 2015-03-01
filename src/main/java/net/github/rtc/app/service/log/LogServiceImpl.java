@@ -40,7 +40,7 @@ public class LogServiceImpl implements LogService {
         Collections.sort(listOfLogs, new Comparator<Log>() {
             @Override
             public int compare(Log o1, Log o2) {
-                return (-1)*o1.getCreatedDate().compareTo(o2.getCreatedDate());
+                return (-1) * o1.getCreatedDate().compareTo(o2.getCreatedDate());
             }
         });
         return listOfLogs;
