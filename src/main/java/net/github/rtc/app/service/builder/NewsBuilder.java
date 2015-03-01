@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * Object that helps to build news from course
+ */
 @Component
 public class NewsBuilder {
 
@@ -27,6 +30,11 @@ public class NewsBuilder {
     @Autowired
     private DateService dateService;
 
+    /**
+     * Build news from course
+     * @param course the course from what news needs to be built
+     * @return the news based on course
+     */
     public News build(Course course) {
         if (course == null) {
             throw new IllegalArgumentException("course = null");
@@ -47,6 +55,11 @@ public class NewsBuilder {
         return news;
     }
 
+    /**
+     * Get description of the news depending on course
+     * @param course the course that needs to be described
+     * @return description in string
+     */
     private String getCourseDescription(final Course course) {
         final Map<String, Object> templateMap = new HashMap<>();
         templateMap.put("termInMonth", dateService.getMothPeriod(course.getStartDate(), course.getEndDate()));
@@ -54,6 +67,11 @@ public class NewsBuilder {
         return templateStringBuilder.build(templatePath, templateMap);
     }
 
+    /**
+     * Detect what course description param should be used depending on course type
+     * @param course course that needs description
+     * @return path to template that contains needed description
+     */
     private String getCourseDescriptionTemplatePath(final Course course) {
         if (course.getTypes().size() == 1) {
             final CourseType type = course.getTypes().iterator().next();

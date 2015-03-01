@@ -10,15 +10,29 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Object that helps to get string from freemarker template
+ */
 @Component
 public class TemplateStringBuilder {
 
     public static final String UNKNOWN_VALUE = "UNKNOWN VALUE";
 
+    /**
+     * Get string from freemarker template that contains no params.
+     * @param templatePath the path to template file
+     * @return resulting string
+     */
     public String build(String templatePath) {
         return build(templatePath, new HashMap<String, Object>());
     }
 
+    /**
+     * Get string from freemarker template that contains some params.
+     * @param templatePath the template path
+     * @param templateParams Map that contains params in for freemarker template
+     * @return resulting string
+     */
     public String build(String templatePath, Map<String, Object> templateParams) {
         try {
             final Configuration config = new Configuration();
