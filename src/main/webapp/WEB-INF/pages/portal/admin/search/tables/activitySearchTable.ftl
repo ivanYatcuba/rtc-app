@@ -13,8 +13,8 @@
         </thead>
     <#if activities?has_content>
         <#list activities as activity>
-            <tr style="vertical-align: middle">
-                <td style="vertical-align: middle; width: 25%">
+            <tr style="vertical-align: middle;">
+                <td style="vertical-align: middle">
                     <p>${activity.detail}</p>
                 </td>
                 <td style="vertical-align: middle;">
@@ -23,7 +23,7 @@
                 <td style="vertical-align: middle;">
                     <p>${activity.username}</p>
                 </td>
-                <td style="vertical-align: middle; width: 25%">
+                <td style="vertical-align: middle;">
                     ${activity.actionDate?string('dd-MMM-yyyy HH:mm:ss')}
                 </td>
             </tr>
