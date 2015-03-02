@@ -35,6 +35,7 @@
     </bean>
     <util:map id="staticAttributesMap">
         <entry key="projectVersion" value="${project.version}" />
+        <entry key="projectName" value="${project.name}" />
     </util:map>
 
     <!--
