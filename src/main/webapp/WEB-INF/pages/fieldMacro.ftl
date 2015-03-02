@@ -225,16 +225,25 @@
     </@rtcFieldWrapper>
 </#macro>
 
-<#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="" >
+<#macro rtcFormMultiSelect label path options class="" style="" messagePrefix="" additionalGetter="">
         <@rtcFieldWrapper label path>
-
+            <#if additionalGetter != "">
+                <#assign properties = [""]>
+                <#list status.actualValue as value>
+                    <#assign properties = properties + [value[additionalGetter]]>
+                </#list>
+            </#if>
         <select multiple="multiple" size="3"
                 <#if status.expression??>id="${status.expression?replace('[','')?replace(']','')}"</#if>
                 name="${status.expression!""}"
                 class = "form-control ${class}"  style = "${style}">
             <#if options?is_hash>
                 <#list options?keys as value>
-                    <#assign isSelected = contains(status.actualValue?default([""]), options[value])>
+                    <#if additionalGetter != "">
+                        <#assign isSelected = contains(properties, options[value])>
+                    <#else>
+                        <#assign isSelected = contains(status.actualValue?default([""]), options[value])>
+                    </#if>
                     <option value="${value?html}"<#if isSelected>selected="selected"</#if>>
                         <#if messagePrefix == "">
                             ${options[value]?html}

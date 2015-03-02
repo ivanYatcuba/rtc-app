@@ -23,7 +23,7 @@
 <hr>
 <div class="row">
     <div class="col-md-6">
-        <@formMacro.rtcFormMultiSelect "course.experts" "course.experts" experts "" "width: 100%; background-color:#FFFACD"/>
+        <@formMacro.rtcFormMultiSelect "course.experts" "course.experts" experts "" "width: 100%; background-color:#FFFACD" "" "surnameName"/>
     </div>
 </div>
 <hr>
