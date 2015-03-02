@@ -4,6 +4,8 @@
 <@layout.layout>
 <@formMacro.rtcForm "userName" "/admin/user/save" "user.createUser" "${validationRules}" "multipart/form-data">
     <#include "userForm.ftl" />
-    <@formMacro.rtcSubmit "Create" "Cancel" "/admin/search/${menuItem}"/>
+    <div class="col-md-11">
+        <@formMacro.rtcSubmit "Create" "Cancel" "/admin/search/${menuItem}"/>
+    </div>
 </@formMacro.rtcForm>
 </@layout.layout>

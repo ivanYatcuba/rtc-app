@@ -10,7 +10,9 @@
     <@spring.formHiddenInput "user.status" />
     <#if user.photo??><@spring.formHiddenInput "user.photo" /></#if>
     <#include "userForm.ftl" />
-    <@formMacro.rtcSubmit "Save" "Cancel" "/admin/user/view/${user.code}"/>
+    <div class="col-md-11">
+        <@formMacro.rtcSubmit "Save" "Cancel" "/admin/user/view/${user.code}"/>
+    </div>
 </@formMacro.rtcForm>
 
 </@layout.layout>
