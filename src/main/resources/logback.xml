@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
+    <logger name="net.github.rtc.app" level="info"/>
     <property name="LOG_PATH" value="/var/log/rtc-app/logs" />
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -15,11 +16,12 @@
             <maxFileSize>1MB</maxFileSize>
         </triggeringPolicy>
         <encoder>
-            <pattern>%date{YYYY-MM-dd HH:mm:ss} %level [%file:%line] %msg%n </pattern>
+            <pattern>%date{YYYY-MM-dd HH:mm:ss} %level [%file:%line] %msg%n</pattern>
         </encoder>
     </appender>
 
-    <root level="debug">
+
+    <root level="info">
         <appender-ref ref="FILE"/>
     </root>
 </configuration>

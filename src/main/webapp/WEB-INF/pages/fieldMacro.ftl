@@ -229,9 +229,11 @@
         <@rtcFieldWrapper label path>
             <#if additionalGetter != "">
                 <#assign properties = [""]>
+                <#if status.actualValue??>
                 <#list status.actualValue as value>
                     <#assign properties = properties + [value[additionalGetter]]>
                 </#list>
+                </#if>
             </#if>
         <select multiple="multiple" size="3"
                 <#if status.expression??>id="${status.expression?replace('[','')?replace(']','')}"</#if>
