@@ -3,12 +3,15 @@ package net.github.rtc.app.dao;
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseType;
+import net.github.rtc.app.model.entity.user.EnglishLevel;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.model.entity.order.UserCourseOrder;
 import net.github.rtc.app.model.entity.order.UserRequestStatus;
+import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.CodeGenerationService;
 import net.github.rtc.app.service.generic.CodeGenerationServiceImpl;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -20,6 +23,9 @@ public class DaoTestContext implements InitializingBean {
     private Map<Class, ModelBuilder<? extends AbstractPersistenceObject>> modelBuilder;
     private Map<Class, EqualityChecker> equalityChecker;
     protected final CodeGenerationService codeGenerationService = new CodeGenerationServiceImpl();
+
+    @Autowired
+    private DateService dateService;
 
     public ModelBuilder getModelBuilder(Class aClass) {
         return modelBuilder.get(aClass);
@@ -44,8 +50,8 @@ public class DaoTestContext implements InitializingBean {
                 course.setName("Test Course");
                 course.setCapacity(1);
                 course.setTypes(new HashSet<>(Arrays.asList(CourseType.BA, CourseType.QA)));
-                course.setEndDate(new Date());
-                course.setStartDate(new Date());
+                course.setEndDate(dateService.getCurrentDate());
+                course.setStartDate(dateService.getCurrentDate());
                 course.setCode(codeGenerationService.generate());
                 return course;
             }
@@ -55,9 +61,16 @@ public class DaoTestContext implements InitializingBean {
             @Override
             public User build() {
                 final User user = new User();
+                user.setName("NAME");
+                user.setSurname("SURNAME");
                 user.setEmail("testMail@mail.com");
-                user.setPassword("1111");
+                user.setNote("note");
                 user.setCode(codeGenerationService.generate());
+                user.setBirthDate(dateService.getCurrentDate());
+                user.setPhone("321312");
+                user.setEnglish(EnglishLevel.BASIC);
+                user.setPassword("1111");
+                user.setRegisterDate(dateService.getCurrentDate());
                 return user;
             }
         });

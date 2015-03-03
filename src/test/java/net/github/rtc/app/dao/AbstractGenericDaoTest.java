@@ -1,7 +1,9 @@
-/*package net.github.rtc.app.dao;
+package net.github.rtc.app.dao;
 
 //todo
-import net.github.rtc.app.model.AbstractPersistenceObject;
+
+import net.github.rtc.app.dao.generic.GenericDao;
+import net.github.rtc.app.model.entity.AbstractPersistenceObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -95,5 +97,4 @@ public abstract class AbstractGenericDaoTest<T extends AbstractPersistenceObject
         assertTrue(initList.size() < genericDao.findAll().size());
     }
 
-
-}*/
+}

@@ -5,8 +5,15 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/util
-        http://www.springframework.org/schema/util/spring-util-3.2.xsd" default-lazy-init="true">
+        http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
+    <!--Manually configure util-->
+    <bean id="namesHolder"
+          class="net.github.rtc.util.converter.ValidationNamesHolder"/>
+    <bean id="scanner"
+          class="net.github.rtc.util.converter.AnnotatedFieldScanner"/>
+    <bean id="ruleFactory"
+          class="net.github.rtc.util.converter.ValidationRuleFactory"/>
     <bean id="validationConverter"
           class="net.github.rtc.util.converter.Converter"/>
     <bean id="validationContext"
@@ -15,6 +22,13 @@
         <constructor-arg index="1" name="packagePath"
                          value="net.github.rtc.app.model"/>
     </bean>
+    <bean id="eMessageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:/errorMessages" />
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+    <!--################################################## -->
+
     <bean id="rtcMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />
         <property name="port" value="465" />
@@ -31,6 +45,7 @@
             </props>
         </property>
     </bean>
+
 
     <util:map id="serviceHolder" map-class="java.util.HashMap">
         <entry>
