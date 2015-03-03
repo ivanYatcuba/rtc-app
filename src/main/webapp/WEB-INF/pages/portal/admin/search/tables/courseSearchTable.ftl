@@ -53,7 +53,7 @@
 </div>
 <hr style="height: 1px; margin-top: 5px; border-top: 1px solid #ddd;">
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6" style="padding-top: 18px">
         <a  href="<@spring.url "/admin/course/create" />">
             <button class="btn btn-primary">Create New</button>
         </a>
