@@ -18,7 +18,7 @@ public final class AuthorizedUserProvider {
      */
     static public User getAuthorizedUser() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof AnonymousAuthenticationToken) {
+        if (authentication instanceof AnonymousAuthenticationToken || authentication == null) {
             return new User(ANONYMOUS, ANONYMOUS, ANONYMOUS, ANONYMOUS + "@" + ANONYMOUS + "." + ANONYMOUS, ANONYMOUS);
         } else {
             return (User) authentication.getPrincipal();
