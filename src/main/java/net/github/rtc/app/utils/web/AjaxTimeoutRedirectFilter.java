@@ -28,7 +28,6 @@ public class AjaxTimeoutRedirectFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
             chain.doFilter(request, response);
-            logger.debug("Chain processed normally");
         } catch (IOException ex) {
             throw ex;
         } catch (Exception ex) {
