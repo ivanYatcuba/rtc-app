@@ -37,7 +37,7 @@
 </div>
 <hr>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6" style="padding-top: 18px">
         <form  class="inline-box" style="margin: 0px"  name="createNews" action="<@spring.url"/admin/export/create"/>"method="get">
             <button  class="btn btn-primary" type="submit">Create New</button>
         </form>
