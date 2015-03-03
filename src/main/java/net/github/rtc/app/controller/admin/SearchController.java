@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
@@ -73,21 +74,21 @@ public class SearchController {
     @Autowired
     private LogService logService;
 
+
+
     @RequestMapping(value = "/search/{menuItem}", method = RequestMethod.GET)
-    public ModelAndView searchPageWithParam(@PathVariable(MENU_ITEM) final String menuItem) {
+    public String searchPageWithParam(@PathVariable(MENU_ITEM) final String menuItem, RedirectAttributes redirectAttributes) {
          if (!EnumHelper.containsValue(MenuItems.class, menuItem)) {
              throw new ResourceNotFoundException();
          }
-        final ModelAndView mav = new ModelAndView("redirect:" + "/admin/search");
-        mav.addObject(MENU_ITEM, menuItem);
-        return mav;
+        redirectAttributes.addFlashAttribute(MENU_ITEM, menuItem);
+        return "redirect:" + "/admin/search";
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public ModelAndView searchPage(@RequestParam(value = MENU_ITEM, required = false) String menuItem) {
-        final ModelAndView mav = new ModelAndView(ROOT + "/search/searchPage");
-        mav.addObject(MENU_ITEM, menuItem);
-        return mav;
+    public String searchPage(@RequestParam(value = MENU_ITEM, required = false) String menuItem, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute(MENU_ITEM, menuItem);
+        return ROOT + "/search/searchPage";
     }
 
     @RequestMapping(value = "/activityTable", method = RequestMethod.POST)
