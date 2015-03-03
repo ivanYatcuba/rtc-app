@@ -1,6 +1,8 @@
 package net.github.rtc.app.controller.admin;
 
 import net.github.rtc.app.model.dto.filter.SearchFilter;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Component;
  * @see net.github.rtc.app.controller.admin.SearchController
  */
 @Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class LastSearchCommand {
 
     private SearchFilter searchFilter;
