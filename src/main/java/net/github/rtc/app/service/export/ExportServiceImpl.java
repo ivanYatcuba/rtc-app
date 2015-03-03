@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -92,8 +93,35 @@ public class ExportServiceImpl extends AbstractGenericServiceImpl<ExportDetails>
     @Override
     public File getExport(ExportDetails details) {
         final ExportDetails exportDetails = findByCode(details.getCode());
-        final String filePath = new StringBuilder(exportPath).append("/").append(details.getCode()).append(DOT).
-                append(exportDetails.getExportFormat().toString().toLowerCase()).toString();
+        final String filePath = exportPath + "/" + details.getCode() + DOT
+                + exportDetails.getExportFormat().toString().toLowerCase();
         return new File(filePath);
+    }
+
+    // Need to move to some util class?
+    @Override
+    public String getCorrectlyEncodedNameFile(ExportDetails export, String agent) {
+        final String encodeIE = "windows-1251";
+        final String encodeOther = "utf-8";
+        final int twiceNotIncluded = -2;
+        final String agentLower = agent.toLowerCase();
+        final boolean isInternetExplorer = (agentLower.indexOf("msie") + agentLower.indexOf("trident") > twiceNotIncluded);
+
+        final StringBuilder correctlyName = new StringBuilder();
+        try {
+            final int mask = 0xff;
+            final byte[] fileNameBytes = export.getName().getBytes((isInternetExplorer) ? encodeIE : encodeOther);
+            for (byte b : fileNameBytes) {
+                correctlyName.append((char) (b & mask));
+            }
+
+        } catch (UnsupportedEncodingException e) {
+
+            log.info("unsupported encoding: " + (isInternetExplorer ? encodeIE : encodeOther));
+            correctlyName.append(export.getName());
+
+        }
+
+        return correctlyName.toString() + DOT + export.getExportFormat().toString().toLowerCase();
     }
 }

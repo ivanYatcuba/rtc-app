@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.file.Files;
@@ -92,19 +93,27 @@ public class ExportController implements MenuItem {
 
     @RequestMapping(value = "/download/{exportCode}", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
-    public void downloadUserExport(@PathVariable final String exportCode,  final HttpServletResponse response) {
+    public void downloadUserExport(@PathVariable final String exportCode, final HttpServletRequest request, final HttpServletResponse response) {
         final ExportDetails exportDetails = exportService.findByCode(exportCode);
         final File downloadFile = exportService.getExport(exportDetails);
-        response.setHeader(HEADER_KEY, String.format("attachment; " + "filename=\"%s\"", exportDetails.getName()));
+        final String agent = request.getHeader("User-Agent");
+        final String correctName = exportService.getCorrectlyEncodedNameFile(exportDetails, agent);
+
+        response.setHeader(HEADER_KEY, String.format("attachment; " + "filename=\"%s\"", correctName));
+
         try (final InputStream is = new FileInputStream(downloadFile)) {
+
             response.setContentType(Files.probeContentType(downloadFile.toPath()));
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
+
         } catch (IOException ex) {
             log.info("Error writing file to output stream. Filename was '{}'", exportCode, ex);
             throw new RuntimeException("IOError writing file to output stream");
         }
     }
+
+
 
     @ModelAttribute(EXPORT)
     public ExportDetails getCommandObject() {
