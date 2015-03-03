@@ -2,15 +2,15 @@ package net.github.rtc.app.service.builder;
 
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.course.CourseType;
+import net.github.rtc.app.model.entity.course.Tag;
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.security.AuthorizedUserProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import java.util.HashMap;
-import java.util.Date;
-import java.util.Map;
+
+import java.util.*;
 
 /**
  * Object that helps to build news from course
@@ -52,6 +52,15 @@ public class NewsBuilder {
         news.setDescription(getCourseDescription(course));
         news.setAuthor(author);
         news.setCreateDate(creationDate);
+
+        if (course.getTags() != null) {
+            final List<Tag> newsTags = new ArrayList<>();
+            for (Tag tag : course.getTags()) {
+                newsTags.add(tag);
+            }
+            news.setTags(newsTags);
+        }
+
         return news;
     }
 
