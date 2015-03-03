@@ -9,4 +9,6 @@ public interface ExportService extends GenericService<ExportDetails> {
     ExportDetails compileExport(ExportDetails export);
 
     File getExport(ExportDetails details);
+
+    String getCorrectlyEncodedNameFile(ExportDetails export, String agent);
 }
