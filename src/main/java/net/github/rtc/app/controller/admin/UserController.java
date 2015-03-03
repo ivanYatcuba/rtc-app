@@ -46,6 +46,8 @@ public class UserController implements MenuItem {
     private ValidationContext validationContext;
     @Autowired
     private UserService userService;
+    @Autowired
+    private LastSearchCommand lastSearchCommand;
 
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public ModelAndView createUser() {
@@ -59,6 +61,7 @@ public class UserController implements MenuItem {
                        @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
                        @RequestParam(required = false) final boolean isActive) {
         userService.create(user, img, isActive);
+        lastSearchCommand.dropFilter();
         return REDIRECT_USER_PAGE + user.getCode();
     }
 
@@ -82,6 +85,7 @@ public class UserController implements MenuItem {
                          @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
                          @RequestParam(required = false) final boolean isActive) {
         userService.update(user, img, isActive);
+        lastSearchCommand.dropFilter();
         return REDIRECT_USER_PAGE + user.getCode();
     }
 

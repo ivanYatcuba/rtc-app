@@ -46,6 +46,8 @@ public class SearchControllerTest {
     private ExportService exportService;
     @Mock
     private ActivityService activityService;
+    @Mock
+    private LastSearchCommand lastSearchCommand;
     @InjectMocks
     private SearchController searchController;
     private MockMvc mockMvc;
@@ -71,6 +73,7 @@ public class SearchControllerTest {
         results.getPageModel().setTotalResults(10);
         results.setResults(new ArrayList<Activity>());
         when(activityService.search(isA(ActivitySearchFilter.class))).thenReturn(results);
+        when(lastSearchCommand.getSearchFilter(ActivitySearchFilter.class)).thenReturn(new ActivitySearchFilter());
         mockMvc.perform(post("/admin/activityTable").sessionAttr("activityFilter", searchFilter))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("activities"));

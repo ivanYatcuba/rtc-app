@@ -73,6 +73,8 @@ public class SearchController {
     private ActivityService activityService;
     @Autowired
     private LogService logService;
+    @Autowired
+    private LastSearchCommand lastSearchCommand;
 
 
 
@@ -99,6 +101,7 @@ public class SearchController {
         final SearchResults<Activity> results = activityService.search(activityFilter);
         mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(ACTIVITIES, results.getResults());
+        lastSearchCommand.setLastFilter(activityFilter);
         return mav;
     }
 
@@ -110,6 +113,7 @@ public class SearchController {
         final SearchResults<News> results = newsService.search(newsFilter);
         mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(NEWS, results.getResults());
+        lastSearchCommand.setLastFilter(newsFilter);
         return mav;
     }
 
@@ -124,6 +128,7 @@ public class SearchController {
         mav.addObject(TYPES, EnumHelper.findAll(CourseType.class));
         mav.addObject(COURSE_STATUSES, getCourseStatuses());
         mav.addObject(COURSE_FILTER, courseFilter);
+        lastSearchCommand.setLastFilter(courseFilter);
         return mav;
     }
 
@@ -135,6 +140,7 @@ public class SearchController {
         final SearchResults<User> results = userService.search(userFilter);
         mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(USERS, results.getResults());
+        lastSearchCommand.setLastFilter(userFilter);
         return mav;
     }
 
@@ -146,6 +152,7 @@ public class SearchController {
         final SearchResults<ExportDetails> results = exportService.search(exportFilter);
         mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(EXPORTS, results.getResults());
+        lastSearchCommand.setLastFilter(exportFilter);
         return mav;
     }
 
@@ -155,37 +162,38 @@ public class SearchController {
     ModelAndView getLogsTable(@ModelAttribute(LOGS_FILTER) final LogsSearchFilter logsFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + SEARCH_PAGE + "/logsSearchTable");
         mav.addAllObjects(logService.search(logsFilter));
+        lastSearchCommand.setLastFilter(logsFilter);
         return mav;
     }
 
     @ModelAttribute(ACTIVITY_FILTER)
     public ActivitySearchFilter getActivitySearchFilter() {
-        return  new ActivitySearchFilter();
+        return (ActivitySearchFilter) lastSearchCommand.getSearchFilter(ActivitySearchFilter.class);
     }
 
     @ModelAttribute(NEWS_FILTER)
     public NewsSearchFilter getNewsSearchFilter() {
-        return new NewsSearchFilter();
+        return (NewsSearchFilter) lastSearchCommand.getSearchFilter(NewsSearchFilter.class);
     }
 
     @ModelAttribute(COURSE_FILTER)
     public CourseSearchFilter getCourseSearchFilter() {
-        return new CourseSearchFilter();
+        return (CourseSearchFilter) lastSearchCommand.getSearchFilter(CourseSearchFilter.class);
     }
 
     @ModelAttribute(USER_FILTER)
     public UserSearchFilter getUserSearchFilter() {
-        return new UserSearchFilter();
+        return (UserSearchFilter) lastSearchCommand.getSearchFilter(UserSearchFilter.class);
     }
 
     @ModelAttribute(EXPORT_FILTER)
     public ExportSearchFilter getReportSearchFilter() {
-        return new ExportSearchFilter();
+        return (ExportSearchFilter) lastSearchCommand.getSearchFilter(ExportSearchFilter.class);
     }
 
     @ModelAttribute(LOGS_FILTER)
     public LogsSearchFilter getLogsSearchFilter() {
-        return new LogsSearchFilter();
+        return (LogsSearchFilter) lastSearchCommand.getSearchFilter(LogsSearchFilter.class);
     }
 
     @ModelAttribute(NEWS_STATUSES)
@@ -251,6 +259,11 @@ public class SearchController {
     @ModelAttribute("currentUser")
     public User getCurrentUser() {
         return AuthorizedUserProvider.getAuthorizedUser();
+    }
+
+    @ModelAttribute("initPage")
+    public Integer getLastPage() {
+        return lastSearchCommand.getLastPage();
     }
 
 }

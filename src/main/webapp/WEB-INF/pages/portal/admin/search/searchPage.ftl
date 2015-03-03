@@ -45,6 +45,11 @@
         searchPage.doSearch();
 
     });
+
+    function init(id) {
+        searchPage.showFilterForm(id);
+        searchPage.doChangePage(${initPage});
+    }
     $("#reset").on("click", function () {
                 searchPage.doReset();
                 searchPage.doSearch();
@@ -66,7 +71,7 @@
 
     $( document ).ready(function() {
         $('.active').each(function(i, obj) {
-                obj.click();
+            init(obj.id)
         });
     });
     function ajaxSessionTimeout()

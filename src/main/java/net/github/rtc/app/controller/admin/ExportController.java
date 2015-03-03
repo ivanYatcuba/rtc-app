@@ -44,6 +44,8 @@ public class ExportController implements MenuItem {
     private ExportService exportService;
     @Autowired
     private ValidationContext validationContext;
+    @Autowired
+    private LastSearchCommand lastSearchCommand;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView openCreatePage() {
@@ -55,6 +57,7 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/insertExport", method = RequestMethod.POST)
     public String createExport(@ModelAttribute("export") final ExportDetails export) {
         exportService.create(export);
+        lastSearchCommand.dropFilter();
         return REDIRECT_EXPORT + export.getCode();
     }
 
@@ -76,6 +79,7 @@ public class ExportController implements MenuItem {
     @RequestMapping(value = "/updateExport", method = RequestMethod.POST)
     public String editExport(@ModelAttribute("export") final ExportDetails export) {
         exportService.update(export);
+        lastSearchCommand.dropFilter();
         return REDIRECT_EXPORT + export.getCode();
     }
 

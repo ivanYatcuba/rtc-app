@@ -48,6 +48,8 @@ public class CourseController implements MenuItem {
     private UserService userService;
     @Autowired
     private ValidationContext validationContext;
+    @Autowired
+    private LastSearchCommand lastSearchCommand;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
@@ -61,6 +63,7 @@ public class CourseController implements MenuItem {
                        @RequestParam(required = false) final boolean published,
                        @RequestParam(required = false) final boolean newsCreated) {
         courseService.create(course, published, newsCreated);
+        lastSearchCommand.dropFilter();
         return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + newsCreated;
     }
 
@@ -86,6 +89,7 @@ public class CourseController implements MenuItem {
                          @RequestParam(required = false) final boolean published,
                          @RequestParam(required = false) final boolean newsCreated) {
         courseService.update(course, published, newsCreated);
+        lastSearchCommand.dropFilter();
         return REDIRECT + VIEW + course.getCode() + NEWS_CREATED + newsCreated;
     }
 

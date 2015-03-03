@@ -1,9 +1,7 @@
 package net.github.rtc.app.model.dto.filter;
 
-import org.hibernate.criterion.DetachedCriteria;
-
 public interface SearchFilter {
-    DetachedCriteria getCriteria();
     int getPage();
+    void setPage(int page);
     int getPerPage();
 }

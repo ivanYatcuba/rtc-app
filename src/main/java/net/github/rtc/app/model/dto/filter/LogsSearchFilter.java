@@ -9,7 +9,7 @@ import java.util.Date;
  */
 
 @Component
-public class LogsSearchFilter {
+public class LogsSearchFilter implements SearchFilter {
     private static final int PAGE_OFFSET = 1;
     private static final int MAX_OFFSET = 3;
     private static final int NUMBER_OF_ENTITIES_PER_PAGE = 5;

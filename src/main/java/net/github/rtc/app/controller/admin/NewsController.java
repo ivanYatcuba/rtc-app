@@ -34,6 +34,8 @@ public class NewsController implements MenuItem {
     private NewsService newsService;
     @Autowired
     private ValidationContext validationContext;
+    @Autowired
+    private LastSearchCommand lastSearchCommand;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
@@ -46,6 +48,7 @@ public class NewsController implements MenuItem {
     public String save(@ModelAttribute(NEWS) final News news,
                        @RequestParam(required = false) final boolean publish) {
         newsService.create(news, publish);
+        lastSearchCommand.dropFilter();
         return REDIRECT_VIEW + news.getCode();
     }
 
@@ -68,6 +71,7 @@ public class NewsController implements MenuItem {
     public String update(@ModelAttribute(NEWS) final News news,
                          @RequestParam(required = false) final boolean publish) {
         newsService.update(news, publish);
+        lastSearchCommand.dropFilter();
         return REDIRECT_VIEW + news.getCode();
     }
 
