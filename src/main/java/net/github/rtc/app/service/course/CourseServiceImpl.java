@@ -144,7 +144,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
      */
     private boolean isUserAssignedForCourse(String courseCode) {
         final String userCode = AuthorizedUserProvider.getAuthorizedUser().getCode();
-        return orderService.getUserCourseOrder(userCode, courseCode) != null;
+        return orderService.findByUserCodeAndCourseCode(userCode, courseCode) != null;
     }
 
     /**

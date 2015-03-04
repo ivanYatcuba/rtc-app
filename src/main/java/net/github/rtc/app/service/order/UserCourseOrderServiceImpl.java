@@ -43,7 +43,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
     private MessageService messageService;
 
     @Override
-    public SearchResults<ExpertOrderDto> searchOrderForExpert(OrderSearchFilter searchFilter) {
+    public SearchResults<ExpertOrderDto> searchExpertOrders(OrderSearchFilter searchFilter) {
         final SearchResultsBuilder<UserCourseOrder, ExpertOrderDto> resultsBuilder = new SearchResultsBuilder<>();
         return resultsBuilder.setSearchResultsToTransform(search(searchFilter)).
             setSearchResultsMapper(getOrderToExpertOrderMapper()).build();
@@ -65,7 +65,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
 
     @Override
     @Transactional
-    public UserCourseOrder declineOrder(String orderCode, String reason) {
+    public UserCourseOrder rejectOrder(String orderCode, String reason) {
         final UserCourseOrder order = findByCode(orderCode);
         order.setRejectReason(reason);
         changeOrderStatus(order, UserRequestStatus.REJECTED);
@@ -103,7 +103,7 @@ public class UserCourseOrderServiceImpl extends AbstractGenericServiceImpl<UserC
 
     @Override
     @Transactional
-    public UserCourseOrder getUserCourseOrder(String userCode, String courseCode) {
+    public UserCourseOrder findByUserCodeAndCourseCode(String userCode, String courseCode) {
         return userCourseOrderDao.getUserCourseOrder(userCode, courseCode);
     }
 
