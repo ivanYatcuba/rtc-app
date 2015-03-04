@@ -97,8 +97,9 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
     /**
      * Register user means set status ACTIVE set role USER set register date as current and persist to db
      * @param user user that needs to be registered
+     * @param img user avatar
      */
-    void registerUser(User user);
+    void registerUser(User user, MultipartFile img);
 
     /**
      * Return true if user with current email exists

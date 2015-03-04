@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +31,7 @@ public class ProfileController implements MenuItem {
     private static final String USER = "user";
     private static final String REDIRECT = "redirect:/";
     private static final String VALIDATION_RULES = "validationRules";
+    private static final boolean IS_ACTIVE = true;
     @Autowired
     private UserService userService;
     @Autowired
@@ -65,11 +67,11 @@ public class ProfileController implements MenuItem {
      * @param user course object
      * @return if all is OK the redirect to view user details
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView update(
-      @ModelAttribute(USER) final User user) {
+    @RequestMapping(value = "/update", headers = "content-type=multipart/*", method = RequestMethod.POST)
+    public ModelAndView update(@ModelAttribute(USER) final User user,
+                               @RequestParam(value = "uploadPhoto", required = false) MultipartFile img) {
         user.setAuthorities(Arrays.asList(userService.getRoleByType(RoleType.ROLE_USER)));
-        userService.update(user);
+        userService.update(user, img, IS_ACTIVE);
         final Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         authenticationManager.authenticate(request);
         SecurityContextHolder.getContext().setAuthentication(request);

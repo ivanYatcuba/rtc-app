@@ -8,14 +8,11 @@
 </head>
 
 <body>
-    <div id="header" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <#include "header.ftl" />
-    </div>
-    <div class="container-fluid" style="margin-bottom: 60px">
-        <div class="row-fluid">
-                <div id="content" class="main">
-                    <#nested>
-                </div>
+    <div class="container" style="margin-bottom: 60px">
+        <div class="row col-md-offset-1">
+            <div class="center-block">
+                <#nested>
+            </div>
         </div>
     </div>
     <div id="footer" class="container">

@@ -170,11 +170,11 @@ public class UserServiceImpl extends AbstractCrudEventsService<User> implements 
     }
 
     @Override
-    public void registerUser(User user) {
+    public void registerUser(User user, MultipartFile img) {
         user.setStatus(UserStatus.ACTIVE);
         user.setAuthorities(Arrays.asList(getRoleByType(RoleType.ROLE_USER)));
         user.setRegisterDate(dateService.getCurrentDate());
-        create(user);
+        create(user, img, true);
 
         final SimpleMailMessage msg = mailMessageBuilder.build(user);
         mailService.sendMail(msg);

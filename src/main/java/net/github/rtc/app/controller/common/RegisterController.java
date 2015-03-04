@@ -1,22 +1,24 @@
 package net.github.rtc.app.controller.common;
 
+import net.github.rtc.app.model.entity.user.EnglishLevel;
 import net.github.rtc.app.model.entity.user.User;
 import net.github.rtc.app.service.user.UserService;
+import net.github.rtc.app.utils.enums.EnumHelper;
 import net.github.rtc.app.utils.propertyeditors.CustomTypeEditor;
 import net.github.rtc.util.converter.ValidationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/register")
@@ -26,6 +28,7 @@ public class RegisterController {
     private static final String REDIRECT_LOGIN = "redirect:/login/";
     private static final String VALIDATION_RULES = "validationRules";
     private static final String VIEW_NAME = "register/register";
+    private static final String ENGLISH = "english";
 
     @Autowired
     private ValidationContext validationContext;
@@ -39,10 +42,12 @@ public class RegisterController {
         return mav;
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute(USER) final User user) {
-        userService.registerUser(user);
-        return new ModelAndView(REDIRECT_LOGIN);
+    @RequestMapping(value = "/save", headers = "content-type=multipart/*", method = RequestMethod.POST)
+    public String save(@ModelAttribute(USER) final User user,
+                       @RequestParam(value = "uploadPhoto", required = false) MultipartFile img,
+                       RedirectAttributes redirectAttributes) {
+        userService.registerUser(user, img);
+        return REDIRECT_LOGIN;
     }
 
     @ModelAttribute(USER)
@@ -55,5 +60,10 @@ public class RegisterController {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(Collection.class, new CustomTypeEditor());
+    }
+
+    @ModelAttribute(ENGLISH)
+    public List<EnglishLevel> getEnglish() {
+        return EnumHelper.findAll(EnglishLevel.class);
     }
 }
