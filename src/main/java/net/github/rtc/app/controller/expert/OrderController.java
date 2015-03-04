@@ -40,7 +40,7 @@ public class OrderController implements MenuItem {
     @RequestMapping(value = "/orderTable", method = RequestMethod.GET)
     public ModelAndView ordersTable(@ModelAttribute(ORDER_FILTER) OrderSearchFilter searchFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + "/orders/orderTable");
-        final SearchResults<ExpertOrderDto> searchResults = userCourseOrderService.searchOrderForExpert(searchFilter);
+        final SearchResults<ExpertOrderDto> searchResults = userCourseOrderService.searchExpertOrders(searchFilter);
         mav.addObject(ORDERS, searchResults.getResults());
         mav.addAllObjects(searchResults.getPageModel().getPageParams());
         return mav;
@@ -54,7 +54,7 @@ public class OrderController implements MenuItem {
 
     @RequestMapping(value = "/decline/{orderCode}", method = RequestMethod.GET)
     public String declineRequest(@PathVariable final String orderCode, @RequestParam final String reason) {
-        userCourseOrderService.declineOrder(orderCode, reason);
+        userCourseOrderService.rejectOrder(orderCode, reason);
         return REDIRECT_REQUESTS;
     }
 

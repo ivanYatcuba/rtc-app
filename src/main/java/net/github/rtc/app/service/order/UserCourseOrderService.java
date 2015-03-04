@@ -19,7 +19,7 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
      * @return Search result that contains  DTOs
      * @see net.github.rtc.app.model.dto.user.ExpertOrderDto
      */
-    SearchResults<ExpertOrderDto> searchOrderForExpert(OrderSearchFilter searchFilter);
+    SearchResults<ExpertOrderDto> searchExpertOrders(OrderSearchFilter searchFilter);
 
     /**
      * Get number of accepted orders for specified course
@@ -41,7 +41,7 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
      * @param reason the reason of rejection
      * @return updated order
      */
-    UserCourseOrder declineOrder(final String orderCode, final String reason);
+    UserCourseOrder rejectOrder(final String orderCode, final String reason);
 
     /**
      * Create order for course on specified position
@@ -57,5 +57,5 @@ public interface UserCourseOrderService extends GenericService<UserCourseOrder> 
      * @param courseCode course code for order
      * @return order with mentioned params
      */
-    UserCourseOrder getUserCourseOrder(String userCode, String courseCode);
+    UserCourseOrder findByUserCodeAndCourseCode(String userCode, String courseCode);
 }
