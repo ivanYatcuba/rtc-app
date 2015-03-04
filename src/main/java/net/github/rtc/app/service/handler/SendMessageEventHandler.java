@@ -10,14 +10,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Class that listen to messages events and handles them
+ * @see net.github.rtc.app.model.event.OrderMessageEvent
+ */
 @Component
 public class SendMessageEventHandler implements ApplicationListener<OrderMessageEvent> {
 
     @Autowired
     private MessageService messageService;
 
+    /**
+     * Catch OrderMessageEvent and persist messages in it to db
+     * @param sendMessageEvent message that was published
+     */
     @Override
-    @Transactional
     public void onApplicationEvent(OrderMessageEvent sendMessageEvent) {
         final List<Message> msgList = sendMessageEvent.getMessages();
         for (Message message: msgList) {

@@ -10,11 +10,17 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Job that updates export files on server every 15 minutes
+ */
 @Component
 public class ExportJob {
     @Autowired
     private ExportService exportService;
 
+    /**
+     * Updating export files every 15 minutes according to changes in db
+     */
     @Scheduled(cron = "0 0/15 * * * ?")
     public void reportUpdate() {
         final List<ExportDetails> myList = exportService.findAll();
