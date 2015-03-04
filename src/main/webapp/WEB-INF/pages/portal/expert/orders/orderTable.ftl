@@ -17,11 +17,7 @@
     <#list orders as order>
         <tr style="vertical-align: middle">
             <td style="vertical-align: middle; width: 25%">
-                <#if order.userPhoto??>
-                    <img id="img" src="<@spring.url '/image/${order.userPhoto}'/>"  class="avatar"/>
-                <#else>
-                    <img id="img" src = "<@spring.url '/resources/images/errorCat.jpg'/>"  class="avatar">
-                </#if>
+                <@formMacro.userImage "${(order.userPhoto)!}" "" "profileImg" />
                 <a style="text-decoration: underline;" href="<@spring.url "/user/expert/order/user/${order.userCode}"/>">  ${order.userName} </a>
             </td>
             <td style="vertical-align: middle">

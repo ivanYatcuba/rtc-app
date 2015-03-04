@@ -463,7 +463,7 @@
     <#if imageId?has_content>
         <img id="${id}" src="<@spring.url '/image/${imageId}'/>"  class="${class}" alt="${alt}"/>
     <#else>
-        <img id="${id}" src="<@spring.url'/resources/images/errorCat.jpg'/>"  class="${class}" alt="${alt}"/>
+        <img id="${id}" src="<@spring.url'/resources/images/user/annonimous.png'/>"  class="${class}" alt="${alt}"/>
     </#if>
 </#macro>
 
