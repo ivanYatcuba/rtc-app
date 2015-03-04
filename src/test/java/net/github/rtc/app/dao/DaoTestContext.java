@@ -24,8 +24,6 @@ public class DaoTestContext implements InitializingBean {
     private Map<Class, EqualityChecker> equalityChecker;
     protected final CodeGenerationService codeGenerationService = new CodeGenerationServiceImpl();
 
-    @Autowired
-    private DateService dateService;
 
     public ModelBuilder getModelBuilder(Class aClass) {
         return modelBuilder.get(aClass);
@@ -41,6 +39,11 @@ public class DaoTestContext implements InitializingBean {
         initModelBuilder();
     }
 
+    public DaoTestContext() {
+        initModelBuilder();
+        initEqualityChecker();
+    }
+
     private void initModelBuilder() {
         modelBuilder = new HashMap<>();
         modelBuilder.put(Course.class,  new ModelBuilder<Course>() {
@@ -50,8 +53,8 @@ public class DaoTestContext implements InitializingBean {
                 course.setName("Test Course");
                 course.setCapacity(1);
                 course.setTypes(new HashSet<>(Arrays.asList(CourseType.BA, CourseType.QA)));
-                course.setEndDate(dateService.getCurrentDate());
-                course.setStartDate(dateService.getCurrentDate());
+                course.setEndDate(getCurrentDate());
+                course.setStartDate(getCurrentDate());
                 course.setCode(codeGenerationService.generate());
                 return course;
             }
@@ -66,11 +69,11 @@ public class DaoTestContext implements InitializingBean {
                 user.setEmail("testMail@mail.com");
                 user.setNote("note");
                 user.setCode(codeGenerationService.generate());
-                user.setBirthDate(dateService.getCurrentDate());
+                user.setBirthDate(getCurrentDate());
                 user.setPhone("321312");
                 user.setEnglish(EnglishLevel.BASIC);
                 user.setPassword("1111");
-                user.setRegisterDate(dateService.getCurrentDate());
+                user.setRegisterDate(getCurrentDate());
                 return user;
             }
         });
@@ -126,4 +129,9 @@ public class DaoTestContext implements InitializingBean {
                 assertEquals(courseOrderSample.getUserCode(), courseOrderAnother.getUserCode());
             }});
     }
+
+    private Date getCurrentDate() {
+        return new Date(0);
+    }
+
 }

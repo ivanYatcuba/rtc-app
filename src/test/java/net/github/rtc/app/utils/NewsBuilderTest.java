@@ -49,7 +49,6 @@ public class NewsBuilderTest {
 
     @Before
     public void prepareUsersList(){
-        MockitoAnnotations.initMocks(this);
         Authentication auth = new UsernamePasswordAuthenticationToken(new User(), null);
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
