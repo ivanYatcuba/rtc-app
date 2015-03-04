@@ -33,9 +33,9 @@ public class NewsServiceImpl extends AbstractCrudEventsService<News> implements 
 
     @Override
     public void create(News news, boolean isPublished) {
-        setAuthorAndDate(news);
+        setAuthorAndDateAttributes(news);
         if (isPublished) {
-            setPublish(news);
+            setPublishedAttribute(news);
         }
         create(news);
     }
@@ -43,7 +43,7 @@ public class NewsServiceImpl extends AbstractCrudEventsService<News> implements 
     @Override
     public void update(News news, boolean isPublished) {
         if (isPublished) {
-            setPublish(news);
+            setPublishedAttribute(news);
         }
         update(news);
     }
@@ -51,7 +51,7 @@ public class NewsServiceImpl extends AbstractCrudEventsService<News> implements 
     @Override
     public void publish(String newsCode) {
         final News news = findByCode(newsCode);
-        setPublish(news);
+        setPublishedAttribute(news);
         update(news);
     }
 
@@ -69,7 +69,7 @@ public class NewsServiceImpl extends AbstractCrudEventsService<News> implements 
      * Set news status as PUBLISHED and set publish date as current
      * @param news news that will be updated
      */
-    private void setPublish(News news) {
+    private void setPublishedAttribute(News news) {
         news.setStatus(NewsStatus.PUBLISHED);
         news.setPublishDate(dateService.getCurrentDate());
     }
@@ -83,7 +83,7 @@ public class NewsServiceImpl extends AbstractCrudEventsService<News> implements 
      * Set news creation date as current and set author as current logged user
      * @param news news that will be updated
      */
-    private void setAuthorAndDate(News news) {
+    private void setAuthorAndDateAttributes(News news) {
         news.setCreateDate(dateService.getCurrentDate());
         news.setAuthor(AuthorizedUserProvider.getAuthorizedUser());
     }
