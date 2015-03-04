@@ -58,7 +58,7 @@ public class MessageServiceImpl  extends AbstractGenericServiceImpl<Message> imp
 
     @Override
     public int getUserUnreadMessageCount(String userCode) {
-        return messageDao.getUnreadMessageCont(userCode);
+        return messageDao.getUnreadMessageCount(userCode);
     }
 
     /**

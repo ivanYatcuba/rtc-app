@@ -113,9 +113,9 @@ public class UserServiceImpl extends AbstractCrudEventsService<User> implements 
 
     @Override
     @Transactional
-    public List<User> getUserByRole(final RoleType type) {
+    public List<User> findAllByRole(final RoleType type) {
         LOG.debug("Getting user list with type: {}", type);
-        return userDao.getUsersByType(type);
+        return userDao.findAllByType(type);
     }
 
     @Override
@@ -160,9 +160,9 @@ public class UserServiceImpl extends AbstractCrudEventsService<User> implements 
     }
 
     @Override
-    public Map<String, String> findUserNameCode(RoleType roleType) {
+    public Map<String, String> findAllUserNameAndCode(RoleType roleType) {
         final Map<String, String> results = new HashMap<>();
-        final List<User> users = getUserByRole(roleType);
+        final List<User> users = findAllByRole(roleType);
         for (final User user : users) {
             results.put(user.shortString(), user.getCode());
         }

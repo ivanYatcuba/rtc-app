@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public class MessageDaoImpl extends AbstractGenericDaoImpl<Message> implements MessageDao {
 
     @Override
-    public int getUnreadMessageCont(String userCode) {
+    public int getUnreadMessageCount(String userCode) {
         return ((Long) getCurrentSession().createCriteria(Message.class).
                 add(Restrictions.eq("receiverUserCode", userCode)).add(Restrictions.eq("isRead", false)).
                 setProjection(Projections.rowCount()).uniqueResult()).intValue();

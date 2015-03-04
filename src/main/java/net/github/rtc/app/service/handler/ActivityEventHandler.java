@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class that listen to activity events and handles them
+ * @see net.github.rtc.app.model.event.ActivityEvent
+ */
 @Component
 public class ActivityEventHandler implements ApplicationListener<ActivityEvent> {
 
@@ -18,6 +22,10 @@ public class ActivityEventHandler implements ApplicationListener<ActivityEvent> 
     @Autowired
     private DateService dateService;
 
+    /**
+     * Catch activity event and persist info abut it to db
+     * @param event activity that was published (new user created for example)
+     */
     @Override
     public void onApplicationEvent(ActivityEvent event) {
             final User user = AuthorizedUserProvider.getAuthorizedUser();

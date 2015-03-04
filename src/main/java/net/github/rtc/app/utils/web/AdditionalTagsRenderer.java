@@ -7,11 +7,17 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
- * Created by kgavrilchenko
+ * Render additional tags attributes in freemarker template
  */
-
 public class AdditionalTagsRenderer {
 
+    /**
+     * If model object has field with Length annotation add to input
+     * property maxlength with this annotation value
+     * @param br represents current rendering field or object status
+     * @param model map that contains page model objects
+     * @return rendered tag
+     */
     public String renderAdditionalTags(BindStatus br, Map<String, Object> model) {
         String attrs = "";
         final String beanName = br.getPath().substring(0, br.getPath().indexOf("."));

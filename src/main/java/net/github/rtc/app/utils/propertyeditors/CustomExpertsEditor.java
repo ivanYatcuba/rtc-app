@@ -9,6 +9,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Custom expert editor to set for example course.expert field by passing value as string
+ * @see net.github.rtc.app.model.entity.course.Course
+ * @see net.github.rtc.app.model.entity.user.User
+ */
 public class CustomExpertsEditor extends PropertyEditorSupport {
 
     private static final String COMMA = ",";

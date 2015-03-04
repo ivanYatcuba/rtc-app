@@ -79,7 +79,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
     }
 
     @Override
-    public SearchResults<UserCourseDto> searchCoursesForUser(CourseSearchFilter filter) {
+    public SearchResults<UserCourseDto> searchUserCourses(CourseSearchFilter filter) {
         final SearchResultsBuilder<Course, UserCourseDto> courseDtoSearchResultsBuilder = new SearchResultsBuilder<>();
         return courseDtoSearchResultsBuilder.setSearchResultsToTransform(search(filter)).
                 setSearchResultsMapper(getCourseToCourseDtoMapper()).build();
@@ -144,7 +144,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
      */
     private boolean isUserAssignedForCourse(String courseCode) {
         final String userCode = AuthorizedUserProvider.getAuthorizedUser().getCode();
-        return orderService.getUserCourseOrder(userCode, courseCode) != null;
+        return orderService.findByUserCodeAndCourseCode(userCode, courseCode) != null;
     }
 
     /**

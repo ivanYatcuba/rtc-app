@@ -3,6 +3,8 @@ package net.github.rtc.app.utils.web.files.upload;
 
 import net.github.rtc.app.exception.ServiceProcessingException;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,17 +13,25 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 
 /**
- * Created by Daria on 9.10.2014.
+ * Class that is responsible for uploading files to server
  */
-
 @Component
 public class FileUpload implements java.io.Serializable {
+
+    private static final Logger LOG = LoggerFactory.getLogger(FileUpload.class.getName());
+
 
     private static final String EXTENTION = ".jpg";
 
     @Value("${img.save.folder}")
     private String imgfold;
 
+    /**
+     * Save image to server
+     * @param filename with what name upload file to server
+     * @param image actually image file that needs to be uploaded
+     * @return string that represents filename with extension at server
+     */
     public String saveImage(String filename, MultipartFile image) {
         final String adr = filename + EXTENTION;
         try {
@@ -40,22 +50,18 @@ public class FileUpload implements java.io.Serializable {
         return adr;
     }
 
+    /**
+     * Create folder that must contain images on server if it's not exist
+     */
     @PostConstruct
     public void folderPhoto() {
         final File f = new File(imgfold);
         if (!f.exists()) {
             if (f.mkdir()) {
-                System.out.println("Directory is created");
+                LOG.info("Directory is created");
             } else {
-                System.out.println("Directory is not created");
+                LOG.info("Directory is not created");
             }
         }
-    }
-
-    public boolean deletePhoto(String code) throws Exception {
-        final String adr =  code + EXTENTION;
-
-        final File file = new File(imgfold + adr);
-        return file.exists() && file.delete();
     }
 }

@@ -12,7 +12,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by denis on 20.10.14.
+ * Custom tags editor for tag collection to render it as string
+ * and set it by passing as string
  */
 public class CustomRoleEditor extends PropertyEditorSupport {
 

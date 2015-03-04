@@ -125,7 +125,7 @@ public class CourseController implements MenuItem {
     @ModelAttribute(EXPERTS)
     public Map<String, String> getExpertUsers() {
         final Map<String, String> expertMap = new HashMap<>();
-        for (User u : userService.getUserByRole(RoleType.ROLE_EXPERT)) {
+        for (User u : userService.findAllByRole(RoleType.ROLE_EXPERT)) {
             expertMap.put(u.getCode(), u.getSurnameName());
         }
         return expertMap;

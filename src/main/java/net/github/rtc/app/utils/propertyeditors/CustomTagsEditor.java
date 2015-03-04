@@ -9,9 +9,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Custom tags editor for tag collection
- *
- * @author Vladislav Pikus
+ * Custom tags editor for tag collection to render it as string
+ * or set it by passing as string
  */
 public class CustomTagsEditor extends PropertyEditorSupport {
 

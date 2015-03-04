@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class that creates register notification message
+ */
 @Component
 public class MailMessageBuilder {
 
@@ -20,10 +23,21 @@ public class MailMessageBuilder {
     @Autowired
     private TemplateStringBuilder templateStringBuilder;
 
+    /**
+     * Build mail register notification based on User object
+     * @param user user that needs register notification
+     * @return built SimpleMailMessage
+     */
     public SimpleMailMessage build(User user) {
         return build(user.getName(), user.getEmail());
     }
 
+    /**
+     * Create mail register notification based on user name and email
+     * @param name name of the receiver user
+     * @param mail email address of the receiver
+     * @return built SimpleMailMessage
+     */
     public SimpleMailMessage build(String name, String mail) {
 
         final Map<String, Object> templateParam = new HashMap<>();
@@ -31,7 +45,7 @@ public class MailMessageBuilder {
         templateParam.put("link", LINK);
 
         String text = templateStringBuilder.build(TEMPLATE_PATH, templateParam);
-        if (text == templateStringBuilder.UNKNOWN_VALUE) {
+        if (text.equals(templateStringBuilder.UNKNOWN_VALUE)) {
             text = "Welcome," + name + "! ";
         }
 
