@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 
+/**
+ * Custom template loader to prevent XSS attacks
+ */
 public class HtmlTemplateLoader implements TemplateLoader {
 
     public static final String ESCAPE_PREFIX = "<#ftl strip_whitespace=true><#escape x as x?html>";
@@ -28,9 +31,15 @@ public class HtmlTemplateLoader implements TemplateLoader {
         return delegate.getLastModified(templateSource);
     }
 
+    /**
+     * Wrap freemarker template content in ESCAPE_PREFIX and ESCAPE_SUFFIX  to prevent XSS attack
+     * @param templateSource template that needs to be wrapped
+     * @param encoding what encoding is used in source file
+     * @return character stream which contains template data that is not sensitive to XSS
+     * @throws IOException if templateSource reading error
+     */
     @Override
-    public Reader getReader(
-      final Object templateSource, final String encoding) throws IOException {
+    public Reader getReader(final Object templateSource, final String encoding) throws IOException {
         final Reader reader = delegate.getReader(templateSource, encoding);
         try {
             final String templateText = IOUtils.toString(reader);
@@ -45,8 +54,7 @@ public class HtmlTemplateLoader implements TemplateLoader {
     }
 
     @Override
-    public void closeTemplateSource(final Object templateSource) throws
-      IOException {
+    public void closeTemplateSource(final Object templateSource) throws IOException {
         delegate.closeTemplateSource(templateSource);
     }
 }

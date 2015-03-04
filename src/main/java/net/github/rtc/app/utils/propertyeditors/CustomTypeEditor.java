@@ -4,9 +4,8 @@ import java.beans.PropertyEditorSupport;
 import java.util.*;
 
 /**
- * Custom tags editor for tag collection
- *
- * @author Vladislav Pikus
+ * Custom editor for collection to render it as string
+ * or set it by passing as string
  */
 public class CustomTypeEditor extends PropertyEditorSupport {
 

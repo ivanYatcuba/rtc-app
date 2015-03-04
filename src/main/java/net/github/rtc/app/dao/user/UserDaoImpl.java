@@ -17,8 +17,6 @@ import java.util.List;
 public class UserDaoImpl extends AbstractGenericDaoImpl<User> implements UserDao {
 
     public static final String EMAIL_STRING = "email";
-    @Autowired
-    private FileUpload upload;
 
     @Override
     public User findByEmail(final String email) {
