@@ -4,10 +4,8 @@ import net.github.rtc.app.dao.generic.AbstractGenericDaoImpl;
 import net.github.rtc.app.model.entity.user.Role;
 import net.github.rtc.app.model.entity.user.RoleType;
 import net.github.rtc.app.model.entity.user.User;
-import net.github.rtc.app.utils.web.files.upload.FileUpload;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
