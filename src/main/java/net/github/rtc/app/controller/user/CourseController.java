@@ -59,7 +59,7 @@ public class CourseController implements MenuItem {
     @ResponseBody
     ModelAndView getCourseTable(@ModelAttribute("courseFilter") final CourseSearchFilter courseFilter) {
         final ModelAndView mav = new ModelAndView(ROOT + "/course/courseTable");
-        final SearchResults<UserCourseDto> results = courseService.searchCoursesForUser(courseFilter);
+        final SearchResults<UserCourseDto> results = courseService.searchUserCourses(courseFilter);
         mav.addAllObjects(results.getPageModel().getPageParams());
         mav.addObject(COURSES, results.getResults());
         mav.addObject(VALIDATION_RULES, validationContext.get(UserCourseOrder.class));

@@ -34,7 +34,7 @@ public interface CourseService extends ModelService<Course>, GenericService<Cour
      * @return search results for user view presented as DTO
      * @see net.github.rtc.app.model.dto.user.UserCourseDto
      */
-    SearchResults<UserCourseDto> searchCoursesForUser(CourseSearchFilter filter);
+    SearchResults<UserCourseDto> searchUserCourses(CourseSearchFilter filter);
 
     /**
      * Get a single course for user and present it as DTO
