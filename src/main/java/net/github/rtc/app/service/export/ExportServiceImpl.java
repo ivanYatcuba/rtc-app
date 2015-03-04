@@ -4,7 +4,6 @@ import net.github.rtc.app.dao.export.ExportDao;
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.model.entity.export.ExportDetails;
 import net.github.rtc.app.service.builder.ExportBuilder;
-import net.github.rtc.app.service.generic.CodeGenerationService;
 import net.github.rtc.app.service.generic.ModelService;
 import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.generic.AbstractGenericServiceImpl;
@@ -31,8 +30,6 @@ public class ExportServiceImpl extends AbstractGenericServiceImpl<ExportDetails>
     private ExportDao exportDao;
     @Autowired
     private DateService dateService;
-    @Autowired
-    private CodeGenerationService codeGenerationService;
     @Resource(name = "serviceHolder")
     private Map<Class, ? extends ModelService> serviceHolder;
     @Value("${export.path}")
@@ -47,7 +44,7 @@ public class ExportServiceImpl extends AbstractGenericServiceImpl<ExportDetails>
     @Transactional
     public ExportDetails create(final ExportDetails export) {
         log.info("Creating export: " + export);
-        export.setCode(codeGenerationService.generate());
+        export.setCode(getCode());
         export.setCreatedDate(dateService.getCurrentDate());
         try {
             compileExport(export);
