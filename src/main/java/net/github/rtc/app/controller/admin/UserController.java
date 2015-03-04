@@ -116,13 +116,13 @@ public class UserController implements MenuItem {
     @RequestMapping(value = "/getExperts", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, String> getExpertUsers() {
-        return userService.findUserNameCode(RoleType.ROLE_EXPERT);
+        return userService.findAllUserNameAndCode(RoleType.ROLE_EXPERT);
     }
 
     @RequestMapping(value = "/getAdmins", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, String> getAdminMapDataId() {
-        return userService.findUserNameCode(RoleType.ROLE_ADMIN);
+        return userService.findAllUserNameAndCode(RoleType.ROLE_ADMIN);
     }
 
     @InitBinder

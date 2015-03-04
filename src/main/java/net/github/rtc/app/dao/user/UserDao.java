@@ -46,5 +46,5 @@ public interface UserDao extends GenericDao<User> {
      * @param type of user role of what users must be found
      * @return list of users with specified role
      */
-    List<User> getUsersByType(RoleType type);
+    List<User> findAllByType(RoleType type);
 }

@@ -35,7 +35,7 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
      * @param type type of user role
      * @return list of users with specified authority
      */
-    List<User> getUserByRole(RoleType type);
+    List<User> findAllByRole(RoleType type);
 
     /**
      * Get user by username that is user's email
@@ -92,7 +92,7 @@ public interface UserService extends ModelService<User>, UserDetailsService, Gen
      * @param roleType user of what role will be put to map
      * @return resulting map
      */
-    Map<String, String> findUserNameCode(RoleType roleType);
+    Map<String, String> findAllUserNameAndCode(RoleType roleType);
 
     /**
      * Register user means set status ACTIVE set role USER set register date as current and persist to db
