@@ -474,3 +474,17 @@
     <span class="sr-only">Toggle Dropdown</span>
 </button>
 </#macro>
+
+<#macro courseImage types>
+<#if types?size gt 1 >
+    <img src="<@spring.url'/resources/images/course/Proj.png'/>"  alt="..." style="width: 242px;height: 200px"><br/>
+    <#else>
+        <#if types[0]=="QA">
+        <img src="<@spring.url'/resources/images/course/QA.png'/>"  alt="..." style="width: 242px;height: 200px"><br/>
+        <#elseif types[0]=="BA">
+        <img src="<@spring.url'/resources/images/course/BA.png'/>"  alt="..." style="width: 242px;height: 200px"><br/>
+        <#elseif types[0]=="DEV">
+        <img src="<@spring.url'/resources/images/course/Dev.png'/>"  alt="..." style="width: 242px;height: 200px"><br/>
+        </#if>
+    </#if>
+</#macro>

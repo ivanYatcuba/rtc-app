@@ -21,7 +21,7 @@
                     </#if>
                 </div>
             </div>
-            <img src="<@spring.url'/resources/images/profile.jpg'/>"  alt="..." style="width: 242px;height: 200px"><br/>
+            <@formMacro.courseImage course.types />
             <div style="width: 242px; min-height: 8em; height: 8em">
                     <p><span class="description">${course.description}</span><br/>
                         <a href="<@spring.url'/user/courses/courseDetails/${course.code}'/>">More >></a></p>
