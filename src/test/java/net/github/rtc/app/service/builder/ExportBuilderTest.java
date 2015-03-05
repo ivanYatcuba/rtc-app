@@ -2,6 +2,7 @@ package net.github.rtc.app.service.builder;
 
 import net.github.rtc.app.model.entity.export.ExportFormat;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
@@ -27,6 +28,7 @@ public class ExportBuilderTest {
         MockitoAnnotations.initMocks(this);
     }
 
+    @Ignore
     @Test
     public void testBuild() {
         List<Field> exportField = new ArrayList<>();
