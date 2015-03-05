@@ -7,7 +7,7 @@ import net.github.rtc.app.model.AbstractPersistenceObject;
 import net.github.rtc.app.model.course.Course;
 import net.github.rtc.app.model.report.ExportFormat;
 import net.github.rtc.app.model.report.ReportDetails;
-import net.github.rtc.app.service.AbstractGenericServiceTest;
+import net.github.rtc.app.service.generic.AbstractGenericServiceTest;
 import net.github.rtc.app.service.GenericService;
 import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
 import org.junit.Test;

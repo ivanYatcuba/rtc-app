@@ -32,20 +32,20 @@ public class NewsServiceImpl extends AbstractCrudEventsService<News> implements 
     }
 
     @Override
-    public void create(News news, boolean isPublished) {
+    public News create(News news, boolean isPublished) {
         setAuthorAndDateAttributes(news);
         if (isPublished) {
             setPublishedAttribute(news);
         }
-        create(news);
+        return create(news);
     }
 
     @Override
-    public void update(News news, boolean isPublished) {
+    public News update(News news, boolean isPublished) {
         if (isPublished) {
             setPublishedAttribute(news);
         }
-        update(news);
+        return update(news);
     }
 
     @Override
@@ -56,8 +56,8 @@ public class NewsServiceImpl extends AbstractCrudEventsService<News> implements 
     }
 
     @Override
-    public void create(Course course) {
-        create(newsBuilder.build(course));
+    public News create(Course course) {
+        return create(newsBuilder.build(course));
     }
 
     @Override

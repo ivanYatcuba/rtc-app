@@ -1,9 +1,12 @@
-/*package net.github.rtc.app.service;
-//todo
+package net.github.rtc.app.service.generic;
+
 import net.github.rtc.app.dao.generic.GenericDao;
-import net.github.rtc.app.model.AbstractPersistenceObject;
-import net.github.rtc.app.utils.datatable.search.AbstractSearchCommand;
+
 import net.github.rtc.app.model.dto.SearchResults;
+import net.github.rtc.app.model.dto.filter.AbstractSearchFilter;
+import net.github.rtc.app.model.entity.AbstractPersistenceObject;
+import net.github.rtc.app.service.generic.CodeGenerationService;
+import net.github.rtc.app.service.generic.GenericService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +22,7 @@ import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
-@ContextConfiguration(locations = "classpath:mvc-dao-test.xml")
+@ContextConfiguration(locations = "classpath:mvc-service-test.xml")
 public abstract class AbstractGenericServiceTest {
 
     public static final String CODE = "X";
@@ -35,7 +38,7 @@ public abstract class AbstractGenericServiceTest {
     protected abstract GenericDao<AbstractPersistenceObject> getGenericDao();
     protected abstract AbstractPersistenceObject getTestEntity();
 
-    protected abstract AbstractSearchCommand getSearchCommand();
+    protected abstract AbstractSearchFilter getSearchCommand();
 
     @Before
     public void setUp(){
@@ -56,7 +59,7 @@ public abstract class AbstractGenericServiceTest {
 
 
     @Test
-    public void deleteByCode() {
+    public void testDeleteByCode() {
        doAnswer(new Answer() {
             @Override
             public Object answer(final InvocationOnMock invocation) throws Throwable {
@@ -97,8 +100,8 @@ public abstract class AbstractGenericServiceTest {
     public void testSearch() {
         final SearchResults<AbstractPersistenceObject> results = new SearchResults();
         results.setResults(Arrays.asList(testEntity));
-        AbstractSearchCommand command =  getSearchCommand();
+        AbstractSearchFilter command =  getSearchCommand();
         when(genericDao.search(command)).thenReturn(results);
         assertEquals(results, genericService.search(command));
     }
-}*/
+}

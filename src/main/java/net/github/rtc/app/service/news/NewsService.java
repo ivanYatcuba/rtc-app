@@ -18,14 +18,14 @@ public interface NewsService extends GenericService<News> {
      * @param news the news that will be persisted to db
      * @param isPublished flag that determines if news needs to be published
      */
-    void create(News news, boolean isPublished);
+    News create(News news, boolean isPublished);
 
     /**
      * Update news and publish it if necessary
      * @param news the news that will be updated
      * @param isPublished flag that determines if news needs to be published
      */
-    void update(News news, boolean isPublished);
+    News update(News news, boolean isPublished);
 
     /**
      * Publish news and update it
@@ -37,7 +37,7 @@ public interface NewsService extends GenericService<News> {
      * Create news about the course
      * @param course the course about what news will be created
      */
-    void create(Course course);
+    News create(Course course);
 
     /**
      * Find all news by news status
