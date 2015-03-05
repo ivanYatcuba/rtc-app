@@ -1,6 +1,5 @@
 package net.github.rtc.app.service.course;
 
-import net.github.rtc.app.dao.DaoTestContext;
 import net.github.rtc.app.dao.course.CourseDao;
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.model.dto.SearchResults;
@@ -55,7 +54,6 @@ public class CourseServiceImplTest extends AbstractCrudEventsServiceTest {
     @InjectMocks
     private CourseServiceImpl courseService;
 
-    private DaoTestContext daoTestContext = new DaoTestContext();
 
     @Before
     public void mockDateService() {
@@ -64,7 +62,7 @@ public class CourseServiceImplTest extends AbstractCrudEventsServiceTest {
 
     @Test
     public void testCreate() {
-        Course testEntity = (Course) getTestEntity();;
+        Course testEntity = (Course) getTestEntity();
 
         doAnswer(new Answer() {
             @Override
@@ -99,7 +97,7 @@ public class CourseServiceImplTest extends AbstractCrudEventsServiceTest {
 
     @Test
     public void testUpdate(){
-        Course testEntity = (Course) getTestEntity();;
+        Course testEntity = (Course) getTestEntity();
 
         doAnswer(new Answer() {
             @Override
@@ -196,7 +194,7 @@ public class CourseServiceImplTest extends AbstractCrudEventsServiceTest {
     public void testGetUserCourseDtoByCode() throws Exception {
         final int orderCount = 10;
         final Course testEntity = (Course) getTestEntity();
-        Set experts = new HashSet<User>();
+        Set<User> experts = new HashSet<>();
         experts.add(new User());
         testEntity.setExperts(experts);
         when(orderService.getAcceptedOrdersCount(CODE)).thenReturn(orderCount);
@@ -213,12 +211,12 @@ public class CourseServiceImplTest extends AbstractCrudEventsServiceTest {
     public void testSearchUserCourses() throws Exception {
         final Course testEntity = (Course) getTestEntity();
 
-        final SearchResults<Course> courseList = new SearchResults();
+        final SearchResults<Course> courseList = new SearchResults<>();
         courseList.setResults(Arrays.asList(testEntity));
         when(courseDao.search(any(AbstractSearchFilter.class))).thenReturn(courseList);
 
         final int orderCount = 10;
-        Set experts = new HashSet<>();
+        Set<User> experts = new HashSet<>();
         experts.add(new User());
         testEntity.setExperts(experts);
 
@@ -228,7 +226,7 @@ public class CourseServiceImplTest extends AbstractCrudEventsServiceTest {
 
         final UserCourseDto courseDto = courseService.getUserCourseDtoByCode(CODE);
 
-        final SearchResults<UserCourseDto> results = new SearchResults();
+        final SearchResults<UserCourseDto> results = new SearchResults<>();
         results.setResults(Arrays.asList(courseDto));
 
         assertSearchResults(results, courseService.searchUserCourses((CourseSearchFilter) getSearchFilter()));
@@ -277,12 +275,12 @@ public class CourseServiceImplTest extends AbstractCrudEventsServiceTest {
 
     @Override
     protected GenericService<AbstractPersistenceObject> getGenericService() {
-        return (GenericService)courseService;
+        return (GenericService) courseService;
     }
 
     @Override
     protected GenericDao<AbstractPersistenceObject> getGenericDao() {
-        return (GenericDao)courseDao;
+        return (GenericDao) courseDao;
     }
 
     @Override
