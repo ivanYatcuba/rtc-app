@@ -14,7 +14,7 @@ import java.util.Map;
 @Component
 public class MailMessageBuilder {
 
-    private static final String LINK = "http://146.185.176.193/rtc-app/user/userCourses";
+    private static final String LINK = "http://146.185.176.193/rtc-app/user/courses";
     private static final String SENDER_MAIL = "rtcsender@gmail.com";
     private static final String REGISTRATION_SUBJECT = "Registration confirmation";
 
