@@ -24,6 +24,12 @@ public class AjaxTimeoutRedirectFilter extends GenericFilterBean {
     private ThrowableAnalyzer throwableAnalyzer = new DefaultThrowableAnalyzer();
     private AuthenticationTrustResolver authenticationTrustResolver = new AuthenticationTrustResolverImpl();
 
+    /**
+     * Filter that check if user session expired
+     * @param request servlet request to filter
+     * @param response servlet response to filter
+     * @param chain what to do next
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
@@ -59,6 +65,9 @@ public class AjaxTimeoutRedirectFilter extends GenericFilterBean {
         }
     }
 
+    /**
+     * Initializes associations between Throwable and ThrowableCauseExtractor.
+     */
     private static final class DefaultThrowableAnalyzer extends ThrowableAnalyzer {
         protected void initExtractorMap() {
             super.initExtractorMap();
