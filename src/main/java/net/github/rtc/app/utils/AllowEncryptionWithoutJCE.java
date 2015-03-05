@@ -7,6 +7,10 @@ import java.lang.reflect.Field;
 
 @Component("allowEncryptionWithoutJCE")
 public class AllowEncryptionWithoutJCE implements InitializingBean {
+    /**
+     * After all bean properties set, this class set variable "isRestricted" in JceSecurity class to false
+     * @throws java.lang.Exception
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
         try {
