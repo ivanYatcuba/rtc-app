@@ -64,9 +64,11 @@ public class MessageServiceTest {
     @Test
     public void testReadMessage() {
         Message message = new Message();
+        Message expected = new Message();
+        expected.setRead(true);
         when(messageService.findByCode(anyString())).thenReturn(message);
-        message.setRead(true);
-        assertEquals(messageService.readMessage(CODE), message);
+        when(messageDao.update(any(Message.class))).thenReturn(message);
+        assertTrue((messageService.readMessage(CODE)).equals(expected));
     }
 
     @Test
@@ -94,5 +96,4 @@ public class MessageServiceTest {
     private boolean isEqualSearchResults(SearchResults res1, SearchResults res2) {
         return (res1.getResults().equals(res2.getResults())&&res1.getPageModel().equals(res2.getPageModel()));
     }
-
 }
