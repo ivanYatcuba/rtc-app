@@ -60,12 +60,8 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
         final Course course = findByCode(courseCode);
         Assert.notNull(course, COURSE_CANNOT_BE_NULL);
         LOG.debug("Publishing course: {}  ", course.getCode());
-        course.setStatus(CourseStatus.PUBLISHED);
-        course.setPublishDate(dateService.getCurrentDate());
-        courseDao.update(course);
-        if (isNewsCreated) {
-           newsService.create(course);
-        }
+
+        update(course,true,isNewsCreated);
     }
 
     @Override

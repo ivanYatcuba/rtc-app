@@ -78,7 +78,7 @@ public class NewsServiceImplTest extends AbstractCrudEventsServiceTest {
     }
 
     @Override
-    protected AbstractSearchFilter getSearchCommand() {
+    protected AbstractSearchFilter getSearchFilter() {
         return new NewsSearchFilter();
     }
 

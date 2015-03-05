@@ -5,8 +5,6 @@ import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.model.dto.SearchResults;
 import net.github.rtc.app.model.dto.filter.AbstractSearchFilter;
 import net.github.rtc.app.model.entity.AbstractPersistenceObject;
-import net.github.rtc.app.service.generic.CodeGenerationService;
-import net.github.rtc.app.service.generic.GenericService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +36,7 @@ public abstract class AbstractGenericServiceTest {
     protected abstract GenericDao<AbstractPersistenceObject> getGenericDao();
     protected abstract AbstractPersistenceObject getTestEntity();
 
-    protected abstract AbstractSearchFilter getSearchCommand();
+    protected abstract AbstractSearchFilter getSearchFilter();
 
     @Before
     public void setUp(){
@@ -100,8 +98,8 @@ public abstract class AbstractGenericServiceTest {
     public void testSearch() {
         final SearchResults<AbstractPersistenceObject> results = new SearchResults();
         results.setResults(Arrays.asList(testEntity));
-        AbstractSearchFilter command =  getSearchCommand();
-        when(genericDao.search(command)).thenReturn(results);
-        assertEquals(results, genericService.search(command));
+        AbstractSearchFilter filter =  getSearchFilter();
+        when(genericDao.search(filter)).thenReturn(results);
+        assertEquals(results, genericService.search(filter));
     }
 }
