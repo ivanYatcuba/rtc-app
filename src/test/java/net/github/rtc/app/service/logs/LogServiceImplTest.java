@@ -3,15 +3,13 @@ package net.github.rtc.app.service.logs;
 
 import net.github.rtc.app.model.dto.Log;
 import net.github.rtc.app.model.dto.filter.LogsSearchFilter;
-import net.github.rtc.app.service.date.DateService;
 import net.github.rtc.app.service.log.LogService;
 import net.github.rtc.app.service.log.LogServiceImpl;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,13 +23,6 @@ import static junit.framework.Assert.assertTrue;
 public class LogServiceImplTest {
     @InjectMocks
     private LogService logService = new LogServiceImpl();
-
-    @Mock
-    private DateService dateService;
-
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test(expected = NullPointerException.class)
     public void testFindAllLogs() {
@@ -55,11 +46,9 @@ public class LogServiceImplTest {
     public void testSearch() {
         Map<String, Object> expectedMapOfLogs = new HashMap<>();
         expectedMapOfLogs.put("logs", logService.findAllLogs());
-
         LogsSearchFilter logsSearchFilter = new LogsSearchFilter();
-        logsSearchFilter.setCreatedDate(dateService.getCurrentDate());
+        logsSearchFilter.setCreatedDate(DateTime.now().toLocalDateTime().toDate());
         logsSearchFilter.setDateMoreLessEq('=');
-
         Map<String, Object> actualMapOfLogs = logService.search(logsSearchFilter);
         assertEquals(expectedMapOfLogs, actualMapOfLogs);
 
