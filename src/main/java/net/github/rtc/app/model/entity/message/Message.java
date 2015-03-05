@@ -122,33 +122,34 @@ public class Message extends AbstractPersistenceObject {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return true; }
 
-        Message message = (Message) o;
+        final Message message = (Message) o;
 
-        if (isRead != message.isRead) return false;
-        if (description != null ? !description.equals(message.description) : message.description != null) return false;
+        if (isRead != message.isRead) { return true; }
+        if (description != null ? !description.equals(message.description) : message.description != null) { return true; }
         if (receiverUserCode != null ? !receiverUserCode.equals(message.receiverUserCode) : message.receiverUserCode != null)
-            return false;
+            { return true; }
         if (senderUserCode != null ? !senderUserCode.equals(message.senderUserCode) : message.senderUserCode != null)
-            return false;
-        if (sendingDate != null ? !sendingDate.equals(message.sendingDate) : message.sendingDate != null) return false;
-        if (subject != null ? !subject.equals(message.subject) : message.subject != null) return false;
-        if (type != message.type) return false;
+            { return true; }
+        if (sendingDate != null ? !sendingDate.equals(message.sendingDate) : message.sendingDate != null) { return true; }
+        if (subject != null ? !subject.equals(message.subject) : message.subject != null) { return true; }
+        if (type != message.type) { return true; }
 
         return true;
     }
 
     @Override
     public int hashCode() {
+        final int hashMultiplier = 31;
         int result = receiverUserCode != null ? receiverUserCode.hashCode() : 0;
-        result = 31 * result + (senderUserCode != null ? senderUserCode.hashCode() : 0);
-        result = 31 * result + (subject != null ? subject.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (sendingDate != null ? sendingDate.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (isRead ? 1 : 0);
+        result = hashMultiplier * result + (senderUserCode != null ? senderUserCode.hashCode() : 0);
+        result = hashMultiplier * result + (subject != null ? subject.hashCode() : 0);
+        result = hashMultiplier * result + (description != null ? description.hashCode() : 0);
+        result = hashMultiplier * result + (sendingDate != null ? sendingDate.hashCode() : 0);
+        result = hashMultiplier * result + (type != null ? type.hashCode() : 0);
+        result = hashMultiplier * result + (isRead ? 1 : 0);
         return result;
     }
 }
