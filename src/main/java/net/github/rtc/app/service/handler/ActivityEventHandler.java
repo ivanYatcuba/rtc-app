@@ -28,15 +28,15 @@ public class ActivityEventHandler implements ApplicationListener<ActivityEvent> 
      */
     @Override
     public void onApplicationEvent(ActivityEvent event) {
-            final User user = AuthorizedUserProvider.getAuthorizedUser();
-            final Activity activity = new Activity();
+        final User user = AuthorizedUserProvider.getAuthorizedUser();
+        final Activity activity = new Activity();
 
-            activity.setUsername(user.getSurnameName());
-            activity.setDetail(event.getDetails());
-            activity.setAction(event.getAction());
-            activity.setActionDate(dateService.getCurrentDate());
-            activity.setEntity(event.getEntity());
+        activity.setUsername(user.getSurnameName());
+        activity.setDetail(event.getDetails());
+        activity.setAction(event.getAction());
+        activity.setActionDate(dateService.getCurrentDate());
+        activity.setEntity(event.getEntity());
 
-            activityService.create(activity);
+        activityService.create(activity);
     }
 }
