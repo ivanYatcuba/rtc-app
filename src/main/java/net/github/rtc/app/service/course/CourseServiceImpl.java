@@ -61,7 +61,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
         Assert.notNull(course, COURSE_CANNOT_BE_NULL);
         LOG.debug("Publishing course: {}  ", course.getCode());
 
-        update(course,true,isNewsCreated);
+        update(course, true, isNewsCreated);
     }
 
     @Override
