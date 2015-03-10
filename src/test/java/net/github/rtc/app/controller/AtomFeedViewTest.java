@@ -21,6 +21,7 @@ import java.util.*;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 //fork test
+//dokku test
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:feed-test.xml")
 public class AtomFeedViewTest {
