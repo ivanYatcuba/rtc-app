@@ -3,7 +3,6 @@ package net.github.rtc.app.service.course;
 import net.github.rtc.app.dao.course.CourseDao;
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.model.entity.activity.ActivityEntity;
-import net.github.rtc.app.model.entity.activity.Auditable;
 import net.github.rtc.app.service.builder.UserCourseDtoBuilder;
 import net.github.rtc.app.model.dto.user.UserCourseDto;
 import net.github.rtc.app.model.entity.course.Course;
@@ -120,7 +119,7 @@ public class CourseServiceImpl extends AbstractCrudEventsService<Course> impleme
     }
 
     @Override
-    protected ActivityEntity getActivityEntity(Auditable entityObj) {
+    protected ActivityEntity getActivityEntity() {
             return ActivityEntity.COURSE;
     }
 

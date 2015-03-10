@@ -3,7 +3,6 @@ package net.github.rtc.app.service.news;
 import net.github.rtc.app.dao.generic.GenericDao;
 import net.github.rtc.app.dao.news.NewsDao;
 import net.github.rtc.app.model.entity.activity.ActivityEntity;
-import net.github.rtc.app.model.entity.activity.Auditable;
 import net.github.rtc.app.model.entity.course.Course;
 import net.github.rtc.app.model.entity.news.News;
 import net.github.rtc.app.model.entity.news.NewsStatus;
@@ -75,7 +74,7 @@ public class NewsServiceImpl extends AbstractCrudEventsService<News> implements 
     }
 
     @Override
-    protected ActivityEntity getActivityEntity(Auditable entityObj) {
+    protected ActivityEntity getActivityEntity() {
         return ActivityEntity.NEWS;
     }
 

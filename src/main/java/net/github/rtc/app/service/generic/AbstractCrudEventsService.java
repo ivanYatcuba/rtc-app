@@ -64,7 +64,7 @@ public abstract class AbstractCrudEventsService<T  extends AbstractPersistenceOb
      */
     private void createAndPublishEvent(Auditable activity,  ActivityAction action) {
         final String detail = activity.getLogDetail();
-        final ActivityEntity entity = getActivityEntity(activity);
+        final ActivityEntity entity = getActivityEntity();
         final ActivityEvent event = new ActivityEvent(this, detail, entity, action);
 
         publisher.publishEvent(event);
@@ -73,9 +73,8 @@ public abstract class AbstractCrudEventsService<T  extends AbstractPersistenceOb
     /**
      * Get activity entity type
      * @see net.github.rtc.app.model.entity.activity.ActivityEntity
-     * @param entityObj object on what CRUD operation was performed
      * @return activity entity that corresponds to selected object
      */
-     protected abstract ActivityEntity getActivityEntity(Auditable entityObj);
+     protected abstract ActivityEntity getActivityEntity();
 
 }
